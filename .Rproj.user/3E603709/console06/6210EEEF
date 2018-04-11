@@ -27,3 +27,38 @@ Untracked files:
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ git add .
+]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ git commnt  it -m "First commmn  it  "
+[master 04bec4b] First commit
+ Committer: solon <solon@dhcp-10-248-195-241.eduroam.wireless.private.cam.ac.uk>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 15 files changed, 41 insertions(+), 699 deletions(-)
+ rewrite .Rproj.user/3E603709/console06/INDEX001 (73%)
+ delete mode 100644 .Rproj.user/3E603709/sources/s-286B4AA9/9C5FF83B
+ delete mode 100644 .Rproj.user/3E603709/sources/s-286B4AA9/9C5FF83B-contents
+ delete mode 100644 .Rproj.user/3E603709/sources/s-286B4AA9/C5777B11
+ delete mode 100644 .Rproj.user/3E603709/sources/s-286B4AA9/C5777B11-contents
+ delete mode 100644 .Rproj.user/3E603709/sources/s-286B4AA9/CCF650CC
+ delete mode 100644 .Rproj.user/3E603709/sources/s-286B4AA9/CCF650CC-contents
+ delete mode 100644 .Rproj.user/3E603709/sources/s-286B4AA9/lock_file
+ create mode 100644 .gitignore
+]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ ls
+Website.Rproj	config.toml	data		layouts		static
+archetypes	content		index.Rmd	public		themes
+]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ git remote add origin https://github.com/solonkarapa/Website.git
+fatal: remote origin already exists.
+]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ git push -u origin master
+remote: Repository not found.
+fatal: repository 'https://github.com/solonkarapa/Website-.git/' not found
+]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ git init
+Reinitialized existing Git repository in /Users/solon/Box Sync/Box Sync/Website/.git/
+]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ 
