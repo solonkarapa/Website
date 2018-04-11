@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on </title>
+    <link>/post/</link>
+    <description>Recent content in Posts on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; Solon Karapanagiotis 2018</copyright>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Importing Flat Files Into R</title>
+      <link>/post/importing-flat-files-into-r/</link>
+      <pubDate>Tue, 10 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/importing-flat-files-into-r/</guid>
+      <description>Lots of data comes in the form of flat files. In this tutorial you will learn how to import all common formats of flat file data with base R functions and the dedicated readr and data.table packages. I first present the three - in my opinion - most used packages to import data into R and finish with a comparison table between them.
+Task Import a flat file into R: create an R object that contains the data from a flat file.</description>
+    </item>
+    
+    <item>
+      <title>Plastic waste and disease on coral reefs</title>
+      <link>/post/plastic-waste-and-disease-on-coral-reefs/</link>
+      <pubDate>Mon, 26 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/plastic-waste-and-disease-on-coral-reefs/</guid>
+      <description>Recently, I came across this very interesting article about how plastic waste is associated with disease on coral reefs. The main colcusions are
+ contact with plastic increase the probability of disease,
+ the stucture of the reefs is assocaited with the probabiltiy of being in contact with plastic with more complex ones being more likely to be affected by plastic,
+ the plastic levels correspond to estimates of mismanaged plastic waste into the ocean.</description>
+    </item>
+    
+    <item>
+      <title>My first one</title>
+      <link>/post/my-first-one/</link>
+      <pubDate>Fri, 23 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/my-first-one/</guid>
+      <description>This is my first trial to write a post. I decided to upload a library and dispaly a dataset.
+library(&amp;quot;titanic&amp;quot;) data(&amp;quot;Titanic&amp;quot;) str(Titanic) ## table [1:4, 1:2, 1:2, 1:2] 0 0 35 0 0 0 17 0 118 154 ... ## - attr(*, &amp;quot;dimnames&amp;quot;)=List of 4 ## ..$ Class : chr [1:4] &amp;quot;1st&amp;quot; &amp;quot;2nd&amp;quot; &amp;quot;3rd&amp;quot; &amp;quot;Crew&amp;quot; ## ..$ Sex : chr [1:2] &amp;quot;Male&amp;quot; &amp;quot;Female&amp;quot; ## ..$ Age : chr [1:2] &amp;quot;Child&amp;quot; &amp;quot;Adult&amp;quot; ## .</description>
+    </item>
+    
+    <item>
+      <title>Academic: the website designer for Hugo</title>
+      <link>/post/getting-started/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0100</pubDate>
+      
+      <guid>/post/getting-started/</guid>
+      <description>Academic is a framework to help you create a beautiful website quickly. Perfect for personal sites, blogs, or business/project sites. Check out the latest demo of what you&amp;rsquo;ll get in less than 10 minutes. Then head on over to the Quick Start guide or take a look at the Release Notes.
+
+Key features:
+ Easily manage various content including homepage, blog posts, publications, talks, and projects Extensible via color themes and widgets/plugins Write in Markdown for easy formatting and code highlighting, with LaTeX for mathematical expressions Social/academic network linking, Google Analytics, and Disqus comments Responsive and mobile friendly Simple and refreshing one page design Multilingual and easy to customize  Color Themes Academic is available in different color themes and font themes.</description>
+    </item>
+    
+  </channel>
+</rss>
