@@ -61,4 +61,9 @@ remote: Repository not found.
 fatal: repository 'https://github.com/solonkarapa/Website-.git/' not found
 ]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ git init
 Reinitialized existing Git repository in /Users/solon/Box Sync/Box Sync/Website/.git/
-]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ 
+]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ git remote add origin https://github.com/solonkarapa/Website.git
+fatal: remote origin already exists.
+]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ git push -u origin master
+remote: Repository not found.
+fatal: repository 'https://github.com/solonkarapa/Website-.git/' not found
+]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ git push -u origin master[Kgit push -u origin master
