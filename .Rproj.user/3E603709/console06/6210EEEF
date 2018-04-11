@@ -1,3 +1,29 @@
 ]0;~/Box Sync/Box Sync/Website6[?1034hSolons-MacBook-Pro:Website6 solon$ [KSolons-MacBook-Pro:Website6 solon$ defaults write org.R-project.R force.LANG en_US.UTF-8
 ]0;~/Box Sync/Box Sync/Website6Solons-MacBook-Pro:Website6 solon$ 
-]0;~/Box Sync/Box Sync/Website6Solons-MacBook-Pro:Website6 solon$ 
+git status
+On branch master
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   .Rproj.user/3E603709/console06/6210EEEF[m
+	[31mmodified:   .Rproj.user/3E603709/console06/INDEX001[m
+	[31mmodified:   .Rproj.user/3E603709/pcs/files-pane.pper[m
+	[31mmodified:   .Rproj.user/3E603709/pcs/source-pane.pper[m
+	[31mmodified:   .Rproj.user/3E603709/pcs/workbench-pane.pper[m
+	[31mmodified:   .Rproj.user/3E603709/sources/prop/7892FE90[m
+	[31mdeleted:    .Rproj.user/3E603709/sources/s-286B4AA9/9C5FF83B[m
+	[31mdeleted:    .Rproj.user/3E603709/sources/s-286B4AA9/9C5FF83B-contents[m
+	[31mdeleted:    .Rproj.user/3E603709/sources/s-286B4AA9/C5777B11[m
+	[31mdeleted:    .Rproj.user/3E603709/sources/s-286B4AA9/C5777B11-contents[m
+	[31mdeleted:    .Rproj.user/3E603709/sources/s-286B4AA9/CCF650CC[m
+	[31mdeleted:    .Rproj.user/3E603709/sources/s-286B4AA9/CCF650CC-contents[m
+	[31mdeleted:    .Rproj.user/3E603709/sources/s-286B4AA9/lock_file[m
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	[31m.gitignore[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ git add .
