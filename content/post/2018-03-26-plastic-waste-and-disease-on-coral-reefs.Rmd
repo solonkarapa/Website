@@ -8,8 +8,12 @@ tags: []
 header:
   caption: ''
   image: ''
+  bookdown::html_document2: default
+bibliography: bibliopost.bib
+link-citations: yes
 draft: true
 ---
+
 
 ```{r, echo = F, message = F, warning = F}
 library(ggplot2)
@@ -31,14 +35,14 @@ SE = function(x)
 }
 
 # Load Data ----------------------------------------------------------------
-Plastic = data.frame(read.table('~/Desktop/CoralReefs/FINALDATASET.csv', header = T, sep = ','))
+Plastic = data.frame(read.table('FINALDATASET.csv', header = T, sep = ','))
 # not used intitially 
-#PlasticWaste = data.frame(read.table('PlasticWaste.csv',header=T,sep=','))
-TransectLengths = data.frame(read.table('~/Desktop/CoralReefs/TRANSECT_LENGTH_FINAL.csv',
+# PlasticWaste = data.frame(read.table('PlasticWaste.csv',header=T,sep=','))
+TransectLengths = data.frame(read.table('TRANSECT_LENGTH_FINAL.csv',
                                         header = T, sep = ','))
 
 # Data Formatting ---------------------------------------------------------
-#Create a summed dataset at the transect level while keeping track of plastic and disease presence jointly
+# Create a summed dataset at the transect level while keeping track of plastic and disease presence jointly
 SumNoPlastic=aggregate(cbind(Healthy,WS,BBD,BrB,SEB,AtN,GA)~Site_No+Tran+Reef_Name+Year+Sector+Country+Season+Group.Code+Trip.code,data=Plastic[which(Plastic$Plastic==0),],FUN='sum',drop=T,na.action = na.pass,na.rm=T)
 SumPlastic=aggregate(cbind(Healthy,WS,BBD,BrB,SEB,AtN,GA,Plastic)~Site_No+Tran+Reef_Name+Year+Sector+Country+Season+Group.Code+Trip.code,data=Plastic[which(Plastic$Plastic==1),],FUN='sum',drop=T,na.action = na.pass,na.rm=T)
 colnames(SumPlastic)<- c('Site_No', 'Tran', 'Reef_Name','Year','Sector','Country', 'Season', 'Group.Code','Trip.code','Healthy.P','WS.P','BBD.P','BrB.P','SEB.P','AtN.P','GA.P','Plastic')
@@ -59,108 +63,31 @@ summarydata2=aggregate(cbind(V1,V2)~Sector,data = summarydata,FUN='min')
 summarydata3=aggregate(cbind(V1,V2)~Sector,data = summarydata,FUN='max')
 ```
 
-Recently, I came across this very interesting article about how plastic waste is associated with disease on coral reefs. The main colcusions are  
+Recently, I came across this very interesting article publised in [Science](http://science.sciencemag.org/content/359/6374/460.long) about how plastic waste is associated with disease on coral reefs [@lamb2018plastic]. The main conclusions are  
 
-+ contact with plastic increase the probability of disease,  
-+ the stucture of the reefs is assocaited with the probabiltiy of being in contact with plastic with more complex ones being more likely to be affected by plastic,    
-+ the plastic levels correspond to estimates of mismanaged plastic waste into the ocean.   
+1. contact with plastic increases the probability of disease,  
+2. the structure of the reefs is associated with the probability of being in contact with plastic with more complex ones being more likely to be affected by plastic,    
+3. the plastic levels correspond to estimates of mismanaged plastic waste into the ocean.   
 
-Overall, this study provides evidence how plastic waste negatively affects the coral reefs, making them more susceptible to diseases. The authors made availble both the datasets they used and the code (clerluy documented), so it's an excellent example of  reproducilbe research. The methods sections is straightforward ot unsdesstand except in a couple of points.  
+Overall, this study provides evidence how plastic waste negatively affects coral reefs, making them more susceptible to diseases. The authors made available both the datasets they used and the code [both can be downloaded from @dryad_mp480] so it's an excellent example of reproducible research. The methods sections is straightforward to follow (see [Supplementary Materials](http://science.sciencemag.org/content/suppl/2018/01/24/359.6374.460.DC1?_ga=2.198123375.1394041835.1523546630-1357771364.1523546630)). My comment is about the 2nd point above, and more specifically the methodology behind Figure 4 in the paper. The issue is the authors interpret the coefficients in an misleading way.   
 
-My first comment is where the authors estimated the plastic waste entering the ocean. To do this they fitted a generalized linear mixed-effects models (GLMMs) relating the number of plastic debris items surveyed on coral reefs with 7 variables published in a previously (ref). They first created draftsman plots in order to identify variables with correlations > 0.7. I assume the purpose of this was to avoid estimation problems due to high collinearity. In the second step, they used the remaining three variables
+They model the disease prevalence (binary) among coral reefs with different morphology. The  structural morphology assignments were massive, tabular, and branching. They use a GLMM with binomial error distribution and logistic link. The morphological assignments were treated as fixed factors and the site as random. The model is  
 
-+ coastal population size in 2010 ($x_1$), 
-+ 25\% of coastal mismanaged waste entering the ocean in 2010 ($x_2$) and
-+ mismanaged waste per capita in 2010 ($x_3$)
-
-as fixed effect predictors in the GLMMs using a negative binomial distribution
-with a log link, with region and year set as a random factor (this corresponds to a random intercept varying among year and region within year). Their models looked like 
-
-$$log(Y_{ijk}) =  \beta_0 + \beta_1x_1 + b_i + b_{j(i)}$$ 
-
-$$log(Y_{ijk}) =  \beta_0 + \beta_1x_2 + b_i + b_{j(i)}$$ 
-$$log(Y_{ijk}) =  \beta_0 + \beta_1x_3 + b_i + b_{j(i)}$$ 
-
-where $Y_{ijk}$ denote the counts of corals with plastic, for year $j$, of region $i$. 
-$\beta$s are the fixed effects. The term $b_i$ captures the variation between years and the term 
-$b_{j(i)}$ captures the variation between regions within a specific year. Finally, they choose the model with the higher AIC. 
-
-What I was not able to understand is why they didn't create a model with all the variables ($x_1, x_2, x_3$) together? Instead they fitted three different ones. Unfortunalely, the dataset corresponding to this analysis is not provided, so I was not able to perfrom the analysis with all the varaibles included at once. 
-
-Secondly, they model the presense of plastic debris (binary) *and* the presense of disease (binary) among different coral morphological structural complexity assignments (massive, tabular, and branching). Now they use a GLMM with binomial error distribution and logistic link. The morphological assignments were treated as fixed factors and the site as random. The model is  
-$$ logit(DebrisPresense_{ik}) =  \sum_j \beta_j x_j + b_i $$
+$$ logit(Disease Presense_{ik}) =  \sum_j \beta_j x_j + b_i $$
  
-where $j_{1:3} = \{massive, tabular, and branching\}$. The output is given in Figure 4(A) in the paper. The conclusion is that plastic debris is more likely in tabular and braching vs massive reefs. Then, they want to find out the baseline disease levels by structural form so they fit the same model,  
+where $j_{1:3} = \{massive, tabular, and branching\}$ and $b_i$ are the reef-specific intercepts. Such a $b_i$ represents the deviation of the intercept of a specific reef from the
+average intercept in the group to which that reef belongs, i.e deviation from $\beta_1$, $\beta_2$ or $\beta_3$. The model is fitted only for reefs unaffected by plastic waste. The outcome is given in Figure 4(B) in the paper. The conclusion is the disease risk increases from massive to bracnhing and tabular reefs when not in contact with plastic debris (Figure 4(B) and table S13).  
 
- $$ logit(Disease Presense_{ik}) =  \sum_j \beta_j x_j + b_i $$
- 
-only for corals unaffected by plastic waste. The outcome is given in Figure 4(B) in the paper. 
-The second step was to use the same model to estimate the probability of plastic debris disease  by structural form for corals affected by plastic waste (Figure 4(D)). The conclusion is the presense of plastic debris increases the likelihood of disease. The next step is to fit again the model for each different level of the structural form (ie. for each $x_j$). Results in Figure 4(C). 
-
-To me it seems they are essentially searching for an interaction between the structural complexity $(x_j$s) and whether or not the the reefs have been in contact with plastic debris. **Efficiency loss**. Something along the lines
-
-$$ logit(Disease Presense_{ik}) =  \sum_j \beta_j x_j*x_4  + b_i$$ 
-
-where $x_4$ is a binary indicator for whether the reefs have been in contacht with plastic debris.  
-
-
-Thirdly, and most imporatntly the authors interpret the coeffcients in an incorrect way. 
-The issue with GLLMs is that the fixed effects have a site-specific interpretation but not a
+The issue with this figure is the authors interpret the coefficients in an misleading way. 
+In GLLMs is the fixed effects have a site-specific interpretation but not a
 population-average interpretation. Let us now consider the logistic random-intercepts model above. We have that 
 
 $$ E[Disease Presense_{ik}|b_i] = \frac{\exp(\sum_j \beta_j x_j + b_i)}{1 + \exp(\sum_j \beta_j x_j + b_i)} $$
-
-The above model assumes a logistic evolution of the success probability of each
-morhology, all curves having different intercepts $\beta0 + bi$. The average site, i.e., the site with intercept $b_i = 0$, has success probability given by
+where $E[.]$ is the expectation operator. The above model assumes a logistic evolution of the success probability of each morphology, all curves having different intercepts $\beta_0 + bi$. The average site, i.e., the site with intercept $b_i = 0$, has success probability given by
 
 $$ E[Disease Presense_{ik}|b_i = 0] = \frac{\exp(\sum_j \beta_j x_j + 0)}{1 + \exp(\sum_j \beta_j x_j + 0)} $$
 
-which is what the authors have calcaulated and producted Fig 4. In otehr words, the authors have calcauted the probability for an "average" site.  Parameters in the mixed model have a subject-specific interpretation, not a population-averaged one. The problem arises from the fact that, $E[g(Y )] \neq g[E(Y)]$. The marginal population-average evolution is obtained from averaging over the random effects. 
-
-```{r}
-# GLMM PDF, Disease levels by Plastic Debris for Branching -----------------------------
-Branch.Disease = glmer(Disease ~ Plastic + (1|Reef_Name),
-                       data = Plastic[which(Plastic$Growth2=='Branching'),],
-                       family = 'binomial',
-                       control = glmerControl(optimizer ="bobyqa"))
-# Branch.Disease.Null = glmer(Disease~1+(1|Reef_Name),
-#                             data=Plastic[which(Plastic$Growth2=='Branching'),],
-#                             family='binomial',
-#                             control = glmerControl(optimizer ="bobyqa"))
-# anova(Branch.Disease, Branch.Disease.Null, test = 'lrt')
-# AIC(Branch.Disease, Branch.Disease.Null)
-# ModSelBranch = model.sel(Branch.Disease,Branch.Disease.Null)
-#write.table(ModSelBranch, "Branch_Comp_ModelTable.csv", col.names = TRUE, row.names = FALSE, sep = ',')
-# Generate data for the creation of a smooth probability density curve based on model results
-Branch = data.frame(Normal = rnorm(100000, mean = -3.6208, sd =.1184),
-                    Plastic= rnorm(100000, mean = -3.6208 + 5.8871, sd = sqrt(.1184^2 + .278^2)))
-Branch$Normalbt = plogis(Branch$Normal)
-Branch$Plasticbt = plogis(Branch$Plastic)
-Branch = gather(Branch, Condition, Estimate, Normalbt:Plasticbt)
-#Branch$Relative = Branch$Estimate/plogis(-3.6208)
-ggplot(aes(x = Estimate*100), data = Branch) + 
-   geom_density(aes(y = ..scaled.., fill = Condition)) +
-   scale_x_continuous(limits = c(0, 100)) +
-   geom_rug(aes(color = Condition), 
-            data = Branch[seq(from = 1,to = length(Branch$Estimate), by = 500),])
-```
-
-Here is a plot of the empirical Bayes estimates of the random effects. We see the great varaiblity. 
-
-```{r, message = F, warning = F}
-library(merTools)
-sim_rfs_Branch.Disease <- REsim(Branch.Disease, n.sims = 200) 
-plotREsim(sim_rfs_Branch.Disease)
-```
-
-What the authors are effectivey doing is presenting the results for reef with $b_i = 0$ which corresponds to the red line. Let's see how figure (above) changes when we take into account more "extreme" reefs. I start with the 0.9 quantile. 
-
-
-This plots still ignores the unceratiy in only takes variation of the fixed coefficients
-
-
-Differences in levels of baseline coral disease prevalence among regions were analyzed
-using a GLMM with a binomial error distribution and logistic link. Only corals that were not affected by plastic debris were included to assess if baseline disease levels differed among regions surveyed in AsiaPacific. Regions were treated as fixed factors, with site included as a random effect to remain consistent with the design of the study. 
+which is what the authors have calculated and produced Fig 4. In other words, the authors have calculated the probability of disease for an "average" reef. The problem arises from the fact that, $E[g(Y )] \neq g[E(Y)]$ unless $g$ is linear, which is not the case for this model. The marginal population-average evolution is obtained from averaging over the random effects. The code they are using is 
 
 ```{r}
 # GLMM, Baseline Disease levels for different growth forms, Asia Pacific --------
@@ -170,9 +97,9 @@ Normal.Disease.Growth = glmer(Disease ~ -1 + Growth2+(1|Reef_Name),
                               control = glmerControl(optimizer ="bobyqa"))
 ```
 
-The following table corresponds to Figure 4(B) of the publication. 
+The following reproduces Figure 4(B) of the publication.
 
-```{r}
+```{r plot}
 # PDF, Baseline disease levels by growth form -----------------------------
 NormalDisease.by.Growth = data.frame(Tabular = rnorm(100000, mean = -3.1332, sd = .1549),
                                    Massive = rnorm(100000, mean = -3.8153, sd = .1095),
@@ -189,17 +116,17 @@ ggplot(aes(x=Estimate*100), data = NormalDisease.by.Growth) +
 #   geom_rug(aes(color = Growth), #data=NormalDisease.by.Growth[seq(from=1,to=length(NormalDisease.by.Growth$Estimate),by=500),])
 ```
 
-This plots still ignores the uncertainty in .... it only takes into consideration the variation of the fixed coefficients $\beta_j$. 
+As it is evident from the code they plot the fixed effects estimates with their standard errors. This plots ignores the uncertainty in .... it only takes into consideration the variation of the fixed coefficients $\beta_j$. 
 
-I simulate random effects from the model and plot them. Points that are distinguishable from zero (i.e. the confidence band based on level does not cross the red line) are highlighted. We see great variation....
+To get an idea for the variability of the random effects I simulate random effects from the model and plot them. Points that are distinguishable from zero (i.e. the confidence band based on level does not cross the red line) are highlighted. We see great variation....
 
-```{r}
+```{r, message = F}
 library(merTools)
 sim_rfs_Normal.Disease <- REsim(Normal.Disease.Growth, n.sims = 200) 
 plotREsim(sim_rfs_Normal.Disease)
 ```
 
-What the authors are effectivectly doing in Figure 4(B) (see density plot above) is presenting the results for reef with $b_i = 0$ which corresponds to the red line. Let's see how figure (above) changes when we take into account more "extreme" reefs. I start with the 0.1 and 0.9 quantiles. 
+What the authors are effectively doing in Figure 4(B) (see density plot above) is presenting the results for reefs with $b_i = 0$ which correspond to the red horizontal line. Let's see how figure (above) changes when we condition on more "extreme" reefs. I start with the 0.1 and 0.9 quantiles. 
 
 ```{r}
 quantile0.9 <- REquantile(Normal.Disease.Growth, quantile = 0.9, groupFctr = "Reef_Name")
@@ -237,9 +164,9 @@ ggplot(aes(x = Estimate*100, col = ID), data = overall) +
    ylab("")
 ```
 
-It is evident both the center and the variability of the distributinos change depending whether we look an "average" coral reef (purple line), a reef towards the upper extreme (blue line) or the lower extreme (black line). 
+It is evident both the center and the variability of the distributions change depending whether we look an "average" coral reef (purple line), a reef towards the upper extreme (blue line) or the lower extreme (black line). 
 
-Conclusion the increase in disease likelihood with plastic debris depends also on the inherit  characteristics of the reefs in additon to the morhology. For example, the likelihood of disease is between a braching reef at the lower extreme ( interprt the random effect) is and a tabular reef at the upper extreme  (interprt the random effect) are very close.  
+Conclusion the increase in disease likelihood with plastic debris depends also on the inherit  characteristics of the reefs in addition to the morphology. For example, the likelihood of disease is between a braching reef at the lower extreme ( interpret the random effect) is and a tabular reef at the upper extreme  (interpret the random effect) are very close.  
 
 In order to generate a proper prediction interval, a prediction must account for three sources of uncertainty in mixed models:
 
@@ -254,3 +181,6 @@ FINAL ANALYSIS
 3. PLOT RANDOM EFFECT ESTIMATES - MENTION UNCERTAINY 
 4. REDO PLOT 2 WITH 0.1 AND 0.9 QUANTILES 
 5. FORM PREDICTIVE INTERVALS 
+
+
+# References
