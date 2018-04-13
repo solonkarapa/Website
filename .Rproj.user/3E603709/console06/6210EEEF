@@ -94,3 +94,38 @@ Changes not staged for commit:
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ]0;~/Desktop/Websitedhcp-10-248-196-16:Website solon$ git add .
+]0;~/Desktop/Websitedhcp-10-248-196-16:Website solon$ gi  git commit -m "fixinf   g bug in post"
+[master 9659b01] fixing bug in post
+ Committer: solon <solon@dhcp-10-248-196-16.eduroam.wireless.private.cam.ac.uk>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 15 files changed, 3482 insertions(+), 3352 deletions(-)
+ rewrite .Rproj.user/3E603709/console06/INDEX001 (61%)
+ rewrite content/post/2018-04-10-importing-flat-files-into-r.html (95%)
+ rewrite public/categories/data/index.html (94%)
+ rewrite public/categories/r/index.html (94%)
+ rewrite public/index.html (81%)
+ rewrite public/index.xml (92%)
+ create mode 100644 public/post/bla/index.html
+ rewrite public/post/importing-flat-files-into-r/index.html (97%)
+ rewrite public/post/index.html (91%)
+ rewrite public/post/index.xml (99%)
+]0;~/Desktop/Websitedhcp-10-248-196-16:Website solon$ git o push
+Counting objects: 33, done.
+Delta compression using up to 4 threads.
+Compressing objects:   3% (1/29)   Compressing objects:   6% (2/29)   Compressing objects:  10% (3/29)   Compressing objects:  13% (4/29)   Compressing objects:  17% (5/29)   Compressing objects:  20% (6/29)   Compressing objects:  24% (7/29)   Compressing objects:  27% (8/29)   Compressing objects:  31% (9/29)   Compressing objects:  34% (10/29)   Compressing objects:  37% (11/29)   Compressing objects:  41% (12/29)   Compressing objects:  44% (13/29)   Compressing objects:  48% (14/29)   Compressing objects:  51% (15/29)   Compressing objects:  55% (16/29)   Compressing objects:  58% (17/29)   Compressing objects:  62% (18/29)   Compressing objects:  65% (19/29)   Compressing objects:  68% (20/29)   Compressing objects:  72% (21/29)   Compressing objects:  75% (22/29)   Compressing objects:  79% (23/29)   Compressing objects:  82% (24/29)   Compressing objects:  86% (25/29)   Compressing objects:  89% (26/29)   Compressing objects:  93% (27/29)   Compressing objects:  96% (28/29)   Compressing objects: 100% (29/29)   Compressing objects: 100% (29/29), done.
+Writing objects:   3% (1/33)   Writing objects:   6% (2/33)   Writing objects:   9% (3/33)   Writing objects:  12% (4/33)   Writing objects:  15% (5/33)   Writing objects:  18% (6/33)   Writing objects:  21% (7/33)   Writing objects:  24% (8/33)   Writing objects:  27% (9/33)   Writing objects:  30% (10/33)   Writing objects:  33% (11/33)   Writing objects:  36% (12/33)   Writing objects:  39% (13/33)   Writing objects:  42% (14/33)   Writing objects:  45% (15/33)   Writing objects:  48% (16/33)   Writing objects:  51% (17/33)   Writing objects:  57% (19/33)   Writing objects:  60% (20/33)   Writing objects:  63% (21/33)   Writing objects:  66% (22/33)   Writing objects:  72% (24/33)   Writing objects:  75% (25/33)   Writing objects:  78% (26/33)   Writing objects:  81% (27/33)   Writing objects:  84% (28/33)   Writing objects:  87% (29/33)   Writing objects:  90% (30/33)   Writing objects:  93% (31/33)   Writing objects:  96% (32/33)   Writing objects: 100% (33/33)   Writing objects: 100% (33/33), 16.16 KiB | 243.00 KiB/s, done.
+Total 33 (delta 20), reused 0 (delta 0)
+remote: Resolving deltas:   0% (0/20)   [Kremote: Resolving deltas:  10% (2/20)   [Kremote: Resolving deltas:  15% (3/20)   [Kremote: Resolving deltas:  20% (4/20)   [Kremote: Resolving deltas:  25% (5/20)   [Kremote: Resolving deltas:  30% (6/20)   [Kremote: Resolving deltas:  35% (7/20)   [Kremote: Resolving deltas:  40% (8/20)   [Kremote: Resolving deltas:  45% (9/20)   [Kremote: Resolving deltas:  50% (10/20)   [Kremote: Resolving deltas:  55% (11/20)   [Kremote: Resolving deltas:  60% (12/20)   [Kremote: Resolving deltas:  65% (13/20)   [Kremote: Resolving deltas:  70% (14/20)   [Kremote: Resolving deltas:  80% (16/20)   [Kremote: Resolving deltas:  85% (17/20)   [Kremote: Resolving deltas:  90% (18/20)   [Kremote: Resolving deltas:  95% (19/20)   [Kremote: Resolving deltas: 100% (20/20)   [Kremote: Resolving deltas: 100% (20/20), completed with 17 local objects.[K
+To https://github.com/solonkarapa/Website.git
+   6679e71..9659b01  master -> master
+]0;~/Desktop/Websitedhcp-10-248-196-16:Website solon$ 

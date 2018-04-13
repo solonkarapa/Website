@@ -41,7 +41,7 @@ weight = 5
 
 # Biography
 
-I'm a first year PhD student at the [University of Cambridge](http://www.cam.ac.uk/), supervised by [Paul Newcombe](https://www.mrc-bsu.cam.ac.uk/people/in-alphabetical-order/n-to-s/paul-newcombe/) at the [MRC Biostatistics Unit](https://www.mrc-bsu.cam.ac.uk/). 
+I'm a PhD student at the [University of Cambridge](http://www.cam.ac.uk/), supervised by [Paul Newcombe](https://www.mrc-bsu.cam.ac.uk/people/in-alphabetical-order/n-to-s/paul-newcombe/) at the [MRC Biostatistics Unit](https://www.mrc-bsu.cam.ac.uk/). 
 <br><br>
 I'm interested in many areas across statistics, machine learning, and their interactions. My research focuses on tailored model development, that is targeted model building for a specific task of interest, mostly prediction. Under this scenario it is desired to use a metric which reflects the loss function to be used for the prediction problem thus "making" the model perform well for the particular task. Our approach is based on general Bayesian learning by incorporating loss functions into Bayesian inference. We will explore the use of such a framework for predictive and prognostic model building, whereby loss functions could be used to target metrics of real world clinical utility tailored to a particular setting. 
 <br><br>
