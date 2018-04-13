@@ -81,4 +81,16 @@ remote: Resolving deltas:   0% (0/115)   [Kremote: Resolving deltas:   4% (5/1
 To https://github.com/solonkarapa/Website.git
  * [new branch]      master -> master
 Branch 'master' set up to track remote branch 'master' from 'origin'.
-]0;~/Desktop/Websitedhcp-10-248-195-241:Website solon$ 
+gi  t status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   .Rproj.user/3E603709/console06/6210EEEF[m
+	[31mmodified:   .Rproj.user/3E603709/console06/INDEX001[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;~/Desktop/Websitedhcp-10-248-196-16:Website solon$ git add .
