@@ -6,7 +6,7 @@ date: '2018-03-26'
 slug: plastic-waste-and-disease-on-coral-reefs
 categories: 
    - data analysis
-tags: [data analysis, misinterpretation]
+tags: [data analysis, misinterpretation, random effects models]
 header:
   caption: ''
   image: ''
