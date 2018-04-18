@@ -215,8 +215,38 @@
     
     <url>
     
+      <loc>/tags/data/</loc>
+      <lastmod>2018-04-10T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/categories/data/</loc>
       <lastmod>2018-04-10T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/data-analysis/</loc>
+      <lastmod>2018-03-26T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/categories/data-analysis/</loc>
+      <lastmod>2018-03-26T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -245,6 +275,26 @@
     
     <url>
     
+      <loc>/tags/import/</loc>
+      <lastmod>2018-04-10T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/misinterpretation/</loc>
+      <lastmod>2018-03-26T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/project/</loc>
       <lastmod>2016-04-27T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -257,6 +307,16 @@
     
       <loc>/publication_types/</loc>
       <lastmod>2014-06-01T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/r/</loc>
+      <lastmod>2018-04-10T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

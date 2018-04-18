@@ -6,7 +6,7 @@ slug: importing-flat-files-into-r
 categories:
   - R
   - data
-tags: []
+tags: [import, data,  R]
 header:
   caption: ''
   image: ''
