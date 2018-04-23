@@ -129,3 +129,60 @@ remote: Resolving deltas:   0% (0/20)   [Kremote: Resolving deltas:  10% (2/20
 To https://github.com/solonkarapa/Website.git
    6679e71..9659b01  master -> master
 git add .
+]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commint -m ""u"e"[1P"[1P"o"r"g"a"n"i"s"e" "p"o"s"t"s" "i"n" "f"i"[1P"o"l"d"e"r"s"
+git: 'commint' is not a git command. See 'git --help'.
+
+The most similar command is
+	commit
+]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commint -m "organise posts in folders"n[1P
+[master 10033cb] organise posts in folders
+ Committer: solon <solon@Solons-MacBook-Pro.local>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 50 files changed, 2256 insertions(+), 249732 deletions(-)
+ rewrite .Rproj.user/3E603709/console06/INDEX001 (74%)
+ delete mode 100644 content/post/FINALDATASET.csv
+ rename content/post/{ => importFlatFiles}/2018-04-10-importing-flat-files-into-r.Rmd (99%)
+ rename content/post/{ => importFlatFiles}/2018-04-10-importing-flat-files-into-r.html (100%)
+ rename content/post/{ => importFlatFiles}/happiness.csv (100%)
+ rename content/post/{ => importFlatFiles}/happiness2.csv (100%)
+ create mode 100644 content/post/reefs/.FINALDATASET.csv.icloud
+ rename content/post/{ => reefs}/2018-03-26-plastic-waste-and-disease-on-coral-reefs.Rmd (100%)
+ rename content/post/{ => reefs}/2018-03-26-plastic-waste-and-disease-on-coral-reefs.html (100%)
+ rename content/post/{ => reefs}/TRANSECT_LENGTH_FINAL.csv (100%)
+ rename content/post/{ => reefs}/bibliopost.bib (100%)
+ create mode 100644 public/.science2.tif.icloud
+ create mode 100644 public/img/.science2.jpg.tif.icloud
+ create mode 100644 public/img/.science2.tif.icloud
+ create mode 100644 public/img/headers/.science2.jpg.icloud
+ delete mode 100644 public/img/headers/science2.jpg
+ delete mode 100644 public/img/science2.jpg.tif
+ delete mode 100644 public/img/science2.tif
+ create mode 100644 public/post/.FINALDATASET.csv.icloud
+ delete mode 100644 public/post/FINALDATASET.csv
+ create mode 100644 public/post/importFlatFiles/happiness.csv
+ create mode 100644 public/post/importFlatFiles/happiness2.csv
+ create mode 100644 public/post/importFlatFiles/importing-flat-files-into-r/index.html
+ create mode 100644 public/post/reefs/TRANSECT_LENGTH_FINAL.csv
+ create mode 100644 public/post/reefs/bibliopost.bib
+ create mode 100644 public/post/reefs/plastic-waste-and-disease-on-coral-reefs/index.html
+ delete mode 100644 public/science2.tif
+]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git push
+Counting objects: 63, done.
+Delta compression using up to 4 threads.
+Compressing objects:   1% (1/58)   Compressing objects:   3% (2/58)   Compressing objects:   5% (3/58)   Compressing objects:   6% (4/58)   Compressing objects:   8% (5/58)   Compressing objects:  10% (6/58)   Compressing objects:  12% (7/58)   Compressing objects:  13% (8/58)   Compressing objects:  15% (9/58)   Compressing objects:  17% (10/58)   Compressing objects:  18% (11/58)   Compressing objects:  20% (12/58)   Compressing objects:  22% (13/58)   Compressing objects:  24% (14/58)   Compressing objects:  25% (15/58)   Compressing objects:  27% (16/58)   Compressing objects:  29% (17/58)   Compressing objects:  31% (18/58)   Compressing objects:  32% (19/58)   Compressing objects:  34% (20/58)   Compressing objects:  36% (21/58)   Compressing objects:  37% (22/58)   Compressing objects:  39% (23/58)   Compressing objects:  41% (24/58)   Compressing objects:  43% (25/58)   Compressing objects:  44% (26/58)   Compressing objects:  46% (27/58)   Compressing objects:  48% (28/58)   Compressing objects:  50% (29/58)   Compressing objects:  51% (30/58)   Compressing objects:  53% (31/58)   Compressing objects:  55% (32/58)   Compressing objects:  56% (33/58)   Compressing objects:  58% (34/58)   Compressing objects:  60% (35/58)   Compressing objects:  62% (36/58)   Compressing objects:  63% (37/58)   Compressing objects:  65% (38/58)   Compressing objects:  67% (39/58)   Compressing objects:  68% (40/58)   Compressing objects:  70% (41/58)   Compressing objects:  72% (42/58)   Compressing objects:  74% (43/58)   Compressing objects:  75% (44/58)   Compressing objects:  77% (45/58)   Compressing objects:  79% (46/58)   Compressing objects:  81% (47/58)   Compressing objects:  82% (48/58)   Compressing objects:  84% (49/58)   Compressing objects:  86% (50/58)   Compressing objects:  87% (51/58)   Compressing objects:  89% (52/58)   Compressing objects:  91% (53/58)   Compressing objects:  93% (54/58)   Compressing objects:  94% (55/58)   Compressing objects:  96% (56/58)   Compressing objects:  98% (57/58)   Compressing objects: 100% (58/58)   Compressing objects: 100% (58/58), done.
+Writing objects:   1% (1/63)   Writing objects:   3% (2/63)   Writing objects:   4% (3/63)   Writing objects:   6% (4/63)   Writing objects:   7% (5/63)   Writing objects:   9% (6/63)   Writing objects:  11% (7/63)   Writing objects:  12% (8/63)   Writing objects:  14% (9/63)   Writing objects:  15% (10/63)   Writing objects:  17% (11/63)   Writing objects:  19% (12/63)   Writing objects:  20% (13/63)   Writing objects:  22% (14/63)   Writing objects:  23% (15/63)   Writing objects:  25% (16/63)   Writing objects:  26% (17/63)   Writing objects:  28% (18/63)   Writing objects:  30% (19/63)   Writing objects:  31% (20/63)   Writing objects:  33% (21/63)   Writing objects:  34% (22/63)   Writing objects:  36% (23/63)   Writing objects:  38% (24/63)   Writing objects:  39% (25/63)   Writing objects:  41% (26/63)   Writing objects:  42% (27/63)   Writing objects:  44% (28/63)   Writing objects:  46% (29/63)   Writing objects:  47% (30/63)   Writing objects:  49% (31/63)   Writing objects:  50% (32/63)   Writing objects:  52% (33/63)   Writing objects:  53% (34/63)   Writing objects:  55% (35/63)   Writing objects:  57% (36/63)   Writing objects:  58% (37/63)   Writing objects:  60% (38/63)   Writing objects:  61% (39/63)   Writing objects:  63% (40/63)   Writing objects:  65% (41/63)   Writing objects:  66% (42/63)   Writing objects:  68% (43/63)   Writing objects:  69% (44/63)   Writing objects:  71% (45/63)   Writing objects:  73% (46/63)   Writing objects:  74% (47/63)   Writing objects:  76% (48/63)   Writing objects:  77% (49/63)   Writing objects:  79% (50/63)   Writing objects:  80% (51/63)   Writing objects:  82% (52/63)   Writing objects:  84% (53/63)   Writing objects:  85% (54/63)   Writing objects:  87% (55/63)   Writing objects:  88% (56/63)   Writing objects:  90% (57/63)   Writing objects:  92% (58/63)   Writing objects:  93% (59/63)   Writing objects:  95% (60/63)   Writing objects:  96% (61/63)   Writing objects:  98% (62/63)   Writing objects: 100% (63/63)   Writing objects: 100% (63/63), 26.50 KiB | 238.00 KiB/s, done.
+Total 63 (delta 35), reused 0 (delta 0)
+remote: Resolving deltas:   0% (0/35)   [Kremote: Resolving deltas:   2% (1/35)   [Kremote: Resolving deltas:   8% (3/35)   [Kremote: Resolving deltas:  11% (4/35)   [Kremote: Resolving deltas:  14% (5/35)   [Kremote: Resolving deltas:  17% (6/35)   [Kremote: Resolving deltas:  20% (7/35)   [Kremote: Resolving deltas:  22% (8/35)   [Kremote: Resolving deltas:  25% (9/35)   [Kremote: Resolving deltas:  28% (10/35)   [Kremote: Resolving deltas:  31% (11/35)   [Kremote: Resolving deltas:  34% (12/35)   [Kremote: Resolving deltas:  37% (13/35)   [Kremote: Resolving deltas:  40% (14/35)   [Kremote: Resolving deltas:  45% (16/35)   [Kremote: Resolving deltas:  48% (17/35)   [Kremote: Resolving deltas:  51% (18/35)   [Kremote: Resolving deltas:  57% (20/35)   [Kremote: Resolving deltas:  62% (22/35)   [Kremote: Resolving deltas:  68% (24/35)   [Kremote: Resolving deltas:  71% (25/35)   [Kremote: Resolving deltas:  74% (26/35)   [Kremote: Resolving deltas:  77% (27/35)   [Kremote: Resolving deltas:  80% (28/35)   [Kremote: Resolving deltas:  82% (29/35)   [Kremote: Resolving deltas:  85% (30/35)   [Kremote: Resolving deltas:  88% (31/35)   [Kremote: Resolving deltas:  91% (32/35)   [Kremote: Resolving deltas:  94% (33/35)   [Kremote: Resolving deltas:  97% (34/35)   [Kremote: Resolving deltas: 100% (35/35)   [Kremote: Resolving deltas: 100% (35/35), completed with 28 local objects.[K
+To https://github.com/solonkarapa/Website.git
+   249ecd9..10033cb  master -> master
+git add .
