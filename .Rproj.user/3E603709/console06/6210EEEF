@@ -128,4 +128,4 @@ Total 33 (delta 20), reused 0 (delta 0)
 remote: Resolving deltas:   0% (0/20)   [Kremote: Resolving deltas:  10% (2/20)   [Kremote: Resolving deltas:  15% (3/20)   [Kremote: Resolving deltas:  20% (4/20)   [Kremote: Resolving deltas:  25% (5/20)   [Kremote: Resolving deltas:  30% (6/20)   [Kremote: Resolving deltas:  35% (7/20)   [Kremote: Resolving deltas:  40% (8/20)   [Kremote: Resolving deltas:  45% (9/20)   [Kremote: Resolving deltas:  50% (10/20)   [Kremote: Resolving deltas:  55% (11/20)   [Kremote: Resolving deltas:  60% (12/20)   [Kremote: Resolving deltas:  65% (13/20)   [Kremote: Resolving deltas:  70% (14/20)   [Kremote: Resolving deltas:  80% (16/20)   [Kremote: Resolving deltas:  85% (17/20)   [Kremote: Resolving deltas:  90% (18/20)   [Kremote: Resolving deltas:  95% (19/20)   [Kremote: Resolving deltas: 100% (20/20)   [Kremote: Resolving deltas: 100% (20/20), completed with 17 local objects.[K
 To https://github.com/solonkarapa/Website.git
    6679e71..9659b01  master -> master
-]0;~/Desktop/Websitedhcp-10-248-196-16:Website solon$ 
+git add .
