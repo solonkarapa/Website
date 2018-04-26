@@ -16,7 +16,7 @@ header:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-There are many tutorials for importing data in R, focusing on a specific function/package. This one focuses only on flat files, and compares 3 different packages. In this tutorial you will learn how to import all common formats of flat file data with base R functions and the dedicated `readr` and `data.table` packages. I first present the three - in my opinion - most used packages to import data into R and finish with a comparison table between them.  
+There are many tutorials for importing data in R focusing on a specific function/package. This one focuses on 3 different packages. In this tutorial you will learn how to import all common formats of flat file data with base R functions and the dedicated `readr` and `data.table` packages. I first present these three packages and finish with a comparison table between them.  
 
 ## Task
 Import a flat file into R: create an R object that contains the data from a flat file.
@@ -364,7 +364,4 @@ With some loss of generality a few suggestions are:
 
 - for large files (many MB-GB) `fread()` will be the fastest (with a few [exceptions](http://stackoverflow.com/questions/32263566/comparing-speed-of-fread-vs-read-table-for-reading-the-first-1m-rows-out-of-100))
 - the consistency and independence of the actual locale makes `readr` a good candidate for everyday use
-- if you are new to all these using `read.table()` will allow you to develop intuition on how R works  
-
-## Concluding 
-In this short tutorial we have seen three packages that can be used to import flat files into R, `utils`, `readr` and `data.table`. Each one has specific properties that make it unique.
+- if you are new to all these using `read.table()` will allow you to develop intuition on how R works.

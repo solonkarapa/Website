@@ -11,6 +11,62 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>On statistical reporting in biomedical journals</title>
+      <link>/post/on-statistical-reporting-in-biomedical-journals/</link>
+      <pubDate>Wed, 25 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/on-statistical-reporting-in-biomedical-journals/</guid>
+      <description>&lt;p&gt;Poor quality of statistical reporting in the biomedical literature is not uncommon. Here is another example by &lt;span class=&#34;citation&#34;&gt;(Cirio et al. &lt;a href=&#34;#ref-cirio2016effects&#34;&gt;2016&lt;/a&gt;)&lt;/span&gt;. The study itself is well planed, executed and reported. The aim was to assess whether heated and humidified high flow gases delived through nasa cannula (HFNC) improve exercise performance in severe chronic obstructive pulmonary disease (COPD) patients. It all started when I show their Fig.1. Here is my attempt to reproduce it&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;x &amp;lt;- c(300, 320, 327, 415, 420, 428, 433, 480, 495, 548, 550, 555)*0.965
+y &amp;lt;- (c(365, 384, 380, 480, 470, 540, 540, 550, 540, 610, 560, 999) + 12)*0.965
+id &amp;lt;- rep(1:12)
+time &amp;lt;- c(rep(&amp;quot;Control test&amp;quot;, 12), rep(&amp;quot;NFNC test&amp;quot;, 12))
+
+data &amp;lt;- data.frame(id = c(id, id), value = c(x, y), time = time)
+
+library(&amp;quot;ggplot2&amp;quot;)
+
+ggplot(data = data, aes(x = time, y = value, group = id)) + 
+   geom_line() + 
+   geom_point(size = 3) + 
+   ylim(0, 1000) + 
+   ylab(&amp;quot;Tlim, sec&amp;quot;) +
+   xlab(&amp;quot;&amp;quot;) + 
+   geom_point(aes(y = (999 + 12)*0.965, x = &amp;quot;NFNC test&amp;quot;), col = &amp;quot;red&amp;quot;, size = 3) + 
+   geom_point(aes(y = 555*0.965, x = &amp;quot;Control test&amp;quot;), col = &amp;quot;red&amp;quot;, size = 3)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-04-25-on-statistical-reporting-in-biomedical-journals_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;In total there are n=12 patients tested twice under the control test and NFNC test. The outcome of interest is the endurance time (Tlim - y axis). This is practically how long each test lasted. It is evident from the figure Tlim increased for all subjects under the NFNC test. Moreover, this increase reached statistical significance (p-value = 0.015)! Looking at the plot I was pondered about the “outlying” patient (red dot). His/her Tlim increased by a whooping 400 seconds! This is huge compared to the other patients. Then I wondered how would the results change if we excluded him/her from the analysis? And here is where the problems start.&lt;/p&gt;
+&lt;p&gt;There is no way from the text to figure out which test was used to produce the p-value of 0.015. Is is a paired t-test or a Wilcoxon test (they mention both is the statistical analysis section)?&lt;/p&gt;
+&lt;p&gt;Having abandoned the idea of being able to reproduce the analysis I started thinking about reporting guidelines, hence the title of this post. The journal must have guidelines for reporting statistical analysis. No, it does not and unfortunately, most of the biomedical journals don’t have statistical reporting guidelines even though 40 years ago O’Fallon and colleges recommended that “Standards governing the content and format of statistical aspects should be developed to guide authors in the preparation of manuscripts” &lt;span class=&#34;citation&#34;&gt;(O’Fallon et al. &lt;a href=&#34;#ref-o1978should&#34;&gt;1978&lt;/a&gt;)&lt;/span&gt;. Since then many repeated the message. As a result, a few sporadic attempts are usually editorials such as &lt;span class=&#34;citation&#34;&gt;(Cummings and Rivara &lt;a href=&#34;#ref-cummings2003reporting&#34;&gt;2003&lt;/a&gt;)&lt;/span&gt; and &lt;span class=&#34;citation&#34;&gt;(Arifin et al. &lt;a href=&#34;#ref-arifin2016reporting&#34;&gt;2016&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Perhaps, the most comprehensive set of statistical reporting guidelines suitable for medical journals is given by &lt;span class=&#34;citation&#34;&gt;(Lang and Altman &lt;a href=&#34;#ref-lang2013basic&#34;&gt;2013&lt;/a&gt;)&lt;/span&gt; (the SAMPL guidelines). As there are many general reporting guidelines based on the study design as such CONSORT, STROBE, PRISMA etc (see &lt;a href=&#34;http://www.equator-network.org/&#34; class=&#34;uri&#34;&gt;http://www.equator-network.org/&lt;/a&gt;) that authors in many journals need to adhere to, I believe the SAMPL guidelines is a big step forward on reporting statistics. The only journal that suggests the use of the SAMPL guidelines is the British Journal of Dermatology &lt;span class=&#34;citation&#34;&gt;(Hollestein and Nijsten &lt;a href=&#34;#ref-hollestein2015guidelines&#34;&gt;2015&lt;/a&gt;)&lt;/span&gt;. (I’ll keep adding the list).&lt;/p&gt;
+&lt;p&gt;Now that the guidelines exist, let’s make use of them.&lt;/p&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;References&lt;/h1&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-arifin2016reporting&#34;&gt;
+&lt;p&gt;Arifin, Wan Nor, Abdullah Sarimah, Bachok Norsa’adah, Yaacob Najib Majdi, Ab Hamid Siti-Azrin, Musa Kamarul Imran, Abd Aziz Aniza, and Lin Naing. 2016. “Reporting Statistical Results in Medical Journals.” &lt;em&gt;The Malaysian Journal of Medical Sciences: MJMS&lt;/em&gt; 23 (5). School of Medical Sciences, Universiti Sains Malaysia: 1.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-cirio2016effects&#34;&gt;
+&lt;p&gt;Cirio, Serena, Manuela Piran, Michele Vitacca, Giancarlo Piaggi, Piero Ceriana, Matteo Prazzoli, Mara Paneroni, and Annalisa Carlucci. 2016. “Effects of Heated and Humidified High Flow Gases During High-Intensity Constant-Load Exercise on Severe Copd Patients with Ventilatory Limitation.” &lt;em&gt;Respiratory Medicine&lt;/em&gt; 118. Elsevier: 128–32.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-cummings2003reporting&#34;&gt;
+&lt;p&gt;Cummings, Peter, and Frederick P Rivara. 2003. “Reporting Statistical Information in Medical Journal Articles.” &lt;em&gt;Archives of Pediatrics &amp;amp; Adolescent Medicine&lt;/em&gt; 157 (4). American Medical Association: 321–24.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-hollestein2015guidelines&#34;&gt;
+&lt;p&gt;Hollestein, LM, and Tamar Nijsten. 2015. “Guidelines for Statistical Reporting in the British Journal of Dermatology.” &lt;em&gt;British Journal of Dermatology&lt;/em&gt; 173 (1). Wiley Online Library: 3–5.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-lang2013basic&#34;&gt;
+&lt;p&gt;Lang, Thomas A, and Douglas G Altman. 2013. “Basic Statistical Reporting for Articles Published in Biomedical Journals: The ‘Statistical Analyses and Methods in the Published Literature’ or the Sampl Guidelines”.” &lt;em&gt;Handbook, European Association of Science Editors&lt;/em&gt; 256. Wiley Online Library: 256.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-o1978should&#34;&gt;
+&lt;p&gt;O’Fallon, JR, SD Dubey, DS Salsburg, JH Edmonson, A Soffer, and T Colton. 1978. “Should There Be Statistical Guidelines for Medical Research Papers?” &lt;em&gt;Biometrics&lt;/em&gt;. JSTOR, 687–95.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Importing Flat Files Into R</title>
       <link>/post/importflatfiles/importing-flat-files-into-r/</link>
       <pubDate>Tue, 10 Apr 2018 00:00:00 +0000</pubDate>
@@ -489,15 +545,15 @@ str(read_delim(&amp;quot;happiness.csv&amp;quot;, delim = &amp;quot;,&amp;quot; 
 &lt;/li&gt;
 &lt;li&gt;the plastic levels correspond to estimates of mismanaged plastic waste into the ocean.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Overall, this study provides evidence how plastic waste negatively affects coral reefs, making them more susceptible to diseases. The authors made available both the datasets they used and the code &lt;span class=&#34;citation&#34;&gt;(both can be downloaded from J. Lamb et al. &lt;a href=&#34;#ref-dryad_mp480&#34;&gt;2018&lt;/a&gt;)&lt;/span&gt; so it’s an excellent example of reproducible research. The methods sections is straightforward to follow (see &lt;a href=&#34;http://science.sciencemag.org/content/suppl/2018/01/24/359.6374.460.DC1?_ga=2.198123375.1394041835.1523546630-1357771364.1523546630&#34;&gt;Supplementary Materials&lt;/a&gt;). My comment is about the 2nd point above, and more specifically the methodology behind Figure 4 in the paper. The issue is the authors interpret the models they are using in an wrong way.&lt;/p&gt;
+&lt;p&gt;Overall, this study provides evidence how plastic waste negatively affects coral reefs, making them more susceptible to diseases. The authors made available both the datasets they used and the code &lt;span class=&#34;citation&#34;&gt;(both can be downloaded from J. Lamb et al. &lt;a href=&#34;#ref-dryad_mp480&#34;&gt;2018&lt;/a&gt;)&lt;/span&gt; so it’s an excellent example of reproducible research. The methods sections is straightforward to follow (see &lt;a href=&#34;http://science.sciencemag.org/content/suppl/2018/01/24/359.6374.460.DC1?_ga=2.198123375.1394041835.1523546630-1357771364.1523546630&#34;&gt;Supplementary Materials&lt;/a&gt;). My comment is about the 2nd point above, and more specifically the methodology that led to this conclusion (see Fig. 4 of the article). The issue is the authors interpret the models they are using in an wrong way.&lt;/p&gt;
 &lt;p&gt;Their model is a simple generalised linear mixed model (GLMM) - binomial error distribution and logistic link. The outcome is the disease prevalence (binary) among coral reefs with different morphology. The morphology assignments were massive, tabular, and branching (3-level categorical covariate). The morphological assignments were treated as fixed factors and the site as random (in order to take into account the correlation between reefs due to their geographical position). The model is&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ logit(Disease Presense_{ik}) =  \sum_j \beta_j x_{ikj} + b_i \]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(j_{1:3} = \{massive, tabular, and branching\}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(b_i\)&lt;/span&gt; are the reef-specific intercepts. Such a &lt;span class=&#34;math inline&#34;&gt;\(b_i\)&lt;/span&gt; represents the deviation of the intercept of a specific reef from the average intercept in the group to which that reef belongs, i.e deviation from &lt;span class=&#34;math inline&#34;&gt;\(\beta_1\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\beta_2\)&lt;/span&gt; or &lt;span class=&#34;math inline&#34;&gt;\(\beta_3\)&lt;/span&gt;. The model is fitted only for reefs unaffected by plastic waste. The output is given in Figure 4(B) in the paper. The conclusion is the disease risk increases from massive to branching and tabular reefs when not in contact with plastic debris (Figure 4(B) and table S13).&lt;/p&gt;
+&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(j_{1:3} = \{massive, tabular, and branching\}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(b_i\)&lt;/span&gt; are the reef-specific intercepts. Such a &lt;span class=&#34;math inline&#34;&gt;\(b_i\)&lt;/span&gt; represents the deviation of the intercept of a specific reef from the average intercept in the group to which that reef belongs, i.e deviation from &lt;span class=&#34;math inline&#34;&gt;\(\beta_1\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\beta_2\)&lt;/span&gt; or &lt;span class=&#34;math inline&#34;&gt;\(\beta_3\)&lt;/span&gt;. The model is fitted only for reefs unaffected by plastic waste. The output is given in Fig. 4(B) in the paper. The conclusion is the disease risk increases from massive to branching and tabular reefs when not in contact with plastic debris (Fig. 4(B) and table S13).&lt;/p&gt;
 &lt;p&gt;The issue with this figure is the authors give a population-average interpretation of the coefficients. In GLLMs the fixed effects have a site-specific interpretation but not a population-average interpretation. Let us now consider the logistic random-intercepts model above. The conditional means &lt;span class=&#34;math inline&#34;&gt;\(E[Disease Presense_{ik}|b_i]\)&lt;/span&gt; are given by&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ E[Disease Presense_{ik}|b_i] = \frac{\exp(\sum_j \beta_j x_{ikj} + b_i)}{1 + \exp(\sum_j \beta_j x_{ikj} + b_i)} \]&lt;/span&gt; where &lt;span class=&#34;math inline&#34;&gt;\(E[.]\)&lt;/span&gt; is the expectation operator. The above model assumes logistic change in prevalence of disease for each morphology, all having different intercepts &lt;span class=&#34;math inline&#34;&gt;\(\beta_0 + bi\)&lt;/span&gt;. The average reef, i.e, the reef with intercept &lt;span class=&#34;math inline&#34;&gt;\(b_i = 0\)&lt;/span&gt;, has disease probability given by&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ E[Disease Presense_{ik}|b_i] = \frac{\exp(\sum_j \beta_j x_{ikj} + b_i)}{1 + \exp(\sum_j \beta_j x_{ikj} + b_i)} \]&lt;/span&gt; where &lt;span class=&#34;math inline&#34;&gt;\(E[.]\)&lt;/span&gt; is the expectation operator. The above model assumes logistic change in prevalence of disease for each morphology, all having different intercepts &lt;span class=&#34;math inline&#34;&gt;\(\beta_0 + b_i\)&lt;/span&gt;. The average reef, i.e, the reef with intercept &lt;span class=&#34;math inline&#34;&gt;\(b_i = 0\)&lt;/span&gt;, has disease probability given by&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ E[Disease Presense_{ik}|b_i = 0] = \frac{\exp(\sum_j \beta_j x_j + 0)}{1 + \exp(\sum_j \beta_j x_j + 0)} \]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;which is what the authors have calculated and produced Fig 4. In other words, the authors have calculated the probability of disease for an “average” reef. They proceed interpreting this as marginal effect which is wrong.&lt;/p&gt;
-&lt;p&gt;The issue arises due to the conditional interpretation, conditionally upon level of random effects, of the &lt;span class=&#34;math inline&#34;&gt;\(\beta\)&lt;/span&gt;s in a GLMM model. And this is due to the fact that &lt;span class=&#34;math inline&#34;&gt;\(E[g(Y )] \neq g[E(Y)]\)&lt;/span&gt; unless &lt;span class=&#34;math inline&#34;&gt;\(g\)&lt;/span&gt; is linear, which is not the case for this model. In what follows I fit the same model and demostrate how the coclusions change when conditioning of diffrerent levels of the random coefficients. The code the authors use is&lt;/p&gt;
+&lt;p&gt;which is what the authors have calculated and produced Fig. 4. In other words, the authors have calculated the probability of disease for an “average” reef. They proceed interpreting this as marginal effect which is wrong.&lt;/p&gt;
+&lt;p&gt;The issue arises due to the conditional interpretation, conditionally upon level of random effects, of the &lt;span class=&#34;math inline&#34;&gt;\(\beta\)&lt;/span&gt;s in a GLMM model. And this is due to the fact that &lt;span class=&#34;math inline&#34;&gt;\(E[g(Y )] \neq g[E(Y)]\)&lt;/span&gt; unless &lt;span class=&#34;math inline&#34;&gt;\(g\)&lt;/span&gt; is linear, which is not the case for this model. In what follows I fit the same model and demostrate how the conclusions change when conditioning of diffrerent levels of the random coefficients. The code the authors use is&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# GLMM, Baseline Disease levels for different growth forms, Asia Pacific --------
 library(lme4)
 Normal.Disease.Growth = glmer(Disease ~ -1 + Growth2+(1|Reef_Name), 
@@ -506,7 +562,7 @@ Normal.Disease.Growth = glmer(Disease ~ -1 + Growth2+(1|Reef_Name),
                               control = glmerControl(optimizer =&amp;quot;bobyqa&amp;quot;))
 
 # As a sidenote: This code uses a Laplace approximation (nAGQ = 1 - the default) on the integral over the random effects space. &amp;quot;Values greater than 1 produce greater accuracy in the evaluation of the log-likelihood at the expense of speed&amp;quot;. The authors of the package suggest values up to 25 (see the documentation). &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The following reproduces Figure 4(B) of the publication.&lt;/p&gt;
+&lt;p&gt;The following reproduces Fig. 4(B) of the publication.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# PDF, Baseline disease levels by growth form -----------------------------
 NormalDisease.by.Growth = data.frame(Tabular = rnorm(100000, mean = -3.1332, sd = .1549),
                                    Massive = rnorm(100000, mean = -3.8153, sd = .1095),
@@ -521,13 +577,13 @@ ggplot(aes(x = Estimate*100), data = NormalDisease.by.Growth) +
    geom_density(aes(y = ..scaled.., fill = Growth)) +
    scale_x_continuous(limits = c(0, 10)) + 
    ylab(&amp;quot;&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;As it is evident from the code that they plot the fixed effects estimates with their standard errors. This plots ignores the random effects and it only takes into consideration the variation of the fixed coefficients &lt;span class=&#34;math inline&#34;&gt;\(\beta_j\)&lt;/span&gt;. To get an idea for the variability of the random effects I simulate them from the model and plot them. Points that are distinguishable from zero (i.e. the confidence band based on level does not cross the red line) are highlighted. We see substantial variation on the random effects estimates with many “outliers” with both high and low averages that need to be accounted for.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(merTools)
 sim_rfs_Normal.Disease &amp;lt;- REsim(Normal.Disease.Growth, n.sims = 200) 
 plotREsim(sim_rfs_Normal.Disease)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;What the authors are effectively doing in Figure 4(B) (see density plot above) is presenting the results for reefs with &lt;span class=&#34;math inline&#34;&gt;\(b_i = 0\)&lt;/span&gt; which corresponds to the red horizontal line. Let’s see how the denisty plot changes when we condition on more “extreme” reefs. I use the 0.1 and 0.9 quantiles.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;What the authors are effectively doing in Fig. 4(B) (see density plot above) is presenting the results for reefs with &lt;span class=&#34;math inline&#34;&gt;\(b_i = 0\)&lt;/span&gt; which corresponds to the red horizontal line. Let’s see how the denisty plot changes when we condition on more “extreme” reefs. I use the 0.1 and 0.9 quantiles.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;quantile0.9 &amp;lt;- REquantile(Normal.Disease.Growth, quantile = 0.9, groupFctr = &amp;quot;Reef_Name&amp;quot;)
 #which(sim_rfs_Normal.Disease$groupID == quantile0.9)
 
@@ -564,8 +620,7 @@ ggplot(aes(x = Estimate*100, col = ID), data = overall) +
    scale_color_manual(values = c(&amp;quot;#000000&amp;quot;, &amp;quot;dodgerblue&amp;quot;, &amp;quot;darkmagenta&amp;quot;)) +
    scale_x_continuous(limits = c(0, 10)) + 
    ylab(&amp;quot;&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Warning: Removed 202763 rows containing non-finite values (stat_density).&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;It is evident both the center and the variability of the distributions change depending whether we look an “average” coral reef (purple line), a reef towards the upper extreme (blue line) or the lower extreme (black line). So the conclusions should be something along the lines: the increase in disease likelihood with plastic debris depends also on inherit/unobserved characteristics of the reefs, captured by the random effects, in addition to their morphology.&lt;/p&gt;
 &lt;p&gt;Of course, what I have presented above is still conditinal interpretation of the parameters. Ideally, we want the marginal population-average interpreation which is obtained from averaging over the random effects. This allows to take into account both the residual (observation-level) variance, the uncertainty in the variance parameters for the grouping factors added to the uncertainty in the fixed coefficients. See for example the &lt;code&gt;predictInterval()&lt;/code&gt; function of the &lt;a href=&#34;https://cran.r-project.org/web/packages/merTools/merTools.pdf&#34;&gt;&lt;code&gt;merTools&lt;/code&gt;&lt;/a&gt; package.&lt;/p&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
@@ -876,15 +931,6 @@ git submodule update --init --recursive
       <pubDate>Sat, 01 Jun 2013 00:00:00 +0000</pubDate>
       
       <guid>/publication/exerciseandsporthabits/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Wiihabilitation</title>
-      <link>/publication/wiihabilitation/</link>
-      <pubDate>Fri, 01 Jun 2012 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/wiihabilitation/</guid>
       <description></description>
     </item>
     

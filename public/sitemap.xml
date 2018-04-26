@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>/post/on-statistical-reporting-in-biomedical-journals/</loc>
+      <lastmod>2018-04-25T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/post/importflatfiles/importing-flat-files-into-r/</loc>
       <lastmod>2018-04-10T00:00:00+00:00</lastmod>
     </url>
@@ -225,16 +234,6 @@
     
     <url>
     
-      <loc>/tags/data/</loc>
-      <lastmod>2018-04-10T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
       <loc>/categories/data/</loc>
       <lastmod>2018-04-10T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -245,8 +244,8 @@
     
     <url>
     
-      <loc>/tags/data-analysis/</loc>
-      <lastmod>2018-03-26T00:00:00+00:00</lastmod>
+      <loc>/tags/data/</loc>
+      <lastmod>2018-04-10T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -256,6 +255,16 @@
     <url>
     
       <loc>/categories/data-analysis/</loc>
+      <lastmod>2018-03-26T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/data-analysis/</loc>
       <lastmod>2018-03-26T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -305,7 +314,7 @@
     
     <url>
     
-      <loc>/tags/r/</loc>
+      <loc>/categories/r/</loc>
       <lastmod>2018-04-10T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -315,7 +324,7 @@
     
     <url>
     
-      <loc>/categories/r/</loc>
+      <loc>/tags/r/</loc>
       <lastmod>2018-04-10T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
