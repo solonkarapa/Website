@@ -281,3 +281,28 @@ remote: Resolving deltas:   0% (0/12)   [Kremote: Resolving deltas:   8% (1/12
 To https://github.com/solonkarapa/Website.git
    201bc37..341cdcd  master -> master
 ]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git add .
+]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commit -m "another attempt"
+[master 22ca4aa] another attempt
+ Committer: solon <solon@Solons-MacBook-Pro.local>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 189 insertions(+), 23 deletions(-)
+]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git psuh    push
+Counting objects: 11, done.
+Delta compression using up to 4 threads.
+Compressing objects:   9% (1/11)   Compressing objects:  18% (2/11)   Compressing objects:  27% (3/11)   Compressing objects:  36% (4/11)   Compressing objects:  45% (5/11)   Compressing objects:  54% (6/11)   Compressing objects:  63% (7/11)   Compressing objects:  72% (8/11)   Compressing objects:  81% (9/11)   Compressing objects:  90% (10/11)   Compressing objects: 100% (11/11)   Compressing objects: 100% (11/11), done.
+Writing objects:   9% (1/11)   Writing objects:  18% (2/11)   Writing objects:  27% (3/11)   Writing objects:  36% (4/11)   Writing objects:  45% (5/11)   Writing objects:  54% (6/11)   Writing objects:  63% (7/11)   Writing objects:  72% (8/11)   Writing objects:  81% (9/11)   Writing objects:  90% (10/11)   Writing objects: 100% (11/11)   Writing objects: 100% (11/11), 564.01 KiB | 6.34 MiB/s, done.
+Total 11 (delta 7), reused 0 (delta 0)
+remote: Resolving deltas:   0% (0/7)   [Kremote: Resolving deltas:  14% (1/7)   [Kremote: Resolving deltas:  28% (2/7)   [Kremote: Resolving deltas:  42% (3/7)   [Kremote: Resolving deltas:  57% (4/7)   [Kremote: Resolving deltas:  71% (5/7)   [Kremote: Resolving deltas:  85% (6/7)   [Kremote: Resolving deltas: 100% (7/7)   [Kremote: Resolving deltas: 100% (7/7), completed with 7 local objects.[K
+To https://github.com/solonkarapa/Website.git
+   341cdcd..22ca4aa  master -> master
+]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ [KSolons-MacBook-Pro:Website solon$ git aff  dd .

@@ -18,7 +18,7 @@
       <pubDate>Wed, 25 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/on-statistical-reporting-in-biomedical-journals/</guid>
-      <description>Poor quality of statistical reporting in the biomedical literature is not uncommon. Here is another example by (Cirio et al. 2016). The study itself is well planed, executed and reported. The aim was to assess whether heated and humidified high flow gases delived through nasa cannula (HFNC) improve exercise performance in severe chronic obstructive pulmonary disease (COPD) patients. It all started when I show their Fig.1. Here is my attempt to reproduce it</description>
+      <description>Poor quality statistical reporting in the biomedical literature is not uncommon. Here is another example by Cirio et al. (2016). The study itself is well planed, executed and reported. The aim was to assess whether heated and humidified high flow gases delivered through nasal cannula (HFNC) improve exercise performance in severe chronic obstructive pulmonary disease (COPD) patients. It all started when I show their Fig.1. Here is my attempt to reproduce it</description>
     </item>
     
     <item>
@@ -27,7 +27,8 @@
       <pubDate>Tue, 10 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/importflatfiles/importing-flat-files-into-r/</guid>
-      <description>There are many tutorials for importing data in R, focusing on a specific function/package. This one focuses only on flat files, and compares 3 different packages. In this tutorial you will learn how to import all common formats of flat file data with base R functions and the dedicated readr and data.table packages. I first present the three - in my opinion - most used packages to import data into R and finish with a comparison table between them.</description>
+      <description>There are many tutorials for importing data in R focusing on a specific function/package. This one focuses on 3 different packages. In this tutorial you will learn how to import all common formats of flat file data with base R functions and the dedicated readr and data.table packages. I first present these three packages and finish with a comparison table between them.
+## Task Import a flat file into R: create an R object that contains the data from a flat file.</description>
     </item>
     
     <item>

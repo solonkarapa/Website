@@ -10,7 +10,6 @@ tags: [data analysis, misinterpretation, random effects models]
 header:
   caption: ''
   image: ''
-  bookdown::html_document2: default
 bibliography: bibliopost.bib
 link-citations: yes
 draft: true
