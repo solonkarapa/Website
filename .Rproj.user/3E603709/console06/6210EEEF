@@ -354,4 +354,4 @@ After doing this, you may fix the identity used for this commit with:
  rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png (97%)
  rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png (97%)
  rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png (96%)
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git push
+git add .
