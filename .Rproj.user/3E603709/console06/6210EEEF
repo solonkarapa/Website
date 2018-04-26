@@ -306,3 +306,52 @@ remote: Resolving deltas:   0% (0/7)   [Kremote: Resolving deltas:  14% (1/7) 
 To https://github.com/solonkarapa/Website.git
    341cdcd..22ca4aa  master -> master
 ]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ [KSolons-MacBook-Pro:Website solon$ git aff  dd .
+git ]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git   commit . -m "a ate tmep   empt to fix bug"
+[master df88d78] attempt to fix bug
+ Committer: solon <solon@Solons-MacBook-Pro.local>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 51 files changed, 126981 insertions(+), 1140 deletions(-)
+ rewrite content/post/2018-04-25-on-statistical-reporting-in-biomedical-journals.html (99%)
+ rewrite content/post/importFlatFiles/2018-04-10-importing-flat-files-into-r.html (96%)
+ rewrite content/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs.html (99%)
+ delete mode 100644 public/.science2.tif.icloud
+ create mode 100644 public/categories/guidelines/index.html
+ create mode 100644 public/categories/guidelines/page/1/index.html
+ create mode 100644 public/categories/reporting/index.html
+ create mode 100644 public/categories/reporting/page/1/index.html
+ delete mode 100644 public/img/.science2.jpg.icloud
+ delete mode 100644 public/img/.science2.jpg.tif.icloud
+ delete mode 100644 public/img/.science2.tif.icloud
+ delete mode 100644 public/img/headers/.science2.jpg.icloud
+ delete mode 100644 public/img/headers/.science2.tiff.icloud
+ create mode 100644 public/img/headers/science2.jpg
+ create mode 100644 public/img/headers/science2.tiff
+ create mode 100644 public/img/science2.jpg
+ create mode 100644 public/img/science2.jpg.tif
+ create mode 100644 public/img/science2.tif
+ delete mode 100644 public/post/.FINALDATASET.csv.icloud
+ create mode 100644 public/post/2018-04-25-on-statistical-reporting-in-biomedical-journals_files/figure-html/figs-1.png
+ create mode 100644 public/post/FINALDATASET.csv
+ rewrite public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png (97%)
+ rewrite public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png (97%)
+ rewrite public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png (96%)
+ create mode 100644 public/science2.tif
+ create mode 100644 public/tags/guidelines/index.html
+ create mode 100644 public/tags/guidelines/page/1/index.html
+ create mode 100644 public/tags/reporting/index.html
+ create mode 100644 public/tags/reporting/page/1/index.html
+ create mode 100644 static/post/2018-04-25-on-statistical-reporting-in-biomedical-journals_files/figure-html/figs-1.png
+ rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png (97%)
+ rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png (97%)
+ rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png (96%)
+]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git push
