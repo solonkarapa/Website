@@ -5,7 +5,7 @@
     
     <url>
     
-      <loc>/post/on-statistical-reporting-in-biomedical-journals/</loc>
+      <loc>/post/stat_reporting/on-statistical-reporting-in-biomedical-journals/</loc>
       <lastmod>2018-04-25T00:00:00+00:00</lastmod>
     </url>
     
@@ -205,6 +205,16 @@
     
     <url>
     
+      <loc>/tags/stat-reporting/</loc>
+      <lastmod>2018-04-25T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/publication_types/1/</loc>
       <lastmod>2014-06-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -356,16 +366,6 @@
     
       <loc>/tags/random-effects-models/</loc>
       <lastmod>2018-03-26T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>/tags/reporting/</loc>
-      <lastmod>2018-04-25T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

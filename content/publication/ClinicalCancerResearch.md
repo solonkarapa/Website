@@ -47,7 +47,7 @@ url_source = ""
 
 # Custom links (optional).
 #   Uncomment line below to enable. For multiple links, use the form `[{...}, {...}, {...}]`.
-url_custom = [{name = "Link", url = "http://clincancerres.aacrjournals.org/content/early/2018/04/02/1078-0432.CCR-17-3542.long"}]
+url_custom = [{name = "Link", url = "http://clincancerres.aacrjournals.org/content/24/9/2110"}]
 
 # Does the content use math formatting?
 math = true
