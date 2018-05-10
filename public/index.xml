@@ -16,7 +16,7 @@
       <pubDate>Wed, 25 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/stat_reporting/on-statistical-reporting-in-biomedical-journals/</guid>
-      <description>&lt;p&gt;Poor quality statistical reporting in the biomedical literature is not uncommon. Here is another example by &lt;span class=&#34;citation&#34;&gt;Cirio et al. (&lt;a href=&#34;#ref-cirio2016effects&#34;&gt;2016&lt;/a&gt;)&lt;/span&gt;. The study itself is well planed, executed and reported. The aim was to assess whether heated and humidified high flow gases delivered through nasal cannula (HFNC) improve exercise performance in severe chronic obstructive pulmonary disease (COPD) patients. It all started when I show their Fig.1. Here is my attempt to reproduce it&lt;/p&gt;
+      <description>&lt;p&gt;Poor quality statistical reporting in the biomedical literature is not uncommon. Here is another example by &lt;span class=&#34;citation&#34;&gt;Cirio et al. (&lt;a href=&#34;#ref-cirio2016effects&#34;&gt;2016&lt;/a&gt;)&lt;/span&gt;. The study itself is well planed, executed and reported. The aim was to assess whether heated and humidified high flow gases delivered through nasal cannula (HFNC) improve exercise performance in severe chronic obstructive pulmonary disease (COPD) patients. It all started when I saw their Fig.1. Here is my attempt to reproduce it&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:figs&#34;&gt;&lt;/span&gt;
 &lt;img src=&#34;/post/stat_reporting/2018-04-25-on-statistical-reporting-in-biomedical-journals_files/figure-html/figs-1.png&#34; alt=&#34;Effect of the HFNC on exercise capacity compared to a control condition. Tlim = exercise duration.&#34; width=&#34;672&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;
