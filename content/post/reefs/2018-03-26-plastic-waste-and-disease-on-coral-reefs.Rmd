@@ -1,6 +1,5 @@
 ---
-title: "Plastic waste and disease on coral reefs"  
-subtitle: "Another misinterpretation of a statistical model"
+title: "Plastic waste and disease on coral reefs - Another misinterpretation of a statistical model"
 author: ''
 date: '2018-05-20'
 slug: plastic-waste-and-disease-on-coral-reefs
@@ -66,7 +65,7 @@ Recently, I came across this very interesting article published in [Science](htt
 2. the morphological structure of the reefs is associated with the probability of being in contact with plastic with more complex ones being more likely to be affected by plastic,    
 3. the plastic levels correspond to estimates of mismanaged plastic waste into the ocean.   
 
-Overall, this study provides evidence how plastic waste negatively affects coral reefs, making them more susceptible to diseases. The authors made available both the datasets they used and the code [both can be downloaded from @dryad_mp480] so it's an excellent example of reproducible research. The methods sections is straightforward to follow (see [Supplementary Materials](http://science.sciencemag.org/content/suppl/2018/01/24/359.6374.460.DC1?_ga=2.198123375.1394041835.1523546630-1357771364.1523546630)). My comment is about the 2nd point above, and more specifically the methodology that led to this conclusion (see Fig. 4 of the article). The issue is the authors interpret the models they are using wrongly. Let me expalain ...   
+Overall, this study provides evidence how plastic waste negatively affects coral reefs, making them more susceptible to diseases. The authors made available both the datasets they used and the code [both can be downloaded from @dryad_mp480] so it's an excellent example of reproducible research. The methods sections is straightforward to follow (see [Supplementary Materials](http://science.sciencemag.org/content/suppl/2018/01/24/359.6374.460.DC1?_ga=2.198123375.1394041835.1523546630-1357771364.1523546630)). My comment is about the 2nd point above, and more specifically the methodology that led to this conclusion (see Fig. 4 of the article). The issue is the authors interpret the models they are using wrongly. Let me explain ...   
 
 Their model is a simple generalised linear mixed model (GLMM) - binomial error distribution and logistic link. The outcome is the disease prevalence (binary) among coral reefs with different morphology. The morphology assignments were massive, tabular, and branching (3-level categorical covariate). The morphological assignments were treated as fixed factors and the site as random (in order to take into account the correlation between reefs due to their geographical position). The model is  
 
