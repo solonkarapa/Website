@@ -16,7 +16,7 @@ header:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-There are many tutorials for importing data in R focusing on a specific function/package. This one focuses on 3 different packages. In this tutorial you will learn how to import all common formats of flat file data with base R functions and the dedicated `readr` and `data.table` packages. I first present these three packages and finish with a comparison table between them. 
+There are many tutorials for importing data into R focusing on a specific function/package. This one focuses on 3 different packages. You will learn how to import all common formats of flat file data with base R functions and the dedicated `readr` and `data.table` packages. I first present these three packages and finish with a comparison table between them. 
 
 ## Task
 Import a flat file into R: create an R object that contains the data from a flat file.
