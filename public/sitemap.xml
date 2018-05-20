@@ -244,16 +244,6 @@
     
     <url>
     
-      <loc>/categories/data/</loc>
-      <lastmod>2018-04-10T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
       <loc>/tags/data/</loc>
       <lastmod>2018-04-10T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -264,8 +254,8 @@
     
     <url>
     
-      <loc>/categories/data-analysis/</loc>
-      <lastmod>2018-03-26T00:00:00+00:00</lastmod>
+      <loc>/categories/data/</loc>
+      <lastmod>2018-04-10T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -284,8 +274,8 @@
     
     <url>
     
-      <loc>/categories/guidelines/</loc>
-      <lastmod>2018-04-25T00:00:00+00:00</lastmod>
+      <loc>/categories/data-analysis/</loc>
+      <lastmod>2018-03-26T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -295,6 +285,16 @@
     <url>
     
       <loc>/tags/guidelines/</loc>
+      <lastmod>2018-04-25T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/categories/guidelines/</loc>
       <lastmod>2018-04-25T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -344,7 +344,7 @@
     
     <url>
     
-      <loc>/categories/r/</loc>
+      <loc>/tags/r/</loc>
       <lastmod>2018-04-10T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -354,7 +354,7 @@
     
     <url>
     
-      <loc>/tags/r/</loc>
+      <loc>/categories/r/</loc>
       <lastmod>2018-04-10T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
