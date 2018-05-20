@@ -554,3 +554,38 @@ remote: Resolving deltas:   0% (0/22)   [Kremote: Resolving deltas:   4% (1/22
 To https://github.com/solonkarapa/Website.git
    2126b9c..c2ff623  master -> master
 git aff  dd .
+]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commit -m ""t"y"p"e"s"[1P"[1P"o"s"
+[master 4c604fa] typos
+ Committer: solon <solon@Solons-MacBook-Pro.local>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+g 22 files changed, 29 insertions(+), 374539 deletions(-)
+ rewrite .Rproj.user/3E603709/console06/INDEX001 (65%)
+ create mode 100644 content/post/reefs/.FINALDATASET.csv.icloud
+ delete mode 100644 content/post/reefs/FINALDATASET.csv
+ create mode 100644 public/.science2.tif.icloud
+ create mode 100644 public/img/.science2.jpg.icloud
+ create mode 100644 public/img/.science2.jpg.tif.icloud
+ create mode 100644 public/img/.science2.tif.icloud
+ create mode 100644 public/img/headers/.science2.jpg.icloud
+ create mode 100644 public/img/headers/.science2.tiff.icloud
+ delete mode 100644 public/img/headers/science2.jpg
+ delete mode 100644 public/img/headers/science2.tiff
+ delete mode 100644 public/img/science2.jpg
+ delete mode 100644 public/img/science2.jpg.tif
+ delete mode 100644 public/img/science2.tif
+ create mode 100644 public/post/.FINALDATASET.csv.icloud
+ delete mode 100644 public/post/FINALDATASET.csv
+ create mode 100644 public/post/reefs/.FINALDATASET.csv.icloud
+ delete mode 100644 public/post/reefs/FINALDATASET.csv
+ delete mode 100644 public/science2.tif
+]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git push        git add .
