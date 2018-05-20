@@ -13,9 +13,20 @@
     
     
     <item>
+      <title>Plastic waste and disease on coral reefs</title>
+      <link>/post/reefs/plastic-waste-and-disease-on-coral-reefs/</link>
+      <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/reefs/plastic-waste-and-disease-on-coral-reefs/</guid>
+      <description>Recently, I came across this very interesting article published in Science about how plastic waste is associated with disease on coral reefs (J. B. Lamb et al. 2018). The main conclusions are
+contact with plastic increases the probability of disease,
+ the morphological structure of the reefs is associated with the probability of being in contact with plastic with more complex ones being more likely to be affected by plastic,</description>
+    </item>
+    
+    <item>
       <title>On statistical reporting in biomedical journals</title>
       <link>/post/stat_reporting/on-statistical-reporting-in-biomedical-journals/</link>
-      <pubDate>Wed, 25 Apr 2018 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/stat_reporting/on-statistical-reporting-in-biomedical-journals/</guid>
       <description>Poor quality statistical reporting in the biomedical literature is not uncommon. Here is another example by Cirio et al. (2016). The study itself is well planed, executed and reported. The aim was to assess whether heated and humidified high flow gases delivered through nasal cannula (HFNC) improve exercise performance in severe chronic obstructive pulmonary disease (COPD) patients. It all started when I saw their Fig.1. Here is my attempt to reproduce it</description>
@@ -29,17 +40,6 @@
       <guid>/post/importflatfiles/importing-flat-files-into-r/</guid>
       <description>There are many tutorials for importing data into R focusing on a specific function/package. This one focuses on 3 different packages. You will learn how to import all common formats of flat file data with base R functions and the dedicated readr and data.table packages. I first present these three packages and finish with a comparison table between them.
 Task Import a flat file into R: create an R object that contains the data from a flat file.</description>
-    </item>
-    
-    <item>
-      <title>Plastic waste and disease on coral reefs</title>
-      <link>/post/reefs/plastic-waste-and-disease-on-coral-reefs/</link>
-      <pubDate>Mon, 26 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/reefs/plastic-waste-and-disease-on-coral-reefs/</guid>
-      <description>Recently, I came across this very interesting article published in Science about how plastic waste is associated with disease on coral reefs (J. B. Lamb et al. 2018). The main conclusions are
-contact with plastic increases the probability of disease,
- the morphological structure of the reefs is associated with the probability of being in contact with plastic with more complex ones being more likely to be affected by plastic,</description>
     </item>
     
     <item>
