@@ -84,7 +84,7 @@ $$ E[Disease Presense_{ik}|b_i = 0] = \frac{\exp(\sum_j \beta_j x_{ik} + 0)}{1 +
 
 which is what the authors have calculated and produced Fig. 4. In other words, the authors have calculated the probability of disease for an "average" reef. They proceed interpreting this as marginal effect, which is wrong. 
 
-The issue arises due to the conditional interpretation, conditionally upon level of random effects, of the $\beta$s in a GLMM model. And this is due to the fact that $E[g(Y )] \neq g[E(Y)]$ unless $g$ is linear, which is not the case for this model. In what follows I fit the same model and demostrate how the conclusions change when conditioning of diffrerent levels of the random coefficients. The code the authors use is 
+The issue arises due to the conditional interpretation, conditionally upon level of random effects, of the $\beta$s in a GLMM model. And this is due to the fact that $E[g(Y )] \neq g[E(Y)]$ unless $g$ is linear, which is not the case for this model. In what follows I fit the same model and demonstrate how the conclusions change when conditioning of different levels of the random coefficients. The code the authors use is 
 
 ```{r, message = F, warning = F}
 # GLMM, Baseline Disease levels for different growth forms, Asia Pacific --------
@@ -124,7 +124,7 @@ sim_rfs_Normal.Disease <- REsim(Normal.Disease.Growth, n.sims = 200)
 plotREsim(sim_rfs_Normal.Disease)
 ```
 
-What the authors are effectively doing in Fig. 4(B) (see density plot above) is presenting the results for reefs with $b_i = 0$ which corresponds to the red horizontal line. Let's see how the denisty plot changes when we condition on more "extreme" reefs. I use the 0.1 and 0.9 quantiles. 
+What the authors are effectively doing in Fig. 4(B) (see density plot above) is presenting the results for reefs with $b_i = 0$ which corresponds to the red horizontal line. Let's see how the density plot changes when we condition on more "extreme" reefs. I use the 0.1 and 0.9 quantiles. 
 
 ```{r, warning=F}
 quantile0.9 <- REquantile(Normal.Disease.Growth, quantile = 0.9, groupFctr = "Reef_Name")
@@ -167,7 +167,7 @@ ggplot(aes(x = Estimate*100, col = ID), data = overall) +
 
 It is evident both the center and the variability of the distributions change depending whether we look an "average" coral reef (purple line), a reef towards the upper extreme (blue line) or the lower extreme (black line). So the conclusions should be something along the lines: the increase in disease likelihood with plastic debris depends also on inherit/unobserved characteristics of the reefs, captured by the random effects, in addition to their morphology. 
 
-Of course, what I have presented above is still conditinal interpretation of the parameters. Ideally, we want the marginal population-average interpreation which is obtained from averaging over the random effects. This allows to take into account both the residual (observation-level) variance, the uncertainty in the variance parameters for the grouping factors added to the uncertainty in the fixed coefficients. See for example the `predictInterval()` function of the [`merTools`](https://cran.r-project.org/web/packages/merTools/merTools.pdf) package.  
+Of course, what I have presented above is still conditional interpretation of the parameters. Ideally, we want the marginal population-average interpretation which is obtained from averaging over the random effects. This allows to take into account both the residual (observation-level) variance, the uncertainty in the variance parameters for the grouping factors added to the uncertainty in the fixed coefficients. See for example the `predictInterval()` function of the [`merTools`](https://cran.r-project.org/web/packages/merTools/merTools.pdf) package.  
 
 
 # References
