@@ -65,7 +65,7 @@ Recently, I came across this very interesting article published in [Science](htt
 2. the morphological structure of the reefs is associated with the probability of being in contact with plastic with more complex ones being more likely to be affected by plastic,    
 3. the plastic levels correspond to estimates of mismanaged plastic waste into the ocean.   
 
-Overall, this study provides evidence how plastic waste negatively affects coral reefs, making them more susceptible to diseases. The authors made available both the datasets they used and the code [both can be downloaded from @dryad_mp480] so it's an excellent example of reproducible research. The methods sections is straightforward to follow (see [Supplementary Materials](http://science.sciencemag.org/content/suppl/2018/01/24/359.6374.460.DC1?_ga=2.198123375.1394041835.1523546630-1357771364.1523546630)). My comment is about the 2nd point above, and more specifically the methodology that led to this conclusion (see Fig. 4 of the article). The issue is the authors interpret the models they are using wrongly. Let me explain ...   
+Overall, this study provides evidence how plastic waste negatively affects coral reefs, making them more susceptible to diseases. The authors made available both the datasets they used and the code [both can be downloaded from @dryad_mp480] so it's an excellent example of reproducible research. The methods section is straightforward to follow (see [Supplementary Materials](http://science.sciencemag.org/content/suppl/2018/01/24/359.6374.460.DC1?_ga=2.198123375.1394041835.1523546630-1357771364.1523546630)). My comment is about the 2nd point above, and more specifically the methodology that led to this conclusion (see Fig. 4 of the article). The issue is the authors interpret the models they are using wrongly. Let me explain ...   
 
 Their model is a simple generalised linear mixed model (GLMM) - binomial error distribution and logistic link. The outcome is the disease prevalence (binary) among coral reefs with different morphology. The morphology assignments were massive, tabular, and branching (3-level categorical covariate). The morphological assignments were treated as fixed factors and the site as random (in order to take into account the correlation between reefs due to their geographical position). The model is  
 
@@ -102,8 +102,8 @@ The following reproduces Fig. 4(B) of the publication.
 ```{r plot}
 # PDF, Baseline disease levels by growth form -----------------------------
 NormalDisease.by.Growth = data.frame(Tabular = rnorm(100000, mean = -3.1332, sd = .1549),
-                                   Massive = rnorm(100000, mean = -3.8153, sd = .1095),
-                                   Branching = rnorm(100000, mean = -3.5534, sd = .1103))
+                                     Massive = rnorm(100000, mean = -3.8153, sd = .1095),
+                                     Branching = rnorm(100000, mean = -3.5534, sd = .1103))
 NormalDisease.by.Growth$Tabularbt = plogis(NormalDisease.by.Growth$Tabular)
 NormalDisease.by.Growth$Massivebt = plogis(NormalDisease.by.Growth$Massive)
 NormalDisease.by.Growth$Branchingbt = plogis(NormalDisease.by.Growth$Branching)
@@ -113,10 +113,11 @@ library(ggplot2)
 ggplot(aes(x = Estimate*100), data = NormalDisease.by.Growth) +
    geom_density(aes(y = ..scaled.., fill = Growth)) +
    scale_x_continuous(limits = c(0, 10)) + 
-   ylab("")
+   ylab("") + 
+   labs(fill = "Morphology")
 ```
 
-As it is evident from the code that they plot the fixed effects estimates with their standard errors. This plots ignores the random effects and it only takes into consideration the variation of the fixed coefficients $\beta_j$. To get an idea for the variability of the random effects I simulate them from the model and plot them. Points that are distinguishable from zero (i.e. the confidence band based on level does not cross the red line) are highlighted. We see substantial variation on the random effects estimates with many "outliers" with both high and low averages that need to be accounted for.
+It is evident from the code that they plot the fixed effects estimates with their standard errors. This plot ignores the random effects and it only takes into consideration the variation of the fixed coefficients $\beta_j$. To get an idea for the variability of the random effects I simulate them from the model and plot them. Points that are distinguishable from zero (i.e. the confidence band based on level does not cross the red line) are highlighted. We see substantial variation on the random effects estimates with many "outliers" with both high and low averages that need to be accounted for.
 
 ```{r, message = F}
 library(merTools)
@@ -162,7 +163,8 @@ ggplot(aes(x = Estimate*100, col = ID), data = overall) +
    #scale_fill_manual(values = c("#D55E00", "#009E73", "#0072B2")) + 
    scale_color_manual(values = c("#000000", "dodgerblue", "darkmagenta")) +
    scale_x_continuous(limits = c(0, 10)) + 
-   ylab("")
+   ylab("") + 
+   labs(col = "R effect", fill = "Morphology")
 ```
 
 It is evident both the center and the variability of the distributions change depending whether we look an "average" coral reef (purple line), a reef towards the upper extreme (blue line) or the lower extreme (black line). So the conclusions should be something along the lines: the increase in disease likelihood with plastic debris depends also on inherit/unobserved characteristics of the reefs, captured by the random effects, in addition to their morphology. 
