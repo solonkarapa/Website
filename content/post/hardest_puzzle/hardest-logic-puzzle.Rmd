@@ -13,17 +13,16 @@ header:
   image: ''
 link-citations: yes
 bibliography: biblio_puzzle.bib
-draft: true
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-I present a solution a modification of the "hardest logic puzzle ever" using probability theory. 
+I present a solution to a modification of the "hardest logic puzzle ever" using probability theory. 
 
 ## Background 
-"The hardest logic puzzle" was originally presented by @boolos1996hardest and since then it has been amended several times in order to make it harder [@rabern2008simple, @novozhilov2012hardest]. 
+"The hardest logic puzzle" was originally presented by @boolos1996hardest and since then it has been amended several times in order to make it harder [see @rabern2008simple, @novozhilov2012hardest]. 
 
 The puzzle: *Three gods A, B, and C are called, in some order, True, False, and Random. True always speaks truly, False always speaks falsely, but whether Random speaks truly or falsely is a completely random matter. Your task is to determine the identities of A, R, and C by asking three yes-no questions; __each question must be put to exactly one god__. The gods understand English, but will answer all questions in their own language, in which the words for “yes” and “no” are “da” and “ja,” in some order. You do not know which word means which. * 
 
@@ -33,18 +32,22 @@ The puzzle: *Three gods A, B, and C are called, in some order, True, False, and 
    3.  Whether Random speaks truly or not should be thought of as depending on the flip of a coin hidden in his brain: if the coin comes down heads, he speaks truly; if tails, falsely.  
    4.  Random will answer da or ja when asked any yes-no question.   
 
-@rabern2008simple proposed the have proposed to modify the third point above with the following:
+@rabern2008simple proposed to modify the third point above with the following:
 "Whether Random answers ‘da’ or ‘ja’ should be thought of as depending on the flip of a coin hidden in his
 brain: if the coin comes down heads, he answers ‘yes’; if tails, ‘no’."
 
+Boolos' article includes multiple ways of solving the problem. @rabern2008simple give  a simpler solution. The main ideas for the solutions can be found [here](https://www.technologyreview.com/s/428189/the-hardest-logic-puzzle-ever-made-even-harder/) and [here](http://nautil.us/issue/30/identity/how-to-solve-the-hardest-logic-puzzle-ever).
+
 ## My solution
-My solution is based on the long-run frequency interpretation of probability. It invloves two steps. At the first step we will identify the Random god and in step 2 distinguish between the True and False god. 
+My solution is based on the long-run frequency interpretation of probability. It involves two steps. At the first step we will identify the Random god and in step 2 distinguish between the True and False gods. 
 
-Step 1:
-Imagine the following scenario: you keep asking the same question to each god. The question is different for each god. Under the interpretation of probability as long-run frequency both True and False will always give the same answer. For example, if A is the True god he will always answer “da” or “ja” and similarly the False god will always answer the opposite. The crucial point is that Random will change between “da” and “ja” because his answers are random, "they depend on the flip of a coin hidden in his brain". Suppose you ask your question to Random ten times, and assuming the coin in his head is fair (P(heads) = P(tails) = 0.5) then the probability that all his answers are same ( “da” or “ja” ) is $0.5^{10}$, that is highly unlikely. In fact, you do not need to pre-specify how many times you ask the question, since the moment a given god switches from “da” to “ja” or vice-versa you know he is Random. Having identified Random we proceed to distinguish between True and False. An example question to each one is “are you true”? 
+Step 1
+
+Imagine the following scenario: you keep asking the same question to each god. The question is different for each god. Under the interpretation of probability as long-run frequency both True and False will always give the same answer. For example, if A is the True god he will always answer “da” or “ja” and similarly the False god will always answer the opposite. The crucial point is that Random will change between “da” and “ja” because his answers are random, "they depend on the flip of a coin hidden in his brain". Suppose you ask your question to Random ten times, and assuming the coin in his head is fair (i.e., P(heads) = P(tails) = 0.5) then the probability that all his answers are same ( “da” or “ja” ) is $0.5^{10}$, that is highly unlikely. In fact, you do not need to pre-specify how many times you ask the question, since the moment a given god switches from “da” to “ja” or vice-versa you know he is Random. Having identified Random we proceed to distinguish between True and False. An example question to each one is “are you True”? 
 
 
-Step 2:
+Step 2
+
 For simplicity let’s assume C is Random. Now, we only need to identify one more god. Let’s use god A for illustration. All possibilities regarding god A and the word “da” are given below:  
 
 (1) A is True and “da” means “yes”, 
@@ -82,9 +85,9 @@ Now,  if scenario (2) the answer is “ja”  and if scenario (3) the answer is 
 Using this approach we have also identified the meanings of “da” and “ja”.
 
 ## Comments
-The modification I used was allowing each question to be put to more than one god. 
+The modification I used was allowing each question to be put to more than one god. In step 1 the question "Are you True" was put to all gods and was repeated in step 2 as Q3. So technically I have solved the puzzle using only three questions in total, but allowing myself to repeat the same questions to more than one god. 
 
 Boolos provided his solution in the same article in which he introduced the puzzle. 
-Boolos states that the "first move is to find a god that you can be certain is not Random, and hence is either True or False". noting that the key is to ask biconditional questions (using "if and only if" statements" within questions)
+He states that the "first move is to find a god that you can be certain is not Random, and hence is either True or False". My approach does the reverse; first identifies the Random god and then the True and False gods.
 
 ## References 
