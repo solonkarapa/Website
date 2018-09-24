@@ -31,7 +31,7 @@
 &lt;/div&gt;
 &lt;div id=&#34;my-solution&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;My solution&lt;/h2&gt;
-&lt;p&gt;My solution is based on the long-run frequency interpretation of probability. It involves two steps. At the first step we will identify the Random god and in step 2 distinguish between the True and False gods.&lt;/p&gt;
+&lt;p&gt;My solution is based on the long-run frequency interpretation of probability. It involves two steps. At the first step we will identify the Random god and in step 2 we distinguish between the True and False gods.&lt;/p&gt;
 &lt;p&gt;Step 1&lt;/p&gt;
 &lt;p&gt;Imagine the following scenario: you keep asking the same question to each god. The question is different for each god. Under the interpretation of probability as long-run frequency both True and False will always give the same answer. For example, if A is the True god he will always answer “da” or “ja” and similarly the False god will always answer the opposite. The crucial point is that Random will change between “da” and “ja” because his answers are random, “they depend on the flip of a coin hidden in his brain”. Suppose you ask your question to Random ten times, and assuming the coin in his head is fair (i.e., P(heads) = P(tails) = 0.5) then the probability that all his answers are same ( “da” or “ja” ) is &lt;span class=&#34;math inline&#34;&gt;\(0.5^{10}\)&lt;/span&gt;, that is highly unlikely. In fact, you do not need to pre-specify how many times you ask the question, since the moment a given god switches from “da” to “ja” or vice-versa you know he is Random. Having identified Random we proceed to distinguish between True and False. An example question to each one is “are you True”?&lt;/p&gt;
 &lt;p&gt;Step 2&lt;/p&gt;
@@ -66,8 +66,8 @@
 &lt;/div&gt;
 &lt;div id=&#34;comments&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Comments&lt;/h2&gt;
-&lt;p&gt;The modification I used was allowing each question to be put to more than one god. In step 1 the question “Are you True” was put to all gods and was repeated in step 2 as Q3. So technically I have solved the puzzle using only three questions in total, but allowing myself to repeat the same questions to more than one god.&lt;/p&gt;
-&lt;p&gt;Boolos provided his solution in the same article in which he introduced the puzzle. He states that the “first move is to find a god that you can be certain is not Random, and hence is either True or False”. My approach does the reverse; first identifies the Random god and then the True and False gods.&lt;/p&gt;
+&lt;p&gt;The modification I used was allowing each question to be put to more than one god. In step 1 the question “Are you True?” was put to all gods and was repeated in step 2 as Q3. So technically I have solved the puzzle using only three questions in total, but allowing myself to repeat the same questions to more than one god.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;Boolos (&lt;a href=&#34;#ref-boolos1996hardest&#34;&gt;1996&lt;/a&gt;)&lt;/span&gt; provided his solution in the same article in which he introduced the puzzle. He states that the “first move is to find a god that you can be certain is not Random, and hence is either True or False”. My approach does the reverse; first identifies the Random god and then the True and False gods.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
 &lt;h2&gt;References&lt;/h2&gt;
