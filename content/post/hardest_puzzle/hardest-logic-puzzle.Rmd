@@ -39,7 +39,7 @@ brain: if the coin comes down heads, he answers ‘yes’; if tails, ‘no’."
 Boolos' article includes multiple ways of solving the problem. @rabern2008simple give  a simpler solution. The main ideas for the solutions can be found [here](https://www.technologyreview.com/s/428189/the-hardest-logic-puzzle-ever-made-even-harder/) and [here](http://nautil.us/issue/30/identity/how-to-solve-the-hardest-logic-puzzle-ever).
 
 ## My solution
-My solution is based on the long-run frequency interpretation of probability. It involves two steps. At the first step we will identify the Random god and in step 2 distinguish between the True and False gods. 
+My solution is based on the long-run frequency interpretation of probability. It involves two steps. At the first step we will identify the Random god and in step 2 we distinguish between the True and False gods. 
 
 Step 1
 
@@ -85,9 +85,9 @@ Now,  if scenario (2) the answer is “ja”  and if scenario (3) the answer is 
 Using this approach we have also identified the meanings of “da” and “ja”.
 
 ## Comments
-The modification I used was allowing each question to be put to more than one god. In step 1 the question "Are you True" was put to all gods and was repeated in step 2 as Q3. So technically I have solved the puzzle using only three questions in total, but allowing myself to repeat the same questions to more than one god. 
+The modification I used was allowing each question to be put to more than one god. In step 1 the question "Are you True?" was put to all gods and was repeated in step 2 as Q3. So technically I have solved the puzzle using only three questions in total, but allowing myself to repeat the same questions to more than one god. 
 
-Boolos provided his solution in the same article in which he introduced the puzzle. 
+@boolos1996hardest provided his solution in the same article in which he introduced the puzzle. 
 He states that the "first move is to find a god that you can be certain is not Random, and hence is either True or False". My approach does the reverse; first identifies the Random god and then the True and False gods.
 
 ## References 
