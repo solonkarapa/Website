@@ -6,7 +6,7 @@
     <description>Recent content in Homes on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; Solon Karapanagiotis 2018</copyright>
+    <copyright>&amp;copy; Solon Karapanagiotis 2019</copyright>
     <lastBuildDate>Sun, 15 Oct 2017 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="/home/index.xml" rel="self" type="application/rss+xml" />
@@ -82,9 +82,9 @@
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/home/teaching/</guid>
-      <description>This is an example of using the custom widget to create your own homepage section.
-I am a teaching instructor for the following courses at University X:
- CS101: An intro to computer science CS102: An intro to computer science CS103: An intro to computer science CS104: An intro to computer science CS105: An intro to computer science CS106: An intro to computer science CS107: An intro to computer science  </description>
+      <description>This is the handbook for the course I teach as a Brilliant club tutor. The Brilliant Club is a charity aiming to increase the number of pupils from under-represented backgrounds progressing to highly selective universities. They do this by mobilising PhD researchers to share their academic expertise with state schools.
+The material is designed for Key stage 4 pupils but can be easily adapted to Key stage 5.
+About the course: Virtually every decision is made in the face of uncertainty.</description>
     </item>
     
     <item>

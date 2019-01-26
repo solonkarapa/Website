@@ -3,7 +3,7 @@
 # An example of using the custom widget to create your own homepage section.
 # To create more sections, duplicate this file and edit the values below as desired.
 widget = "custom"
-active = false # use `true` to activate it  
+active = true # use `true` to activate it  
 date = "2016-04-20T00:00:00"
 
 # Note: a full width section format can be enabled by commenting out the `title` and `subtitle` with a `#`.
@@ -15,14 +15,12 @@ weight = 60
 
 +++
 
-This is an example of using the *custom* widget to create your own homepage section.
+This is the [handbook](/teaching/BrilliantClub_Handbook.pdf) for the course I teach as a Brilliant club tutor. [The Brilliant Club](https://thebrilliantclub.org/) is a charity aiming to increase the number of pupils from under-represented backgrounds progressing to highly selective universities. They do this by mobilising PhD researchers to share their academic expertise with state schools. 
 
-I am a teaching instructor for the following courses at University X:
+The material is designed for Key stage 4 pupils but can be easily adapted to Key stage 5. 
 
-- CS101: An intro to computer science
-- CS102: An intro to computer science
-- CS103: An intro to computer science
-- CS104: An intro to computer science
-- CS105: An intro to computer science
-- CS106: An intro to computer science
-- CS107: An intro to computer science
+About the course: 
+Virtually every decision is made in the face of uncertainty. In this course, I quantify uncertainty using probability theory. I then introduce the expected utility framework as a model of choice behaviour under uncertainty.
+
+Cite this work as: Solon Karapanagiotis. Which bicycle lock should I buy? A journey to decision making under
+uncertainty, 2019.
