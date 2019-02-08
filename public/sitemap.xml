@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>/post/approx_binomial/approximating-binomial-with-poisson/</loc>
+      <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/post/hardest_puzzle/the-hardest-logic-puzzle/</loc>
       <lastmod>2018-08-03T00:00:00+00:00</lastmod>
     </url>
@@ -253,16 +262,6 @@
     
     <url>
     
-      <loc>/tags/data/</loc>
-      <lastmod>2018-04-10T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
       <loc>/categories/data/</loc>
       <lastmod>2018-04-10T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -273,8 +272,8 @@
     
     <url>
     
-      <loc>/tags/data-analysis/</loc>
-      <lastmod>2018-05-20T00:00:00+00:00</lastmod>
+      <loc>/tags/data/</loc>
+      <lastmod>2018-04-10T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -293,8 +292,8 @@
     
     <url>
     
-      <loc>/tags/guidelines/</loc>
-      <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+      <loc>/tags/data-analysis/</loc>
+      <lastmod>2018-05-20T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -304,6 +303,16 @@
     <url>
     
       <loc>/categories/guidelines/</loc>
+      <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/guidelines/</loc>
       <lastmod>2018-05-15T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -333,8 +342,8 @@
     
     <url>
     
-      <loc>/tags/probability/</loc>
-      <lastmod>2018-08-03T00:00:00+00:00</lastmod>
+      <loc>/categories/probability/</loc>
+      <lastmod>2019-02-05T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -343,8 +352,8 @@
     
     <url>
     
-      <loc>/categories/probability/</loc>
-      <lastmod>2018-08-03T00:00:00+00:00</lastmod>
+      <loc>/tags/probability/</loc>
+      <lastmod>2019-02-05T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -373,8 +382,8 @@
     
     <url>
     
-      <loc>/tags/r/</loc>
-      <lastmod>2018-04-10T00:00:00+00:00</lastmod>
+      <loc>/categories/r/</loc>
+      <lastmod>2019-02-05T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -383,8 +392,8 @@
     
     <url>
     
-      <loc>/categories/r/</loc>
-      <lastmod>2018-04-10T00:00:00+00:00</lastmod>
+      <loc>/tags/r/</loc>
+      <lastmod>2019-02-05T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

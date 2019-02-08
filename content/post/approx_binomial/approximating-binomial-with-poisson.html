@@ -1,0 +1,122 @@
+---
+title: Approximating Binomial with Poisson
+author: ''
+date: '2019-02-05'
+slug: approximating-binomial-with-poisson
+categories: [probability, R]
+tags: [probability, R]
+output: bookdown::html_document2
+header:
+  caption: ''
+  image: ''
+  preview: yes
+link-citations: yes
+bibliography: approx_bin.bib
+draft: true
+---
+
+
+
+<p>It is usually taught in statistics classes that binomial probabilities can be approximated by Poisson probabilities, which are generally easier to calculate. This approximation is valid “when <span class="math inline">\(n\)</span> is large and <span class="math inline">\(np\)</span> is small,” and rules of thumb are sometimes given.</p>
+<p>In this post I’ll walk through a simple proof showing that the Poisson distribution is really just the Binomial with <span class="math inline">\(n\)</span> (the number of trials) approaching infinity and <span class="math inline">\(p\)</span> (the probability of success in each trail) approaching zero. I’ll then provide some numerical examples to investigate how good is the approximation.</p>
+<div id="proof" class="section level2">
+<h2>Proof</h2>
+<p>The binomial distribution describes the probability that there will be <span class="math inline">\(x\)</span> successes in a sample of size <span class="math inline">\(n\)</span>, chosen with replacement from a population where the probability of success is <span class="math inline">\(p\)</span>.</p>
+<p>Let <span class="math inline">\(X \sim Binomial(n, p)\)</span>, that is</p>
+<span class="math display" id="eq:binom">\[\begin{equation}
+\tag{1}
+   P(X = x) = {n\choose x} p^x (1-p)^{n-x},
+\end{equation}\]</span>
+<p>where <span class="math inline">\(x= 0, 1, \dots, n\)</span>. Define the number</p>
+<p><span class="math display">\[\lambda = np\]</span></p>
+<p>This is the rate of success. That’s the number of trials <span class="math inline">\(n\)</span>—however many there are—times the chance of success <span class="math inline">\(p\)</span> for each of those trials. In other words, if we repeat the experiment every day, we will be getting <span class="math inline">\(\lambda\)</span> successes per day on average.</p>
+<p>Solving for <span class="math inline">\(p\)</span>, we get:</p>
+<p><span class="math display">\[ p = \frac{\lambda}{n}\]</span> We then substitute this into <a href="#eq:binom">(1)</a>, and take the limit as <span class="math inline">\(n\)</span> goes to infinity</p>
+<p><span class="math display">\[ \lim_{n \to \infty}P(X = x) =  \lim_{n \to \infty} \frac{n!}{x!(n-x)!} \bigg( \frac{\lambda}{n} \bigg)^x \bigg( 1-\frac{\lambda}{n} \bigg)^{n-x}\]</span></p>
+<p>I then collect the constants (terms that don’t depend on <span class="math inline">\(n\)</span>) in front and split the last term into two</p>
+<span class="math display" id="eq:limit">\[\begin{equation}
+   \tag{2}
+   \frac{\lambda^x}{x!}  \lim_{n \to \infty} \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x \bigg( 1-\frac{\lambda}{n} \bigg)^n \bigg( 1-\frac{\lambda}{n} \bigg)^{-x}
+\end{equation}\]</span>
+<p>Now let’s take the limit of this right-hand side one term at a time.</p>
+<ol style="list-style-type: decimal">
+<li>We start with</li>
+</ol>
+<p><span class="math display">\[\lim_{n \to \infty} \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x\]</span> The numerator and denominator can be expanded as follows</p>
+<p><span class="math display">\[\lim_{n \to \infty} \frac{(n)(n-1)(n-2)\dots(n-x)(n-x-1)\dots (1)}{(n-x)(n-x-1)(n-x-2)\dots (1)}\bigg( \frac{1}{n} \bigg)^x\]</span></p>
+<p>The <span class="math inline">\((n-x)(n-x-1)\dots(1)\)</span> terms cancel from both the numerator and denominator, leaving the following</p>
+<p><span class="math display">\[ \lim_{n \to \infty} \frac{(n)(n-1)(n-2)(n-x+1)}{n^x}\]</span> Expanding out the numerator and denominator we can rewrite this as</p>
+<p><span class="math display">\[ \lim_{n \to \infty} \frac{n}{n} \frac{(n-1)}{n} \frac{(n-2)}{n} \frac{(n-x+1)}{n}.\]</span> This is because there were <span class="math inline">\(x\)</span> terms in both the numerator and denominator. Clearly, every one of these <span class="math inline">\(x\)</span> terms approaches 1 as <span class="math inline">\(n\)</span> approaches infinity. So we know this just simplifies to one. So we’re done with the first step.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Now we focus on the middle term of <a href="#eq:limit">(2)</a></li>
+</ol>
+<p><span class="math display">\[\lim_{n \to \infty} \bigg( 1-\frac{\lambda}{n} \bigg)^n\]</span></p>
+<p>Recall the <a href="https://en.wikipedia.org/wiki/E_(mathematical_constant)">definition</a> of <span class="math inline">\(e= 2.7182\dots\)</span> is</p>
+<p><span class="math display">\[ \lim_{a \to \infty} \bigg(1 + \frac{1}{a}\bigg)^a\]</span> Our goal here is to find a way to manipulate our expression to look more like the definition of <span class="math inline">\(e\)</span>, which we know the limit of. Let’s define a number <span class="math inline">\(a\)</span> as</p>
+<p><span class="math display">\[ a = -\frac{n}{\lambda}\]</span></p>
+<p>Substituting it into our expression we get</p>
+<p><span class="math display">\[\lim_{n \to \infty} \bigg( 1-\frac{\lambda}{n} \bigg)^n = \lim_{n \to \infty} \bigg( 1+\frac{1}{a} \bigg)^{-a\lambda} = e^{-\lambda}.\]</span> So we’ve finished with the middle term.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>The third term of <a href="#eq:limit">(2)</a> is</li>
+</ol>
+<p><span class="math display">\[ \lim_{n \to \infty}  \bigg( 1-\frac{\lambda}{n} \bigg)^{-x} \]</span> As <span class="math inline">\(n\)</span> approaches infinity, this term becomes <span class="math inline">\(1^{-x}\)</span> which is equal to one. And that takes care of our last term.</p>
+<p>Putting these together we can re-write <a href="#eq:limit">(2)</a> as</p>
+<p><span class="math display">\[ \frac{\lambda^x}{x!}  \lim_{n \to \infty} \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x \bigg( 1-\frac{\lambda}{n} \bigg)^n \bigg( 1-\frac{\lambda}{n} \bigg)^{-x} = \frac{\lambda^x}{x!} e^{-\lambda}\]</span> which is the pmf of a Poisson random variable <span class="math inline">\(Y\)</span>, i.e</p>
+<p><span class="math display">\[P(Y = y)  = \frac{\lambda^y}{y!} e^{-\lambda}\]</span></p>
+<p>where <span class="math inline">\(y = 0, 1, \dots\)</span>. So we have shown that the Poisson distribution is a special case of the Binomial, in which the number of trials grows to infinity and the chance of success in any trial approaches zero. And that completes the proof.</p>
+<p><span class="citation">Casella and Berger (<a href="#ref-casella2002statistical">2002</a>)</span> provide a much shorter proof based on moment generating functions.</p>
+<p>A natural question is how good is this approximation? It turns out it is quite good even for moderate <span class="math inline">\(p\)</span> and <span class="math inline">\(n\)</span> as we’ll see with a few numerical examples.</p>
+</div>
+<div id="code" class="section level2">
+<h2>Code</h2>
+<p>A <a href="https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc331.htm">rule of thumb</a> says for the approximation to be good:</p>
+<blockquote>
+<p>“The sample size <span class="math inline">\(n\)</span> should be equal to or larger than 20 and the probability of a single success, <span class="math inline">\(p\)</span>, should be smaller than or equal to 0.05. If $n $100, the approximation is excellent if <span class="math inline">\(np\)</span> is also <span class="math inline">\(leq\)</span> 10.”</p>
+</blockquote>
+<p>Let’s try a few scenarios. I have slightly modified the code from <a href="https://www.math.utah.edu/~treiberg/M3074PoisApproxEg.pdf">here</a>.</p>
+<pre class="r"><code># plots the pmfs of Binomial and Poisson
+pl &lt;- function(n, p, a, b) {
+   
+   clr &lt;- rainbow(15)[ceiling(c(10.68978, 14.24863))]
+   lambda &lt;- n * p
+   mx &lt;- max(dbinom(a:b, n, p))
+      
+   plot(
+      c(a:b, a:b),
+      c(dbinom(a:b, n, p), dpois(a:b, lambda)),
+      type = &quot;n&quot;,
+      main = paste(&quot;Poisson Approx. to Binomial, n=&quot;, n, &quot;, p=&quot;, p, &quot;, lambda=&quot;, lambda),
+      ylab = &quot;Probability&quot;,
+      xlab = &quot;x&quot;)
+   points((a:b) - .15,
+          dbinom(a:b, n, p),
+          type = &quot;h&quot;,
+          col = clr[1],
+          lwd = 10)
+   points((a:b) + .15,
+          dpois(a:b, lambda),
+          type = &quot;h&quot;,
+          col = clr[2],
+          lwd = 10)
+   legend(b - 3.5, mx, legend = c(&quot;Binomial(x,n,p)&quot;, &quot;Poisson(x,lambda)&quot;), fill = clr, bg = &quot;white&quot;)
+}</code></pre>
+<p>I start with the recommendation: <span class="math inline">\(n\)</span> = 20, <span class="math inline">\(p\)</span> = 0.05. This gives <span class="math inline">\(\lambda= 1\)</span>. Already the approximation seems reasonable.</p>
+<pre class="r"><code>pl(20, 0.05, 0, 10)</code></pre>
+<p><img src="/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>For <span class="math inline">\(n\)</span> = 10, <span class="math inline">\(p\)</span> = 0.3 it doesn’t seem to work very well.</p>
+<pre class="r"><code>pl(10, 0.3, 0, 10)</code></pre>
+<p><img src="/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>But if we increase <span class="math inline">\(n\)</span> and decrease <span class="math inline">\(p\)</span> in order to come home with the same <span class="math inline">\(\lambda\)</span> value things improve.</p>
+<pre class="r"><code>pl(100, 0.03, 0, 10)</code></pre>
+<p><img src="/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-4-1.png" width="672" /> Lastly, for 1000 trials the distributions are indistinguishable.</p>
+<pre class="r"><code>pl(1000, 0.003, 0, 10)</code></pre>
+<p><img src="/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-casella2002statistical">
+<p>Casella, George, and Roger L Berger. 2002. <em>Statistical Inference</em>. Vol. 2. Duxbury Pacific Grove, CA.</p>
+</div>
+</div>
+</div>
