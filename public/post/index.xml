@@ -18,7 +18,7 @@
       <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/approx_binomial/approximating-binomial-with-poisson/</guid>
-      <description>It is usually taught in statistics classes that binomial probabilities can be approximated by Poisson probabilities, which are generally easier to calculate. This approximation is valid “when \(n\) is large and \(np\) is small,” and rules of thumb are sometimes given.
+      <description>It is usually taught in statistics classes that Binomial probabilities can be approximated by Poisson probabilities, which are generally easier to calculate. This approximation is valid “when \(n\) is large and \(np\) is small,” and rules of thumb are sometimes given.
 In this post I’ll walk through a simple proof showing that the Poisson distribution is really just the Binomial with \(n\) (the number of trials) approaching infinity and \(p\) (the probability of success in each trail) approaching zero.</description>
     </item>
     

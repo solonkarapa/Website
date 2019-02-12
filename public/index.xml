@@ -16,11 +16,11 @@
       <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/approx_binomial/approximating-binomial-with-poisson/</guid>
-      <description>&lt;p&gt;It is usually taught in statistics classes that binomial probabilities can be approximated by Poisson probabilities, which are generally easier to calculate. This approximation is valid “when &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; is large and &lt;span class=&#34;math inline&#34;&gt;\(np\)&lt;/span&gt; is small,” and rules of thumb are sometimes given.&lt;/p&gt;
+      <description>&lt;p&gt;It is usually taught in statistics classes that Binomial probabilities can be approximated by Poisson probabilities, which are generally easier to calculate. This approximation is valid “when &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; is large and &lt;span class=&#34;math inline&#34;&gt;\(np\)&lt;/span&gt; is small,” and rules of thumb are sometimes given.&lt;/p&gt;
 &lt;p&gt;In this post I’ll walk through a simple proof showing that the Poisson distribution is really just the Binomial with &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; (the number of trials) approaching infinity and &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; (the probability of success in each trail) approaching zero. I’ll then provide some numerical examples to investigate how good is the approximation.&lt;/p&gt;
 &lt;div id=&#34;proof&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Proof&lt;/h2&gt;
-&lt;p&gt;The binomial distribution describes the probability that there will be &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; successes in a sample of size &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;, chosen with replacement from a population where the probability of success is &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The Binomial distribution describes the probability that there will be &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; successes in a sample of size &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;, chosen with replacement from a population where the probability of success is &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(X \sim Binomial(n, p)\)&lt;/span&gt;, that is&lt;/p&gt;
 &lt;span class=&#34;math display&#34; id=&#34;eq:binom&#34;&gt;\[\begin{equation}
 \tag{1}
@@ -28,39 +28,39 @@
 \end{equation}\]&lt;/span&gt;
 &lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(x= 0, 1, \dots, n\)&lt;/span&gt;. Define the number&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\lambda = np\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;This is the rate of success. That’s the number of trials &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;—however many there are—times the chance of success &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; for each of those trials. In other words, if we repeat the experiment every day, we will be getting &lt;span class=&#34;math inline&#34;&gt;\(\lambda\)&lt;/span&gt; successes per day on average.&lt;/p&gt;
+&lt;p&gt;This is the rate of success. That’s the number of trials &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;—however many there are—times the chance of success &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; for each of those trials. If we repeat the experiment every day, we will be getting &lt;span class=&#34;math inline&#34;&gt;\(\lambda\)&lt;/span&gt; successes per day on average.&lt;/p&gt;
 &lt;p&gt;Solving for &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;, we get:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ p = \frac{\lambda}{n}\]&lt;/span&gt; We then substitute this into &lt;a href=&#34;#eq:binom&#34;&gt;(1)&lt;/a&gt;, and take the limit as &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; goes to infinity&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \lim_{n \to \infty}P(X = x) =  \lim_{n \to \infty} \frac{n!}{x!(n-x)!} \bigg( \frac{\lambda}{n} \bigg)^x \bigg( 1-\frac{\lambda}{n} \bigg)^{n-x}\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;I then collect the constants (terms that don’t depend on &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;) in front and split the last term into two&lt;/p&gt;
 &lt;span class=&#34;math display&#34; id=&#34;eq:limit&#34;&gt;\[\begin{equation}
    \tag{2}
-   \frac{\lambda^x}{x!}  \lim_{n \to \infty} \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x \bigg( 1-\frac{\lambda}{n} \bigg)^n \bigg( 1-\frac{\lambda}{n} \bigg)^{-x}
+   \frac{\lambda^x}{x!}  \lim_{n \to \infty} \color{blue}{\frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x} \color{red}{ \bigg( 1-\frac{\lambda}{n} \bigg)^n } \color{green}{\bigg( 1-\frac{\lambda}{n} \bigg)^{-x}}
 \end{equation}\]&lt;/span&gt;
 &lt;p&gt;Now let’s take the limit of this right-hand side one term at a time.&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;We start with&lt;/li&gt;
+&lt;li&gt;We start with the blue term&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\lim_{n \to \infty} \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x\]&lt;/span&gt; The numerator and denominator can be expanded as follows&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\lim_{n \to \infty} \frac{(n)(n-1)(n-2)\dots(n-x)(n-x-1)\dots (1)}{(n-x)(n-x-1)(n-x-2)\dots (1)}\bigg( \frac{1}{n} \bigg)^x\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{blue}{ \lim_{n \to \infty} \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x }\]&lt;/span&gt; The numerator and denominator can be expanded as follows&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{blue}{ \lim_{n \to \infty} \frac{(n)(n-1)(n-2)\dots(n-x)(n-x-1)\dots (1)}{(n-x)(n-x-1)(n-x-2)\dots (1)}\bigg( \frac{1}{n} \bigg)^x }\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;The &lt;span class=&#34;math inline&#34;&gt;\((n-x)(n-x-1)\dots(1)\)&lt;/span&gt; terms cancel from both the numerator and denominator, leaving the following&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \lim_{n \to \infty} \frac{(n)(n-1)(n-2)(n-x+1)}{n^x}\]&lt;/span&gt; Expanding out the numerator and denominator we can rewrite this as&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \lim_{n \to \infty} \frac{n}{n} \frac{(n-1)}{n} \frac{(n-2)}{n} \frac{(n-x+1)}{n}.\]&lt;/span&gt; This is because there were &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; terms in both the numerator and denominator. Clearly, every one of these &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; terms approaches 1 as &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; approaches infinity. So we know this just simplifies to one. So we’re done with the first step.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{blue}{ \lim_{n \to \infty} \frac{(n)(n-1)(n-2)(n-x+1)}{n^x} }\]&lt;/span&gt; This can be rewrited as&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{blue}{  \lim_{n \to \infty} \frac{n}{n} \frac{(n-1)}{n} \frac{(n-2)}{n} \frac{(n-x+1)}{n} }\]&lt;/span&gt; This is because there were &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; terms in both the numerator and denominator. Clearly, every one of these &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; terms approaches 1 as &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; approaches infinity. So we know this just simplifies to one. So we’re done with the first step.&lt;/p&gt;
 &lt;ol start=&#34;2&#34; style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;Now we focus on the middle term of &lt;a href=&#34;#eq:limit&#34;&gt;(2)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Now we focus on the red term of &lt;a href=&#34;#eq:limit&#34;&gt;(2)&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\lim_{n \to \infty} \bigg( 1-\frac{\lambda}{n} \bigg)^n\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{red}{ \lim_{n \to \infty} \bigg( 1-\frac{\lambda}{n} \bigg)^n }\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Recall the &lt;a href=&#34;https://en.wikipedia.org/wiki/E_(mathematical_constant)&#34;&gt;definition&lt;/a&gt; of &lt;span class=&#34;math inline&#34;&gt;\(e= 2.7182\dots\)&lt;/span&gt; is&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \lim_{a \to \infty} \bigg(1 + \frac{1}{a}\bigg)^a\]&lt;/span&gt; Our goal here is to find a way to manipulate our expression to look more like the definition of &lt;span class=&#34;math inline&#34;&gt;\(e\)&lt;/span&gt;, which we know the limit of. Let’s define a number &lt;span class=&#34;math inline&#34;&gt;\(a\)&lt;/span&gt; as&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ a = -\frac{n}{\lambda}\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Substituting it into our expression we get&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\lim_{n \to \infty} \bigg( 1-\frac{\lambda}{n} \bigg)^n = \lim_{n \to \infty} \bigg( 1+\frac{1}{a} \bigg)^{-a\lambda} = e^{-\lambda}.\]&lt;/span&gt; So we’ve finished with the middle term.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \color{red}{ \lim_{n \to \infty} \bigg( 1-\frac{\lambda}{n} \bigg)^n = \lim_{n \to \infty} \bigg( 1+\frac{1}{a} \bigg)^{-a\lambda} = e^{-\lambda} }\]&lt;/span&gt; So we’ve finished with the middle term.&lt;/p&gt;
 &lt;ol start=&#34;3&#34; style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;The third term of &lt;a href=&#34;#eq:limit&#34;&gt;(2)&lt;/a&gt; is&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \lim_{n \to \infty}  \bigg( 1-\frac{\lambda}{n} \bigg)^{-x} \]&lt;/span&gt; As &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; approaches infinity, this term becomes &lt;span class=&#34;math inline&#34;&gt;\(1^{-x}\)&lt;/span&gt; which is equal to one. And that takes care of our last term.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{green}{ \lim_{n \to \infty}  \bigg( 1-\frac{\lambda}{n} \bigg)^{-x} }\]&lt;/span&gt; As &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; approaches infinity, this term becomes &lt;span class=&#34;math inline&#34;&gt;\(1^{-x}\)&lt;/span&gt; which is equal to one. And that takes care of our last term.&lt;/p&gt;
 &lt;p&gt;Putting these together we can re-write &lt;a href=&#34;#eq:limit&#34;&gt;(2)&lt;/a&gt; as&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \frac{\lambda^x}{x!}  \lim_{n \to \infty} \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x \bigg( 1-\frac{\lambda}{n} \bigg)^n \bigg( 1-\frac{\lambda}{n} \bigg)^{-x} = \frac{\lambda^x}{x!} e^{-\lambda}\]&lt;/span&gt; which is the pmf of a Poisson random variable &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt;, i.e&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \frac{\lambda^x}{x!}  \lim_{n \to \infty} \color{blue}{ \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x} \color{red}{ \bigg( 1-\frac{\lambda}{n} \bigg)^n} \color{green}{ \bigg( 1-\frac{\lambda}{n} \bigg)^{-x} } = \frac{\lambda^x}{x!} \color{red}{ e^{-\lambda} }\]&lt;/span&gt; which is the pmf of a Poisson random variable &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt;, i.e&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[P(Y = y)  = \frac{\lambda^y}{y!} e^{-\lambda}\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(y = 0, 1, \dots\)&lt;/span&gt;. So we have shown that the Poisson distribution is a special case of the Binomial, in which the number of trials grows to infinity and the chance of success in any trial approaches zero. And that completes the proof.&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;citation&#34;&gt;Casella and Berger (&lt;a href=&#34;#ref-casella2002statistical&#34;&gt;2002&lt;/a&gt;)&lt;/span&gt; provide a much shorter proof based on moment generating functions.&lt;/p&gt;
@@ -70,7 +70,7 @@
 &lt;h2&gt;Code&lt;/h2&gt;
 &lt;p&gt;A &lt;a href=&#34;https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc331.htm&#34;&gt;rule of thumb&lt;/a&gt; says for the approximation to be good:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;“The sample size &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; should be equal to or larger than 20 and the probability of a single success, &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;, should be smaller than or equal to 0.05. If $n $100, the approximation is excellent if &lt;span class=&#34;math inline&#34;&gt;\(np\)&lt;/span&gt; is also &lt;span class=&#34;math inline&#34;&gt;\(leq\)&lt;/span&gt; 10.”&lt;/p&gt;
+&lt;p&gt;“The sample size &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; should be equal to or larger than 20 and the probability of a single success, &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;, should be smaller than or equal to 0.05. If &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; &amp;gt; 100, the approximation is excellent if &lt;span class=&#34;math inline&#34;&gt;\(np\)&lt;/span&gt; is also &amp;lt; 10.”&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Let’s try a few scenarios. I have slightly modified the code from &lt;a href=&#34;https://www.math.utah.edu/~treiberg/M3074PoisApproxEg.pdf&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plots the pmfs of Binomial and Poisson

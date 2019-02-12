@@ -12,15 +12,14 @@ header:
   preview: yes
 link-citations: yes
 bibliography: approx_bin.bib
-draft: true
 ---
 
-It is usually taught in statistics classes that binomial probabilities can be approximated by Poisson probabilities, which are generally easier to calculate. This approximation is valid "when $n$ is large and $np$ is small," and rules of thumb are sometimes given.
+It is usually taught in statistics classes that Binomial probabilities can be approximated by Poisson probabilities, which are generally easier to calculate. This approximation is valid "when $n$ is large and $np$ is small," and rules of thumb are sometimes given.
 
 In this post I’ll walk through a simple proof showing that the Poisson distribution is really just the Binomial with $n$ (the number of trials) approaching infinity and $p$ (the probability of success in each trail) approaching zero. I'll then provide some numerical examples to investigate how good is the approximation. 
 
 ## Proof 
-The binomial distribution describes the probability that there will be $x$ successes in a sample
+The Binomial distribution describes the probability that there will be $x$ successes in a sample
 of size $n$, chosen with replacement from a population where the probability of success is $p$. 
 
 Let $X \sim Binomial(n, p)$, that is 
@@ -34,7 +33,7 @@ where $x= 0, 1, \dots, n$. Define the number
 
 $$\lambda = np$$
 
-This is the rate of success. That’s the number of trials $n$—however many there are—times the chance of success $p$ for each of those trials. In other words, if we repeat the experiment every day, we will be getting $\lambda$ successes per day on average. 
+This is the rate of success. That’s the number of trials $n$—however many there are—times the chance of success $p$ for each of those trials. If we repeat the experiment every day, we will be getting $\lambda$ successes per day on average. 
 
 Solving for $p$, we get:
 
@@ -47,29 +46,29 @@ I then collect the constants (terms that don't depend on $n$) in front and split
 
 \begin{equation}
    (\#eq:limit)
-   \frac{\lambda^x}{x!}  \lim_{n \to \infty} \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x \bigg( 1-\frac{\lambda}{n} \bigg)^n \bigg( 1-\frac{\lambda}{n} \bigg)^{-x}
+   \frac{\lambda^x}{x!}  \lim_{n \to \infty} \color{blue}{\frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x} \color{red}{ \bigg( 1-\frac{\lambda}{n} \bigg)^n } \color{green}{\bigg( 1-\frac{\lambda}{n} \bigg)^{-x}}
 \end{equation}
 
 Now let’s take the limit of this right-hand side one term at a time. 
 
-1. We start with 
+1. We start with the blue term 
 
-$$\lim_{n \to \infty} \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x$$
+$$\color{blue}{ \lim_{n \to \infty} \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x }$$
 The numerator and denominator can be expanded as follows 
 
-$$\lim_{n \to \infty} \frac{(n)(n-1)(n-2)\dots(n-x)(n-x-1)\dots (1)}{(n-x)(n-x-1)(n-x-2)\dots (1)}\bigg( \frac{1}{n} \bigg)^x$$
+$$\color{blue}{ \lim_{n \to \infty} \frac{(n)(n-1)(n-2)\dots(n-x)(n-x-1)\dots (1)}{(n-x)(n-x-1)(n-x-2)\dots (1)}\bigg( \frac{1}{n} \bigg)^x }$$
 
 The $(n-x)(n-x-1)\dots(1)$ terms cancel from both the numerator and denominator, leaving the following
 
-$$ \lim_{n \to \infty} \frac{(n)(n-1)(n-2)(n-x+1)}{n^x}$$
-Expanding out the numerator and denominator we can rewrite this as
+$$\color{blue}{ \lim_{n \to \infty} \frac{(n)(n-1)(n-2)(n-x+1)}{n^x} }$$
+This can be rewrited as
 
-$$ \lim_{n \to \infty} \frac{n}{n} \frac{(n-1)}{n} \frac{(n-2)}{n} \frac{(n-x+1)}{n}.$$
+$$\color{blue}{  \lim_{n \to \infty} \frac{n}{n} \frac{(n-1)}{n} \frac{(n-2)}{n} \frac{(n-x+1)}{n} }$$
 This is because there were $x$ terms in both the numerator and denominator. Clearly, every one of these $x$ terms approaches 1 as $n$ approaches infinity. So we know this just simplifies to one. So we’re done with the first step. 
 
-2. Now we focus on the middle term of \@ref(eq:limit)
+2. Now we focus on the red term of \@ref(eq:limit)
 
-$$\lim_{n \to \infty} \bigg( 1-\frac{\lambda}{n} \bigg)^n$$
+$$\color{red}{ \lim_{n \to \infty} \bigg( 1-\frac{\lambda}{n} \bigg)^n }$$
 
 Recall the [definition](https://en.wikipedia.org/wiki/E_(mathematical_constant)) of $e= 2.7182\dots$ is 
 
@@ -80,17 +79,17 @@ $$ a = -\frac{n}{\lambda}$$
 
 Substituting it into our expression we get 
 
-$$\lim_{n \to \infty} \bigg( 1-\frac{\lambda}{n} \bigg)^n = \lim_{n \to \infty} \bigg( 1+\frac{1}{a} \bigg)^{-a\lambda} = e^{-\lambda}.$$
+$$ \color{red}{ \lim_{n \to \infty} \bigg( 1-\frac{\lambda}{n} \bigg)^n = \lim_{n \to \infty} \bigg( 1+\frac{1}{a} \bigg)^{-a\lambda} = e^{-\lambda} }$$
 So we've finished with the middle term. 
 
 3. The third term of \@ref(eq:limit) is 
 
-$$ \lim_{n \to \infty}  \bigg( 1-\frac{\lambda}{n} \bigg)^{-x} $$
+$$\color{green}{ \lim_{n \to \infty}  \bigg( 1-\frac{\lambda}{n} \bigg)^{-x} }$$
 As $n$ approaches infinity, this term becomes $1^{-x}$ which is equal to one. And that takes care of our last term. 
 
 Putting these together we can re-write \@ref(eq:limit) as 
 
-$$ \frac{\lambda^x}{x!}  \lim_{n \to \infty} \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x \bigg( 1-\frac{\lambda}{n} \bigg)^n \bigg( 1-\frac{\lambda}{n} \bigg)^{-x} = \frac{\lambda^x}{x!} e^{-\lambda}$$
+$$ \frac{\lambda^x}{x!}  \lim_{n \to \infty} \color{blue}{ \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x} \color{red}{ \bigg( 1-\frac{\lambda}{n} \bigg)^n} \color{green}{ \bigg( 1-\frac{\lambda}{n} \bigg)^{-x} } = \frac{\lambda^x}{x!} \color{red}{ e^{-\lambda} }$$
 which is the pmf of a Poisson random variable $Y$, i.e 
 
 $$P(Y = y)  = \frac{\lambda^y}{y!} e^{-\lambda}$$
@@ -104,7 +103,7 @@ A natural question is how good is this approximation? It turns out it is quite g
 ## Code 
 A [rule of thumb](https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc331.htm) says for the approximation to be good: 
 
-   > "The sample size $n$ should be equal to or larger than 20 and the probability of a single success, $p$, should be smaller than or equal to 0.05. If $n \geq $100, the approximation is excellent if $np$ is also $leq$ 10." 
+   > "The sample size $n$ should be equal to or larger than 20 and the probability of a single success, $p$, should be smaller than or equal to 0.05. If $n$ > 100, the approximation is excellent if $np$ is also < 10." 
 
 
 Let's try a few scenarios. I have slightly modified the code from [here](https://www.math.utah.edu/~treiberg/M3074PoisApproxEg.pdf).
