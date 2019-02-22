@@ -90,7 +90,7 @@ As $n$ approaches infinity, this term becomes $1^{-x}$ which is equal to one. An
 Putting these together we can re-write \@ref(eq:limit) as 
 
 $$ \frac{\lambda^x}{x!}  \lim_{n \to \infty} \color{blue}{ \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x} \color{red}{ \bigg( 1-\frac{\lambda}{n} \bigg)^n} \color{green}{ \bigg( 1-\frac{\lambda}{n} \bigg)^{-x} } = \frac{\lambda^x}{x!} \color{red}{ e^{-\lambda} }$$
-which is the pmf of a Poisson random variable $Y$, i.e 
+which is the probability mass function of a Poisson random variable $Y$, i.e 
 
 $$P(Y = y)  = \frac{\lambda^y}{y!} e^{-\lambda}$$
 
