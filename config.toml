@@ -10,7 +10,7 @@ title = ""
 
 # Your copyright notice - appears in site footer.
 # To display a copyright symbol, type `&copy;`.
-copyright = "&copy; Solon Karapanagiotis 2019"
+copyright = "&copy; Solon Karapanagiotis 2018-2020"
 
 theme = "hugo-academic"
 enableEmoji = true
