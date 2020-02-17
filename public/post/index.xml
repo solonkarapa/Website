@@ -6,11 +6,20 @@
     <description>Recent content in Posts on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; Solon Karapanagiotis 2019</copyright>
+    <copyright>&amp;copy; Solon Karapanagiotis 2018-2020</copyright>
     <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Naive classification beats deep-learning</title>
+      <link>/post/auc_post/model-evaluation-auc/</link>
+      <pubDate>Tue, 10 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/auc_post/model-evaluation-auc/</guid>
+      <description>Overview Mitani and co-authors’ present a deep-learning algorithm trained with retinal images and participants’ clinical data from the UK Biobank to estimate blood-haemoglobin levels and predict the presence or absence of anaemia (Mitani et al. 2020). A major limitation of the study is the inadequate evaluation of the algorithm. I will show how a naïve classification (i.e. classify everybody as healthy) performs much better than their deep-learning approach, despite their model having AUC of around 80%.</description>
+    </item>
     
     <item>
       <title>Approximating Binomial with Poisson</title>

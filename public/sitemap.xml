@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>/post/auc_post/model-evaluation-auc/</loc>
+      <lastmod>2020-03-10T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/post/approx_binomial/approximating-binomial-with-poisson/</loc>
       <lastmod>2019-02-05T00:00:00+00:00</lastmod>
     </url>
@@ -223,6 +232,16 @@
     
     <url>
     
+      <loc>/tags/ml-reporting/</loc>
+      <lastmod>2020-03-10T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/tags/stat-reporting/</loc>
       <lastmod>2018-05-15T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -342,6 +361,26 @@
     
     <url>
     
+      <loc>/tags/model-evaluation/</loc>
+      <lastmod>2020-03-10T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/categories/model-evaluation/</loc>
+      <lastmod>2020-03-10T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/tags/probability/</loc>
       <lastmod>2019-02-05T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -383,7 +422,7 @@
     <url>
     
       <loc>/tags/r/</loc>
-      <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+      <lastmod>2020-03-10T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -393,7 +432,7 @@
     <url>
     
       <loc>/categories/r/</loc>
-      <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+      <lastmod>2020-03-10T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -413,7 +452,7 @@
     <url>
     
       <loc>/categories/reporting/</loc>
-      <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+      <lastmod>2020-03-10T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
