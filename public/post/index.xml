@@ -15,7 +15,7 @@
     <item>
       <title>Naive classification beats deep-learning</title>
       <link>/post/auc_post/model-evaluation-auc/</link>
-      <pubDate>Tue, 10 Mar 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>/post/auc_post/model-evaluation-auc/</guid>
       <description>Overview Mitani and co-authors’ present a deep-learning algorithm trained with retinal images and participants’ clinical data from the UK Biobank to estimate blood-haemoglobin levels and predict the presence or absence of anaemia (Mitani et al. 2020). A major limitation of the study is the inadequate evaluation of the algorithm. I will show how a naïve classification (i.e. classify everybody as healthy) performs much better than their deep-learning approach, despite their model having AUC of around 80%.</description>

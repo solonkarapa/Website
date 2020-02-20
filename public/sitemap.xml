@@ -6,7 +6,7 @@
     <url>
     
       <loc>/post/auc_post/model-evaluation-auc/</loc>
-      <lastmod>2020-03-10T00:00:00+00:00</lastmod>
+      <lastmod>2020-02-20T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -233,7 +233,7 @@
     <url>
     
       <loc>/tags/ml-reporting/</loc>
-      <lastmod>2020-03-10T00:00:00+00:00</lastmod>
+      <lastmod>2020-02-20T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -281,16 +281,6 @@
     
     <url>
     
-      <loc>/categories/data/</loc>
-      <lastmod>2018-04-10T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
       <loc>/tags/data/</loc>
       <lastmod>2018-04-10T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -301,8 +291,8 @@
     
     <url>
     
-      <loc>/categories/data-analysis/</loc>
-      <lastmod>2018-05-20T00:00:00+00:00</lastmod>
+      <loc>/categories/data/</loc>
+      <lastmod>2018-04-10T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -321,8 +311,8 @@
     
     <url>
     
-      <loc>/categories/guidelines/</loc>
-      <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+      <loc>/categories/data-analysis/</loc>
+      <lastmod>2018-05-20T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -332,6 +322,16 @@
     <url>
     
       <loc>/tags/guidelines/</loc>
+      <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/categories/guidelines/</loc>
       <lastmod>2018-05-15T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -361,18 +361,8 @@
     
     <url>
     
-      <loc>/categories/model-evaluation/</loc>
-      <lastmod>2020-03-10T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
       <loc>/tags/model-evaluation/</loc>
-      <lastmod>2020-03-10T00:00:00+00:00</lastmod>
+      <lastmod>2020-02-20T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -381,8 +371,8 @@
     
     <url>
     
-      <loc>/categories/probability/</loc>
-      <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+      <loc>/categories/model-evaluation/</loc>
+      <lastmod>2020-02-20T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -392,6 +382,16 @@
     <url>
     
       <loc>/tags/probability/</loc>
+      <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/categories/probability/</loc>
       <lastmod>2019-02-05T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -421,8 +421,8 @@
     
     <url>
     
-      <loc>/categories/r/</loc>
-      <lastmod>2020-03-10T00:00:00+00:00</lastmod>
+      <loc>/tags/r/</loc>
+      <lastmod>2020-02-20T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -431,8 +431,8 @@
     
     <url>
     
-      <loc>/tags/r/</loc>
-      <lastmod>2020-03-10T00:00:00+00:00</lastmod>
+      <loc>/categories/r/</loc>
+      <lastmod>2020-02-20T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -452,7 +452,7 @@
     <url>
     
       <loc>/categories/reporting/</loc>
-      <lastmod>2020-03-10T00:00:00+00:00</lastmod>
+      <lastmod>2020-02-20T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

@@ -2,7 +2,7 @@
 title: Naive classification beats deep-learning
 subtitle: How (not) to evaluate models
 author: ''
-date: '2020-03-10'
+date: '2020-02-20'
 slug: model-evaluation-auc
 categories: [reporting, model evaluation, R]
 tags: [(ML) reporting, model evaluation, R ]
