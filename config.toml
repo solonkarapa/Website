@@ -233,7 +233,7 @@ defaultContentLanguageInSubdir = false
   [[params.social]]
     icon = "github"
     icon_pack = "fa"
-    link = "https://github.com/solonkarapa"
+    link = "https://github.com/solonkarapa?tab=repositories"
     
     [[params.social]]
     icon = "publons"
