@@ -60,8 +60,8 @@ highlight = true
 [header]
 #image = "headers/bubbles-wide.jpg"
 #image = "headers/science.jpg"
-image = "headers/science3.jpg"
-caption = "Credit: ESO/WFI (Optical); MPIfR/ESO/APEX/A.Weiss et al. (Submillimetre); NASA/CXC/CfA/R.Kraft et al. (X-ray)"
+image = ""
+caption = ""
 
 +++
 
