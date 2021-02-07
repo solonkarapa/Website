@@ -7,6 +7,8 @@ image:
 math: true
 title: Writing technical content in Academic
 draft: true
+image:
+  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/CpkOjOcXdUY)'
 ---
 
 Academic is designed to give technical content creators a seamless experience. You can focus on the content and Academic handles the rest.
