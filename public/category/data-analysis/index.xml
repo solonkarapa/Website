@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>data analysis | </title>
+    <link>https://solon-karapanagiotis.com/category/data-analysis/</link>
+      <atom:link href="https://solon-karapanagiotis.com/category/data-analysis/index.xml" rel="self" type="application/rss+xml" />
+    <description>data analysis</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Solon Karapanagiotis 2018-2021</copyright><lastBuildDate>Sun, 20 May 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://solon-karapanagiotis.com/media/icon.png</url>
+      <title>data analysis</title>
+      <link>https://solon-karapanagiotis.com/category/data-analysis/</link>
+    </image>
+    
+    <item>
+      <title>Plastic waste and disease on coral reefs - Another misinterpretation of a statistical model</title>
+      <link>https://solon-karapanagiotis.com/post/reefs/plastic-waste-and-disease-on-coral-reefs/</link>
+      <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/reefs/plastic-waste-and-disease-on-coral-reefs/</guid>
+      <description>
+
+
+&lt;p&gt;Recently, I came across this very interesting article published in &lt;a href=&#34;http://science.sciencemag.org/content/359/6374/460.long&#34;&gt;Science&lt;/a&gt; about how plastic waste is associated with disease on coral reefs &lt;span class=&#34;citation&#34;&gt;(J. B. Lamb et al. &lt;a href=&#34;#ref-lamb2018plastic&#34;&gt;2018&lt;/a&gt;)&lt;/span&gt;. The main conclusions are&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;contact with plastic increases the probability of disease,&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;the morphological structure of the reefs is associated with the probability of being in contact with plastic with more complex ones being more likely to be affected by plastic,&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;the plastic levels correspond to estimates of mismanaged plastic waste into the ocean.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Overall, this study provides evidence how plastic waste negatively affects coral reefs, making them more susceptible to diseases. The authors made available both the datasets they used and the code &lt;span class=&#34;citation&#34;&gt;(both can be downloaded from J. Lamb et al. &lt;a href=&#34;#ref-dryad_mp480&#34;&gt;2018&lt;/a&gt; - an excellent example of reproducible research)&lt;/span&gt;. The methods section is straightforward to follow (see &lt;a href=&#34;http://science.sciencemag.org/content/suppl/2018/01/24/359.6374.460.DC1?_ga=2.198123375.1394041835.1523546630-1357771364.1523546630&#34;&gt;Supplementary Materials&lt;/a&gt;). My comment is about the 2nd point above, and more specifically the methodology that led to this conclusion (see Fig. 4 of the article). The issue is the authors interpret the models they are using wrongly. Let me explain …&lt;/p&gt;
+&lt;p&gt;Their model is a simple generalised linear mixed model (GLMM) - binomial error distribution and logistic link. The outcome is the disease prevalence (binary) among coral reefs with different morphology. The morphology assignments were massive, tabular, and branching (3-level categorical covariate). The morphological assignments were treated as fixed factors and the site as random (in order to take into account the correlation between reefs due to their geographical position). The model is&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ logit(Disease Presense_{ik}) =  \sum_j \beta_j x_{ik} + b_i \]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(j_{1:3} = \{massive, tabular, branching\}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(b_i\)&lt;/span&gt; are the reef-specific intercepts. Such a &lt;span class=&#34;math inline&#34;&gt;\(b_i\)&lt;/span&gt; represents the deviation of the intercept of a specific reef from the average intercept in the group to which that reef belongs, i.e deviation from &lt;span class=&#34;math inline&#34;&gt;\(\beta_1\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\beta_2\)&lt;/span&gt; or &lt;span class=&#34;math inline&#34;&gt;\(\beta_3\)&lt;/span&gt;. The model is fitted only for reefs unaffected by plastic waste. The output is given in Fig. 4(B) in the paper. The conclusion is the disease risk increases from massive to branching and tabular reefs when not in contact with plastic debris (Fig. 4(B) and table S13).&lt;/p&gt;
+&lt;p&gt;The issue with this figure is the authors give a population-average interpretation of the coefficients. In GLLMs the fixed effects have a site-specific interpretation but not a population-average one. Let us now consider the logistic random-intercepts model above. The conditional means &lt;span class=&#34;math inline&#34;&gt;\(E[Disease Presense_{ik}|b_i]\)&lt;/span&gt; are given by&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ E[Disease Presense_{ik}|b_i] = \frac{\exp(\sum_j \beta_j x_{ik} + b_i)}{1 + \exp(\sum_j \beta_j x_{ik} + b_i)} \]&lt;/span&gt; where &lt;span class=&#34;math inline&#34;&gt;\(E[.]\)&lt;/span&gt; is the expectation operator. The above model assumes logistic change in prevalence of disease for each morphology, all having different intercepts &lt;span class=&#34;math inline&#34;&gt;\(\beta_0 + b_i\)&lt;/span&gt;. The average reef, i.e, the reef with intercept &lt;span class=&#34;math inline&#34;&gt;\(b_i = 0\)&lt;/span&gt;, has disease probability given by&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ E[Disease Presense_{ik}|b_i = 0] = \frac{\exp(\sum_j \beta_j x_{ik} + 0)}{1 + \exp(\sum_j \beta_j x_{ik} + 0)} \]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;which is what the authors have calculated and produced Fig. 4. In other words, the authors have calculated the probability of disease for an “average” reef. They proceed interpreting this as marginal effect, which is wrong.&lt;/p&gt;
+&lt;p&gt;The issue arises due to the conditional interpretation, conditionally upon level of random effects, of the &lt;span class=&#34;math inline&#34;&gt;\(\beta\)&lt;/span&gt;s in a GLMM model. And this is due to the fact that &lt;span class=&#34;math inline&#34;&gt;\(E[g(Y )] \neq g[E(Y)]\)&lt;/span&gt; unless &lt;span class=&#34;math inline&#34;&gt;\(g\)&lt;/span&gt; is linear, which is not the case for this model. In what follows I fit the same model and demonstrate how the conclusions change when conditioning of different levels of the random coefficients. The code the authors use is&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# GLMM, Baseline Disease levels for different growth forms, Asia Pacific --------
+library(lme4)
+Normal.Disease.Growth = glmer(Disease ~ -1 + Growth2+(1|Reef_Name), 
+                              data = Plastic[which(Plastic$Plastic==0),], 
+                              family = &amp;#39;binomial&amp;#39;, 
+                              control = glmerControl(optimizer =&amp;quot;bobyqa&amp;quot;))
+
+# As a sidenote: This code uses a Laplace approximation (nAGQ = 1 - the default) on the integral over the random effects space. &amp;quot;Values greater than 1 produce greater accuracy in the evaluation of the log-likelihood at the expense of speed&amp;quot;. The authors of the package suggest values up to 25 (see the documentation). &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The following reproduces Fig. 4(B) of the publication.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# PDF, Baseline disease levels by growth form -----------------------------
+NormalDisease.by.Growth = data.frame(Tabular = rnorm(100000, mean = -3.1332, sd = .1549),
+                                     Massive = rnorm(100000, mean = -3.8153, sd = .1095),
+                                     Branching = rnorm(100000, mean = -3.5534, sd = .1103))
+NormalDisease.by.Growth$Tabularbt = plogis(NormalDisease.by.Growth$Tabular)
+NormalDisease.by.Growth$Massivebt = plogis(NormalDisease.by.Growth$Massive)
+NormalDisease.by.Growth$Branchingbt = plogis(NormalDisease.by.Growth$Branching)
+NormalDisease.by.Growth = gather(NormalDisease.by.Growth, Growth, Estimate, Tabularbt:Branchingbt)
+
+library(ggplot2)
+ggplot(aes(x = Estimate*100), data = NormalDisease.by.Growth) +
+   geom_density(aes(y = ..scaled.., fill = Growth)) +
+   scale_x_continuous(limits = c(0, 10)) + 
+   ylab(&amp;quot;&amp;quot;) + 
+   labs(fill = &amp;quot;Morphology&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;It is evident from the code that they plot the fixed effects estimates with their standard errors. This plot ignores the random effects and it only takes into consideration the variation of the fixed coefficients &lt;span class=&#34;math inline&#34;&gt;\(\beta_j\)&lt;/span&gt;. To get an idea for the variability of the random effects I simulate them from the model and plot them. Points that are distinguishable from zero (i.e. the confidence band based on level does not cross the red line) are highlighted. We see substantial variation on the random effects estimates with many “outliers” with both high and low averages that need to be accounted for.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(merTools)
+sim_rfs_Normal.Disease &amp;lt;- REsim(Normal.Disease.Growth, n.sims = 200) 
+plotREsim(sim_rfs_Normal.Disease)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;What the authors are effectively doing in Fig. 4(B) (see density plot above) is presenting the results for reefs with &lt;span class=&#34;math inline&#34;&gt;\(b_i = 0\)&lt;/span&gt; which corresponds to the red horizontal line. Let’s see how the density plot changes when we condition on more “extreme” reefs. I use the 0.1 and 0.9 quantiles.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;quantile0.9 &amp;lt;- REquantile(Normal.Disease.Growth, quantile = 0.9, groupFctr = &amp;quot;Reef_Name&amp;quot;)
+#which(sim_rfs_Normal.Disease$groupID == quantile0.9)
+
+quantile0.1 &amp;lt;- REquantile(Normal.Disease.Growth, quantile = 0.1, groupFctr = &amp;quot;Reef_Name&amp;quot;)
+#which(sim_rfs_Normal.Disease$groupID == quantile0.1)
+
+NormalDisease.by.Growth_quantile0.9 = data.frame(
+   Tabular = rnorm(100000, mean = -3.1332 + 1.495773, sd = .1549),
+   Massive = rnorm(100000, mean = -3.8153 + 1.495773, sd = .1095),
+   Branching = rnorm(100000, mean = -3.5534 + 1.495773, sd = .1103))
+NormalDisease.by.Growth_quantile0.9$Tabularbt = plogis(NormalDisease.by.Growth_quantile0.9$Tabular)
+NormalDisease.by.Growth_quantile0.9$Massivebt = plogis(NormalDisease.by.Growth_quantile0.9$Massive)
+NormalDisease.by.Growth_quantile0.9$Branchingbt = plogis(NormalDisease.by.Growth_quantile0.9$Branching)
+NormalDisease.by.Growth_quantile0.9 = gather(NormalDisease.by.Growth_quantile0.9, Growth, Estimate, Tabularbt:Branchingbt)
+NormalDisease.by.Growth_quantile0.1 = data.frame(
+   Tabular = rnorm(100000, mean = -3.1332 - 1.689569, sd = .1549),
+   Massive = rnorm(100000, mean = -3.8153 - 1.689569, sd = .1095),
+   Branching = rnorm(100000, mean = -3.5534 - 1.689569, sd = .1103))
+
+NormalDisease.by.Growth_quantile0.1$Tabularbt = plogis(NormalDisease.by.Growth_quantile0.1$Tabular)
+NormalDisease.by.Growth_quantile0.1$Massivebt = plogis(NormalDisease.by.Growth_quantile0.1$Massive)
+NormalDisease.by.Growth_quantile0.1$Branchingbt = plogis(NormalDisease.by.Growth_quantile0.1$Branching)
+NormalDisease.by.Growth_quantile0.1 = gather(NormalDisease.by.Growth_quantile0.1, Growth, Estimate, Tabularbt:Branchingbt)
+
+NormalDisease.by.Growth$ID = &amp;quot;average&amp;quot;
+NormalDisease.by.Growth_quantile0.1$ID = &amp;quot;0.1quantile&amp;quot;
+NormalDisease.by.Growth_quantile0.9$ID = &amp;quot;0.9quantile&amp;quot;
+
+overall &amp;lt;- rbind(NormalDisease.by.Growth, NormalDisease.by.Growth_quantile0.1, NormalDisease.by.Growth_quantile0.9)
+ggplot(aes(x = Estimate*100, col = ID), data = overall) +
+   geom_density(aes(y = ..scaled.., fill = Growth), alpha = 0.9, size = 1.3) +
+   scale_fill_brewer(palette = &amp;quot;Spectral&amp;quot;) + 
+   #scale_fill_manual(values = c(&amp;quot;#D55E00&amp;quot;, &amp;quot;#009E73&amp;quot;, &amp;quot;#0072B2&amp;quot;)) + 
+   scale_color_manual(values = c(&amp;quot;#000000&amp;quot;, &amp;quot;dodgerblue&amp;quot;, &amp;quot;darkmagenta&amp;quot;)) +
+   scale_x_continuous(limits = c(0, 10)) + 
+   ylab(&amp;quot;&amp;quot;) + 
+   labs(col = &amp;quot;R effect&amp;quot;, fill = &amp;quot;Morphology&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;It is evident both the center and the variability of the distributions change depending whether we look an “average” coral reef (purple line), a reef towards the upper extreme (blue line) or the lower extreme (black line). So the conclusions should be something along the lines: the increase in disease likelihood with plastic debris depends also on inherit/unobserved characteristics of the reefs, captured by the random effects, in addition to their morphology.&lt;/p&gt;
+&lt;p&gt;Of course, what I have presented above is still conditional interpretation of the parameters. Ideally, we want the marginal population-average interpretation which is obtained from averaging over the random effects. This allows to take into account both the residual (observation-level) variance, the uncertainty in the variance parameters for the grouping factors added to the uncertainty in the fixed coefficients. See for example the &lt;code&gt;predictInterval()&lt;/code&gt; function of the &lt;a href=&#34;https://cran.r-project.org/web/packages/merTools/merTools.pdf&#34;&gt;&lt;code&gt;merTools&lt;/code&gt;&lt;/a&gt; package.&lt;/p&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;References&lt;/h1&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-dryad_mp480&#34;&gt;
+&lt;p&gt;Lamb, JB, BL Willis, EA Fiorenza, CS Couch, R Howard, DN Rader, JD True, et al. 2018. “Data from: Plastic Waste Associated with Disease on Coral Reefs.” &lt;em&gt;Science&lt;/em&gt;. Dryad Digital Repository. doi:&lt;a href=&#34;https://doi.org/10.5061/dryad.mp480&#34;&gt;10.5061/dryad.mp480&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-lamb2018plastic&#34;&gt;
+&lt;p&gt;Lamb, Joleah B, Bette L Willis, Evan A Fiorenza, Courtney S Couch, Robert Howard, Douglas N Rader, James D True, et al. 2018. “Plastic Waste Associated with Disease on Coral Reefs.” &lt;em&gt;Science&lt;/em&gt; 359 (6374). American Association for the Advancement of Science: 460–62.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

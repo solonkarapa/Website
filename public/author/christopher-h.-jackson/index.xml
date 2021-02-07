@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Christopher H. Jackson | </title>
+    <link>https://solon-karapanagiotis.com/author/christopher-h.-jackson/</link>
+      <atom:link href="https://solon-karapanagiotis.com/author/christopher-h.-jackson/index.xml" rel="self" type="application/rss+xml" />
+    <description>Christopher H. Jackson</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Solon Karapanagiotis 2018-2021</copyright><lastBuildDate>Mon, 01 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://solon-karapanagiotis.com/media/icon.png</url>
+      <title>Christopher H. Jackson</title>
+      <link>https://solon-karapanagiotis.com/author/christopher-h.-jackson/</link>
+    </image>
+    
+    <item>
+      <title>Development and External Validation of Prediction Models for 10-Year Survival of Invasive Breast Cancer. Comparison with PREDICT and CancerMath</title>
+      <link>https://solon-karapanagiotis.com/publication/clinicalcancerresearch/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/clinicalcancerresearch/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,339 +1,825 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!DOCTYPE html><html lang="en-us" >
+
 <head>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="theme" content="hugo-academic">
-  <meta name="generator" content="Hugo 0.37.1" />
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.1 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
   <meta name="author" content="Solon Karapanagiotis">
 
   
   
   
-  
-    
-      
     
   
-  <meta name="description" content="There are many tutorials for importing data into R focusing on a specific function/package. This one focuses on 3 different packages. You will learn how to import all common formats of flat file data with base R functions and the dedicated readr and data.table packages. I first present these three packages and finish with a comparison table between them.
-Task Import a flat file into R: create an R object that contains the data from a flat file.">
+  <meta name="description" content="There are many tutorials for importing data into R focusing on a specific function/package. This one focuses on 3 different packages. You will learn how to import all common formats of flat file data with base R functions and the dedicated readr and data.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/post/importflatfiles/importing-flat-files-into-r/">
-
-  
-
+  <link rel="alternate" hreflang="en-us" href="https://solon-karapanagiotis.com/post/importflatfiles/importing-flat-files-into-r/">
 
   
 
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
   
   
   <meta name="theme-color" content="#EF525B">
   
+
   
   
   
-    
-  
-  
-    
-    
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-    
-  
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.1/css/academicons.min.css" integrity="sha512-NThgw3XKQ1absAahW6to7Ey42uycrVvfNfyjqcFNgCmOCQ5AR4AO0SiXrN+8ZtYeappp56lk1WtvjVmEa+VR6A==" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
-  
-  
-  
-  
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Playfair&#43;Display:400,700%7cFauna&#43;One">
-  
-  <link rel="stylesheet" href="/styles.css">
+  <script src="/js/mathjax-config.js"></script>
   
 
   
-    <script>
-      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-      ga('create', 'UA-143318883-1', 'auto');
-      ga('require', 'eventTracker');
-      ga('require', 'outboundLinkTracker');
-      ga('require', 'urlChangeTracker');
-      ga('send', 'pageview');
-    </script>
-    <script async src="//www.google-analytics.com/analytics.js"></script>
+  
+  
+  
     
-    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700%7CFauna+One&display=swap">
     
   
 
   
-  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="">
-  <link rel="feed" href="/index.xml" type="application/rss+xml" title="">
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.39aa9ab0cbc7062863ae0bf789104c8f.css">
+
   
 
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="icon" type="image/png" href="/img/icon.png">
-  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/post/importflatfiles/importing-flat-files-into-r/">
 
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-143318883-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-143318883-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_huc18e723f091434b03acc4e46114b282d_11627_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_huc18e723f091434b03acc4e46114b282d_11627_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://solon-karapanagiotis.com/post/importflatfiles/importing-flat-files-into-r/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
   <meta property="twitter:card" content="summary_large_image">
   
-  <meta property="twitter:site" content="@https://twitter.com/SolonSTATS">
-  <meta property="twitter:creator" content="@https://twitter.com/SolonSTATS">
+  <meta property="twitter:site" content="@SolonSTATS">
+  <meta property="twitter:creator" content="@SolonSTATS">
   
   <meta property="og:site_name" content="">
-  <meta property="og:url" content="/post/importflatfiles/importing-flat-files-into-r/">
+  <meta property="og:url" content="https://solon-karapanagiotis.com/post/importflatfiles/importing-flat-files-into-r/">
   <meta property="og:title" content="Importing Flat Files Into R | ">
-  <meta property="og:description" content="There are many tutorials for importing data into R focusing on a specific function/package. This one focuses on 3 different packages. You will learn how to import all common formats of flat file data with base R functions and the dedicated readr and data.table packages. I first present these three packages and finish with a comparison table between them.
-Task Import a flat file into R: create an R object that contains the data from a flat file.">
-  <meta property="og:locale" content="en-us">
+  <meta property="og:description" content="There are many tutorials for importing data into R focusing on a specific function/package. This one focuses on 3 different packages. You will learn how to import all common formats of flat file data with base R functions and the dedicated readr and data."><meta property="og:image" content="https://solon-karapanagiotis.com/media/icon.png">
+  <meta property="twitter:image" content="https://solon-karapanagiotis.com/media/icon.png"><meta property="og:locale" content="en-us">
   
-  <meta property="article:published_time" content="2018-04-10T00:00:00&#43;00:00">
-  
-  <meta property="article:modified_time" content="2018-04-10T00:00:00&#43;00:00">
+    
+      <meta property="article:published_time" content="2018-04-10T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2018-04-10T00:00:00&#43;00:00">
   
 
   
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://solon-karapanagiotis.com/post/importflatfiles/importing-flat-files-into-r/"
+  },
+  "headline": "Importing Flat Files Into R",
+  
+  "datePublished": "2018-04-10T00:00:00Z",
+  "dateModified": "2018-04-10T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Solon Karapanagiotis"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://solon-karapanagiotis.com/images/icon_huc18e723f091434b03acc4e46114b282d_11627_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "There are many tutorials for importing data into R focusing on a specific function/package. This one focuses on 3 different packages. You will learn how to import all common formats of flat file data with base R functions and the dedicated readr and data."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
 
   <title>Importing Flat Files Into R | </title>
 
 </head>
-<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
 
-<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.1df0392aab543464b23a85146803aaf2.js"></script>
+
+  
+
+<aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
+        
+      </div>
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
   <div class="container">
 
     
-    <div class="navbar-header">
-      
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-              data-target=".navbar-collapse" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      
+    <div class="d-none d-lg-inline-flex">
       <a class="navbar-brand" href="/"></a>
     </div>
+    
 
     
-    <div class="collapse navbar-collapse">
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
 
-      
-      
-      <ul class="nav navbar-nav navbar-right">
-        
-
-        
-        
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a href="/#about">
-            
-            <span>Home</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-        
-        
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a href="/#publications_selected">
-            
-            <span>Publications</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-        
-        
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a href="/#teaching">
-            
-            <span>Teaching</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-        
-        
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a href="/#posts">
-            
-            <span>Posts</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-        
-        
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a href="/#contact">
-            
-            <span>Contact</span>
-            
-          </a>
-        </li>
-
-        
-        
-      
-
-      
-      </ul>
-
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"></a>
     </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#teaching"><span>Teaching</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
   </div>
 </nav>
 
 
-<article class="article" itemscope itemtype="http://schema.org/Article">
+  </div>
+
+  <div class="page-body">
+    <article class="article">
 
   
 
 
-  <div class="article-container">
-    <h1 itemprop="name">Importing Flat Files Into R</h1>
 
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Importing Flat Files Into R</h1>
+
+  
+
+  
     
+
 
 <div class="article-metadata">
 
+  
+  
+
+  
   <span class="article-date">
     
-    <time datetime="2018-04-10 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
-      Apr 10, 2018
-    </time>
+    
+      
+    
+    Apr 10, 2018
   </span>
-  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Solon Karapanagiotis">
-  </span>
+  
+
+  
 
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    17 min read
+    16 min read
   </span>
   
 
   
   
-
   
+  
+  
+
   
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fa fa-folder"></i>
-    
-    <a href="/categories/r">R</a
-    >, 
-    
-    <a href="/categories/data">data</a
-    >
-    
-  </span>
-  
-  
-
-  
-  
-<div class="share-box" aria-hidden="true">
-  <ul class="share">
-    <li>
-      <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=Importing%20Flat%20Files%20Into%20R&amp;url=%2fpost%2fimportflatfiles%2fimporting-flat-files-into-r%2f"
-         target="_blank" rel="noopener">
-        <i class="fa fa-twitter"></i>
-      </a>
-    </li>
-    <li>
-      <a class="facebook"
-         href="https://www.facebook.com/sharer.php?u=%2fpost%2fimportflatfiles%2fimporting-flat-files-into-r%2f"
-         target="_blank" rel="noopener">
-        <i class="fa fa-facebook"></i>
-      </a>
-    </li>
-    <li>
-      <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fimportflatfiles%2fimporting-flat-files-into-r%2f&amp;title=Importing%20Flat%20Files%20Into%20R"
-         target="_blank" rel="noopener">
-        <i class="fa fa-linkedin"></i>
-      </a>
-    </li>
-    <li>
-      <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=%2fpost%2fimportflatfiles%2fimporting-flat-files-into-r%2f&amp;title=Importing%20Flat%20Files%20Into%20R"
-         target="_blank" rel="noopener">
-        <i class="fa fa-weibo"></i>
-      </a>
-    </li>
-    <li>
-      <a class="email"
-         href="mailto:?subject=Importing%20Flat%20Files%20Into%20R&amp;body=%2fpost%2fimportflatfiles%2fimporting-flat-files-into-r%2f">
-        <i class="fa fa-envelope"></i>
-      </a>
-    </li>
-  </ul>
-</div>
-
-
+    <i class="fas fa-folder mr-1"></i><a href="/category/r/">R</a>, <a href="/category/data/">data</a></span>
   
 
 </div>
 
+    
 
-    <div class="article-style" itemprop="articleBody">
-      <p>There are many tutorials for importing data into R focusing on a specific function/package. This one focuses on 3 different packages. You will learn how to import all common formats of flat file data with base R functions and the dedicated <code>readr</code> and <code>data.table</code> packages. I first present these three packages and finish with a comparison table between them.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+
+
+<p>There are many tutorials for importing data into R focusing on a specific function/package. This one focuses on 3 different packages. You will learn how to import all common formats of flat file data with base R functions and the dedicated <code>readr</code> and <code>data.table</code> packages. I first present these three packages and finish with a comparison table between them.</p>
 <div id="task" class="section level2">
 <h2>Task</h2>
 <p>Import a flat file into R: create an R object that contains the data from a flat file.</p>
@@ -360,7 +846,8 @@ Task Import a flat file into R: create an R object that contains the data from a
 </div>
 <div id="lets-get-going-the-utils" class="section level2">
 <h2>Let’s get going… the <code>utils</code></h2>
-<p>We start with the <a href="http://www.rdocumentation.org/packages/utils/"><code>utils</code></a> package. This package is loaded by default when you start your R session. This means that you can access its functions without further due. Here, we are interested in three of them: <a href="http://www.rdocumentation.org/packages/utils/functions/read.table"><code>read.table()</code></a>, <a href="http://www.rdocumentation.org/packages/utils/functions/read.table"><code>read.csv()</code></a>, and <a href="http://www.rdocumentation.org/packages/utils/functions/read.table"><code>read.delim()</code></a>.</p>
+<p>We start with the <a href="http://www.rdocumentation.org/packages/utils/"><code>utils</code></a> package. This package is loaded by default when you start your R session. This means that you can access its functions without further due. Here, we are interested in three of them:
+<a href="http://www.rdocumentation.org/packages/utils/functions/read.table"><code>read.table()</code></a>, <a href="http://www.rdocumentation.org/packages/utils/functions/read.table"><code>read.csv()</code></a>, and <a href="http://www.rdocumentation.org/packages/utils/functions/read.table"><code>read.delim()</code></a>.</p>
 <div id="reading-data-with-read.table" class="section level3">
 <h3>Reading data with <a href="http://www.rdocumentation.org/packages/utils/functions/read.table"><code>read.table()</code></a></h3>
 <p>Reads a file in table format and creates an R <strong>data.frame</strong> from it, with cases corresponding to rows and variables to columns. Let’s see how it works for our dataset.</p>
@@ -393,13 +880,15 @@ head(happiness)</code></pre>
 ##  $ Gender : chr  &quot;Male&quot; &quot;Female&quot; &quot;Both&quot; &quot;Male&quot; ...
 ##  $ Mean   : num  7.3 7.3 7.3 7.8 7.8 7.8 5.8 5.8 5.8 7.8 ...
 ##  $ N.     : int  471 570 1041 468 542 1010 416 555 971 433 ...</code></pre>
-<p>By specifying <code>header = TRUE</code> R sees the that the first line contains the names of the variables. With <code>stringsAsFactors = FALSE</code> we specify that we wanted <code>Country</code> and <code>Gender</code> to be character variables. The <code>sep = &quot;,&quot;</code> identifies the field separator to be a comma. There are many more arguments you can specify and each one can take many values! For further details, consult the <a href="http://www.rdocumentation.org/packages/utils/functions/read.table">R documentation</a> or type <code>help(read.table)</code> on the console.</p>
+<p>By specifying <code>header = TRUE</code> R sees the that the first line contains the names of the variables. With <code>stringsAsFactors = FALSE</code> we specify that we wanted <code>Country</code> and <code>Gender</code> to be character variables. The <code>sep = ","</code> identifies the field separator to be a comma. There are many more arguments you can specify and each one can take many values!
+For further details, consult the <a href="http://www.rdocumentation.org/packages/utils/functions/read.table">R documentation</a> or type <code>help(read.table)</code> on the console.</p>
 <blockquote>
-<p>Note: In order to use <code>read.table()</code>, in same manner, you need to give the full path name of the target file if it’s not in your working directory. You can use the <a href="http://rfunction.com/archives/1001">R Function of the Day</a>, namely <code>setwd(&quot;&lt;location of your dataset&gt;&quot;)</code>, to change your working directory. The same is valid for any other function we are going to encounter in this tutorial. Alternatively, you can specify the location of the flat file inside <code>read.table()</code>. Keep in mind that the specification of the file is platform dependent (Windows, Unix/Linux and OSX).</p>
+<p>Note: In order to use <code>read.table()</code>, in same manner, you need to give the full path name of the target file if it’s not in your working directory. You can use the <a href="http://rfunction.com/archives/1001">R Function of the Day</a>, namely <code>setwd("&lt;location of your dataset&gt;")</code>, to change your working directory. The same is valid for any other function we are going to encounter in this tutorial. Alternatively, you can specify the location of the flat file inside <code>read.table()</code>. Keep in mind that the specification of the file is platform dependent (Windows, Unix/Linux and OSX).</p>
 </blockquote>
 <pre class="r"><code>read.table(file = &quot;&lt;location of your dataset&gt;&quot;, ...) </code></pre>
 <blockquote>
-<p>Another option is to use <a href="http://www.rdocumentation.org/packages/base/functions/file.path"><code>file.path()</code></a>. It constructs the path to a file from components in a platform-independent way. For example,</p>
+<p>Another option is to use <a href="http://www.rdocumentation.org/packages/base/functions/file.path"><code>file.path()</code></a>. It constructs the path to a file from components in a platform-independent way.
+For example,</p>
 </blockquote>
 <pre class="r"><code>path &lt;- file.path(&quot;~&quot;, &quot;datasets&quot;, &quot;happiness.csv&quot;)     
 
@@ -407,7 +896,8 @@ happiness &lt;- read.table(file = path,
                         header = TRUE,             
                         sep = &quot;,&quot;,                  
                         stringsAsFactors = FALSE)</code></pre>
-<p><strong>Comment</strong> The <code>stringsAsFactors</code> argument is true by default which means that character variables are imported into R as factors, the data type to store categorical variables.</p>
+<p><strong>Comment</strong>
+The <code>stringsAsFactors</code> argument is true by default which means that character variables are imported into R as factors, the data type to store categorical variables.</p>
 <pre class="r"><code>happiness_2 &lt;- read.table(file = &quot;happiness.csv&quot;,    
                         header = TRUE,             
                         sep = &quot;,&quot;,                  
@@ -422,7 +912,7 @@ happiness &lt;- read.table(file = path,
 </div>
 <div id="reading-data-with-read.csv" class="section level3">
 <h3>Reading data with <a href="http://www.rdocumentation.org/packages/utils/functions/read.table"><code>read.csv()</code></a></h3>
-<p>It is a wrapper around <code>read.table()</code>. This means that <code>read.csv()</code> calls <code>read.table()</code> behind the scenes but with different default arguments. More specifically, the defaults are <code>header = TRUE</code> and <code>sep = &quot;,&quot;</code>. These match with the standardized CSV format, where <code>,</code> is used as a separator and usually the first line contains the names of the columns. Therefore, it saves you time since you need to specify less arguments.</p>
+<p>It is a wrapper around <code>read.table()</code>. This means that <code>read.csv()</code> calls <code>read.table()</code> behind the scenes but with different default arguments. More specifically, the defaults are <code>header = TRUE</code> and <code>sep = ","</code>. These match with the standardized CSV format, where <code>,</code> is used as a separator and usually the first line contains the names of the columns. Therefore, it saves you time since you need to specify less arguments.</p>
 <pre class="r"><code>read.csv(file = &quot;happiness.csv&quot;,   
                         stringsAsFactors = FALSE)</code></pre>
 <p>which is equivalent to</p>
@@ -433,7 +923,7 @@ happiness &lt;- read.table(file = path,
 </div>
 <div id="reading-data-with-read.delim" class="section level3">
 <h3>Reading data with <a href="http://www.rdocumentation.org/packages/utils/functions/read.table"><code>read.delim()</code></a></h3>
-<p>It is also a wrapper of <code>read.table()</code>. Now the default arguments match with tab-delimited files. More specifically, the defaults are <code>header = TRUE</code> and <code>sep = &quot;\t&quot;</code>, since <code>\t</code> is the field separator in tab-delimited files.</p>
+<p>It is also a wrapper of <code>read.table()</code>. Now the default arguments match with tab-delimited files. More specifically, the defaults are <code>header = TRUE</code> and <code>sep = "\t"</code>, since <code>\t</code> is the field separator in tab-delimited files.</p>
 <pre class="r"><code>read.delim(file = &quot;happiness.txt&quot;,    
                         stringsAsFactors = FALSE)</code></pre>
 <p>which is equivalent to</p>
@@ -442,7 +932,9 @@ happiness &lt;- read.table(file = path,
                         sep = &quot;\t&quot;,                  
                         stringsAsFactors = FALSE)</code></pre>
 <p>Both these functions make our lives easier since less arguments need to be specified.</p>
-<p><strong>Note</strong> Locale differences. The standard field delimiters for CSV files are commas. On US versions, the comma is set as default for the “List Separator”, which is okay for CSV files. But on European versions this character is reserved as the Decimal Symbol and the “List Separator” is set by default to the semicolon. Why you should care?</p>
+<p><strong>Note</strong> Locale differences.
+The standard field delimiters for CSV files are commas. On US versions, the comma is set as default for the “List Separator”, which is okay for CSV files. But on European versions this character is reserved as the Decimal Symbol and the “List Separator” is set by default to the semicolon.
+Why you should care?</p>
 <p>Suppose you try to import the European CSV version <code>happiness_eu.csv</code>.</p>
 <pre class="r"><code>head(happiness_eu)</code></pre>
 <pre><code>##   Country.Gender.Mean.N.
@@ -452,7 +944,7 @@ happiness &lt;- read.table(file = path,
 ## 4        BE,Male,7.8,468
 ## 5        ,Female,7.8,542
 ## 6         ,Both,7.8,1010</code></pre>
-<p>R performs the operation but clearly not the one we wanted. It’s a data frame with 105 rows but a single variable! To deal with such problems you can use the <a href="http://www.rdocumentation.org/packages/utils/functions/read.table"><code>read.csv2()</code></a> function. The defaults are <code>sep = &quot;;&quot;</code> and <code>dec = &quot;,&quot;</code>.</p>
+<p>R performs the operation but clearly not the one we wanted. It’s a data frame with 105 rows but a single variable! To deal with such problems you can use the <a href="http://www.rdocumentation.org/packages/utils/functions/read.table"><code>read.csv2()</code></a> function. The defaults are <code>sep = ";"</code> and <code>dec = ","</code>.</p>
 <pre class="r"><code>happiness_eu &lt;- read.csv2(file = &quot;happiness_eu.csv&quot;,  
                         stringsAsFactors = FALSE)
 head(happiness_eu)</code></pre>
@@ -471,57 +963,51 @@ head(happiness_eu)</code></pre>
 <li>In <a href="http://www.rdocumentation.org/packages/utils/functions/read.table"><code>read.delim()</code></a> default values are: <code>header = T</code>, <code>sep = ???\t???</code>, <code>dec = ???.???</code></li>
 <li>In <a href="http://www.rdocumentation.org/packages/utils/functions/read.table"><code>read.delim2()</code></a> default values are: <code>header = T</code>, <code>sep = ???\t???</code>, <code>dec = ???,???</code></li>
 </ul>
-</div>
-</div>
-<div id="readr-an-alternative-to-import-flat-files" class="section level2">
-<h2><a href="https://cran.r-project.org/web/packages/readr/readr.pdf"><code>readr</code></a> … an alternative to import flat files</h2>
-<p>An alternative to the <code>utils</code> package is the <a href="https://cran.r-project.org/web/packages/readr/readr.pdf"><code>readr</code></a>. Compared the <code>read.table</code> family of functions, it is faster, easier to use and with a consistent naming scheme. We start by installing and loading it.</p>
+<p>##<a href="https://cran.r-project.org/web/packages/readr/readr.pdf"><code>readr</code></a> … an alternative to import flat files</p>
+<p>An alternative to the <code>utils</code> package is the <a href="https://cran.r-project.org/web/packages/readr/readr.pdf"><code>readr</code></a>. Compared
+the <code>read.table</code> family of functions, it is faster, easier to use and with a consistent naming scheme. We start by installing and loading it.</p>
 <pre class="r"><code>install.packages(&quot;readr&quot;)</code></pre>
 <pre class="r"><code>library(readr)</code></pre>
 <p>Let’s import our dataset. In <code>readr</code> you can use <a href="https://cran.r-project.org/web/packages/readr/readr.pdf"><code>read_delim()</code></a> for flat files. It can be considered the correspondent to <code>read.table()</code>.</p>
 <pre class="r"><code>happiness_readr &lt;- read_delim(&quot;happiness.csv&quot;,        # path to flat file 
                               delim = &quot;,&quot;)            # character that separates fields in the file</code></pre>
-<pre><code>## Parsed with column specification:
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
 ##   Country = col_character(),
 ##   Gender = col_character(),
 ##   Mean = col_double(),
-##   `N=` = col_integer()
+##   `N=` = col_double()
 ## )</code></pre>
 <pre class="r"><code>str(happiness_readr)</code></pre>
-<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    105 obs. of  4 variables:
-##  $ Country: chr  &quot;AT&quot; NA NA &quot;BE&quot; ...
-##  $ Gender : chr  &quot;Male&quot; &quot;Female&quot; &quot;Both&quot; &quot;Male&quot; ...
-##  $ Mean   : num  7.3 7.3 7.3 7.8 7.8 7.8 5.8 5.8 5.8 7.8 ...
-##  $ N=     : int  471 570 1041 468 542 1010 416 555 971 433 ...
-##  - attr(*, &quot;spec&quot;)=List of 2
-##   ..$ cols   :List of 4
-##   .. ..$ Country: list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
-##   .. ..$ Gender : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
-##   .. ..$ Mean   : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_double&quot; &quot;collector&quot;
-##   .. ..$ N=     : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
-##   ..$ default: list()
-##   .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_guess&quot; &quot;collector&quot;
-##   ..- attr(*, &quot;class&quot;)= chr &quot;col_spec&quot;</code></pre>
+<pre><code>## tibble [105 × 4] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ Country: chr [1:105] &quot;AT&quot; NA NA &quot;BE&quot; ...
+##  $ Gender : chr [1:105] &quot;Male&quot; &quot;Female&quot; &quot;Both&quot; &quot;Male&quot; ...
+##  $ Mean   : num [1:105] 7.3 7.3 7.3 7.8 7.8 7.8 5.8 5.8 5.8 7.8 ...
+##  $ N=     : num [1:105] 471 570 1041 468 542 ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   Country = col_character(),
+##   ..   Gender = col_character(),
+##   ..   Mean = col_double(),
+##   ..   `N=` = col_double()
+##   .. )</code></pre>
 <pre class="r"><code>head(happiness_readr)</code></pre>
 <pre><code>## # A tibble: 6 x 4
 ##   Country Gender  Mean  `N=`
-##   &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;int&gt;
-## 1 AT      Male    7.30   471
-## 2 &lt;NA&gt;    Female  7.30   570
-## 3 &lt;NA&gt;    Both    7.30  1041
-## 4 BE      Male    7.80   468
-## 5 &lt;NA&gt;    Female  7.80   542
-## 6 &lt;NA&gt;    Both    7.80  1010</code></pre>
+##   &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 AT      Male     7.3   471
+## 2 &lt;NA&gt;    Female   7.3   570
+## 3 &lt;NA&gt;    Both     7.3  1041
+## 4 BE      Male     7.8   468
+## 5 &lt;NA&gt;    Female   7.8   542
+## 6 &lt;NA&gt;    Both     7.8  1010</code></pre>
 <p>Notice, that the output is the same as when using the <code>read.table()</code>, previously. But we did not have to specify <code>header=TRUE</code> because by default <code>read_delim()</code> expects the first row to contain the column names. This is done through the <code>col_names</code> argument, set equal to true by default. Also, strings are never automatically converted to factors. Hence, <code>stringsAsFactors = FALSE</code> is not necessary. To control the types of the columns <code>readr</code> uses the <code>col_types</code> argument. Let’s see how these two work.</p>
 <p><code>col_names</code> is true by default meaning that it will use the the first row of data as column names. If your file does not have column names you can set <code>col_names = FALSE</code> and columns will be numbered sequentially.</p>
 <pre class="r"><code>head(read_delim(&quot;happiness2.csv&quot;, delim = &quot;,&quot;,
                               col_names = FALSE))</code></pre>
-<pre><code>## Parsed with column specification:
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
 ##   X1 = col_character(),
 ##   X2 = col_character(),
@@ -531,12 +1017,12 @@ head(happiness_eu)</code></pre>
 <pre><code>## # A tibble: 6 x 4
 ##   X1    X2        X3 X4   
 ##   &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;
-## 1 &#39;AT   Male    7.30 471&#39; 
-## 2 &#39;     Female  7.30 570&#39; 
-## 3 &#39;     Both    7.30 1041&#39;
-## 4 &#39;BE   Male    7.80 468&#39; 
-## 5 &#39;     Female  7.80 542&#39; 
-## 6 &#39;     Both    7.80 1010&#39;</code></pre>
+## 1 &#39;AT   Male     7.3 471&#39; 
+## 2 &#39;     Female   7.3 570&#39; 
+## 3 &#39;     Both     7.3 1041&#39;
+## 4 &#39;BE   Male     7.8 468&#39; 
+## 5 &#39;     Female   7.8 542&#39; 
+## 6 &#39;     Both     7.8 1010&#39;</code></pre>
 <blockquote>
 <p><strong>Note</strong> Instead of assigning the output of <code>read_delim()</code> to a variable I directly use the <code>head()</code> function to print the first 6 lines of the data frame. It is equivalent to</p>
 </blockquote>
@@ -546,7 +1032,8 @@ head(happiness_delim)</code></pre>
 <p>You can also manually set the column names.</p>
 <pre class="r"><code>head(read_delim(&quot;happiness2.csv&quot;, delim = &quot;,&quot;,
                               col_names = c(&quot;Country&quot;, &quot;Gender&quot;, &quot;Mean&quot;, &quot;N&quot;)))</code></pre>
-<pre><code>## Parsed with column specification:
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
 ##   Country = col_character(),
 ##   Gender = col_character(),
@@ -556,16 +1043,16 @@ head(happiness_delim)</code></pre>
 <pre><code>## # A tibble: 6 x 4
 ##   Country Gender  Mean N    
 ##   &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;
-## 1 &#39;AT     Male    7.30 471&#39; 
-## 2 &#39;       Female  7.30 570&#39; 
-## 3 &#39;       Both    7.30 1041&#39;
-## 4 &#39;BE     Male    7.80 468&#39; 
-## 5 &#39;       Female  7.80 542&#39; 
-## 6 &#39;       Both    7.80 1010&#39;</code></pre>
+## 1 &#39;AT     Male     7.3 471&#39; 
+## 2 &#39;       Female   7.3 570&#39; 
+## 3 &#39;       Both     7.3 1041&#39;
+## 4 &#39;BE     Male     7.8 468&#39; 
+## 5 &#39;       Female   7.8 542&#39; 
+## 6 &#39;       Both     7.8 1010&#39;</code></pre>
 <p>As mentioned, there is <code>col_types</code> to control the column classes. If you leave the default value <code>readr</code> heuristically inspects the first 100 rows to guess the type of each column.</p>
 <pre class="r"><code>sapply(happiness_readr, class)</code></pre>
 <pre><code>##     Country      Gender        Mean          N= 
-## &quot;character&quot; &quot;character&quot;   &quot;numeric&quot;   &quot;integer&quot;</code></pre>
+## &quot;character&quot; &quot;character&quot;   &quot;numeric&quot;   &quot;numeric&quot;</code></pre>
 <p>If you want to override the default column types you can also specify them manually. An option would be</p>
 <pre class="r"><code>happiness_readr2 &lt;- read_delim(&quot;happiness.csv&quot;, delim = &quot;,&quot;, 
                                col_types = &quot;ccni&quot;)
@@ -586,12 +1073,12 @@ sapply(happiness_readr2, class)</code></pre>
 <pre><code>## # A tibble: 6 x 3
 ##   Country Gender  Mean
 ##   &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt;
-## 1 AT      Male    7.30
-## 2 &lt;NA&gt;    Female  7.30
-## 3 &lt;NA&gt;    Both    7.30
-## 4 BE      Male    7.80
-## 5 &lt;NA&gt;    Female  7.80
-## 6 &lt;NA&gt;    Both    7.80</code></pre>
+## 1 AT      Male     7.3
+## 2 &lt;NA&gt;    Female   7.3
+## 3 &lt;NA&gt;    Both     7.3
+## 4 BE      Male     7.8
+## 5 &lt;NA&gt;    Female   7.8
+## 6 &lt;NA&gt;    Both     7.8</code></pre>
 <p>Notice the fourth column has been skipped.</p>
 <p>Yet another way of setting the types of the imported columns is using collectors. Collector functions can be passed in a <a href="http://www.rdocumentation.org/packages/base/functions/list"><code>list()</code></a> to the <code>col_types</code> argument of <code>read_</code> functions to tell them how to interpret values in a column.</p>
 <pre class="r"><code>car &lt;- col_character()
@@ -601,51 +1088,44 @@ int &lt;- col_integer()
 
 str(read_delim(&quot;happiness.csv&quot;, delim = &quot;,&quot; , 
                            col_types = list(car, fac, num, int)))</code></pre>
-<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    105 obs. of  4 variables:
-##  $ Country: chr  &quot;AT&quot; NA NA &quot;BE&quot; ...
+<pre><code>## tibble [105 × 4] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ Country: chr [1:105] &quot;AT&quot; NA NA &quot;BE&quot; ...
 ##  $ Gender : Factor w/ 3 levels &quot;Male&quot;,&quot;Female&quot;,..: 1 2 3 1 2 3 1 2 3 1 ...
-##  $ Mean   : num  7.3 7.3 7.3 7.8 7.8 7.8 5.8 5.8 5.8 7.8 ...
-##  $ N=     : int  471 570 1041 468 542 1010 416 555 971 433 ...
-##  - attr(*, &quot;spec&quot;)=List of 2
-##   ..$ cols   :List of 4
-##   .. ..$ Country: list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
-##   .. ..$ Gender :List of 3
-##   .. .. ..$ levels    : chr  &quot;Male&quot; &quot;Female&quot; &quot;Both&quot;
-##   .. .. ..$ ordered   : logi FALSE
-##   .. .. ..$ include_na: logi FALSE
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_factor&quot; &quot;collector&quot;
-##   .. ..$ Mean   : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_number&quot; &quot;collector&quot;
-##   .. ..$ N=     : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
-##   ..$ default: list()
-##   .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_guess&quot; &quot;collector&quot;
-##   ..- attr(*, &quot;class&quot;)= chr &quot;col_spec&quot;</code></pre>
+##  $ Mean   : num [1:105] 7.3 7.3 7.3 7.8 7.8 7.8 5.8 5.8 5.8 7.8 ...
+##  $ N=     : int [1:105] 471 570 1041 468 542 1010 416 555 971 433 ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   Country = col_character(),
+##   ..   Gender = col_factor(levels = c(&quot;Male&quot;, &quot;Female&quot;, &quot;Both&quot;), ordered = FALSE, include_na = FALSE),
+##   ..   Mean = col_number(),
+##   ..   `N=` = col_integer()
+##   .. )</code></pre>
 <p>For a complete list of collector functions, you can take a look at the <a href="https://cran.r-project.org/web/packages/readr/readr.pdf"><code>collector</code></a> documentation.</p>
 <p>If you are working on large datasets you may prefer handling the data in smaller parts. In <code>readr</code> you can achieve this with the combination of <code>skip</code> and <code>n_max</code> arguments.</p>
 <pre class="r"><code>head(read_delim(&quot;happiness.csv&quot;, delim = &quot;,&quot;,
                 skip=2, n_max= 4))</code></pre>
 <pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
-<pre><code>## Parsed with column specification:
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
 ##   X1 = col_character(),
 ##   Female = col_character(),
 ##   `7.3` = col_double(),
-##   `570` = col_integer()
+##   `570` = col_double()
 ## )</code></pre>
 <pre><code>## # A tibble: 4 x 4
 ##   X1    Female `7.3` `570`
-##   &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;int&gt;
-## 1 &lt;NA&gt;  Both    7.30  1041
-## 2 BE    Male    7.80   468
-## 3 &lt;NA&gt;  Female  7.80   542
-## 4 &lt;NA&gt;  Both    7.80  1010</code></pre>
+##   &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 &lt;NA&gt;  Both     7.3  1041
+## 2 BE    Male     7.8   468
+## 3 &lt;NA&gt;  Female   7.8   542
+## 4 &lt;NA&gt;  Both     7.8  1010</code></pre>
 <p>We skipped two rows and then read four lines. There is something wrong though! Since the <code>col_names</code> is true by default the first line is used for the column names. Therefore, we need to manually specify the column names.</p>
 <pre class="r"><code>head(read_delim(&quot;happiness2.csv&quot;, delim = &quot;,&quot;,
                               col_names = c(&quot;Country&quot;,&quot;Gender&quot;, &quot;Mean&quot;, &quot;N&quot;), 
                               skip=2, n_max= 4))</code></pre>
-<pre><code>## Parsed with column specification:
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
 ##   Country = col_character(),
 ##   Gender = col_character(),
@@ -655,10 +1135,10 @@ str(read_delim(&quot;happiness.csv&quot;, delim = &quot;,&quot; ,
 <pre><code>## # A tibble: 4 x 4
 ##   Country Gender  Mean N    
 ##   &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;
-## 1 &#39;       Both    7.30 1041&#39;
-## 2 &#39;BE     Male    7.80 468&#39; 
-## 3 &#39;       Female  7.80 542&#39; 
-## 4 &#39;       Both    7.80 1010&#39;</code></pre>
+## 1 &#39;       Both     7.3 1041&#39;
+## 2 &#39;BE     Male     7.8 468&#39; 
+## 3 &#39;       Female   7.8 542&#39; 
+## 4 &#39;       Both     7.8 1010&#39;</code></pre>
 <p>Like the <code>utils</code> package <code>readr</code> provides alternatives to <code>read_delim()</code>. The <a href="https://cran.r-project.org/web/packages/readr/readr.pdf"><code>read_csv()</code></a> and <a href="https://cran.r-project.org/web/packages/readr/readr.pdf"><code>read_tsv()</code></a> are used for CSV files and tab-delimited files, respectively. The functions of both packages are presented below. Notice the <code>_</code> is used in <code>readr</code> instead of the <code>.</code>.</p>
 <table>
 <thead>
@@ -682,6 +1162,7 @@ str(read_delim(&quot;happiness.csv&quot;, delim = &quot;,&quot; ,
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 <div id="data.table-yet-another-alternative-to-read-data-into-r" class="section level2">
 <h2><a href="http://www.rdocumentation.org/packages/data.table"><code>data.table</code></a> … yet another alternative to read data into R</h2>
@@ -743,11 +1224,12 @@ str(read_delim(&quot;happiness.csv&quot;, delim = &quot;,&quot; ,
 <p>which is equivalent to</p>
 <pre class="r"><code>head(fread(&quot;happiness.csv&quot;, drop = c(&quot;Country&quot;,&quot;N=&quot;)))</code></pre>
 <p>In short, <code>fread()</code> saves you work by automatically guessing the delimiter, whether or not the file has a header, how many lines to skip by default, providing an easy way to select variables and more. Nevertheless, if you wish to specify them, you can do it, along with other arguments. Check the <a href="http://www.rdocumentation.org/packages/data.table/functions/fread">documentation</a>.</p>
-<p><strong>Comment</strong> You might have noticed by now that the <code>fread()</code> function produces data frames that look slightly different when you print them out. That’s because another class is assigned to the resulting data frames, namely <code>data.table</code> and <code>data.frame</code>. <code>read_delim()</code> creates an object with three classes: <code>tbl_df</code>, <code>tbl</code> and <code>data.frame</code>. The printout of such data.table objects is different. Well, it allows for a different treatment of the printouts, for example.</p>
+<p><strong>Comment</strong>
+You might have noticed by now that the <code>fread()</code> function produces data frames that look slightly different when you print them out. That’s because another class is assigned to the resulting data frames, namely <code>data.table</code> and <code>data.frame</code>. <code>read_delim()</code> creates an object with three classes: <code>tbl_df</code>, <code>tbl</code> and <code>data.frame</code>. The printout of such data.table objects is different. Well, it allows for a different treatment of the printouts, for example.</p>
 </div>
 <div id="when-to-use-read.table-read_delim-or-fread" class="section level2">
 <h2>When to use <code>read.table()</code>, <code>read_delim()</code> or <code>fread()</code></h2>
-<p>In a nutshell, the main differences between these functions are : the <code>read_</code> functions from the <code>readr</code> package have more consistent naming scheme for the parameters (e.g. <code>col_names</code> and <code>col_types</code>) than <code>read.</code> and all functions work exactly the same way regardless of the current locale (to override the US-centric defaults, use <code>locale()</code>). It is also faster! But <code>fread()</code> is even faster! And it saves you work by automatically guessing parameters. This <a href="https://cran.r-project.org/web/packages/readr/README.html">README</a> goes in more detail.</p>
+<p>In a nutshell, the main differences between these functions are : the <code>read_</code> functions from the <code>readr</code> package have more consistent naming scheme for the parameters (e.g. <code>col_names</code> and <code>col_types</code>) than <code>read.</code> and all functions work exactly the same way regardless of the current locale (to override the US-centric defaults, use <code>locale()</code>). It is also faster! But <code>fread()</code> is even faster! And it saves you work by automatically guessing parameters. This <a href="https://cran.r-project.org/web/packages/readr/README.html">README</a> goes in more detail.</p>
 <table>
 <thead>
 <tr class="header">
@@ -791,69 +1273,316 @@ str(read_delim(&quot;happiness.csv&quot;, delim = &quot;,&quot; ,
     
 
 
+
+
+
+
 <div class="article-tags">
   
-  <a class="btn btn-primary btn-outline" href="/tags/import">import</a>
+  <a class="badge badge-light" href="/tag/import/">import</a>
   
-  <a class="btn btn-primary btn-outline" href="/tags/data">data</a>
+  <a class="badge badge-light" href="/tag/data/">data</a>
   
-  <a class="btn btn-primary btn-outline" href="/tags/r">R</a>
+  <a class="badge badge-light" href="/tag/r/">R</a>
   
 </div>
 
 
 
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://solon-karapanagiotis.com/post/importflatfiles/importing-flat-files-into-r/&amp;text=Importing%20Flat%20Files%20Into%20R" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Importing%20Flat%20Files%20Into%20R&amp;body=https://solon-karapanagiotis.com/post/importflatfiles/importing-flat-files-into-r/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://solon-karapanagiotis.com/post/importflatfiles/importing-flat-files-into-r/&amp;title=Importing%20Flat%20Files%20Into%20R" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
 
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
     
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://solon-karapanagiotis.com/"><img class="avatar mr-3 avatar-circle" src="/author/solon-karapanagiotis/avatar_hu91952b704368f9faa82e4f9322747064_1766173_270x270_fill_q75_lanczos_center.jpg" alt="Solon Karapanagiotis"></a>
     
 
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://solon-karapanagiotis.com/">Solon Karapanagiotis</a></h5>
+      <h6 class="card-subtitle">PhD Candidate <br> MRC Biostatistics Unit</h6>
+      
+      <ul class="network-icon" aria-hidden="true">
+  
     
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/SolonSTATS" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/solonkarapa?tab=repositories" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/solonkarapanagiotis/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://publons.com/author/1232574/solon-karapanagiotis#profile" target="_blank" rel="noopener">
+        <i class="ai ai-publons"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://orcid.org/0000-0003-4460-2073" target="_blank" rel="noopener">
+        <i class="fab fa-orcid"></i>
+      </a>
+    </li>
+  
+</ul>
 
-    
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/auc_post/model-evaluation-auc/">Naive classification beats deep-learning</a></li>
+      
+      <li><a href="/post/approx_binomial/approximating-binomial-with-poisson/">Approximating Binomial with Poisson</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
 
 
   </div>
 </article>
-
-<footer class="site-footer">
-  <div class="container">
-    <p class="powered-by">
-
-      &copy; Solon Karapanagiotis 2018-2020 &middot; 
-
-      Powered by the
-      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
-      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
-
-      <span class="pull-right" aria-hidden="true">
-        <a href="#" id="back_to_top">
-          <span class="button_icon">
-            <i class="fa fa-chevron-up fa-2x"></i>
-          </span>
-        </a>
-      </span>
-
-    </p>
   </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © Solon Karapanagiotis 2018-2021
+  </p>
+
+  
+  
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+    
+  
+  
+    
+  
+
+  
+
+  
+  <p class="powered-by copyright-license-text">
+    This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank">CC BY NC ND 4.0</a>
+  </p>
+  
+
+  <p class="powered-by footer-license-icons">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank" aria-label="Creative Commons">
+      <i class="fab fa-creative-commons fa-2x" aria-hidden="true"></i>
+      <i class="fab fa-creative-commons-by fa-2x" aria-hidden="true"></i>
+      
+        <i class="fab fa-creative-commons-nc fa-2x" aria-hidden="true"></i>
+      
+      
+        <i class="fab fa-creative-commons-nd fa-2x" aria-hidden="true"></i>
+      
+    </a>
+  </p>
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+    Published with
+    <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+  </p>
 </footer>
 
+    </div>
+    
+  </div>
 
+  
 <div id="modal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Cite</h4>
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <div>
-        <pre><code class="modal-body tex"></code></pre>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
       </div>
       <div class="modal-footer">
-        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
-          <i class="fa fa-copy"></i> Copy
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
         </a>
-        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
-          <i class="fa fa-download"></i> Download
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
         </a>
         <div id="modal-error"></div>
       </div>
@@ -861,48 +1590,124 @@ str(read_delim(&quot;happiness.csv&quot;, delim = &quot;,&quot; ,
   </div>
 </div>
 
-    
+      
 
     
     
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
-    
-
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
-    
-    
-    <script src="/js/hugo-academic.js"></script>
-    
-
-    
-    
       
       
-      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
       
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
 
       
 
       
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/latex.min.js"></script>
+        
+      
 
-      <script>hljs.initHighlightingOnLoad();</script>
     
 
     
     
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'event' : "Events",
+        'slides' : "Slides"
+        };
     </script>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML" integrity="sha512-tOav5w1OjvsSJzePRtt2uQPFwBoHt1VZcUq8l8nm5284LEKE9FSJBQryzMBzHxY5P0zRdNqEcpLIRVYFNgu1jw==" crossorigin="anonymous"></script>
+
     
     
 
-  </body>
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/js/wowchemy.min.572b7caf7fe601716a0f74d67d754c21.js"></script>
+
+    
+
+
+
+
+
+
+</body>
 </html>
-

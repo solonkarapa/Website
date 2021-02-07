@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>(ML) reporting | </title>
+    <link>https://solon-karapanagiotis.com/tag/ml-reporting/</link>
+      <atom:link href="https://solon-karapanagiotis.com/tag/ml-reporting/index.xml" rel="self" type="application/rss+xml" />
+    <description>(ML) reporting</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Solon Karapanagiotis 2018-2021</copyright><lastBuildDate>Thu, 20 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://solon-karapanagiotis.com/media/icon.png</url>
+      <title>(ML) reporting</title>
+      <link>https://solon-karapanagiotis.com/tag/ml-reporting/</link>
+    </image>
+    
+    <item>
+      <title>Naive classification beats deep-learning</title>
+      <link>https://solon-karapanagiotis.com/post/auc_post/model-evaluation-auc/</link>
+      <pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/auc_post/model-evaluation-auc/</guid>
+      <description>
+&lt;script src=&#34;https://solon-karapanagiotis.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;https://solon-karapanagiotis.com/rmarkdown-libs/lightable/lightable.css&#34; rel=&#34;stylesheet&#34; /&gt;
+
+
+&lt;div id=&#34;overview&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;Overview&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nature.com/articles/s41551-019-0487-z#Abs1&#34;&gt;Mitani and co-authors’&lt;/a&gt; present a deep-learning algorithm trained with retinal images and participants’ clinical data from the UK Biobank to estimate blood-haemoglobin levels and predict the presence or absence of anaemia &lt;span class=&#34;citation&#34;&gt;(Mitani et al. &lt;a href=&#34;#ref-mitani2020&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt;. A major limitation of the study is the inadequate evaluation of the algorithm. I will show how a naïve classification (i.e. classify everybody as healthy) performs much better than their deep-learning approach, despite their model having AUC of around 80%. I will then explain why this is the case and finish with some thoughts on how (clinical) predictions models should be evaluated.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;introduction&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;The goal of the paper was to investigate whether anaemia can be detected via machine-learning algorithms trained using retinal images, study participants’ metadata or the combination of both.&lt;/p&gt;
+&lt;p&gt;First, the authors develop a deep-learning algorithm to predict haemoglobin concentration (Hb) (which is the most reliable indicator of anaemia) and then three others to predict anaemia itself. They develop a deep convolutional neural network classification model to directly predict whether a patient is anaemic (rather than predicting Hb). They used the World Health Organization Hb cut-off values to label each participant as not having anaemia, mild, moderate or severe anaemia. One of the models was trained to classify: normal versus mild, moderate or severe. For concreteness, I’ll focus on this model but the reasoning below is valid for the others as well. Also, I focus on the combined model (images and metadata) because it showed the best performance (AUC of 0.88).&lt;/p&gt;
+&lt;p&gt;The authors present a detailed analysis of the data and their model. Nevertheless, a crucial point is missing. Is the model useful? If it is implemented tomorrow will it result in better care? This is important, especially since the authors argue their model potentially enables automated anaemia screening (see Discussion). This is slightly far-fetched in my opinion given they only evaluated their algorithm on a test set; with unsatisfactory results as I argue below. Algorithms need to be compared with human experts (i.e. ophthalmologists in this case), followed by extensive field testing to prove their trustworthiness and usefulness &lt;span class=&#34;citation&#34;&gt;(Spiegelhalter &lt;a href=&#34;#ref-Spiegelhalter2020&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-issue&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;The Issue&lt;/h1&gt;
+&lt;p&gt;As with many other models out there the authors have fallen in the trap of evaluating the absolute performance of their model when the important metric is the relative performance with respect to the actual reality of retinal screening. It is exactly the same idea when in clinical trials the experimental treatment is compared with the standard of care (or placebo). We want to see if the new treatment (deep-learning model classification in this case) is better than simply classifying every participant as having anaemia or not. This should be the benchmark. I call these naive classifications and I will demonstrate the model does not perform better than the naive rule of classifying everybody as healthy.&lt;/p&gt;
+&lt;p&gt;First, some preliminary stuff. The performance of a model can be represented in a &lt;a href=&#34;https://en.wikipedia.org/wiki/Confusion_matrix&#34;&gt;confusion matrix&lt;/a&gt; with four categories (see table below). True positives (TP) are positive examples that are correctly labelled as positives, and False positives (FP) are negative examples that are labelled incorrectly as positive. Likewise, True negatives (TN) are negatives labelled correctly as negative, and false negatives (FN) refer to positive examples labelled incorrectly as negative.&lt;/p&gt;
+&lt;table class=&#34;table table-striped table-responsive&#34; style=&#34;width: auto !important; margin-left: auto; margin-right: auto;&#34;&gt;
+&lt;caption&gt;
+&lt;span id=&#34;tab:unnamed-chunk-1&#34;&gt;Table 1: &lt;/span&gt;Confusion matrix showing correct classifications (in red) and incorrect (in blue)
+&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;empty-cells: hide;border-bottom:hidden;&#34; colspan=&#34;2&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; color: black !important;&#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+Truth
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;color: gray !important;&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;color: gray !important;&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;color: gray !important;&#34;&gt;
+positive
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;color: gray !important;&#34;&gt;
+negative
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;font-weight: bold;&#34;&gt;
+Predict
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;font-weight: bold;color: gray !important;&#34;&gt;
+positive
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&lt;span style=&#34;     color: red !important;&#34;&gt;TP&lt;/span&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&lt;span style=&#34;     color: blue !important;&#34;&gt;FP&lt;/span&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;font-weight: bold;&#34;&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;font-weight: bold;color: gray !important;&#34;&gt;
+negative
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&lt;span style=&#34;     color: blue !important;&#34;&gt;FN&lt;/span&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&lt;span style=&#34;     color: red !important;&#34;&gt;TN&lt;/span&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Let’s use the information from the study to construct our confusion matrix using the data from Table 1 (last column; validation dataset) and Table 2 (column 1 and anaemia combined model). There are in total 10949 negatives (non anaemic) out of 11388 participants. The reported specificity is 0.7 and sensitivity is 0.875. Using these we can calculate the number of true negatives and true positives as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Specificity = true negative rate (TNR) = TN/#negative, so TN = 0.7*10949 = 7664.&lt;/li&gt;
+&lt;li&gt;Sensitivity = true positive rate (TPR) = TP/ #positive, so TP = 0.875*439 = 384.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So the confusion matrix is&lt;/p&gt;
+&lt;table class=&#34;table table-striped table-responsive&#34; style=&#34;width: auto !important; margin-left: auto; margin-right: auto;&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;empty-cells: hide;border-bottom:hidden;&#34; colspan=&#34;2&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; color: black !important;&#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+Truth
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;color: gray !important;&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;color: gray !important;&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;color: gray !important;&#34;&gt;
+positive
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;color: gray !important;&#34;&gt;
+negative
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;font-weight: bold;&#34;&gt;
+Predict
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;font-weight: bold;color: gray !important;&#34;&gt;
+positive
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&lt;span style=&#34;     color: red !important;&#34;&gt;384&lt;/span&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&lt;span style=&#34;     color: blue !important;&#34;&gt;3285&lt;/span&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;font-weight: bold;&#34;&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;font-weight: bold;color: gray !important;&#34;&gt;
+negative
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&lt;span style=&#34;     color: blue !important;&#34;&gt;55&lt;/span&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&lt;span style=&#34;     color: red !important;&#34;&gt;7664&lt;/span&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Looking at the table we see that in total 3285+55 = 3340 subjects have been misclassified. That is 29% misclassification rate.&lt;/p&gt;
+&lt;p&gt;Now, let’s construct the confusion matrix for my naïve classification: “classify everybody as negative”,&lt;/p&gt;
+&lt;table class=&#34;table table-striped table-responsive&#34; style=&#34;width: auto !important; margin-left: auto; margin-right: auto;&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;empty-cells: hide;border-bottom:hidden;&#34; colspan=&#34;2&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; color: black !important;&#34; colspan=&#34;2&#34;&gt;
+&lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
+Truth
+&lt;/div&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;color: gray !important;&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;color: gray !important;&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;color: gray !important;&#34;&gt;
+positive
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;color: gray !important;&#34;&gt;
+negative
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;font-weight: bold;&#34;&gt;
+Predict
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;font-weight: bold;color: gray !important;&#34;&gt;
+positive
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&lt;span style=&#34;     color: red !important;&#34;&gt;0&lt;/span&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&lt;span style=&#34;     color: blue !important;&#34;&gt;0&lt;/span&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;font-weight: bold;&#34;&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;font-weight: bold;color: gray !important;&#34;&gt;
+negative
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&lt;span style=&#34;     color: blue !important;&#34;&gt;439&lt;/span&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+&lt;span style=&#34;     color: red !important;&#34;&gt;10949&lt;/span&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;In total, 439 subjects have been misclassified. This is 4% misclassification rate.&lt;/p&gt;
+&lt;p&gt;This means the naive classification achieves 86% better performance!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;roc-and-auc-is-to-blame&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;ROC (and AUC) is to blame&lt;/h1&gt;
+&lt;p&gt;Why was this not spotted by the authors? Probably because the model evaluation was based on the receiver operating curve (ROC) and area under the ROC (AUC). ROC curves can present an overly optimistic view of a model’s performance if there is a large skew in the class distribution. In this study the ratio positive (i.e. anaemic) to negative (i.e. not anaemic) participants is 439/10949 = 0.04 (see Table 2, validation column)!&lt;/p&gt;
+&lt;p&gt;ROC curves (and AUC) have the (un-)attractive property of being insensitive to changes in class distribution &lt;span class=&#34;citation&#34;&gt;(Fawcett &lt;a href=&#34;#ref-fawcett2006&#34; role=&#34;doc-biblioref&#34;&gt;2006&lt;/a&gt;)&lt;/span&gt;. That is, if the proportion of positive to negative instances changes in a dataset, the ROC curves (and AUC) will not change. This is because ROC plots are based upon TPR and FPR which do not depend on class distributions. Increasing the number of positive samples by 10x would increase both TP and FN by 10x, which would not change the TPR at any threshold. Similarly, increasing the number of negative samples by 10x would increase both TN and FP by 10x, which would not change the FPR at any threshold. Thus, both the shape of the ROC curve and the AUC are insensitive to the class distribution. On the contrary, any performance metric that uses values from both columns will be inherently sensitive to class skews, for instance the misclassification rate.&lt;/p&gt;
+&lt;p&gt;Let’s make this more concrete with a simple simulation example. I simulate one covariate, &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;, which follows a standard Gaussian distribution in negative cases: &lt;span class=&#34;math inline&#34;&gt;\(X \sim N(0, 1)\)&lt;/span&gt;. Among positives, it follows &lt;span class=&#34;math inline&#34;&gt;\(X \sim N(1.5, 1)\)&lt;/span&gt;. The event rate (i.e. prevalence) is varied to be &lt;span class=&#34;math inline&#34;&gt;\(20\%\)&lt;/span&gt; (I call this scenario 1) and &lt;span class=&#34;math inline&#34;&gt;\(2\%\)&lt;/span&gt; (scenario 2). (The &lt;span class=&#34;math inline&#34;&gt;\(2\%\)&lt;/span&gt; is close to the one observed in the study &lt;span class=&#34;math inline&#34;&gt;\(\approx 4\%\)&lt;/span&gt;). Then, I derive true risks (&lt;span class=&#34;math inline&#34;&gt;\(R\)&lt;/span&gt;) based on the event rate (&lt;span class=&#34;math inline&#34;&gt;\(ER\)&lt;/span&gt;) and the density of the covariate distributions for positives (&lt;span class=&#34;math inline&#34;&gt;\(D_p\)&lt;/span&gt;) and negatives (&lt;span class=&#34;math inline&#34;&gt;\(D_{n}\)&lt;/span&gt;) at the covariate values:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ R = \frac{ER × D_p}{[ER × D_p] + [(1 − ER) × D_{n}]}.\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;I simulate two large samples of 5000 and 50000 and plot the ROC. The two plots below are almost identical despite the fact that scenario 2 has 10x more negative examples than scenario 1.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(pROC)
+library(tibble)
+sim_data &amp;lt;- function(n_positives, n_negatives){# simulates dataset as described above and calculates the ROC
+    # input arguments: the number of positives and negatives 
+    
+    y &amp;lt;- c(rep(0, n_negatives), rep(1, n_positives)) # binary response 
+    x &amp;lt;- c(rnorm(n_negatives), rnorm(n_positives, mean = 1.5)) # simulate covariate
+    df &amp;lt;- data.frame(y = y, x = x)
+    
+    ER &amp;lt;- mean(df$y) # event rate 
+    Dp &amp;lt;- dnorm(df$x, mean = 1.5, sd = 1) # covariate density for positives
+    Dn &amp;lt;- dnorm(df$x, mean = 0, sd = 1) # covariate density for negatives 
+   
+    true_risk &amp;lt;- (ER * Dp)/((ER * Dp) + ((1 - ER) * Dn))  # true risks
+    
+    roc_sim &amp;lt;- roc(df$y, true_risk) # calculates ROC curve
+    
+    df &amp;lt;- tibble(FPR = 1 - roc_sim$specificities, # false positive rate
+                 TPR = roc_sim$sensitivities) # true positive rate
+    
+    return(df)
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;n.sims &amp;lt;- 20 # times simulation is repeated
+n.positives &amp;lt;- 1000 # number of positives 
+n.negatives &amp;lt;- 4000 # number of negatives
+
+library(purrr)
+library(dplyr)
+# scenario 1
+multiplier &amp;lt;- 1 # the multiplier adjusts the number of the negatives - so I can have the event rate I want
+sims1 &amp;lt;- n.sims %&amp;gt;%
+    rerun(sim_data(n.positives, n.negatives * multiplier)) %&amp;gt;%
+    map(~ data.frame(.x)) %&amp;gt;%
+    plyr::ldply(., data.frame, .id = &amp;quot;Name&amp;quot;) %&amp;gt;% 
+    mutate(sims = rep(1:n.sims, each = sum(n.positives + n.negatives * multiplier) + 1),
+           Scenario = &amp;quot;Scenario 1&amp;quot;)
+
+# scenario 2
+multiplier &amp;lt;- 10 
+sims2 &amp;lt;- n.sims %&amp;gt;%
+    rerun(sim_data(n.positives, n.negatives * multiplier)) %&amp;gt;%
+    map(~ data.frame(.x)) %&amp;gt;%
+    plyr::ldply(., data.frame, .id = &amp;quot;Name&amp;quot;) %&amp;gt;% 
+    mutate(sims = rep(1:n.sims, each = sum(n.positives + n.negatives * multiplier) + 1),
+           Scenario = &amp;quot;Scenario 2&amp;quot;)
+
+df_final &amp;lt;- rbind(sims1, sims2)
+
+library(ggplot2)
+ggplot(df_final) +
+  geom_line(aes(x = FPR, y = TPR, group = sims, col = Scenario), alpha = 0.8) + 
+  facet_grid(~ Scenario)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:figs&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;https://solon-karapanagiotis.com/post/auc_post/classification_AUC_files/figure-html/figs-1.png&#34; alt=&#34;ROC plots for each scenario; 20 repetitions each.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 1: ROC plots for each scenario; 20 repetitions each.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;unequal-misclassification-costs&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;Unequal misclassification costs&lt;/h1&gt;
+&lt;p&gt;Of course, my naive classification can be easily debated by noting that the misclassification rate makes an inherent assumption, which is unlikely to be true in anaemia screening: it assumes that misclassifying someone with anaemia is of the same severity as misclassifying a healthy subject. This implies that one type of error is more costly (i.e. worse) than the other. In other words, the costs are asymmetric. I agree that most of time this is the case. This information should be taken into account when evaluating or fitting models.&lt;/p&gt;
+&lt;p&gt;Some methods to account for differing consequences of correct and incorrect classification when evaluating models are the Weighted Net Reclassification Improvement &lt;span class=&#34;citation&#34;&gt;(Pencina et al. &lt;a href=&#34;#ref-pencina2011&#34; role=&#34;doc-biblioref&#34;&gt;2011&lt;/a&gt;)&lt;/span&gt;, Relative Utility &lt;span class=&#34;citation&#34;&gt;(Baker et al. &lt;a href=&#34;#ref-baker2009&#34; role=&#34;doc-biblioref&#34;&gt;2009&lt;/a&gt;)&lt;/span&gt;, Net Benefit &lt;span class=&#34;citation&#34;&gt;(Vickers and Elkin &lt;a href=&#34;#ref-vickers2006&#34; role=&#34;doc-biblioref&#34;&gt;2006&lt;/a&gt;)&lt;/span&gt; and the &lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt; measure &lt;span class=&#34;citation&#34;&gt;(Hand &lt;a href=&#34;#ref-hand2009&#34; role=&#34;doc-biblioref&#34;&gt;2009&lt;/a&gt;)&lt;/span&gt;. Another option is to design models/algorithms that take misclassification costs into consideration. This area of research is called cost-sensitive learning &lt;span class=&#34;citation&#34;&gt;(Elkan &lt;a href=&#34;#ref-elkan2001&#34; role=&#34;doc-biblioref&#34;&gt;2001&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;This is another reason the ROC (AUC) is inadequate metric (in addition to the insensitivity in class imbalance). It ignores clinical differentials in misclassification costs and, therefore, risks finding a model worthwhile (or worthless) when patients and clinicians would consider otherwise. Strictly speaking, ROC weighs changes in sensitivity and specificity equally only where the curve slope equals one &lt;span class=&#34;citation&#34;&gt;(Fawcett &lt;a href=&#34;#ref-fawcett2006&#34; role=&#34;doc-biblioref&#34;&gt;2006&lt;/a&gt;)&lt;/span&gt;. Other points assign different weights, determined by curve shape and without considering any clinically meaningful information. Thus, AUC can consider a model that increases sensitivity at low specificity superior to one that increases sensitivity at high specificity. However, in some situations, in disease screening for instance, better tests must increase sensitivity at high specificity to avoid numerous false positives.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;a-way-forward-estimate-and-validate-probabilities&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;A way forward: estimate and validate probabilities&lt;/h1&gt;
+&lt;p&gt;Ultimately, the quality of algorithms is exposed to the nature of the performance metrics chosen. We must carefully choose the goals we ask these systems to optimize. Evaluation of models for use in healthcare should take the intended purpose of the model into account. Metrics such as AUC are rarely of any use in clinical practise. AUC represents how likely it is that the model will rank a pair of subjects; one with anaemia and one without, in the correct order, across all possible thresholds. More intuitively, AUC is the chance that a randomly selected participant with anaemia will be ranked above a randomly selected healthy participant. However, patients do not walk into the clinician’s room in pairs, and patients want their results, rather than the order of their results compared with another patient. They care about their individual risk of having a disease/condition (being anaemic in this case). Hence, the focus of modelling should be on estimating and validating risks/probabilities rather than the chance of correctly ranking a pair of patients.&lt;/p&gt;
+&lt;p&gt;Consequently, model evaluation/comparison should focus (primarily) on calibration. Calibration refers to the agreement between observed and predicted probabilities. This means that for future cases predicted to be in class &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt; with probability &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;, a proportion of &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; cases will truly belong in class &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;, and this should be true for all &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; in (0,1). In other words, for every 100 patients given a risk of &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;%, close to &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; have the event. Calibration approaches appropriate for representing prediction accuracy are crucial, especially when treatment decisions are made based on probability thresholds. Calibration of a model can be evaluated graphically by plotting expected against observed probabilities &lt;span class=&#34;citation&#34;&gt;(Steyerberg et al. &lt;a href=&#34;#ref-steyerberg2004&#34; role=&#34;doc-biblioref&#34;&gt;2004&lt;/a&gt;)&lt;/span&gt; or using an aggregate score. The most widely used is the Brier score, which is given by the average over all squared differences between an observation and its predicted probability &lt;span class=&#34;citation&#34;&gt;(Brier &lt;a href=&#34;#ref-brier1950&#34; role=&#34;doc-biblioref&#34;&gt;1950&lt;/a&gt;)&lt;/span&gt;. (It has nice properties &lt;span class=&#34;citation&#34;&gt;(see e.g. Spiegelhalter &lt;a href=&#34;#ref-spiegelhalter1986&#34; role=&#34;doc-biblioref&#34;&gt;1986&lt;/a&gt;; Gneiting and Raftery &lt;a href=&#34;#ref-gneiting2007&#34; role=&#34;doc-biblioref&#34;&gt;2007&lt;/a&gt;)&lt;/span&gt;).&lt;/p&gt;
+&lt;p&gt;To conclude, machine learning models in healthcare need rigorous evaluation. Beyond ethical, legal and moral issues, the technical/statistical fitness of the models needs thorough assessment. Statistical analysis should consider clinically relevant evaluation metrics. Motivated by the paper of &lt;span class=&#34;citation&#34;&gt;Mitani et al. (&lt;a href=&#34;#ref-mitani2020&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt; I have re-demonstrated why AUC is an irrelevant metric for clinical practise. This is because it is insensitive to class imbalances and integrates over all error regimes (under the best case scenario). This becomes increasingly important in predicting rare outcomes, where operating in a regime that corresponds to a high false positive rate may be impractical, because costly interventions might be applied in situations in which patients are unlikely to benefit. A way forward is to focus on evaluating predictions rather than (in addition to) classifications. That is, focus on estimating and evaluating probabilities. These convey more useful information to clinicians and patients in order to aid decision making.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;further-reading&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;Further reading&lt;/h1&gt;
+&lt;p&gt;The limitations of the ROC (and AUC) have been discussed in&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Cook NR . Use and misuse of the receiver operating characteristic curve in risk prediction. Circulation (2007).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Pencina, Michael J., et al. “Evaluating the added predictive ability of a new marker: from area under the ROC curve to reclassification and beyond.” Statistics in medicine (2008).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Hand, David J. “Evaluating diagnostic tests: the area under the ROC curve and the balance of errors.” Statistics in medicine (2010).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Hand, David J., and Christoforos Anagnostopoulos. “When is the area under the receiver operating characteristic curve an appropriate measure of classifier performance?.” Pattern Recognition Letters (2013).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Halligan, Steve, Douglas G. Altman, and Susan Mallett. “Disadvantages of using the area under the receiver operating characteristic curve to assess imaging tests: a discussion and proposal for an alternative approach.” European radiology (2015).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;On probability estimation and evaluation:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Kruppa, Jochen, Andreas Ziegler, and Inke R. König. “Risk estimation and risk prediction using machine-learning methods.” Human genetics (2012).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Kruppa, Jochen, et al. “Probability estimation with machine learning methods for dichotomous and multicategory outcome: Theory.” Biometrical Journal (2014).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Kruppa, Jochen, et al. “Probability estimation with machine learning methods for dichotomous and multicategory outcome: Applications.” Biometrical Journal (2014).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;References&lt;/h1&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-baker2009&#34;&gt;
+&lt;p&gt;Baker, S. G., Cook, N. R., Vickers, A., and Kramer, B. S. (2009), “Using relative utility curves to evaluate risk prediction,” &lt;em&gt;Journal of the Royal Statistical Society: Series A (Statistics in Society)&lt;/em&gt;, Wiley Online Library, 172, 729–748.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-brier1950&#34;&gt;
+&lt;p&gt;Brier, G. W. (1950), “Verification of forecasts expressed in terms of probability,” &lt;em&gt;Monthly weather review&lt;/em&gt;, 78, 1–3.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-elkan2001&#34;&gt;
+&lt;p&gt;Elkan, C. (2001), “The foundations of cost-sensitive learning,” in &lt;em&gt;International joint conference on artificial intelligence&lt;/em&gt;, Lawrence Erlbaum Associates Ltd, pp. 973–978.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-fawcett2006&#34;&gt;
+&lt;p&gt;Fawcett, T. (2006), “An introduction to roc analysis,” &lt;em&gt;Pattern recognition letters&lt;/em&gt;, Elsevier, 27, 861–874.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-gneiting2007&#34;&gt;
+&lt;p&gt;Gneiting, T., and Raftery, A. E. (2007), “Strictly proper scoring rules, prediction, and estimation,” &lt;em&gt;Journal of the American statistical Association&lt;/em&gt;, Taylor &amp;amp; Francis, 102, 359–378.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-hand2009&#34;&gt;
+&lt;p&gt;Hand, D. J. (2009), “Measuring classifier performance: A coherent alternative to the area under the roc curve,” &lt;em&gt;Machine learning&lt;/em&gt;, Springer, 77, 103–123.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-mitani2020&#34;&gt;
+&lt;p&gt;Mitani, A., Huang, A., Venugopalan, S., Corrado, G. S., Peng, L., Webster, D. R., Hammel, N., Liu, Y., and Varadarajan, A. V. (2020), “Detection of anaemia from retinal fundus images via deep learning,” &lt;em&gt;Nature Biomedical Engineering&lt;/em&gt;, Nature Publishing Group, 4, 18–27.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-pencina2011&#34;&gt;
+&lt;p&gt;Pencina, M. J., D’Agostino Sr, R. B., and Steyerberg, E. W. (2011), “Extensions of net reclassification improvement calculations to measure usefulness of new biomarkers,” &lt;em&gt;Statistics in medicine&lt;/em&gt;, Wiley Online Library, 30, 11–21.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-Spiegelhalter2020&#34;&gt;
+&lt;p&gt;Spiegelhalter, D. (2020), “Should we trust algorithms?” &lt;em&gt;Harvard Data Science Review&lt;/em&gt;, 2. &lt;a href=&#34;https://doi.org/10.1162/99608f92.cb91a35a&#34;&gt;https://doi.org/10.1162/99608f92.cb91a35a&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-spiegelhalter1986&#34;&gt;
+&lt;p&gt;Spiegelhalter, D. J. (1986), “Probabilistic prediction in patient management and clinical trials,” &lt;em&gt;Statistics in medicine&lt;/em&gt;, Wiley Online Library, 5, 421–433.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-steyerberg2004&#34;&gt;
+&lt;p&gt;Steyerberg, E. W., Borsboom, G. J., Houwelingen, H. C. van, Eijkemans, M. J., and Habbema, J. D. F. (2004), “Validation and updating of predictive logistic regression models: A study on sample size and shrinkage,” &lt;em&gt;Statistics in medicine&lt;/em&gt;, Wiley Online Library, 23, 2567–2586.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-vickers2006&#34;&gt;
+&lt;p&gt;Vickers, A. J., and Elkin, E. B. (2006), “Decision curve analysis: A novel method for evaluating prediction models,” &lt;em&gt;Medical Decision Making&lt;/em&gt;, Sage Publications Sage CA: Thousand Oaks, CA, 26, 565–574.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

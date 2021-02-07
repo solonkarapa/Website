@@ -2,32 +2,105 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title></title>
-    <link>/</link>
-    <description>Recent content on </description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>&amp;copy; Solon Karapanagiotis 2018-2020</copyright>
-    <lastBuildDate>Sun, 15 Oct 2017 00:00:00 +0100</lastBuildDate>
-    <atom:link href="/" rel="self" type="application/rss+xml" />
+    <link>https://solon-karapanagiotis.com/</link>
+      <atom:link href="https://solon-karapanagiotis.com/index.xml" rel="self" type="application/rss+xml" />
+    <description></description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Solon Karapanagiotis 2018-2021</copyright><lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://solon-karapanagiotis.com/media/icon.png</url>
+      <title></title>
+      <link>https://solon-karapanagiotis.com/</link>
+    </image>
+    
+    <item>
+      <title>Example Page 1</title>
+      <link>https://solon-karapanagiotis.com/courses/example/example1/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>https://solon-karapanagiotis.com/courses/example/example1/</guid>
+      <description>&lt;p&gt;In this tutorial, I&amp;rsquo;ll share my top 10 tips for getting started with Academic:&lt;/p&gt;
+&lt;h2 id=&#34;tip-1&#34;&gt;Tip 1&lt;/h2&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+&lt;h2 id=&#34;tip-2&#34;&gt;Tip 2&lt;/h2&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Example Page 2</title>
+      <link>https://solon-karapanagiotis.com/courses/example/example2/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>https://solon-karapanagiotis.com/courses/example/example2/</guid>
+      <description>&lt;p&gt;Here are some more tips for getting started with Academic:&lt;/p&gt;
+&lt;h2 id=&#34;tip-3&#34;&gt;Tip 3&lt;/h2&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+&lt;h2 id=&#34;tip-4&#34;&gt;Tip 4&lt;/h2&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Example Talk</title>
+      <link>https://solon-karapanagiotis.com/talk/example-talk/</link>
+      <pubDate>Sat, 01 Jun 2030 13:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/talk/example-talk/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click on the &lt;strong&gt;Slides&lt;/strong&gt; button above to view the built-in slides feature.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Slides can be added in a few ways:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Create&lt;/strong&gt; slides using Wowchemy&amp;rsquo;s &lt;a href=&#34;https://wowchemy.com/docs/managing-content/#create-slides&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;em&gt;Slides&lt;/em&gt;&lt;/a&gt; feature and link using &lt;code&gt;slides&lt;/code&gt; parameter in the front matter of the talk file&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Upload&lt;/strong&gt; an existing slide deck to &lt;code&gt;static/&lt;/code&gt; and link using &lt;code&gt;url_slides&lt;/code&gt; parameter in the front matter of the talk file&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Embed&lt;/strong&gt; your slides (e.g. Google Slides) or presentation video on this page using &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;shortcodes&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Further event details, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;page elements&lt;/a&gt; such as image galleries, can be added to the body of this page.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>False Positive Multiparametric Magnetic Resonance Imaging Phenotypes in the Biopsy-naïve Prostate: Are They Distinct from Significant Cancer-associated Lesions? Lessons from PROMIS</title>
+      <link>https://solon-karapanagiotis.com/publication/mri_prostate/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/mri_prostate/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Naive classification beats deep-learning</title>
-      <link>/post/auc_post/model-evaluation-auc/</link>
+      <link>https://solon-karapanagiotis.com/post/auc_post/model-evaluation-auc/</link>
       <pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/auc_post/model-evaluation-auc/</guid>
-      <description>&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+      <guid>https://solon-karapanagiotis.com/post/auc_post/model-evaluation-auc/</guid>
+      <description>
+&lt;script src=&#34;https://solon-karapanagiotis.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;https://solon-karapanagiotis.com/rmarkdown-libs/lightable/lightable.css&#34; rel=&#34;stylesheet&#34; /&gt;
 
 
 &lt;div id=&#34;overview&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;Overview&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.nature.com/articles/s41551-019-0487-z#Abs1&#34;&gt;Mitani and co-authors’&lt;/a&gt; present a deep-learning algorithm trained with retinal images and participants’ clinical data from the UK Biobank to estimate blood-haemoglobin levels and predict the presence or absence of anaemia &lt;span class=&#34;citation&#34;&gt;(Mitani et al. &lt;a href=&#34;#ref-mitani2020&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt;. A major limitation of the study is the inadequate evaluation of the algorithm. I will show how a naïve classification (i.e. classify everybody as healthy) performs much better than their deep-learning approach, despite their model having AUC of around 80%. I will then explain why this is the case and finish with some thoughts on how (clinical) predictions models should be evaluated.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nature.com/articles/s41551-019-0487-z#Abs1&#34;&gt;Mitani and co-authors’&lt;/a&gt; present a deep-learning algorithm trained with retinal images and participants’ clinical data from the UK Biobank to estimate blood-haemoglobin levels and predict the presence or absence of anaemia &lt;span class=&#34;citation&#34;&gt;(Mitani et al. &lt;a href=&#34;#ref-mitani2020&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt;. A major limitation of the study is the inadequate evaluation of the algorithm. I will show how a naïve classification (i.e. classify everybody as healthy) performs much better than their deep-learning approach, despite their model having AUC of around 80%. I will then explain why this is the case and finish with some thoughts on how (clinical) predictions models should be evaluated.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;introduction&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;The goal of the paper was to investigate whether anaemia can be detected via machine-learning algorithms trained using retinal images, study participants’ metadata or the combination of both.&lt;/p&gt;
 &lt;p&gt;First, the authors develop a deep-learning algorithm to predict haemoglobin concentration (Hb) (which is the most reliable indicator of anaemia) and then three others to predict anaemia itself. They develop a deep convolutional neural network classification model to directly predict whether a patient is anaemic (rather than predicting Hb). They used the World Health Organization Hb cut-off values to label each participant as not having anaemia, mild, moderate or severe anaemia. One of the models was trained to classify: normal versus mild, moderate or severe. For concreteness, I’ll focus on this model but the reasoning below is valid for the others as well. Also, I focus on the combined model (images and metadata) because it showed the best performance (AUC of 0.88).&lt;/p&gt;
-&lt;p&gt;The authors present a detailed analysis of the data and their model. Nevertheless, a crucial point is missing. Is the model useful? If it is implemented tomorrow will it result in better care? This is important, especially since the authors argue their model potentially enables automated anaemia screening (see Discussion). This is slightly far-fetched in my opinion given they only evaluated their algorithm on a test set; with unsatisfactory results as I argue below. Algorithms need to be compared with human experts (i.e. ophthalmologists in this case), followed by extensive field testing to prove their trustworthiness and usefulness &lt;span class=&#34;citation&#34;&gt;(Spiegelhalter &lt;a href=&#34;#ref-Spiegelhalter2020&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The authors present a detailed analysis of the data and their model. Nevertheless, a crucial point is missing. Is the model useful? If it is implemented tomorrow will it result in better care? This is important, especially since the authors argue their model potentially enables automated anaemia screening (see Discussion). This is slightly far-fetched in my opinion given they only evaluated their algorithm on a test set; with unsatisfactory results as I argue below. Algorithms need to be compared with human experts (i.e. ophthalmologists in this case), followed by extensive field testing to prove their trustworthiness and usefulness &lt;span class=&#34;citation&#34;&gt;(Spiegelhalter &lt;a href=&#34;#ref-Spiegelhalter2020&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;the-issue&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;The Issue&lt;/h1&gt;
@@ -39,9 +112,9 @@
 &lt;/caption&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th style=&#34;border-bottom:hidden&#34; colspan=&#34;2&#34;&gt;
+&lt;th style=&#34;empty-cells: hide;border-bottom:hidden;&#34; colspan=&#34;2&#34;&gt;
 &lt;/th&gt;
-&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; color: black !important;&#34; colspan=&#34;2&#34;&gt;
+&lt;th style=&#34;border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; color: black !important;&#34; colspan=&#34;2&#34;&gt;
 &lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
 Truth
 &lt;/div&gt;
@@ -99,9 +172,9 @@ negative
 &lt;table class=&#34;table table-striped table-responsive&#34; style=&#34;width: auto !important; margin-left: auto; margin-right: auto;&#34;&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th style=&#34;border-bottom:hidden&#34; colspan=&#34;2&#34;&gt;
+&lt;th style=&#34;empty-cells: hide;border-bottom:hidden;&#34; colspan=&#34;2&#34;&gt;
 &lt;/th&gt;
-&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; color: black !important;&#34; colspan=&#34;2&#34;&gt;
+&lt;th style=&#34;border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; color: black !important;&#34; colspan=&#34;2&#34;&gt;
 &lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
 Truth
 &lt;/div&gt;
@@ -155,9 +228,9 @@ negative
 &lt;table class=&#34;table table-striped table-responsive&#34; style=&#34;width: auto !important; margin-left: auto; margin-right: auto;&#34;&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th style=&#34;border-bottom:hidden&#34; colspan=&#34;2&#34;&gt;
+&lt;th style=&#34;empty-cells: hide;border-bottom:hidden;&#34; colspan=&#34;2&#34;&gt;
 &lt;/th&gt;
-&lt;th style=&#34;border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; color: black !important;&#34; colspan=&#34;2&#34;&gt;
+&lt;th style=&#34;border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; color: black !important;&#34; colspan=&#34;2&#34;&gt;
 &lt;div style=&#34;border-bottom: 1px solid #ddd; padding-bottom: 5px; &#34;&gt;
 Truth
 &lt;/div&gt;
@@ -212,7 +285,7 @@ negative
 &lt;div id=&#34;roc-and-auc-is-to-blame&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;ROC (and AUC) is to blame&lt;/h1&gt;
 &lt;p&gt;Why was this not spotted by the authors? Probably because the model evaluation was based on the receiver operating curve (ROC) and area under the ROC (AUC). ROC curves can present an overly optimistic view of a model’s performance if there is a large skew in the class distribution. In this study the ratio positive (i.e. anaemic) to negative (i.e. not anaemic) participants is 439/10949 = 0.04 (see Table 2, validation column)!&lt;/p&gt;
-&lt;p&gt;ROC curves (and AUC) have the (un-)attractive property of being insensitive to changes in class distribution &lt;span class=&#34;citation&#34;&gt;(Fawcett &lt;a href=&#34;#ref-fawcett2006&#34;&gt;2006&lt;/a&gt;)&lt;/span&gt;. That is, if the proportion of positive to negative instances changes in a dataset, the ROC curves (and AUC) will not change. This is because ROC plots are based upon TPR and FPR which do not depend on class distributions. Increasing the number of positive samples by 10x would increase both TP and FN by 10x, which would not change the TPR at any threshold. Similarly, increasing the number of negative samples by 10x would increase both TN and FP by 10x, which would not change the FPR at any threshold. Thus, both the shape of the ROC curve and the AUC are insensitive to the class distribution. On the contrary, any performance metric that uses values from both columns will be inherently sensitive to class skews, for instance the misclassification rate.&lt;/p&gt;
+&lt;p&gt;ROC curves (and AUC) have the (un-)attractive property of being insensitive to changes in class distribution &lt;span class=&#34;citation&#34;&gt;(Fawcett &lt;a href=&#34;#ref-fawcett2006&#34; role=&#34;doc-biblioref&#34;&gt;2006&lt;/a&gt;)&lt;/span&gt;. That is, if the proportion of positive to negative instances changes in a dataset, the ROC curves (and AUC) will not change. This is because ROC plots are based upon TPR and FPR which do not depend on class distributions. Increasing the number of positive samples by 10x would increase both TP and FN by 10x, which would not change the TPR at any threshold. Similarly, increasing the number of negative samples by 10x would increase both TN and FP by 10x, which would not change the FPR at any threshold. Thus, both the shape of the ROC curve and the AUC are insensitive to the class distribution. On the contrary, any performance metric that uses values from both columns will be inherently sensitive to class skews, for instance the misclassification rate.&lt;/p&gt;
 &lt;p&gt;Let’s make this more concrete with a simple simulation example. I simulate one covariate, &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;, which follows a standard Gaussian distribution in negative cases: &lt;span class=&#34;math inline&#34;&gt;\(X \sim N(0, 1)\)&lt;/span&gt;. Among positives, it follows &lt;span class=&#34;math inline&#34;&gt;\(X \sim N(1.5, 1)\)&lt;/span&gt;. The event rate (i.e. prevalence) is varied to be &lt;span class=&#34;math inline&#34;&gt;\(20\%\)&lt;/span&gt; (I call this scenario 1) and &lt;span class=&#34;math inline&#34;&gt;\(2\%\)&lt;/span&gt; (scenario 2). (The &lt;span class=&#34;math inline&#34;&gt;\(2\%\)&lt;/span&gt; is close to the one observed in the study &lt;span class=&#34;math inline&#34;&gt;\(\approx 4\%\)&lt;/span&gt;). Then, I derive true risks (&lt;span class=&#34;math inline&#34;&gt;\(R\)&lt;/span&gt;) based on the event rate (&lt;span class=&#34;math inline&#34;&gt;\(ER\)&lt;/span&gt;) and the density of the covariate distributions for positives (&lt;span class=&#34;math inline&#34;&gt;\(D_p\)&lt;/span&gt;) and negatives (&lt;span class=&#34;math inline&#34;&gt;\(D_{n}\)&lt;/span&gt;) at the covariate values:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ R = \frac{ER × D_p}{[ER × D_p] + [(1 − ER) × D_{n}]}.\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;I simulate two large samples of 5000 and 50000 and plot the ROC. The two plots below are almost identical despite the fact that scenario 2 has 10x more negative examples than scenario 1.&lt;/p&gt;
@@ -269,7 +342,7 @@ ggplot(df_final) +
   geom_line(aes(x = FPR, y = TPR, group = sims, col = Scenario), alpha = 0.8) + 
   facet_grid(~ Scenario)&lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:figs&#34;&gt;&lt;/span&gt;
-&lt;img src=&#34;/post/auc_post/classification_AUC_files/figure-html/figs-1.png&#34; alt=&#34;ROC plots for each scenario; 20 repetitions each.&#34; width=&#34;672&#34; /&gt;
+&lt;img src=&#34;https://solon-karapanagiotis.com/post/auc_post/classification_AUC_files/figure-html/figs-1.png&#34; alt=&#34;ROC plots for each scenario; 20 repetitions each.&#34; width=&#34;672&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;
 Figure 1: ROC plots for each scenario; 20 repetitions each.
 &lt;/p&gt;
@@ -278,21 +351,21 @@ Figure 1: ROC plots for each scenario; 20 repetitions each.
 &lt;div id=&#34;unequal-misclassification-costs&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;Unequal misclassification costs&lt;/h1&gt;
 &lt;p&gt;Of course, my naive classification can be easily debated by noting that the misclassification rate makes an inherent assumption, which is unlikely to be true in anaemia screening: it assumes that misclassifying someone with anaemia is of the same severity as misclassifying a healthy subject. This implies that one type of error is more costly (i.e. worse) than the other. In other words, the costs are asymmetric. I agree that most of time this is the case. This information should be taken into account when evaluating or fitting models.&lt;/p&gt;
-&lt;p&gt;Some methods to account for differing consequences of correct and incorrect classification when evaluating models are the Weighted Net Reclassification Improvement &lt;span class=&#34;citation&#34;&gt;(Pencina et al. &lt;a href=&#34;#ref-pencina2011&#34;&gt;2011&lt;/a&gt;)&lt;/span&gt;, Relative Utility &lt;span class=&#34;citation&#34;&gt;(Baker et al. &lt;a href=&#34;#ref-baker2009&#34;&gt;2009&lt;/a&gt;)&lt;/span&gt;, Net Benefit &lt;span class=&#34;citation&#34;&gt;(Vickers and Elkin &lt;a href=&#34;#ref-vickers2006&#34;&gt;2006&lt;/a&gt;)&lt;/span&gt; and the &lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt; measure &lt;span class=&#34;citation&#34;&gt;(Hand &lt;a href=&#34;#ref-hand2009&#34;&gt;2009&lt;/a&gt;)&lt;/span&gt;. Another option is to design models/algorithms that take misclassification costs into consideration. This area of research is called cost-sensitive learning &lt;span class=&#34;citation&#34;&gt;(Elkan &lt;a href=&#34;#ref-elkan2001&#34;&gt;2001&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;This is another reason the ROC (AUC) is inadequate metric (in addition to the insensitivity in class imbalance). It ignores clinical differentials in misclassification costs and, therefore, risks finding a model worthwhile (or worthless) when patients and clinicians would consider otherwise. Strictly speaking, ROC weighs changes in sensitivity and specificity equally only where the curve slope equals one &lt;span class=&#34;citation&#34;&gt;(Fawcett &lt;a href=&#34;#ref-fawcett2006&#34;&gt;2006&lt;/a&gt;)&lt;/span&gt;. Other points assign different weights, determined by curve shape and without considering any clinically meaningful information. Thus, AUC can consider a model that increases sensitivity at low specificity superior to one that increases sensitivity at high specificity. However, in some situations, in disease screening for instance, better tests must increase sensitivity at high specificity to avoid numerous false positives.&lt;/p&gt;
+&lt;p&gt;Some methods to account for differing consequences of correct and incorrect classification when evaluating models are the Weighted Net Reclassification Improvement &lt;span class=&#34;citation&#34;&gt;(Pencina et al. &lt;a href=&#34;#ref-pencina2011&#34; role=&#34;doc-biblioref&#34;&gt;2011&lt;/a&gt;)&lt;/span&gt;, Relative Utility &lt;span class=&#34;citation&#34;&gt;(Baker et al. &lt;a href=&#34;#ref-baker2009&#34; role=&#34;doc-biblioref&#34;&gt;2009&lt;/a&gt;)&lt;/span&gt;, Net Benefit &lt;span class=&#34;citation&#34;&gt;(Vickers and Elkin &lt;a href=&#34;#ref-vickers2006&#34; role=&#34;doc-biblioref&#34;&gt;2006&lt;/a&gt;)&lt;/span&gt; and the &lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt; measure &lt;span class=&#34;citation&#34;&gt;(Hand &lt;a href=&#34;#ref-hand2009&#34; role=&#34;doc-biblioref&#34;&gt;2009&lt;/a&gt;)&lt;/span&gt;. Another option is to design models/algorithms that take misclassification costs into consideration. This area of research is called cost-sensitive learning &lt;span class=&#34;citation&#34;&gt;(Elkan &lt;a href=&#34;#ref-elkan2001&#34; role=&#34;doc-biblioref&#34;&gt;2001&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;This is another reason the ROC (AUC) is inadequate metric (in addition to the insensitivity in class imbalance). It ignores clinical differentials in misclassification costs and, therefore, risks finding a model worthwhile (or worthless) when patients and clinicians would consider otherwise. Strictly speaking, ROC weighs changes in sensitivity and specificity equally only where the curve slope equals one &lt;span class=&#34;citation&#34;&gt;(Fawcett &lt;a href=&#34;#ref-fawcett2006&#34; role=&#34;doc-biblioref&#34;&gt;2006&lt;/a&gt;)&lt;/span&gt;. Other points assign different weights, determined by curve shape and without considering any clinically meaningful information. Thus, AUC can consider a model that increases sensitivity at low specificity superior to one that increases sensitivity at high specificity. However, in some situations, in disease screening for instance, better tests must increase sensitivity at high specificity to avoid numerous false positives.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;a-way-forward-estimate-and-validate-probabilities&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;A way forward: estimate and validate probabilities&lt;/h1&gt;
 &lt;p&gt;Ultimately, the quality of algorithms is exposed to the nature of the performance metrics chosen. We must carefully choose the goals we ask these systems to optimize. Evaluation of models for use in healthcare should take the intended purpose of the model into account. Metrics such as AUC are rarely of any use in clinical practise. AUC represents how likely it is that the model will rank a pair of subjects; one with anaemia and one without, in the correct order, across all possible thresholds. More intuitively, AUC is the chance that a randomly selected participant with anaemia will be ranked above a randomly selected healthy participant. However, patients do not walk into the clinician’s room in pairs, and patients want their results, rather than the order of their results compared with another patient. They care about their individual risk of having a disease/condition (being anaemic in this case). Hence, the focus of modelling should be on estimating and validating risks/probabilities rather than the chance of correctly ranking a pair of patients.&lt;/p&gt;
-&lt;p&gt;Consequently, model evaluation/comparison should focus (primarily) on calibration. Calibration refers to the agreement between observed and predicted probabilities. This means that for future cases predicted to be in class &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt; with probability &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;, a proportion of &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; cases will truly belong in class &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;, and this should be true for all &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; in (0,1). In other words, for every 100 patients given a risk of &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;%, close to &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; have the event. Calibration approaches appropriate for representing prediction accuracy are crucial, especially when treatment decisions are made based on probability thresholds. Calibration of a model can be evaluated graphically by plotting expected against observed probabilities &lt;span class=&#34;citation&#34;&gt;(Steyerberg et al. &lt;a href=&#34;#ref-steyerberg2004&#34;&gt;2004&lt;/a&gt;)&lt;/span&gt; or using an aggregate score. The most widely used is the Brier score, which is given by the average over all squared differences between an observation and its predicted probability &lt;span class=&#34;citation&#34;&gt;(Brier &lt;a href=&#34;#ref-brier1950&#34;&gt;1950&lt;/a&gt;)&lt;/span&gt;. (It has nice properties &lt;span class=&#34;citation&#34;&gt;(see e.g. Spiegelhalter &lt;a href=&#34;#ref-spiegelhalter1986&#34;&gt;1986&lt;/a&gt;; Gneiting and Raftery &lt;a href=&#34;#ref-gneiting2007&#34;&gt;2007&lt;/a&gt;)&lt;/span&gt;).&lt;/p&gt;
-&lt;p&gt;To conclude, machine learning models in healthcare need rigorous evaluation. Beyond ethical, legal and moral issues, the technical/statistical fitness of the models needs thorough assessment. Statistical analysis should consider clinically relevant evaluation metrics. Motivated by the paper of &lt;span class=&#34;citation&#34;&gt;Mitani et al. (&lt;a href=&#34;#ref-mitani2020&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt; I have re-demonstrated why AUC is an irrelevant metric for clinical practise. This is because it is insensitive to class imbalances and integrates over all error regimes (under the best case scenario). This becomes increasingly important in predicting rare outcomes, where operating in a regime that corresponds to a high false positive rate may be impractical, because costly interventions might be applied in situations in which patients are unlikely to benefit. A way forward is to focus on evaluating predictions rather than (in addition to) classifications. That is, focus on estimating and evaluating probabilities. These convey more useful information to clinicians and patients in order to aid decision making.&lt;/p&gt;
+&lt;p&gt;Consequently, model evaluation/comparison should focus (primarily) on calibration. Calibration refers to the agreement between observed and predicted probabilities. This means that for future cases predicted to be in class &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt; with probability &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;, a proportion of &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; cases will truly belong in class &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;, and this should be true for all &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; in (0,1). In other words, for every 100 patients given a risk of &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;%, close to &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; have the event. Calibration approaches appropriate for representing prediction accuracy are crucial, especially when treatment decisions are made based on probability thresholds. Calibration of a model can be evaluated graphically by plotting expected against observed probabilities &lt;span class=&#34;citation&#34;&gt;(Steyerberg et al. &lt;a href=&#34;#ref-steyerberg2004&#34; role=&#34;doc-biblioref&#34;&gt;2004&lt;/a&gt;)&lt;/span&gt; or using an aggregate score. The most widely used is the Brier score, which is given by the average over all squared differences between an observation and its predicted probability &lt;span class=&#34;citation&#34;&gt;(Brier &lt;a href=&#34;#ref-brier1950&#34; role=&#34;doc-biblioref&#34;&gt;1950&lt;/a&gt;)&lt;/span&gt;. (It has nice properties &lt;span class=&#34;citation&#34;&gt;(see e.g. Spiegelhalter &lt;a href=&#34;#ref-spiegelhalter1986&#34; role=&#34;doc-biblioref&#34;&gt;1986&lt;/a&gt;; Gneiting and Raftery &lt;a href=&#34;#ref-gneiting2007&#34; role=&#34;doc-biblioref&#34;&gt;2007&lt;/a&gt;)&lt;/span&gt;).&lt;/p&gt;
+&lt;p&gt;To conclude, machine learning models in healthcare need rigorous evaluation. Beyond ethical, legal and moral issues, the technical/statistical fitness of the models needs thorough assessment. Statistical analysis should consider clinically relevant evaluation metrics. Motivated by the paper of &lt;span class=&#34;citation&#34;&gt;Mitani et al. (&lt;a href=&#34;#ref-mitani2020&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt; I have re-demonstrated why AUC is an irrelevant metric for clinical practise. This is because it is insensitive to class imbalances and integrates over all error regimes (under the best case scenario). This becomes increasingly important in predicting rare outcomes, where operating in a regime that corresponds to a high false positive rate may be impractical, because costly interventions might be applied in situations in which patients are unlikely to benefit. A way forward is to focus on evaluating predictions rather than (in addition to) classifications. That is, focus on estimating and evaluating probabilities. These convey more useful information to clinicians and patients in order to aid decision making.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;further-reading&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;Further reading&lt;/h1&gt;
 &lt;p&gt;The limitations of the ROC (and AUC) have been discussed in&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Cook NR . Use and misuse of the receiver operating characteristic curve in risk prediction. Circulation (2007).&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Pencina, Michael J., et al. “Evaluating the added predictive ability of a new marker: from area under the ROC curve to reclassification and beyond.” Statistics in medicine (2008).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Pencina, Michael J., et al. “Evaluating the added predictive ability of a new marker: from area under the ROC curve to reclassification and beyond.” Statistics in medicine (2008).&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Hand, David J. “Evaluating diagnostic tests: the area under the ROC curve and the balance of errors.” Statistics in medicine (2010).&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Hand, David J., and Christoforos Anagnostopoulos. “When is the area under the receiver operating characteristic curve an appropriate measure of classifier performance?.” Pattern Recognition Letters (2013).&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Halligan, Steve, Douglas G. Altman, and Susan Mallett. “Disadvantages of using the area under the receiver operating characteristic curve to assess imaging tests: a discussion and proposal for an alternative approach.” European radiology (2015).&lt;/p&gt;&lt;/li&gt;
@@ -300,8 +373,8 @@ Figure 1: ROC plots for each scenario; 20 repetitions each.
 &lt;p&gt;On probability estimation and evaluation:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Kruppa, Jochen, Andreas Ziegler, and Inke R. König. “Risk estimation and risk prediction using machine-learning methods.” Human genetics (2012).&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Kruppa, Jochen, et al. “Probability estimation with machine learning methods for dichotomous and multicategory outcome: Theory.” Biometrical Journal (2014).&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Kruppa, Jochen, et al. “Probability estimation with machine learning methods for dichotomous and multicategory outcome: Applications.” Biometrical Journal (2014).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Kruppa, Jochen, et al. “Probability estimation with machine learning methods for dichotomous and multicategory outcome: Theory.” Biometrical Journal (2014).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Kruppa, Jochen, et al. “Probability estimation with machine learning methods for dichotomous and multicategory outcome: Applications.” Biometrical Journal (2014).&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
@@ -350,58 +423,69 @@ Figure 1: ROC plots for each scenario; 20 repetitions each.
     
     <item>
       <title>Approximating Binomial with Poisson</title>
-      <link>/post/approx_binomial/approximating-binomial-with-poisson/</link>
+      <link>https://solon-karapanagiotis.com/post/approx_binomial/approximating-binomial-with-poisson/</link>
       <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/approx_binomial/approximating-binomial-with-poisson/</guid>
-      <description>&lt;p&gt;It is usually taught in statistics classes that Binomial probabilities can be approximated by Poisson probabilities, which are generally easier to calculate. This approximation is valid “when &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; is large and &lt;span class=&#34;math inline&#34;&gt;\(np\)&lt;/span&gt; is small,” and rules of thumb are sometimes given.&lt;/p&gt;
+      <guid>https://solon-karapanagiotis.com/post/approx_binomial/approximating-binomial-with-poisson/</guid>
+      <description>
+
+
+&lt;p&gt;It is usually taught in statistics classes that Binomial probabilities can be approximated by Poisson probabilities, which are generally easier to calculate. This approximation is valid “when &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; is large and &lt;span class=&#34;math inline&#34;&gt;\(np\)&lt;/span&gt; is small,” and rules of thumb are sometimes given.&lt;/p&gt;
 &lt;p&gt;In this post I’ll walk through a simple proof showing that the Poisson distribution is really just the Binomial with &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; (the number of trials) approaching infinity and &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; (the probability of success in each trail) approaching zero. I’ll then provide some numerical examples to investigate how good is the approximation.&lt;/p&gt;
 &lt;div id=&#34;proof&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Proof&lt;/h2&gt;
-&lt;p&gt;The Binomial distribution describes the probability that there will be &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; successes in a sample of size &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;, chosen with replacement from a population where the probability of success is &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The Binomial distribution describes the probability that there will be &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; successes in a sample
+of size &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;, chosen with replacement from a population where the probability of success is &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(X \sim Binomial(n, p)\)&lt;/span&gt;, that is&lt;/p&gt;
-&lt;span class=&#34;math display&#34; id=&#34;eq:binom&#34;&gt;\[\begin{equation}
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:binom&#34;&gt;\[\begin{equation}
 \tag{1}
    P(X = x) = {n\choose x} p^x (1-p)^{n-x},
-\end{equation}\]&lt;/span&gt;
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(x= 0, 1, \dots, n\)&lt;/span&gt;. Define the number&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\lambda = np\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;This is the rate of success. That’s the number of trials &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;—however many there are—times the chance of success &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; for each of those trials. If we repeat the experiment every day, we will be getting &lt;span class=&#34;math inline&#34;&gt;\(\lambda\)&lt;/span&gt; successes per day on average.&lt;/p&gt;
 &lt;p&gt;Solving for &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;, we get:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ p = \frac{\lambda}{n}\]&lt;/span&gt; We then substitute this into &lt;a href=&#34;#eq:binom&#34;&gt;(1)&lt;/a&gt;, and take the limit as &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; goes to infinity&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ p = \frac{\lambda}{n}\]&lt;/span&gt;
+We then substitute this into &lt;a href=&#34;#eq:binom&#34;&gt;(1)&lt;/a&gt;, and take the limit as &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; goes to infinity&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \lim_{n \to \infty}P(X = x) =  \lim_{n \to \infty} \frac{n!}{x!(n-x)!} \bigg( \frac{\lambda}{n} \bigg)^x \bigg( 1-\frac{\lambda}{n} \bigg)^{n-x}\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;I then collect the constants (terms that don’t depend on &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;) in front and split the last term into two&lt;/p&gt;
-&lt;span class=&#34;math display&#34; id=&#34;eq:limit&#34;&gt;\[\begin{equation}
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:limit&#34;&gt;\[\begin{equation}
    \tag{2}
    \frac{\lambda^x}{x!}  \lim_{n \to \infty} \color{blue}{\frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x} \color{red}{ \bigg( 1-\frac{\lambda}{n} \bigg)^n } \color{green}{\bigg( 1-\frac{\lambda}{n} \bigg)^{-x}}
-\end{equation}\]&lt;/span&gt;
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Now let’s take the limit of this right-hand side one term at a time.&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;We start with the blue term&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{blue}{ \lim_{n \to \infty} \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x }\]&lt;/span&gt; The numerator and denominator can be expanded as follows&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{blue}{ \lim_{n \to \infty} \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x }\]&lt;/span&gt;
+The numerator and denominator can be expanded as follows&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{blue}{ \lim_{n \to \infty} \frac{(n)(n-1)(n-2)\dots(n-x)(n-x-1)\dots (1)}{(n-x)(n-x-1)(n-x-2)\dots (1)}\bigg( \frac{1}{n} \bigg)^x }\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;The &lt;span class=&#34;math inline&#34;&gt;\((n-x)(n-x-1)\dots(1)\)&lt;/span&gt; terms cancel from both the numerator and denominator, leaving the following&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{blue}{ \lim_{n \to \infty} \frac{(n)(n-1)(n-2)(n-x+1)}{n^x} }\]&lt;/span&gt; This can be rewrited as&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{blue}{  \lim_{n \to \infty} \frac{n}{n} \frac{(n-1)}{n} \frac{(n-2)}{n} \frac{(n-x+1)}{n} }\]&lt;/span&gt; This is because there were &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; terms in both the numerator and denominator. Clearly, every one of these &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; terms approaches 1 as &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; approaches infinity. So we know this just simplifies to one. So we’re done with the first step.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{blue}{ \lim_{n \to \infty} \frac{(n)(n-1)(n-2)(n-x+1)}{n^x} }\]&lt;/span&gt;
+This can be rewrited as&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{blue}{  \lim_{n \to \infty} \frac{n}{n} \frac{(n-1)}{n} \frac{(n-2)}{n} \frac{(n-x+1)}{n} }\]&lt;/span&gt;
+This is because there were &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; terms in both the numerator and denominator. Clearly, every one of these &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; terms approaches 1 as &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; approaches infinity. So we know this just simplifies to one. So we’re done with the first step.&lt;/p&gt;
 &lt;ol start=&#34;2&#34; style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;Now we focus on the red term of &lt;a href=&#34;#eq:limit&#34;&gt;(2)&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{red}{ \lim_{n \to \infty} \bigg( 1-\frac{\lambda}{n} \bigg)^n }\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Recall the &lt;a href=&#34;https://en.wikipedia.org/wiki/E_(mathematical_constant)&#34;&gt;definition&lt;/a&gt; of &lt;span class=&#34;math inline&#34;&gt;\(e= 2.7182\dots\)&lt;/span&gt; is&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \lim_{a \to \infty} \bigg(1 + \frac{1}{a}\bigg)^a\]&lt;/span&gt; Our goal here is to find a way to manipulate our expression to look more like the definition of &lt;span class=&#34;math inline&#34;&gt;\(e\)&lt;/span&gt;, which we know the limit of. Let’s define a number &lt;span class=&#34;math inline&#34;&gt;\(a\)&lt;/span&gt; as&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \lim_{a \to \infty} \bigg(1 + \frac{1}{a}\bigg)^a\]&lt;/span&gt;
+Our goal here is to find a way to manipulate our expression to look more like the definition of &lt;span class=&#34;math inline&#34;&gt;\(e\)&lt;/span&gt;, which we know the limit of. Let’s define a number &lt;span class=&#34;math inline&#34;&gt;\(a\)&lt;/span&gt; as&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ a = -\frac{n}{\lambda}\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Substituting it into our expression we get&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \color{red}{ \lim_{n \to \infty} \bigg( 1-\frac{\lambda}{n} \bigg)^n = \lim_{n \to \infty} \bigg( 1+\frac{1}{a} \bigg)^{-a\lambda} = e^{-\lambda} }\]&lt;/span&gt; So we’ve finished with the middle term.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \color{red}{ \lim_{n \to \infty} \bigg( 1-\frac{\lambda}{n} \bigg)^n = \lim_{n \to \infty} \bigg( 1+\frac{1}{a} \bigg)^{-a\lambda} = e^{-\lambda} }\]&lt;/span&gt;
+So we’ve finished with the middle term.&lt;/p&gt;
 &lt;ol start=&#34;3&#34; style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;The third term of &lt;a href=&#34;#eq:limit&#34;&gt;(2)&lt;/a&gt; is&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{green}{ \lim_{n \to \infty}  \bigg( 1-\frac{\lambda}{n} \bigg)^{-x} }\]&lt;/span&gt; As &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; approaches infinity, this term becomes &lt;span class=&#34;math inline&#34;&gt;\(1^{-x}\)&lt;/span&gt; which is equal to one. And that takes care of our last term.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{green}{ \lim_{n \to \infty}  \bigg( 1-\frac{\lambda}{n} \bigg)^{-x} }\]&lt;/span&gt;
+As &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; approaches infinity, this term becomes &lt;span class=&#34;math inline&#34;&gt;\(1^{-x}\)&lt;/span&gt; which is equal to one. And that takes care of our last term.&lt;/p&gt;
 &lt;p&gt;Putting these together we can re-write &lt;a href=&#34;#eq:limit&#34;&gt;(2)&lt;/a&gt; as&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \frac{\lambda^x}{x!}  \lim_{n \to \infty} \color{blue}{ \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x} \color{red}{ \bigg( 1-\frac{\lambda}{n} \bigg)^n} \color{green}{ \bigg( 1-\frac{\lambda}{n} \bigg)^{-x} } = \frac{\lambda^x}{x!} \color{red}{ e^{-\lambda} }\]&lt;/span&gt; which is the probability mass function of a Poisson random variable &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt;, i.e&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \frac{\lambda^x}{x!}  \lim_{n \to \infty} \color{blue}{ \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x} \color{red}{ \bigg( 1-\frac{\lambda}{n} \bigg)^n} \color{green}{ \bigg( 1-\frac{\lambda}{n} \bigg)^{-x} } = \frac{\lambda^x}{x!} \color{red}{ e^{-\lambda} }\]&lt;/span&gt;
+which is the probability mass function of a Poisson random variable &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt;, i.e&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[P(Y = y)  = \frac{\lambda^y}{y!} e^{-\lambda}\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(y = 0, 1, \dots\)&lt;/span&gt;. So we have shown that the Poisson distribution is a special case of the Binomial, in which the number of trials grows to infinity and the chance of success in any trial approaches zero. And that completes the proof.&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;Casella and Berger (&lt;a href=&#34;#ref-casella2002statistical&#34;&gt;2002&lt;/a&gt;)&lt;/span&gt; provide a much shorter proof based on moment generating functions.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;Casella and Berger (&lt;a href=&#34;#ref-casella2002statistical&#34; role=&#34;doc-biblioref&#34;&gt;2002&lt;/a&gt;)&lt;/span&gt; provide a much shorter proof based on moment generating functions.&lt;/p&gt;
 &lt;p&gt;A natural question is how good is this approximation? It turns out it is quite good even for moderate &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; as we’ll see with a few numerical examples.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;code&#34; class=&#34;section level2&#34;&gt;
@@ -439,15 +523,16 @@ pl &amp;lt;- function(n, p, a, b) {
 }&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;I start with the recommendation: &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; = 20, &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; = 0.05. This gives &lt;span class=&#34;math inline&#34;&gt;\(\lambda= 1\)&lt;/span&gt;. Already the approximation seems reasonable.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pl(20, 0.05, 0, 10)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;For &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; = 10, &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; = 0.3 it doesn’t seem to work very well.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pl(10, 0.3, 0, 10)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;But if we increase &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; and decrease &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; in order to come home with the same &lt;span class=&#34;math inline&#34;&gt;\(\lambda\)&lt;/span&gt; value things improve.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pl(100, 0.03, 0, 10)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt; Lastly, for 1000 trials the distributions are indistinguishable.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;
+Lastly, for 1000 trials the distributions are indistinguishable.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pl(1000, 0.003, 0, 10)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
 &lt;h2&gt;References&lt;/h2&gt;
@@ -461,23 +546,156 @@ pl &amp;lt;- function(n, p, a, b) {
     </item>
     
     <item>
-      <title>Another solution to the &#39;The Hardest Logic Puzzle Ever&#39; using probability</title>
-      <link>/post/hardest_puzzle/the-hardest-logic-puzzle/</link>
-      <pubDate>Fri, 03 Aug 2018 00:00:00 +0000</pubDate>
+      <title>Slides</title>
+      <link>https://solon-karapanagiotis.com/slides/example/</link>
+      <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/slides/example/</guid>
+      <description>&lt;h1 id=&#34;create-slides-in-markdown-with-wowchemy&#34;&gt;Create slides in Markdown with Wowchemy&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://wowchemy.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Wowchemy&lt;/a&gt; | &lt;a href=&#34;https://owchemy.com/docs/managing-content/#create-slides&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Efficiently write slides in Markdown&lt;/li&gt;
+&lt;li&gt;3-in-1: Create, Present, and Publish your slides&lt;/li&gt;
+&lt;li&gt;Supports speaker notes&lt;/li&gt;
+&lt;li&gt;Mobile friendly slides&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;controls&#34;&gt;Controls&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Next: &lt;code&gt;Right Arrow&lt;/code&gt; or &lt;code&gt;Space&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Previous: &lt;code&gt;Left Arrow&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Start: &lt;code&gt;Home&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Finish: &lt;code&gt;End&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Overview: &lt;code&gt;Esc&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Speaker notes: &lt;code&gt;S&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Fullscreen: &lt;code&gt;F&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Zoom: &lt;code&gt;Alt + Click&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/hakimel/reveal.js#pdf-export&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PDF Export&lt;/a&gt;: &lt;code&gt;E&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;code-highlighting&#34;&gt;Code Highlighting&lt;/h2&gt;
+&lt;p&gt;Inline code: &lt;code&gt;variable&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Code block:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;porridge = &amp;quot;blueberry&amp;quot;
+if porridge == &amp;quot;blueberry&amp;quot;:
+    print(&amp;quot;Eating...&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;math&#34;&gt;Math&lt;/h2&gt;
+&lt;p&gt;In-line math: $x + y = z$&lt;/p&gt;
+&lt;p&gt;Block math:&lt;/p&gt;
+&lt;p&gt;$$
+f\left( x \right) = ;\frac{{2\left( {x + 4} \right)\left( {x - 4} \right)}}{{\left( {x + 4} \right)\left( {x + 1} \right)}}
+$$&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;fragments&#34;&gt;Fragments&lt;/h2&gt;
+&lt;p&gt;Make content appear incrementally&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{{% fragment %}} One {{% /fragment %}}
+{{% fragment %}} **Two** {{% /fragment %}}
+{{% fragment %}} Three {{% /fragment %}}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Press &lt;code&gt;Space&lt;/code&gt; to play!&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;fragment &#34; &gt;
+One
+&lt;/span&gt;
+&lt;span class=&#34;fragment &#34; &gt;
+&lt;strong&gt;Two&lt;/strong&gt;
+&lt;/span&gt;
+&lt;span class=&#34;fragment &#34; &gt;
+Three
+&lt;/span&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;A fragment can accept two optional parameters:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;class&lt;/code&gt;: use a custom style (requires definition in custom CSS)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;weight&lt;/code&gt;: sets the order in which a fragment appears&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;speaker-notes&#34;&gt;Speaker Notes&lt;/h2&gt;
+&lt;p&gt;Add speaker notes to your presentation&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;{{% speaker_note %}}
+- Only the speaker can read these notes
+- Press `S` key to view
+{{% /speaker_note %}}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Press the &lt;code&gt;S&lt;/code&gt; key to view the speaker notes!&lt;/p&gt;
+&lt;aside class=&#34;notes&#34;&gt;
+  &lt;ul&gt;
+&lt;li&gt;Only the speaker can read these notes&lt;/li&gt;
+&lt;li&gt;Press &lt;code&gt;S&lt;/code&gt; key to view&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/aside&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;themes&#34;&gt;Themes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;black: Black background, white text, blue links (default)&lt;/li&gt;
+&lt;li&gt;white: White background, black text, blue links&lt;/li&gt;
+&lt;li&gt;league: Gray background, white text, blue links&lt;/li&gt;
+&lt;li&gt;beige: Beige background, dark text, brown links&lt;/li&gt;
+&lt;li&gt;sky: Blue background, thin dark text, blue links&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;night: Black background, thick white text, orange links&lt;/li&gt;
+&lt;li&gt;serif: Cappuccino background, gray text, brown links&lt;/li&gt;
+&lt;li&gt;simple: White background, black text, blue links&lt;/li&gt;
+&lt;li&gt;solarized: Cream-colored background, dark green text, blue links&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+
+&lt;section data-noprocess data-shortcode-slide
+  
       
-      <guid>/post/hardest_puzzle/the-hardest-logic-puzzle/</guid>
-      <description>&lt;p&gt;I present a solution to a modification of the “hardest logic puzzle ever” using probability theory.&lt;/p&gt;
+      data-background-image=&#34;/media/boards.jpg&#34;
+  &gt;
+
+&lt;h2 id=&#34;custom-slide&#34;&gt;Custom Slide&lt;/h2&gt;
+&lt;p&gt;Customize the slide style and background&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;{{&amp;lt; slide background-image=&amp;quot;/media/boards.jpg&amp;quot; &amp;gt;}}
+{{&amp;lt; slide background-color=&amp;quot;#0000FF&amp;quot; &amp;gt;}}
+{{&amp;lt; slide class=&amp;quot;my-style&amp;quot; &amp;gt;}}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;custom-css-example&#34;&gt;Custom CSS Example&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s make headers navy colored.&lt;/p&gt;
+&lt;p&gt;Create &lt;code&gt;assets/css/reveal_custom.css&lt;/code&gt; with:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;.reveal section h1,
+.reveal section h2,
+.reveal section h3 {
+  color: navy;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;questions&#34;&gt;Questions?&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/wowchemy/wowchemy-hugo-modules/discussions&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ask&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://wowchemy.com/docs/managing-content/#create-slides&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Another solution to the &#39;The Hardest Logic Puzzle Ever&#39; using probability</title>
+      <link>https://solon-karapanagiotis.com/post/hardest_puzzle/the-hardest-logic-puzzle/</link>
+      <pubDate>Fri, 03 Aug 2018 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/hardest_puzzle/the-hardest-logic-puzzle/</guid>
+      <description>
+
+
+&lt;p&gt;I present a solution to a modification of the “hardest logic puzzle ever” using probability theory.&lt;/p&gt;
 &lt;div id=&#34;background&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Background&lt;/h2&gt;
-&lt;p&gt;“The hardest logic puzzle” was originally presented by &lt;span class=&#34;citation&#34;&gt;Boolos (&lt;a href=&#34;#ref-boolos1996hardest&#34;&gt;1996&lt;/a&gt;)&lt;/span&gt; and since then it has been amended several times in order to make it harder &lt;span class=&#34;citation&#34;&gt;(see B. Rabern and Rabern &lt;a href=&#34;#ref-rabern2008simple&#34;&gt;2008&lt;/a&gt;, &lt;span class=&#34;citation&#34;&gt;Novozhilov (&lt;a href=&#34;#ref-novozhilov2012hardest&#34;&gt;2012&lt;/a&gt;)&lt;/span&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;“The hardest logic puzzle” was originally presented by &lt;span class=&#34;citation&#34;&gt;Boolos (&lt;a href=&#34;#ref-boolos1996hardest&#34; role=&#34;doc-biblioref&#34;&gt;1996&lt;/a&gt;)&lt;/span&gt; and since then it has been amended several times in order to make it harder &lt;span class=&#34;citation&#34;&gt;(see Rabern and Rabern &lt;a href=&#34;#ref-rabern2008simple&#34; role=&#34;doc-biblioref&#34;&gt;2008&lt;/a&gt;, @novozhilov2012hardest)&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;The puzzle: &lt;em&gt;Three gods A, B, and C are called, in some order, True, False, and Random. True always speaks truly, False always speaks falsely, but whether Random speaks truly or falsely is a completely random matter. Your task is to determine the identities of A, B, and C by asking three yes-no questions; &lt;strong&gt;each question must be put to exactly one god&lt;/strong&gt;. The gods understand English, but will answer all questions in their own language, in which the words for “yes” and “no” are “da” and “ja,” in some order. You do not know which word means which. &lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;Boolos (&lt;a href=&#34;#ref-boolos1996hardest&#34;&gt;1996&lt;/a&gt;)&lt;/span&gt; then provides the following guidelines:&lt;br /&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;Boolos (&lt;a href=&#34;#ref-boolos1996hardest&#34; role=&#34;doc-biblioref&#34;&gt;1996&lt;/a&gt;)&lt;/span&gt; then provides the following guidelines:&lt;br /&gt;
 1. It could be that some god gets asked more than one question (and hence that some god is not asked any question at all).&lt;br /&gt;
 2. What the second question is, and to which god it is put, may depend on the answer to the first question. (And of course similarly for the third question.)&lt;br /&gt;
 3. Whether Random speaks truly or not should be thought of as depending on the flip of a coin hidden in his brain: if the coin comes down heads, he speaks truly; if tails, falsely.&lt;br /&gt;
 4. Random will answer da or ja when asked any yes-no question.&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;B. Rabern and Rabern (&lt;a href=&#34;#ref-rabern2008simple&#34;&gt;2008&lt;/a&gt;)&lt;/span&gt; proposed to modify the third point above with the following: “Whether Random answers ‘da’ or ‘ja’ should be thought of as depending on the flip of a coin hidden in his brain: if the coin comes down heads, he answers ‘yes’; if tails, ‘no’.”&lt;/p&gt;
-&lt;p&gt;Boolos’ article includes multiple ways of solving the problem. &lt;span class=&#34;citation&#34;&gt;B. Rabern and Rabern (&lt;a href=&#34;#ref-rabern2008simple&#34;&gt;2008&lt;/a&gt;)&lt;/span&gt; give a simpler solution. The main ideas for the solutions can be found &lt;a href=&#34;https://www.technologyreview.com/s/428189/the-hardest-logic-puzzle-ever-made-even-harder/&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;http://nautil.us/issue/30/identity/how-to-solve-the-hardest-logic-puzzle-ever&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;Rabern and Rabern (&lt;a href=&#34;#ref-rabern2008simple&#34; role=&#34;doc-biblioref&#34;&gt;2008&lt;/a&gt;)&lt;/span&gt; proposed to modify the third point above with the following:
+“Whether Random answers ‘da’ or ‘ja’ should be thought of as depending on the flip of a coin hidden in his
+brain: if the coin comes down heads, he answers ‘yes’; if tails, ‘no’.”&lt;/p&gt;
+&lt;p&gt;Boolos’ article includes multiple ways of solving the problem. &lt;span class=&#34;citation&#34;&gt;Rabern and Rabern (&lt;a href=&#34;#ref-rabern2008simple&#34; role=&#34;doc-biblioref&#34;&gt;2008&lt;/a&gt;)&lt;/span&gt; give a simpler solution. The main ideas for the solutions can be found &lt;a href=&#34;https://www.technologyreview.com/s/428189/the-hardest-logic-puzzle-ever-made-even-harder/&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;http://nautil.us/issue/30/identity/how-to-solve-the-hardest-logic-puzzle-ever&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;my-solution&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;My solution&lt;/h2&gt;
@@ -517,7 +735,8 @@ pl &amp;lt;- function(n, p, a, b) {
 &lt;div id=&#34;comments&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Comments&lt;/h2&gt;
 &lt;p&gt;The modification I used was allowing each question to be put to more than one god. In step 1 the question “Are you True?” was put to all gods and was repeated in step 2 as Q3. So technically I have solved the puzzle using only three questions in total, but allowing myself to repeat the same questions to more than one god.&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;Boolos (&lt;a href=&#34;#ref-boolos1996hardest&#34;&gt;1996&lt;/a&gt;)&lt;/span&gt; provided his solution in the same article in which he introduced the puzzle. He states that the “first move is to find a god that you can be certain is not Random, and hence is either True or False”. My approach does the reverse; first identifies the Random god and then the True and False gods.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;Boolos (&lt;a href=&#34;#ref-boolos1996hardest&#34; role=&#34;doc-biblioref&#34;&gt;1996&lt;/a&gt;)&lt;/span&gt; provided his solution in the same article in which he introduced the puzzle.
+He states that the “first move is to find a god that you can be certain is not Random, and hence is either True or False”. My approach does the reverse; first identifies the Random god and then the True and False gods.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
 &lt;h2&gt;References&lt;/h2&gt;
@@ -529,7 +748,7 @@ pl &amp;lt;- function(n, p, a, b) {
 &lt;p&gt;Novozhilov, Nikolay. 2012. “The Hardest Logic Puzzle Ever Becomes Even Tougher.” &lt;em&gt;arXiv Preprint arXiv:1206.1926&lt;/em&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;ref-rabern2008simple&#34;&gt;
-&lt;p&gt;Rabern, Brian, and Landon Rabern. 2008. “A Simple Solution to the Hardest Logic Puzzle Ever.” &lt;em&gt;Analysis&lt;/em&gt; 68 (2). Blackwell Publishing Ltd.: 105–12.&lt;/p&gt;
+&lt;p&gt;Rabern, Brian, and Landon Rabern. 2008. “A Simple Solution to the Hardest Logic Puzzle Ever.” &lt;em&gt;Analysis&lt;/em&gt; 68 (2): 105–12.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -538,11 +757,13 @@ pl &amp;lt;- function(n, p, a, b) {
     
     <item>
       <title>Plastic waste and disease on coral reefs - Another misinterpretation of a statistical model</title>
-      <link>/post/reefs/plastic-waste-and-disease-on-coral-reefs/</link>
+      <link>https://solon-karapanagiotis.com/post/reefs/plastic-waste-and-disease-on-coral-reefs/</link>
       <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/reefs/plastic-waste-and-disease-on-coral-reefs/</guid>
-      <description>&lt;p&gt;Recently, I came across this very interesting article published in &lt;a href=&#34;http://science.sciencemag.org/content/359/6374/460.long&#34;&gt;Science&lt;/a&gt; about how plastic waste is associated with disease on coral reefs &lt;span class=&#34;citation&#34;&gt;(J. B. Lamb et al. &lt;a href=&#34;#ref-lamb2018plastic&#34;&gt;2018&lt;/a&gt;)&lt;/span&gt;. The main conclusions are&lt;/p&gt;
+      <guid>https://solon-karapanagiotis.com/post/reefs/plastic-waste-and-disease-on-coral-reefs/</guid>
+      <description>
+
+
+&lt;p&gt;Recently, I came across this very interesting article published in &lt;a href=&#34;http://science.sciencemag.org/content/359/6374/460.long&#34;&gt;Science&lt;/a&gt; about how plastic waste is associated with disease on coral reefs &lt;span class=&#34;citation&#34;&gt;(J. B. Lamb et al. &lt;a href=&#34;#ref-lamb2018plastic&#34;&gt;2018&lt;/a&gt;)&lt;/span&gt;. The main conclusions are&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;contact with plastic increases the probability of disease,&lt;br /&gt;
 &lt;/li&gt;
@@ -583,12 +804,12 @@ ggplot(aes(x = Estimate*100), data = NormalDisease.by.Growth) +
    scale_x_continuous(limits = c(0, 10)) + 
    ylab(&amp;quot;&amp;quot;) + 
    labs(fill = &amp;quot;Morphology&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;It is evident from the code that they plot the fixed effects estimates with their standard errors. This plot ignores the random effects and it only takes into consideration the variation of the fixed coefficients &lt;span class=&#34;math inline&#34;&gt;\(\beta_j\)&lt;/span&gt;. To get an idea for the variability of the random effects I simulate them from the model and plot them. Points that are distinguishable from zero (i.e. the confidence band based on level does not cross the red line) are highlighted. We see substantial variation on the random effects estimates with many “outliers” with both high and low averages that need to be accounted for.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(merTools)
 sim_rfs_Normal.Disease &amp;lt;- REsim(Normal.Disease.Growth, n.sims = 200) 
 plotREsim(sim_rfs_Normal.Disease)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;What the authors are effectively doing in Fig. 4(B) (see density plot above) is presenting the results for reefs with &lt;span class=&#34;math inline&#34;&gt;\(b_i = 0\)&lt;/span&gt; which corresponds to the red horizontal line. Let’s see how the density plot changes when we condition on more “extreme” reefs. I use the 0.1 and 0.9 quantiles.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;quantile0.9 &amp;lt;- REquantile(Normal.Disease.Growth, quantile = 0.9, groupFctr = &amp;quot;Reef_Name&amp;quot;)
 #which(sim_rfs_Normal.Disease$groupID == quantile0.9)
@@ -627,7 +848,7 @@ ggplot(aes(x = Estimate*100, col = ID), data = overall) +
    scale_x_continuous(limits = c(0, 10)) + 
    ylab(&amp;quot;&amp;quot;) + 
    labs(col = &amp;quot;R effect&amp;quot;, fill = &amp;quot;Morphology&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;It is evident both the center and the variability of the distributions change depending whether we look an “average” coral reef (purple line), a reef towards the upper extreme (blue line) or the lower extreme (black line). So the conclusions should be something along the lines: the increase in disease likelihood with plastic debris depends also on inherit/unobserved characteristics of the reefs, captured by the random effects, in addition to their morphology.&lt;/p&gt;
 &lt;p&gt;Of course, what I have presented above is still conditional interpretation of the parameters. Ideally, we want the marginal population-average interpretation which is obtained from averaging over the random effects. This allows to take into account both the residual (observation-level) variance, the uncertainty in the variance parameters for the grouping factors added to the uncertainty in the fixed coefficients. See for example the &lt;code&gt;predictInterval()&lt;/code&gt; function of the &lt;a href=&#34;https://cran.r-project.org/web/packages/merTools/merTools.pdf&#34;&gt;&lt;code&gt;merTools&lt;/code&gt;&lt;/a&gt; package.&lt;/p&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
@@ -646,45 +867,48 @@ ggplot(aes(x = Estimate*100, col = ID), data = overall) +
     
     <item>
       <title>On statistical reporting in biomedical journals</title>
-      <link>/post/stat_reporting/on-statistical-reporting-in-biomedical-journals/</link>
+      <link>https://solon-karapanagiotis.com/post/stat_reporting/on-statistical-reporting-in-biomedical-journals/</link>
       <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/stat_reporting/on-statistical-reporting-in-biomedical-journals/</guid>
-      <description>&lt;p&gt;Poor quality statistical reporting in the biomedical literature is not uncommon. Here is another example by &lt;span class=&#34;citation&#34;&gt;Cirio et al. (&lt;a href=&#34;#ref-cirio2016effects&#34;&gt;2016&lt;/a&gt;)&lt;/span&gt;. The study itself is well planed, executed and reported. The aim was to assess whether heated and humidified high flow gases delivered through nasal cannula (HFNC) improve exercise performance in severe chronic obstructive pulmonary disease (COPD) patients. It all started when I saw their Fig.1. Here is my attempt to reproduce it&lt;/p&gt;
+      <guid>https://solon-karapanagiotis.com/post/stat_reporting/on-statistical-reporting-in-biomedical-journals/</guid>
+      <description>
+
+
+&lt;p&gt;Poor quality statistical reporting in the biomedical literature is not uncommon. Here is another example by &lt;span class=&#34;citation&#34;&gt;Cirio et al. (&lt;a href=&#34;#ref-cirio2016effects&#34; role=&#34;doc-biblioref&#34;&gt;2016&lt;/a&gt;)&lt;/span&gt;. The study itself is well planed, executed and reported.
+The aim was to assess whether heated and humidified high flow gases delivered through nasal cannula (HFNC) improve exercise performance in severe chronic obstructive pulmonary disease (COPD) patients. It all started when I saw their Fig.1. Here is my attempt to reproduce it&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:figs&#34;&gt;&lt;/span&gt;
-&lt;img src=&#34;/post/stat_reporting/2018-04-25-on-statistical-reporting-in-biomedical-journals_files/figure-html/figs-1.png&#34; alt=&#34;Effect of the HFNC on exercise capacity compared to a control condition. Tlim = exercise duration.&#34; width=&#34;672&#34; /&gt;
+&lt;img src=&#34;https://solon-karapanagiotis.com/post/stat_reporting/2018-04-25-on-statistical-reporting-in-biomedical-journals_files/figure-html/figs-1.png&#34; alt=&#34;Effect of the HFNC on exercise capacity compared to a control condition. Tlim = exercise duration.&#34; width=&#34;672&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;
 Figure 1: Effect of the HFNC on exercise capacity compared to a control condition. Tlim = exercise duration.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;In total there are 12 patients tested twice; once under the control test and once under the HFNC test. The outcome of interest is the endurance time (Tlim; y axis). This is practically how long each test lasted. The authors hypothesized that HFNC would improve exercise performance, that is the test would last longer. This was the case since Tlim increased for all subjects under the HFNC test (see figure &lt;a href=&#34;#fig:figs&#34;&gt;1&lt;/a&gt;). Moreover, this increase reached statistical significance (p-value = 0.015) - ready to publish! Looking at the plot I was pondered about the “outlying” patient (red dot). His/her Tlim increased by a whooping 400 seconds! This is huge compared to the other patients. Then I wondered how would the results change if we excluded him/her from the analysis? And here is where the problems start.&lt;/p&gt;
 &lt;p&gt;There is no way from the text to figure out which test was used to produce the p-value of 0.015. Is is a paired t-test or a Wilcoxon test? (they mention both in the statistical analysis section). So it is impossible to evaluate and/or try to reproduce the results.&lt;/p&gt;
-&lt;p&gt;Having abandoned the idea of being able to reproduce the analysis I started thinking about reporting guidelines, hence the title of this post. I thought the journal must have guidelines for reporting statistical analysis. No, it does not and unfortunately, most of the biomedical journals don’t have such guidelines even though 40 years ago O’Fallon and colleges recommended that “Standards governing the content and format of statistical aspects should be developed to guide authors in the preparation of manuscripts” &lt;span class=&#34;citation&#34;&gt;(O’Fallon et al. &lt;a href=&#34;#ref-o1978should&#34;&gt;1978&lt;/a&gt;)&lt;/span&gt;. Since then many have repeated the message. A few sporadic attempts are usually editorials such as &lt;span class=&#34;citation&#34;&gt;Cummings and Rivara (&lt;a href=&#34;#ref-cummings2003reporting&#34;&gt;2003&lt;/a&gt;)&lt;/span&gt;, &lt;span class=&#34;citation&#34;&gt;Curran-Everett and Benos (&lt;a href=&#34;#ref-curran2004guidelines&#34;&gt;2004&lt;/a&gt;)&lt;/span&gt; and &lt;span class=&#34;citation&#34;&gt;Arifin et al. (&lt;a href=&#34;#ref-arifin2016reporting&#34;&gt;2016&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;Recently, &lt;span class=&#34;citation&#34;&gt;Lang and Altman (&lt;a href=&#34;#ref-lang2013basic&#34;&gt;2013&lt;/a&gt;)&lt;/span&gt; published a comprehensive set of statistical reporting guidelines suitable for medical journals - the SAMPL guidelines. “The SAMPL guidelines are designed to be included in a journal’s Instructions for Authors”. So the journals just need to refer to them! As there are many general reporting guidelines based on the study design as such CONSORT, STROBE, PRISMA etc (see &lt;a href=&#34;http://www.equator-network.org/&#34; class=&#34;uri&#34;&gt;http://www.equator-network.org/&lt;/a&gt;) that authors in many journals must adhere to, I believe the SAMPL guidelines is a big step forward on reporting statistics. The only journal (that I know of) that suggests the use of the SAMPL guidelines is the British Journal of Dermatology &lt;span class=&#34;citation&#34;&gt;(Hollestein and Nijsten &lt;a href=&#34;#ref-hollestein2015guidelines&#34;&gt;2015&lt;/a&gt;)&lt;/span&gt;. (I’ll keep adding to this list).&lt;/p&gt;
+&lt;p&gt;Having abandoned the idea of being able to reproduce the analysis I started thinking about reporting guidelines, hence the title of this post. I thought the journal must have guidelines for reporting statistical analysis. No, it does not and unfortunately, most of the biomedical journals don’t have such guidelines even though 40 years ago O’Fallon and colleges recommended that “Standards governing the content and format of statistical aspects should be developed to guide authors in the preparation of manuscripts” &lt;span class=&#34;citation&#34;&gt;(O’Fallon et al. &lt;a href=&#34;#ref-o1978should&#34; role=&#34;doc-biblioref&#34;&gt;1978&lt;/a&gt;)&lt;/span&gt;. Since then many have repeated the message. A few sporadic attempts are usually editorials such as &lt;span class=&#34;citation&#34;&gt;Cummings and Rivara (&lt;a href=&#34;#ref-cummings2003reporting&#34; role=&#34;doc-biblioref&#34;&gt;2003&lt;/a&gt;)&lt;/span&gt;, &lt;span class=&#34;citation&#34;&gt;Curran-Everett and Benos (&lt;a href=&#34;#ref-curran2004guidelines&#34; role=&#34;doc-biblioref&#34;&gt;2004&lt;/a&gt;)&lt;/span&gt; and &lt;span class=&#34;citation&#34;&gt;Arifin et al. (&lt;a href=&#34;#ref-arifin2016reporting&#34; role=&#34;doc-biblioref&#34;&gt;2016&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Recently, &lt;span class=&#34;citation&#34;&gt;Lang and Altman (&lt;a href=&#34;#ref-lang2013basic&#34; role=&#34;doc-biblioref&#34;&gt;2013&lt;/a&gt;)&lt;/span&gt; published a comprehensive set of statistical reporting guidelines suitable for medical journals - the SAMPL guidelines. “The SAMPL guidelines are designed to be included in a journal’s Instructions for Authors”. So the journals just need to refer to them! As there are many general reporting guidelines based on the study design as such CONSORT, STROBE, PRISMA etc (see &lt;a href=&#34;http://www.equator-network.org/&#34; class=&#34;uri&#34;&gt;http://www.equator-network.org/&lt;/a&gt;) that authors in many journals must adhere to, I believe the SAMPL guidelines is a big step forward on reporting statistics. The only journal (that I know of) that suggests the use of the SAMPL guidelines is the British Journal of Dermatology &lt;span class=&#34;citation&#34;&gt;(Hollestein and Nijsten &lt;a href=&#34;#ref-hollestein2015guidelines&#34; role=&#34;doc-biblioref&#34;&gt;2015&lt;/a&gt;)&lt;/span&gt;. (I’ll keep adding to this list).&lt;/p&gt;
 &lt;p&gt;Now that the guidelines exist, let’s make use of them.&lt;/p&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;References&lt;/h1&gt;
 &lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
 &lt;div id=&#34;ref-arifin2016reporting&#34;&gt;
-&lt;p&gt;Arifin, Wan Nor, Abdullah Sarimah, Bachok Norsa’adah, Yaacob Najib Majdi, Ab Hamid Siti-Azrin, Musa Kamarul Imran, Abd Aziz Aniza, and Lin Naing. 2016. “Reporting Statistical Results in Medical Journals.” &lt;em&gt;The Malaysian Journal of Medical Sciences: MJMS&lt;/em&gt; 23 (5). School of Medical Sciences, Universiti Sains Malaysia: 1.&lt;/p&gt;
+&lt;p&gt;Arifin, Wan Nor, Abdullah Sarimah, Bachok Norsa’adah, Yaacob Najib Majdi, Ab Hamid Siti-Azrin, Musa Kamarul Imran, Abd Aziz Aniza, and Lin Naing. 2016. “Reporting Statistical Results in Medical Journals.” &lt;em&gt;The Malaysian Journal of Medical Sciences: MJMS&lt;/em&gt; 23 (5): 1.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;ref-cirio2016effects&#34;&gt;
-&lt;p&gt;Cirio, Serena, Manuela Piran, Michele Vitacca, Giancarlo Piaggi, Piero Ceriana, Matteo Prazzoli, Mara Paneroni, and Annalisa Carlucci. 2016. “Effects of Heated and Humidified High Flow Gases During High-Intensity Constant-Load Exercise on Severe Copd Patients with Ventilatory Limitation.” &lt;em&gt;Respiratory Medicine&lt;/em&gt; 118. Elsevier: 128–32.&lt;/p&gt;
+&lt;p&gt;Cirio, Serena, Manuela Piran, Michele Vitacca, Giancarlo Piaggi, Piero Ceriana, Matteo Prazzoli, Mara Paneroni, and Annalisa Carlucci. 2016. “Effects of Heated and Humidified High Flow Gases During High-Intensity Constant-Load Exercise on Severe Copd Patients with Ventilatory Limitation.” &lt;em&gt;Respiratory Medicine&lt;/em&gt; 118: 128–32.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;ref-cummings2003reporting&#34;&gt;
-&lt;p&gt;Cummings, Peter, and Frederick P Rivara. 2003. “Reporting Statistical Information in Medical Journal Articles.” &lt;em&gt;Archives of Pediatrics &amp;amp; Adolescent Medicine&lt;/em&gt; 157 (4). American Medical Association: 321–24.&lt;/p&gt;
+&lt;p&gt;Cummings, Peter, and Frederick P Rivara. 2003. “Reporting Statistical Information in Medical Journal Articles.” &lt;em&gt;Archives of Pediatrics &amp;amp; Adolescent Medicine&lt;/em&gt; 157 (4): 321–24.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;ref-curran2004guidelines&#34;&gt;
 &lt;p&gt;Curran-Everett, Douglas, and Dale J Benos. 2004. “Guidelines for Reporting Statistics in Journals Published by the American Physiological Society.” Am Physiological Soc.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;ref-hollestein2015guidelines&#34;&gt;
-&lt;p&gt;Hollestein, LM, and Tamar Nijsten. 2015. “Guidelines for Statistical Reporting in the British Journal of Dermatology.” &lt;em&gt;British Journal of Dermatology&lt;/em&gt; 173 (1). Wiley Online Library: 3–5.&lt;/p&gt;
+&lt;p&gt;Hollestein, LM, and Tamar Nijsten. 2015. “Guidelines for Statistical Reporting in the British Journal of Dermatology.” &lt;em&gt;British Journal of Dermatology&lt;/em&gt; 173 (1): 3–5.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;ref-lang2013basic&#34;&gt;
-&lt;p&gt;Lang, Thomas A, and Douglas G Altman. 2013. “Basic Statistical Reporting for Articles Published in Biomedical Journals: The ‘Statistical Analyses and Methods in the Published Literature’ or the Sampl Guidelines”.” &lt;em&gt;Handbook, European Association of Science Editors&lt;/em&gt; 256. Wiley Online Library: 256.&lt;/p&gt;
+&lt;p&gt;Lang, Thomas A, and Douglas G Altman. 2013. “Basic Statistical Reporting for Articles Published in Biomedical Journals: The ‘Statistical Analyses and Methods in the Published Literature’ or the Sampl Guidelines”.” &lt;em&gt;Handbook, European Association of Science Editors&lt;/em&gt; 256: 256.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;ref-o1978should&#34;&gt;
-&lt;p&gt;O’Fallon, JR, SD Dubey, DS Salsburg, JH Edmonson, A Soffer, and T Colton. 1978. “Should There Be Statistical Guidelines for Medical Research Papers?” &lt;em&gt;Biometrics&lt;/em&gt;. JSTOR, 687–95.&lt;/p&gt;
+&lt;p&gt;O’Fallon, JR, SD Dubey, DS Salsburg, JH Edmonson, A Soffer, and T Colton. 1978. “Should There Be Statistical Guidelines for Medical Research Papers?” &lt;em&gt;Biometrics&lt;/em&gt;, 687–95.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -693,11 +917,13 @@ Figure 1: Effect of the HFNC on exercise capacity compared to a control conditio
     
     <item>
       <title>Importing Flat Files Into R</title>
-      <link>/post/importflatfiles/importing-flat-files-into-r/</link>
+      <link>https://solon-karapanagiotis.com/post/importflatfiles/importing-flat-files-into-r/</link>
       <pubDate>Tue, 10 Apr 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/importflatfiles/importing-flat-files-into-r/</guid>
-      <description>&lt;p&gt;There are many tutorials for importing data into R focusing on a specific function/package. This one focuses on 3 different packages. You will learn how to import all common formats of flat file data with base R functions and the dedicated &lt;code&gt;readr&lt;/code&gt; and &lt;code&gt;data.table&lt;/code&gt; packages. I first present these three packages and finish with a comparison table between them.&lt;/p&gt;
+      <guid>https://solon-karapanagiotis.com/post/importflatfiles/importing-flat-files-into-r/</guid>
+      <description>
+
+
+&lt;p&gt;There are many tutorials for importing data into R focusing on a specific function/package. This one focuses on 3 different packages. You will learn how to import all common formats of flat file data with base R functions and the dedicated &lt;code&gt;readr&lt;/code&gt; and &lt;code&gt;data.table&lt;/code&gt; packages. I first present these three packages and finish with a comparison table between them.&lt;/p&gt;
 &lt;div id=&#34;task&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Task&lt;/h2&gt;
 &lt;p&gt;Import a flat file into R: create an R object that contains the data from a flat file.&lt;/p&gt;
@@ -724,7 +950,8 @@ Figure 1: Effect of the HFNC on exercise capacity compared to a control conditio
 &lt;/div&gt;
 &lt;div id=&#34;lets-get-going-the-utils&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Let’s get going… the &lt;code&gt;utils&lt;/code&gt;&lt;/h2&gt;
-&lt;p&gt;We start with the &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/&#34;&gt;&lt;code&gt;utils&lt;/code&gt;&lt;/a&gt; package. This package is loaded by default when you start your R session. This means that you can access its functions without further due. Here, we are interested in three of them: &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.table()&lt;/code&gt;&lt;/a&gt;, &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.csv()&lt;/code&gt;&lt;/a&gt;, and &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.delim()&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We start with the &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/&#34;&gt;&lt;code&gt;utils&lt;/code&gt;&lt;/a&gt; package. This package is loaded by default when you start your R session. This means that you can access its functions without further due. Here, we are interested in three of them:
+&lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.table()&lt;/code&gt;&lt;/a&gt;, &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.csv()&lt;/code&gt;&lt;/a&gt;, and &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.delim()&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;div id=&#34;reading-data-with-read.table&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Reading data with &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.table()&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Reads a file in table format and creates an R &lt;strong&gt;data.frame&lt;/strong&gt; from it, with cases corresponding to rows and variables to columns. Let’s see how it works for our dataset.&lt;/p&gt;
@@ -757,13 +984,15 @@ head(happiness)&lt;/code&gt;&lt;/pre&gt;
 ##  $ Gender : chr  &amp;quot;Male&amp;quot; &amp;quot;Female&amp;quot; &amp;quot;Both&amp;quot; &amp;quot;Male&amp;quot; ...
 ##  $ Mean   : num  7.3 7.3 7.3 7.8 7.8 7.8 5.8 5.8 5.8 7.8 ...
 ##  $ N.     : int  471 570 1041 468 542 1010 416 555 971 433 ...&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;By specifying &lt;code&gt;header = TRUE&lt;/code&gt; R sees the that the first line contains the names of the variables. With &lt;code&gt;stringsAsFactors = FALSE&lt;/code&gt; we specify that we wanted &lt;code&gt;Country&lt;/code&gt; and &lt;code&gt;Gender&lt;/code&gt; to be character variables. The &lt;code&gt;sep = &amp;quot;,&amp;quot;&lt;/code&gt; identifies the field separator to be a comma. There are many more arguments you can specify and each one can take many values! For further details, consult the &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;R documentation&lt;/a&gt; or type &lt;code&gt;help(read.table)&lt;/code&gt; on the console.&lt;/p&gt;
+&lt;p&gt;By specifying &lt;code&gt;header = TRUE&lt;/code&gt; R sees the that the first line contains the names of the variables. With &lt;code&gt;stringsAsFactors = FALSE&lt;/code&gt; we specify that we wanted &lt;code&gt;Country&lt;/code&gt; and &lt;code&gt;Gender&lt;/code&gt; to be character variables. The &lt;code&gt;sep = &#34;,&#34;&lt;/code&gt; identifies the field separator to be a comma. There are many more arguments you can specify and each one can take many values!
+For further details, consult the &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;R documentation&lt;/a&gt; or type &lt;code&gt;help(read.table)&lt;/code&gt; on the console.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Note: In order to use &lt;code&gt;read.table()&lt;/code&gt;, in same manner, you need to give the full path name of the target file if it’s not in your working directory. You can use the &lt;a href=&#34;http://rfunction.com/archives/1001&#34;&gt;R Function of the Day&lt;/a&gt;, namely &lt;code&gt;setwd(&amp;quot;&amp;lt;location of your dataset&amp;gt;&amp;quot;)&lt;/code&gt;, to change your working directory. The same is valid for any other function we are going to encounter in this tutorial. Alternatively, you can specify the location of the flat file inside &lt;code&gt;read.table()&lt;/code&gt;. Keep in mind that the specification of the file is platform dependent (Windows, Unix/Linux and OSX).&lt;/p&gt;
+&lt;p&gt;Note: In order to use &lt;code&gt;read.table()&lt;/code&gt;, in same manner, you need to give the full path name of the target file if it’s not in your working directory. You can use the &lt;a href=&#34;http://rfunction.com/archives/1001&#34;&gt;R Function of the Day&lt;/a&gt;, namely &lt;code&gt;setwd(&#34;&amp;lt;location of your dataset&amp;gt;&#34;)&lt;/code&gt;, to change your working directory. The same is valid for any other function we are going to encounter in this tutorial. Alternatively, you can specify the location of the flat file inside &lt;code&gt;read.table()&lt;/code&gt;. Keep in mind that the specification of the file is platform dependent (Windows, Unix/Linux and OSX).&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;read.table(file = &amp;quot;&amp;lt;location of your dataset&amp;gt;&amp;quot;, ...) &lt;/code&gt;&lt;/pre&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Another option is to use &lt;a href=&#34;http://www.rdocumentation.org/packages/base/functions/file.path&#34;&gt;&lt;code&gt;file.path()&lt;/code&gt;&lt;/a&gt;. It constructs the path to a file from components in a platform-independent way. For example,&lt;/p&gt;
+&lt;p&gt;Another option is to use &lt;a href=&#34;http://www.rdocumentation.org/packages/base/functions/file.path&#34;&gt;&lt;code&gt;file.path()&lt;/code&gt;&lt;/a&gt;. It constructs the path to a file from components in a platform-independent way.
+For example,&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;path &amp;lt;- file.path(&amp;quot;~&amp;quot;, &amp;quot;datasets&amp;quot;, &amp;quot;happiness.csv&amp;quot;)     
 
@@ -771,7 +1000,8 @@ happiness &amp;lt;- read.table(file = path,
                         header = TRUE,             
                         sep = &amp;quot;,&amp;quot;,                  
                         stringsAsFactors = FALSE)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;Comment&lt;/strong&gt; The &lt;code&gt;stringsAsFactors&lt;/code&gt; argument is true by default which means that character variables are imported into R as factors, the data type to store categorical variables.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Comment&lt;/strong&gt;
+The &lt;code&gt;stringsAsFactors&lt;/code&gt; argument is true by default which means that character variables are imported into R as factors, the data type to store categorical variables.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;happiness_2 &amp;lt;- read.table(file = &amp;quot;happiness.csv&amp;quot;,    
                         header = TRUE,             
                         sep = &amp;quot;,&amp;quot;,                  
@@ -786,7 +1016,7 @@ happiness &amp;lt;- read.table(file = path,
 &lt;/div&gt;
 &lt;div id=&#34;reading-data-with-read.csv&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Reading data with &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.csv()&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;It is a wrapper around &lt;code&gt;read.table()&lt;/code&gt;. This means that &lt;code&gt;read.csv()&lt;/code&gt; calls &lt;code&gt;read.table()&lt;/code&gt; behind the scenes but with different default arguments. More specifically, the defaults are &lt;code&gt;header = TRUE&lt;/code&gt; and &lt;code&gt;sep = &amp;quot;,&amp;quot;&lt;/code&gt;. These match with the standardized CSV format, where &lt;code&gt;,&lt;/code&gt; is used as a separator and usually the first line contains the names of the columns. Therefore, it saves you time since you need to specify less arguments.&lt;/p&gt;
+&lt;p&gt;It is a wrapper around &lt;code&gt;read.table()&lt;/code&gt;. This means that &lt;code&gt;read.csv()&lt;/code&gt; calls &lt;code&gt;read.table()&lt;/code&gt; behind the scenes but with different default arguments. More specifically, the defaults are &lt;code&gt;header = TRUE&lt;/code&gt; and &lt;code&gt;sep = &#34;,&#34;&lt;/code&gt;. These match with the standardized CSV format, where &lt;code&gt;,&lt;/code&gt; is used as a separator and usually the first line contains the names of the columns. Therefore, it saves you time since you need to specify less arguments.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;read.csv(file = &amp;quot;happiness.csv&amp;quot;,   
                         stringsAsFactors = FALSE)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;which is equivalent to&lt;/p&gt;
@@ -797,7 +1027,7 @@ happiness &amp;lt;- read.table(file = path,
 &lt;/div&gt;
 &lt;div id=&#34;reading-data-with-read.delim&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Reading data with &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.delim()&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;It is also a wrapper of &lt;code&gt;read.table()&lt;/code&gt;. Now the default arguments match with tab-delimited files. More specifically, the defaults are &lt;code&gt;header = TRUE&lt;/code&gt; and &lt;code&gt;sep = &amp;quot;\t&amp;quot;&lt;/code&gt;, since &lt;code&gt;\t&lt;/code&gt; is the field separator in tab-delimited files.&lt;/p&gt;
+&lt;p&gt;It is also a wrapper of &lt;code&gt;read.table()&lt;/code&gt;. Now the default arguments match with tab-delimited files. More specifically, the defaults are &lt;code&gt;header = TRUE&lt;/code&gt; and &lt;code&gt;sep = &#34;\t&#34;&lt;/code&gt;, since &lt;code&gt;\t&lt;/code&gt; is the field separator in tab-delimited files.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;read.delim(file = &amp;quot;happiness.txt&amp;quot;,    
                         stringsAsFactors = FALSE)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;which is equivalent to&lt;/p&gt;
@@ -806,7 +1036,9 @@ happiness &amp;lt;- read.table(file = path,
                         sep = &amp;quot;\t&amp;quot;,                  
                         stringsAsFactors = FALSE)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Both these functions make our lives easier since less arguments need to be specified.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; Locale differences. The standard field delimiters for CSV files are commas. On US versions, the comma is set as default for the “List Separator”, which is okay for CSV files. But on European versions this character is reserved as the Decimal Symbol and the “List Separator” is set by default to the semicolon. Why you should care?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; Locale differences.
+The standard field delimiters for CSV files are commas. On US versions, the comma is set as default for the “List Separator”, which is okay for CSV files. But on European versions this character is reserved as the Decimal Symbol and the “List Separator” is set by default to the semicolon.
+Why you should care?&lt;/p&gt;
 &lt;p&gt;Suppose you try to import the European CSV version &lt;code&gt;happiness_eu.csv&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(happiness_eu)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##   Country.Gender.Mean.N.
@@ -816,7 +1048,7 @@ happiness &amp;lt;- read.table(file = path,
 ## 4        BE,Male,7.8,468
 ## 5        ,Female,7.8,542
 ## 6         ,Both,7.8,1010&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;R performs the operation but clearly not the one we wanted. It’s a data frame with 105 rows but a single variable! To deal with such problems you can use the &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.csv2()&lt;/code&gt;&lt;/a&gt; function. The defaults are &lt;code&gt;sep = &amp;quot;;&amp;quot;&lt;/code&gt; and &lt;code&gt;dec = &amp;quot;,&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;R performs the operation but clearly not the one we wanted. It’s a data frame with 105 rows but a single variable! To deal with such problems you can use the &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.csv2()&lt;/code&gt;&lt;/a&gt; function. The defaults are &lt;code&gt;sep = &#34;;&#34;&lt;/code&gt; and &lt;code&gt;dec = &#34;,&#34;&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;happiness_eu &amp;lt;- read.csv2(file = &amp;quot;happiness_eu.csv&amp;quot;,  
                         stringsAsFactors = FALSE)
 head(happiness_eu)&lt;/code&gt;&lt;/pre&gt;
@@ -835,57 +1067,51 @@ head(happiness_eu)&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;In &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.delim()&lt;/code&gt;&lt;/a&gt; default values are: &lt;code&gt;header = T&lt;/code&gt;, &lt;code&gt;sep = ???\t???&lt;/code&gt;, &lt;code&gt;dec = ???.???&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;In &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.delim2()&lt;/code&gt;&lt;/a&gt; default values are: &lt;code&gt;header = T&lt;/code&gt;, &lt;code&gt;sep = ???\t???&lt;/code&gt;, &lt;code&gt;dec = ???,???&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;readr-an-alternative-to-import-flat-files&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;&lt;a href=&#34;https://cran.r-project.org/web/packages/readr/readr.pdf&#34;&gt;&lt;code&gt;readr&lt;/code&gt;&lt;/a&gt; … an alternative to import flat files&lt;/h2&gt;
-&lt;p&gt;An alternative to the &lt;code&gt;utils&lt;/code&gt; package is the &lt;a href=&#34;https://cran.r-project.org/web/packages/readr/readr.pdf&#34;&gt;&lt;code&gt;readr&lt;/code&gt;&lt;/a&gt;. Compared the &lt;code&gt;read.table&lt;/code&gt; family of functions, it is faster, easier to use and with a consistent naming scheme. We start by installing and loading it.&lt;/p&gt;
+&lt;p&gt;##&lt;a href=&#34;https://cran.r-project.org/web/packages/readr/readr.pdf&#34;&gt;&lt;code&gt;readr&lt;/code&gt;&lt;/a&gt; … an alternative to import flat files&lt;/p&gt;
+&lt;p&gt;An alternative to the &lt;code&gt;utils&lt;/code&gt; package is the &lt;a href=&#34;https://cran.r-project.org/web/packages/readr/readr.pdf&#34;&gt;&lt;code&gt;readr&lt;/code&gt;&lt;/a&gt;. Compared
+the &lt;code&gt;read.table&lt;/code&gt; family of functions, it is faster, easier to use and with a consistent naming scheme. We start by installing and loading it.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;install.packages(&amp;quot;readr&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(readr)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Let’s import our dataset. In &lt;code&gt;readr&lt;/code&gt; you can use &lt;a href=&#34;https://cran.r-project.org/web/packages/readr/readr.pdf&#34;&gt;&lt;code&gt;read_delim()&lt;/code&gt;&lt;/a&gt; for flat files. It can be considered the correspondent to &lt;code&gt;read.table()&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;happiness_readr &amp;lt;- read_delim(&amp;quot;happiness.csv&amp;quot;,        # path to flat file 
                               delim = &amp;quot;,&amp;quot;)            # character that separates fields in the file&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Parsed with column specification:
+&lt;pre&gt;&lt;code&gt;## 
+## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
 ##   Country = col_character(),
 ##   Gender = col_character(),
 ##   Mean = col_double(),
-##   `N=` = col_integer()
+##   `N=` = col_double()
 ## )&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(happiness_readr)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Classes &amp;#39;tbl_df&amp;#39;, &amp;#39;tbl&amp;#39; and &amp;#39;data.frame&amp;#39;:    105 obs. of  4 variables:
-##  $ Country: chr  &amp;quot;AT&amp;quot; NA NA &amp;quot;BE&amp;quot; ...
-##  $ Gender : chr  &amp;quot;Male&amp;quot; &amp;quot;Female&amp;quot; &amp;quot;Both&amp;quot; &amp;quot;Male&amp;quot; ...
-##  $ Mean   : num  7.3 7.3 7.3 7.8 7.8 7.8 5.8 5.8 5.8 7.8 ...
-##  $ N=     : int  471 570 1041 468 542 1010 416 555 971 433 ...
-##  - attr(*, &amp;quot;spec&amp;quot;)=List of 2
-##   ..$ cols   :List of 4
-##   .. ..$ Country: list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_character&amp;quot; &amp;quot;collector&amp;quot;
-##   .. ..$ Gender : list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_character&amp;quot; &amp;quot;collector&amp;quot;
-##   .. ..$ Mean   : list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_double&amp;quot; &amp;quot;collector&amp;quot;
-##   .. ..$ N=     : list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_integer&amp;quot; &amp;quot;collector&amp;quot;
-##   ..$ default: list()
-##   .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_guess&amp;quot; &amp;quot;collector&amp;quot;
-##   ..- attr(*, &amp;quot;class&amp;quot;)= chr &amp;quot;col_spec&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## tibble [105 × 4] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ Country: chr [1:105] &amp;quot;AT&amp;quot; NA NA &amp;quot;BE&amp;quot; ...
+##  $ Gender : chr [1:105] &amp;quot;Male&amp;quot; &amp;quot;Female&amp;quot; &amp;quot;Both&amp;quot; &amp;quot;Male&amp;quot; ...
+##  $ Mean   : num [1:105] 7.3 7.3 7.3 7.8 7.8 7.8 5.8 5.8 5.8 7.8 ...
+##  $ N=     : num [1:105] 471 570 1041 468 542 ...
+##  - attr(*, &amp;quot;spec&amp;quot;)=
+##   .. cols(
+##   ..   Country = col_character(),
+##   ..   Gender = col_character(),
+##   ..   Mean = col_double(),
+##   ..   `N=` = col_double()
+##   .. )&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(happiness_readr)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 4
 ##   Country Gender  Mean  `N=`
-##   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;
-## 1 AT      Male    7.30   471
-## 2 &amp;lt;NA&amp;gt;    Female  7.30   570
-## 3 &amp;lt;NA&amp;gt;    Both    7.30  1041
-## 4 BE      Male    7.80   468
-## 5 &amp;lt;NA&amp;gt;    Female  7.80   542
-## 6 &amp;lt;NA&amp;gt;    Both    7.80  1010&lt;/code&gt;&lt;/pre&gt;
+##   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+## 1 AT      Male     7.3   471
+## 2 &amp;lt;NA&amp;gt;    Female   7.3   570
+## 3 &amp;lt;NA&amp;gt;    Both     7.3  1041
+## 4 BE      Male     7.8   468
+## 5 &amp;lt;NA&amp;gt;    Female   7.8   542
+## 6 &amp;lt;NA&amp;gt;    Both     7.8  1010&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Notice, that the output is the same as when using the &lt;code&gt;read.table()&lt;/code&gt;, previously. But we did not have to specify &lt;code&gt;header=TRUE&lt;/code&gt; because by default &lt;code&gt;read_delim()&lt;/code&gt; expects the first row to contain the column names. This is done through the &lt;code&gt;col_names&lt;/code&gt; argument, set equal to true by default. Also, strings are never automatically converted to factors. Hence, &lt;code&gt;stringsAsFactors = FALSE&lt;/code&gt; is not necessary. To control the types of the columns &lt;code&gt;readr&lt;/code&gt; uses the &lt;code&gt;col_types&lt;/code&gt; argument. Let’s see how these two work.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;col_names&lt;/code&gt; is true by default meaning that it will use the the first row of data as column names. If your file does not have column names you can set &lt;code&gt;col_names = FALSE&lt;/code&gt; and columns will be numbered sequentially.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(read_delim(&amp;quot;happiness2.csv&amp;quot;, delim = &amp;quot;,&amp;quot;,
                               col_names = FALSE))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Parsed with column specification:
+&lt;pre&gt;&lt;code&gt;## 
+## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
 ##   X1 = col_character(),
 ##   X2 = col_character(),
@@ -895,12 +1121,12 @@ head(happiness_eu)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 4
 ##   X1    X2        X3 X4   
 ##   &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;
-## 1 &amp;#39;AT   Male    7.30 471&amp;#39; 
-## 2 &amp;#39;     Female  7.30 570&amp;#39; 
-## 3 &amp;#39;     Both    7.30 1041&amp;#39;
-## 4 &amp;#39;BE   Male    7.80 468&amp;#39; 
-## 5 &amp;#39;     Female  7.80 542&amp;#39; 
-## 6 &amp;#39;     Both    7.80 1010&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+## 1 &amp;#39;AT   Male     7.3 471&amp;#39; 
+## 2 &amp;#39;     Female   7.3 570&amp;#39; 
+## 3 &amp;#39;     Both     7.3 1041&amp;#39;
+## 4 &amp;#39;BE   Male     7.8 468&amp;#39; 
+## 5 &amp;#39;     Female   7.8 542&amp;#39; 
+## 6 &amp;#39;     Both     7.8 1010&amp;#39;&lt;/code&gt;&lt;/pre&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; Instead of assigning the output of &lt;code&gt;read_delim()&lt;/code&gt; to a variable I directly use the &lt;code&gt;head()&lt;/code&gt; function to print the first 6 lines of the data frame. It is equivalent to&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -910,7 +1136,8 @@ head(happiness_delim)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;You can also manually set the column names.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(read_delim(&amp;quot;happiness2.csv&amp;quot;, delim = &amp;quot;,&amp;quot;,
                               col_names = c(&amp;quot;Country&amp;quot;, &amp;quot;Gender&amp;quot;, &amp;quot;Mean&amp;quot;, &amp;quot;N&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Parsed with column specification:
+&lt;pre&gt;&lt;code&gt;## 
+## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
 ##   Country = col_character(),
 ##   Gender = col_character(),
@@ -920,16 +1147,16 @@ head(happiness_delim)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 4
 ##   Country Gender  Mean N    
 ##   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;
-## 1 &amp;#39;AT     Male    7.30 471&amp;#39; 
-## 2 &amp;#39;       Female  7.30 570&amp;#39; 
-## 3 &amp;#39;       Both    7.30 1041&amp;#39;
-## 4 &amp;#39;BE     Male    7.80 468&amp;#39; 
-## 5 &amp;#39;       Female  7.80 542&amp;#39; 
-## 6 &amp;#39;       Both    7.80 1010&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+## 1 &amp;#39;AT     Male     7.3 471&amp;#39; 
+## 2 &amp;#39;       Female   7.3 570&amp;#39; 
+## 3 &amp;#39;       Both     7.3 1041&amp;#39;
+## 4 &amp;#39;BE     Male     7.8 468&amp;#39; 
+## 5 &amp;#39;       Female   7.8 542&amp;#39; 
+## 6 &amp;#39;       Both     7.8 1010&amp;#39;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;As mentioned, there is &lt;code&gt;col_types&lt;/code&gt; to control the column classes. If you leave the default value &lt;code&gt;readr&lt;/code&gt; heuristically inspects the first 100 rows to guess the type of each column.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sapply(happiness_readr, class)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##     Country      Gender        Mean          N= 
-## &amp;quot;character&amp;quot; &amp;quot;character&amp;quot;   &amp;quot;numeric&amp;quot;   &amp;quot;integer&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+## &amp;quot;character&amp;quot; &amp;quot;character&amp;quot;   &amp;quot;numeric&amp;quot;   &amp;quot;numeric&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If you want to override the default column types you can also specify them manually. An option would be&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;happiness_readr2 &amp;lt;- read_delim(&amp;quot;happiness.csv&amp;quot;, delim = &amp;quot;,&amp;quot;, 
                                col_types = &amp;quot;ccni&amp;quot;)
@@ -950,12 +1177,12 @@ sapply(happiness_readr2, class)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 3
 ##   Country Gender  Mean
 ##   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;  &amp;lt;dbl&amp;gt;
-## 1 AT      Male    7.30
-## 2 &amp;lt;NA&amp;gt;    Female  7.30
-## 3 &amp;lt;NA&amp;gt;    Both    7.30
-## 4 BE      Male    7.80
-## 5 &amp;lt;NA&amp;gt;    Female  7.80
-## 6 &amp;lt;NA&amp;gt;    Both    7.80&lt;/code&gt;&lt;/pre&gt;
+## 1 AT      Male     7.3
+## 2 &amp;lt;NA&amp;gt;    Female   7.3
+## 3 &amp;lt;NA&amp;gt;    Both     7.3
+## 4 BE      Male     7.8
+## 5 &amp;lt;NA&amp;gt;    Female   7.8
+## 6 &amp;lt;NA&amp;gt;    Both     7.8&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Notice the fourth column has been skipped.&lt;/p&gt;
 &lt;p&gt;Yet another way of setting the types of the imported columns is using collectors. Collector functions can be passed in a &lt;a href=&#34;http://www.rdocumentation.org/packages/base/functions/list&#34;&gt;&lt;code&gt;list()&lt;/code&gt;&lt;/a&gt; to the &lt;code&gt;col_types&lt;/code&gt; argument of &lt;code&gt;read_&lt;/code&gt; functions to tell them how to interpret values in a column.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;car &amp;lt;- col_character()
@@ -965,51 +1192,44 @@ int &amp;lt;- col_integer()
 
 str(read_delim(&amp;quot;happiness.csv&amp;quot;, delim = &amp;quot;,&amp;quot; , 
                            col_types = list(car, fac, num, int)))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Classes &amp;#39;tbl_df&amp;#39;, &amp;#39;tbl&amp;#39; and &amp;#39;data.frame&amp;#39;:    105 obs. of  4 variables:
-##  $ Country: chr  &amp;quot;AT&amp;quot; NA NA &amp;quot;BE&amp;quot; ...
+&lt;pre&gt;&lt;code&gt;## tibble [105 × 4] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ Country: chr [1:105] &amp;quot;AT&amp;quot; NA NA &amp;quot;BE&amp;quot; ...
 ##  $ Gender : Factor w/ 3 levels &amp;quot;Male&amp;quot;,&amp;quot;Female&amp;quot;,..: 1 2 3 1 2 3 1 2 3 1 ...
-##  $ Mean   : num  7.3 7.3 7.3 7.8 7.8 7.8 5.8 5.8 5.8 7.8 ...
-##  $ N=     : int  471 570 1041 468 542 1010 416 555 971 433 ...
-##  - attr(*, &amp;quot;spec&amp;quot;)=List of 2
-##   ..$ cols   :List of 4
-##   .. ..$ Country: list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_character&amp;quot; &amp;quot;collector&amp;quot;
-##   .. ..$ Gender :List of 3
-##   .. .. ..$ levels    : chr  &amp;quot;Male&amp;quot; &amp;quot;Female&amp;quot; &amp;quot;Both&amp;quot;
-##   .. .. ..$ ordered   : logi FALSE
-##   .. .. ..$ include_na: logi FALSE
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_factor&amp;quot; &amp;quot;collector&amp;quot;
-##   .. ..$ Mean   : list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_number&amp;quot; &amp;quot;collector&amp;quot;
-##   .. ..$ N=     : list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_integer&amp;quot; &amp;quot;collector&amp;quot;
-##   ..$ default: list()
-##   .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_guess&amp;quot; &amp;quot;collector&amp;quot;
-##   ..- attr(*, &amp;quot;class&amp;quot;)= chr &amp;quot;col_spec&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+##  $ Mean   : num [1:105] 7.3 7.3 7.3 7.8 7.8 7.8 5.8 5.8 5.8 7.8 ...
+##  $ N=     : int [1:105] 471 570 1041 468 542 1010 416 555 971 433 ...
+##  - attr(*, &amp;quot;spec&amp;quot;)=
+##   .. cols(
+##   ..   Country = col_character(),
+##   ..   Gender = col_factor(levels = c(&amp;quot;Male&amp;quot;, &amp;quot;Female&amp;quot;, &amp;quot;Both&amp;quot;), ordered = FALSE, include_na = FALSE),
+##   ..   Mean = col_number(),
+##   ..   `N=` = col_integer()
+##   .. )&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;For a complete list of collector functions, you can take a look at the &lt;a href=&#34;https://cran.r-project.org/web/packages/readr/readr.pdf&#34;&gt;&lt;code&gt;collector&lt;/code&gt;&lt;/a&gt; documentation.&lt;/p&gt;
 &lt;p&gt;If you are working on large datasets you may prefer handling the data in smaller parts. In &lt;code&gt;readr&lt;/code&gt; you can achieve this with the combination of &lt;code&gt;skip&lt;/code&gt; and &lt;code&gt;n_max&lt;/code&gt; arguments.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(read_delim(&amp;quot;happiness.csv&amp;quot;, delim = &amp;quot;,&amp;quot;,
                 skip=2, n_max= 4))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Warning: Missing column names filled in: &amp;#39;X1&amp;#39; [1]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Parsed with column specification:
+&lt;pre&gt;&lt;code&gt;## 
+## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
 ##   X1 = col_character(),
 ##   Female = col_character(),
 ##   `7.3` = col_double(),
-##   `570` = col_integer()
+##   `570` = col_double()
 ## )&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 4 x 4
 ##   X1    Female `7.3` `570`
-##   &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;
-## 1 &amp;lt;NA&amp;gt;  Both    7.30  1041
-## 2 BE    Male    7.80   468
-## 3 &amp;lt;NA&amp;gt;  Female  7.80   542
-## 4 &amp;lt;NA&amp;gt;  Both    7.80  1010&lt;/code&gt;&lt;/pre&gt;
+##   &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+## 1 &amp;lt;NA&amp;gt;  Both     7.3  1041
+## 2 BE    Male     7.8   468
+## 3 &amp;lt;NA&amp;gt;  Female   7.8   542
+## 4 &amp;lt;NA&amp;gt;  Both     7.8  1010&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We skipped two rows and then read four lines. There is something wrong though! Since the &lt;code&gt;col_names&lt;/code&gt; is true by default the first line is used for the column names. Therefore, we need to manually specify the column names.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(read_delim(&amp;quot;happiness2.csv&amp;quot;, delim = &amp;quot;,&amp;quot;,
                               col_names = c(&amp;quot;Country&amp;quot;,&amp;quot;Gender&amp;quot;, &amp;quot;Mean&amp;quot;, &amp;quot;N&amp;quot;), 
                               skip=2, n_max= 4))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Parsed with column specification:
+&lt;pre&gt;&lt;code&gt;## 
+## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
 ##   Country = col_character(),
 ##   Gender = col_character(),
@@ -1019,10 +1239,10 @@ str(read_delim(&amp;quot;happiness.csv&amp;quot;, delim = &amp;quot;,&amp;quot; 
 &lt;pre&gt;&lt;code&gt;## # A tibble: 4 x 4
 ##   Country Gender  Mean N    
 ##   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;
-## 1 &amp;#39;       Both    7.30 1041&amp;#39;
-## 2 &amp;#39;BE     Male    7.80 468&amp;#39; 
-## 3 &amp;#39;       Female  7.80 542&amp;#39; 
-## 4 &amp;#39;       Both    7.80 1010&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+## 1 &amp;#39;       Both     7.3 1041&amp;#39;
+## 2 &amp;#39;BE     Male     7.8 468&amp;#39; 
+## 3 &amp;#39;       Female   7.8 542&amp;#39; 
+## 4 &amp;#39;       Both     7.8 1010&amp;#39;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Like the &lt;code&gt;utils&lt;/code&gt; package &lt;code&gt;readr&lt;/code&gt; provides alternatives to &lt;code&gt;read_delim()&lt;/code&gt;. The &lt;a href=&#34;https://cran.r-project.org/web/packages/readr/readr.pdf&#34;&gt;&lt;code&gt;read_csv()&lt;/code&gt;&lt;/a&gt; and &lt;a href=&#34;https://cran.r-project.org/web/packages/readr/readr.pdf&#34;&gt;&lt;code&gt;read_tsv()&lt;/code&gt;&lt;/a&gt; are used for CSV files and tab-delimited files, respectively. The functions of both packages are presented below. Notice the &lt;code&gt;_&lt;/code&gt; is used in &lt;code&gt;readr&lt;/code&gt; instead of the &lt;code&gt;.&lt;/code&gt;.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -1046,6 +1266,7 @@ str(read_delim(&amp;quot;happiness.csv&amp;quot;, delim = &amp;quot;,&amp;quot; 
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;data.table-yet-another-alternative-to-read-data-into-r&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;&lt;a href=&#34;http://www.rdocumentation.org/packages/data.table&#34;&gt;&lt;code&gt;data.table&lt;/code&gt;&lt;/a&gt; … yet another alternative to read data into R&lt;/h2&gt;
@@ -1107,11 +1328,12 @@ str(read_delim(&amp;quot;happiness.csv&amp;quot;, delim = &amp;quot;,&amp;quot; 
 &lt;p&gt;which is equivalent to&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(fread(&amp;quot;happiness.csv&amp;quot;, drop = c(&amp;quot;Country&amp;quot;,&amp;quot;N=&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;In short, &lt;code&gt;fread()&lt;/code&gt; saves you work by automatically guessing the delimiter, whether or not the file has a header, how many lines to skip by default, providing an easy way to select variables and more. Nevertheless, if you wish to specify them, you can do it, along with other arguments. Check the &lt;a href=&#34;http://www.rdocumentation.org/packages/data.table/functions/fread&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Comment&lt;/strong&gt; You might have noticed by now that the &lt;code&gt;fread()&lt;/code&gt; function produces data frames that look slightly different when you print them out. That’s because another class is assigned to the resulting data frames, namely &lt;code&gt;data.table&lt;/code&gt; and &lt;code&gt;data.frame&lt;/code&gt;. &lt;code&gt;read_delim()&lt;/code&gt; creates an object with three classes: &lt;code&gt;tbl_df&lt;/code&gt;, &lt;code&gt;tbl&lt;/code&gt; and &lt;code&gt;data.frame&lt;/code&gt;. The printout of such data.table objects is different. Well, it allows for a different treatment of the printouts, for example.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Comment&lt;/strong&gt;
+You might have noticed by now that the &lt;code&gt;fread()&lt;/code&gt; function produces data frames that look slightly different when you print them out. That’s because another class is assigned to the resulting data frames, namely &lt;code&gt;data.table&lt;/code&gt; and &lt;code&gt;data.frame&lt;/code&gt;. &lt;code&gt;read_delim()&lt;/code&gt; creates an object with three classes: &lt;code&gt;tbl_df&lt;/code&gt;, &lt;code&gt;tbl&lt;/code&gt; and &lt;code&gt;data.frame&lt;/code&gt;. The printout of such data.table objects is different. Well, it allows for a different treatment of the printouts, for example.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;when-to-use-read.table-read_delim-or-fread&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;When to use &lt;code&gt;read.table()&lt;/code&gt;, &lt;code&gt;read_delim()&lt;/code&gt; or &lt;code&gt;fread()&lt;/code&gt;&lt;/h2&gt;
-&lt;p&gt;In a nutshell, the main differences between these functions are : the &lt;code&gt;read_&lt;/code&gt; functions from the &lt;code&gt;readr&lt;/code&gt; package have more consistent naming scheme for the parameters (e.g. &lt;code&gt;col_names&lt;/code&gt; and &lt;code&gt;col_types&lt;/code&gt;) than &lt;code&gt;read.&lt;/code&gt; and all functions work exactly the same way regardless of the current locale (to override the US-centric defaults, use &lt;code&gt;locale()&lt;/code&gt;). It is also faster! But &lt;code&gt;fread()&lt;/code&gt; is even faster! And it saves you work by automatically guessing parameters. This &lt;a href=&#34;https://cran.r-project.org/web/packages/readr/README.html&#34;&gt;README&lt;/a&gt; goes in more detail.&lt;/p&gt;
+&lt;p&gt;In a nutshell, the main differences between these functions are : the &lt;code&gt;read_&lt;/code&gt; functions from the &lt;code&gt;readr&lt;/code&gt; package have more consistent naming scheme for the parameters (e.g. &lt;code&gt;col_names&lt;/code&gt; and &lt;code&gt;col_types&lt;/code&gt;) than &lt;code&gt;read.&lt;/code&gt; and all functions work exactly the same way regardless of the current locale (to override the US-centric defaults, use &lt;code&gt;locale()&lt;/code&gt;). It is also faster! But &lt;code&gt;fread()&lt;/code&gt; is even faster! And it saves you work by automatically guessing parameters. This &lt;a href=&#34;https://cran.r-project.org/web/packages/readr/README.html&#34;&gt;README&lt;/a&gt; goes in more detail.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr class=&#34;header&#34;&gt;
@@ -1154,272 +1376,310 @@ str(read_delim(&amp;quot;happiness.csv&amp;quot;, delim = &amp;quot;,&amp;quot; 
     
     <item>
       <title>Development and External Validation of Prediction Models for 10-Year Survival of Invasive Breast Cancer. Comparison with PREDICT and CancerMath</title>
-      <link>/publication/clinicalcancerresearch/</link>
+      <link>https://solon-karapanagiotis.com/publication/clinicalcancerresearch/</link>
       <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/clinicalcancerresearch/</guid>
+      <guid>https://solon-karapanagiotis.com/publication/clinicalcancerresearch/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>Example Talk</title>
-      <link>/talk/example-talk/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/talk/example-talk/</guid>
-      <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://sourcethemes.com/academic/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
-</description>
     </item>
     
     <item>
       <title>Ventilatory limitation and dynamic hyperinflation during exercise testing in Cystic Fibrosis</title>
-      <link>/publication/ventilatorylimitation/</link>
+      <link>https://solon-karapanagiotis.com/publication/ventilatorylimitation/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/ventilatorylimitation/</guid>
+      <guid>https://solon-karapanagiotis.com/publication/ventilatorylimitation/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Deep Learning</title>
-      <link>/project/deep-learning/</link>
+      <title>External Project</title>
+      <link>https://solon-karapanagiotis.com/project/external-project/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/project/deep-learning/</guid>
+      <guid>https://solon-karapanagiotis.com/project/external-project/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Internal Project</title>
+      <link>https://solon-karapanagiotis.com/project/internal-project/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/project/internal-project/</guid>
       <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
-
 &lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
-
 &lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
-
 &lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
-
 &lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
 </description>
     </item>
     
     <item>
-      <title>External Project</title>
-      <link>/project/example-external-project/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/project/example-external-project/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Academic: the website designer for Hugo</title>
-      <link>/post/getting-started/</link>
-      <pubDate>Wed, 20 Apr 2016 00:00:00 +0100</pubDate>
-      
-      <guid>/post/getting-started/</guid>
-      <description>
+      <title>Welcome to Wowchemy, the website builder for Hugo</title>
+      <link>https://solon-karapanagiotis.com/post/getting-started/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/getting-started/</guid>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;The Wowchemy website builder for Hugo, along with its starter templates, is designed for professional creators, educators, and teams/organizations - although it can be used to create any kind of site&lt;/li&gt;
+&lt;li&gt;The template can be modified and customised to suit your needs. It&amp;rsquo;s a good platform for anyone looking to take control of their data and online identity whilst having the convenience to start off with a &lt;strong&gt;no-code solution (write in Markdown and customize with YAML parameters)&lt;/strong&gt; and having &lt;strong&gt;flexibility to later add even deeper personalization with HTML and CSS&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;You can work with all your favourite tools and apps with hundreds of plugins and integrations to speed up your workflows, interact with your readers, and much more&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;&lt;strong&gt;Academic&lt;/strong&gt; is a framework to help you create a beautiful website quickly. Perfect for personal sites, blogs, or business/project sites. &lt;a href=&#34;https://themes.gohugo.io/theme/academic/&#34; target=&#34;_blank&#34;&gt;Check out the latest demo&lt;/a&gt; of what you&amp;rsquo;ll get in less than 10 minutes. Then head on over to the &lt;a href=&#34;https://sourcethemes.com/academic/docs/&#34; target=&#34;_blank&#34;&gt;Quick Start guide&lt;/a&gt; or take a look at the &lt;a href=&#34;https://sourcethemes.com/academic/updates/&#34; target=&#34;_blank&#34;&gt;Release Notes&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://github.com/gcushen/hugo-academic/&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/academic.png&#34; alt=&#34;Screenshot&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Key features:&lt;/p&gt;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-the-template-is-mobile-first-with-a-responsive-design-to-ensure-that-your-site-looks-stunning-on-every-device&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://raw.githubusercontent.com/wowchemy/wowchemy-hugo-modules/master/academic.png&#34; data-caption=&#34;The template is mobile first with a responsive design to ensure that your site looks stunning on every device.&#34;&gt;
+
+
+  &lt;img src=&#34;https://raw.githubusercontent.com/wowchemy/wowchemy-hugo-modules/master/academic.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    The template is mobile first with a responsive design to ensure that your site looks stunning on every device.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;h2 id=&#34;get-started&#34;&gt;Get Started&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;Easily manage various content including homepage, blog posts, publications, talks, and projects&lt;/li&gt;
-&lt;li&gt;Extensible via &lt;strong&gt;color themes&lt;/strong&gt; and &lt;strong&gt;widgets/plugins&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Write in &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;Markdown&lt;/a&gt; for easy formatting and code highlighting, with &lt;a href=&#34;https://en.wikibooks.org/wiki/LaTeX/Mathematics&#34; target=&#34;_blank&#34;&gt;LaTeX&lt;/a&gt; for mathematical expressions&lt;/li&gt;
-&lt;li&gt;Social/academic network linking, &lt;a href=&#34;https://analytics.google.com&#34; target=&#34;_blank&#34;&gt;Google Analytics&lt;/a&gt;, and &lt;a href=&#34;https://disqus.com&#34; target=&#34;_blank&#34;&gt;Disqus&lt;/a&gt; comments&lt;/li&gt;
-&lt;li&gt;Responsive and mobile friendly&lt;/li&gt;
-&lt;li&gt;Simple and refreshing one page design&lt;/li&gt;
-&lt;li&gt;Multilingual and easy to customize&lt;/li&gt;
+&lt;li&gt;👉 &lt;a href=&#34;https://wowchemy.com/templates/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Create a new site&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;📚 &lt;a href=&#34;https://wowchemy.com/docs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Personalize your site&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;💬 &lt;a href=&#34;https://discord.gg/z8wNYzb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Chat with the &lt;strong&gt;Wowchemy community&lt;/strong&gt;&lt;/a&gt; or &lt;a href=&#34;https://discourse.gohugo.io&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Hugo community&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;🐦 Twitter: &lt;a href=&#34;https://twitter.com/wowchemy&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;@wowchemy&lt;/a&gt; &lt;a href=&#34;https://twitter.com/GeorgeCushen&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;@GeorgeCushen&lt;/a&gt; &lt;a href=&#34;https://twitter.com/search?q=%28%23MadeWithWowchemy%20OR%20%23MadeWithAcademic%29&amp;amp;src=typed_query&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;#MadeWithWowchemy&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;💡 &lt;a href=&#34;https://github.com/wowchemy/wowchemy-hugo-modules/issues&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Request a &lt;strong&gt;feature&lt;/strong&gt; or report a &lt;strong&gt;bug&lt;/strong&gt; for &lt;em&gt;Wowchemy&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;⬆️ &lt;strong&gt;Updating Wowchemy?&lt;/strong&gt; View the &lt;a href=&#34;https://wowchemy.com/docs/update/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Update Guide&lt;/a&gt; and &lt;a href=&#34;https://wowchemy.com/updates/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Release Notes&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h2 id=&#34;color-themes&#34;&gt;Color Themes&lt;/h2&gt;
-
-&lt;p&gt;Academic is available in different color themes and font themes.&lt;/p&gt;
-
-
-
-&lt;div class=&#34;gallery&#34;&gt;
-  
-  
-  
-  
-    
-  
-  &lt;a data-fancybox=&#34;gallery-1&#34; data-caption=&#34;Default&#34; href=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-default.png&#34;&gt;
-    &lt;img alt=&#34;&#34; src=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-default.png&#34;&gt;
-  &lt;/a&gt;
-  
-  
-  
-  
-    
-  
-  &lt;a data-fancybox=&#34;gallery-1&#34; data-caption=&#34;Ocean&#34; href=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-ocean.png&#34;&gt;
-    &lt;img alt=&#34;&#34; src=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-ocean.png&#34;&gt;
-  &lt;/a&gt;
-  
-  
-  
-  
-    
-  
-  &lt;a data-fancybox=&#34;gallery-1&#34; data-caption=&#34;Dark&#34; href=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-dark.png&#34;&gt;
-    &lt;img alt=&#34;&#34; src=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-dark.png&#34;&gt;
-  &lt;/a&gt;
-  
-  
-  
-  
-    
-  
-  &lt;a data-fancybox=&#34;gallery-1&#34; data-caption=&#34;Default&#34; href=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-forest.png&#34;&gt;
-    &lt;img alt=&#34;&#34; src=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-forest.png&#34;&gt;
-  &lt;/a&gt;
-  
-  
-  
-  
-    
-  
-  &lt;a data-fancybox=&#34;gallery-1&#34; data-caption=&#34;Coffee theme with Playfair font&#34; href=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-coffee-playfair.png&#34;&gt;
-    &lt;img alt=&#34;&#34; src=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-coffee-playfair.png&#34;&gt;
-  &lt;/a&gt;
-  
-  
-  
-  
-    
-  
-  &lt;a data-fancybox=&#34;gallery-1&#34; data-caption=&#34;1950s&#34; href=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-1950s.png&#34;&gt;
-    &lt;img alt=&#34;&#34; src=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-1950s.png&#34;&gt;
-  &lt;/a&gt;
-  
-&lt;/div&gt;
-
-&lt;h2 id=&#34;install&#34;&gt;Install&lt;/h2&gt;
-
-&lt;p&gt;You can choose from one of the following four methods to install:&lt;/p&gt;
-
+&lt;h2 id=&#34;crowd-funded-open-source-software&#34;&gt;Crowd-funded open-source software&lt;/h2&gt;
+&lt;p&gt;To help us develop this template and software sustainably under the MIT license, we ask all individuals and businesses that use it to help support its ongoing maintenance and development via sponsorship.&lt;/p&gt;
+&lt;h3 id=&#34;-click-here-to-become-a-sponsor-and-help-support-wowchemys-future-httpswowchemycomplans&#34;&gt;&lt;a href=&#34;https://wowchemy.com/plans/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;❤️ Click here to become a sponsor and help support Wowchemy&amp;rsquo;s future ❤️&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;As a token of appreciation for sponsoring, you can &lt;strong&gt;unlock &lt;a href=&#34;https://wowchemy.com/plans/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;these&lt;/a&gt; awesome rewards and extra features 🦄✨&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;ecosystem&#34;&gt;Ecosystem&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;one-click install using your web browser (recommended)&lt;/li&gt;
-&lt;li&gt;install on your computer using Git with the Command Prompt/Terminal app&lt;/li&gt;
-&lt;li&gt;install on your computer by downloading the ZIP files&lt;/li&gt;
-&lt;li&gt;install on your computer with RStudio&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/wowchemy/wowchemy-admin/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Wowchemy Admin&lt;/a&gt;:&lt;/strong&gt; An admin tool to automatically import publications from BibTeX&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h3 id=&#34;quick-install-using-your-web-browser&#34;&gt;Quick install using your web browser&lt;/h3&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;https://app.netlify.com/start/deploy?repository=https://github.com/sourcethemes/academic-kickstart&#34; target=&#34;_blank&#34;&gt;Install Academic with Netlify&lt;/a&gt;
-
+&lt;h2 id=&#34;inspiration&#34;&gt;Inspiration&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://academic-demo.netlify.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Check out the latest &lt;strong&gt;demo&lt;/strong&gt;&lt;/a&gt; of what you&amp;rsquo;ll get in less than 10 minutes, or &lt;a href=&#34;https://wowchemy.com/user-stories/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;view the &lt;strong&gt;showcase&lt;/strong&gt;&lt;/a&gt; of personal, project, and business sites.&lt;/p&gt;
+&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;Netlify will provide you with a customizable URL to access your new site&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;On GitHub, go to your newly created &lt;code&gt;academic-kickstart&lt;/code&gt; repository and edit &lt;code&gt;config.toml&lt;/code&gt; to personalize your site. Shortly after saving the file, your site will automatically update&lt;/li&gt;
-&lt;li&gt;Read the &lt;a href=&#34;https://sourcethemes.com/academic/docs/&#34; target=&#34;_blank&#34;&gt;Quick Start Guide&lt;/a&gt; to learn how to add Markdown content. For inspiration, refer to the &lt;a href=&#34;https://github.com/gcushen/hugo-academic/tree/master/exampleSite&#34; target=&#34;_blank&#34;&gt;Markdown content&lt;/a&gt; which powers the &lt;a href=&#34;https://themes.gohugo.io/theme/academic/&#34; target=&#34;_blank&#34;&gt;Demo&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&#34;install-with-git&#34;&gt;Install with Git&lt;/h3&gt;
-
-&lt;p&gt;Prerequisites:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://git-scm.com/downloads&#34; target=&#34;_blank&#34;&gt;Download and install Git&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://gohugo.io/getting-started/installing/#quick-install&#34; target=&#34;_blank&#34;&gt;Download and install Hugo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Page builder&lt;/strong&gt; - Create &lt;em&gt;anything&lt;/em&gt; with &lt;a href=&#34;https://wowchemy.com/docs/page-builder/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;widgets&lt;/strong&gt;&lt;/a&gt; and &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;elements&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Edit any type of content&lt;/strong&gt; - Blog posts, publications, talks, slides, projects, and more!&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Create content&lt;/strong&gt; in &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Markdown&lt;/strong&gt;&lt;/a&gt;, &lt;a href=&#34;https://wowchemy.com/docs/import/jupyter/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Jupyter&lt;/strong&gt;&lt;/a&gt;, or &lt;a href=&#34;https://wowchemy.com/docs/install-locally/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;RStudio&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Plugin System&lt;/strong&gt; - Fully customizable &lt;a href=&#34;https://wowchemy.com/docs/customization/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;color&lt;/strong&gt; and &lt;strong&gt;font themes&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Display Code and Math&lt;/strong&gt; - Code highlighting and &lt;a href=&#34;https://en.wikibooks.org/wiki/LaTeX/Mathematics&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;LaTeX math&lt;/a&gt; supported&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Integrations&lt;/strong&gt; - &lt;a href=&#34;https://analytics.google.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Google Analytics&lt;/a&gt;, &lt;a href=&#34;https://disqus.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Disqus commenting&lt;/a&gt;, Maps, Contact Forms, and more!&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Beautiful Site&lt;/strong&gt; - Simple and refreshing one page design&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Industry-Leading SEO&lt;/strong&gt; - Help get your website found on search engines and social media&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Media Galleries&lt;/strong&gt; - Display your images and videos with captions in a customizable gallery&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mobile Friendly&lt;/strong&gt; - Look amazing on every screen with a mobile friendly version of your site&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multi-language&lt;/strong&gt; - 34+ language packs including English, 中文, and Português&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multi-user&lt;/strong&gt; - Each author gets their own profile page&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Privacy Pack&lt;/strong&gt; - Assists with GDPR&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stand Out&lt;/strong&gt; - Bring your site to life with animation, parallax backgrounds, and scroll effects&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;One-Click Deployment&lt;/strong&gt; - No servers. No databases. Only files.&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/sourcethemes/academic-kickstart#fork-destination-box&#34; target=&#34;_blank&#34;&gt;Fork&lt;/a&gt; the &lt;em&gt;Academic Kickstart&lt;/em&gt; repository and clone your fork with Git:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/sourcethemes/academic-kickstart.git My_Website
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;Note that if you forked Academic Kickstart, the above command should be edited to clone your fork, i.e. replace &lt;code&gt;sourcethemes&lt;/code&gt; with your GitHub username.&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Initialize the theme:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;cd My_Website
-git submodule update --init --recursive
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&#34;install-with-zip&#34;&gt;Install with ZIP&lt;/h3&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/sourcethemes/academic-kickstart/archive/master.zip&#34; target=&#34;_blank&#34;&gt;Download&lt;/a&gt; and extract &lt;em&gt;Academic Kickstart&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/gcushen/hugo-academic/archive/master.zip&#34; target=&#34;_blank&#34;&gt;Download&lt;/a&gt; and extract the &lt;em&gt;Academic theme&lt;/em&gt; to the &lt;code&gt;themes/academic/&lt;/code&gt; folder from the above step&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&#34;install-with-rstudio&#34;&gt;Install with RStudio&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-rstudio&#34; target=&#34;_blank&#34;&gt;View the guide to installing Academic with RStudio&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;quick-start&#34;&gt;Quick start&lt;/h2&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;If you installed on your computer, view your new website by running the following command:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hugo server
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now visit &lt;a href=&#34;http://localhost:1313&#34; target=&#34;_blank&#34;&gt;localhost:1313&lt;/a&gt; and your new Academic powered website will appear. Otherwise, if using Netlify, they will provide you with your URL.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Read the &lt;a href=&#34;https://sourcethemes.com/academic/docs/&#34; target=&#34;_blank&#34;&gt;Quick Start Guide&lt;/a&gt; to learn how to add Markdown content, customize your site, and deploy it. For inspiration, refer to the &lt;a href=&#34;https://github.com/gcushen/hugo-academic/tree/master/exampleSite&#34; target=&#34;_blank&#34;&gt;Markdown content&lt;/a&gt; which powers the &lt;a href=&#34;https://themes.gohugo.io/theme/academic/&#34; target=&#34;_blank&#34;&gt;Demo&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Build your site by running the &lt;code&gt;hugo&lt;/code&gt; command. Then &lt;a href=&#34;https://georgecushen.com/create-your-website-with-hugo/&#34; target=&#34;_blank&#34;&gt;host it for free using Github Pages&lt;/a&gt; or Netlify (refer to the first installation method). Alternatively, copy the generated &lt;code&gt;public/&lt;/code&gt; directory (by FTP, Rsync, etc.) to your production web server (such as a university&amp;rsquo;s hosting service).&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&#34;updating&#34;&gt;Updating&lt;/h2&gt;
-
-&lt;p&gt;Feel free to &lt;em&gt;star&lt;/em&gt; the project on &lt;a href=&#34;https://github.com/gcushen/hugo-academic/&#34; target=&#34;_blank&#34;&gt;Github&lt;/a&gt; to help keep track of updates and check out the &lt;a href=&#34;https://sourcethemes.com/academic/updates&#34; target=&#34;_blank&#34;&gt;release notes&lt;/a&gt; prior to updating your site.&lt;/p&gt;
-
-&lt;p&gt;Before updating the framework, it is recommended to make a backup of your entire website directory (or at least your &lt;code&gt;themes/academic&lt;/code&gt; directory) and record your current version number.&lt;/p&gt;
-
-&lt;p&gt;By default, Academic is installed as a Git submodule which can be updated by running the following command:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git submodule update --remote --merge
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/update/&#34; target=&#34;_blank&#34;&gt;Check out the update guide&lt;/a&gt; for full instructions and alternative methods.&lt;/p&gt;
-
-&lt;h2 id=&#34;feedback-contributing&#34;&gt;Feedback &amp;amp; Contributing&lt;/h2&gt;
-
-&lt;p&gt;Please use the &lt;a href=&#34;https://github.com/gcushen/hugo-academic/issues&#34; target=&#34;_blank&#34;&gt;issue tracker&lt;/a&gt; to let me know about any bugs or feature requests, or alternatively make a pull request.&lt;/p&gt;
-
-&lt;p&gt;For support, head over to the &lt;a href=&#34;http://discuss.gohugo.io&#34; target=&#34;_blank&#34;&gt;Hugo discussion forum&lt;/a&gt;.&lt;/p&gt;
-
+&lt;h2 id=&#34;themes&#34;&gt;Themes&lt;/h2&gt;
+&lt;p&gt;Wowchemy and its templates come with &lt;strong&gt;automatic day (light) and night (dark) mode&lt;/strong&gt; built-in. Alternatively, visitors can choose their preferred mode - click the moon icon in the top right of the &lt;a href=&#34;https://academic-demo.netlify.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Demo&lt;/a&gt; to see it in action! Day/night mode can also be disabled by the site admin in &lt;code&gt;params.toml&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://wowchemy.com/docs/customization&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Choose a stunning &lt;strong&gt;theme&lt;/strong&gt; and &lt;strong&gt;font&lt;/strong&gt;&lt;/a&gt; for your site. Themes are fully customizable.&lt;/p&gt;
 &lt;h2 id=&#34;license&#34;&gt;License&lt;/h2&gt;
-
-&lt;p&gt;Copyright 2016-present &lt;a href=&#34;https://georgecushen.com&#34; target=&#34;_blank&#34;&gt;George Cushen&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Released under the &lt;a href=&#34;https://github.com/gcushen/hugo-academic/blob/master/LICENSE.md&#34; target=&#34;_blank&#34;&gt;MIT&lt;/a&gt; license.&lt;/p&gt;
+&lt;p&gt;Copyright 2016-present &lt;a href=&#34;https://georgecushen.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;George Cushen&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Released under the &lt;a href=&#34;https://github.com/wowchemy/wowchemy-hugo-modules/blob/master/LICENSE.md&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MIT&lt;/a&gt; license.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Isocapnic hyperpnea with a portable device in Cystic Fibrosis: an agreement study between two different set-up modalities</title>
-      <link>/publication/isocapnichyperpnea/</link>
+      <link>https://solon-karapanagiotis.com/publication/isocapnichyperpnea/</link>
       <pubDate>Thu, 01 Oct 2015 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/isocapnichyperpnea/</guid>
+      <guid>https://solon-karapanagiotis.com/publication/isocapnichyperpnea/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Cystic fibrosis patients’ performance on Modified Shuttle Walk Test</title>
-      <link>/publication/mst/</link>
+      <link>https://solon-karapanagiotis.com/publication/mst/</link>
       <pubDate>Sun, 01 Jun 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/mst/</guid>
+      <guid>https://solon-karapanagiotis.com/publication/mst/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Exercise intensity during interactive video game</title>
-      <link>/publication/exerciseintensity/</link>
+      <link>https://solon-karapanagiotis.com/publication/exerciseintensity/</link>
       <pubDate>Sun, 01 Jun 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/exerciseintensity/</guid>
+      <guid>https://solon-karapanagiotis.com/publication/exerciseintensity/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>Quantifying weight bearing activity in children and adolescents with cystic fibrosis</title>
+      <link>https://solon-karapanagiotis.com/publication/quantifyingweight/</link>
+      <pubDate>Sun, 01 Jun 2014 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/quantifyingweight/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Adherence to the administration of aerosolized promixin with the I-neb adaptive aerosol delivery (AAD) system, lung function and administration times in patients with cystic fibrosis (CF)</title>
+      <link>https://solon-karapanagiotis.com/publication/adherence/</link>
+      <pubDate>Sat, 01 Jun 2013 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/adherence/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Exercise and sport habits in children and adolescents with cystic fibrosis</title>
+      <link>https://solon-karapanagiotis.com/publication/exerciseandsporthabits/</link>
+      <pubDate>Sat, 01 Jun 2013 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/exerciseandsporthabits/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Wiihabilitation</title>
+      <link>https://solon-karapanagiotis.com/publication/wiihabilitation/</link>
+      <pubDate>Fri, 01 Jun 2012 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/wiihabilitation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://solon-karapanagiotis.com/publication/journal-article/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/journal-article/</guid>
+      <description>&lt;p&gt;#&amp;mdash;
+#abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus&lt;/p&gt;
+&lt;h1 id=&#34;ac-convallis-placerat-proin-tincidunt-magna-sed-ex-sollicitudin-condimentum-sed&#34;&gt;ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed&lt;/h1&gt;
+&lt;h1 id=&#34;ac-faucibus-dolor-scelerisque-sollicitudin-nisi-cras-purus-urna-suscipit-quis&#34;&gt;ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis&lt;/h1&gt;
+&lt;h1 id=&#34;sapien-eu-pulvinar-tempor-diam-quisque-risus-orci-mollis-id-ante-sit-amet-gravida&#34;&gt;sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida&lt;/h1&gt;
+&lt;h1 id=&#34;egestas-nisl-sed-ac-tempus-magna-proin-in-dui-enim-donec-condimentum-sem-id&#34;&gt;egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id&lt;/h1&gt;
+&lt;h1 id=&#34;dapibus-fringilla-tellus-enim-condimentum-arcu-nec-volutpat-est-felis-vel-metus&#34;&gt;dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus.&lt;/h1&gt;
+&lt;h1 id=&#34;vestibulum-sit-amet-erat-at-nulla-eleifend-gravida&#34;&gt;Vestibulum sit amet erat at nulla eleifend gravida.&lt;/h1&gt;
+&lt;p&gt;author_notes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Equal contribution&lt;/li&gt;
+&lt;li&gt;Equal contribution
+authors:&lt;/li&gt;
+&lt;li&gt;admin&lt;/li&gt;
+&lt;li&gt;Robert Ford
+date: &amp;ldquo;2015-09-01T00:00:00Z&amp;rdquo;
+doi: &amp;quot;&amp;quot;
+featured: false
+image:
+caption: &amp;lsquo;Image credit: &lt;a href=&#34;https://unsplash.com/photos/jdD8gXaTZsc&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Unsplash&lt;/strong&gt;&lt;/a&gt;&amp;rsquo;
+focal_point: &amp;quot;&amp;quot;
+preview_only: false
+projects: []
+publication: &amp;lsquo;&lt;em&gt;Journal of Source Themes, 1&lt;/em&gt;(1)&amp;rsquo;
+publication_short: &amp;quot;&amp;quot;
+publication_types:&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;0&amp;rdquo;
+publishDate: &amp;ldquo;2017-01-01T00:00:00Z&amp;rdquo;
+slides: example
+summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus
+ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.
+tags:&lt;/li&gt;
+&lt;li&gt;Source Themes
+title: An example journal article
+url_code: &amp;quot;&amp;quot;
+url_dataset: &amp;quot;&amp;quot;
+url_pdf: &lt;a href=&#34;http://arxiv.org/pdf/1512.04133v1&#34;&gt;http://arxiv.org/pdf/1512.04133v1&lt;/a&gt;
+url_poster: &amp;quot;&amp;quot;
+url_project: &amp;quot;&amp;quot;
+url_slides: &amp;quot;&amp;quot;
+url_source: &amp;quot;&amp;quot;
+url_video: &amp;quot;&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://solon-karapanagiotis.com/publication/preprint/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/preprint/</guid>
+      <description>&lt;p&gt;#&amp;mdash;
+#abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus&lt;/p&gt;
+&lt;h1 id=&#34;ac-convallis-placerat-proin-tincidunt-magna-sed-ex-sollicitudin-condimentum-sed&#34;&gt;ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed&lt;/h1&gt;
+&lt;h1 id=&#34;ac-faucibus-dolor-scelerisque-sollicitudin-nisi-cras-purus-urna-suscipit-quis&#34;&gt;ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis&lt;/h1&gt;
+&lt;h1 id=&#34;sapien-eu-pulvinar-tempor-diam-quisque-risus-orci-mollis-id-ante-sit-amet-gravida&#34;&gt;sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida&lt;/h1&gt;
+&lt;h1 id=&#34;egestas-nisl-sed-ac-tempus-magna-proin-in-dui-enim-donec-condimentum-sem-id&#34;&gt;egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id&lt;/h1&gt;
+&lt;h1 id=&#34;dapibus-fringilla-tellus-enim-condimentum-arcu-nec-volutpat-est-felis-vel-metus&#34;&gt;dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus.&lt;/h1&gt;
+&lt;h1 id=&#34;vestibulum-sit-amet-erat-at-nulla-eleifend-gravida&#34;&gt;Vestibulum sit amet erat at nulla eleifend gravida.&lt;/h1&gt;
+&lt;p&gt;authors:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;admin
+date: &amp;ldquo;2019-04-07T00:00:00Z&amp;rdquo;
+doi: &amp;quot;&amp;quot;
+featured: false
+image:
+caption: &amp;lsquo;Image credit: &lt;a href=&#34;https://unsplash.com/photos/s9CC2SKySJM&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Unsplash&lt;/strong&gt;&lt;/a&gt;&amp;rsquo;
+focal_point: &amp;quot;&amp;quot;
+preview_only: false
+links:&lt;/li&gt;
+&lt;li&gt;name: Custom Link
+url: &lt;a href=&#34;http://example.org&#34;&gt;http://example.org&lt;/a&gt;
+projects:&lt;/li&gt;
+&lt;li&gt;internal-project
+publication: &amp;quot;&amp;quot;
+publication_short: &amp;quot;&amp;quot;
+publication_types:&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;3&amp;rdquo;
+publishDate: &amp;ldquo;2017-01-01T00:00:00Z&amp;rdquo;
+slides: example
+summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus
+ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.
+tags:&lt;/li&gt;
+&lt;li&gt;Source Themes
+title: An example preprint / working paper
+url_code: &amp;lsquo;#&amp;rsquo;
+url_dataset: &amp;lsquo;#&amp;rsquo;
+url_pdf: &lt;a href=&#34;http://arxiv.org/pdf/1512.04133v1&#34;&gt;http://arxiv.org/pdf/1512.04133v1&lt;/a&gt;
+url_poster: &amp;lsquo;#&amp;rsquo;
+url_project: &amp;quot;&amp;quot;
+url_slides: &amp;quot;&amp;quot;
+url_source: &amp;lsquo;#&amp;rsquo;
+url_video: &amp;lsquo;#&amp;rsquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
+</description>
     </item>
     
   </channel>

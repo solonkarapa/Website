@@ -1,96 +1,216 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Publications on </title>
-    <link>/publication/</link>
-    <description>Recent content in Publications on </description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>&amp;copy; Solon Karapanagiotis 2018-2020</copyright>
-    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
+    <title>Publications | </title>
+    <link>https://solon-karapanagiotis.com/publication/</link>
+      <atom:link href="https://solon-karapanagiotis.com/publication/index.xml" rel="self" type="application/rss+xml" />
+    <description>Publications</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Solon Karapanagiotis 2018-2021</copyright><lastBuildDate>Fri, 01 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://solon-karapanagiotis.com/media/icon.png</url>
+      <title>Publications</title>
+      <link>https://solon-karapanagiotis.com/publication/</link>
+    </image>
     
-	<atom:link href="/publication/index.xml" rel="self" type="application/rss+xml" />
-    
+    <item>
+      <title>False Positive Multiparametric Magnetic Resonance Imaging Phenotypes in the Biopsy-naïve Prostate: Are They Distinct from Significant Cancer-associated Lesions? Lessons from PROMIS</title>
+      <link>https://solon-karapanagiotis.com/publication/mri_prostate/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/mri_prostate/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Development and External Validation of Prediction Models for 10-Year Survival of Invasive Breast Cancer. Comparison with PREDICT and CancerMath</title>
-      <link>/publication/clinicalcancerresearch/</link>
+      <link>https://solon-karapanagiotis.com/publication/clinicalcancerresearch/</link>
       <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/clinicalcancerresearch/</guid>
+      <guid>https://solon-karapanagiotis.com/publication/clinicalcancerresearch/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ventilatory limitation and dynamic hyperinflation during exercise testing in Cystic Fibrosis</title>
-      <link>/publication/ventilatorylimitation/</link>
+      <link>https://solon-karapanagiotis.com/publication/ventilatorylimitation/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/ventilatorylimitation/</guid>
+      <guid>https://solon-karapanagiotis.com/publication/ventilatorylimitation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Isocapnic hyperpnea with a portable device in Cystic Fibrosis: an agreement study between two different set-up modalities</title>
-      <link>/publication/isocapnichyperpnea/</link>
+      <link>https://solon-karapanagiotis.com/publication/isocapnichyperpnea/</link>
       <pubDate>Thu, 01 Oct 2015 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/isocapnichyperpnea/</guid>
+      <guid>https://solon-karapanagiotis.com/publication/isocapnichyperpnea/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Cystic fibrosis patients’ performance on Modified Shuttle Walk Test</title>
-      <link>/publication/mst/</link>
+      <link>https://solon-karapanagiotis.com/publication/mst/</link>
       <pubDate>Sun, 01 Jun 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/mst/</guid>
+      <guid>https://solon-karapanagiotis.com/publication/mst/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Exercise intensity during interactive video game</title>
-      <link>/publication/exerciseintensity/</link>
+      <link>https://solon-karapanagiotis.com/publication/exerciseintensity/</link>
       <pubDate>Sun, 01 Jun 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/exerciseintensity/</guid>
+      <guid>https://solon-karapanagiotis.com/publication/exerciseintensity/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Quantifying weight bearing activity in children and adolescents with cystic fibrosis</title>
-      <link>/publication/quantifyingweight/</link>
+      <link>https://solon-karapanagiotis.com/publication/quantifyingweight/</link>
       <pubDate>Sun, 01 Jun 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/quantifyingweight/</guid>
+      <guid>https://solon-karapanagiotis.com/publication/quantifyingweight/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Adherence to the administration of aerosolized promixin with the I-neb adaptive aerosol delivery (AAD) system, lung function and administration times in patients with cystic fibrosis (CF)</title>
-      <link>/publication/adherence/</link>
+      <link>https://solon-karapanagiotis.com/publication/adherence/</link>
       <pubDate>Sat, 01 Jun 2013 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/adherence/</guid>
+      <guid>https://solon-karapanagiotis.com/publication/adherence/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Exercise and sport habits in children and adolescents with cystic fibrosis</title>
-      <link>/publication/exerciseandsporthabits/</link>
+      <link>https://solon-karapanagiotis.com/publication/exerciseandsporthabits/</link>
       <pubDate>Sat, 01 Jun 2013 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/exerciseandsporthabits/</guid>
+      <guid>https://solon-karapanagiotis.com/publication/exerciseandsporthabits/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Wiihabilitation</title>
-      <link>/publication/wiihabilitation/</link>
+      <link>https://solon-karapanagiotis.com/publication/wiihabilitation/</link>
       <pubDate>Fri, 01 Jun 2012 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/wiihabilitation/</guid>
+      <guid>https://solon-karapanagiotis.com/publication/wiihabilitation/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://solon-karapanagiotis.com/publication/journal-article/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/journal-article/</guid>
+      <description>&lt;p&gt;#&amp;mdash;
+#abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus&lt;/p&gt;
+&lt;h1 id=&#34;ac-convallis-placerat-proin-tincidunt-magna-sed-ex-sollicitudin-condimentum-sed&#34;&gt;ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed&lt;/h1&gt;
+&lt;h1 id=&#34;ac-faucibus-dolor-scelerisque-sollicitudin-nisi-cras-purus-urna-suscipit-quis&#34;&gt;ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis&lt;/h1&gt;
+&lt;h1 id=&#34;sapien-eu-pulvinar-tempor-diam-quisque-risus-orci-mollis-id-ante-sit-amet-gravida&#34;&gt;sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida&lt;/h1&gt;
+&lt;h1 id=&#34;egestas-nisl-sed-ac-tempus-magna-proin-in-dui-enim-donec-condimentum-sem-id&#34;&gt;egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id&lt;/h1&gt;
+&lt;h1 id=&#34;dapibus-fringilla-tellus-enim-condimentum-arcu-nec-volutpat-est-felis-vel-metus&#34;&gt;dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus.&lt;/h1&gt;
+&lt;h1 id=&#34;vestibulum-sit-amet-erat-at-nulla-eleifend-gravida&#34;&gt;Vestibulum sit amet erat at nulla eleifend gravida.&lt;/h1&gt;
+&lt;p&gt;author_notes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Equal contribution&lt;/li&gt;
+&lt;li&gt;Equal contribution
+authors:&lt;/li&gt;
+&lt;li&gt;admin&lt;/li&gt;
+&lt;li&gt;Robert Ford
+date: &amp;ldquo;2015-09-01T00:00:00Z&amp;rdquo;
+doi: &amp;quot;&amp;quot;
+featured: false
+image:
+caption: &amp;lsquo;Image credit: &lt;a href=&#34;https://unsplash.com/photos/jdD8gXaTZsc&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Unsplash&lt;/strong&gt;&lt;/a&gt;&amp;rsquo;
+focal_point: &amp;quot;&amp;quot;
+preview_only: false
+projects: []
+publication: &amp;lsquo;&lt;em&gt;Journal of Source Themes, 1&lt;/em&gt;(1)&amp;rsquo;
+publication_short: &amp;quot;&amp;quot;
+publication_types:&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;0&amp;rdquo;
+publishDate: &amp;ldquo;2017-01-01T00:00:00Z&amp;rdquo;
+slides: example
+summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus
+ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.
+tags:&lt;/li&gt;
+&lt;li&gt;Source Themes
+title: An example journal article
+url_code: &amp;quot;&amp;quot;
+url_dataset: &amp;quot;&amp;quot;
+url_pdf: &lt;a href=&#34;http://arxiv.org/pdf/1512.04133v1&#34;&gt;http://arxiv.org/pdf/1512.04133v1&lt;/a&gt;
+url_poster: &amp;quot;&amp;quot;
+url_project: &amp;quot;&amp;quot;
+url_slides: &amp;quot;&amp;quot;
+url_source: &amp;quot;&amp;quot;
+url_video: &amp;quot;&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://solon-karapanagiotis.com/publication/preprint/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/preprint/</guid>
+      <description>&lt;p&gt;#&amp;mdash;
+#abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus&lt;/p&gt;
+&lt;h1 id=&#34;ac-convallis-placerat-proin-tincidunt-magna-sed-ex-sollicitudin-condimentum-sed&#34;&gt;ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed&lt;/h1&gt;
+&lt;h1 id=&#34;ac-faucibus-dolor-scelerisque-sollicitudin-nisi-cras-purus-urna-suscipit-quis&#34;&gt;ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis&lt;/h1&gt;
+&lt;h1 id=&#34;sapien-eu-pulvinar-tempor-diam-quisque-risus-orci-mollis-id-ante-sit-amet-gravida&#34;&gt;sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida&lt;/h1&gt;
+&lt;h1 id=&#34;egestas-nisl-sed-ac-tempus-magna-proin-in-dui-enim-donec-condimentum-sem-id&#34;&gt;egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id&lt;/h1&gt;
+&lt;h1 id=&#34;dapibus-fringilla-tellus-enim-condimentum-arcu-nec-volutpat-est-felis-vel-metus&#34;&gt;dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus.&lt;/h1&gt;
+&lt;h1 id=&#34;vestibulum-sit-amet-erat-at-nulla-eleifend-gravida&#34;&gt;Vestibulum sit amet erat at nulla eleifend gravida.&lt;/h1&gt;
+&lt;p&gt;authors:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;admin
+date: &amp;ldquo;2019-04-07T00:00:00Z&amp;rdquo;
+doi: &amp;quot;&amp;quot;
+featured: false
+image:
+caption: &amp;lsquo;Image credit: &lt;a href=&#34;https://unsplash.com/photos/s9CC2SKySJM&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Unsplash&lt;/strong&gt;&lt;/a&gt;&amp;rsquo;
+focal_point: &amp;quot;&amp;quot;
+preview_only: false
+links:&lt;/li&gt;
+&lt;li&gt;name: Custom Link
+url: &lt;a href=&#34;http://example.org&#34;&gt;http://example.org&lt;/a&gt;
+projects:&lt;/li&gt;
+&lt;li&gt;internal-project
+publication: &amp;quot;&amp;quot;
+publication_short: &amp;quot;&amp;quot;
+publication_types:&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;3&amp;rdquo;
+publishDate: &amp;ldquo;2017-01-01T00:00:00Z&amp;rdquo;
+slides: example
+summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus
+ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.
+tags:&lt;/li&gt;
+&lt;li&gt;Source Themes
+title: An example preprint / working paper
+url_code: &amp;lsquo;#&amp;rsquo;
+url_dataset: &amp;lsquo;#&amp;rsquo;
+url_pdf: &lt;a href=&#34;http://arxiv.org/pdf/1512.04133v1&#34;&gt;http://arxiv.org/pdf/1512.04133v1&lt;/a&gt;
+url_poster: &amp;lsquo;#&amp;rsquo;
+url_project: &amp;quot;&amp;quot;
+url_slides: &amp;quot;&amp;quot;
+url_source: &amp;lsquo;#&amp;rsquo;
+url_video: &amp;lsquo;#&amp;rsquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
+</description>
     </item>
     
   </channel>
