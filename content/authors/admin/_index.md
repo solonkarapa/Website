@@ -22,6 +22,7 @@ interests:
 - Statistical Computing
 - Statistical Modelling 
 - Longitudinal Data Analysis
+- Statistical Learning  
 - Machine Learning
 - Medical Decision Making
 - Predictive Modelling and Model Validation

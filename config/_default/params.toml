@@ -27,7 +27,7 @@ font = "playfair"
 
 # Choose a font size.
 # Sizes: XS (extra small), S (small), M (medium), L (large - DEFAULT), XL (extra large)
-font_size = "M"
+#font_size = "S"
 #font_size = "1950s"
 ############################
 ## Basic Info
