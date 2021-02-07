@@ -24,7 +24,7 @@ publication = "In *Pediatric pulmonology*, 52(1), 29-33"
 abstract = "**Objective**: To investigate the presence of dynamic hyperinflation after the Modified Shuttle Test (MST) and its relationship with lung function, exercise tolerance, and clinical symptoms in Cystic Fibrosis (CF). **Methods**: Retrospective observational study. Subjects in clinically stable condition with a CF diagnosis based on a positive sweat test (chloride >60 mEq/L) and/or presence of two disease causing mutations, with available data on MST, spirometry, maximal voluntary ventilation, and inspiratory capacity manoeuvres were considered for the analysis. Breathing reserve was calculated and a threshold value of 0.7 was subsequently chosen as a value of pulmonary mechanical limit. Subjects were then categorized into two groups according to the change in the inspiratory capacity from rest to peak exercise. Unconditional logistic regression was used to estimate unadjusted odds ratios, 95% confidence intervals and P‐values. **Results**: Twenty‐two subjects demonstrated evidence of dynamic hyperinflation during the MST. Thirteen out of 22 subjects were ventilatory limited during exercise including 5 of those without evidence of dynamic hyperinflation (P = 0.24). No combination of variables resulted in a parsimonious regression model. **Conclusions**: Dynamic hyperinflation is common in CF and it is not associated with traditionally defined ventilatory limitation parameters during the MST."
 
 # Featured image thumbnail (optional)
-image_preview = ""
+image_preview = ''
 
 # Is this a selected publication? (true/false)
 selected = false
@@ -58,8 +58,8 @@ highlight = true
 # Featured image
 # Place your image in the `static/img/` folder and reference its filename below, e.g. `image = "example.jpg"`.
 [header]
-image = "headers/bubbles-wide.jpg"
-caption = "My caption :smile:"
+image = ""
+caption = ""
 
 +++
 

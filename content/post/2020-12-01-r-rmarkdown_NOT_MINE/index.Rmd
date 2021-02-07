@@ -1,13 +1,14 @@
 ---
 title: "Hello R Markdown"
 author: "Frida Gomam"
-date: 2020-12-01T21:13:14-05:00
+date: 2020-12-01
 categories: ["R"]
 tags: ["R Markdown", "plot", "regression"]
 draft: true
-output:
-  blogdown::html_page
-image_preview: 'images/icon.png'
+featured: true
+header:
+  caption: 'images/featured.png'
+  image: ''
 ---
 
 ```{r setup, include=FALSE}
@@ -18,9 +19,9 @@ knitr::opts_chunk$set(collapse = TRUE)
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
+
 You can embed an R code chunk like this:
 
-![](images/featured.jpg)
 
 ```{r cars}
 summary(cars)

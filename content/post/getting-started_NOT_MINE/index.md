@@ -7,7 +7,7 @@ categories:
 - 教程
 date: "2016-04-20T00:00:00Z"
 draft: true
-featured: false
+featured: true
 image:
   caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/CpkOjOcXdUY)'
   focal_point: ""
