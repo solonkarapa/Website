@@ -13,48 +13,6 @@
     </image>
     
     <item>
-      <title>Example Page 1</title>
-      <link>https://solon-karapanagiotis.com/courses/example/example1/</link>
-      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
-      <guid>https://solon-karapanagiotis.com/courses/example/example1/</guid>
-      <description>&lt;p&gt;In this tutorial, I&amp;rsquo;ll share my top 10 tips for getting started with Academic:&lt;/p&gt;
-&lt;h2 id=&#34;tip-1&#34;&gt;Tip 1&lt;/h2&gt;
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
-&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
-&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
-&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
-&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
-&lt;h2 id=&#34;tip-2&#34;&gt;Tip 2&lt;/h2&gt;
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
-&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
-&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
-&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
-&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Example Page 2</title>
-      <link>https://solon-karapanagiotis.com/courses/example/example2/</link>
-      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
-      <guid>https://solon-karapanagiotis.com/courses/example/example2/</guid>
-      <description>&lt;p&gt;Here are some more tips for getting started with Academic:&lt;/p&gt;
-&lt;h2 id=&#34;tip-3&#34;&gt;Tip 3&lt;/h2&gt;
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
-&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
-&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
-&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
-&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
-&lt;h2 id=&#34;tip-4&#34;&gt;Tip 4&lt;/h2&gt;
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
-&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
-&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
-&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
-&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Example Talk</title>
       <link>https://solon-karapanagiotis.com/talk/example-talk/</link>
       <pubDate>Sat, 01 Jun 2030 13:00:00 +0000</pubDate>
@@ -1475,61 +1433,65 @@ You might have noticed by now that the &lt;code&gt;fread()&lt;/code&gt; function
       <link>https://solon-karapanagiotis.com/publication/journal-article/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://solon-karapanagiotis.com/publication/journal-article/</guid>
-      <description>&lt;p&gt;#&amp;mdash;
-#abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus&lt;/p&gt;
-&lt;h1 id=&#34;ac-convallis-placerat-proin-tincidunt-magna-sed-ex-sollicitudin-condimentum-sed&#34;&gt;ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed&lt;/h1&gt;
-&lt;h1 id=&#34;ac-faucibus-dolor-scelerisque-sollicitudin-nisi-cras-purus-urna-suscipit-quis&#34;&gt;ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis&lt;/h1&gt;
-&lt;h1 id=&#34;sapien-eu-pulvinar-tempor-diam-quisque-risus-orci-mollis-id-ante-sit-amet-gravida&#34;&gt;sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida&lt;/h1&gt;
-&lt;h1 id=&#34;egestas-nisl-sed-ac-tempus-magna-proin-in-dui-enim-donec-condimentum-sem-id&#34;&gt;egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id&lt;/h1&gt;
-&lt;h1 id=&#34;dapibus-fringilla-tellus-enim-condimentum-arcu-nec-volutpat-est-felis-vel-metus&#34;&gt;dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus.&lt;/h1&gt;
-&lt;h1 id=&#34;vestibulum-sit-amet-erat-at-nulla-eleifend-gravida&#34;&gt;Vestibulum sit amet erat at nulla eleifend gravida.&lt;/h1&gt;
-&lt;p&gt;author_notes:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Equal contribution&lt;/li&gt;
-&lt;li&gt;Equal contribution
-authors:&lt;/li&gt;
-&lt;li&gt;admin&lt;/li&gt;
-&lt;li&gt;Robert Ford
-date: &amp;ldquo;2015-09-01T00:00:00Z&amp;rdquo;
-doi: &amp;quot;&amp;quot;
-featured: false
-image:
-caption: &amp;lsquo;Image credit: &lt;a href=&#34;https://unsplash.com/photos/jdD8gXaTZsc&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Unsplash&lt;/strong&gt;&lt;/a&gt;&amp;rsquo;
-focal_point: &amp;quot;&amp;quot;
-preview_only: false
-projects: []
-publication: &amp;lsquo;&lt;em&gt;Journal of Source Themes, 1&lt;/em&gt;(1)&amp;rsquo;
-publication_short: &amp;quot;&amp;quot;
-publication_types:&lt;/li&gt;
-&lt;li&gt;&amp;ldquo;0&amp;rdquo;
-publishDate: &amp;ldquo;2017-01-01T00:00:00Z&amp;rdquo;
-slides: example
-summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus
-ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.
-tags:&lt;/li&gt;
-&lt;li&gt;Source Themes
-title: An example journal article
-url_code: &amp;quot;&amp;quot;
-url_dataset: &amp;quot;&amp;quot;
-url_pdf: &lt;a href=&#34;http://arxiv.org/pdf/1512.04133v1&#34;&gt;http://arxiv.org/pdf/1512.04133v1&lt;/a&gt;
-url_poster: &amp;quot;&amp;quot;
-url_project: &amp;quot;&amp;quot;
-url_slides: &amp;quot;&amp;quot;
-url_source: &amp;quot;&amp;quot;
-url_video: &amp;quot;&amp;quot;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;div class=&#34;alert alert-note&#34;&gt;
+      <description>&lt;h1 id=&#34;---&#34;&gt;#&amp;mdash;&lt;/h1&gt;
+&lt;h1 id=&#34;abstract-lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-duis-posuere-tellus&#34;&gt;#abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus&lt;/h1&gt;
+&lt;h1 id=&#34;--ac-convallis-placerat-proin-tincidunt-magna-sed-ex-sollicitudin-condimentum-sed&#34;&gt;#  ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed&lt;/h1&gt;
+&lt;h1 id=&#34;--ac-faucibus-dolor-scelerisque-sollicitudin-nisi-cras-purus-urna-suscipit-quis&#34;&gt;#  ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis&lt;/h1&gt;
+&lt;h1 id=&#34;--sapien-eu-pulvinar-tempor-diam-quisque-risus-orci-mollis-id-ante-sit-amet-gravida&#34;&gt;#  sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida&lt;/h1&gt;
+&lt;h1 id=&#34;--egestas-nisl-sed-ac-tempus-magna-proin-in-dui-enim-donec-condimentum-sem-id&#34;&gt;#  egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id&lt;/h1&gt;
+&lt;h1 id=&#34;--dapibus-fringilla-tellus-enim-condimentum-arcu-nec-volutpat-est-felis-vel-metus&#34;&gt;#  dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus.&lt;/h1&gt;
+&lt;h1 id=&#34;--vestibulum-sit-amet-erat-at-nulla-eleifend-gravida&#34;&gt;#  Vestibulum sit amet erat at nulla eleifend gravida.&lt;/h1&gt;
+&lt;h1 id=&#34;author_notes&#34;&gt;author_notes:&lt;/h1&gt;
+&lt;h1 id=&#34;--equal-contribution&#34;&gt;- Equal contribution&lt;/h1&gt;
+&lt;h1 id=&#34;--equal-contribution-1&#34;&gt;- Equal contribution&lt;/h1&gt;
+&lt;h1 id=&#34;authors&#34;&gt;authors:&lt;/h1&gt;
+&lt;h1 id=&#34;--admin&#34;&gt;- admin&lt;/h1&gt;
+&lt;h1 id=&#34;--robert-ford&#34;&gt;- Robert Ford&lt;/h1&gt;
+&lt;h1 id=&#34;date-2015-09-01&#34;&gt;date: &amp;ldquo;2015-09-01&amp;rdquo;&lt;/h1&gt;
+&lt;h1 id=&#34;doi-&#34;&gt;doi: &amp;quot;&amp;quot;&lt;/h1&gt;
+&lt;h1 id=&#34;featured-false&#34;&gt;featured: false&lt;/h1&gt;
+&lt;h1 id=&#34;draft-true&#34;&gt;draft: true&lt;/h1&gt;
+&lt;h1 id=&#34;image&#34;&gt;image:&lt;/h1&gt;
+&lt;h1 id=&#34;caption-image-credit-unsplashhttpsunsplashcomphotosjdd8gxatzsc&#34;&gt;caption: &amp;lsquo;Image credit: &lt;a href=&#34;https://unsplash.com/photos/jdD8gXaTZsc&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Unsplash&lt;/strong&gt;&lt;/a&gt;&amp;rsquo;&lt;/h1&gt;
+&lt;h1 id=&#34;focal_point-&#34;&gt;focal_point: &amp;quot;&amp;quot;&lt;/h1&gt;
+&lt;h1 id=&#34;preview_only-false&#34;&gt;preview_only: false&lt;/h1&gt;
+&lt;h1 id=&#34;projects-&#34;&gt;projects: []&lt;/h1&gt;
+&lt;h1 id=&#34;publication-journal-of-source-themes-11&#34;&gt;publication: &amp;lsquo;&lt;em&gt;Journal of Source Themes, 1&lt;/em&gt;(1)&amp;rsquo;&lt;/h1&gt;
+&lt;h1 id=&#34;publication_short-&#34;&gt;publication_short: &amp;quot;&amp;quot;&lt;/h1&gt;
+&lt;h1 id=&#34;publication_types&#34;&gt;publication_types:&lt;/h1&gt;
+&lt;h1 id=&#34;--0&#34;&gt;- &amp;ldquo;0&amp;rdquo;&lt;/h1&gt;
+&lt;h1 id=&#34;publishdate-2017-01-01&#34;&gt;publishDate: &amp;ldquo;2017-01-01&amp;rdquo;&lt;/h1&gt;
+&lt;h1 id=&#34;slides-example&#34;&gt;slides: example&lt;/h1&gt;
+&lt;h1 id=&#34;summary-lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-duis-posuere-tellus&#34;&gt;summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus&lt;/h1&gt;
+&lt;h1 id=&#34;ac-convallis-placerat-proin-tincidunt-magna-sed-ex-sollicitudin-condimentum&#34;&gt;ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.&lt;/h1&gt;
+&lt;h1 id=&#34;tags&#34;&gt;tags:&lt;/h1&gt;
+&lt;h1 id=&#34;--source-themes&#34;&gt;- Source Themes&lt;/h1&gt;
+&lt;h1 id=&#34;title-an-example-journal-article&#34;&gt;title: An example journal article&lt;/h1&gt;
+&lt;h1 id=&#34;url_code-&#34;&gt;url_code: &amp;quot;&amp;quot;&lt;/h1&gt;
+&lt;h1 id=&#34;url_dataset-&#34;&gt;url_dataset: &amp;quot;&amp;quot;&lt;/h1&gt;
+&lt;h1 id=&#34;url_pdf-&#34;&gt;url_pdf: &#39;&#39;&lt;/h1&gt;
+&lt;h1 id=&#34;url_poster-&#34;&gt;url_poster: &amp;quot;&amp;quot;&lt;/h1&gt;
+&lt;h1 id=&#34;url_project-&#34;&gt;url_project: &amp;quot;&amp;quot;&lt;/h1&gt;
+&lt;h1 id=&#34;url_slides-&#34;&gt;url_slides: &amp;quot;&amp;quot;&lt;/h1&gt;
+&lt;h1 id=&#34;url_source-&#34;&gt;url_source: &amp;quot;&amp;quot;&lt;/h1&gt;
+&lt;h1 id=&#34;url_video-&#34;&gt;url_video: &amp;quot;&amp;quot;&lt;/h1&gt;
+&lt;h1 id=&#34;----1&#34;&gt;&amp;mdash;&lt;/h1&gt;
+&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
+&lt;h1 id=&#34;div-classalert-alert-note&#34;&gt;&lt;div class=&#34;alert alert-note&#34;&gt;&lt;/h1&gt;
   &lt;div&gt;
-    Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
+    &lt;h1 id=&#34;click-the-cite-button-above-to-demo-the-feature-to-enable-visitors-to-import-publication-metadata-into-their-reference-management-software&#34;&gt;Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.&lt;/h1&gt;
+&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class=&#34;alert alert-note&#34;&gt;
+&lt;h1 id=&#34;heading-1&#34;&gt;&lt;/h1&gt;
+&lt;h1 id=&#34;div-classalert-alert-note-1&#34;&gt;&lt;div class=&#34;alert alert-note&#34;&gt;&lt;/h1&gt;
   &lt;div&gt;
-    Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
+    &lt;h1 id=&#34;create-your-slides-in-markdown---click-the-slides-button-to-check-out-the-example&#34;&gt;Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.&lt;/h1&gt;
+&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;heading-2&#34;&gt;&lt;/h1&gt;
+&lt;h1 id=&#34;supplementary-notes-can-be-added-here-including-code-math-and-imageshttpswowchemycomdocswriting-markdown-latex&#34;&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/h1&gt;
 </description>
     </item>
     
@@ -1546,48 +1508,49 @@ url_video: &amp;quot;&amp;quot;&lt;/li&gt;
 &lt;h1 id=&#34;egestas-nisl-sed-ac-tempus-magna-proin-in-dui-enim-donec-condimentum-sem-id&#34;&gt;egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id&lt;/h1&gt;
 &lt;h1 id=&#34;dapibus-fringilla-tellus-enim-condimentum-arcu-nec-volutpat-est-felis-vel-metus&#34;&gt;dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus.&lt;/h1&gt;
 &lt;h1 id=&#34;vestibulum-sit-amet-erat-at-nulla-eleifend-gravida&#34;&gt;Vestibulum sit amet erat at nulla eleifend gravida.&lt;/h1&gt;
-&lt;p&gt;authors:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;admin
-date: &amp;ldquo;2019-04-07T00:00:00Z&amp;rdquo;
-doi: &amp;quot;&amp;quot;
-featured: false
-image:
-caption: &amp;lsquo;Image credit: &lt;a href=&#34;https://unsplash.com/photos/s9CC2SKySJM&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Unsplash&lt;/strong&gt;&lt;/a&gt;&amp;rsquo;
-focal_point: &amp;quot;&amp;quot;
-preview_only: false
-links:&lt;/li&gt;
-&lt;li&gt;name: Custom Link
-url: &lt;a href=&#34;http://example.org&#34;&gt;http://example.org&lt;/a&gt;
-projects:&lt;/li&gt;
-&lt;li&gt;internal-project
-publication: &amp;quot;&amp;quot;
-publication_short: &amp;quot;&amp;quot;
-publication_types:&lt;/li&gt;
-&lt;li&gt;&amp;ldquo;3&amp;rdquo;
-publishDate: &amp;ldquo;2017-01-01T00:00:00Z&amp;rdquo;
-slides: example
-summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus
-ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.
-tags:&lt;/li&gt;
-&lt;li&gt;Source Themes
-title: An example preprint / working paper
-url_code: &amp;lsquo;#&amp;rsquo;
-url_dataset: &amp;lsquo;#&amp;rsquo;
-url_pdf: &lt;a href=&#34;http://arxiv.org/pdf/1512.04133v1&#34;&gt;http://arxiv.org/pdf/1512.04133v1&lt;/a&gt;
-url_poster: &amp;lsquo;#&amp;rsquo;
-url_project: &amp;quot;&amp;quot;
-url_slides: &amp;quot;&amp;quot;
-url_source: &amp;lsquo;#&amp;rsquo;
-url_video: &amp;lsquo;#&amp;rsquo;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;div class=&#34;alert alert-note&#34;&gt;
+&lt;h1 id=&#34;authors&#34;&gt;authors:&lt;/h1&gt;
+&lt;h1 id=&#34;--admin&#34;&gt;- admin&lt;/h1&gt;
+&lt;h1 id=&#34;date-2019-04-07&#34;&gt;date: &amp;ldquo;2019-04-07&amp;rdquo;&lt;/h1&gt;
+&lt;h1 id=&#34;doi-&#34;&gt;doi: &amp;quot;&amp;quot;&lt;/h1&gt;
+&lt;h1 id=&#34;featured-false&#34;&gt;featured: false&lt;/h1&gt;
+&lt;h1 id=&#34;image&#34;&gt;image:&lt;/h1&gt;
+&lt;h1 id=&#34;caption-image-credit-unsplashhttpsunsplashcomphotoss9cc2skysjm&#34;&gt;caption: &amp;lsquo;Image credit: &lt;a href=&#34;https://unsplash.com/photos/s9CC2SKySJM&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Unsplash&lt;/strong&gt;&lt;/a&gt;&amp;rsquo;&lt;/h1&gt;
+&lt;h1 id=&#34;focal_point-&#34;&gt;focal_point: &amp;quot;&amp;quot;&lt;/h1&gt;
+&lt;h1 id=&#34;preview_only-false&#34;&gt;preview_only: false&lt;/h1&gt;
+&lt;h1 id=&#34;links&#34;&gt;links:&lt;/h1&gt;
+&lt;h1 id=&#34;--name-custom-link&#34;&gt;- name: Custom Link&lt;/h1&gt;
+&lt;h1 id=&#34;url-httpexampleorg&#34;&gt;url: &lt;a href=&#34;http://example.org&#34;&gt;http://example.org&lt;/a&gt;&lt;/h1&gt;
+&lt;h1 id=&#34;projects&#34;&gt;projects:&lt;/h1&gt;
+&lt;h1 id=&#34;--internal-project&#34;&gt;- internal-project&lt;/h1&gt;
+&lt;h1 id=&#34;publication-&#34;&gt;publication: &amp;quot;&amp;quot;&lt;/h1&gt;
+&lt;h1 id=&#34;publication_short-&#34;&gt;publication_short: &amp;quot;&amp;quot;&lt;/h1&gt;
+&lt;h1 id=&#34;publication_types&#34;&gt;publication_types:&lt;/h1&gt;
+&lt;h1 id=&#34;--3&#34;&gt;- &amp;ldquo;3&amp;rdquo;&lt;/h1&gt;
+&lt;h1 id=&#34;publishdate-2017-01-01t000000z&#34;&gt;publishDate: &amp;ldquo;2017-01-01T00:00:00Z&amp;rdquo;&lt;/h1&gt;
+&lt;h1 id=&#34;slides-example&#34;&gt;slides: example&lt;/h1&gt;
+&lt;h1 id=&#34;summary-lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-duis-posuere-tellus&#34;&gt;summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus&lt;/h1&gt;
+&lt;h1 id=&#34;ac-convallis-placerat-proin-tincidunt-magna-sed-ex-sollicitudin-condimentum&#34;&gt;ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.&lt;/h1&gt;
+&lt;h1 id=&#34;tags&#34;&gt;tags:&lt;/h1&gt;
+&lt;h1 id=&#34;--source-themes&#34;&gt;- Source Themes&lt;/h1&gt;
+&lt;h1 id=&#34;title-an-example-preprint--working-paper&#34;&gt;title: An example preprint / working paper&lt;/h1&gt;
+&lt;h1 id=&#34;url_code-&#34;&gt;url_code: &#39;&#39;&lt;/h1&gt;
+&lt;h1 id=&#34;url_dataset-&#34;&gt;url_dataset: &#39;&#39;&lt;/h1&gt;
+&lt;h1 id=&#34;url_pdf-&#34;&gt;url_pdf: &#39;&#39;&lt;/h1&gt;
+&lt;h1 id=&#34;url_poster-&#34;&gt;url_poster: &#39;&#39;&lt;/h1&gt;
+&lt;h1 id=&#34;url_project-&#34;&gt;url_project: &amp;quot;&amp;quot;&lt;/h1&gt;
+&lt;h1 id=&#34;url_slides-&#34;&gt;url_slides: &amp;quot;&amp;quot;&lt;/h1&gt;
+&lt;h1 id=&#34;url_source-&#34;&gt;url_source: &#39;&#39;&lt;/h1&gt;
+&lt;h1 id=&#34;url_video-&#34;&gt;url_video: &#39;&#39;&lt;/h1&gt;
+&lt;h1 id=&#34;---&#34;&gt;&amp;mdash;&lt;/h1&gt;
+&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
+&lt;h1 id=&#34;div-classalert-alert-note&#34;&gt;&lt;div class=&#34;alert alert-note&#34;&gt;&lt;/h1&gt;
   &lt;div&gt;
-    Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
+    &lt;h1 id=&#34;create-your-slides-in-markdown---click-the-slides-button-to-check-out-the-example&#34;&gt;Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.&lt;/h1&gt;
+&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;heading-1&#34;&gt;&lt;/h1&gt;
+&lt;h1 id=&#34;supplementary-notes-can-be-added-here-including-code-math-and-imageshttpswowchemycomdocswriting-markdown-latex&#34;&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and #images&lt;/a&gt;.&lt;/h1&gt;
 </description>
     </item>
     

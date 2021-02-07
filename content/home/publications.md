@@ -27,7 +27,8 @@ content:
     category: ''
     publication_type: ''
     author: ''
-    exclude_featured: true
+    date: '2012-2021'
+    exclude_featured: false
 design:
   # Choose a view for the listings:
   #   1 = List

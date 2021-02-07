@@ -3,21 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://solon-karapanagiotis.com/courses/example/example1/</loc>
-    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://solon-karapanagiotis.com/courses/example/</loc>
-    <lastmod>2018-09-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://solon-karapanagiotis.com/courses/example/example2/</loc>
-    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://solon-karapanagiotis.com/</loc>
     <lastmod>2030-06-01T13:00:00+00:00</lastmod>
   </url>
@@ -115,11 +100,6 @@
   <url>
     <loc>https://solon-karapanagiotis.com/tags/</loc>
     <lastmod>2020-02-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://solon-karapanagiotis.com/courses/</loc>
-    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
   </url>
   
   <url>
@@ -418,6 +398,10 @@
   
   <url>
     <loc>https://solon-karapanagiotis.com/publication/preprint/</loc>
+  </url>
+  
+  <url>
+    <loc>https://solon-karapanagiotis.com/courses/</loc>
   </url>
   
   <url>
