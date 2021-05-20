@@ -1,0 +1,136 @@
+---
+title: "Outliers: Which prior are you using?"
+subtitle: "The problem of outliers from a Bayesian viewpoint"
+author: ''
+date: '2021-05-22'
+slug: outliers
+categories: [Bayes]
+tags: [Bayes]
+output: 
+  bookdown::html_document2: 
+    fig_caption: yes
+header:
+  caption: ''
+  image: ''
+bibliography: sample.bib
+link-citations: yes
+draft: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This post is concerned with a ubiquitous problem in many fields -- outliers. They degrade the performance of many models/algorithms. As a result, there are ongoing attempts to accommodate outlying observations by deriving robust estimators. But these estimators have drawbacks such as being less efficient.  Here, I illustrate how the problem of outliers connects with our prior beliefs about the data collection procedure. This leads me to show how a simple but flexible Bayesian model allows to accommodate outliers without inheriting the drawback of other estimators. 
+
+Disclaimer: This post is heavily inspired by the work of @jaynes2003probability.
+
+## The problem
+Imagine we are interested in a quantity $\theta$, which is unknown. The subsequent, logical step is to try to quantify our uncertainty about $\theta$ by collecting some data. That is, we are trying to measure $\theta$. But the apparatus or the data collection procedure is always imperfect and so having $n$ independent measurements of $\theta$, we have $n$ different results ($x_1, \dots, x_n $). How are we going to proceed on estimating $\theta$, what is the "best" estimate to use?
+If the $n$ data points are "close" together the problem of drawing conclusion about $\theta$ is not very difficult. But if they are not nicely clustered: one value, $x_j$, lies far away from the other $n-1$ values? How are we going to deal with this outlier[^1]?
+
+[^1]:I define an outlier as an observation which seems "to deviate markedly from the other members of the data sample in which it appears." [@grubbs1969procedures]?
+
+
+## The dilemma
+Two opposite views have been expressed on how to deal with the outlier:
+
+1. It should not have been included in the data. The data have been contaminated and the outlier needs to be removed otherwise we may get erroneous conclusions. 
+2.  The outlier may be the most important datapoint we have so it must be taken into account in the analysis. In other words, it may be desirable to describe the population including all observations. For only in that way do we describe what is actually happening [@dixon1950analysis].
+
+These viewpoints reflect different prior information about the data collection procedure. The first view is reasonable if we believe *a priori* the data collection procedure is unreliable. That is, any now and then and without warning we can get an erroneous measurement. The second view is reasonable if we have absolute confidence in the data collection procedure. Then the outlier is an important result and ignoring it may harm us.  
+
+Clearly these are extreme positions, and in real-life the researcher/data collector is in a intermediate position. If they knew the apparatus is unreliable they have choose not to collect data in the first place or improve the apparatus. Of course, in some situations we are obliged to use whatever "apparatus" we have access to. So the question arises can we formalise an intermediate position? 
+
+## Robustness
+Such an intermediate position is the idea of robustness. Researchers sometimes use various "robust" procedures, which protect against the possibility (or presence) of outliers. These techniques do not directly examine the outliers but accommodate them at no serious inconvenience [@barnett1974outliers]. Certain estimators, especially the mean and least squares estimators, are particularly vulnerable to outliers, or have low breakdown values[^2].
+
+[^2]: The breakdown point of an estimator is the proportion of incorrect observations (e.g. arbitrarily large observations) an estimator can handle before giving an incorrect (e.g., arbitrarily large) result. See @serfling2011asymptotic for a formal definition.
+
+For this reason, researchers turn to robust or high breakdown methods to provide alternative estimators for these important aspects of the data. A common robust estimation method for univariate distributions involves the use of a trimmed mean, which is calculated by temporarily eliminating extreme observations at both ends of the sample (very high and low values) [@anscombe1960rejection]. Alternatively, researchers may choose to compute a Windsorized mean, for which the highest and lowest observations are temporarily censored, and replaced with adjacent values from the remaining data. 
+
+The issue arises from the fact that robust qualities - however defined - must
+be bought at a price: the price of poorer performance when the model is correct. This is usually reported by some trade-off between the conflicting requirements of robustness and accuracy. 
+
+As an example, lets look at the median which is often cited as a robust estimator. The downside of the median is that it is less efficient than the mean. This is because it does not take into account the precise value of each observation and hence does not use all information available in the data. The standard error of the median ($\sigma_{median}$) for large samples and normal distributions is:
+
+$$ \sigma_{median} \approx 1.25 \frac{\sigma}{\sqrt{N}} = 1.25 \sigma_{mean}$$
+
+where $\sigma$ is the population standard deviation and $N$ the sample size.
+Thus, the standard error of the median is about $25\%$ larger than that for the mean [@maindonald2006data, Chapter 4]. Hence, the median is less efficient estimator when the model in correct, i.e the data come from a normal distributions. Later, we show that Bayesian analysis automatically delivers robustness whenever it is desirable without throwing away relevant information. But first we introduce how the apparatus generates data. 
+
+## The model
+Following @box1968bayesian we assume that the apparatus produces good and bad measurements. So we have a \enquote{good} sampling distribution 
+
+$$G(x|\theta)$$
+
+parametrized by $\theta$. The \enquote{bad} sampling distribution 
+
+$$B(x|\xi)$$
+
+possibly containing an uninteresting parameter $\xi$. Data from $B(x|\xi)$ are useless or worse for estimating $\theta$, since their occurrence probability has nothing to do with $\theta$. Our sample consists of $n$ observations 
+
+$$D = (x_1 \dots x_n).$$
+The trouble is we do not know which is which. However, we may be able to guess since a datapoint far away from the tails of $G(x|\theta)$ can be suspected of being bad. Let's define 
+
+\begin{equation}
+       q_i = 
+        \begin{cases}
+            1 & \text{if the ith datapoint is good} \\
+            0 & \text{if it is bad,}
+        \end{cases} 
+\end{equation}
+    
+with joint prior probabilities 
+
+$$p(q_1 \dots q_n)$$
+
+to the $2^n$ sequences of good and bad.
+
+Consider the most common case where our prior information about the good and bad observations is invariant on the particular trial at which they occur. That is, the probability of any sequence of $n$ good/bad observations depends only on the numbers $r$, $n-r$ of good and bad ones. Then, under de Finetti's representation theorem [@de1972probability]
+
+\begin{equation}
+p(q_1 \dots q_n) = \int_{0}^{1} u^r (1-u)^{n-r} dg(u).
+(\#eq:de_finetti)
+\end{equation}
+
+The theorem above is equivalent to assuming that $q_i$ are independent Bern($u$) (Bernoulli) random variables with $u$, given a prior distribution $g(u)$. Consequently, our sampling distribution can be written as a probability mixture of the good and bad distributions
+
+\begin{equation}
+p(x|\theta,\xi,u) = u G(x|\theta) + (1-u) B(x|\xi). 
+(\#eq:mixturedistr)
+\end{equation}
+
+$\theta$ can be thought of the parameter of interest while ($\xi,u$) are nuisance parameters. 
+In the next section, I show how a simple, flexible Bayesian solution allows for robustness. Throughout I assume $u$ is unknown, which is in line to real-life scenarios. 
+
+
+### The solution
+Let $p(\theta,\xi,u)$ be the joint prior density for the parameters. Under Bayes theorem their joint posterior density, given the data $D$, becomes 
+
+$$p(\theta,\xi,u|D) \propto L(\theta,\xi,u) p(\theta,\xi,u),$$
+
+and from \@ref(eq:mixturedistr),
+
+\begin{equation}
+L(\theta,\xi,u) = \prod_{i=1}^{n} \Big[ u G(x|\theta) + (1-u) B(x|\xi) \Big]
+\label{jointlikelihood}
+\end{equation}
+
+is the likelihood. The marginal posterior density for the parameter of interest $\theta$ is
+
+\begin{equation}
+p(\theta|D) = \int \int p(\theta,\xi,u|D) d\xi du.
+(\#eq:marginaltheta)
+\end{equation}
+
+Another formulation of \@ref(eq:marginaltheta) is
+
+$$ p(\theta|D) = \frac{p(\theta) \bar{L}(\theta)} {\int p(\theta) \bar{L}(\theta) d\theta}$$
+
+where $p(\theta)$ is the marginal prior density for $\theta$ and $\bar{L}(\theta)$ is the quasi-likelihood defined as 
+
+
+
+
+## References
