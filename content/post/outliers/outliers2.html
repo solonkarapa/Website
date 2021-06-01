@@ -14,27 +14,27 @@ header:
   image: ''
 bibliography: sample.bib
 link-citations: yes
-draft: TRUE
+draft: FALSE
 ---
 
 
 
-<p>This post is concerned with a ubiquitous problem of outliers. They degrade the performance of many models/algorithms. As a result, ongoing attempts try accommodate them by deriving robust estimators. But these estimators have drawbacks such as being less efficient. In this post, I approach the problem from a Bayesian viewpoint. I illustrate how the issue of outliers connects with our prior beliefs about the data collection procedure. This leads me to show how a simple but flexible Bayesian model allows us to accommodate outliers without inheriting the drawbacks of other estimators.</p>
+<p>This post is concerned with a ubiquitous problem of outliers. They are infamous for degrading the performance of many models/algorithms. As a result, ongoing attempts try to accommodate them by deriving robust estimators. Unfortunately, these estimators have drawbacks such as being less efficient. In this post, I approach the problem from a Bayesian viewpoint. I illustrate how the issue of outliers connects with our prior beliefs about the data collection procedure. This leads me to show how a simple but flexible Bayesian model allows us to accommodate outliers without inheriting the drawbacks of other estimators.</p>
 <p>Disclaimer: This post is heavily inspired by the work of <span class="citation">Jaynes (<a href="#ref-jaynes2003probability" role="doc-biblioref">2003</a>)</span>.</p>
 <div id="the-problem" class="section level2">
 <h2>The problem</h2>
-<p>Imagine we are interested in a quantity <span class="math inline">\(\theta\)</span>, which is unknown. The subsequent, logical step is to try to quantify our uncertainty about <span class="math inline">\(\theta\)</span> by collecting some data. That is, we are trying to measure <span class="math inline">\(\theta\)</span>. But the the data collection procedure (or apparatus) is always imperfect and so having <span class="math inline">\(n\)</span> independent measurements of <span class="math inline">\(\theta\)</span>, we have <span class="math inline">\(n\)</span> different results ($x_1, …, x_n $). How are we going to proceed on estimating <span class="math inline">\(\theta\)</span>, what is the “best” estimate to use?
+<p>Imagine we are interested in a quantity <span class="math inline">\(\theta\)</span>, which is unknown. The subsequent, logical step is to try to quantify our uncertainty about <span class="math inline">\(\theta\)</span> by collecting some data. That is, we are trying to measure <span class="math inline">\(\theta\)</span>. But the data collection procedure (or apparatus) is always imperfect and so having <span class="math inline">\(n\)</span> independent measurements of <span class="math inline">\(\theta\)</span>, we have <span class="math inline">\(n\)</span> different results ($x_1, …, x_n $). How are we going to proceed on estimating <span class="math inline">\(\theta\)</span>, what is the “best” estimate to use?
 If the <span class="math inline">\(n\)</span> data points are “close” together the problem of drawing conclusion about <span class="math inline">\(\theta\)</span> is not very difficult. But if they are not nicely clustered: one value, <span class="math inline">\(x_j\)</span>, lies far away from the other <span class="math inline">\(n-1\)</span> values? How are we going to deal with this outlier<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>?</p>
 </div>
 <div id="the-dilemma" class="section level2">
 <h2>The dilemma</h2>
-<p>Two opposite views have been expressed on how to deal with the outlier:</p>
+<p>Two opposite views have been expressed:</p>
 <ol style="list-style-type: decimal">
-<li>It should not have been included in the data. The data have been contaminated and the outlier needs to be removed otherwise we may get erroneous conclusions.</li>
+<li>The outlier should not have been included in the data. The data have been contaminated and the outlier needs to be removed otherwise we may get erroneous conclusions.</li>
 <li>The outlier may be the most important datapoint we have so it must be taken into account in the analysis. In other words, it may be desirable to describe the population including all observations. For only in that way do we describe what is actually happening <span class="citation">(Dixon <a href="#ref-dixon1950analysis" role="doc-biblioref">1950</a>)</span>.</li>
 </ol>
 <p>These viewpoints reflect different prior information about the data collection procedure. The first view is reasonable if we believe <em>a priori</em> the data collection procedure is unreliable. That is, any now and then and without warning we can get an erroneous measurement. The second view is reasonable if we have absolute confidence in the data collection procedure. Then the outlier is an important result and ignoring it may harm us.</p>
-<p>Clearly these are extreme positions, and in real-life the researcher is in a intermediate position. If they knew the apparatus is unreliable they have choose not to collect data in the first place or improve the apparatus. Of course, in some situations we are obliged to use whatever “apparatus” we have access to. So the question arises can we formalise an intermediate position?</p>
+<p>Clearly these are extreme positions, and in real-life the researcher is in a intermediate position. If they knew the apparatus is unreliable they would have choose not to collect data in the first place or improve the apparatus. Of course, in some situations we are obliged to use whatever “apparatus” we have access to. So the question arises can we formalise an intermediate position?</p>
 </div>
 <div id="robustness" class="section level2">
 <h2>Robustness</h2>
@@ -49,7 +49,7 @@ Thus, the standard error of the median is about <span class="math inline">\(25\%
 </div>
 <div id="the-model" class="section level2">
 <h2>The model</h2>
-<p>Following <span class="citation">Box and Tiao (<a href="#ref-box1968bayesian" role="doc-biblioref">1968</a>)</span> we assume that the apparatus produces good and bad measurements. So we have a “good” sampling distribution</p>
+<p>Following <span class="citation">Box and Tiao (<a href="#ref-box1968bayesian" role="doc-biblioref">1968</a>)</span> I assume that the apparatus produces good and bad measurements. So we have a “good” sampling distribution</p>
 <p><span class="math display">\[G(x|\theta)\]</span></p>
 <p>parametrized by <span class="math inline">\(\theta\)</span>. The “bad” sampling distribution</p>
 <p><span class="math display">\[B(x|\xi)\]</span></p>
@@ -130,12 +130,12 @@ L_{jk}(\theta) = \prod_{i \neq j,k} G(x_i|\theta) \dots
 \int u^{n-1} (1-u) du \int B(x_j|\xi) h(\xi,u|\theta) d\xi.\]</span></p>
 <p>Following the same reasoning, this is the probability, given <span class="math inline">\(\theta\)</span>, that the jth datapoint would be bad and would have the value <span class="math inline">\(x_j\)</span> and the other data would be good. Putting <span class="math inline">\(\bar{L}(\theta)\)</span> into words</p>
 <p><span class="math display">\[\begin{equation}
-\begin{split}
-\bar{L}(\theta) = \text{prob(all the data are good)} \times \text{(likelihood using all the data)} \\
- + \sum_j \text{prob(only $x_j$ bad)} \times \text{(likelihood using all the data except $x_j$)} \\
- + \dots  \\
- + \text{prob(all the data are bad)}.
-\end{split}
+\begin{array}{l@{}l}
+\bar{L}(\theta) &amp;{} = \text{prob(all the data are good)} \times \text{(likelihood using all the data)} \\
+&amp;{} + \sum_j \text{prob(only $x_j$ bad)} \times \text{(likelihood using all the data except $x_j$)} \\
+&amp;{} + \dots  \\
+&amp;{} + \text{prob(all the data are bad)}.
+\end{array}
 \label{quasiinwords}
 \end{equation}\]</span></p>
 <p>In short, <span class="math inline">\(\bar{L}(\theta)\)</span> is a weighted average of likelihoods resulting from every possible assumption about each datapoint <span class="math inline">\(x_j\)</span>, weighted by the prior probabilities of those assumptions.</p>
@@ -183,7 +183,7 @@ L_{jk}(\theta) = \prod_{i \neq j,k} G(x_i|\theta) \dots
 <p>———. 1965. “A Robust Version of the Probability Ratio Test.” <em>Ann. Math. Statist.</em> 36 (6): 1753–8. <a href="https://doi.org/10.1214/aoms/1177699803">https://doi.org/10.1214/aoms/1177699803</a>.</p>
 </div>
 <div id="ref-jaynes2003probability">
-<p>Jaynes, Edwin T. 2003. <em>Probability Theory: The Logic of Science</em>. Cambridge university press.</p>
+<p>Jaynes, Edwin T. 2003. <em>Probability Theory: The Logic of Science</em>. Cambridge University Press.</p>
 </div>
 <div id="ref-kurakin2016adversarial">
 <p>Kurakin, Alexey, Ian Goodfellow, and Samy Bengio. 2016. “Adversarial Machine Learning at Scale.” <em>arXiv Preprint arXiv:1611.01236</em>.</p>

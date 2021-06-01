@@ -14,33 +14,33 @@ header:
   image: ''
 bibliography: sample.bib
 link-citations: yes
-draft: TRUE
+draft: FALSE
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-This post is concerned with a ubiquitous problem of outliers. They degrade the performance of many models/algorithms. As a result, ongoing attempts try accommodate them by deriving robust estimators. But these estimators have drawbacks such as being less efficient. In this post, I approach the problem from a Bayesian viewpoint. I illustrate how the issue of outliers connects with our prior beliefs about the data collection procedure. This leads me to show how a simple but flexible Bayesian model allows us to accommodate outliers without inheriting the drawbacks of other estimators. 
+This post is concerned with a ubiquitous problem of outliers. They are infamous for degrading the performance of many models/algorithms. As a result, ongoing attempts try to accommodate them by deriving robust estimators. Unfortunately, these estimators have drawbacks such as being less efficient. In this post, I approach the problem from a Bayesian viewpoint. I illustrate how the issue of outliers connects with our prior beliefs about the data collection procedure. This leads me to show how a simple but flexible Bayesian model allows us to accommodate outliers without inheriting the drawbacks of other estimators. 
 
 Disclaimer: This post is heavily inspired by the work of @jaynes2003probability.
 
 ## The problem
-Imagine we are interested in a quantity $\theta$, which is unknown. The subsequent, logical step is to try to quantify our uncertainty about $\theta$ by collecting some data. That is, we are trying to measure $\theta$. But the the data collection procedure (or apparatus) is always imperfect and so having $n$ independent measurements of $\theta$, we have $n$ different results ($x_1, ..., x_n $). How are we going to proceed on estimating $\theta$, what is the "best" estimate to use?
+Imagine we are interested in a quantity $\theta$, which is unknown. The subsequent, logical step is to try to quantify our uncertainty about $\theta$ by collecting some data. That is, we are trying to measure $\theta$. But the data collection procedure (or apparatus) is always imperfect and so having $n$ independent measurements of $\theta$, we have $n$ different results ($x_1, ..., x_n $). How are we going to proceed on estimating $\theta$, what is the "best" estimate to use?
 If the $n$ data points are "close" together the problem of drawing conclusion about $\theta$ is not very difficult. But if they are not nicely clustered: one value, $x_j$, lies far away from the other $n-1$ values? How are we going to deal with this outlier[^1]?
 
 [^1]:I define an outlier as an observation which seems "to deviate markedly from the other members of the data sample in which it appears." [@grubbs1969procedures]?
 
 
 ## The dilemma
-Two opposite views have been expressed on how to deal with the outlier:
+Two opposite views have been expressed:
 
-1. It should not have been included in the data. The data have been contaminated and the outlier needs to be removed otherwise we may get erroneous conclusions. 
+1. The outlier should not have been included in the data. The data have been contaminated and the outlier needs to be removed otherwise we may get erroneous conclusions. 
 2.  The outlier may be the most important datapoint we have so it must be taken into account in the analysis. In other words, it may be desirable to describe the population including all observations. For only in that way do we describe what is actually happening [@dixon1950analysis].
 
 These viewpoints reflect different prior information about the data collection procedure. The first view is reasonable if we believe *a priori* the data collection procedure is unreliable. That is, any now and then and without warning we can get an erroneous measurement. The second view is reasonable if we have absolute confidence in the data collection procedure. Then the outlier is an important result and ignoring it may harm us.  
 
-Clearly these are extreme positions, and in real-life the researcher is in a intermediate position. If they knew the apparatus is unreliable they have choose not to collect data in the first place or improve the apparatus. Of course, in some situations we are obliged to use whatever "apparatus" we have access to. So the question arises can we formalise an intermediate position? 
+Clearly these are extreme positions, and in real-life the researcher is in a intermediate position. If they knew the apparatus is unreliable they would have choose not to collect data in the first place or improve the apparatus. Of course, in some situations we are obliged to use whatever "apparatus" we have access to. So the question arises can we formalise an intermediate position? 
 
 ## Robustness
 Such an intermediate position is the idea of robustness. Researchers sometimes use various "robust" procedures, which protect against the possibility (or presence) of outliers. These techniques do not directly examine the outliers but accommodate them at no serious inconvenience [@barnett1974outliers]. Certain estimators, especially the mean and least squares estimators, are particularly vulnerable to outliers, or have low breakdown values[^2].
@@ -60,7 +60,7 @@ where $\sigma$ is the population standard deviation and $N$ the sample size.
 Thus, the standard error of the median is about $25\%$ larger than that for the mean [@maindonald2006data, Chapter 4]. Hence, the median is less efficient estimator when the model in correct, i.e the data come from normal distributions. Later, I will show that Bayesian analysis automatically delivers robustness whenever it is desirable without throwing away relevant information. But first I introduce how the apparatus generates data. 
 
 ## The model
-Following @box1968bayesian we assume that the apparatus produces good and bad measurements. So we have a "good" sampling distribution 
+Following @box1968bayesian I assume that the apparatus produces good and bad measurements. So we have a "good" sampling distribution 
 
 $$G(x|\theta)$$
 
@@ -179,12 +179,12 @@ $$ \int \int h(\xi,u|\theta) u^{n-1} (1-u) B(x_j|\xi)  d\xi du =\\
 Following the same reasoning, this is the probability, given $\theta$, that the jth datapoint would be bad and would have the value $x_j$ and the other data would be good. Putting $\bar{L}(\theta)$ into words
 
 \begin{equation}
-\begin{split}
-\bar{L}(\theta) = \text{prob(all the data are good)} \times \text{(likelihood using all the data)} \\
- + \sum_j \text{prob(only $x_j$ bad)} \times \text{(likelihood using all the data except $x_j$)} \\
- + \dots  \\
- + \text{prob(all the data are bad)}.
-\end{split}
+\begin{array}{l@{}l}
+\bar{L}(\theta) &{} = \text{prob(all the data are good)} \times \text{(likelihood using all the data)} \\
+&{} + \sum_j \text{prob(only $x_j$ bad)} \times \text{(likelihood using all the data except $x_j$)} \\
+&{} + \dots  \\
+&{} + \text{prob(all the data are bad)}.
+\end{array}
 \label{quasiinwords}
 \end{equation}
 
