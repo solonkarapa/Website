@@ -1,0 +1,116 @@
+---
+title: "Puzzle from the New Scientist"
+author: ''
+date: '2021-06-01'
+slug: puzzle
+categories: [puzzle, probability]
+tags: [puzzle, probability]
+output: 
+  bookdown::html_document2: 
+    fig_caption: yes
+header:
+  caption: ''
+  image: ''
+link-citations: yes
+draft: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggsn) # for north symbol
+library(ggplot2)
+```
+
+Attempt to solve [#115 "A random robot"](https://www.newscientist.com/article/mg25033361-300-puzzle-115-can-you-work-out-where-roman-the-robot-will-end-up/) puzzle from the [New Scientist](https://www.newscientist.com/). This week (No 3336 - 29 May 2021) the New Scientist published the following puzzle: 
+
+> Roman the test robot is being given one final roam before being consigned to the scrapheap where he can rust in peace.
+
+> He has been programmed to make four equal length steps. For his first move, he can travel one step east, west, north or south. Each of his subsequent three steps must be at right angles to the previous move. The direction of each move is selected by a random number generator, with all four possibilities being equally probable.
+
+> What is the chance that Roman will finish where he started?
+
+I decided to solve the puzzle by first plotting how (and whether) Roman can finish where he started (see graph below). To do this, I divided the space based on the 4 cardinal directions he can take in one step.
+These are the coloured quadrants in the plot; his Start/Finish position is also given. For instance, Roman will be travelling along the purple top-right quadrant if he starts by going either north or east. 
+
+Next, within each quadrant he can travel clockwise or anti-clockwise. This is depicted with the black and grey arrows, respectively. For instance, if he goes north at the first step (purple quadrant) and then by travelling clockwise (black arrow), at right angles,  he will finish where he started. Similarly, if he goes east at the first step (purple quadrant) and then by travelling anti-clockwise (grey arrow) he will again finish where he started. In effect, the purple quadrant corresponds to the path: 
+
+north -> east -> south -> west 
+
+or 
+
+east -> north -> west -> south  
+
+```{r, echo=F}
+# coordinates
+x0 <- c(0, 0, 0, 1)
+y0 <- c(0, 0, 1, 1)
+x1 <- c(0, 1, 1, 1)
+y1 <- c(1, 0, 1, 0)
+
+df <- data.frame(x0, x1, y0, y1)
+
+value_shift <- 0.05
+value_shift_frame <- 0.08
+
+cbp2 <- c("#000000", "#E69F00", "#56B4E9", "#009E73",
+          "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+arrow_coord <- 0.2
+curv <- 0.4
+borders <- 1.5
+
+ggplot(df) +
+    xlim(-borders, borders) +
+    ylim(-borders, borders) +
+    #
+    geom_segment(aes(x = x0, y = y0, xend = x1, yend = y1), color = cbp2[8], linetype = 5,
+                 position = position_nudge(y = value_shift_frame, x = value_shift_frame)) +
+    geom_curve(aes(x = arrow_coord, y = 3*arrow_coord, xend = 1, yend = 3*arrow_coord),
+        arrow = arrow(length = unit(0.04, "npc")), curvature = -curv, color = cbp2[1]) +
+    geom_curve(aes(x = arrow_coord, y = 3*arrow_coord-value_shift, xend = 1, yend = 3*arrow_coord - value_shift),
+               arrow = arrow(length = unit(0.04, "npc")), curvature = curv, color = "darkgrey") +
+    #
+    geom_segment(aes(x = x0, y = -y0, xend = x1, yend = -y1), color = cbp2[2], linetype = 5, 
+                 position = position_nudge(y = -value_shift_frame, x = value_shift_frame)) +
+    geom_curve(aes(x = arrow_coord, y = -3*arrow_coord, xend = 1, yend = -3*arrow_coord),
+               arrow = arrow(length = unit(0.04, "npc")), curvature = -curv, color = cbp2[1]) +
+    geom_curve(aes(x = arrow_coord, y = -3*arrow_coord - value_shift, xend = 1, yend = -3*arrow_coord - value_shift),
+               arrow = arrow(length = unit(0.04, "npc")), curvature = curv, color = "darkgrey") +
+    #
+    geom_segment(aes(x = -x0, y = y0, xend = -x1, yend = y1), color = cbp2[3], linetype = 5,
+                 position = position_nudge(y = value_shift_frame, x = -value_shift_frame)) +
+    geom_curve(aes(x = -arrow_coord, y = -3*arrow_coord, xend = -1, yend = -3*arrow_coord),
+               arrow = arrow(length = unit(0.04, "npc")), curvature = -curv, color = cbp2[1]) +
+    geom_curve(aes(x = -arrow_coord, y = -3*arrow_coord + value_shift, xend = -1, yend = -3*arrow_coord + value_shift),
+               arrow = arrow(length = unit(0.04, "npc")), curvature = curv, color = "darkgrey") +
+    #
+    geom_segment(aes(x = -x0, y = -y0, xend = -x1, yend = -y1), color = cbp2[4], linetype = 5,
+                 position = position_nudge(y = -value_shift_frame, x = -value_shift_frame)) +
+    geom_curve(aes(x = -arrow_coord, y = 3*arrow_coord, xend = -1, yend = 3*arrow_coord),
+               arrow = arrow(length = unit(0.04, "npc")), curvature = -curv, color = cbp2[1]) +
+    geom_curve(aes(x = -arrow_coord, y = 3*arrow_coord + value_shift, xend = -1, yend = 3*arrow_coord + value_shift),
+               arrow = arrow(length = unit(0.04, "npc")), curvature = curv, color = "darkgrey") +
+    geom_text(aes(0, 0, label = 'Start/Finish')) +
+    #theme_classic() +
+    theme(axis.title = element_blank(),
+          axis.text = element_blank(),
+          axis.ticks = element_blank(),
+          panel.background = element_blank()) +
+    north(x.min = 0, x.max = 1.5, y.min = -1.5, y.max = 1.5)
+
+                 
+```
+
+Using the same reasoning, within each quadrant Roman can travel clockwise or anti-clockwise. This gives us 8 different paths (4 quadrants times 2 directions in each one) in total for Roman to start and finish at the same position. 
+
+Now we need to calculate the probability of each of those paths. I'll use the 
+path: 
+
+north -> east -> south -> west 
+
+for illustration. For his first move, he can choose any of the four cardinal directions with equal probability. So, the probability he chooses north is 1/4 (ie P(north)=1/4). After that, for each subsequent step he can only travel at right angels to the previous move. This limits his choices to two at each subsequent step. In addition, either choice is equally probable (as given by the problem). In this example, after going north, he can only go east or west with equal probability, so P(east) = 1/2. The same is valid of the next two steps. Hence, P(south) = 1/2 and P(west) = 1/2. To find the probability of the entire path we simply need to multiply the individual probabilities of the path. This is, P(path) = P(north) * P(east) * P(south) * P(west) = 1/32.
+
+Finally, we have 8 different paths so the total probability that Roman will finish where he started is 8*(1/32)=1/4. 
+
+
+
