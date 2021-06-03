@@ -12,7 +12,7 @@ header:
   caption: ''
   image: ''
 link-citations: yes
-draft: TRUE
+draft: FALSE
 ---
 
 ```{r setup, include=FALSE}
@@ -30,7 +30,7 @@ Attempt to solve [#115 "A random robot"](https://www.newscientist.com/article/mg
 > What is the chance that Roman will finish where he started?
 
 I decided to solve the puzzle by first plotting how (and whether) Roman can finish where he started (see graph below). To do this, I divided the space based on the 4 cardinal directions he can take in one step.
-These are the coloured quadrants in the plot; his Start/Finish position is also given. For instance, Roman will be travelling along the purple top-right quadrant if he starts by going either north or east. 
+These are the coloured quadrants in the plot; his Start/Finish position is also given. For example, Roman will be travelling along the purple top-right quadrant if he starts by going either north or east. 
 
 Next, within each quadrant he can travel clockwise or anti-clockwise. This is depicted with the black and grey arrows, respectively. For instance, if he goes north at the first step (purple quadrant) and then by travelling clockwise (black arrow), at right angles,  he will finish where he started. Similarly, if he goes east at the first step (purple quadrant) and then by travelling anti-clockwise (grey arrow) he will again finish where he started. In effect, the purple quadrant corresponds to the path: 
 
@@ -108,7 +108,7 @@ path:
 
 north -> east -> south -> west 
 
-for illustration. For his first move, he can choose any of the four cardinal directions with equal probability. So, the probability he chooses north is 1/4 (ie P(north)=1/4). After that, for each subsequent step he can only travel at right angels to the previous move. This limits his choices to two at each subsequent step. In addition, either choice is equally probable (as given by the problem). In this example, after going north, he can only go east or west with equal probability, so P(east) = 1/2. The same is valid of the next two steps. Hence, P(south) = 1/2 and P(west) = 1/2. To find the probability of the entire path we simply need to multiply the individual probabilities of the path. This is, P(path) = P(north) * P(east) * P(south) * P(west) = 1/32.
+for illustration. For his first move, he can choose any of the four cardinal directions with equal probability. So, the probability he chooses north is 1/4 (i.e. P(north)=1/4). After that, for each subsequent step he can only travel at right angels to the previous move. This limits his choices to two at each subsequent step. In addition, either choice is equally probable (as given by the problem). In this example, after going north, he can only go east or west with equal probability, so P(east) = 1/2. The same is valid of the next two steps. Hence, P(south) = 1/2 and P(west) = 1/2. To find the probability of the entire path we simply need to multiply the individual probabilities of the path. This is, P(path) = P(north) * P(east) * P(south) * P(west) = 1/32.
 
 Finally, we have 8 different paths so the total probability that Roman will finish where he started is 8*(1/32)=1/4. 
 
