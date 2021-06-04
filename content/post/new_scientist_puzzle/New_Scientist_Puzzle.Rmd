@@ -112,5 +112,7 @@ for illustration. For his first move, he can choose any of the four cardinal dir
 
 Finally, we have 8 different paths so the total probability that Roman will finish where he started is 8*(1/32)=1/4. 
 
+## Update 04/06/21
+Indeed, the answer is 1/4, [see here](https://www.newscientist.com/article/mg25033370-700-puzzle-116-can-you-figure-out-all-the-scores-for-the-1991-season/) for the New Scientist's solution.
 
 
