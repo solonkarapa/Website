@@ -30,7 +30,7 @@ content:
   - name: All
     tag: '*'
   - name: Deep Learning
-    tag: Deep Learning
+    tag: 
   - name: Other
     tag: Demo
 
