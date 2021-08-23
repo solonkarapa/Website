@@ -12,7 +12,7 @@ header:
   caption: ''
   image: ''
 link-citations: yes
-draft: TRUE
+draft: FALSE
 ---
 
 ```{r setup, include=FALSE}
@@ -23,7 +23,7 @@ library(tidyr)
 library(stringr)
 ```
 
-Shall I display my data using a table or a graph? The usual answer is: it depends. Mostly, it depends on who the audience is and how the data will be used. I agree, but [Alla et al, 2021](https://doi.org/10.1038/s42256-021-00353-8) may have gone a bit too far using tables.  
+Shall I display my data using a table or a graph? The usual answer is: it depends. Mostly, it depends on who the audience is and how the data will be used. I agree, but [Alaa et al, 2021](https://doi.org/10.1038/s42256-021-00353-8) may have gone a bit too far using tables.  
 
 I'll start with a brief summary of the paper. 
 
@@ -37,7 +37,7 @@ The horizontal lines show the performance of Adjutorium. In general, Adjutorium 
 
 Interestingly though, the conclusions depend the choice of performance measure. For example, using the AUC-ROC and Uno’s C-index the simpler Cox PH model predicts all-cause mortality equally well to Adjutorium. 
 
-In general, I find such visual displays more informative. 
+In general, I find graphs more informative - it is easier to see trends in the data when it is displayed visually compared to when it is displayed numerically in a table.  
 
 ```{r, echo=F}
 # paper
