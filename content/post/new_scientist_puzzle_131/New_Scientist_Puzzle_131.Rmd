@@ -28,7 +28,7 @@ The maximum score (i.e. sum) when rolling two dice is 12. The prime numbers from
 
 $$2, 3, 5, 7, 11$$
 
-Each number can be the result of the following dice combinations 
+Each score can be the result of the following dice combinations 
 
 2: {1, 1}
 
@@ -40,7 +40,7 @@ Each number can be the result of the following dice combinations
 
 11: {6, 5}
 
-For example, a score of 2, can only be achieved if both dice are {1, 1} (1 combination in total). A score of 3 can be achieved either with {2, 1} or {1, 2} (2 combinations in total).
+For example, a score of 2 can only be achieved if both dice are {1, 1} (1 combination in total). A score of 3 can be achieved either with {2, 1} or {1, 2} (2 combinations in total). A score of 5 can be achieved with {2, 3} or {4, 1} or {3, 2} or {1, 4} (4 combinations in total).
 
 The table below shows the total number of combinations for each score
 
@@ -67,12 +67,12 @@ We already know the number of favourable combinations (i.e. the number of combin
 
 Hence, the probability of getting their favourite score is $2/36 \text{ or } 1/18$ and it is the same for both.
 
-Then, we are asked: "If Gus goes first what are his chances of being bought a drink?" This the chance that Gus wins - the probability that he rolls his favourite score. We don't know if his favourite score is 3 or 11, but we know the probability of rolling either 3 or 11 is equal to the sum of the probability of rolling  3 and the probability of rolling 11, that is[^2] 
+Then, we are asked: "If Gus goes first what are his chances of being bought a drink?" This is the chance that Gus wins - the probability that he rolls his favourite score. We don't know if his favourite score is 3 or 11, but we know the probability of rolling either 3 or 11 is equal to the sum of the probability of rolling  3 and the probability of rolling 11, that is[^2] 
 
 
 $$P(3 \text{ or } 11) = P(3) + P(11) $$
 and we know that $P(3) = P(11)= 1/18$. So the probability Gus wins is $2/18 = 1/9$. 
 
-[^2]: This is usually called the addition rule. It states that for two events A and B, the probability that either one or both events occur is P(A or B) = P(A) + P(B) - P(A and B). The last term, P(A and B), is the probability that both events occur. In our case, it is zero because we cannot roll 3 and 11 at the same time, they cannot occur together when rolling a pair of dice. 
+[^2]: This is usually called the addition rule. It states that for two events A and B, the probability that either one or both events occur is P(A or B) = P(A) + P(B) - P(A and B). The last term, P(A and B), is the probability that both events occur. In our case, it is zero because we cannot have a score of 3 and 11 at the same time, they cannot occur together when rolling a pair of dice. 
 
 
