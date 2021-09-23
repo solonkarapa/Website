@@ -67,7 +67,13 @@ We already know the number of favourable combinations (i.e. the number of combin
 
 Hence, the probability of getting their favourite score is $2/36 \text{ or } 1/18$ and it is the same for both.
 
-Then, we are asked: "If Gus goes first what are his chances of being bought a drink?" This is the chance that Gus wins - the probability that he rolls his favourite score. We don't know if his favourite score is 3 or 11, but we know the probability of rolling either 3 or 11 is equal to the sum of the probability of rolling  3 and the probability of rolling 11, that is[^2] 
+
+
+Then, we are asked: "If Gus goes first what are his chances of being bought a drink?" This is the chance that Gus wins - the probability that he rolls his favourite score. 
+
+Should be the same 1/18.
+
+We don't know if his favourite score is 3 or 11, but we know the probability of rolling either 3 or 11 is equal to the sum of the probability of rolling  3 and the probability of rolling 11, that is[^2] 
 
 
 $$P(3 \text{ or } 11) = P(3) + P(11) $$
