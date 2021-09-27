@@ -11,7 +11,7 @@ header:
   image: ''
   preview: yes
 link-citations: yes
-draft: TRUE
+draft: FALSE
 ---
 
 ```{r setup, include=FALSE}
@@ -61,7 +61,7 @@ The puzzle states that the chances of getting their favourite score is the same 
 
 Now we need to find that probability. We can calculate it as 
 
-Probability = Number of favourable combinations/ total number of combinations
+Probability = Number of favourable combinations/total number of combinations
 
 We already know the number of favourable combinations (i.e. the number of combinations that will give the win) - it is 2. There are 2 ways to get a score of 3 or 11 (see table). The total number of combinations is 36. There are 36 possible outcomes when we roll two dice (6 from the first and 6 from the second die).
 
@@ -69,16 +69,35 @@ Hence, the probability of getting their favourite score is $2/36 \text{ or } 1/1
 
 
 
-Then, we are asked: "If Gus goes first what are his chances of being bought a drink?" This is the chance that Gus wins - the probability that he rolls his favourite score. 
+Then, we are asked: "If Gus goes first what are his chances of being bought a drink?" 
+That is, what are his chances of winning? Gus wins if he rolls his favourite score or both Bart and Gus fail - in which case they continue the game. Let W denote the event that Gus wins. The probability of W is
 
-Should be the same 1/18.
+P(W) = P(Gus rolls his favourite score ) + P(both fail)
 
-We don't know if his favourite score is 3 or 11, but we know the probability of rolling either 3 or 11 is equal to the sum of the probability of rolling  3 and the probability of rolling 11, that is[^2] 
+This is usually called the addition rule[^2]. We already know the first term, the probability of rolling his favourite score is $1/18$. The second term can be decomposed as 
+
+P(both fail) = P(Bart fails and Gus fails) = 
+
+P(Bart fails given that Gus fails) P(Gus fails)
+
+P(Bart fails given that Gus fails) (1 - P(W))
+
+To go from the first to the second line I used the multiplication rule[^3]. Also, P(Gus fails) = 1 - P(Gus wins) = 1 - P(W). The first term in the last line (P(Bart fails given that Gus fails)) is equal to the probability that Bart fails, which is 1-P(Bart rolls his favourite score) = 1 - 1/18 = 17/18. So rewriting our previous equation we have
+
+P(W) = P(Gus rolls his favourite score) + P(both fail) 
+
+P(W) = P(Gus rolls his favourite score)  + P(Bart fails given that Gus fails) (1 - P(W))
+
+P(W) = 1/18 + 17/18(1 - P(W))
+
+P(W) = 18/35
+
+The probability of Gus winning, if he goes first, is 18/35.
+
+## Update 27/09/21
+The [solution](https://www.newscientist.com/article/mg25133530-900-puzzle-132-can-you-work-out-on-which-day-a-quiz-will-be-given/) from the New Scientist's.
 
 
-$$P(3 \text{ or } 11) = P(3) + P(11) $$
-and we know that $P(3) = P(11)= 1/18$. So the probability Gus wins is $2/18 = 1/9$. 
+[^2]: The addition rule states that for two events A and B, the probability that either one or both events occur is P(A or B) = P(A) + P(B) - P(A and B). The last term, P(A and B), is the probability that both events occur. In our case, it is zero because we cannot have a score of 3 and 11 at the same time, they cannot occur together when rolling a pair of dice. 
 
-[^2]: This is usually called the addition rule. It states that for two events A and B, the probability that either one or both events occur is P(A or B) = P(A) + P(B) - P(A and B). The last term, P(A and B), is the probability that both events occur. In our case, it is zero because we cannot have a score of 3 and 11 at the same time, they cannot occur together when rolling a pair of dice. 
-
-
+[^3]: The multiplication rule states that the probability that both events occur is P(A and B) = P(A) P(B given A) or P(B) P(A given B). P(A given B) means the probability that event A occurs given event B has occurred.
