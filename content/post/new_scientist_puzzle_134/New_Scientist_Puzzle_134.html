@@ -11,7 +11,7 @@ header:
   image: ''
   preview: yes
 link-citations: yes
-draft: TRUE
+draft: FALSE
 ---
 
 
@@ -37,18 +37,18 @@ draft: TRUE
 <li>Pick one of the remaining two numbers (two choices).</li>
 <li>Stick the last number on the end.</li>
 </ol>
-<p>By multiplying these choices together to get our result: <span class="math inline">\(4 \times 3 \times 2 (\times 1) = 24\)</span>.</p>
+<p>By multiplying these choices together to get our result: <span class="math inline">\(4 \times 3 \times 2 (\times 1) = 24\)</span> possible permutations.</p>
 <p>The actual formula behind the calculation is <span class="math inline">\(n!/(n-r)!\)</span>, where <span class="math inline">\(n\)</span> is the number of things to choose from,
-and we choose <span class="math inline">\(r\)</span> of them, with no repetitions (we need to choose each number only once). For us, <span class="math inline">\(n= r= 4\)</span> since we have <span class="math inline">\(n=4\)</span> buttons to choose from and we choose <span class="math inline">\(r=4\)</span> which gives <span class="math inline">\(4!/(0!) = 4!/1 = 4 \times 3 \times 2 \times 1 = 24\)</span>.</p>
+and we choose <span class="math inline">\(r\)</span> of them, with no repetitions (we need to choose each number only once). For us, <span class="math inline">\(n= r= 4\)</span> since we have <span class="math inline">\(n=4\)</span> digits to choose from and we choose <span class="math inline">\(r=4\)</span> which gives <span class="math inline">\(4!/(0!) = 4!/1 = 4 \times 3 \times 2 \times 1 = 24\)</span>.</p>
 <p>The factorial function (symbol: <span class="math inline">\(!\)</span>) just means to multiply a series of descending natural numbers. Example: <span class="math inline">\(7! = 7 × 6 × 5 × 4 × 3 × 2 × 1 = 5,040\)</span>. Note, it is generally agreed that <span class="math inline">\(0! = 1\)</span>.</p>
 <p>The reasoning for the door with three worn buttons (Door 2) is slightly more involved. First, I introduce the letters <span class="math inline">\(A, B\)</span> and <span class="math inline">\(C\)</span> to denote each of the three worn buttons on the keypad- it doesn’t matter which is which. We can arrange the three letters in <span class="math inline">\(3!\)</span> ways. This follows the same reasoning as before. Now, let’s assume the following order</p>
 <p><span class="math inline">\({\color{BrickRed}*}, A, *, B, *, C, {\color{BrickRed}*}\)</span></p>
-<p>where the asterisks indicate positions the letters can be repeated. For example, if <span class="math inline">\(A\)</span> is repeated then I simply replace the asterisks with <span class="math inline">\(A\)</span>. We then get</p>
+<p>where the asterisks indicate positions where the letters can be repeated. For example, if <span class="math inline">\(A\)</span> is repeated then I simply replace the asterisks with <span class="math inline">\(A\)</span>. We then get</p>
 <p><span class="math inline">\(A, A, B, C\)</span> (I replaced the first asterisk)</p>
 <p><span class="math inline">\(A, A, B, C\)</span> (I replaced the second asterisk)</p>
 <p><span class="math inline">\(A, B, A, C\)</span> (I replaced the third asterisk)</p>
 <p><span class="math inline">\(A, B, C, A\)</span> (I replaced the fourth asterisk)</p>
-<p>Note the first two are actually the same. So, in effect, two asterisks (shown in red above) are superfluous. This reduces the positions the letters can be repeated to two. And since we can repeat any of the three letters (<span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span> or <span class="math inline">\(C\)</span>), the number of arrangements is <span class="math inline">\(3! \times 2 \times 3 = 36\)</span>.</p>
+<p>Note the first two are actually the same. So, in effect, two asterisks (shown in red above) are superfluous. This reduces the positions the letters can be repeated to 2. And since we can repeat any of the 3 letters (<span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span> or <span class="math inline">\(C\)</span>), the number of possible permutations is <span class="math inline">\(3! \times 2 \times 3 = 36\)</span>.</p>
 <p>Hence, James should go for Door 1 with the four worn digits as he will need at most 24 attempts compared to 36 attempts for Door 2.</p>
 <div id="update-151021" class="section level2">
 <h2>Update 15/10/21</h2>

@@ -11,7 +11,7 @@ header:
   image: ''
   preview: yes
 link-citations: yes
-draft: TRUE
+draft: FALSE
 ---
 
 ```{r setup, include=FALSE}
@@ -37,10 +37,10 @@ For the door with the four worn buttons (let's call it Door 1) we can calculate 
 3. Pick one of the remaining two numbers (two choices). 
 4. Stick the last number on the end.
 
-By multiplying these choices together to get our result: $4 \times 3 \times 2 (\times 1) = 24$. 
+By multiplying these choices together to get our result: $4 \times 3 \times 2 (\times 1) = 24$ possible permutations. 
 
 The actual formula behind the calculation is $n!/(n-r)!$, where $n$ is the number of things to choose from,
-and we choose $r$ of them, with no repetitions (we need to choose each number only once). For us, $n= r= 4$ since we have $n=4$ buttons to choose from and we choose $r=4$ which gives $4!/(0!) = 4!/1 = 4 \times 3 \times 2 \times 1 = 24$.
+and we choose $r$ of them, with no repetitions (we need to choose each number only once). For us, $n= r= 4$ since we have $n=4$ digits to choose from and we choose $r=4$ which gives $4!/(0!) = 4!/1 = 4 \times 3 \times 2 \times 1 = 24$.
 
 The factorial function (symbol: $!$) just means to multiply a series of descending natural numbers. Example: $7! = 7 × 6 × 5 × 4 × 3 × 2 × 1 = 5,040$. Note, it is generally agreed that $0! = 1$.
 
@@ -48,7 +48,7 @@ The reasoning for the door with three worn buttons (Door 2) is slightly more inv
 
 ${\color{BrickRed}*}, A, *, B, *,  C, {\color{BrickRed}*}$
 
-where the asterisks indicate positions the letters can be repeated. For example, if $A$ is repeated then I simply replace the asterisks with $A$. We then get 
+where the asterisks indicate positions where the letters can be repeated. For example, if $A$ is repeated then I simply replace the asterisks with $A$. We then get 
 
 $A, A, B,  C$ (I replaced the first asterisk)
 
@@ -59,7 +59,7 @@ $A, B, A,  C$ (I replaced the third asterisk)
 $A, B,  C, A$ (I replaced the fourth asterisk)
 
 
-Note the first two are actually the same. So, in effect, two asterisks (shown in red above) are superfluous. This reduces the positions the letters can be repeated to two. And since we can repeat any of the three letters ($A$ or $B$ or $C$), the number of arrangements is $3! \times 2 \times 3 = 36$.
+Note the first two are actually the same. So, in effect, two asterisks (shown in red above) are superfluous. This reduces the positions the letters can be repeated to 2. And since we can repeat any of the 3 letters ($A$ or $B$ or $C$), the number of possible permutations is $3! \times 2 \times 3 = 36$.
 
 Hence, James should go for Door 1 with the four worn digits as he will need at most 24 attempts compared to 36 attempts for Door 2. 
 
