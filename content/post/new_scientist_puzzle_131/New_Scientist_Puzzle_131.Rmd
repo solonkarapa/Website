@@ -95,7 +95,7 @@ P(W) = 18/35
 The probability of Gus winning, if he goes first, is 18/35.
 
 ## Update 27/09/21
-The [solution](https://www.newscientist.com/article/mg25133530-900-puzzle-132-can-you-work-out-on-which-day-a-quiz-will-be-given/) from the New Scientist's.
+The [solution](https://www.newscientist.com/article/mg25133530-900-puzzle-132-can-you-work-out-on-which-day-a-quiz-will-be-given/) from the New Scientist.
 
 
 [^2]: The addition rule states that for two events A and B, the probability that either one or both events occur is P(A or B) = P(A) + P(B) - P(A and B). The last term, P(A and B), is the probability that both events occur. In our case, it is zero because we cannot have a score of 3 and 11 at the same time, they cannot occur together when rolling a pair of dice. 

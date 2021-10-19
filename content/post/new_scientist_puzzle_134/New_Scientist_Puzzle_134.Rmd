@@ -64,4 +64,4 @@ Note the first two are actually the same. So, in effect, two asterisks (shown in
 Hence, James should go for Door 1 with the four worn digits as he will need at most 24 attempts compared to 36 attempts for Door 2. 
 
 ## Update 15/10/21
-The [solution](https://www.newscientist.com/article/mg25133564-500-puzzle-135-how-do-you-hit-the-jackpot-on-this-machine/) from the New Scientist's.
+The [solution](https://www.newscientist.com/article/mg25133564-500-puzzle-135-how-do-you-hit-the-jackpot-on-this-machine/) from the New Scientist.
