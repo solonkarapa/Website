@@ -36,11 +36,11 @@ selected = true
 
 # Links (optional).
 url_pdf = ""
-url_preprint = ""
-url_code = ""
+url_preprint = "https://arxiv.org/abs/2104.01822"
+url_code = "https://github.com/solonkarapa/TailoredBayes"
 url_dataset = ""
 url_project = ""
-url_slides = ""
+url_slides = "https://zenodo.org/record/3994748#.YbcqVH3P30o"
 url_video = ""
 url_poster = ""
 url_source = "https://academic.oup.com/biostatistics/advance-article/doi/10.1093/biostatistics/kxab023/6345454"
