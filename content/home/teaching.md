@@ -25,7 +25,7 @@ title: Teaching
 
 ---
 
-- Teaching Assistant and Dissertation Supervisor (2021-2022), at the [MPhil in Population Health Sciences](https://www.phs.masters.cam.ac.uk/), University of Cambridge.
+- Teaching Assistant and Dissertation Supervisor (2021-2022) at the [MPhil in Population Health Sciences](https://www.phs.masters.cam.ac.uk/), University of Cambridge.
 <br><br>
 
 - I have [supervised](https://www.maths.cam.ac.uk/undergrad/supervisions) 
