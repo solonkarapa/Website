@@ -32,14 +32,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 The authors use a coloured beetle species as a test case. The beetle’s wings sport a shiny, shifting and metallic green-blue appearance stemming from structural colour. They then use a series of elegantly simple experiments to test the camouflage hypothesis. First, they put together a collection of hundreds of beetle wing cases, including the iridescent and non-iridescent beetles in a variety of colours, and distributed them in a natural setting amid a variety of plant species. They found, surprisingly, that the iridescent specimens were more likely to survive predation by birds than the non-iridescent variety—even outperforming a leaf-green non-iridescent model that should have blended in with the background colours.
 
-Their conclusions are based on a mixed Cox model where the survival of the beetles was recorded at 2, 24, and 48 h. Predation by birds, which ate all or most of the mealworm, was scored as an event in the survival analysis. Predation by animals other than birds (non-birds), complete disappearance of a target, or survival to 48 h, were treated as censored values in the survival analysis[^1]. 
+Their conclusions are based on a mixed Cox model where the survival of the beetles was recorded at 2, 24, and 48 h. **Predation by birds**, which ate all or most of the mealworm, was scored as an event in the survival analysis. Predation by animals other than birds (**non-birds**), complete disappearance of a target, or survival to 48 h, were treated as censored values in the survival analysis[^1]. 
 
 [^1]: Predation by other animals included spiders, which sucked the fluids out and left a hollow exoskeleton, slugs, which left slime trails, and ants, which chopped off small pieces of the mealworm. 
 
-Effectively this analyses ignores the competing risks. A *competing risk* is an event whose occurrence precludes the occurrence of the primary event of interest. Being eaten by other animals precludes to be eaten by birds! 
+Effectively this analysis ignores the competing risks. A *competing risk* is an event whose occurrence precludes the occurrence of the primary event of interest. Being eaten by other animals precludes to be eaten by birds! 
 Here, I re-analyse the data taking into account the competing risks.
 
-## Competing risks
+## About competing risks
 Competing risks concern the situation where more than one cause of failure is possible. It refers to situations where an event has occurred, which prevents occurrence of the primary event of interest. For instance, in this study, predation by non-birds prevents the occurrence of the primary event of interest, i.e. predation by birds. 
 
 A common assumption is that upon removal of one cause of failure, the risks of failure of the remaining causes is unchanged. That is, the competing risks are assumed independent. Two competing risks are said to be independent if information about a subject’s risk of experiencing 1 type of event provides no information about the subject’s risk of experiencing the other type of event. While this may be a reasonable assumption in some settings, independent competing risks may be relatively rare in biological applications.
@@ -62,9 +62,9 @@ The cause-specific hazard function denotes the instantaneous rate of occurrence 
 $$\lambda^{SD}(t) = \lim_{\Delta t \to 0} \frac{Prob(t \leq  T < t + \Delta t, \color{blue}{E = k} | T > t \color{blue}{\cup (T < t \cap E \neq k)})}{\Delta t}$$
 It denotes the instantaneous risk of failure from the $k^{th}$ event in subjects who have not yet experienced an event of type $k$ (blue term). Note that this risk set includes those who are currently event free as well as those who have previously experienced a competing event. This differs from the risk set for the cause-specific hazard function, which only includes those who are currently event free. Using the same example as above, the subdistribution hazard of predation by birds denotes the instantaneous rate of bird death in insects who are still "alive" (i.e. who have not yet experienced either event) or who have previously died of non-bird predation. There is a distinct cause-specific hazard function for each of the distinct types of events and a distinct subdistribution hazard function for each of the distinct types of events.
 
-To reiterate, the difference between the two hazard function is in the risk set. For the cause-specific hazard, the risk set decreases at each time point at which there is a failure of another cause. For subdistribution hazard insects who fail from another cause remain in the risk set.
+Note, the difference between the two hazard functions is in the risk set. As a result, for the cause-specific hazard, the risk set decreases at each time point at which there is a failure of another cause. For subdistribution hazard insects who fail from another cause remain in the risk set.
 
-Here, I'm interested in modelling the effect of covariates on both hazards and see if that leads to different conclusions. 
+Here, I'm interested in modelling the effect of covariates on both hazards and see if that leads us to different conclusions. 
 
 ## Results
 
