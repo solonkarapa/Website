@@ -19,6 +19,12 @@ draft: TRUE
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r, echo=F, message=F}
+# load packages
+library(dplyr)
+library(ggplot2)
+```
+
 ## Introduction
 
 
@@ -44,9 +50,8 @@ Competing risks concern the situation where more than one cause of failure is po
 
 A common assumption is that upon removal of one cause of failure, the risks of failure of the remaining causes is unchanged. That is, the competing risks are assumed independent. Two competing risks are said to be independent if information about a subject’s risk of experiencing 1 type of event provides no information about the subject’s risk of experiencing the other type of event. While this may be a reasonable assumption in some settings, independent competing risks may be relatively rare in biological applications.
 
-When analyzing survival data in which competing risks are present, analysts frequently censor subjects when a competing event occurs (as done in this study). Thus, when the outcome is time to death attributable to birds, an analyst considers an insect as censored once that subject dies of non-bird causes (spiders etc). However, censoring insects at the time of death attributable to non-bird causes may be problematic.
+When analyzing survival data in which competing risks are present, analysts frequently censor subjects when a competing event occurs (as done in this study). Thus, when the outcome is time to death attributable to birds, an analyst considers an insect as censored once it dies of non-bird causes (spiders etc). However, censoring insects at the time of death attributable to non-bird causes may be problematic (@putter2007tutorial).
 
-**Elaborate**
 
 ### The Hazard Function
 A key concept in survival analysis is that of the hazard function. In the absence of competing risks, the hazard function is defined as
@@ -67,6 +72,100 @@ Note, the difference between the two hazard functions is in the risk set. As a r
 Here, I'm interested in modelling the effect of covariates on both hazards and see if that leads us to different conclusions. 
 
 ## Results
+```{r, echo=F}
+# load data
+main_path <- "/Users/work/Desktop/Website/content/post/iridescence/data"
+
+Experiment1_data <- read.delim(paste0(main_path, "/Kjernsmo_et_al_Experiment1_data.txt"))
+
+data <- Experiment1_data %>% 
+    mutate(Treatment = factor(Treatment, levels = c("Irid", "Stat", "Gre" , "Pur", "Blu", "Bla")))
+```
+
+The data can be found [here](https://data.bris.ac.uk/data/dataset/388y3cip6r6mv25yccy5qum1l7)[^2]. First, I transform the data for competing risks analysis. I use the following three event type indicators: 1 for bird death, 2 for non-bird death and 0 for censored observations.
+
+[^2]: I use `Kjernsmo_et_al_Experiment1_data.txt` 
+
+```{r}
+# data transformation for competing risks
+# data is the loaded data-frame
+data_compete <- data %>% 
+    mutate(BirdPredated = case_when(
+        (Notes == "SPIDER" | Notes == "ANTS" | Notes == "SLUG" | Notes == "WASP") ~ 2, 
+        TRUE ~ as.numeric(BirdPredated)))
+```
+
+I use the [survival](https://cran.r-project.org/web/packages/survival/index.html) package to fit the two cause-spesific models: `cox1` for bird death and `cox2` for non-bird death. 
+
+```{r}
+library(survival)
+
+# Cause-specific hazard for bird death
+cox1 <- coxph(Surv(Time, BirdPredated == 1) ~ Treatment, data = data_compete, x = TRUE)
+
+# Cause-specific hazard for non-bird death
+cox2 <- coxph(Surv(Time, BirdPredated == 2) ~ Treatment, data = data_compete, x = TRUE)
+```
+
+I then use the [cmprsk](https://cran.r-project.org/web/packages/cmprsk/index.html) package to fit the two subdistribution models: `crr1` for bird death and `crr2` for non-bird death. 
+
+```{r}
+library(cmprsk)
+# necessary pre-processing
+Treatment <- model.matrix(~ data_compete[, "Treatment"])[,-1]
+cov_mat <- Treatment
+
+# subdistribution hazard bird death
+crr1 <- crr(data_compete$Time, fstatus = data_compete$BirdPredated, cov1 = cov_mat, failcode = 1) 
+
+# subdistribution hazard non-bird death
+crr2 <- crr(data_compete$Time, fstatus = data_compete$BirdPredated, cov1 = cov_mat, failcode = 2)
+```
+
+I plot the hazard ratios (HR) with 95% confidence intervals for each treatment. We see that treatment affects the relative cause-specific hazard of bird death (red)[^3] but not of non-bird death (blue). Similarly, treatment has a significant effect on the relative incidence of bird death (green), but not of non-bird death (yellow). Together these indicate that contrary to non-bird predators, birds are sensitive to iridescent targets.Interestingly, though, treatment has a more accentuated effect on the cause-specific hazard (red) of bird death than the cumulative incidence (green) of bird death. Likely, the effects are qualitatively the same, which not be the case.
+
+[^3]: These are almost identical results as in the original paper (@kjernsmo2020iridescence), even though I don't use any random effects.  
+
+```{r, echo=F}
+##### auxiliary function
+processing__irid_output <- function(fit, model_name){
+    res <- as.data.frame(summary(fit)$conf.int[,c(1, 3, 4)])
+    
+    rownames(res) <- c("Stat", "Gre" , "Pur", "Blu", "Bla")
+    colnames(res) <- c("HR", "2.5%", "97.5%")
+    
+    res$Model <- model_name
+    
+    df_prelim <- tibble::rownames_to_column(res, "Treatment")
+    
+    df <- df_prelim %>% 
+        add_row(Treatment = c("Irid"), HR = 1, `2.5%` = 1, `97.5%` = 1, Model = model_name) %>%
+        mutate(Treatment = factor(Treatment, levels = c("Irid", "Stat", "Gre" , "Pur", "Blu", "Bla")))
+    
+    return(df)
+}
+```
+
+```{r, echo = F}
+library(purrr)
+
+models <- list(cox1, cox2, crr1, crr2)
+models_names <- list("cause-specific birds", "cause-specific non-birds", "subdistribution birds", "subdistribution non-birds")
+df_output <- map2_df(models, models_names, processing__irid_output)
+
+library(ggsci)
+
+width_dodge <- 0.4
+ggplot(df_output) +
+    geom_point(aes(y = HR, x = Treatment, col = Model), size = 2, position = position_dodge(width_dodge)) +
+    geom_errorbar(aes(y = HR, x = Treatment, ymin = `2.5%`, ymax = `97.5%` , col = Model),
+                  width = .3, position=position_dodge(width_dodge), size = 1) +
+    geom_hline(yintercept = 1, linetype = "dashed") +
+    scale_color_startrek() + 
+    #coord_cartesian(y = c(0.5, 4)) +
+    theme_bw(14) 
+
+```
 
 
 ## References

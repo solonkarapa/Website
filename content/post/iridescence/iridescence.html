@@ -34,8 +34,7 @@ Here, I re-analyse the data taking into account the competing risks.</p>
 <h2>About competing risks</h2>
 <p>Competing risks concern the situation where more than one cause of failure is possible. It refers to situations where an event has occurred, which prevents occurrence of the primary event of interest. For instance, in this study, predation by non-birds prevents the occurrence of the primary event of interest, i.e. predation by birds.</p>
 <p>A common assumption is that upon removal of one cause of failure, the risks of failure of the remaining causes is unchanged. That is, the competing risks are assumed independent. Two competing risks are said to be independent if information about a subject’s risk of experiencing 1 type of event provides no information about the subject’s risk of experiencing the other type of event. While this may be a reasonable assumption in some settings, independent competing risks may be relatively rare in biological applications.</p>
-<p>When analyzing survival data in which competing risks are present, analysts frequently censor subjects when a competing event occurs (as done in this study). Thus, when the outcome is time to death attributable to birds, an analyst considers an insect as censored once that subject dies of non-bird causes (spiders etc). However, censoring insects at the time of death attributable to non-bird causes may be problematic.</p>
-<p><strong>Elaborate</strong></p>
+<p>When analyzing survival data in which competing risks are present, analysts frequently censor subjects when a competing event occurs (as done in this study). Thus, when the outcome is time to death attributable to birds, an analyst considers an insect as censored once that subject dies of non-bird causes (spiders etc). However, censoring insects at the time of death attributable to non-bird causes may be problematic (<span class="citation">Putter, Fiocco, and Geskus (<a href="#ref-putter2007tutorial" role="doc-biblioref">2007</a>)</span>).</p>
 <div id="the-hazard-function" class="section level3">
 <h3>The Hazard Function</h3>
 <p>A key concept in survival analysis is that of the hazard function. In the absence of competing risks, the hazard function is defined as</p>
@@ -46,12 +45,41 @@ where <span class="math inline">\(T\)</span> denotes the time from baseline unti
 The cause-specific hazard function denotes the instantaneous rate of occurrence of the <span class="math inline">\(k^{th}\)</span> event (blue term) in subjects who are currently event free (i.e. in subjects who have not yet experienced any of the different types of events). If one were considering 2 types of events, death attributable to birds and death attributable to non-birds, then the cause-specific hazard of bird death denotes the instantaneous rate of bird death in subjects who have not yet experienced either event (i.e., in subjects who are still “alive”). The <strong>subdistribution hazard function</strong> is</p>
 <p><span class="math display">\[\lambda^{SD}(t) = \lim_{\Delta t \to 0} \frac{Prob(t \leq  T &lt; t + \Delta t, \color{blue}{E = k} | T &gt; t \color{blue}{\cup (T &lt; t \cap E \neq k)})}{\Delta t}\]</span>
 It denotes the instantaneous risk of failure from the <span class="math inline">\(k^{th}\)</span> event in subjects who have not yet experienced an event of type <span class="math inline">\(k\)</span> (blue term). Note that this risk set includes those who are currently event free as well as those who have previously experienced a competing event. This differs from the risk set for the cause-specific hazard function, which only includes those who are currently event free. Using the same example as above, the subdistribution hazard of predation by birds denotes the instantaneous rate of bird death in insects who are still “alive” (i.e. who have not yet experienced either event) or who have previously died of non-bird predation. There is a distinct cause-specific hazard function for each of the distinct types of events and a distinct subdistribution hazard function for each of the distinct types of events.</p>
-<p>To reiterate, the difference between the two hazard function is in the risk set. For the cause-specific hazard, the risk set decreases at each time point at which there is a failure of another cause. For subdistribution hazard insects who fail from another cause remain in the risk set.</p>
-<p>Here, I’m interested in modelling the effect of covariates on both hazards and see if that leads to different conclusions.</p>
+<p>Note, the difference between the two hazard functions is in the risk set. As a result, for the cause-specific hazard, the risk set decreases at each time point at which there is a failure of another cause. For subdistribution hazard insects who fail from another cause remain in the risk set.</p>
+<p>Here, I’m interested in modelling the effect of covariates on both hazards and see if that leads us to different conclusions.</p>
 </div>
 </div>
 <div id="results" class="section level2">
 <h2>Results</h2>
+<p>The data can be found <a href="https://data.bris.ac.uk/data/dataset/388y3cip6r6mv25yccy5qum1l7">here</a><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. First, I transform the data for competing risks analysis. I use the following three event type indicators: 1 for bird death, 2 for non-bird death and 0 for censored observations.</p>
+<pre class="r"><code># data transformation for competing risks
+# data is the loaded data-frame
+data_compete &lt;- data %&gt;% 
+    mutate(BirdPredated = case_when(
+        (Notes == &quot;SPIDER&quot; | Notes == &quot;ANTS&quot; | Notes == &quot;SLUG&quot; | Notes == &quot;WASP&quot;) ~ 2, 
+        TRUE ~ as.numeric(BirdPredated)))</code></pre>
+<p>I use the <a href="https://cran.r-project.org/web/packages/survival/index.html">survival</a> package to fit the two cause-spesific models: <code>cox1</code> for bird death and <code>cox2</code> for non-bird death.</p>
+<pre class="r"><code>library(survival)
+
+# Cause-specific hazard for bird death
+cox1 &lt;- coxph(Surv(Time, BirdPredated == 1) ~ Treatment, data = data_compete, x = TRUE)
+
+# Cause-specific hazard for non-bird death
+cox2 &lt;- coxph(Surv(Time, BirdPredated == 2) ~ Treatment, data = data_compete, x = TRUE)</code></pre>
+<p>I then use the <a href="https://cran.r-project.org/web/packages/cmprsk/index.html">cmprsk</a> package to fit the two subdistribution models: <code>crr1</code> for bird death and <code>crr2</code> for non-bird death.</p>
+<pre class="r"><code>library(cmprsk)
+# necessary pre-processing
+Treatment &lt;- model.matrix(~ data_compete[, &quot;Treatment&quot;])[,-1]
+cov_mat &lt;- Treatment
+
+# subdistribution hazard bird death
+crr1 &lt;- crr(data_compete$Time, fstatus = data_compete$BirdPredated, cov1 = cov_mat, failcode = 1) 
+
+# subdistribution hazard non-bird death
+crr2 &lt;- crr(data_compete$Time, fstatus = data_compete$BirdPredated, cov1 = cov_mat, failcode = 2)</code></pre>
+<p>I plot the hazard ratios (HR) with 95% confidence intervals for each treatment. We see that treatment affects the relative cause-specific hazard of bird death (red)<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> but not of non-bird death (blue). Similarly, treatment has a significant effect on the relative incidence of bird death (green), but not of non-bird death (yellow). Together these indicate that contrary to non-bird predators, birds are sensitive to iridescent targets.Interestingly, though, treatment has a more accentuated effect on the cause-specific hazard (red) of bird death than the cumulative incidence (green) of bird death. Likely, the effects are qualitatively the same, which not be the case.</p>
+<p><img src="/post/iridescence/iridescence_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Notes</p>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
@@ -59,11 +87,16 @@ It denotes the instantaneous risk of failure from the <span class="math inline">
 <div id="ref-kjernsmo2020iridescence">
 <p>Kjernsmo, Karin, Heather M Whitney, Nicholas E Scott-Samuel, Joanna R Hall, Henry Knowles, Laszlo Talas, and Innes C Cuthill. 2020. “Iridescence as Camouflage.” <em>Current Biology</em> 30 (3): 551–55.</p>
 </div>
+<div id="ref-putter2007tutorial">
+<p>Putter, Hein, Marta Fiocco, and Ronald B Geskus. 2007. “Tutorial in Biostatistics: Competing Risks and Multi-State Models.” <em>Statistics in Medicine</em> 26 (11): 2389–2430.</p>
+</div>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol>
 <li id="fn1"><p>Predation by other animals included spiders, which sucked the fluids out and left a hollow exoskeleton, slugs, which left slime trails, and ants, which chopped off small pieces of the mealworm.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>I use <code>Kjernsmo_et_al_Experiment1_data.txt</code><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>These are almost identical results as in the original paper (<span class="citation">Kjernsmo et al. (<a href="#ref-kjernsmo2020iridescence" role="doc-biblioref">2020</a>)</span>), even though I don’t use any random effects.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
