@@ -162,7 +162,6 @@ ggplot(df_output) +
     scale_color_startrek() + 
     #coord_cartesian(y = c(0.5, 4)) +
     theme_bw(14) 
-
 ```
 
 ## Which one to use?
@@ -173,7 +172,7 @@ However, the numerical value of 1.45 is not straightforward to interpret since i
 
 [^4]:These figures can be obtained from 'summary(cox1)' and 'summary(crr1)'.
 
-This quantity is mainly of interest for prediction. That is why the the subdistribution hazard ratio may be thought of as a measure of ‘prognostic association’, i.e. best suited to quantifying predictive relationships. Conversely, the cause-specific hazard ratio may be thought of as a measure of ‘aetiological association’, i.e. best suited to quantifying causal relationships (see @noordzij2013we for a comprehensive review).
+This quantity is mainly of interest for prediction. That is why the the subdistribution hazard ratio may be thought of as a measure of ‘prognostic association’, i.e. best suited to quantifying predictive relationships. Conversely, the cause-specific hazard ratio may be thought of as a measure of ‘aetiological association’, i.e. best suited to quantifying causal relationships (see @noordzij2013we for a comprehensive review and @feakins2018standard for an application on cardiovascular and cancer mortality).
 
 
 ## References
