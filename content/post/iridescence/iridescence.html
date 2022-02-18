@@ -17,10 +17,8 @@ draft: TRUE
 
 
 
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
-<p>(for blogpost)</p>
-</div>
+<p>Standard survival data measure the time span from some time origin until the occurrence of the event of interest. In the interpretation of results of survival analyses, competing risks can be an important problem. Competing risks occur when subjects can experience one or more events which ‘compete’ with the event of interest. In those cases, the competing risk hinders the observation of the event of interest or modifies the chance that this event occurs.</p>
+<p>Here, I use a data from <span class="citation">Kjernsmo et al. (<a href="#ref-kjernsmo2020iridescence" role="doc-biblioref">2020</a>)</span> on biological iridescence to study the impact of competing risks on the final conclusions. First, I introduce the topic of iridescence and its intriguing biological significance (<a href="#background">Background</a>). Then, I outline the main idea behind competing risks (<a href="#cmrisk">About competing risks</a>) and present the two main types of <a href="#hzd">hazard functions</a>. I then re-analyse the data from <span class="citation">Kjernsmo et al. (<a href="#ref-kjernsmo2020iridescence" role="doc-biblioref">2020</a>)</span> (<a href="#res">Results</a>) and finish with a few <a href="#conc">concluding remarks</a>.</p>
 <div id="background" class="section level2">
 <h2>Background</h2>
 <p><a href="https://en.wikipedia.org/wiki/Iridescence">Biological iridescence</a> (the vivid, shining coloring of many species) often serves to make individual animals more visible, and as a result, has been hypothesised to contribute to sexual selection. But the fact that it is found in non-reproductive stages makes the sexual selection hypothesis less likely. An alternative (and counterintuitive) hypothesis is that can work as a form of protection, aiming “to conceal rather than reveal” .</p>
@@ -30,12 +28,12 @@ draft: TRUE
 <p>Effectively this analysis ignores the competing risks. A <em>competing risk</em> is an event whose occurrence precludes the occurrence of the primary event of interest. Being eaten by other animals precludes to be eaten by birds!
 Here, I re-analyse the data taking into account the competing risks.</p>
 </div>
-<div id="about-competing-risks" class="section level2">
+<div id="cmrisk" class="section level2">
 <h2>About competing risks</h2>
 <p>Competing risks concern the situation where more than one cause of failure is possible. It refers to situations where an event has occurred, which prevents occurrence of the primary event of interest. For instance, in this study, predation by non-birds prevents the occurrence of the primary event of interest, i.e. predation by birds.
 A common assumption is that upon removal of one cause of failure, the risks of failure of the remaining causes is unchanged. That is, the competing risks are assumed independent. Two competing risks are said to be independent if information about a subject’s risk of experiencing 1 type of event provides no information about the subject’s risk of experiencing the other type of event. While this may be a reasonable assumption in some settings, independent competing risks may be relatively rare in biological applications.</p>
 <p>When analyzing survival data in which competing risks are present, analysts frequently censor subjects when a competing event occurs (as done in this study). Thus, when the outcome is time to death attributable to birds, an analyst considers an insect as censored once it dies of non-bird causes (spiders etc). However, censoring insects at the time of death attributable to non-bird causes may be problematic (see <span class="citation">Putter, Fiocco, and Geskus (<a href="#ref-putter2007tutorial" role="doc-biblioref">2007</a>)</span> for a review). The next section introduces two ways competing risks can be taken into account.</p>
-<div id="the-hazard-function" class="section level3">
+<div id="hzd" class="section level3">
 <h3>The Hazard Function</h3>
 <p>A key concept in survival analysis is that of the hazard function. In the absence of competing risks, the hazard function is defined as</p>
 <p><span class="math display">\[\lambda(t) = \lim_{\Delta t \to 0} \frac{Prob(t \leq  T &lt; t + \Delta t | T &gt; t)}{\Delta t}\]</span>
@@ -49,7 +47,7 @@ It denotes the instantaneous risk of failure from the <span class="math inline">
 <p>Here, I’m interested in modelling the effect of covariates on both hazards and see if that leads us to different conclusions.</p>
 </div>
 </div>
-<div id="results" class="section level2">
+<div id="res" class="section level2">
 <h2>Results</h2>
 <p>The data can be found <a href="https://data.bris.ac.uk/data/dataset/388y3cip6r6mv25yccy5qum1l7">here</a><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. First, I transform the data for competing risks analysis. I use the following three event type indicators: 1 for bird death, 2 for non-bird death and 0 for censored observations.</p>
 <pre class="r"><code># data transformation for competing risks
@@ -80,7 +78,7 @@ crr2 &lt;- crr(data_compete$Time, fstatus = data_compete$BirdPredated, cov1 = co
 <p>I plot the hazard ratios (HR) with 95% confidence intervals for each treatment. We see that treatment affects the relative cause-specific hazard of bird death (red)<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> but not of non-bird death (blue). Similarly, treatment has a significant effect on the relative incidence of bird death (green), but not of non-bird death (yellow). Together these indicate that, contrary to non-bird predators, birds are less sensitive to iridescent targets. Interestingly, though, treatment has a more accentuated effect on the cause-specific hazard (red) of bird death than the cumulative incidence (green) of bird death. Likely, the effects are qualitatively the same, which not be the case.</p>
 <p><img src="/post/iridescence/iridescence_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
-<div id="which-one-to-use" class="section level2">
+<div id="conc" class="section level2">
 <h2>Which one to use?</h2>
 <p>This example demonstrates that both approaches may yield different results. This can be explained by the different composition of the risk sets. In the cause-specific model for bird death, the insects who died from a non-bird cause were censored and thus removed from the risk sets after their time of death, whereas they were kept in the risk sets after death in the subdistribution model.</p>
 <p>As a result, the cause-specific hazard ratio (<span class="math inline">\(HR^{CS}\)</span>) and the subdistribution HR (<span class="math inline">\(HR^{SD}\)</span>) do not have the same interpretation. For example<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>, the <span class="math inline">\(HR^{CS}\)</span> of 1.65 means that static rainbow insects (‘Stat’ in plot - red), had a hazard of dying 1.65 times higher than iridescent insects, among insects who were alive and did not die from non-bird predators. The <span class="math inline">\(HR^{SD}\)</span> higher than one (<span class="math inline">\(HR^{SD}\)</span> = 1.45) means that the cumulative incidence of death is higher in static rainbow insects (‘Stat’ in plot - green) when compared with iridescent ones.
