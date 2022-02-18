@@ -80,11 +80,21 @@ crr2 &lt;- crr(data_compete$Time, fstatus = data_compete$BirdPredated, cov1 = co
 <p>I plot the hazard ratios (HR) with 95% confidence intervals for each treatment. We see that treatment affects the relative cause-specific hazard of bird death (red)<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> but not of non-bird death (blue). Similarly, treatment has a significant effect on the relative incidence of bird death (green), but not of non-bird death (yellow). Together these indicate that, contrary to non-bird predators, birds are less sensitive to iridescent targets. Interestingly, though, treatment has a more accentuated effect on the cause-specific hazard (red) of bird death than the cumulative incidence (green) of bird death. Likely, the effects are qualitatively the same, which not be the case.</p>
 <p><img src="/post/iridescence/iridescence_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
+<div id="which-one-to-use" class="section level2">
+<h2>Which one to use?</h2>
+<p>This example demonstrates that both approaches may yield different results. This can be explained by the different composition of the risk sets. In the cause-specific model for bird death, the insects who died from a non-bird cause were censored and thus removed from the risk sets after their time of death, whereas they were kept in the risk sets after death in the subdistribution model.</p>
+<p>As a result, the cause-specific hazard ratio (<span class="math inline">\(HR^{CS}\)</span>) and the subdistribution HR (<span class="math inline">\(HR^{SD}\)</span>) do not have the same interpretation. For example<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>, the <span class="math inline">\(HR^{CS}\)</span> of 1.65 means that static rainbow insects (‘Stat’ in plot - red), had a hazard of dying 1.65 times higher than iridescent insects, among insects who were alive and did not die from non-bird predators. The <span class="math inline">\(HR^{SD}\)</span> higher than one (<span class="math inline">\(HR^{SD}\)</span> = 1.45) means that the cumulative incidence of death is higher in static rainbow insects (‘Stat’ in plot - green) when compared with iridescent ones.
+However, the numerical value of 1.45 is not straightforward to interpret since it reflects the mortality rate ratio among insects who are alive or have died from non-bird predators. So, the <span class="math inline">\(HR^{SD}\)</span> is in fact a different quantity than an <span class="math inline">\(HR^{CS}\)</span>, representing a ratio in a non-existing population including those who experienced the competing event.</p>
+<p>This quantity is mainly of interest for prediction. That is why the the subdistribution hazard ratio may be thought of as a measure of ‘prognostic association’, i.e. best suited to quantifying predictive relationships. Conversely, the cause-specific hazard ratio may be thought of as a measure of ‘aetiological association’, i.e. best suited to quantifying causal relationships (see <span class="citation">Noordzij et al. (<a href="#ref-noordzij2013we" role="doc-biblioref">2013</a>)</span> for a comprehensive review).</p>
+</div>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
 <div id="refs" class="references">
 <div id="ref-kjernsmo2020iridescence">
 <p>Kjernsmo, Karin, Heather M Whitney, Nicholas E Scott-Samuel, Joanna R Hall, Henry Knowles, Laszlo Talas, and Innes C Cuthill. 2020. “Iridescence as Camouflage.” <em>Current Biology</em> 30 (3): 551–55.</p>
+</div>
+<div id="ref-noordzij2013we">
+<p>Noordzij, Marlies, Karen Leffondré, Karlijn J van Stralen, Carmine Zoccali, Friedo W Dekker, and Kitty J Jager. 2013. “When Do We Need Competing Risks Methods for Survival Analysis in Nephrology?” <em>Nephrology Dialysis Transplantation</em> 28 (11): 2670–7.</p>
 </div>
 <div id="ref-putter2007tutorial">
 <p>Putter, Hein, Marta Fiocco, and Ronald B Geskus. 2007. “Tutorial in Biostatistics: Competing Risks and Multi-State Models.” <em>Statistics in Medicine</em> 26 (11): 2389–2430.</p>
@@ -97,5 +107,6 @@ crr2 &lt;- crr(data_compete$Time, fstatus = data_compete$BirdPredated, cov1 = co
 <li id="fn1"><p>Predation by other animals included spiders, which sucked the fluids out and left a hollow exoskeleton, slugs, which left slime trails, and ants, which chopped off small pieces of the mealworm.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p>I use <code>Kjernsmo_et_al_Experiment1_data.txt</code><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p>These are almost identical results as in the original paper (<span class="citation">Kjernsmo et al. (<a href="#ref-kjernsmo2020iridescence" role="doc-biblioref">2020</a>)</span>), even though I don’t use any random effects.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>These figures can be obtained from ‘summary(cox1)’ and ‘summary(crr1)’.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>

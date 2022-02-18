@@ -165,6 +165,16 @@ ggplot(df_output) +
 
 ```
 
+## Which one to use?
+This example demonstrates that both approaches may yield different results. This can be explained by the different composition of the risk sets. In the cause-specific model for bird death, the insects who died from a non-bird cause were censored and thus removed from the risk sets after their time of death, whereas they were kept in the risk sets after death in the subdistribution model.
+
+As a result, the cause-specific hazard ratio ($HR^{CS}$) and the subdistribution HR ($HR^{SD}$) do not have the same interpretation. For example[^4], the $HR^{CS}$ of 1.65 means that static rainbow insects ('Stat' in plot - red), had a hazard of dying 1.65 times higher than iridescent insects, among insects who were alive and did not die from non-bird predators. The $HR^{SD}$ higher than one ($HR^{SD}$ = 1.45) means that the cumulative incidence of death is higher in  static rainbow insects ('Stat' in plot - green) when compared with iridescent ones.
+However, the numerical value of 1.45 is not straightforward to interpret since it reflects the mortality rate ratio among insects who are alive or have died from non-bird predators. So, the $HR^{SD}$ is in fact a different quantity than an $HR^{CS}$, representing a ratio in a non-existing population including those who experienced the competing event. 
+
+[^4]:These figures can be obtained from 'summary(cox1)' and 'summary(crr1)'.
+
+This quantity is mainly of interest for prediction. That is why the the subdistribution hazard ratio may be thought of as a measure of ‘prognostic association’, i.e. best suited to quantifying predictive relationships. Conversely, the cause-specific hazard ratio may be thought of as a measure of ‘aetiological association’, i.e. best suited to quantifying causal relationships (see @noordzij2013we for a comprehensive review).
+
 
 ## References
 
