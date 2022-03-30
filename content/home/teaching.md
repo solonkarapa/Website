@@ -24,6 +24,8 @@ title: Teaching
 #    text_color_light: true
 
 ---
+- Lecturer (Lent 2022) at the [MPhil in Computational Biology](https://www.postgraduate.study.cam.ac.uk/courses/directory/maammpcbi), University of Cambridge.
+<br><br>
 
 - Teaching Assistant and Dissertation Supervisor (2021-2022) at the [MPhil in Population Health Sciences](https://www.phs.masters.cam.ac.uk/), University of Cambridge.
 <br><br>
