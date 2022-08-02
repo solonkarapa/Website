@@ -24,13 +24,16 @@ title: Teaching
 #    text_color_light: true
 
 ---
-- Lecturer (Lent 2022) at the [MPhil in Computational Biology](https://www.postgraduate.study.cam.ac.uk/courses/directory/maammpcbi), University of Cambridge.
+- Dissertation Supervisor (2022) at the  [MPhil in Computational Biology](https://www.postgraduate.study.cam.ac.uk/courses/directory/maammpcbi), University of Cambridge.
+<br><br>
+
+- Lecturer (Lent 2022) at the [MPhil in Computational Biology](https://www.postgraduate.study.cam.ac.uk/courses/directory/maammpcbi).
 <br><br>
 
 - Teaching Assistant and Dissertation Supervisor (2021-2022) at the [MPhil in Population Health Sciences](https://www.phs.masters.cam.ac.uk/), University of Cambridge.
 <br><br>
 
-- I have [supervised](https://www.maths.cam.ac.uk/undergrad/supervisions) 
+- [Supervisor](https://www.maths.cam.ac.uk/undergrad/supervisions) 
 [Statistics IB](https://www.dpmms.cam.ac.uk/study/IB/Statistics/), Lent 2019 (2nd year undergraduate course from the [Department of Pure Mathematics and Mathematical Statistics](https://www.dpmms.cam.ac.uk/about/), University of Cambridge). 
 <br><br>
 
