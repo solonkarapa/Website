@@ -24,7 +24,7 @@ QWERTY has become the dominant keyboard standard. The basic QWERTY form was deve
 QWERTY takes its name from the first six letter of the second line (see image). 
 
 ```{r}
-#knitr::include_graphics("/Users/work/Desktop/Website/content/post/qwerty/keyboard_1280.png")
+knitr::include_graphics("/Users/work/Desktop/Website/content/post/qwerty/keyboard_1280.png")
 ```
 
 There has been a lot of debate on the nature of QWERTY, whether the specific keyboard design was by choice or chance?
@@ -44,11 +44,11 @@ Crucially, this calculation is based on the assumption that the designer had cho
 Here, I’m looking how this probability changes for other values of letters/rows combinations.
 
 # The calculation in @kay2013rerun
-First, I briefly go through the calculations as presented in @kay2013rerun. The problem is parallel to sampling without replacement from an (imaginary) urn. The designer has chosen $K=10$ letters to be assigned at the top row of the keyboard and the rest $R=26-10=16$ to the other rows (there are $N=26$ letters in the alphabet).
+First, I briefly go through the calculations presented in @kay2013rerun. The problem is parallel to sampling without replacement from an (imaginary) urn. The designer has chosen $K=10$ letters to be assigned at the top row of the keyboard and the rest $R=26-10=16$ to the other rows (there are $N=26$ letters in the alphabet).
 
 We are interested in the probability the $k=7$ letters needed to form the word "typewriter" finish at the top row. This probability is described by a *hypergeometric* distribution. 
 
-The hypergeometric distribution describes the probability of $k=7$ "successes" in $n=7$ draws, without replacement, from a finite population of size $N = 26$ letters that contains exactly K = 10 objects with that feature, wherein each draw is either a success or a failure. Using the usual urn-style "language" of "green" and "red" marbles we have: 
+The hypergeometric distribution describes the probability of $k=7$ "successes" in $n=7$ draws, without replacement, from a finite population of size $N = 26$ letters that contains exactly $K = 10$ objects with that feature, wherein each draw is either a success or a failure. Using the usual urn-style language of "green" and "red" marbles we have: 
 
  - $K = 10$ green marbles (i.e. 10 letters to be assigned at the top row)
  - $N = 26$ (i.e. the letters of the alphabet)
@@ -66,7 +66,7 @@ But this calculation is based on the assumption: the designer decided the number
 # An updated calculation 
 Another approach is to change the number of letters in the top row and see how this probability changes. 
 
-Now we are interested in the probability of drawing "$k=7$ green marbles in 7 draws for different choices of $K$ (and $R$ consequently)". The plots shows the probability of $k=7$ for different values of $K$. We start with $K = 6$ which gives Probability = 0, as there is no way to draw 7 green balls when there are only 6 of them! The red dot corresponds to $K=10$ which has been used in the paper. For $K=19$ which corresponds to the quite extreme scenario of having 19 letters at the top row, the probability the 7 "typerwriter" letters are found there becomes 8%. Still small but appreciable.   
+Now we are interested in the probability of drawing "$k=7$ green marbles in $n=7$ draws for different choices of $K$". The plot shows the probability of $k=7$ for different values of $K$. We start with $K = 6$ which gives Probability = 0, as there is no way to draw 7 green balls when there are only 6 of them! The red dot corresponds to $K=10$ which has been used in the paper. For $K=19$ which corresponds to the quite extreme scenario of having 19 letters at the top row, the probability the 7 "typerwriter" letters are found there becomes 8%. Still small but appreciable.   
 
 The calculations above are based on sampling the letters in "typewriter" at any order. We can also calculate the probability of drawing "Exactly $k=7$ green marbles in $n=7$ draws, in the specific QWERTY order”. This corresponds to the horizontal dashed line in the plot.
 
@@ -82,7 +82,7 @@ df <- data.frame(K, prbs)
 library(ggplot2)
 library(dplyr)
 
-# prb of exact "qwerty" word sampled - see later 
+# prb of exact "qwerty" word sampled
 pr_exact <- (1/26)*(1/25)*(1/24)*(1/23)*(1/22)**(1/21)*(1/20)*(1/19)
 
 ggplot(df) +
