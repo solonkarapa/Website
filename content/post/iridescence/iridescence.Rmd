@@ -40,8 +40,7 @@ These conclusions are based on a mixed Cox model where the survival of the beetl
 
 [^1]: Predation by other animals included spiders, which sucked the fluids out and left a hollow exoskeleton, slugs, which left slime trails, and ants, which chopped off small pieces of the mealworm. 
 
-Effectively this analysis ignores the competing risks. A *competing risk* is an event whose occurrence precludes the occurrence of the primary event of interest. Being eaten by other animals precludes to be eaten by birds! 
-Here, I re-analyse the data taking into account the competing risks.
+Effectively this analysis ignores the competing risks. A *competing risk* is an event whose occurrence precludes the occurrence of the primary event of interest. Being eaten by other animals precludes to be eaten by birds! Here, I re-analyse the data taking into account the competing risks.
 
 ## About competing risks{#cmrisk}
 Competing risks concern the situation where more than one cause of failure is possible. It refers to situations where an event has occurred, which prevents occurrence of the primary event of interest. For instance, in this study, predation by non-birds prevents the occurrence of the primary event of interest, i.e. predation by birds. 
