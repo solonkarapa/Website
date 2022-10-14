@@ -33,7 +33,7 @@ A common view is the letters QWERTY were assembled (on purpose) in one row so th
 
 They used probability theory to investigate whether this feature of the keyboard exists "by intent or accident". To do this, they calculated the probability the seven letters that make up "typewriter" falling on one line. This probability is 0.0002, so small, which indicates it was a design choice.
 
-Crucially, this calculation is based on the assumption that the designer had chosen in advance to place 10 letters at the top row[^1].
+Crucially, this calculation is based on the assumption that the designer had chosen in advance to place 10 letters at the top row of the keyboard[^1].
 
 [^1]: In fact, later versions changed this arrangement to 10 (top), 9 (middle), 7 (bottom), a more balanced ordering - this the modern QWERTY.
 
@@ -62,11 +62,11 @@ But this calculation is based on the assumption: the designer decided the number
 # An updated calculation 
 Another approach is to change the number of letters in the top row and see how this probability changes. 
 
-Now we are interested in the probability of drawing "$k=7$ green marbles in $n=7$ draws for different choices of $K$". The plot shows the probability of $k=7$ for different values of $K$. We start with $K = 6$ which gives probability = 0, as there is no way to draw 7 green balls when there are only 6 of them! The red dot corresponds to $K=10$ which has been used in the paper by Kay. For $K=19$ which corresponds to the quite extreme scenario of having 19 letters at the top row, the probability the 7 "typerwriter" letters are found there becomes 8%. Still small but appreciable.   
+Now we are interested in the probability of drawing "$k=7$ green marbles in $n=7$ draws for different choices of $K$". The plot shows the probability of $k=7$ for different values of $K$. We start with $K = 6$ which gives probability = 0, as there is no way to draw 7 green marbles when there are only 6 of them! The red dot corresponds to $K=10$ which has been used in the paper by Kay. For $K=19$ which corresponds to the quite extreme scenario of having 19 letters at the top row, the probability the 7 "typerwriter" letters are found there becomes 8%. Still small but appreciable.   
 
 The calculations above are based on sampling the letters in "typewriter" at any order. We can also calculate the probability of drawing "Exactly $k=7$ green marbles in $n=7$ draws, in the specific QWERTY order”. This corresponds to the horizontal dashed line in the plot.
 
-Overall, adding more letters at the top row increases the probability substantially. For example, the probability increases by 750% when going from $K=10$ to $16$ letters. Nevertheless, in absolute terms even for $K =19$ it is so small that we can conclude it is unlikely that these letters would appear together by chance. 
+Overall, adding more letters at the top row increases the probability substantially. For example, the probability increases by 9900% (!) when going from $K=10$ to $16$ letters. Nevertheless, in absolute terms even for $K =19$ it is so small that we can conclude it is unlikely that these letters would appear together by chance. 
 
 For a more historical perspective and other myths on QWERTY - read [this article](https://www.newscientist.com/article/2200664-the-truth-about-the-qwerty-keyboard/). 
 
