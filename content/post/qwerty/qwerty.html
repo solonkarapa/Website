@@ -12,24 +12,24 @@ header:
   caption: ''
   image: ''
 bibliography: biblio_qwerty.bib  
-draft: TRUE
+draft: FALSE
 ---
 
 
 
-<p>QWERTY has become the dominant keyboard standard. The basic QWERTY form was developed in 1873 and was based around four rows with eleven characters in each row.</p>
-<p>QWERTY takes its name from the first six letter of the second line (see image).</p>
-<pre class="r"><code>knitr::include_graphics(&quot;/Users/work/Desktop/Website/content/post/qwerty/keyboard_1280.png&quot;)</code></pre>
-<p><img src="keyboard_1280.png" width="640" /></p>
-<p>There has been a lot of debate on the nature of QWERTY, whether the specific keyboard design was by choice or chance?</p>
-<p>A common view is the letters QWERTY were assembled (on purpose) in one row so the salesman could impress the customers by quickly typing “typewriter” which was the name of the brand producing the hardware - “the Sholes and Glidden Type Writer”.</p>
+<p>QWERTY has become the dominant keyboard standard, used by billions of people every day. The basic QWERTY form was developed in 1873 and was based around four rows with eleven characters in each row.</p>
+<p><a href="https://en.wikipedia.org/wiki/QWERTY">QWERTY</a> takes its name from the first six letter of the second line (see <a href="http://www.gettyimages.com/detail/1268712200">image</a>).</p>
 <blockquote>
-<p>Using these six letters in QWERTY we can type the word “typewriter”.</p>
+<p>There has been a lot of debate on the nature of QWERTY, whether the specific keyboard design was by choice or chance?</p>
+</blockquote>
+<p>A common view is the letters QWERTY were assembled (on purpose) in one row so the salesman could impress the customers by quickly typing “typewriter” which was the name of the brand producing the hardware - “the Sholes and Glidden Type Writer”. Effectively a sales trick!</p>
+<blockquote>
+<p>Using the six letters in QWERTY we can type the word “typewriter”.</p>
 </blockquote>
 <p><span class="citation">Kay (<a href="#ref-kay2013rerun" role="doc-biblioref">2013</a>)</span> labels this view as Myth 1.</p>
-<p>They used probability theory to investigate whether this feature of the keyboard exists “by intent or accident”. To do this, they calculated the probability the seven letters that make up “typewriter” falling on one line. This probability is 0.0002 which would indicate it was a design choice, rather than a random ordering of letters.</p>
-<p>Crucially, this calculation is based on the assumption that the designer had chosen in advance to place the 26 letter of the alphabet into 3 rows with 10 letters at the top row, 10 at the middle, and 6 at the bottom row<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
-<p>Here, I’m looking how this probability changes for other values of letters/rows combinations.</p>
+<p>They used probability theory to investigate whether this feature of the keyboard exists “by intent or accident”. To do this, they calculated the probability the seven letters that make up “typewriter” falling on one line. This probability is 0.0002, so small, which indicates it was a design choice.</p>
+<p>Crucially, this calculation is based on the assumption that the designer had chosen in advance to place 10 letters at the top row<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<p>Here, I’m looking how this probability changes for other values of letters at the top row.</p>
 <div id="the-calculation-in-kay2013rerun" class="section level1">
 <h1>The calculation in <span class="citation">Kay (<a href="#ref-kay2013rerun" role="doc-biblioref">2013</a>)</span></h1>
 <p>First, I briefly go through the calculations presented in <span class="citation">Kay (<a href="#ref-kay2013rerun" role="doc-biblioref">2013</a>)</span>. The problem is parallel to sampling without replacement from an (imaginary) urn. The designer has chosen <span class="math inline">\(K=10\)</span> letters to be assigned at the top row of the keyboard and the rest <span class="math inline">\(R=26-10=16\)</span> to the other rows (there are <span class="math inline">\(N=26\)</span> letters in the alphabet).</p>
@@ -39,7 +39,7 @@ draft: TRUE
 <li><span class="math inline">\(K = 10\)</span> green marbles (i.e. 10 letters to be assigned at the top row)</li>
 <li><span class="math inline">\(N = 26\)</span> (i.e. the letters of the alphabet)</li>
 <li><span class="math inline">\(R = 16\)</span> red marbles (i.e. the rest of the letters to be assigned to the other rows)</li>
-<li><span class="math inline">\(k = 7\)</span> the letters that form the word “typerwriter”</li>
+<li><span class="math inline">\(k = 7\)</span> letters that form the word “typerwriter”</li>
 </ul>
 <p>We then draw <span class="math inline">\(n = 7\)</span> marbles without replacement. What is the probability that exactly <span class="math inline">\(k=7\)</span> are green? This is given by</p>
 <p><span class="math display">\[P(X=k) = \frac{ {K\choose{k}} {{N-k}\choose{n-k}}}{N\choose n}\]</span></p>
@@ -49,8 +49,10 @@ draft: TRUE
 <div id="an-updated-calculation" class="section level1">
 <h1>An updated calculation</h1>
 <p>Another approach is to change the number of letters in the top row and see how this probability changes.</p>
-<p>Now we are interested in the probability of drawing “<span class="math inline">\(k=7\)</span> green marbles in <span class="math inline">\(n=7\)</span> draws for different choices of <span class="math inline">\(K\)</span>”. The plot shows the probability of <span class="math inline">\(k=7\)</span> for different values of <span class="math inline">\(K\)</span>. We start with <span class="math inline">\(K = 6\)</span> which gives Probability = 0, as there is no way to draw 7 green balls when there are only 6 of them! The red dot corresponds to <span class="math inline">\(K=10\)</span> which has been used in the paper. For <span class="math inline">\(K=19\)</span> which corresponds to the quite extreme scenario of having 19 letters at the top row, the probability the 7 “typerwriter” letters are found there becomes 8%. Still small but appreciable.</p>
+<p>Now we are interested in the probability of drawing “<span class="math inline">\(k=7\)</span> green marbles in <span class="math inline">\(n=7\)</span> draws for different choices of <span class="math inline">\(K\)</span>”. The plot shows the probability of <span class="math inline">\(k=7\)</span> for different values of <span class="math inline">\(K\)</span>. We start with <span class="math inline">\(K = 6\)</span> which gives probability = 0, as there is no way to draw 7 green balls when there are only 6 of them! The red dot corresponds to <span class="math inline">\(K=10\)</span> which has been used in the paper by Kay. For <span class="math inline">\(K=19\)</span> which corresponds to the quite extreme scenario of having 19 letters at the top row, the probability the 7 “typerwriter” letters are found there becomes 8%. Still small but appreciable.</p>
 <p>The calculations above are based on sampling the letters in “typewriter” at any order. We can also calculate the probability of drawing “Exactly <span class="math inline">\(k=7\)</span> green marbles in <span class="math inline">\(n=7\)</span> draws, in the specific QWERTY order”. This corresponds to the horizontal dashed line in the plot.</p>
+<p>Overall, adding more letters at the top row increases the probability substantially. For example, the probability increases by 750% when going from <span class="math inline">\(K=10\)</span> to <span class="math inline">\(16\)</span> letters. Nevertheless, in absolute terms even for <span class="math inline">\(K =19\)</span> it is so small that we can conclude it is unlikely that these letters would appear together by chance.</p>
+<p>For a more historical perspective and other myths on QWERTY - read <a href="https://www.newscientist.com/article/2200664-the-truth-about-the-qwerty-keyboard/">this article</a>.</p>
 <pre class="r"><code>library(purrr)
 N &lt;- 26
 K &lt;- seq(6, N - 7, by = 1)
@@ -69,7 +71,7 @@ ggplot(df) +
     geom_hline(yintercept = pr_exact, linetype = &quot;dashed&quot;) +
     scale_x_continuous(breaks = K, labels = K) +
     theme_bw()</code></pre>
-<p><img src="/post/qwerty/qwerty_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/post/qwerty/qwerty_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>
@@ -82,6 +84,6 @@ Kay, Neil M. 2013. <span>“Rerun the Tape of History and QWERTY Always Wins.”
 <div class="footnotes footnotes-end-of-document">
 <hr />
 <ol>
-<li id="fn1"><p>In fact, later versions changed this arrangement to 10, 9, 7, a more balanced ordering - this the modern QWERTY.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>In fact, later versions changed this arrangement to 10 (top), 9 (middle), 7 (bottom), a more balanced ordering - this the modern QWERTY.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
