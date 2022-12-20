@@ -3,8 +3,8 @@ title: "QWERTY-nomics, how did QWERTY came to be?"
 author: ''
 date: '2022-10-07'
 slug: probability
-categories: [probability qwerty]
-tags: [probability qwerty]
+categories: [probability, qwerty]
+tags: [probability, qwerty]
 output: 
   bookdown::html_document2: 
     fig_caption: yes
