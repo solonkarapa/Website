@@ -35,7 +35,15 @@ selected = true
 # projects = ["example-external-project"]
 
 # Links (optional).
-
+url_pdf = ""
+url_preprint = ""
+url_code = ""
+url_dataset = ""
+url_project = ""
+url_slides = ""
+url_video = ""
+url_poster = ""
+url_source = "https://pubs.rsna.org/doi/10.1148/radiol.220762"
 
 # Custom links (optional).
 #   Uncomment line below to enable. For multiple links, use the form `[{...}, {...}, {...}]`.
