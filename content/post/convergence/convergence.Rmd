@@ -3,8 +3,8 @@ title: "How to publish a model that hasn’t converged"
 author: ''
 date: '2023-01-01'
 slug: convergence
-categories: [convergence, algorithm, reporting, model evaluation]
-tags: [convergence, algorithm, (ML) reporting, model evaluation]
+categories: [algorithm, reporting, model evaluation]
+tags: [algorithm, reporting, model evaluation]
 output: 
   bookdown::html_document2: 
     fig_caption: yes
@@ -40,5 +40,6 @@ Usually, when we write an algorithm, we are interested in knowing if the solutio
 As a result, we cannot trust the parameter estimates from an algorithm that has not converged and even less other derived quantities such as standard errors or p-values (which are reported in Table 4 and discussed throughout the paper). So why the authors interpret the results in the main text as "the deep-learning model had significantly better predictions compared with the CPH model, with>10-fold difference between the 2 analytic approaches (mean absolute error for CPH vs deep-learning: 316.2 vs 29.3)"?
 
 It is disheartening to know such work passes both the editorial team and peer-review process and gets published. 
+
 
 # References

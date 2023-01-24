@@ -19,7 +19,6 @@ highlight_name: false
 interests:
 - Bayesian Methods
 - Biomedical Research
-- Genomics
 - Statistical Computing
 - Statistical Modelling 
 - Longitudinal Data Analysis
