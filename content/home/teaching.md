@@ -39,7 +39,7 @@ title: Teaching
 
 - This is the [handbook](/teaching/BrilliantClub_Handbook.pdf) for the course I teach as a Brilliant club tutor. [The Brilliant Club](https://thebrilliantclub.org/) is a charity aiming to increase the number of pupils from under-represented backgrounds progressing to highly selective universities. 
    
-   The material is designed for Key stage 4 pupils but can be easily adapted to Key stage 5. <br>
+   The material is designed for Key stage 4 pupils but can be easily adapted to Key stage 5. <br><br>
 
 
    Cite this work as: Solon Karapanagiotis. Which bicycle lock should I buy? A journey to decision making under uncertainty, 2019.
