@@ -2,7 +2,7 @@
 title: "Iridescence as camouflage - A comment on competing risks"
 author: ''
 date: '2022-01-27'
-slug: the-hardest-logic-puzzle
+slug: iridescence
 categories: [data analysis]
 tags: [data analysis]
 output: 
@@ -25,8 +25,7 @@ draft: FALSE
 <p><span class="citation">Kjernsmo et al. (<a href="#ref-kjernsmo2020iridescence" role="doc-biblioref">2020</a>)</span> provide evidence for this hypothesis by showing that iridescence provides a survival advantage making the prey less detectable, effectively acting as camouflage.</p>
 <p>The authors use a coloured beetle species as a test case. The beetle’s wings sport a shiny, shifting and metallic green-blue appearance stemming from structural colour. They then use a series of elegantly simple experiments to test the camouflage hypothesis. First, they put together a collection of hundreds of beetle wing cases, including the iridescent and non-iridescent beetles in a variety of colours, and distributed them in a natural setting amid a variety of plant species. They found, surprisingly, that the iridescent specimens were more likely to survive predation by birds than the non-iridescent variety—even outperforming a leaf-green non-iridescent model that should have blended in with the background colours.</p>
 <p>These conclusions are based on a mixed Cox model where the survival of the beetles was recorded at 2, 24, and 48 h. <strong>Predation by birds</strong>, which ate all or most of the metalwork, was scored as an event in the survival analysis. Predation by animals other than birds (<strong>non-birds</strong>), complete disappearance of a target, or survival to 48 h, were treated as censored values in the survival analysis<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
-<p>Effectively this analysis ignores the competing risks. A <em>competing risk</em> is an event whose occurrence precludes the occurrence of the primary event of interest. Being eaten by other animals precludes to be eaten by birds!
-Here, I re-analyse the data taking into account the competing risks.</p>
+<p>Effectively this analysis ignores the competing risks. A <em>competing risk</em> is an event whose occurrence precludes the occurrence of the primary event of interest. Being eaten by other animals precludes to be eaten by birds! Here, I re-analyse the data taking into account the competing risks.</p>
 </div>
 <div id="cmrisk" class="section level2">
 <h2>About competing risks</h2>
@@ -76,6 +75,8 @@ crr1 &lt;- crr(data_compete$Time, fstatus = data_compete$BirdPredated, cov1 = co
 # subdistribution hazard non-bird death
 crr2 &lt;- crr(data_compete$Time, fstatus = data_compete$BirdPredated, cov1 = cov_mat, failcode = 2)</code></pre>
 <p>I plot the hazard ratios (HR) with 95% confidence intervals for each treatment. We see that treatment affects the relative cause-specific hazard of bird death (red)<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> but not of non-bird death (blue). Similarly, treatment has a significant effect on the relative incidence of bird death (green), but not of non-bird death (yellow). Together these indicate that, contrary to non-bird predators, birds are less sensitive to iridescent targets. Interestingly, though, treatment has a more accentuated effect on the cause-specific hazard (red) of bird death than the cumulative incidence (green) of bird death. Likely, the effects are qualitatively the same, which not be the case.</p>
+<pre><code>## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## ℹ Please use `linewidth` instead.</code></pre>
 <p><img src="/post/iridescence/iridescence_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="conc" class="section level2">
@@ -90,22 +91,22 @@ Conversely, the cause-specific hazard ratio may be thought of as a measure of �
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
-<div id="refs" class="references">
-<div id="ref-feakins2018standard">
-<p>Feakins, Benjamin G, Emily C McFadden, Andrew J Farmer, and Richard J Stevens. 2018. “Standard and Competing Risk Analysis of the Effect of Albuminuria on Cardiovascular and Cancer Mortality in Patients with Type 2 Diabetes Mellitus.” <em>Diagnostic and Prognostic Research</em> 2 (1): 1–9.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-feakins2018standard" class="csl-entry">
+Feakins, Benjamin G, Emily C McFadden, Andrew J Farmer, and Richard J Stevens. 2018. <span>“Standard and Competing Risk Analysis of the Effect of Albuminuria on Cardiovascular and Cancer Mortality in Patients with Type 2 Diabetes Mellitus.”</span> <em>Diagnostic and Prognostic Research</em> 2 (1): 1–9.
 </div>
-<div id="ref-kjernsmo2020iridescence">
-<p>Kjernsmo, Karin, Heather M Whitney, Nicholas E Scott-Samuel, Joanna R Hall, Henry Knowles, Laszlo Talas, and Innes C Cuthill. 2020. “Iridescence as Camouflage.” <em>Current Biology</em> 30 (3): 551–55.</p>
+<div id="ref-kjernsmo2020iridescence" class="csl-entry">
+Kjernsmo, Karin, Heather M Whitney, Nicholas E Scott-Samuel, Joanna R Hall, Henry Knowles, Laszlo Talas, and Innes C Cuthill. 2020. <span>“Iridescence as Camouflage.”</span> <em>Current Biology</em> 30 (3): 551–55.
 </div>
-<div id="ref-noordzij2013we">
-<p>Noordzij, Marlies, Karen Leffondré, Karlijn J van Stralen, Carmine Zoccali, Friedo W Dekker, and Kitty J Jager. 2013. “When Do We Need Competing Risks Methods for Survival Analysis in Nephrology?” <em>Nephrology Dialysis Transplantation</em> 28 (11): 2670–7.</p>
+<div id="ref-noordzij2013we" class="csl-entry">
+Noordzij, Marlies, Karen Leffondré, Karlijn J van Stralen, Carmine Zoccali, Friedo W Dekker, and Kitty J Jager. 2013. <span>“When Do We Need Competing Risks Methods for Survival Analysis in Nephrology?”</span> <em>Nephrology Dialysis Transplantation</em> 28 (11): 2670–77.
 </div>
-<div id="ref-putter2007tutorial">
-<p>Putter, Hein, Marta Fiocco, and Ronald B Geskus. 2007. “Tutorial in Biostatistics: Competing Risks and Multi-State Models.” <em>Statistics in Medicine</em> 26 (11): 2389–2430.</p>
+<div id="ref-putter2007tutorial" class="csl-entry">
+Putter, Hein, Marta Fiocco, and Ronald B Geskus. 2007. <span>“Tutorial in Biostatistics: Competing Risks and Multi-State Models.”</span> <em>Statistics in Medicine</em> 26 (11): 2389–2430.
 </div>
 </div>
 </div>
-<div class="footnotes">
+<div class="footnotes footnotes-end-of-document">
 <hr />
 <ol>
 <li id="fn1"><p>Predation by other animals included spiders, which sucked the fluids out and left a hollow exoskeleton, slugs, which left slime trails, and ants, which chopped off small pieces of the mealworm.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>

@@ -2,7 +2,7 @@
 title: "Iridescence as camouflage - A comment on competing risks"
 author: ''
 date: '2022-01-27'
-slug: the-hardest-logic-puzzle
+slug: iridescence
 categories: [data analysis]
 tags: [data analysis]
 output: 

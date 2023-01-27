@@ -1,7 +1,7 @@
 ---
 title: "How to publish a model that hasn’t converged"
 author: ''
-date: '2023-01-01'
+date: '2023-01-10'
 slug: convergence
 categories: [algorithm, reporting, model evaluation]
 tags: [algorithm, reporting, model evaluation]
@@ -42,4 +42,5 @@ As a result, we cannot trust the parameter estimates from an algorithm that has 
 It is disheartening to know such work passes both the editorial team and peer-review process and gets published. 
 
 
-# References
+
+## References
