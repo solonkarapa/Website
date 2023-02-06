@@ -1,0 +1,93 @@
+---
+title: "# 204 Puzzle from the New Scientist"
+author: ''
+date: '2022-02-10'
+slug: puzzle_204
+categories: [puzzle]
+tags: [puzzle]
+output: bookdown::html_document2
+header:
+  caption: ''
+  image: ''
+  preview: yes
+link-citations: yes
+draft: TRUE
+---
+
+
+
+<p>This week’s <a href="https://www.newscientist.com/article/mg25734214-000-puzzle-204-can-you-work-out-what-number-my-son-thought-of/">puzzle</a> goes as follows:</p>
+<blockquote>
+<p>My son’s book of mathematical magic tricks includes this one:
+1. Think of a whole number from 1 to 50.
+2. Add 9 and double the result.
+3. Multiply by 6 and add 12.
+4. Subtract 60.
+5. Divide by 12 and subtract 4.
+6. Subtract your original number.
+7. And the answer is (drumroll…) 1!</p>
+</blockquote>
+<blockquote>
+<p>Unfortunately, when he is reading, my son sometimes repeats a line and sometimes he skips one. That happened with this trick. He did one of the lines twice and then missed the final instruction to subtract this original number. Yet, by an increadible fluke, he still managed to end up on the number 1.</p>
+</blockquote>
+<div id="section" class="section level2">
+<h2></h2>
+<pre class="r"><code># helper functions - each one calculates one of the steps 2-5
+f2 &lt;- function(x) (x + 9) * 2 # calculates step 2
+f3 &lt;- function(x) (x * 6) + 12 # calculates step 3
+f4 &lt;- function(x) x - 60 # calculates step 4
+f5 &lt;- function(x) (x / 12) - 4 # calculates step 5
+
+
+magic_trick &lt;- function(x, rep = 0){
+   # x: a whole number from 1 to 50
+   # rep: the step 2-5 to be repeated twice. If rep = 0 or 1. - no repetition 
+   
+    if(rep == 2){
+        f &lt;- f5(f4(f3(f2(f2(x)))))
+        } else if(rep == 3){
+            f &lt;- f5(f4(f3(f3(f2(x)))))
+            } else if(rep == 4){
+                f &lt;- f5(f4(f4(f3(f2(x))))) 
+            } else if(rep == 5) {
+                f &lt;- f5(f5(f4(f3(f2(x)))))
+                }
+                else{
+                    f &lt;- f5(f4(f3(f2(x)))) - x
+                    }    
+            
+    return(f)
+}</code></pre>
+<pre class="r"><code>x_values &lt;- seq(1, 50, by = 1) # step 1: whole number from 1 to 50.
+repeated &lt;- c(0, 2, 3, 4, 5) # step to repeat. 0 corresponds to the original puzzle 
+
+vals &lt;- expand.grid(x_values, repeated)
+
+library(purrr)
+library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(ggplot2)
+
+res &lt;- map2_dbl(vals$Var1, vals$Var2, magic_trick)
+
+df &lt;- data.frame(x = rep(x_values, 5), repeated = rep(repeated, each = 50), res = res) %&gt;%
+   mutate(repeated = paste0(&quot;step &quot;, repeated, &quot; repeated&quot;)) 
+
+
+ggplot(df) +
+   geom_point(aes(x = x, y = res)) +
+   facet_wrap(. ~ repeated, scales = &quot;free&quot;) +
+   geom_hline(yintercept = 1, linetype = &quot;dashed&quot;, linewidth = 1.7, col = &quot;#009E73&quot;) +
+   labs(y = &quot;Result at step 7&quot;) +
+   theme_linedraw(12) +
+   theme(strip.background = element_rect(fill = &quot;white&quot;)) +
+   theme(strip.text.x = element_text(color = &quot;black&quot;))</code></pre>
+<p><img src="/post/new_scientist_puzzle_204/New_Scientist_puzzle_204_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
