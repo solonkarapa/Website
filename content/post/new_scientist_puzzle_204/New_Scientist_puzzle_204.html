@@ -43,17 +43,17 @@ draft: TRUE
 <li>Divide by 12 and subtract 4 - we call this <span class="math inline">\(t\)</span>. Then, <span class="math inline">\(t=\frac{s}{12} - 4\)</span></li>
 <li>Subtract your original number - we call this <span class="math inline">\(u\)</span>. That is, <span class="math inline">\(u=t-x\)</span>. And, we know, <span class="math inline">\(u=1\)</span> (from step 7).</li>
 </ol>
-<p>The puzzle states that the son “missed the final instruction to subtract this original number.” If he had subtracted the original number (after repeating one of the previous steps) he would have gotten a negative number (or zero). So, we know, after repeating a step, <span class="math inline">\(t’ \leq 0\)</span>, where <span class="math inline">\(t’\)</span> is the result to step 5, after repeating one of the previous steps.</p>
-<p>Now, looking at steps 2 through 5, the only ones that can give us negative number are steps 4 and 5. Steps 2 and 3 involve the addition and multiplication of positive numbers - they cannot give us a negative result.</p>
-<p>We are thus left with steps 4 and 5 as potential candidates. In fact, whatever the result after steps 2 and 3 we know that either:</p>
+<p>The puzzle states that the son “missed the final instruction to subtract this original number.” If he had subtracted the original number (after repeating one of the previous steps) he would have gotten a negative number (or zero). So, we know, after repeating a step that <span class="math inline">\(t’ \leq 0\)</span>, where <span class="math inline">\(t’\)</span> is the result to step 5, after repeating one of the previous steps.</p>
+<p>Now, looking at steps 2 through 5, the only ones that can give us negative number are steps 4 and 5. Steps 2 and 3 involve the addition and multiplication of positive numbers. They cannot give us a negative result.</p>
+<p>We are then left with steps 4 and 5 as potential candidates. In fact, whatever the result is after steps 2 and 3 we know that either:</p>
 <ul>
 <li><p>repeat step 4 twice and add step 5 = 1 (I call this proposition A) or</p></li>
-<li><p>step 4 and repeat step 5 twice = 1 (I call this proposition B)</p></li>
+<li><p>step 4 and repeat step 5 twice = 1 (I call this proposition B).</p></li>
 </ul>
-<p>We can check each of these propositions.</p>
+<p>We can check each of these propositions:</p>
 <ul>
 <li><p>Proposition A is: <span class="math inline">\(\frac{(r-60)-60}{12} - 4 = 1\)</span>. I have simply repeated step 4 twice and then added step 5. Solving for <span class="math inline">\(r\)</span> gives us <span class="math inline">\(r = 180\)</span>. We can then backtrack, solving for <span class="math inline">\(q\)</span> from steps 2 and 3 to get <span class="math inline">\(x =5\)</span>. So <span class="math inline">\(x = 5\)</span> is a potential solution.</p></li>
-<li><p>Proposition B is: <span class="math inline">\(\frac{(s/12 - 4)}{12} - 4 = 1\)</span> gives us <span class="math inline">\(s=708\)</span>. From steps 2-4 this implies that <span class="math inline">\(x=54\)</span>, which is outside the range given in step 1. So this is not a valid solution.</p></li>
+<li><p>Proposition B is: <span class="math inline">\(\frac{(s/12 - 4)}{12} - 4 = 1\)</span> gives us <span class="math inline">\(s=708\)</span>. From steps 2-4 this implies that <span class="math inline">\(x=59\)</span>, which is outside the range given in step 1. So this is not a valid solution.</p></li>
 </ul>
 <p>Summarizing, the only way to get a result equal to 1 at step 6, after repeating one step twice and then missing the final instruction to subtract this original number, is to choose <span class="math inline">\(x=5\)</span> at step 1.</p>
 <div id="brute-force-solution" class="section level2">
@@ -83,23 +83,20 @@ magic_trick &lt;- function(x, rep = 0){
     return(f)
 }</code></pre>
 <p>The code below calculates the final solution to the puzzle for each original number (<code>x_values</code>) and for each step repeated twice or not repeated at all (<code>repeated</code>).</p>
-<ul>
-<li>comment on results</li>
-</ul>
-<pre class="r"><code>x_values &lt;- seq(1, 50, by = 1) # step 1: whole number from 1 to 50.
+<p>The first (top left) panel corresponds to the solution for the original set-up - no step is repeated. For all <span class="math inline">\(x\)</span> the result is always one. The second and third panels corresponds to repeating steps 2 and 3, respectively. The results confirm our intuition from before - all solutions are positive and well above one. The last panel shows the results when repeating step 5. All of them are negative for the range 1 to 50. Finally, the fourth panel gives the solution to the puzzle. There is only one value of <span class="math inline">\(x\)</span>, namely <span class="math inline">\(x = 5\)</span>, that gives one as the final result.</p>
+<pre class="r"><code>library(purrr)
+library(dplyr)
+library(ggplot2)
+
+x_values &lt;- seq(1, 50, by = 1) # step 1: whole number from 1 to 50.
 repeated &lt;- c(0, 2, 3, 4, 5) # step to repeat. 0 corresponds to the original puzzle 
 
 vals &lt;- expand.grid(x_values, repeated)
-
-library(purrr)
-library(dplyr)
-library(ggplot2)
 
 res &lt;- map2_dbl(vals$Var1, vals$Var2, magic_trick)
 
 df &lt;- data.frame(x = rep(x_values, 5), repeated = rep(repeated, each = 50), res = res) %&gt;%
    mutate(repeated = paste0(&quot;step &quot;, repeated, &quot; repeated&quot;)) 
-
 ggplot(df) +
    geom_point(aes(x = x, y = res)) +
    facet_wrap(. ~ repeated, scales = &quot;free&quot;) +
