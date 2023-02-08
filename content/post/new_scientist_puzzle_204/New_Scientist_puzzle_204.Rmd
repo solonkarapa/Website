@@ -11,7 +11,7 @@ header:
   image: ''
   preview: yes
 link-citations: yes
-draft: TRUE
+draft: FALSE
 ---
 
 ```{r setup, include=FALSE}
@@ -43,21 +43,21 @@ Let’s start by introducing some notation for each step:
 
 The puzzle states that the son “missed the final instruction to subtract this original number.” If he had subtracted the original number (after repeating one of the previous steps) he would have gotten a negative number (or zero). So, we know, after repeating a step that $t’ \leq 0$, where $t’$ is the result to step 5, after repeating one of the previous steps. 
 
-Now, looking at steps 2 through 5, the only ones that can give us negative number are steps 4 and 5. Steps 2 and 3 involve the addition and multiplication of positive numbers. They cannot give us a negative result.
+Now, looking at steps 2 through 5, the only ones that can give us a negative number are steps 4 and 5. Steps 2 and 3 involve the addition and multiplication of positive numbers. They cannot give us a negative result.
 
-We are then left with steps 4 and 5 as potential candidates. In fact, whatever the result is after steps 2 and 3 we know that either: 
+We are then left with steps 4 and 5 as potential candidates to have been repeated twice. In fact, whatever the result is after steps 2 and 3 we know that either: 
 
-- repeat step 4 twice and add step 5 = 1 (I call this proposition A) or 
+- [repeat step 4 twice and add step 5] = 1 (I call this proposition A) or 
 
-- step 4 and repeat step 5 twice = 1 (I call this proposition B). 
+- [step 4 and repeat step 5 twice] = 1 (I call this proposition B). 
 
 We can check each of these propositions:
 
 - Proposition A is: $\frac{(r-60)-60}{12} - 4 = 1$. I have simply repeated step 4 twice and then added step 5. Solving for $r$ gives us $r = 180$. We can then backtrack, solving for $q$ from steps 2 and 3 to get $x =5$. So $x = 5$ is a potential solution. 
 
-- Proposition B is: $\frac{(s/12 - 4)}{12} - 4 = 1$ gives us $s=708$. From steps 2-4  this implies that $x=59$, which is outside the range given in step 1. So this is not a valid solution. 
+- Proposition B is: $\frac{(s/12 - 4)}{12} - 4 = 1$ gives us $s=768$. From steps 2-4  this implies that $x=59$, which is outside the range given in step 1. So this is not a valid solution. 
 
-Summarizing, the only way to get a result equal to 1 at step 6, after repeating one step twice and then missing the final instruction to subtract this original number, is to choose $x=5$ at step 1. 
+Summarizing, the only way to get a result equal to 1 at step 6, after repeating one step twice and then missing the final instruction to subtract the original number, is to choose $x=5$ at step 1. 
 
 ## Brute force solution
 Another way to get the solution is to code steps 2 through 6, repeating each step twice and checking the result for all numbers from 1 to 50. This is what the `magic_trick()` function does. 
@@ -86,12 +86,11 @@ magic_trick <- function(x, rep = 0){
                    }    
     return(f)
 }
-
 ```
 
 The code below calculates the final solution to the puzzle for each original number (`x_values`) and for each step repeated twice or not repeated at all (`repeated`).
 
-The first (top left) panel corresponds to the solution for the original set-up - no step is repeated. For all $x$ the result is always one. The second and third panels corresponds to repeating steps 2 and 3, respectively. The results confirm our intuition from before - all solutions are positive and well above one. The last panel shows the results when repeating step 5. All of them are negative for the range 1 to 50. Finally, the fourth panel gives the solution to the puzzle. There is only one value of $x$, namely $x = 5$, that gives one as the final result. 
+The first (top left) panel corresponds to the solution for the original set-up - no step is repeated. For all $x$ the result is always one. The second and third panels correspond to repeating steps 2 and 3, respectively. The results confirm our intuition from before - all solutions are positive and well above one. The last panel shows the results when repeating step 5. All of them are negative for the range 1 to 50. Finally, the fourth panel gives the solution to the puzzle. There is only one value of $x$, namely $x = 5$, that gives one as the final result. 
 
 ```{r, warning=F, message=F}
 library(purrr)
@@ -107,6 +106,7 @@ res <- map2_dbl(vals$Var1, vals$Var2, magic_trick)
 
 df <- data.frame(x = rep(x_values, 5), repeated = rep(repeated, each = 50), res = res) %>%
    mutate(repeated = paste0("step ", repeated, " repeated")) 
+
 ggplot(df) +
    geom_point(aes(x = x, y = res)) +
    facet_wrap(. ~ repeated, scales = "free") +
@@ -116,9 +116,6 @@ ggplot(df) +
    theme(strip.background = element_rect(fill = "white")) +
    theme(strip.text.x = element_text(color = "black"))
 ```
-
-
-
 
 
 
