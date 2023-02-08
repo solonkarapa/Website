@@ -5,12 +5,28 @@
     <link>https://solon-karapanagiotis.com/publication/</link>
       <atom:link href="https://solon-karapanagiotis.com/publication/index.xml" rel="self" type="application/rss+xml" />
     <description>Publications</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Solon Karapanagiotis 2018-2021</copyright><lastBuildDate>Fri, 01 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Solon Karapanagiotis 2018-2023</copyright><lastBuildDate>Tue, 13 Dec 2022 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://solon-karapanagiotis.com/media/icon.png</url>
       <title>Publications</title>
       <link>https://solon-karapanagiotis.com/publication/</link>
     </image>
+    
+    <item>
+      <title>Regional Histopathology and Prostate MRI Positivity: A Secondary Analysis of the PROMIS Trial</title>
+      <link>https://solon-karapanagiotis.com/publication/mri_prostate2/</link>
+      <pubDate>Tue, 13 Dec 2022 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/mri_prostate2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tailored Bayes: a risk modeling framework under unequal misclassification costs</title>
+      <link>https://solon-karapanagiotis.com/publication/tailoredbayes/</link>
+      <pubDate>Sat, 07 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/tailoredbayes/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>False Positive Multiparametric Magnetic Resonance Imaging Phenotypes in the Biopsy-naïve Prostate: Are They Distinct from Significant Cancer-associated Lesions? Lessons from PROMIS</title>
@@ -90,132 +106,6 @@
       <pubDate>Fri, 01 Jun 2012 00:00:00 +0000</pubDate>
       <guid>https://solon-karapanagiotis.com/publication/wiihabilitation/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://solon-karapanagiotis.com/publication/journal-article/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://solon-karapanagiotis.com/publication/journal-article/</guid>
-      <description>&lt;h1 id=&#34;---&#34;&gt;#&amp;mdash;&lt;/h1&gt;
-&lt;h1 id=&#34;abstract-lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-duis-posuere-tellus&#34;&gt;#abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus&lt;/h1&gt;
-&lt;h1 id=&#34;--ac-convallis-placerat-proin-tincidunt-magna-sed-ex-sollicitudin-condimentum-sed&#34;&gt;#  ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed&lt;/h1&gt;
-&lt;h1 id=&#34;--ac-faucibus-dolor-scelerisque-sollicitudin-nisi-cras-purus-urna-suscipit-quis&#34;&gt;#  ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis&lt;/h1&gt;
-&lt;h1 id=&#34;--sapien-eu-pulvinar-tempor-diam-quisque-risus-orci-mollis-id-ante-sit-amet-gravida&#34;&gt;#  sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida&lt;/h1&gt;
-&lt;h1 id=&#34;--egestas-nisl-sed-ac-tempus-magna-proin-in-dui-enim-donec-condimentum-sem-id&#34;&gt;#  egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id&lt;/h1&gt;
-&lt;h1 id=&#34;--dapibus-fringilla-tellus-enim-condimentum-arcu-nec-volutpat-est-felis-vel-metus&#34;&gt;#  dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus.&lt;/h1&gt;
-&lt;h1 id=&#34;--vestibulum-sit-amet-erat-at-nulla-eleifend-gravida&#34;&gt;#  Vestibulum sit amet erat at nulla eleifend gravida.&lt;/h1&gt;
-&lt;h1 id=&#34;author_notes&#34;&gt;author_notes:&lt;/h1&gt;
-&lt;h1 id=&#34;--equal-contribution&#34;&gt;- Equal contribution&lt;/h1&gt;
-&lt;h1 id=&#34;--equal-contribution-1&#34;&gt;- Equal contribution&lt;/h1&gt;
-&lt;h1 id=&#34;authors&#34;&gt;authors:&lt;/h1&gt;
-&lt;h1 id=&#34;--admin&#34;&gt;- admin&lt;/h1&gt;
-&lt;h1 id=&#34;--robert-ford&#34;&gt;- Robert Ford&lt;/h1&gt;
-&lt;h1 id=&#34;date-2015-09-01&#34;&gt;date: &amp;ldquo;2015-09-01&amp;rdquo;&lt;/h1&gt;
-&lt;h1 id=&#34;doi-&#34;&gt;doi: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;featured-false&#34;&gt;featured: false&lt;/h1&gt;
-&lt;h1 id=&#34;draft-true&#34;&gt;draft: true&lt;/h1&gt;
-&lt;h1 id=&#34;image&#34;&gt;image:&lt;/h1&gt;
-&lt;h1 id=&#34;caption-image-credit-unsplashhttpsunsplashcomphotosjdd8gxatzsc&#34;&gt;caption: &amp;lsquo;Image credit: &lt;a href=&#34;https://unsplash.com/photos/jdD8gXaTZsc&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Unsplash&lt;/strong&gt;&lt;/a&gt;&amp;rsquo;&lt;/h1&gt;
-&lt;h1 id=&#34;focal_point-&#34;&gt;focal_point: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;preview_only-false&#34;&gt;preview_only: false&lt;/h1&gt;
-&lt;h1 id=&#34;projects-&#34;&gt;projects: []&lt;/h1&gt;
-&lt;h1 id=&#34;publication-journal-of-source-themes-11&#34;&gt;publication: &amp;lsquo;&lt;em&gt;Journal of Source Themes, 1&lt;/em&gt;(1)&amp;rsquo;&lt;/h1&gt;
-&lt;h1 id=&#34;publication_short-&#34;&gt;publication_short: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;publication_types&#34;&gt;publication_types:&lt;/h1&gt;
-&lt;h1 id=&#34;--0&#34;&gt;- &amp;ldquo;0&amp;rdquo;&lt;/h1&gt;
-&lt;h1 id=&#34;publishdate-2017-01-01&#34;&gt;publishDate: &amp;ldquo;2017-01-01&amp;rdquo;&lt;/h1&gt;
-&lt;h1 id=&#34;slides-example&#34;&gt;slides: example&lt;/h1&gt;
-&lt;h1 id=&#34;summary-lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-duis-posuere-tellus&#34;&gt;summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus&lt;/h1&gt;
-&lt;h1 id=&#34;ac-convallis-placerat-proin-tincidunt-magna-sed-ex-sollicitudin-condimentum&#34;&gt;ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.&lt;/h1&gt;
-&lt;h1 id=&#34;tags&#34;&gt;tags:&lt;/h1&gt;
-&lt;h1 id=&#34;--source-themes&#34;&gt;- Source Themes&lt;/h1&gt;
-&lt;h1 id=&#34;title-an-example-journal-article&#34;&gt;title: An example journal article&lt;/h1&gt;
-&lt;h1 id=&#34;url_code-&#34;&gt;url_code: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;url_dataset-&#34;&gt;url_dataset: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;url_pdf-&#34;&gt;url_pdf: &#39;&#39;&lt;/h1&gt;
-&lt;h1 id=&#34;url_poster-&#34;&gt;url_poster: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;url_project-&#34;&gt;url_project: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;url_slides-&#34;&gt;url_slides: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;url_source-&#34;&gt;url_source: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;url_video-&#34;&gt;url_video: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;----1&#34;&gt;&amp;mdash;&lt;/h1&gt;
-&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
-&lt;h1 id=&#34;div-classalert-alert-note&#34;&gt;&lt;div class=&#34;alert alert-note&#34;&gt;&lt;/h1&gt;
-  &lt;div&gt;
-    &lt;h1 id=&#34;click-the-cite-button-above-to-demo-the-feature-to-enable-visitors-to-import-publication-metadata-into-their-reference-management-software&#34;&gt;Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.&lt;/h1&gt;
-&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;h1 id=&#34;heading-1&#34;&gt;&lt;/h1&gt;
-&lt;h1 id=&#34;div-classalert-alert-note-1&#34;&gt;&lt;div class=&#34;alert alert-note&#34;&gt;&lt;/h1&gt;
-  &lt;div&gt;
-    &lt;h1 id=&#34;create-your-slides-in-markdown---click-the-slides-button-to-check-out-the-example&#34;&gt;Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.&lt;/h1&gt;
-&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;h1 id=&#34;heading-2&#34;&gt;&lt;/h1&gt;
-&lt;h1 id=&#34;supplementary-notes-can-be-added-here-including-code-math-and-imageshttpswowchemycomdocswriting-markdown-latex&#34;&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/h1&gt;
-</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://solon-karapanagiotis.com/publication/preprint/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://solon-karapanagiotis.com/publication/preprint/</guid>
-      <description>&lt;p&gt;#&amp;mdash;
-#abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus&lt;/p&gt;
-&lt;h1 id=&#34;ac-convallis-placerat-proin-tincidunt-magna-sed-ex-sollicitudin-condimentum-sed&#34;&gt;ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed&lt;/h1&gt;
-&lt;h1 id=&#34;ac-faucibus-dolor-scelerisque-sollicitudin-nisi-cras-purus-urna-suscipit-quis&#34;&gt;ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis&lt;/h1&gt;
-&lt;h1 id=&#34;sapien-eu-pulvinar-tempor-diam-quisque-risus-orci-mollis-id-ante-sit-amet-gravida&#34;&gt;sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida&lt;/h1&gt;
-&lt;h1 id=&#34;egestas-nisl-sed-ac-tempus-magna-proin-in-dui-enim-donec-condimentum-sem-id&#34;&gt;egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id&lt;/h1&gt;
-&lt;h1 id=&#34;dapibus-fringilla-tellus-enim-condimentum-arcu-nec-volutpat-est-felis-vel-metus&#34;&gt;dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus.&lt;/h1&gt;
-&lt;h1 id=&#34;vestibulum-sit-amet-erat-at-nulla-eleifend-gravida&#34;&gt;Vestibulum sit amet erat at nulla eleifend gravida.&lt;/h1&gt;
-&lt;h1 id=&#34;authors&#34;&gt;authors:&lt;/h1&gt;
-&lt;h1 id=&#34;--admin&#34;&gt;- admin&lt;/h1&gt;
-&lt;h1 id=&#34;date-2019-04-07&#34;&gt;date: &amp;ldquo;2019-04-07&amp;rdquo;&lt;/h1&gt;
-&lt;h1 id=&#34;doi-&#34;&gt;doi: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;featured-false&#34;&gt;featured: false&lt;/h1&gt;
-&lt;h1 id=&#34;image&#34;&gt;image:&lt;/h1&gt;
-&lt;h1 id=&#34;caption-image-credit-unsplashhttpsunsplashcomphotoss9cc2skysjm&#34;&gt;caption: &amp;lsquo;Image credit: &lt;a href=&#34;https://unsplash.com/photos/s9CC2SKySJM&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Unsplash&lt;/strong&gt;&lt;/a&gt;&amp;rsquo;&lt;/h1&gt;
-&lt;h1 id=&#34;focal_point-&#34;&gt;focal_point: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;preview_only-false&#34;&gt;preview_only: false&lt;/h1&gt;
-&lt;h1 id=&#34;links&#34;&gt;links:&lt;/h1&gt;
-&lt;h1 id=&#34;--name-custom-link&#34;&gt;- name: Custom Link&lt;/h1&gt;
-&lt;h1 id=&#34;url-httpexampleorg&#34;&gt;url: &lt;a href=&#34;http://example.org&#34;&gt;http://example.org&lt;/a&gt;&lt;/h1&gt;
-&lt;h1 id=&#34;projects&#34;&gt;projects:&lt;/h1&gt;
-&lt;h1 id=&#34;--internal-project&#34;&gt;- internal-project&lt;/h1&gt;
-&lt;h1 id=&#34;publication-&#34;&gt;publication: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;publication_short-&#34;&gt;publication_short: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;publication_types&#34;&gt;publication_types:&lt;/h1&gt;
-&lt;h1 id=&#34;--3&#34;&gt;- &amp;ldquo;3&amp;rdquo;&lt;/h1&gt;
-&lt;h1 id=&#34;publishdate-2017-01-01t000000z&#34;&gt;publishDate: &amp;ldquo;2017-01-01T00:00:00Z&amp;rdquo;&lt;/h1&gt;
-&lt;h1 id=&#34;slides-example&#34;&gt;slides: example&lt;/h1&gt;
-&lt;h1 id=&#34;summary-lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-duis-posuere-tellus&#34;&gt;summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus&lt;/h1&gt;
-&lt;h1 id=&#34;ac-convallis-placerat-proin-tincidunt-magna-sed-ex-sollicitudin-condimentum&#34;&gt;ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.&lt;/h1&gt;
-&lt;h1 id=&#34;tags&#34;&gt;tags:&lt;/h1&gt;
-&lt;h1 id=&#34;--source-themes&#34;&gt;- Source Themes&lt;/h1&gt;
-&lt;h1 id=&#34;title-an-example-preprint--working-paper&#34;&gt;title: An example preprint / working paper&lt;/h1&gt;
-&lt;h1 id=&#34;url_code-&#34;&gt;url_code: &#39;&#39;&lt;/h1&gt;
-&lt;h1 id=&#34;url_dataset-&#34;&gt;url_dataset: &#39;&#39;&lt;/h1&gt;
-&lt;h1 id=&#34;url_pdf-&#34;&gt;url_pdf: &#39;&#39;&lt;/h1&gt;
-&lt;h1 id=&#34;url_poster-&#34;&gt;url_poster: &#39;&#39;&lt;/h1&gt;
-&lt;h1 id=&#34;url_project-&#34;&gt;url_project: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;url_slides-&#34;&gt;url_slides: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;url_source-&#34;&gt;url_source: &#39;&#39;&lt;/h1&gt;
-&lt;h1 id=&#34;url_video-&#34;&gt;url_video: &#39;&#39;&lt;/h1&gt;
-&lt;h1 id=&#34;---&#34;&gt;&amp;mdash;&lt;/h1&gt;
-&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
-&lt;h1 id=&#34;div-classalert-alert-note&#34;&gt;&lt;div class=&#34;alert alert-note&#34;&gt;&lt;/h1&gt;
-  &lt;div&gt;
-    &lt;h1 id=&#34;create-your-slides-in-markdown---click-the-slides-button-to-check-out-the-example&#34;&gt;Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.&lt;/h1&gt;
-&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;h1 id=&#34;heading-1&#34;&gt;&lt;/h1&gt;
-&lt;h1 id=&#34;supplementary-notes-can-be-added-here-including-code-math-and-imageshttpswowchemycomdocswriting-markdown-latex&#34;&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and #images&lt;/a&gt;.&lt;/h1&gt;
-</description>
     </item>
     
   </channel>

@@ -5,7 +5,7 @@
     <link>https://solon-karapanagiotis.com/</link>
       <atom:link href="https://solon-karapanagiotis.com/index.xml" rel="self" type="application/rss+xml" />
     <description></description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Solon Karapanagiotis 2018-2021</copyright><lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Solon Karapanagiotis 2018-2023</copyright><lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
     <image>
       <url>https://solon-karapanagiotis.com/media/icon.png</url>
       <title></title>
@@ -33,6 +33,803 @@
     </item>
     
     <item>
+      <title>How to publish a model that hasn’t converged</title>
+      <link>https://solon-karapanagiotis.com/post/convergence/convergence/</link>
+      <pubDate>Tue, 10 Jan 2023 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/convergence/convergence/</guid>
+      <description>
+
+
+&lt;p&gt;The article by &lt;span class=&#34;citation&#34;&gt;Matsuo et al. (&lt;a href=&#34;#ref-matsuo2019survival&#34; role=&#34;doc-biblioref&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt; appeared in my newsletter. It is another attempt to sell deep-learning (DL) as a promising alternative to traditional survival analysis. To this end, they compare the performance of their DL model to Cox proportional hazard regression (CPH) when predicting survival for women with newly diagnosed cervical cancer. In fact, they compare a series of cox-based regression models (CPH, Cox Lasso, Random Survival Forest, and Cox Boost) to their proposed DL model. Not surprisingly, they conclude the DL model shows better performance.&lt;/p&gt;
+&lt;p&gt;Nevertheless, the paper is full of misconceptions and misreporting making their conclusions debatable. Let’s start with a few of their claims:&lt;/p&gt;
+&lt;p&gt;They claim, “Unlike CPH and its variants, deep-learning approaches can model nonlinear risk functions …”. This is not true; both Random Survival Forests, and Cox Boost allow for nonlinear functions of the risk factors. (In fact, even CPH allows for nonlinear functions, albeit they need to be pre-specified.) They continue arguing that, “deep-learning models […] easily can handle censoring in survival data”. Again, not entirely true; all the models mentioned above handle censored data. Third, they claim “… the performance of the deep-learning neural network model will perform better when large feature sets are used”. This is generally true - using more features can improve performance- but it is also clinically useless and practically infeasible. It could be quite costly and time-consuming to collect a continuously increasing number of features to achieve fractional increases in any performance metric.&lt;/p&gt;
+&lt;p&gt;Besides all these, I have two more serious concerns: (1) about using the mean absolute deviation (MAD) as a performance metric and (2) the problem of algorithmic convergence.&lt;/p&gt;
+&lt;div id=&#34;mad-is-not-properly-defined&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;MAD is not properly defined&lt;/h2&gt;
+&lt;p&gt;The authors define the mean absolute deviation as “the absolute difference between the original survival time (ground truth) and the model’s predicted survival time measured in months.” This definition is ambiguous since a time-to-event model outputs the probability a patient survives (or dies) up to a timepoint. Of course, we could calculate the estimated time the outcome is expected to occur with high probability. But for some subjects this can be larger than the study follow-up time. In other words, not all subjects will necessarily experience the outcome within the follow-up time. This creates two problems.&lt;/p&gt;
+&lt;p&gt;First, we are extrapolating time. There is no way of knowing how the survival curves act beyond the sampled survival times. Second, if we do not want to extrapolate time what happens to the censored individuals? These are people that experience the event after the last follow-up evaluation or are lost to follow-up, hence their event time is unobserved. It is unclear how the data from censored individuals have been analysed. Of course, one option is to simply remove all the censored individuals. However, this will likely bias the results. There are two general approaches to overcome this issue: weighting and imputation. Both methods have been explored in survival settings, for example, by &lt;span class=&#34;citation&#34;&gt;Graf et al. (&lt;a href=&#34;#ref-graf1999assessment&#34; role=&#34;doc-biblioref&#34;&gt;1999&lt;/a&gt;)&lt;/span&gt;, &lt;span class=&#34;citation&#34;&gt;Schemper and Henderson (&lt;a href=&#34;#ref-schemper2000predictive&#34; role=&#34;doc-biblioref&#34;&gt;2000&lt;/a&gt;)&lt;/span&gt; and &lt;span class=&#34;citation&#34;&gt;Gerds and Schumacher (&lt;a href=&#34;#ref-gerds2006consistent&#34; role=&#34;doc-biblioref&#34;&gt;2006&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;to-convergence-or-not-to-converge-does-it-matter&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;To convergence or not to converge … does it matter?&lt;/h2&gt;
+&lt;p&gt;Another concern is about the convergence of the CPH model. To my surprise the authors report a MAD of 316 months! for the CPH model (Table 2), which they attribute to failed convergence. Fair enough, but this raises two other questions - why did it the algorithm fail in the fist place and why was it not fixed? More importantly, since the algorithm did not converge, its output cannot be trusted.&lt;/p&gt;
+&lt;p&gt;Usually, when we write an algorithm, we are interested in knowing if the solution the algorithm provides is the correct one for the problem it solves. This can sometimes come in the form of a convergence. In iterative algorithms (such as the one used for CPH), every step generates a different error. And what the algorithm tries to do is to minimize that error so it ever gets smaller and smaller. We say that the algorithm converges if it sequence of errors converges. If the algorithm does not converge implies that a different solution can give us a lower error. In other words, our solution is not optimal.&lt;/p&gt;
+&lt;p&gt;As a result, we cannot trust the parameter estimates from an algorithm that has not converged and even less other derived quantities such as standard errors or p-values (which are reported in Table 4 and discussed throughout the paper). So why the authors interpret the results in the main text as “the deep-learning model had significantly better predictions compared with the CPH model, with&amp;gt;10-fold difference between the 2 analytic approaches (mean absolute error for CPH vs deep-learning: 316.2 vs 29.3)”?&lt;/p&gt;
+&lt;p&gt;It is disheartening to know such work passes both the editorial team and peer-review process and gets published.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references csl-bib-body hanging-indent&#34;&gt;
+&lt;div id=&#34;ref-gerds2006consistent&#34; class=&#34;csl-entry&#34;&gt;
+Gerds, Thomas A, and Martin Schumacher. 2006. &lt;span&gt;“Consistent Estimation of the Expected Brier Score in General Survival Models with Right-Censored Event Times.”&lt;/span&gt; &lt;em&gt;Biometrical Journal&lt;/em&gt; 48 (6): 1029–40.
+&lt;/div&gt;
+&lt;div id=&#34;ref-graf1999assessment&#34; class=&#34;csl-entry&#34;&gt;
+Graf, Erika, Claudia Schmoor, Willi Sauerbrei, and Martin Schumacher. 1999. &lt;span&gt;“Assessment and Comparison of Prognostic Classification Schemes for Survival Data.”&lt;/span&gt; &lt;em&gt;Statistics in Medicine&lt;/em&gt; 18 (17-18): 2529–45.
+&lt;/div&gt;
+&lt;div id=&#34;ref-matsuo2019survival&#34; class=&#34;csl-entry&#34;&gt;
+Matsuo, Koji, Sanjay Purushotham, Bo Jiang, Rachel S Mandelbaum, Tsuyoshi Takiuchi, Yan Liu, and Lynda D Roman. 2019. &lt;span&gt;“Survival Outcome Prediction in Cervical Cancer: Cox Models Vs Deep-Learning Model.”&lt;/span&gt; &lt;em&gt;American Journal of Obstetrics and Gynecology&lt;/em&gt; 220 (4): 381–e1.
+&lt;/div&gt;
+&lt;div id=&#34;ref-schemper2000predictive&#34; class=&#34;csl-entry&#34;&gt;
+Schemper, Michael, and Robin Henderson. 2000. &lt;span&gt;“Predictive Accuracy and Explained Variation in Cox Regression.”&lt;/span&gt; &lt;em&gt;Biometrics&lt;/em&gt; 56 (1): 249–55.
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Regional Histopathology and Prostate MRI Positivity: A Secondary Analysis of the PROMIS Trial</title>
+      <link>https://solon-karapanagiotis.com/publication/mri_prostate2/</link>
+      <pubDate>Tue, 13 Dec 2022 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/mri_prostate2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>QWERTY-nomics, how did QWERTY came to be?</title>
+      <link>https://solon-karapanagiotis.com/post/qwerty/probability/</link>
+      <pubDate>Fri, 07 Oct 2022 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/qwerty/probability/</guid>
+      <description>
+
+
+&lt;p&gt;QWERTY has become the dominant keyboard standard, used by billions of people every day. The basic QWERTY form was developed in 1873 and was based around four rows with eleven characters in each row.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/QWERTY&#34;&gt;QWERTY&lt;/a&gt; takes its name from the first six letter of the second line (see &lt;a href=&#34;http://www.gettyimages.com/detail/1268712200&#34;&gt;image&lt;/a&gt;).&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There has been a lot of debate on the nature of QWERTY, whether the specific keyboard design was by choice or chance?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;A common view is the letters QWERTY were assembled (on purpose) in one row so the salesman could impress the customers by quickly typing “typewriter” which was the name of the brand producing the hardware - “the Sholes and Glidden Type Writer”. Effectively a sales trick!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Using the six letters in QWERTY we can type the word “typewriter”.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;Kay (&lt;a href=&#34;#ref-kay2013rerun&#34; role=&#34;doc-biblioref&#34;&gt;2013&lt;/a&gt;)&lt;/span&gt; labels this view as Myth 1.&lt;/p&gt;
+&lt;p&gt;They used probability theory to investigate whether this feature of the keyboard exists “by intent or accident”. To do this, they calculated the probability the seven letters that make up “typewriter” falling on one line. This probability is 0.0002, so small, which indicates it was a design choice.&lt;/p&gt;
+&lt;p&gt;Crucially, this calculation is based on the assumption that the designer had chosen in advance to place 10 letters at the top row of the keyboard&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here, I’m looking how this probability changes for other values of letters at the top row.&lt;/p&gt;
+&lt;div id=&#34;the-calculation-in-kay2013rerun&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;The calculation in &lt;span class=&#34;citation&#34;&gt;Kay (&lt;a href=&#34;#ref-kay2013rerun&#34; role=&#34;doc-biblioref&#34;&gt;2013&lt;/a&gt;)&lt;/span&gt;&lt;/h1&gt;
+&lt;p&gt;First, I briefly go through the calculations presented in &lt;span class=&#34;citation&#34;&gt;Kay (&lt;a href=&#34;#ref-kay2013rerun&#34; role=&#34;doc-biblioref&#34;&gt;2013&lt;/a&gt;)&lt;/span&gt;. The problem is parallel to sampling without replacement from an (imaginary) urn. The designer has chosen &lt;span class=&#34;math inline&#34;&gt;\(K=10\)&lt;/span&gt; letters to be assigned at the top row of the keyboard and the rest &lt;span class=&#34;math inline&#34;&gt;\(R=26-10=16\)&lt;/span&gt; to the other rows (there are &lt;span class=&#34;math inline&#34;&gt;\(N=26\)&lt;/span&gt; letters in the alphabet).&lt;/p&gt;
+&lt;p&gt;We are interested in the probability the &lt;span class=&#34;math inline&#34;&gt;\(k=7\)&lt;/span&gt; letters needed to form the word “typewriter” finish at the top row. This probability is described by a &lt;em&gt;hypergeometric&lt;/em&gt; distribution.&lt;/p&gt;
+&lt;p&gt;The hypergeometric distribution describes the probability of &lt;span class=&#34;math inline&#34;&gt;\(k=7\)&lt;/span&gt; “successes” in &lt;span class=&#34;math inline&#34;&gt;\(n=7\)&lt;/span&gt; draws, without replacement, from a finite population of size &lt;span class=&#34;math inline&#34;&gt;\(N = 26\)&lt;/span&gt; letters that contains exactly &lt;span class=&#34;math inline&#34;&gt;\(K = 10\)&lt;/span&gt; objects with that feature, wherein each draw is either a success or a failure. Using the usual urn-style language of “green” and “red” marbles we have:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(K = 10\)&lt;/span&gt; green marbles (i.e. 10 letters to be assigned at the top row)&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(N = 26\)&lt;/span&gt; (i.e. the letters of the alphabet)&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(R = 16\)&lt;/span&gt; red marbles (i.e. the rest of the letters to be assigned to the other rows)&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(k = 7\)&lt;/span&gt; letters that form the word “typerwriter”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We then draw &lt;span class=&#34;math inline&#34;&gt;\(n = 7\)&lt;/span&gt; marbles without replacement. What is the probability that exactly &lt;span class=&#34;math inline&#34;&gt;\(k=7\)&lt;/span&gt; are green? This is given by&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[P(X=k) = \frac{ {K\choose{k}} {{N-k}\choose{n-k}}}{N\choose n}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;For &lt;span class=&#34;math inline&#34;&gt;\(k=7, n=7, N=26, K= 10\)&lt;/span&gt;, this probability is 0.00018 which is quite small. Hence, it indicates this was a design choice rather than by chance.&lt;/p&gt;
+&lt;p&gt;But this calculation is based on the assumption: the designer decided the number of letters for the top row to be 10 (&lt;span class=&#34;math inline&#34;&gt;\(K=10\)&lt;/span&gt;).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;an-updated-calculation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;An updated calculation&lt;/h1&gt;
+&lt;p&gt;Another approach is to change the number of letters in the top row and see how this probability changes.&lt;/p&gt;
+&lt;p&gt;Now we are interested in the probability of drawing “&lt;span class=&#34;math inline&#34;&gt;\(k=7\)&lt;/span&gt; green marbles in &lt;span class=&#34;math inline&#34;&gt;\(n=7\)&lt;/span&gt; draws for different choices of &lt;span class=&#34;math inline&#34;&gt;\(K\)&lt;/span&gt;”. The plot shows the probability of &lt;span class=&#34;math inline&#34;&gt;\(k=7\)&lt;/span&gt; for different values of &lt;span class=&#34;math inline&#34;&gt;\(K\)&lt;/span&gt;. We start with &lt;span class=&#34;math inline&#34;&gt;\(K = 6\)&lt;/span&gt; which gives probability = 0, as there is no way to draw 7 green marbles when there are only 6 of them! The red dot corresponds to &lt;span class=&#34;math inline&#34;&gt;\(K=10\)&lt;/span&gt; which has been used in the paper by Kay. For &lt;span class=&#34;math inline&#34;&gt;\(K=19\)&lt;/span&gt; which corresponds to the quite extreme scenario of having 19 letters at the top row, the probability the 7 “typerwriter” letters are found there becomes 8%. Still small but appreciable.&lt;/p&gt;
+&lt;p&gt;The calculations above are based on sampling the letters in “typewriter” at any order. We can also calculate the probability of drawing “Exactly &lt;span class=&#34;math inline&#34;&gt;\(k=7\)&lt;/span&gt; green marbles in &lt;span class=&#34;math inline&#34;&gt;\(n=7\)&lt;/span&gt; draws, in the specific QWERTY order”. This corresponds to the horizontal dashed line in the plot.&lt;/p&gt;
+&lt;p&gt;Overall, adding more letters at the top row increases the probability substantially. For example, the probability increases by 9900% (!) when going from &lt;span class=&#34;math inline&#34;&gt;\(K=10\)&lt;/span&gt; to &lt;span class=&#34;math inline&#34;&gt;\(16\)&lt;/span&gt; letters. Nevertheless, in absolute terms even for &lt;span class=&#34;math inline&#34;&gt;\(K =19\)&lt;/span&gt; it is so small that we can conclude it is unlikely that these letters would appear together by chance.&lt;/p&gt;
+&lt;p&gt;For a more historical perspective and other myths on QWERTY - read &lt;a href=&#34;https://www.newscientist.com/article/2200664-the-truth-about-the-qwerty-keyboard/&#34;&gt;this article&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(purrr)
+N &amp;lt;- 26
+K &amp;lt;- seq(6, N - 7, by = 1)
+prbs &amp;lt;- map_dbl(K, ~ dhyper(x = 7, m = .x, n = N - .x, k = 7))
+df &amp;lt;- data.frame(K, prbs)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)
+library(dplyr)
+
+# prb of exact &amp;quot;qwerty&amp;quot; word sampled
+pr_exact &amp;lt;- (1/26)*(1/25)*(1/24)*(1/23)*(1/22)**(1/21)*(1/20)*(1/19)
+
+ggplot(df) +
+    geom_point(aes(x = K, y = prbs)) +
+    labs(y = &amp;quot;Probability&amp;quot;, x = &amp;quot;K&amp;quot;) +
+    geom_point(data = df %&amp;gt;% filter(K == &amp;quot;10&amp;quot;), aes(x = K, y = prbs), col = &amp;#39;red&amp;#39;) +
+    geom_hline(yintercept = pr_exact, linetype = &amp;quot;dashed&amp;quot;) +
+    scale_x_continuous(breaks = K, labels = K) +
+    theme_bw()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/qwerty/qwerty_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;References&lt;/h1&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references csl-bib-body hanging-indent&#34;&gt;
+&lt;div id=&#34;ref-kay2013rerun&#34; class=&#34;csl-entry&#34;&gt;
+Kay, Neil M. 2013. &lt;span&gt;“Rerun the Tape of History and QWERTY Always Wins.”&lt;/span&gt; &lt;em&gt;Research Policy&lt;/em&gt; 42 (6-7): 1175–85.
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes footnotes-end-of-document&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;In fact, later versions changed this arrangement to 10 (top), 9 (middle), 7 (bottom), a more balanced ordering - this the modern QWERTY.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Origins - Book Overview</title>
+      <link>https://solon-karapanagiotis.com/post/origins_review/book_review/</link>
+      <pubDate>Tue, 02 Aug 2022 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/origins_review/book_review/</guid>
+      <description>
+
+
+&lt;p&gt;The most common discussion around Earth concerns how we are shaping our planet. &lt;em&gt;Origins&lt;/em&gt; is all about “how the Earth made us”.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Origins: How the Earth Shaped Human History&lt;/strong&gt;, &lt;em&gt;Lewis Dartnell&lt;/em&gt;, Vintage Publishing (2020)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;What is the connecting link between the voting patterns in south-eastern US states and an ocean formed millions of years ago? The Earth’s rotation and the built of Taj Mahal? How is the formation of coal deposits 300 million years ago influence the political map of today’s Britain?&lt;/p&gt;
+&lt;p&gt;All these parallels between events are spread across Dartnell’s book, a thought-provoking introduction to our origins. The premise of the book is that these events are driven by the Earth’s climate which created a sort of domino effect for human evolution and progress to today’s society.&lt;/p&gt;
+&lt;p&gt;In a nutshell, planetary forces, caused by shifts of the Earth relative to the Sun and its orbital path, drove our evolution. Different processes (e.g. tectonic drift, climate change, landscape formation) facilitated both the emergence of humanity and its subsequent history. In fact, this is supported by more recent evidence: a simulation of the past two million years of Earth’s climate provides evidence that temperature and other planetary forces influenced early human migration — and possibly contributed to the emergence of the modern-day human species &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-timmermann2022climate&#34; role=&#34;doc-biblioref&#34;&gt;Timmermann et al. 2022&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Although such a deductive step (i.e. planetary forces caused our evolution) is interesting (and not new &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-dart1925australopithecus&#34; role=&#34;doc-biblioref&#34;&gt;Dart and Salmons 1925&lt;/a&gt;)&lt;/span&gt;), the more intriguing aspect of the book is going through each of these climate processes and looking their connections with our history.&lt;/p&gt;
+&lt;div id=&#34;three-examples&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Three examples&lt;/h2&gt;
+&lt;p&gt;Why did we domesticate only a small proportion of animals?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A spike in the planet’s termperature (methane-related carbon release) about 50 million years ago drove rapid evolution in many animals and especially the emergence of new orders of mammals. These dispersed across Asia, Europe and North America. The subsequent cooling down created the ecosystems (vast grasslands) these mammals came to dominate and diversify in many species such as the ancestors of cows and sheep. But these animal species were not evenly distributed across the planet. For example, the five most important mammals - sheep, goat, pig, cow and horse - were present only in Eurasia. After the last ice age humans settled down in Eurasia. We simply domesticated the animals we found around us!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;What is the connection between the voting patterns in south-eastern US states and an ocean formed millions of years ago?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The south-eastern states of the US traditionaly vote for the Democrats. More specifically, there is a clear blue, Democrat-voting band curving through North and South Carolina and Alabama. This band represents the regional political and socio-economic conditions of today which relate to the an ocean formed millions of years ago! A few million years ago the area of the south-eastern US states was flooded. Material was deposited in the seafloor and when the sea fell again the ancient seafloor sediments rended this area agriculrutally productive. In particular, the cultivation of cotton became quite popular here during the Industrial Revolution. The cultivation was carried out by slaves. In fact, the term “Black belt” described the population in these regions, a dense concentration of African-Americans. Later on, as slavery was abolished the former slaves continued to work on the same cotton plantations, but now as freedmen. But, as cotton prices plumented the economy of the region struggled. As a result, people started to move to more industrial cities. But, over the years, despite this internal migration, many African-Americans remained in the region. More recently, without any industrial developments, these states suffer from socio-economic problems (poverty, poor healthcare, etc). Hence, the electorate tends to favour the policies of the Democratic Party. This is a clear connection between the soil and geology and contremporary politics.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;How the Earth’s rotation allowed the built of Taj Mahal?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;During the Age of Exploration Portuguese navigators developed a critical innovation, known as the volta do mar – the turn, or return, of the sea. This innovation takes advantage of specific wind patterns to allow for more efficient sailing - that is, sail further and faster. As people became more familiar with such wind patterns they could explore further offshore. Knowing these winds (and ocean) currents allowed the Europeans to discover and explore unknown places - Colombus sailed to America and back - and establish the trading routes during the 15th century. These patterns are created by the Sun warming up the air and the rotation of the Earth. Together these two forces produce the major wind zones of the planet which in turn drive the ocean currents. These currents allowed the Spanish to transport silver from South America, handled through European merchants, and ultimately financing a monumental building project in India - the Taj Mahal.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div id=&#34;implications-for-today&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Implications for today&lt;/h2&gt;
+&lt;p&gt;The book touches upon another hot topic: energy production.&lt;/p&gt;
+&lt;p&gt;Over the course of history we achieved energy production through muscle mass (ours and animals’) (and agriculture) - that is, using solar energy to grow crop and breed animals and converting them to energy. We then relied on wind and water. After that, coal and oil transformed and accelerated our progress. But we ended up emitting too much carbon (and other compounds) and changing the climate. What do we do now? Shall we return to age-old practices of using wind and water? Or solar energy?&lt;/p&gt;
+&lt;p&gt;Farms of solar panels produce electricity directly, and hydroelectric dams and wind turbines are identical in principle to waterwheels and mills, but all have limitations. They require the Sun to shine, the wind to blow and the water to flow. But, what about nuclear fusion?&lt;/p&gt;
+&lt;p&gt;The book advocates in favour of nuclear power as it solves the problem of relying on natural elements (Sun, wind, river). In addition, nuclear power produces small amounts of carbon dioxide (&lt;a href=&#34;https://www.economist.com/briefing/2022/06/23/energy-security-gives-climate-friendly-nuclear-power-plants-a-new-appeal&#34;&gt;The Economist, 2022&lt;/a&gt;), it is safe (&lt;a href=&#34;https://ourworldindata.org/safest-sources-of-energy&#34;&gt;Hannah Ritchie, 2020&lt;/a&gt;) and, most importantly, it occupies the least space among other energy sources (&lt;a href=&#34;https://ourworldindata.org/land-use-per-energy-source?utm_source=OWID+Newsletter&amp;amp;utm_campaign=39d2bf489c-biweekly-digest-2022-06-17&amp;amp;utm_medium=email&amp;amp;utm_term=0_2e166c1fc1-39d2bf489c-536929022&#34;&gt;Hannah Ritchie, 2022&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;Nuclear-power plants seem to be promising. But, first, we need to get them easier to build (&lt;a href=&#34;https://www.economist.com/briefing/2022/06/23/energy-security-gives-climate-friendly-nuclear-power-plants-a-new-appeal&#34;&gt;The Economist, 2022&lt;/a&gt;).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;References&lt;/h1&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references csl-bib-body hanging-indent&#34;&gt;
+&lt;div id=&#34;ref-dart1925australopithecus&#34; class=&#34;csl-entry&#34;&gt;
+Dart, Raymond A, and A Salmons. 1925. &lt;span&gt;“Australopithecus Africanus: The Man-Ape of South Africa.”&lt;/span&gt; &lt;em&gt;A Century of Nature: Twenty-One Discoveries That Changed Science and the World&lt;/em&gt;, 10–20.
+&lt;/div&gt;
+&lt;div id=&#34;ref-timmermann2022climate&#34; class=&#34;csl-entry&#34;&gt;
+Timmermann, Axel, Kyung-Sook Yun, Pasquale Raia, Jiaoyang Ruan, Alessandro Mondanaro, Elke Zeller, Christoph Zollikofer, et al. 2022. &lt;span&gt;“Climate Effects on Archaic Human Habitats and Species Successions.”&lt;/span&gt; &lt;em&gt;Nature&lt;/em&gt; 604 (7906): 495–501.
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title># 204 Puzzle from the New Scientist</title>
+      <link>https://solon-karapanagiotis.com/post/new_scientist_puzzle_204/puzzle_204/</link>
+      <pubDate>Thu, 10 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/new_scientist_puzzle_204/puzzle_204/</guid>
+      <description>
+
+
+&lt;p&gt;This week’s &lt;a href=&#34;https://www.newscientist.com/article/mg25734214-000-puzzle-204-can-you-work-out-what-number-my-son-thought-of/&#34;&gt;puzzle&lt;/a&gt; goes as follows:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;My son’s book of mathematical magic tricks includes this one:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Think of a whole number from 1 to 50.&lt;/li&gt;
+&lt;li&gt;Add 9 and double the result.&lt;/li&gt;
+&lt;li&gt;Multiply by 6 and add 12.&lt;/li&gt;
+&lt;li&gt;Subtract 60.&lt;/li&gt;
+&lt;li&gt;Divide by 12 and subtract 4.&lt;/li&gt;
+&lt;li&gt;Subtract your original number.&lt;/li&gt;
+&lt;li&gt;And the answer is (drumroll…) 1!&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Unfortunately, when he is reading, my son sometimes repeats a line and sometimes he skips one. That happened with this trick. He did one of the lines twice and then missed the final instruction to subtract this original number. Yet, by an increadible fluke, he still managed to end up on the number 1.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Let’s start by introducing some notation for each step:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Think of a whole number from 1 to 50 - we call this number &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Add 9 and double the result - we call the result of this step, &lt;span class=&#34;math inline&#34;&gt;\(q\)&lt;/span&gt;. That is, &lt;span class=&#34;math inline&#34;&gt;\(q=((x + 9)*2)\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Multiply by 6 and add 12 - we call this &lt;span class=&#34;math inline&#34;&gt;\(r\)&lt;/span&gt;. That is, &lt;span class=&#34;math inline&#34;&gt;\(r = (q*6)+12\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Subtract 60 - we call this &lt;span class=&#34;math inline&#34;&gt;\(s\)&lt;/span&gt;. Then, &lt;span class=&#34;math inline&#34;&gt;\(s=r-60\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Divide by 12 and subtract 4 - we call this &lt;span class=&#34;math inline&#34;&gt;\(t\)&lt;/span&gt;. Then, &lt;span class=&#34;math inline&#34;&gt;\(t=\frac{s}{12} - 4\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Subtract your original number - we call this &lt;span class=&#34;math inline&#34;&gt;\(u\)&lt;/span&gt;. That is, &lt;span class=&#34;math inline&#34;&gt;\(u=t-x\)&lt;/span&gt;. And, we know, &lt;span class=&#34;math inline&#34;&gt;\(u=1\)&lt;/span&gt; (from step 7).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The puzzle states that the son “missed the final instruction to subtract this original number.” If he had subtracted the original number (after repeating one of the previous steps) he would have gotten a negative number (or zero). So, we know, after repeating a step that &lt;span class=&#34;math inline&#34;&gt;\(t’ \leq 0\)&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\(t’\)&lt;/span&gt; is the result to step 5, after repeating one of the previous steps.&lt;/p&gt;
+&lt;p&gt;Now, looking at steps 2 through 5, the only ones that can give us a negative number are steps 4 and 5. Steps 2 and 3 involve the addition and multiplication of positive numbers. They cannot give us a negative result.&lt;/p&gt;
+&lt;p&gt;We are then left with steps 4 and 5 as potential candidates to have been repeated twice. In fact, whatever the result is after steps 2 and 3 we know that either:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;[repeat step 4 twice and add step 5] = 1 (I call this proposition A) or&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;[step 4 and repeat step 5 twice] = 1 (I call this proposition B).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We can check each of these propositions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Proposition A is: &lt;span class=&#34;math inline&#34;&gt;\(\frac{(r-60)-60}{12} - 4 = 1\)&lt;/span&gt;. I have simply repeated step 4 twice and then added step 5. Solving for &lt;span class=&#34;math inline&#34;&gt;\(r\)&lt;/span&gt; gives us &lt;span class=&#34;math inline&#34;&gt;\(r = 180\)&lt;/span&gt;. We can then backtrack, solving for &lt;span class=&#34;math inline&#34;&gt;\(q\)&lt;/span&gt; from steps 2 and 3 to get &lt;span class=&#34;math inline&#34;&gt;\(x =5\)&lt;/span&gt;. So &lt;span class=&#34;math inline&#34;&gt;\(x = 5\)&lt;/span&gt; is a potential solution.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Proposition B is: &lt;span class=&#34;math inline&#34;&gt;\(\frac{(s/12 - 4)}{12} - 4 = 1\)&lt;/span&gt; gives us &lt;span class=&#34;math inline&#34;&gt;\(s=768\)&lt;/span&gt;. From steps 2-4 this implies that &lt;span class=&#34;math inline&#34;&gt;\(x=59\)&lt;/span&gt;, which is outside the range given in step 1. So this is not a valid solution.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Summarizing, the only way to get a result equal to 1 at step 6, after repeating one step twice and then missing the final instruction to subtract the original number, is to choose &lt;span class=&#34;math inline&#34;&gt;\(x=5\)&lt;/span&gt; at step 1.&lt;/p&gt;
+&lt;div id=&#34;brute-force-solution&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Brute force solution&lt;/h2&gt;
+&lt;p&gt;Another way to get the solution is to code steps 2 through 6, repeating each step twice and checking the result for all numbers from 1 to 50. This is what the &lt;code&gt;magic_trick()&lt;/code&gt; function does.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# helper functions - each one calculates one of the steps 2-5
+f2 &amp;lt;- function(x) (x + 9) * 2 # calculates step 2
+f3 &amp;lt;- function(x) (x * 6) + 12 # calculates step 3
+f4 &amp;lt;- function(x) x - 60 # calculates step 4
+f5 &amp;lt;- function(x) (x / 12) - 4 # calculates step 5
+
+magic_trick &amp;lt;- function(x, rep = 0){
+   # x: a whole number from 1 to 50
+   # rep: the step 2-5 to be repeated twice. If rep = 0 or 1. - no repetition 
+   
+    if(rep == 2){
+       f &amp;lt;- f5(f4(f3(f2(f2(x)))))
+       } else if(rep == 3){
+          f &amp;lt;- f5(f4(f3(f3(f2(x)))))
+          } else if(rep == 4){
+             f &amp;lt;- f5(f4(f4(f3(f2(x))))) 
+             } else if(rep == 5) {
+                f &amp;lt;- f5(f5(f4(f3(f2(x)))))
+                } else {
+                   f &amp;lt;- f5(f4(f3(f2(x)))) - x
+                   }    
+    return(f)
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The code below calculates the final solution to the puzzle for each original number (&lt;code&gt;x_values&lt;/code&gt;) and for each step repeated twice or not repeated at all (&lt;code&gt;repeated&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;The first (top left) panel corresponds to the solution for the original set-up - no step is repeated. For all &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; the result is always one. The second and third panels correspond to repeating steps 2 and 3, respectively. The results confirm our intuition from before - all solutions are positive and well above one. The last panel shows the results when repeating step 5. All of them are negative for the range 1 to 50. Finally, the fourth panel gives the solution to the puzzle. There is only one value of &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;, namely &lt;span class=&#34;math inline&#34;&gt;\(x = 5\)&lt;/span&gt;, that gives one as the final result.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(purrr)
+library(dplyr)
+library(ggplot2)
+
+x_values &amp;lt;- seq(1, 50, by = 1) # step 1: whole number from 1 to 50.
+repeated &amp;lt;- c(0, 2, 3, 4, 5) # step to repeat. 0 corresponds to the original puzzle 
+
+vals &amp;lt;- expand.grid(x_values, repeated)
+
+res &amp;lt;- map2_dbl(vals$Var1, vals$Var2, magic_trick)
+
+df &amp;lt;- data.frame(x = rep(x_values, 5), repeated = rep(repeated, each = 50), res = res) %&amp;gt;%
+   mutate(repeated = paste0(&amp;quot;step &amp;quot;, repeated, &amp;quot; repeated&amp;quot;)) 
+
+ggplot(df) +
+   geom_point(aes(x = x, y = res)) +
+   facet_wrap(. ~ repeated, scales = &amp;quot;free&amp;quot;) +
+   geom_hline(yintercept = 1, linetype = &amp;quot;dashed&amp;quot;, linewidth = 1.7, col = &amp;quot;#009E73&amp;quot;) +
+   labs(y = &amp;quot;Result at step 7&amp;quot;) +
+   theme_linedraw(12) +
+   theme(strip.background = element_rect(fill = &amp;quot;white&amp;quot;)) +
+   theme(strip.text.x = element_text(color = &amp;quot;black&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/new_scientist_puzzle_204/New_Scientist_puzzle_204_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Iridescence as camouflage - A comment on competing risks</title>
+      <link>https://solon-karapanagiotis.com/post/iridescence/iridescence/</link>
+      <pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/iridescence/iridescence/</guid>
+      <description>
+
+
+&lt;p&gt;Standard survival data measure the time span from some time origin until the occurrence of the event of interest. In the interpretation of results of survival analyses, competing risks can be an important problem. Competing risks occur when subjects can experience one or more events which ‘compete’ with the event of interest. In those cases, the competing risk hinders the observation of the event of interest or modifies the chance that this event occurs.&lt;/p&gt;
+&lt;p&gt;Here, I use the data from &lt;span class=&#34;citation&#34;&gt;Kjernsmo et al. (&lt;a href=&#34;#ref-kjernsmo2020iridescence&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt; on biological iridescence to study the impact of competing risks on the final conclusions. First, I introduce the topic of iridescence and its intriguing biological significance (&lt;a href=&#34;#background&#34;&gt;Background&lt;/a&gt;). Then, I outline the main idea behind competing risks (&lt;a href=&#34;#cmrisk&#34;&gt;About competing risks&lt;/a&gt;) and present the two main types of &lt;a href=&#34;#hzd&#34;&gt;hazard functions&lt;/a&gt;. I then re-analyse the data from &lt;span class=&#34;citation&#34;&gt;Kjernsmo et al. (&lt;a href=&#34;#ref-kjernsmo2020iridescence&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt; (&lt;a href=&#34;#res&#34;&gt;Results&lt;/a&gt;) and finish with a few &lt;a href=&#34;#conc&#34;&gt;concluding remarks&lt;/a&gt;.&lt;/p&gt;
+&lt;div id=&#34;background&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Background&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Iridescence&#34;&gt;Biological iridescence&lt;/a&gt; (the vivid, shining colouring of many species) often serves to make individual animals more visible, and as a result, has been hypothesised to contribute to sexual selection. But the fact that it is found in non-reproductive stages makes the sexual selection hypothesis less likely. An alternative (and ) hypothesis is that can work as a form of protection, aiming “to conceal rather than reveal” .&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;Kjernsmo et al. (&lt;a href=&#34;#ref-kjernsmo2020iridescence&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt; provide evidence for this hypothesis by showing that iridescence provides a survival advantage making the prey less detectable, effectively acting as camouflage.&lt;/p&gt;
+&lt;p&gt;The authors use a coloured beetle species as a test case. The beetle’s wings sport a shiny, shifting and metallic green-blue appearance stemming from structural colour. They then use a series of elegantly simple experiments to test the camouflage hypothesis. First, they put together a collection of hundreds of beetle wing cases, including the iridescent and non-iridescent beetles in a variety of colours, and distributed them in a natural setting amid a variety of plant species. They found, surprisingly, that the iridescent specimens were more likely to survive predation by birds than the non-iridescent variety—even outperforming a leaf-green non-iridescent model that should have blended in with the background colours.&lt;/p&gt;
+&lt;p&gt;These conclusions are based on a mixed Cox model where the survival of the beetles was recorded at 2, 24, and 48 h. &lt;strong&gt;Predation by birds&lt;/strong&gt;, which ate all or most of the metalwork, was scored as an event in the survival analysis. Predation by animals other than birds (&lt;strong&gt;non-birds&lt;/strong&gt;), complete disappearance of a target, or survival to 48 h, were treated as censored values in the survival analysis&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Effectively this analysis ignores the competing risks. A &lt;em&gt;competing risk&lt;/em&gt; is an event whose occurrence precludes the occurrence of the primary event of interest. Being eaten by other animals precludes to be eaten by birds! Here, I re-analyse the data taking into account the competing risks.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;cmrisk&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;About competing risks&lt;/h2&gt;
+&lt;p&gt;Competing risks concern the situation where more than one cause of failure is possible. It refers to situations where an event has occurred, which prevents occurrence of the primary event of interest. For instance, in this study, predation by non-birds prevents the occurrence of the primary event of interest, i.e. predation by birds.
+A common assumption is that upon removal of one cause of failure, the risk of failure of the remaining causes is unchanged. That is, the competing risks are assumed independent. While this may be a reasonable assumption in some settings, independent competing risks may be relatively rare in biological applications.&lt;/p&gt;
+&lt;p&gt;When analyzing survival data in which competing risks are present, analysts frequently censor subjects when a competing event occurs (as done in this study). Thus, when the outcome is time to death attributable to birds, an analyst considers an insect as censored once it dies of non-bird causes (spiders etc). However, censoring insects at the time of death attributable to non-bird causes may be problematic (see &lt;span class=&#34;citation&#34;&gt;Putter, Fiocco, and Geskus (&lt;a href=&#34;#ref-putter2007tutorial&#34; role=&#34;doc-biblioref&#34;&gt;2007&lt;/a&gt;)&lt;/span&gt; for a review). The next section introduces two ways competing risks can be taken into account.&lt;/p&gt;
+&lt;div id=&#34;hzd&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;The Hazard Function&lt;/h3&gt;
+&lt;p&gt;A key concept in survival analysis is that of the hazard function. In the absence of competing risks, the hazard function is defined as&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\lambda(t) = \lim_{\Delta t \to 0} \frac{Prob(t \leq  T &amp;lt; t + \Delta t | T &amp;gt; t)}{\Delta t}\]&lt;/span&gt;
+where &lt;span class=&#34;math inline&#34;&gt;\(T\)&lt;/span&gt; denotes the time from baseline until the occurrence of the event of interest. The hazard function, which is a function of time, describes the instantaneous rate of occurrence of the event of interest in subjects who are still at risk of the event. In a setting in which the outcome is, say, all-cause mortality, the hazard function at a given point in time would describe the instantaneous rate of death in subjects who were alive at that point in time.&lt;/p&gt;
+&lt;p&gt;Competing risks implies that a subject can experience one of a set of different events - an insect can be eaten by a bird (event 1) or by a non-bird (event 2). In this case, 2 different types of hazard functions are of interest: the cause-specific hazard function and the subdistribution hazard function. The &lt;strong&gt;cause-specific hazard function&lt;/strong&gt; is&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\lambda^{CS}(t) = \lim_{\Delta t \to 0} \frac{Prob(t \leq  T &amp;lt; t + \Delta t, \color{blue}{E = k} | T &amp;gt; t)}{\Delta t}\]&lt;/span&gt;
+The cause-specific hazard function denotes the instantaneous rate of occurrence of the &lt;span class=&#34;math inline&#34;&gt;\(k^{th}\)&lt;/span&gt; event (blue term) in subjects who are currently event free (i.e. in subjects who have not yet experienced any of the different types of events). If one were considering 2 types of events, death attributable to birds and death attributable to non-birds, then the cause-specific hazard of bird death denotes the instantaneous rate of bird death in insects which have not yet experienced either event (i.e., in insects that are still “alive”). The &lt;strong&gt;subdistribution hazard function&lt;/strong&gt; is&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\lambda^{SD}(t) = \lim_{\Delta t \to 0} \frac{Prob(t \leq  T &amp;lt; t + \Delta t, \color{blue}{E = k} | T &amp;gt; t \color{blue}{\cup (T &amp;lt; t \cap E \neq k)})}{\Delta t}\]&lt;/span&gt;
+It denotes the instantaneous risk of failure from the &lt;span class=&#34;math inline&#34;&gt;\(k^{th}\)&lt;/span&gt; event in subjects who have not yet experienced an event of type &lt;span class=&#34;math inline&#34;&gt;\(k\)&lt;/span&gt; (blue term). Note that this risk set includes those who are currently event free as well as those who have previously experienced a competing event. This differs from the risk set for the cause-specific hazard function, which only includes those who are currently event free. Using the same example as above, the subdistribution hazard of predation by birds denotes the instantaneous rate of bird death in insects who are still “alive” (i.e. who have not yet experienced either event) or who have previously died of non-bird predation. There is a distinct cause-specific hazard function for each of the distinct types of events and a distinct subdistribution hazard function for each of the distinct types of events.&lt;/p&gt;
+&lt;p&gt;Note, the difference between the two hazard functions is in the risk set. As a result, for the cause-specific hazard, the risk set decreases at each time point at which there is a failure of another cause. For subdistribution hazard insects who fail from another cause remain in the risk set.&lt;/p&gt;
+&lt;p&gt;Here, I’m interested in modelling the effect of covariates on both hazards and see if that leads us to different conclusions.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;res&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Results&lt;/h2&gt;
+&lt;p&gt;The data can be found &lt;a href=&#34;https://data.bris.ac.uk/data/dataset/388y3cip6r6mv25yccy5qum1l7&#34;&gt;here&lt;/a&gt;&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;. First, I transform the data for competing risks analysis. I use the following three event type indicators: 1 for bird death, 2 for non-bird death and 0 for censored observations.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# data transformation for competing risks
+# data is the loaded data-frame
+data_compete &amp;lt;- data %&amp;gt;% 
+    mutate(BirdPredated = case_when(
+        (Notes == &amp;quot;SPIDER&amp;quot; | Notes == &amp;quot;ANTS&amp;quot; | Notes == &amp;quot;SLUG&amp;quot; | Notes == &amp;quot;WASP&amp;quot;) ~ 2, 
+        TRUE ~ as.numeric(BirdPredated)))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I use the &lt;a href=&#34;https://cran.r-project.org/web/packages/survival/index.html&#34;&gt;survival&lt;/a&gt; package to fit the two cause-specific models: &lt;code&gt;cox1&lt;/code&gt; for bird death and &lt;code&gt;cox2&lt;/code&gt; for non-bird death.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(survival)
+
+# Cause-specific hazard for bird death
+cox1 &amp;lt;- coxph(Surv(Time, BirdPredated == 1) ~ Treatment, data = data_compete, x = TRUE)
+
+# Cause-specific hazard for non-bird death
+cox2 &amp;lt;- coxph(Surv(Time, BirdPredated == 2) ~ Treatment, data = data_compete, x = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I then use the &lt;a href=&#34;https://cran.r-project.org/web/packages/cmprsk/index.html&#34;&gt;cmprsk&lt;/a&gt; package to fit the two subdistribution models: &lt;code&gt;crr1&lt;/code&gt; for bird death and &lt;code&gt;crr2&lt;/code&gt; for non-bird death.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(cmprsk)
+# necessary pre-processing
+Treatment &amp;lt;- model.matrix(~ data_compete[, &amp;quot;Treatment&amp;quot;])[,-1]
+cov_mat &amp;lt;- Treatment
+
+# subdistribution hazard bird death
+crr1 &amp;lt;- crr(data_compete$Time, fstatus = data_compete$BirdPredated, cov1 = cov_mat, failcode = 1) 
+
+# subdistribution hazard non-bird death
+crr2 &amp;lt;- crr(data_compete$Time, fstatus = data_compete$BirdPredated, cov1 = cov_mat, failcode = 2)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I plot the hazard ratios (HR) with 95% confidence intervals for each treatment. We see that treatment affects the relative cause-specific hazard of bird death (red)&lt;a href=&#34;#fn3&#34; class=&#34;footnote-ref&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt; but not of non-bird death (blue). Similarly, treatment has a significant effect on the relative incidence of bird death (green), but not of non-bird death (yellow). Together these indicate that, contrary to non-bird predators, birds are less sensitive to iridescent targets. Interestingly, though, treatment has a more accentuated effect on the cause-specific hazard (red) of bird death than the cumulative incidence (green) of bird death. Likely, the effects are qualitatively the same, which not be the case.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## ℹ Please use `linewidth` instead.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/iridescence/iridescence_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;conc&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Which one to use?&lt;/h2&gt;
+&lt;p&gt;This example demonstrates that the two approaches may yield different results. This can be explained by the different composition of the risk sets. In the cause-specific model for bird death, insects who died from a non-bird cause were censored and thus removed from the risk sets after their time of death, whereas they were kept in the risk sets after death in the subdistribution model.&lt;/p&gt;
+&lt;p&gt;As a result, the cause-specific hazard ratio (&lt;span class=&#34;math inline&#34;&gt;\(HR^{CS}\)&lt;/span&gt;) and the subdistribution HR (&lt;span class=&#34;math inline&#34;&gt;\(HR^{SD}\)&lt;/span&gt;) do not have the same interpretation. For example&lt;a href=&#34;#fn4&#34; class=&#34;footnote-ref&#34; id=&#34;fnref4&#34;&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt;, the &lt;span class=&#34;math inline&#34;&gt;\(HR^{CS}\)&lt;/span&gt; of 1.65 means that static rainbow insects (‘Stat’ in plot - red), had a hazard of dying 1.65 times higher than iridescent insects, among insects who were alive and did not die from non-bird predators. The &lt;span class=&#34;math inline&#34;&gt;\(HR^{SD}\)&lt;/span&gt; higher than one (&lt;span class=&#34;math inline&#34;&gt;\(HR^{SD}\)&lt;/span&gt; = 1.45) means that the cumulative incidence of death is higher in static rainbow insects (‘Stat’ in plot - green) when compared with iridescent ones.
+However, the numerical value of 1.45 is not straightforward to interpret since it reflects the mortality rate ratio among insects who are alive or have died from non-bird predators. So, the &lt;span class=&#34;math inline&#34;&gt;\(HR^{SD}\)&lt;/span&gt; is in fact a different quantity than an &lt;span class=&#34;math inline&#34;&gt;\(HR^{CS}\)&lt;/span&gt;, representing a ratio in a non-existing population including those who experienced the competing event.&lt;/p&gt;
+&lt;p&gt;This quantity is mainly of interest for prediction. That is why the the subdistribution hazard ratio may be thought of as a measure of ‘prognostic association’, i.e. best suited to quantifying predictive relationships.
+This suggests that subdistribution hazards models should be used for developing clinical prediction models.
+Conversely, the cause-specific hazard ratio may be thought of as a measure of ‘aetiological association’, i.e. best suited to quantifying causal relationships and may be more appropriate for addressing questions of aetiology.
+(see &lt;span class=&#34;citation&#34;&gt;Noordzij et al. (&lt;a href=&#34;#ref-noordzij2013we&#34; role=&#34;doc-biblioref&#34;&gt;2013&lt;/a&gt;)&lt;/span&gt; for a comprehensive review and &lt;span class=&#34;citation&#34;&gt;Feakins et al. (&lt;a href=&#34;#ref-feakins2018standard&#34; role=&#34;doc-biblioref&#34;&gt;2018&lt;/a&gt;)&lt;/span&gt; for an application on cardiovascular and cancer mortality).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references csl-bib-body hanging-indent&#34;&gt;
+&lt;div id=&#34;ref-feakins2018standard&#34; class=&#34;csl-entry&#34;&gt;
+Feakins, Benjamin G, Emily C McFadden, Andrew J Farmer, and Richard J Stevens. 2018. &lt;span&gt;“Standard and Competing Risk Analysis of the Effect of Albuminuria on Cardiovascular and Cancer Mortality in Patients with Type 2 Diabetes Mellitus.”&lt;/span&gt; &lt;em&gt;Diagnostic and Prognostic Research&lt;/em&gt; 2 (1): 1–9.
+&lt;/div&gt;
+&lt;div id=&#34;ref-kjernsmo2020iridescence&#34; class=&#34;csl-entry&#34;&gt;
+Kjernsmo, Karin, Heather M Whitney, Nicholas E Scott-Samuel, Joanna R Hall, Henry Knowles, Laszlo Talas, and Innes C Cuthill. 2020. &lt;span&gt;“Iridescence as Camouflage.”&lt;/span&gt; &lt;em&gt;Current Biology&lt;/em&gt; 30 (3): 551–55.
+&lt;/div&gt;
+&lt;div id=&#34;ref-noordzij2013we&#34; class=&#34;csl-entry&#34;&gt;
+Noordzij, Marlies, Karen Leffondré, Karlijn J van Stralen, Carmine Zoccali, Friedo W Dekker, and Kitty J Jager. 2013. &lt;span&gt;“When Do We Need Competing Risks Methods for Survival Analysis in Nephrology?”&lt;/span&gt; &lt;em&gt;Nephrology Dialysis Transplantation&lt;/em&gt; 28 (11): 2670–77.
+&lt;/div&gt;
+&lt;div id=&#34;ref-putter2007tutorial&#34; class=&#34;csl-entry&#34;&gt;
+Putter, Hein, Marta Fiocco, and Ronald B Geskus. 2007. &lt;span&gt;“Tutorial in Biostatistics: Competing Risks and Multi-State Models.”&lt;/span&gt; &lt;em&gt;Statistics in Medicine&lt;/em&gt; 26 (11): 2389–2430.
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes footnotes-end-of-document&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;Predation by other animals included spiders, which sucked the fluids out and left a hollow exoskeleton, slugs, which left slime trails, and ants, which chopped off small pieces of the mealworm.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;I use &lt;code&gt;Kjernsmo_et_al_Experiment1_data.txt&lt;/code&gt;&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;These are almost identical results as in the original paper (&lt;span class=&#34;citation&#34;&gt;Kjernsmo et al. (&lt;a href=&#34;#ref-kjernsmo2020iridescence&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt;), even though I don’t use any random effects.&lt;a href=&#34;#fnref3&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn4&#34;&gt;&lt;p&gt;These figures can be obtained from ‘summary(cox1)’ and ‘summary(crr1)’.&lt;a href=&#34;#fnref4&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title># 134 Puzzle from the New Scientist</title>
+      <link>https://solon-karapanagiotis.com/post/new_scientist_puzzle_134/puzzle_134/</link>
+      <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/new_scientist_puzzle_134/puzzle_134/</guid>
+      <description>
+
+
+&lt;p&gt;Another puzzle from the &lt;a href=&#34;https://www.newscientist.com/&#34;&gt;New Scientist&lt;/a&gt; - &lt;a href=&#34;https://www.newscientist.com/article/mg25133551-300-puzzle-134-can-you-work-out-which-keyboard-to-hack/&#34;&gt;#134: Can you work out which keyboard to hack?&lt;/a&gt;. It goes as follows:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;James Blond edges along the corridors of the supervillain’s base, and comes to two locked doors, each with a keypad that requires a four-digit code. He will need to get through one of the doors, but there is no time to guess a four-digit code – the number of possible combinations is staggering!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;But wait! Some of the buttons on the keypads are visibly worn down, while others look as if they have never been pressed.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;One door has a keypad with four worn buttons, the other has three. Blond only has time to try one door, and he will have to try all the possible combinations.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Which of the two keypads will give him fewer combinations to try – the one with four worn buttons, or the one with three?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Here we are interested in the order of the four numbers, that is all possible &lt;a href=&#34;https://en.wikipedia.org/wiki/Permutation&#34;&gt;permutations&lt;/a&gt; of four digits.&lt;/p&gt;
+&lt;p&gt;For the door with the four worn buttons (let’s call it Door 1) we can calculate all the permutations as follows:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Pick one of the four numbers (there are four choices in this step).&lt;/li&gt;
+&lt;li&gt;Pick one of the remaining three numbers (there are three choices).&lt;/li&gt;
+&lt;li&gt;Pick one of the remaining two numbers (two choices).&lt;/li&gt;
+&lt;li&gt;Stick the last number on the end.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;By multiplying these choices together to get our result: &lt;span class=&#34;math inline&#34;&gt;\(4 \times 3 \times 2 (\times 1) = 24\)&lt;/span&gt; possible permutations.&lt;/p&gt;
+&lt;p&gt;The actual formula behind the calculation is &lt;span class=&#34;math inline&#34;&gt;\(n!/(n-r)!\)&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; is the number of things to choose from,
+and we choose &lt;span class=&#34;math inline&#34;&gt;\(r\)&lt;/span&gt; of them, with no repetitions (we need to choose each number only once). For us, &lt;span class=&#34;math inline&#34;&gt;\(n= r= 4\)&lt;/span&gt; since we have &lt;span class=&#34;math inline&#34;&gt;\(n=4\)&lt;/span&gt; digits to choose from and we choose &lt;span class=&#34;math inline&#34;&gt;\(r=4\)&lt;/span&gt; which gives &lt;span class=&#34;math inline&#34;&gt;\(4!/(0!) = 4!/1 = 4 \times 3 \times 2 \times 1 = 24\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The factorial function (symbol: &lt;span class=&#34;math inline&#34;&gt;\(!\)&lt;/span&gt;) just means to multiply a series of descending natural numbers. Example: &lt;span class=&#34;math inline&#34;&gt;\(7! = 7 × 6 × 5 × 4 × 3 × 2 × 1 = 5,040\)&lt;/span&gt;. Note, it is generally agreed that &lt;span class=&#34;math inline&#34;&gt;\(0! = 1\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The reasoning for the door with three worn buttons (Door 2) is slightly more involved. First, I introduce the letters &lt;span class=&#34;math inline&#34;&gt;\(A, B\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(C\)&lt;/span&gt; to denote each of the three worn buttons on the keypad- it doesn’t matter which is which. We can arrange the three letters in &lt;span class=&#34;math inline&#34;&gt;\(3!\)&lt;/span&gt; ways. This follows the same reasoning as before. Now, let’s assume the following order&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\({\color{BrickRed}*}, A, *, B, *, C, {\color{BrickRed}*}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where the asterisks indicate positions where the letters can be repeated. For example, if &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt; is repeated then I simply replace the asterisks with &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;. We then get&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(A, A, B, C\)&lt;/span&gt; (I replaced the first asterisk)&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(A, A, B, C\)&lt;/span&gt; (I replaced the second asterisk)&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(A, B, A, C\)&lt;/span&gt; (I replaced the third asterisk)&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(A, B, C, A\)&lt;/span&gt; (I replaced the fourth asterisk)&lt;/p&gt;
+&lt;p&gt;Note the first two are actually the same. So, in effect, two asterisks (shown in red above) are superfluous. This reduces the positions the letters can be repeated to 2. And since we can repeat any of the 3 letters (&lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt; or &lt;span class=&#34;math inline&#34;&gt;\(B\)&lt;/span&gt; or &lt;span class=&#34;math inline&#34;&gt;\(C\)&lt;/span&gt;), the number of possible permutations is &lt;span class=&#34;math inline&#34;&gt;\(3! \times 2 \times 3 = 36\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Hence, James should go for Door 1 with the four worn digits as he will need at most 24 attempts compared to 36 attempts for Door 2.&lt;/p&gt;
+&lt;div id=&#34;update-151021&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Update 15/10/21&lt;/h2&gt;
+&lt;p&gt;The &lt;a href=&#34;https://www.newscientist.com/article/mg25133564-500-puzzle-135-how-do-you-hit-the-jackpot-on-this-machine/&#34;&gt;solution&lt;/a&gt; from the New Scientist.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title># 131 Puzzle from the New Scientist</title>
+      <link>https://solon-karapanagiotis.com/post/new_scientist_puzzle_131/puzzle_131/</link>
+      <pubDate>Tue, 21 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/new_scientist_puzzle_131/puzzle_131/</guid>
+      <description>
+
+
+&lt;p&gt;Solution to &lt;a href=&#34;https://www.newscientist.com/article/mg25133522-800-puzzle-131-what-is-the-probability-of-winning-this-game-of-chance/#ixzz775sxHixz&#34;&gt;#131 “The Paradise Club”&lt;/a&gt; puzzle from the &lt;a href=&#34;https://www.newscientist.com/&#34;&gt;New Scientist&lt;/a&gt;. This week (No 3352 - 18 September 2021) the New Scientist posted the following puzzle:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Down at The Paradise Club, Gus and Bart take it in turns to roll a pair of dice. The first person to score his favourite score for two dice wins, which means being treated to a drink by the other (the loser). They each favour a different prime number as a score with two dice and it so happens that their chances of getting their favourite score is the same for each.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What is that probability? If Gus goes first what are his chances of being bought a drink?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The maximum score (i.e. sum) when rolling two dice is 12. The prime numbers from 2 (the minimum score) to 12 are&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[2, 3, 5, 7, 11\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Each score can be the result of the following dice combinations&lt;/p&gt;
+&lt;p&gt;2: {1, 1}&lt;/p&gt;
+&lt;p&gt;3: {2, 1}&lt;/p&gt;
+&lt;p&gt;5: {2, 3}, {4, 1}&lt;/p&gt;
+&lt;p&gt;7: {4, 3}, {5, 2}, {6, 1}&lt;/p&gt;
+&lt;p&gt;11: {6, 5}&lt;/p&gt;
+&lt;p&gt;For example, a score of 2 can only be achieved if both dice are {1, 1} (1 combination in total). A score of 3 can be achieved either with {2, 1} or {1, 2} (2 combinations in total). A score of 5 can be achieved with {2, 3} or {4, 1} or {3, 2} or {1, 4} (4 combinations in total).&lt;/p&gt;
+&lt;p&gt;The table below shows the total number of combinations for each score&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;center&#34;&gt;Score&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Total Combinations&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;11&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The puzzle states that the chances of getting their favourite score is the same for Gus and Bart. Since each combination is equiprobable&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; the only scores that result in the same chances are 3 and 11.&lt;/p&gt;
+&lt;p&gt;Now we need to find that probability. We can calculate it as&lt;/p&gt;
+&lt;p&gt;Probability = Number of favourable combinations/total number of combinations&lt;/p&gt;
+&lt;p&gt;We already know the number of favourable combinations (i.e. the number of combinations that will give the win) - it is 2. There are 2 ways to get a score of 3 or 11 (see table). The total number of combinations is 36. There are 36 possible outcomes when we roll two dice (6 from the first and 6 from the second die).&lt;/p&gt;
+&lt;p&gt;Hence, the probability of getting their favourite score is &lt;span class=&#34;math inline&#34;&gt;\(2/36 \text{ or } 1/18\)&lt;/span&gt; and it is the same for both.&lt;/p&gt;
+&lt;p&gt;Then, we are asked: “If Gus goes first what are his chances of being bought a drink?”
+That is, what are his chances of winning? Gus wins if he rolls his favourite score or both Bart and Gus fail - in which case they continue the game. Let W denote the event that Gus wins. The probability of W is&lt;/p&gt;
+&lt;p&gt;P(W) = P(Gus rolls his favourite score ) + P(both fail)&lt;/p&gt;
+&lt;p&gt;This is usually called the addition rule&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;. We already know the first term, the probability of rolling his favourite score is &lt;span class=&#34;math inline&#34;&gt;\(1/18\)&lt;/span&gt;. The second term can be decomposed as&lt;/p&gt;
+&lt;p&gt;P(both fail) = P(Bart fails and Gus fails) =&lt;/p&gt;
+&lt;p&gt;P(Bart fails given that Gus fails) P(Gus fails)&lt;/p&gt;
+&lt;p&gt;P(Bart fails given that Gus fails) (1 - P(W))&lt;/p&gt;
+&lt;p&gt;To go from the first to the second line I used the multiplication rule&lt;a href=&#34;#fn3&#34; class=&#34;footnote-ref&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;. Also, P(Gus fails) = 1 - P(Gus wins) = 1 - P(W). The first term in the last line (P(Bart fails given that Gus fails)) is equal to the probability that Bart fails, which is 1-P(Bart rolls his favourite score) = 1 - 1/18 = 17/18. So rewriting our previous equation we have&lt;/p&gt;
+&lt;p&gt;P(W) = P(Gus rolls his favourite score) + P(both fail)&lt;/p&gt;
+&lt;p&gt;P(W) = P(Gus rolls his favourite score) + P(Bart fails given that Gus fails) (1 - P(W))&lt;/p&gt;
+&lt;p&gt;P(W) = 1/18 + 17/18(1 - P(W))&lt;/p&gt;
+&lt;p&gt;P(W) = 18/35&lt;/p&gt;
+&lt;p&gt;The probability of Gus winning, if he goes first, is 18/35.&lt;/p&gt;
+&lt;div id=&#34;update-270921&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Update 27/09/21&lt;/h2&gt;
+&lt;p&gt;The &lt;a href=&#34;https://www.newscientist.com/article/mg25133530-900-puzzle-132-can-you-work-out-on-which-day-a-quiz-will-be-given/&#34;&gt;solution&lt;/a&gt; from the New Scientist.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;I have assumed that each die is fair, that is the occurrence of each number is equally likely.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;The addition rule states that for two events A and B, the probability that either one or both events occur is P(A or B) = P(A) + P(B) - P(A and B). The last term, P(A and B), is the probability that both events occur. In our case, it is zero because we cannot have a score of 3 and 11 at the same time, they cannot occur together when rolling a pair of dice.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;The multiplication rule states that the probability that both events occur is P(A and B) = P(A) P(B given A) or P(B) P(A given B). P(A given B) means the probability that event A occurs given event B has occurred.&lt;a href=&#34;#fnref3&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Table vs graph</title>
+      <link>https://solon-karapanagiotis.com/post/table_vs_graph/ml/</link>
+      <pubDate>Fri, 20 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/table_vs_graph/ml/</guid>
+      <description>
+
+
+&lt;p&gt;Shall I display my data using a table or a graph? The usual answer is: it depends. Mostly, it depends on who the audience is and how the data will be used. I agree, but &lt;a href=&#34;https://doi.org/10.1038/s42256-021-00353-8&#34;&gt;Alaa et al, 2021&lt;/a&gt; may have gone a bit too far using tables.&lt;/p&gt;
+&lt;p&gt;I’ll start with a brief summary of the paper.&lt;/p&gt;
+&lt;p&gt;It is about the development of Adjutorium - a machine learning algorithm for breast cancer prognostication. The authors motivate the development of Adjutorium by stating that a widely used model (PREDICT v2.1) under-performs in specific subgroups of patients. They then compare the accuracy of Adjutorium in predicting all-cause and breast cancer-specific mortality at 3, 5 and 10 years from baseline with PREDICT v2.1. In addition, they compare Adjutorium to an in-house Cox proportional hazards (Cox PH) regression model. They use a series of measures to assess the three models, AUC-ROC, Harrel’s C-index and Uno’s C-index. They conclude that “Adjutorium uniformly outperformed PREDICT v2.1 and the conventional Cox PH model in predicting all-cause and breast cancer-specific mortality”.&lt;/p&gt;
+&lt;p&gt;This statement is mostly based on &lt;a href=&#34;https://www.nature.com/articles/s42256-021-00353-8/tables/1&#34;&gt;Table 1&lt;/a&gt;. But, the table is cramped with so many values that is difficult to draw any conclusions - unless you spend hours on it.&lt;/p&gt;
+&lt;p&gt;I argue that the main message they are trying to convey is not contained in the actual values, which would justify this tabular form, but in the “shape” of the values. They want to reveal the relationships among the three models. That is why I believe a graph would communicate the message more efficiently. So, below I plot the bottom panel (external validation cohort) of their Table 1.&lt;/p&gt;
+&lt;p&gt;The horizontal lines show the performance of Adjutorium. In general, Adjutorium performs better. The improvement in performance is more evident for the cancer-specific mortality (right panel).&lt;/p&gt;
+&lt;p&gt;Interestingly though, the conclusions depend the choice of performance measure. For example, using the AUC-ROC and Uno’s C-index the simpler Cox PH model predicts all-cause mortality equally well to Adjutorium.&lt;/p&gt;
+&lt;p&gt;In general, I find graphs more informative - it is easier to see trends in the data when it is displayed visually compared to when it is displayed numerically in a table.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/table_vs_graph/table_vs_graph_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Tailored Bayes: a risk modeling framework under unequal misclassification costs</title>
+      <link>https://solon-karapanagiotis.com/publication/tailoredbayes/</link>
+      <pubDate>Sat, 07 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/tailoredbayes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Puzzle from the New Scientist</title>
+      <link>https://solon-karapanagiotis.com/post/new_scientist_puzzle/puzzle_115/</link>
+      <pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/new_scientist_puzzle/puzzle_115/</guid>
+      <description>
+
+
+&lt;p&gt;Attempt to solve &lt;a href=&#34;https://www.newscientist.com/article/mg25033361-300-puzzle-115-can-you-work-out-where-roman-the-robot-will-end-up/&#34;&gt;#115 “A random robot”&lt;/a&gt; puzzle from the &lt;a href=&#34;https://www.newscientist.com/&#34;&gt;New Scientist&lt;/a&gt;. This week (No 3336 - 29 May 2021) the New Scientist published the following puzzle:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Roman the test robot is being given one final roam before being consigned to the scrapheap where he can rust in peace.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;He has been programmed to make four equal length steps. For his first move, he can travel one step east, west, north or south. Each of his subsequent three steps must be at right angles to the previous move. The direction of each move is selected by a random number generator, with all four possibilities being equally probable.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What is the chance that Roman will finish where he started?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I decided to solve the puzzle by first plotting how (and whether) Roman can finish where he started (see graph below). To do this, I divided the space based on the 4 cardinal directions he can take in one step.
+These are the coloured quadrants in the plot; his Start/Finish position is also given. For example, Roman will be travelling along the purple top-right quadrant if he starts by going either north or east.&lt;/p&gt;
+&lt;p&gt;Next, within each quadrant he can travel clockwise or anti-clockwise. This is depicted with the black and grey arrows, respectively. For instance, if he goes north at the first step (purple quadrant) and then by travelling clockwise (black arrow), at right angles, he will finish where he started. Similarly, if he goes east at the first step (purple quadrant) and then by travelling anti-clockwise (grey arrow) he will again finish where he started. In effect, the purple quadrant corresponds to the path:&lt;/p&gt;
+&lt;p&gt;north -&amp;gt; east -&amp;gt; south -&amp;gt; west&lt;/p&gt;
+&lt;p&gt;or&lt;/p&gt;
+&lt;p&gt;east -&amp;gt; north -&amp;gt; west -&amp;gt; south&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/new_scientist_puzzle/New_Scientist_Puzzle_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Using the same reasoning, within each quadrant Roman can travel clockwise or anti-clockwise. This gives us 8 different paths (4 quadrants times 2 directions in each one) in total for Roman to start and finish at the same position.&lt;/p&gt;
+&lt;p&gt;Now we need to calculate the probability of each of those paths. I’ll use the
+path:&lt;/p&gt;
+&lt;p&gt;north -&amp;gt; east -&amp;gt; south -&amp;gt; west&lt;/p&gt;
+&lt;p&gt;for illustration. For his first move, he can choose any of the four cardinal directions with equal probability. So, the probability he chooses north is 1/4 (i.e. P(north)=1/4). After that, for each subsequent step he can only travel at right angels to the previous move. This limits his choices to two at each subsequent step. In addition, either choice is equally probable (as given by the problem). In this example, after going north, he can only go east or west with equal probability, so P(east) = 1/2. The same is valid of the next two steps. Hence, P(south) = 1/2 and P(west) = 1/2. To find the probability of the entire path we simply need to multiply the individual probabilities of the path. This is, P(path) = P(north) * P(east) * P(south) * P(west) = 1/32.&lt;/p&gt;
+&lt;p&gt;Finally, we have 8 different paths so the total probability that Roman will finish where he started is 8*(1/32)=1/4.&lt;/p&gt;
+&lt;div id=&#34;update-040621&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Update 04/06/21&lt;/h2&gt;
+&lt;p&gt;Indeed, the answer is 1/4, &lt;a href=&#34;https://www.newscientist.com/article/mg25033370-700-puzzle-116-can-you-figure-out-all-the-scores-for-the-1991-season/&#34;&gt;see here&lt;/a&gt; for the New Scientist’s solution.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Outliers: Which prior are you using?</title>
+      <link>https://solon-karapanagiotis.com/post/outliers/outliers/</link>
+      <pubDate>Sat, 22 May 2021 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/outliers/outliers/</guid>
+      <description>
+
+
+&lt;p&gt;This post is concerned with a ubiquitous problem of outliers. They are infamous for degrading the performance of many models/algorithms. As a result, ongoing attempts try to accommodate them by deriving robust estimators. Unfortunately, these estimators have drawbacks such as being less efficient. In this post, I approach the problem from a Bayesian viewpoint. I illustrate how the issue of outliers connects with our prior beliefs about the data collection procedure. This leads me to show how a simple but flexible Bayesian model allows us to accommodate outliers without inheriting the drawbacks of other estimators.&lt;/p&gt;
+&lt;p&gt;Disclaimer: This post is heavily inspired by the work of &lt;span class=&#34;citation&#34;&gt;Jaynes (&lt;a href=&#34;#ref-jaynes2003probability&#34; role=&#34;doc-biblioref&#34;&gt;2003&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;div id=&#34;the-problem&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The problem&lt;/h2&gt;
+&lt;p&gt;Imagine we are interested in a quantity &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;, which is unknown. The subsequent, logical step is to try to quantify our uncertainty about &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; by collecting some data. That is, we are trying to measure &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;. But the data collection procedure (or apparatus) is always imperfect and so having &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; independent measurements of &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;, we have &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; different results ($x_1, …, x_n $). How are we going to proceed on estimating &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;, what is the “best” estimate to use?
+If the &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; data points are “close” together the problem of drawing conclusion about &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; is not very difficult. But if they are not nicely clustered: one value, &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt;, lies far away from the other &lt;span class=&#34;math inline&#34;&gt;\(n-1\)&lt;/span&gt; values? How are we going to deal with this outlier&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-dilemma&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The dilemma&lt;/h2&gt;
+&lt;p&gt;Two opposite views have been expressed:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;The outlier should not have been included in the data. The data have been contaminated and the outlier needs to be removed otherwise we may get erroneous conclusions.&lt;/li&gt;
+&lt;li&gt;The outlier may be the most important datapoint we have so it must be taken into account in the analysis. In other words, it may be desirable to describe the population including all observations. For only in that way do we describe what is actually happening &lt;span class=&#34;citation&#34;&gt;(Dixon &lt;a href=&#34;#ref-dixon1950analysis&#34; role=&#34;doc-biblioref&#34;&gt;1950&lt;/a&gt;)&lt;/span&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;These viewpoints reflect different prior information about the data collection procedure. The first view is reasonable if we believe &lt;em&gt;a priori&lt;/em&gt; the data collection procedure is unreliable. That is, any now and then and without warning we can get an erroneous measurement. The second view is reasonable if we have absolute confidence in the data collection procedure. Then the outlier is an important result and ignoring it may harm us.&lt;/p&gt;
+&lt;p&gt;Clearly these are extreme positions, and in real-life the researcher is in a intermediate position. If they knew the apparatus is unreliable they would have choose not to collect data in the first place or improve the apparatus. Of course, in some situations we are obliged to use whatever “apparatus” we have access to. So the question arises can we formalise an intermediate position?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;robustness&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Robustness&lt;/h2&gt;
+&lt;p&gt;Such an intermediate position is the idea of robustness. Researchers sometimes use various “robust” procedures, which protect against the possibility (or presence) of outliers. These techniques do not directly examine the outliers but accommodate them at no serious inconvenience &lt;span class=&#34;citation&#34;&gt;(Barnett and Lewis &lt;a href=&#34;#ref-barnett1974outliers&#34; role=&#34;doc-biblioref&#34;&gt;1974&lt;/a&gt;)&lt;/span&gt;. Certain estimators, especially the mean and least squares estimators, are particularly vulnerable to outliers, or have low breakdown values&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For this reason, researchers turn to robust or high breakdown methods to provide alternative estimators for these important aspects of the data. A common robust estimation method for univariate distributions involves the use of a trimmed mean, which is calculated by temporarily eliminating extreme observations at both ends of the sample (very high and low values) &lt;span class=&#34;citation&#34;&gt;(Anscombe &lt;a href=&#34;#ref-anscombe1960rejection&#34; role=&#34;doc-biblioref&#34;&gt;1960&lt;/a&gt;)&lt;/span&gt;. Alternatively, researchers may choose to compute a Windsorized mean, for which the highest and lowest observations are temporarily censored, and replaced with adjacent values from the remaining data.&lt;/p&gt;
+&lt;p&gt;The issue arises from the fact that robust qualities - however defined - must
+be bought at a price: poorer performance when the model is correct. This is usually reported by some trade-off between the conflicting requirements of robustness and accuracy.&lt;/p&gt;
+&lt;p&gt;As an example, lets look at the median which is often cited as a robust estimator. The downside of the median is that it is less efficient than the mean. This is because it does not take into account the precise value of each observation and hence does not use all information available in the data. The standard error of the median (&lt;span class=&#34;math inline&#34;&gt;\(\sigma_{median}\)&lt;/span&gt;) for large samples and normal distributions is:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \sigma_{median} \approx 1.25 \frac{\sigma}{\sqrt{N}} = 1.25 \sigma_{mean}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(\sigma\)&lt;/span&gt; is the population standard deviation and &lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt; the sample size.
+Thus, the standard error of the median is about &lt;span class=&#34;math inline&#34;&gt;\(25\%\)&lt;/span&gt; larger than that for the mean &lt;span class=&#34;citation&#34;&gt;(Maindonald and Braun &lt;a href=&#34;#ref-maindonald2006data&#34; role=&#34;doc-biblioref&#34;&gt;2006&lt;/a&gt;, Chapter 4)&lt;/span&gt;. Hence, the median is less efficient estimator when the model in correct, i.e the data come from normal distributions. Later, I will show that Bayesian analysis automatically delivers robustness whenever it is desirable without throwing away relevant information. But first I introduce how the apparatus generates data.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-model&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The model&lt;/h2&gt;
+&lt;p&gt;Following &lt;span class=&#34;citation&#34;&gt;Box and Tiao (&lt;a href=&#34;#ref-box1968bayesian&#34; role=&#34;doc-biblioref&#34;&gt;1968&lt;/a&gt;)&lt;/span&gt; I assume that the apparatus produces good and bad measurements. So we have a “good” sampling distribution&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[G(x|\theta)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;parametrized by &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;. The “bad” sampling distribution&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[B(x|\xi)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;possibly containing an uninteresting parameter &lt;span class=&#34;math inline&#34;&gt;\(\xi\)&lt;/span&gt;. Data from &lt;span class=&#34;math inline&#34;&gt;\(B(x|\xi)\)&lt;/span&gt; are useless or worse for estimating &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;, since their occurrence probability has nothing to do with &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;. Our sample consists of &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; observations&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[D = (x_1 \dots x_n)\]&lt;/span&gt;
+The trouble is we do not know which is which. However, we may be able to guess since a datapoint far away from the tails of &lt;span class=&#34;math inline&#34;&gt;\(G(x|\theta)\)&lt;/span&gt; can be suspected of being bad. Let’s define&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{equation}
+       q_i = 
+        \begin{cases}
+            1 &amp;amp; \text{if the ith datapoint is good} \\
+            0 &amp;amp; \text{if it is bad,}
+        \end{cases} 
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;with joint prior probabilities&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[p(q_1 \dots q_n)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;to the &lt;span class=&#34;math inline&#34;&gt;\(2^n\)&lt;/span&gt; sequences of good and bad.&lt;/p&gt;
+&lt;p&gt;Consider the most common case where our prior information about the good and bad observations is invariant on the particular trial at which they occur. That is, the probability of any sequence of &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; good/bad observations depends only on the numbers &lt;span class=&#34;math inline&#34;&gt;\(r\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(n-r\)&lt;/span&gt; of good and bad ones. Then, under de Finetti’s representation theorem &lt;span class=&#34;citation&#34;&gt;(De Finetti &lt;a href=&#34;#ref-de1972probability&#34; role=&#34;doc-biblioref&#34;&gt;1972&lt;/a&gt;)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:deFinetti&#34;&gt;\[\begin{equation}
+p(q_1 \dots q_n) = \int_{0}^{1} u^r (1-u)^{n-r} dg(u)
+\tag{1}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;The theorem above is equivalent to assuming that &lt;span class=&#34;math inline&#34;&gt;\(q_i\)&lt;/span&gt; are independent Bern(&lt;span class=&#34;math inline&#34;&gt;\(u\)&lt;/span&gt;) (Bernoulli) random variables with &lt;span class=&#34;math inline&#34;&gt;\(u\)&lt;/span&gt;, given a prior distribution &lt;span class=&#34;math inline&#34;&gt;\(g(u)\)&lt;/span&gt;. Consequently, our sampling distribution can be written as a probability mixture of the good and bad distributions&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:mixturedistr&#34;&gt;\[\begin{equation}
+p(x|\theta,\xi,u) = u G(x|\theta) + (1-u) B(x|\xi)
+\tag{2}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; can be thought of the parameter of interest while (&lt;span class=&#34;math inline&#34;&gt;\(\xi,u\)&lt;/span&gt;) are nuisance parameters.
+In the next section, I show how a simple, flexible Bayesian solution allows for robustness. Throughout I assume &lt;span class=&#34;math inline&#34;&gt;\(u\)&lt;/span&gt; is unknown, which is in line with real-life scenarios.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-solution&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The solution&lt;/h2&gt;
+&lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(p(\theta,\xi,u)\)&lt;/span&gt; be the joint prior density for the parameters. Under Bayes theorem their joint posterior density, given the data &lt;span class=&#34;math inline&#34;&gt;\(D\)&lt;/span&gt;, becomes&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[p(\theta,\xi,u|D) \propto L(\theta,\xi,u) p(\theta,\xi,u),\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;and from &lt;a href=&#34;#eq:mixturedistr&#34;&gt;(2)&lt;/a&gt;,&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:jointlikelihood&#34;&gt;\[\begin{equation}
+L(\theta,\xi,u) = \prod_{i=1}^{n} \Big[ u G(x|\theta) + (1-u) B(x|\xi) \Big]
+\tag{3}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;is the likelihood. The marginal posterior density for the parameter of interest &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; is&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:marginaltheta&#34;&gt;\[\begin{equation}
+p(\theta|D) = \int \int p(\theta,\xi,u|D) d\xi du.
+\tag{4}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Another formulation of &lt;a href=&#34;#eq:marginaltheta&#34;&gt;(4)&lt;/a&gt; is&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ p(\theta|D) = \frac{p(\theta) \bar{L}(\theta)} {\int p(\theta) \bar{L}(\theta) d\theta}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(p(\theta)\)&lt;/span&gt; is the marginal prior density for &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\bar{L}(\theta)\)&lt;/span&gt; is the quasi-likelihood defined as&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:quasilikelihood&#34;&gt;\[\begin{equation}
+\bar{L}(\theta) = \int \int L(\theta,\xi,u) h(\xi,u|\theta) d\xi du.
+\tag{5}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;which results from decomposing the prior joint density &lt;span class=&#34;math inline&#34;&gt;\(p(\theta,\xi,u)\)&lt;/span&gt; into&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[p(\theta,\xi,u) = h(\xi,u|\theta) p(\theta)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(h(\xi,u|\theta)\)&lt;/span&gt; is the joint prior for &lt;span class=&#34;math inline&#34;&gt;\((\xi,u)\)&lt;/span&gt; given &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;.
+Substituting &lt;a href=&#34;#eq:jointlikelihood&#34;&gt;(3)&lt;/a&gt; into &lt;a href=&#34;#eq:quasilikelihood&#34;&gt;(5)&lt;/a&gt;, we have&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:quasilikelihoodex&#34;&gt;\[\begin{equation}
+\begin{split}
+\bar{L}(\theta) = \int \int h(\xi,u|\theta) d\xi du \Big[ u^n L(\theta) + u^{n-1} (1-u) \sum_{j=1}^n B(x_j|\xi) L_j(\theta) \\
++ n^{n-2} (1-u)^2 \sum_{j&amp;lt; k} B(x_j|\xi) B(x_k|\xi) L_{jk}(\theta) + \dots \\
++ (1-u)^n B(x_1|\xi) \dots B(x_n|\xi) \Big]
+\end{split}
+\tag{6}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{equation}
+\begin{split}
+L(\theta) = \prod_{i = 1}^n G(x_i|\theta) \\
+L_j(\theta) = \prod_{i \neq j} G(x_i|\theta) \\
+L_{jk}(\theta) = \prod_{i \neq j,k} G(x_i|\theta) \dots
+\end{split}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;are a sequence of likelihood functions for the good distributions in which we use all the data, all except &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt;, all except &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(x_k\)&lt;/span&gt; etc. Note that the coefficient of &lt;span class=&#34;math inline&#34;&gt;\(L(\theta)\)&lt;/span&gt; in &lt;a href=&#34;#eq:quasilikelihoodex&#34;&gt;(6)&lt;/a&gt;,&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:simplification&#34;&gt;\[\begin{equation}
+\int \int h(\xi,u|\theta) u^n d\xi du = \int h(u|\theta)u^n du,   
+\tag{7}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;is the probability that all the data &lt;span class=&#34;math inline&#34;&gt;\(D\)&lt;/span&gt; are good conditional on &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;&lt;a href=&#34;#fn3&#34; class=&#34;footnote-ref&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;. This is in the form &lt;a href=&#34;#eq:deFinetti&#34;&gt;(1)&lt;/a&gt;, in which the function &lt;span class=&#34;math inline&#34;&gt;\(g(u)\)&lt;/span&gt; is the prior &lt;span class=&#34;math inline&#34;&gt;\(h(u|\theta)\)&lt;/span&gt;. Likewise, the coefficient of &lt;span class=&#34;math inline&#34;&gt;\(L_j(\theta)\)&lt;/span&gt; is&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \int \int h(\xi,u|\theta) u^{n-1} (1-u) B(x_j|\xi)  d\xi du =\\ 
+\int u^{n-1} (1-u) du \int B(x_j|\xi) h(\xi,u|\theta) d\xi.\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Following the same reasoning, this is the probability, given &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;, that the jth datapoint would be bad and would have the value &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt; and the other data would be good. Putting &lt;span class=&#34;math inline&#34;&gt;\(\bar{L}(\theta)\)&lt;/span&gt; into words&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{equation}
+\begin{array}{l@{}l}
+\bar{L}(\theta) &amp;amp;{} = \text{prob(all the data are good)} \times \text{(likelihood using all the data)} \\
+&amp;amp;{} + \sum_j \text{prob(only $x_j$ bad)} \times \text{(likelihood using all the data except $x_j$)} \\
+&amp;amp;{} + \dots  \\
+&amp;amp;{} + \text{prob(all the data are bad)}.
+\end{array}
+\label{quasiinwords}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;In short, &lt;span class=&#34;math inline&#34;&gt;\(\bar{L}(\theta)\)&lt;/span&gt; is a weighted average of likelihoods resulting from every possible assumption about each datapoint &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt;, weighted by the prior probabilities of those assumptions.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;an-example&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;An example&lt;/h2&gt;
+&lt;p&gt;Suppose we are interested in a location parameter, and have a sample of 10 observations. But one datapoint &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt; moves away from the cluster of the others. How will this datapoint affect our conclusions about &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;? The answer depends on the model we specify. If we assume the sampling distribution &lt;span class=&#34;math inline&#34;&gt;\(G(x|\theta)\)&lt;/span&gt; to be Gaussian i.e. &lt;span class=&#34;math inline&#34;&gt;\(x \sim N(\theta, \sigma)\)&lt;/span&gt;, and our prior for &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; wide, then the Bayesian estimate will remain equal to the sample average and our datapoint &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt; will pull the estimate far away from the average indicated by the nine other data values. However, this analysis assumes that we know in advance that &lt;span class=&#34;math inline&#34;&gt;\(u =1\)&lt;/span&gt;, all the data are good i.e. come from &lt;span class=&#34;math inline&#34;&gt;\(G\)&lt;/span&gt;. In such a case the study of datapoint &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt; may be of significance since it gives us information about &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;. The rejection of &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt; would then be fault. On the other hand, if we believe that &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt; should be thrown out, then we don’t actually believe in our assumption that &lt;span class=&#34;math inline&#34;&gt;\(u = 1\)&lt;/span&gt; strongly enough to adhere to it in the presence of the this surprising datapoint. A model like &lt;a href=&#34;#eq:mixturedistr&#34;&gt;(2)&lt;/a&gt; would then be more realistic.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;connection-with-adversarial-training-in-machine-learning&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Connection with adversarial training in Machine Learning&lt;/h2&gt;
+&lt;p&gt;In fact, model &lt;a href=&#34;#eq:mixturedistr&#34;&gt;(2)&lt;/a&gt; is the cornerstone of adversarial training in Machine Learning (ML). In adversarial training, the basic idea is to simply create and then incorporate adversarial data into the training process. The researcher then evaluates how robust is the output of the model to such perturbations of the input data. The entire area of adversarial ML studies ways to create robust learning algorithms that withstand such perturbations. The area of adversarial ML arose after observing that standard learning methods degrade rapidly in the presence of perturbations &lt;span class=&#34;citation&#34;&gt;(Kurakin, Goodfellow, and Bengio &lt;a href=&#34;#ref-kurakin2016adversarial&#34; role=&#34;doc-biblioref&#34;&gt;2016&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The formal study of robust estimation was initiated by &lt;span class=&#34;citation&#34;&gt;(Huber &lt;a href=&#34;#ref-huber1964&#34; role=&#34;doc-biblioref&#34;&gt;1964&lt;/a&gt;, &lt;a href=&#34;#ref-huber1965&#34; role=&#34;doc-biblioref&#34;&gt;1965&lt;/a&gt;)&lt;/span&gt; who considered estimation procedures under the &lt;span class=&#34;math inline&#34;&gt;\(\epsilon\)&lt;/span&gt;-contamination model, where samples are obtained from a mixture model of the form:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{equation}
+ P_{\epsilon} = (1 - \epsilon) P + \epsilon Q,
+\label{Huber_contamination}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(P\)&lt;/span&gt; is the uncontaminated target distribution, &lt;span class=&#34;math inline&#34;&gt;\(Q\)&lt;/span&gt; is an arbitrary outlier distribution and &lt;span class=&#34;math inline&#34;&gt;\(\epsilon\)&lt;/span&gt; is the expected fraction of contamination. The distribution &lt;span class=&#34;math inline&#34;&gt;\(Q\)&lt;/span&gt; allows for arbitrary contamination, which may correspond to gross corruptions or more subtle deviations from the assumed model. This is exactly our model in &lt;a href=&#34;#eq:mixturedistr&#34;&gt;(2)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Summarising, the Bayesian solution can capture our prior knowledge about how the data are being generated. Allowing for a more flexible Bayesian model gives desirable qualities of robustness &lt;em&gt;automatically&lt;/em&gt;. As a result, we may be able to bypass the need to derive robust estimators which, as we saw, come with drawbacks. This fact could be used in adversarial ML applications.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-anscombe1960rejection&#34;&gt;
+&lt;p&gt;Anscombe, Frank J. 1960. “Rejection of Outliers.” &lt;em&gt;Technometrics&lt;/em&gt; 2 (2): 123–46.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-barnett1974outliers&#34;&gt;
+&lt;p&gt;Barnett, Vic, and Toby Lewis. 1974. &lt;em&gt;Outliers in Statistical Data&lt;/em&gt;. Wiley.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-box1968bayesian&#34;&gt;
+&lt;p&gt;Box, George EP, and George C Tiao. 1968. “A Bayesian Approach to Some Outlier Problems.” &lt;em&gt;Biometrika&lt;/em&gt; 55 (1): 119–29.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-de1972probability&#34;&gt;
+&lt;p&gt;De Finetti, Bruno. 1972. “Probability, Induction, and Statistics.”&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-dixon1950analysis&#34;&gt;
+&lt;p&gt;Dixon, Wilfred J. 1950. “Analysis of Extreme Values.” &lt;em&gt;The Annals of Mathematical Statistics&lt;/em&gt; 21 (4): 488–506.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-grubbs1969procedures&#34;&gt;
+&lt;p&gt;Grubbs, Frank E. 1969. “Procedures for Detecting Outlying Observations in Samples.” &lt;em&gt;Technometrics&lt;/em&gt; 11 (1): 1–21.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-huber1964&#34;&gt;
+&lt;p&gt;Huber, Peter J. 1964. “Robust Estimation of a Location Parameter.” &lt;em&gt;Ann. Math. Statist.&lt;/em&gt; 35 (1): 73–101. &lt;a href=&#34;https://doi.org/10.1214/aoms/1177703732&#34;&gt;https://doi.org/10.1214/aoms/1177703732&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-huber1965&#34;&gt;
+&lt;p&gt;———. 1965. “A Robust Version of the Probability Ratio Test.” &lt;em&gt;Ann. Math. Statist.&lt;/em&gt; 36 (6): 1753–8. &lt;a href=&#34;https://doi.org/10.1214/aoms/1177699803&#34;&gt;https://doi.org/10.1214/aoms/1177699803&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-jaynes2003probability&#34;&gt;
+&lt;p&gt;Jaynes, Edwin T. 2003. &lt;em&gt;Probability Theory: The Logic of Science&lt;/em&gt;. Cambridge University Press.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-kurakin2016adversarial&#34;&gt;
+&lt;p&gt;Kurakin, Alexey, Ian Goodfellow, and Samy Bengio. 2016. “Adversarial Machine Learning at Scale.” &lt;em&gt;arXiv Preprint arXiv:1611.01236&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-maindonald2006data&#34;&gt;
+&lt;p&gt;Maindonald, John, and John Braun. 2006. &lt;em&gt;Data Analysis and Graphics Using R: An Example-Based Approach&lt;/em&gt;. Vol. 10. Cambridge University Press.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-serfling2011asymptotic&#34;&gt;
+&lt;p&gt;Serfling, Robert. 2011. “Asymptotic Relative Efficiency in Estimation.” &lt;em&gt;International Encyclopedia of Statistical Science&lt;/em&gt; 23 (13): 68–72.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;I define an outlier as an observation which seems “to deviate markedly from the other members of the data sample in which it appears.” &lt;span class=&#34;citation&#34;&gt;(Grubbs &lt;a href=&#34;#ref-grubbs1969procedures&#34; role=&#34;doc-biblioref&#34;&gt;1969&lt;/a&gt;)&lt;/span&gt;?&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;The breakdown point of an estimator is the proportion of incorrect observations (e.g. arbitrarily large observations) an estimator can handle before giving an incorrect (e.g., arbitrarily large) result. See &lt;span class=&#34;citation&#34;&gt;Serfling (&lt;a href=&#34;#ref-serfling2011asymptotic&#34; role=&#34;doc-biblioref&#34;&gt;2011&lt;/a&gt;)&lt;/span&gt; for a formal definition.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;In &lt;a href=&#34;#eq:simplification&#34;&gt;(7)&lt;/a&gt; I assume that &lt;span class=&#34;math inline&#34;&gt;\(u\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\xi\)&lt;/span&gt; are independent. That is, &lt;span class=&#34;math inline&#34;&gt;\(h(\xi,u) = h(\xi) h(u)\)&lt;/span&gt;, which a reasonable assumption.&lt;a href=&#34;#fnref3&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>False Positive Multiparametric Magnetic Resonance Imaging Phenotypes in the Biopsy-naïve Prostate: Are They Distinct from Significant Cancer-associated Lesions? Lessons from PROMIS</title>
       <link>https://solon-karapanagiotis.com/publication/mri_prostate/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
@@ -52,13 +849,13 @@
 
 &lt;div id=&#34;overview&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;Overview&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.nature.com/articles/s41551-019-0487-z#Abs1&#34;&gt;Mitani and co-authors’&lt;/a&gt; present a deep-learning algorithm trained with retinal images and participants’ clinical data from the UK Biobank to estimate blood-haemoglobin levels and predict the presence or absence of anaemia &lt;span class=&#34;citation&#34;&gt;(Mitani et al. &lt;a href=&#34;#ref-mitani2020&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt;. A major limitation of the study is the inadequate evaluation of the algorithm. I will show how a naïve classification (i.e. classify everybody as healthy) performs much better than their deep-learning approach, despite their model having AUC of around 80%. I will then explain why this is the case and finish with some thoughts on how (clinical) predictions models should be evaluated.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nature.com/articles/s41551-019-0487-z#Abs1&#34;&gt;Mitani and co-authors’&lt;/a&gt; present a deep-learning algorithm trained with retinal images and participants’ clinical data from the UK Biobank to estimate blood-haemoglobin levels and predict the presence or absence of anaemia &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-mitani2020&#34; role=&#34;doc-biblioref&#34;&gt;Mitani et al. 2020&lt;/a&gt;)&lt;/span&gt;. A major limitation of the study is the inadequate evaluation of the algorithm. I will show how a naïve classification (i.e. classify everybody as healthy) performs much better than their deep-learning approach, despite their model having AUC of around 80%. I will then explain why this is the case and finish with some thoughts on how (clinical) predictions models should be evaluated.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;introduction&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;The goal of the paper was to investigate whether anaemia can be detected via machine-learning algorithms trained using retinal images, study participants’ metadata or the combination of both.&lt;/p&gt;
 &lt;p&gt;First, the authors develop a deep-learning algorithm to predict haemoglobin concentration (Hb) (which is the most reliable indicator of anaemia) and then three others to predict anaemia itself. They develop a deep convolutional neural network classification model to directly predict whether a patient is anaemic (rather than predicting Hb). They used the World Health Organization Hb cut-off values to label each participant as not having anaemia, mild, moderate or severe anaemia. One of the models was trained to classify: normal versus mild, moderate or severe. For concreteness, I’ll focus on this model but the reasoning below is valid for the others as well. Also, I focus on the combined model (images and metadata) because it showed the best performance (AUC of 0.88).&lt;/p&gt;
-&lt;p&gt;The authors present a detailed analysis of the data and their model. Nevertheless, a crucial point is missing. Is the model useful? If it is implemented tomorrow will it result in better care? This is important, especially since the authors argue their model potentially enables automated anaemia screening (see Discussion). This is slightly far-fetched in my opinion given they only evaluated their algorithm on a test set; with unsatisfactory results as I argue below. Algorithms need to be compared with human experts (i.e. ophthalmologists in this case), followed by extensive field testing to prove their trustworthiness and usefulness &lt;span class=&#34;citation&#34;&gt;(Spiegelhalter &lt;a href=&#34;#ref-Spiegelhalter2020&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The authors present a detailed analysis of the data and their model. Nevertheless, a crucial point is missing. Is the model useful? If it is implemented tomorrow will it result in better care? This is important, especially since the authors argue their model potentially enables automated anaemia screening (see Discussion). This is slightly far-fetched in my opinion given they only evaluated their algorithm on a test set; with unsatisfactory results as I argue below. Algorithms need to be compared with human experts (i.e. ophthalmologists in this case), followed by extensive field testing to prove their trustworthiness and usefulness &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-Spiegelhalter2020&#34; role=&#34;doc-biblioref&#34;&gt;Spiegelhalter 2020&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;the-issue&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;The Issue&lt;/h1&gt;
@@ -243,7 +1040,7 @@ negative
 &lt;div id=&#34;roc-and-auc-is-to-blame&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;ROC (and AUC) is to blame&lt;/h1&gt;
 &lt;p&gt;Why was this not spotted by the authors? Probably because the model evaluation was based on the receiver operating curve (ROC) and area under the ROC (AUC). ROC curves can present an overly optimistic view of a model’s performance if there is a large skew in the class distribution. In this study the ratio positive (i.e. anaemic) to negative (i.e. not anaemic) participants is 439/10949 = 0.04 (see Table 2, validation column)!&lt;/p&gt;
-&lt;p&gt;ROC curves (and AUC) have the (un-)attractive property of being insensitive to changes in class distribution &lt;span class=&#34;citation&#34;&gt;(Fawcett &lt;a href=&#34;#ref-fawcett2006&#34; role=&#34;doc-biblioref&#34;&gt;2006&lt;/a&gt;)&lt;/span&gt;. That is, if the proportion of positive to negative instances changes in a dataset, the ROC curves (and AUC) will not change. This is because ROC plots are based upon TPR and FPR which do not depend on class distributions. Increasing the number of positive samples by 10x would increase both TP and FN by 10x, which would not change the TPR at any threshold. Similarly, increasing the number of negative samples by 10x would increase both TN and FP by 10x, which would not change the FPR at any threshold. Thus, both the shape of the ROC curve and the AUC are insensitive to the class distribution. On the contrary, any performance metric that uses values from both columns will be inherently sensitive to class skews, for instance the misclassification rate.&lt;/p&gt;
+&lt;p&gt;ROC curves (and AUC) have the (un-)attractive property of being insensitive to changes in class distribution &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-fawcett2006&#34; role=&#34;doc-biblioref&#34;&gt;Fawcett 2006&lt;/a&gt;)&lt;/span&gt;. That is, if the proportion of positive to negative instances changes in a dataset, the ROC curves (and AUC) will not change. This is because ROC plots are based upon TPR and FPR which do not depend on class distributions. Increasing the number of positive samples by 10x would increase both TP and FN by 10x, which would not change the TPR at any threshold. Similarly, increasing the number of negative samples by 10x would increase both TN and FP by 10x, which would not change the FPR at any threshold. Thus, both the shape of the ROC curve and the AUC are insensitive to the class distribution. On the contrary, any performance metric that uses values from both columns will be inherently sensitive to class skews, for instance the misclassification rate.&lt;/p&gt;
 &lt;p&gt;Let’s make this more concrete with a simple simulation example. I simulate one covariate, &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;, which follows a standard Gaussian distribution in negative cases: &lt;span class=&#34;math inline&#34;&gt;\(X \sim N(0, 1)\)&lt;/span&gt;. Among positives, it follows &lt;span class=&#34;math inline&#34;&gt;\(X \sim N(1.5, 1)\)&lt;/span&gt;. The event rate (i.e. prevalence) is varied to be &lt;span class=&#34;math inline&#34;&gt;\(20\%\)&lt;/span&gt; (I call this scenario 1) and &lt;span class=&#34;math inline&#34;&gt;\(2\%\)&lt;/span&gt; (scenario 2). (The &lt;span class=&#34;math inline&#34;&gt;\(2\%\)&lt;/span&gt; is close to the one observed in the study &lt;span class=&#34;math inline&#34;&gt;\(\approx 4\%\)&lt;/span&gt;). Then, I derive true risks (&lt;span class=&#34;math inline&#34;&gt;\(R\)&lt;/span&gt;) based on the event rate (&lt;span class=&#34;math inline&#34;&gt;\(ER\)&lt;/span&gt;) and the density of the covariate distributions for positives (&lt;span class=&#34;math inline&#34;&gt;\(D_p\)&lt;/span&gt;) and negatives (&lt;span class=&#34;math inline&#34;&gt;\(D_{n}\)&lt;/span&gt;) at the covariate values:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ R = \frac{ER × D_p}{[ER × D_p] + [(1 − ER) × D_{n}]}.\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;I simulate two large samples of 5000 and 50000 and plot the ROC. The two plots below are almost identical despite the fact that scenario 2 has 10x more negative examples than scenario 1.&lt;/p&gt;
@@ -299,7 +1096,7 @@ library(ggplot2)
 ggplot(df_final) +
   geom_line(aes(x = FPR, y = TPR, group = sims, col = Scenario), alpha = 0.8) + 
   facet_grid(~ Scenario)&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:figs&#34;&gt;&lt;/span&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span style=&#34;display:block;&#34; id=&#34;fig:figs&#34;&gt;&lt;/span&gt;
 &lt;img src=&#34;https://solon-karapanagiotis.com/post/auc_post/classification_AUC_files/figure-html/figs-1.png&#34; alt=&#34;ROC plots for each scenario; 20 repetitions each.&#34; width=&#34;672&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;
 Figure 1: ROC plots for each scenario; 20 repetitions each.
@@ -309,13 +1106,13 @@ Figure 1: ROC plots for each scenario; 20 repetitions each.
 &lt;div id=&#34;unequal-misclassification-costs&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;Unequal misclassification costs&lt;/h1&gt;
 &lt;p&gt;Of course, my naive classification can be easily debated by noting that the misclassification rate makes an inherent assumption, which is unlikely to be true in anaemia screening: it assumes that misclassifying someone with anaemia is of the same severity as misclassifying a healthy subject. This implies that one type of error is more costly (i.e. worse) than the other. In other words, the costs are asymmetric. I agree that most of time this is the case. This information should be taken into account when evaluating or fitting models.&lt;/p&gt;
-&lt;p&gt;Some methods to account for differing consequences of correct and incorrect classification when evaluating models are the Weighted Net Reclassification Improvement &lt;span class=&#34;citation&#34;&gt;(Pencina et al. &lt;a href=&#34;#ref-pencina2011&#34; role=&#34;doc-biblioref&#34;&gt;2011&lt;/a&gt;)&lt;/span&gt;, Relative Utility &lt;span class=&#34;citation&#34;&gt;(Baker et al. &lt;a href=&#34;#ref-baker2009&#34; role=&#34;doc-biblioref&#34;&gt;2009&lt;/a&gt;)&lt;/span&gt;, Net Benefit &lt;span class=&#34;citation&#34;&gt;(Vickers and Elkin &lt;a href=&#34;#ref-vickers2006&#34; role=&#34;doc-biblioref&#34;&gt;2006&lt;/a&gt;)&lt;/span&gt; and the &lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt; measure &lt;span class=&#34;citation&#34;&gt;(Hand &lt;a href=&#34;#ref-hand2009&#34; role=&#34;doc-biblioref&#34;&gt;2009&lt;/a&gt;)&lt;/span&gt;. Another option is to design models/algorithms that take misclassification costs into consideration. This area of research is called cost-sensitive learning &lt;span class=&#34;citation&#34;&gt;(Elkan &lt;a href=&#34;#ref-elkan2001&#34; role=&#34;doc-biblioref&#34;&gt;2001&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;This is another reason the ROC (AUC) is inadequate metric (in addition to the insensitivity in class imbalance). It ignores clinical differentials in misclassification costs and, therefore, risks finding a model worthwhile (or worthless) when patients and clinicians would consider otherwise. Strictly speaking, ROC weighs changes in sensitivity and specificity equally only where the curve slope equals one &lt;span class=&#34;citation&#34;&gt;(Fawcett &lt;a href=&#34;#ref-fawcett2006&#34; role=&#34;doc-biblioref&#34;&gt;2006&lt;/a&gt;)&lt;/span&gt;. Other points assign different weights, determined by curve shape and without considering any clinically meaningful information. Thus, AUC can consider a model that increases sensitivity at low specificity superior to one that increases sensitivity at high specificity. However, in some situations, in disease screening for instance, better tests must increase sensitivity at high specificity to avoid numerous false positives.&lt;/p&gt;
+&lt;p&gt;Some methods to account for differing consequences of correct and incorrect classification when evaluating models are the Weighted Net Reclassification Improvement &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-pencina2011&#34; role=&#34;doc-biblioref&#34;&gt;Pencina et al. 2011&lt;/a&gt;)&lt;/span&gt;, Relative Utility &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-baker2009&#34; role=&#34;doc-biblioref&#34;&gt;Baker et al. 2009&lt;/a&gt;)&lt;/span&gt;, Net Benefit &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-vickers2006&#34; role=&#34;doc-biblioref&#34;&gt;Vickers and Elkin 2006&lt;/a&gt;)&lt;/span&gt; and the &lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt; measure &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-hand2009&#34; role=&#34;doc-biblioref&#34;&gt;Hand 2009&lt;/a&gt;)&lt;/span&gt;. Another option is to design models/algorithms that take misclassification costs into consideration. This area of research is called cost-sensitive learning &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-elkan2001&#34; role=&#34;doc-biblioref&#34;&gt;Elkan 2001&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;This is another reason the ROC (AUC) is inadequate metric (in addition to the insensitivity in class imbalance). It ignores clinical differentials in misclassification costs and, therefore, risks finding a model worthwhile (or worthless) when patients and clinicians would consider otherwise. Strictly speaking, ROC weighs changes in sensitivity and specificity equally only where the curve slope equals one &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-fawcett2006&#34; role=&#34;doc-biblioref&#34;&gt;Fawcett 2006&lt;/a&gt;)&lt;/span&gt;. Other points assign different weights, determined by curve shape and without considering any clinically meaningful information. Thus, AUC can consider a model that increases sensitivity at low specificity superior to one that increases sensitivity at high specificity. However, in some situations, in disease screening for instance, better tests must increase sensitivity at high specificity to avoid numerous false positives.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;a-way-forward-estimate-and-validate-probabilities&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;A way forward: estimate and validate probabilities&lt;/h1&gt;
 &lt;p&gt;Ultimately, the quality of algorithms is exposed to the nature of the performance metrics chosen. We must carefully choose the goals we ask these systems to optimize. Evaluation of models for use in healthcare should take the intended purpose of the model into account. Metrics such as AUC are rarely of any use in clinical practise. AUC represents how likely it is that the model will rank a pair of subjects; one with anaemia and one without, in the correct order, across all possible thresholds. More intuitively, AUC is the chance that a randomly selected participant with anaemia will be ranked above a randomly selected healthy participant. However, patients do not walk into the clinician’s room in pairs, and patients want their results, rather than the order of their results compared with another patient. They care about their individual risk of having a disease/condition (being anaemic in this case). Hence, the focus of modelling should be on estimating and validating risks/probabilities rather than the chance of correctly ranking a pair of patients.&lt;/p&gt;
-&lt;p&gt;Consequently, model evaluation/comparison should focus (primarily) on calibration. Calibration refers to the agreement between observed and predicted probabilities. This means that for future cases predicted to be in class &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt; with probability &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;, a proportion of &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; cases will truly belong in class &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;, and this should be true for all &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; in (0,1). In other words, for every 100 patients given a risk of &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;%, close to &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; have the event. Calibration approaches appropriate for representing prediction accuracy are crucial, especially when treatment decisions are made based on probability thresholds. Calibration of a model can be evaluated graphically by plotting expected against observed probabilities &lt;span class=&#34;citation&#34;&gt;(Steyerberg et al. &lt;a href=&#34;#ref-steyerberg2004&#34; role=&#34;doc-biblioref&#34;&gt;2004&lt;/a&gt;)&lt;/span&gt; or using an aggregate score. The most widely used is the Brier score, which is given by the average over all squared differences between an observation and its predicted probability &lt;span class=&#34;citation&#34;&gt;(Brier &lt;a href=&#34;#ref-brier1950&#34; role=&#34;doc-biblioref&#34;&gt;1950&lt;/a&gt;)&lt;/span&gt;. (It has nice properties &lt;span class=&#34;citation&#34;&gt;(see e.g. Spiegelhalter &lt;a href=&#34;#ref-spiegelhalter1986&#34; role=&#34;doc-biblioref&#34;&gt;1986&lt;/a&gt;; Gneiting and Raftery &lt;a href=&#34;#ref-gneiting2007&#34; role=&#34;doc-biblioref&#34;&gt;2007&lt;/a&gt;)&lt;/span&gt;).&lt;/p&gt;
+&lt;p&gt;Consequently, model evaluation/comparison should focus (primarily) on calibration. Calibration refers to the agreement between observed and predicted probabilities. This means that for future cases predicted to be in class &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt; with probability &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;, a proportion of &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; cases will truly belong in class &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;, and this should be true for all &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; in (0,1). In other words, for every 100 patients given a risk of &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;%, close to &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; have the event. Calibration approaches appropriate for representing prediction accuracy are crucial, especially when treatment decisions are made based on probability thresholds. Calibration of a model can be evaluated graphically by plotting expected against observed probabilities &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-steyerberg2004&#34; role=&#34;doc-biblioref&#34;&gt;Steyerberg et al. 2004&lt;/a&gt;)&lt;/span&gt; or using an aggregate score. The most widely used is the Brier score, which is given by the average over all squared differences between an observation and its predicted probability &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-brier1950&#34; role=&#34;doc-biblioref&#34;&gt;Brier 1950&lt;/a&gt;)&lt;/span&gt;. (It has nice properties &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-gneiting2007&#34; role=&#34;doc-biblioref&#34;&gt;Gneiting and Raftery 2007&lt;/a&gt;; see e.g. &lt;a href=&#34;#ref-spiegelhalter1986&#34; role=&#34;doc-biblioref&#34;&gt;Spiegelhalter 1986&lt;/a&gt;)&lt;/span&gt;).&lt;/p&gt;
 &lt;p&gt;To conclude, machine learning models in healthcare need rigorous evaluation. Beyond ethical, legal and moral issues, the technical/statistical fitness of the models needs thorough assessment. Statistical analysis should consider clinically relevant evaluation metrics. Motivated by the paper of &lt;span class=&#34;citation&#34;&gt;Mitani et al. (&lt;a href=&#34;#ref-mitani2020&#34; role=&#34;doc-biblioref&#34;&gt;2020&lt;/a&gt;)&lt;/span&gt; I have re-demonstrated why AUC is an irrelevant metric for clinical practise. This is because it is insensitive to class imbalances and integrates over all error regimes (under the best case scenario). This becomes increasingly important in predicting rare outcomes, where operating in a regime that corresponds to a high false positive rate may be impractical, because costly interventions might be applied in situations in which patients are unlikely to benefit. A way forward is to focus on evaluating predictions rather than (in addition to) classifications. That is, focus on estimating and evaluating probabilities. These convey more useful information to clinicians and patients in order to aid decision making.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;further-reading&#34; class=&#34;section level1 unnumbered&#34;&gt;
@@ -337,42 +1134,42 @@ Figure 1: ROC plots for each scenario; 20 repetitions each.
 &lt;/div&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
 &lt;h1&gt;References&lt;/h1&gt;
-&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
-&lt;div id=&#34;ref-baker2009&#34;&gt;
-&lt;p&gt;Baker, S. G., Cook, N. R., Vickers, A., and Kramer, B. S. (2009), “Using relative utility curves to evaluate risk prediction,” &lt;em&gt;Journal of the Royal Statistical Society: Series A (Statistics in Society)&lt;/em&gt;, Wiley Online Library, 172, 729–748.&lt;/p&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references csl-bib-body hanging-indent&#34;&gt;
+&lt;div id=&#34;ref-baker2009&#34; class=&#34;csl-entry&#34;&gt;
+Baker, S. G., Cook, N. R., Vickers, A., and Kramer, B. S. (2009), &lt;span&gt;“Using relative utility curves to evaluate risk prediction,”&lt;/span&gt; &lt;em&gt;Journal of the Royal Statistical Society: Series A (Statistics in Society)&lt;/em&gt;, Wiley Online Library, 172, 729–748.
 &lt;/div&gt;
-&lt;div id=&#34;ref-brier1950&#34;&gt;
-&lt;p&gt;Brier, G. W. (1950), “Verification of forecasts expressed in terms of probability,” &lt;em&gt;Monthly weather review&lt;/em&gt;, 78, 1–3.&lt;/p&gt;
+&lt;div id=&#34;ref-brier1950&#34; class=&#34;csl-entry&#34;&gt;
+Brier, G. W. (1950), &lt;span&gt;“Verification of forecasts expressed in terms of probability,”&lt;/span&gt; &lt;em&gt;Monthly weather review&lt;/em&gt;, 78, 1–3.
 &lt;/div&gt;
-&lt;div id=&#34;ref-elkan2001&#34;&gt;
-&lt;p&gt;Elkan, C. (2001), “The foundations of cost-sensitive learning,” in &lt;em&gt;International joint conference on artificial intelligence&lt;/em&gt;, Lawrence Erlbaum Associates Ltd, pp. 973–978.&lt;/p&gt;
+&lt;div id=&#34;ref-elkan2001&#34; class=&#34;csl-entry&#34;&gt;
+Elkan, C. (2001), &lt;span&gt;“The foundations of cost-sensitive learning,”&lt;/span&gt; in &lt;em&gt;International joint conference on artificial intelligence&lt;/em&gt;, Lawrence Erlbaum Associates Ltd, pp. 973–978.
 &lt;/div&gt;
-&lt;div id=&#34;ref-fawcett2006&#34;&gt;
-&lt;p&gt;Fawcett, T. (2006), “An introduction to roc analysis,” &lt;em&gt;Pattern recognition letters&lt;/em&gt;, Elsevier, 27, 861–874.&lt;/p&gt;
+&lt;div id=&#34;ref-fawcett2006&#34; class=&#34;csl-entry&#34;&gt;
+Fawcett, T. (2006), &lt;span&gt;“An introduction to ROC analysis,”&lt;/span&gt; &lt;em&gt;Pattern recognition letters&lt;/em&gt;, Elsevier, 27, 861–874.
 &lt;/div&gt;
-&lt;div id=&#34;ref-gneiting2007&#34;&gt;
-&lt;p&gt;Gneiting, T., and Raftery, A. E. (2007), “Strictly proper scoring rules, prediction, and estimation,” &lt;em&gt;Journal of the American statistical Association&lt;/em&gt;, Taylor &amp;amp; Francis, 102, 359–378.&lt;/p&gt;
+&lt;div id=&#34;ref-gneiting2007&#34; class=&#34;csl-entry&#34;&gt;
+Gneiting, T., and Raftery, A. E. (2007), &lt;span&gt;“Strictly proper scoring rules, prediction, and estimation,”&lt;/span&gt; &lt;em&gt;Journal of the American statistical Association&lt;/em&gt;, Taylor &amp;amp; Francis, 102, 359–378.
 &lt;/div&gt;
-&lt;div id=&#34;ref-hand2009&#34;&gt;
-&lt;p&gt;Hand, D. J. (2009), “Measuring classifier performance: A coherent alternative to the area under the roc curve,” &lt;em&gt;Machine learning&lt;/em&gt;, Springer, 77, 103–123.&lt;/p&gt;
+&lt;div id=&#34;ref-hand2009&#34; class=&#34;csl-entry&#34;&gt;
+Hand, D. J. (2009), &lt;span&gt;“Measuring classifier performance: A coherent alternative to the area under the ROC curve,”&lt;/span&gt; &lt;em&gt;Machine learning&lt;/em&gt;, Springer, 77, 103–123.
 &lt;/div&gt;
-&lt;div id=&#34;ref-mitani2020&#34;&gt;
-&lt;p&gt;Mitani, A., Huang, A., Venugopalan, S., Corrado, G. S., Peng, L., Webster, D. R., Hammel, N., Liu, Y., and Varadarajan, A. V. (2020), “Detection of anaemia from retinal fundus images via deep learning,” &lt;em&gt;Nature Biomedical Engineering&lt;/em&gt;, Nature Publishing Group, 4, 18–27.&lt;/p&gt;
+&lt;div id=&#34;ref-mitani2020&#34; class=&#34;csl-entry&#34;&gt;
+Mitani, A., Huang, A., Venugopalan, S., Corrado, G. S., Peng, L., Webster, D. R., Hammel, N., Liu, Y., and Varadarajan, A. V. (2020), &lt;span&gt;“Detection of anaemia from retinal fundus images via deep learning,”&lt;/span&gt; &lt;em&gt;Nature Biomedical Engineering&lt;/em&gt;, Nature Publishing Group, 4, 18–27.
 &lt;/div&gt;
-&lt;div id=&#34;ref-pencina2011&#34;&gt;
-&lt;p&gt;Pencina, M. J., D’Agostino Sr, R. B., and Steyerberg, E. W. (2011), “Extensions of net reclassification improvement calculations to measure usefulness of new biomarkers,” &lt;em&gt;Statistics in medicine&lt;/em&gt;, Wiley Online Library, 30, 11–21.&lt;/p&gt;
+&lt;div id=&#34;ref-pencina2011&#34; class=&#34;csl-entry&#34;&gt;
+Pencina, M. J., D’Agostino Sr, R. B., and Steyerberg, E. W. (2011), &lt;span&gt;“Extensions of net reclassification improvement calculations to measure usefulness of new biomarkers,”&lt;/span&gt; &lt;em&gt;Statistics in medicine&lt;/em&gt;, Wiley Online Library, 30, 11–21.
 &lt;/div&gt;
-&lt;div id=&#34;ref-Spiegelhalter2020&#34;&gt;
-&lt;p&gt;Spiegelhalter, D. (2020), “Should we trust algorithms?” &lt;em&gt;Harvard Data Science Review&lt;/em&gt;, 2. &lt;a href=&#34;https://doi.org/10.1162/99608f92.cb91a35a&#34;&gt;https://doi.org/10.1162/99608f92.cb91a35a&lt;/a&gt;.&lt;/p&gt;
+&lt;div id=&#34;ref-Spiegelhalter2020&#34; class=&#34;csl-entry&#34;&gt;
+Spiegelhalter, D. (2020), &lt;span&gt;“Should we trust algorithms?”&lt;/span&gt; &lt;em&gt;Harvard Data Science Review&lt;/em&gt;, 2. &lt;a href=&#34;https://doi.org/10.1162/99608f92.cb91a35a&#34;&gt;https://doi.org/10.1162/99608f92.cb91a35a&lt;/a&gt;.
 &lt;/div&gt;
-&lt;div id=&#34;ref-spiegelhalter1986&#34;&gt;
-&lt;p&gt;Spiegelhalter, D. J. (1986), “Probabilistic prediction in patient management and clinical trials,” &lt;em&gt;Statistics in medicine&lt;/em&gt;, Wiley Online Library, 5, 421–433.&lt;/p&gt;
+&lt;div id=&#34;ref-spiegelhalter1986&#34; class=&#34;csl-entry&#34;&gt;
+Spiegelhalter, D. J. (1986), &lt;span&gt;“Probabilistic prediction in patient management and clinical trials,”&lt;/span&gt; &lt;em&gt;Statistics in medicine&lt;/em&gt;, Wiley Online Library, 5, 421–433.
 &lt;/div&gt;
-&lt;div id=&#34;ref-steyerberg2004&#34;&gt;
-&lt;p&gt;Steyerberg, E. W., Borsboom, G. J., Houwelingen, H. C. van, Eijkemans, M. J., and Habbema, J. D. F. (2004), “Validation and updating of predictive logistic regression models: A study on sample size and shrinkage,” &lt;em&gt;Statistics in medicine&lt;/em&gt;, Wiley Online Library, 23, 2567–2586.&lt;/p&gt;
+&lt;div id=&#34;ref-steyerberg2004&#34; class=&#34;csl-entry&#34;&gt;
+Steyerberg, E. W., Borsboom, G. J., Houwelingen, H. C. van, Eijkemans, M. J., and Habbema, J. D. F. (2004), &lt;span&gt;“Validation and updating of predictive logistic regression models: A study on sample size and shrinkage,”&lt;/span&gt; &lt;em&gt;Statistics in medicine&lt;/em&gt;, Wiley Online Library, 23, 2567–2586.
 &lt;/div&gt;
-&lt;div id=&#34;ref-vickers2006&#34;&gt;
-&lt;p&gt;Vickers, A. J., and Elkin, E. B. (2006), “Decision curve analysis: A novel method for evaluating prediction models,” &lt;em&gt;Medical Decision Making&lt;/em&gt;, Sage Publications Sage CA: Thousand Oaks, CA, 26, 565–574.&lt;/p&gt;
+&lt;div id=&#34;ref-vickers2006&#34; class=&#34;csl-entry&#34;&gt;
+Vickers, A. J., and Elkin, E. B. (2006), &lt;span&gt;“Decision curve analysis: A novel method for evaluating prediction models,”&lt;/span&gt; &lt;em&gt;Medical Decision Making&lt;/em&gt;, Sage Publications Sage CA: Thousand Oaks, CA, 26, 565–574.
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1426,132 +2223,6 @@ You might have noticed by now that the &lt;code&gt;fread()&lt;/code&gt; function
       <pubDate>Fri, 01 Jun 2012 00:00:00 +0000</pubDate>
       <guid>https://solon-karapanagiotis.com/publication/wiihabilitation/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://solon-karapanagiotis.com/publication/journal-article/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://solon-karapanagiotis.com/publication/journal-article/</guid>
-      <description>&lt;h1 id=&#34;---&#34;&gt;#&amp;mdash;&lt;/h1&gt;
-&lt;h1 id=&#34;abstract-lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-duis-posuere-tellus&#34;&gt;#abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus&lt;/h1&gt;
-&lt;h1 id=&#34;--ac-convallis-placerat-proin-tincidunt-magna-sed-ex-sollicitudin-condimentum-sed&#34;&gt;#  ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed&lt;/h1&gt;
-&lt;h1 id=&#34;--ac-faucibus-dolor-scelerisque-sollicitudin-nisi-cras-purus-urna-suscipit-quis&#34;&gt;#  ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis&lt;/h1&gt;
-&lt;h1 id=&#34;--sapien-eu-pulvinar-tempor-diam-quisque-risus-orci-mollis-id-ante-sit-amet-gravida&#34;&gt;#  sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida&lt;/h1&gt;
-&lt;h1 id=&#34;--egestas-nisl-sed-ac-tempus-magna-proin-in-dui-enim-donec-condimentum-sem-id&#34;&gt;#  egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id&lt;/h1&gt;
-&lt;h1 id=&#34;--dapibus-fringilla-tellus-enim-condimentum-arcu-nec-volutpat-est-felis-vel-metus&#34;&gt;#  dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus.&lt;/h1&gt;
-&lt;h1 id=&#34;--vestibulum-sit-amet-erat-at-nulla-eleifend-gravida&#34;&gt;#  Vestibulum sit amet erat at nulla eleifend gravida.&lt;/h1&gt;
-&lt;h1 id=&#34;author_notes&#34;&gt;author_notes:&lt;/h1&gt;
-&lt;h1 id=&#34;--equal-contribution&#34;&gt;- Equal contribution&lt;/h1&gt;
-&lt;h1 id=&#34;--equal-contribution-1&#34;&gt;- Equal contribution&lt;/h1&gt;
-&lt;h1 id=&#34;authors&#34;&gt;authors:&lt;/h1&gt;
-&lt;h1 id=&#34;--admin&#34;&gt;- admin&lt;/h1&gt;
-&lt;h1 id=&#34;--robert-ford&#34;&gt;- Robert Ford&lt;/h1&gt;
-&lt;h1 id=&#34;date-2015-09-01&#34;&gt;date: &amp;ldquo;2015-09-01&amp;rdquo;&lt;/h1&gt;
-&lt;h1 id=&#34;doi-&#34;&gt;doi: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;featured-false&#34;&gt;featured: false&lt;/h1&gt;
-&lt;h1 id=&#34;draft-true&#34;&gt;draft: true&lt;/h1&gt;
-&lt;h1 id=&#34;image&#34;&gt;image:&lt;/h1&gt;
-&lt;h1 id=&#34;caption-image-credit-unsplashhttpsunsplashcomphotosjdd8gxatzsc&#34;&gt;caption: &amp;lsquo;Image credit: &lt;a href=&#34;https://unsplash.com/photos/jdD8gXaTZsc&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Unsplash&lt;/strong&gt;&lt;/a&gt;&amp;rsquo;&lt;/h1&gt;
-&lt;h1 id=&#34;focal_point-&#34;&gt;focal_point: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;preview_only-false&#34;&gt;preview_only: false&lt;/h1&gt;
-&lt;h1 id=&#34;projects-&#34;&gt;projects: []&lt;/h1&gt;
-&lt;h1 id=&#34;publication-journal-of-source-themes-11&#34;&gt;publication: &amp;lsquo;&lt;em&gt;Journal of Source Themes, 1&lt;/em&gt;(1)&amp;rsquo;&lt;/h1&gt;
-&lt;h1 id=&#34;publication_short-&#34;&gt;publication_short: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;publication_types&#34;&gt;publication_types:&lt;/h1&gt;
-&lt;h1 id=&#34;--0&#34;&gt;- &amp;ldquo;0&amp;rdquo;&lt;/h1&gt;
-&lt;h1 id=&#34;publishdate-2017-01-01&#34;&gt;publishDate: &amp;ldquo;2017-01-01&amp;rdquo;&lt;/h1&gt;
-&lt;h1 id=&#34;slides-example&#34;&gt;slides: example&lt;/h1&gt;
-&lt;h1 id=&#34;summary-lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-duis-posuere-tellus&#34;&gt;summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus&lt;/h1&gt;
-&lt;h1 id=&#34;ac-convallis-placerat-proin-tincidunt-magna-sed-ex-sollicitudin-condimentum&#34;&gt;ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.&lt;/h1&gt;
-&lt;h1 id=&#34;tags&#34;&gt;tags:&lt;/h1&gt;
-&lt;h1 id=&#34;--source-themes&#34;&gt;- Source Themes&lt;/h1&gt;
-&lt;h1 id=&#34;title-an-example-journal-article&#34;&gt;title: An example journal article&lt;/h1&gt;
-&lt;h1 id=&#34;url_code-&#34;&gt;url_code: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;url_dataset-&#34;&gt;url_dataset: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;url_pdf-&#34;&gt;url_pdf: &#39;&#39;&lt;/h1&gt;
-&lt;h1 id=&#34;url_poster-&#34;&gt;url_poster: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;url_project-&#34;&gt;url_project: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;url_slides-&#34;&gt;url_slides: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;url_source-&#34;&gt;url_source: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;url_video-&#34;&gt;url_video: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;----1&#34;&gt;&amp;mdash;&lt;/h1&gt;
-&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
-&lt;h1 id=&#34;div-classalert-alert-note&#34;&gt;&lt;div class=&#34;alert alert-note&#34;&gt;&lt;/h1&gt;
-  &lt;div&gt;
-    &lt;h1 id=&#34;click-the-cite-button-above-to-demo-the-feature-to-enable-visitors-to-import-publication-metadata-into-their-reference-management-software&#34;&gt;Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.&lt;/h1&gt;
-&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;h1 id=&#34;heading-1&#34;&gt;&lt;/h1&gt;
-&lt;h1 id=&#34;div-classalert-alert-note-1&#34;&gt;&lt;div class=&#34;alert alert-note&#34;&gt;&lt;/h1&gt;
-  &lt;div&gt;
-    &lt;h1 id=&#34;create-your-slides-in-markdown---click-the-slides-button-to-check-out-the-example&#34;&gt;Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.&lt;/h1&gt;
-&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;h1 id=&#34;heading-2&#34;&gt;&lt;/h1&gt;
-&lt;h1 id=&#34;supplementary-notes-can-be-added-here-including-code-math-and-imageshttpswowchemycomdocswriting-markdown-latex&#34;&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/h1&gt;
-</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://solon-karapanagiotis.com/publication/preprint/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://solon-karapanagiotis.com/publication/preprint/</guid>
-      <description>&lt;p&gt;#&amp;mdash;
-#abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus&lt;/p&gt;
-&lt;h1 id=&#34;ac-convallis-placerat-proin-tincidunt-magna-sed-ex-sollicitudin-condimentum-sed&#34;&gt;ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed&lt;/h1&gt;
-&lt;h1 id=&#34;ac-faucibus-dolor-scelerisque-sollicitudin-nisi-cras-purus-urna-suscipit-quis&#34;&gt;ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis&lt;/h1&gt;
-&lt;h1 id=&#34;sapien-eu-pulvinar-tempor-diam-quisque-risus-orci-mollis-id-ante-sit-amet-gravida&#34;&gt;sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida&lt;/h1&gt;
-&lt;h1 id=&#34;egestas-nisl-sed-ac-tempus-magna-proin-in-dui-enim-donec-condimentum-sem-id&#34;&gt;egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id&lt;/h1&gt;
-&lt;h1 id=&#34;dapibus-fringilla-tellus-enim-condimentum-arcu-nec-volutpat-est-felis-vel-metus&#34;&gt;dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus.&lt;/h1&gt;
-&lt;h1 id=&#34;vestibulum-sit-amet-erat-at-nulla-eleifend-gravida&#34;&gt;Vestibulum sit amet erat at nulla eleifend gravida.&lt;/h1&gt;
-&lt;h1 id=&#34;authors&#34;&gt;authors:&lt;/h1&gt;
-&lt;h1 id=&#34;--admin&#34;&gt;- admin&lt;/h1&gt;
-&lt;h1 id=&#34;date-2019-04-07&#34;&gt;date: &amp;ldquo;2019-04-07&amp;rdquo;&lt;/h1&gt;
-&lt;h1 id=&#34;doi-&#34;&gt;doi: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;featured-false&#34;&gt;featured: false&lt;/h1&gt;
-&lt;h1 id=&#34;image&#34;&gt;image:&lt;/h1&gt;
-&lt;h1 id=&#34;caption-image-credit-unsplashhttpsunsplashcomphotoss9cc2skysjm&#34;&gt;caption: &amp;lsquo;Image credit: &lt;a href=&#34;https://unsplash.com/photos/s9CC2SKySJM&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Unsplash&lt;/strong&gt;&lt;/a&gt;&amp;rsquo;&lt;/h1&gt;
-&lt;h1 id=&#34;focal_point-&#34;&gt;focal_point: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;preview_only-false&#34;&gt;preview_only: false&lt;/h1&gt;
-&lt;h1 id=&#34;links&#34;&gt;links:&lt;/h1&gt;
-&lt;h1 id=&#34;--name-custom-link&#34;&gt;- name: Custom Link&lt;/h1&gt;
-&lt;h1 id=&#34;url-httpexampleorg&#34;&gt;url: &lt;a href=&#34;http://example.org&#34;&gt;http://example.org&lt;/a&gt;&lt;/h1&gt;
-&lt;h1 id=&#34;projects&#34;&gt;projects:&lt;/h1&gt;
-&lt;h1 id=&#34;--internal-project&#34;&gt;- internal-project&lt;/h1&gt;
-&lt;h1 id=&#34;publication-&#34;&gt;publication: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;publication_short-&#34;&gt;publication_short: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;publication_types&#34;&gt;publication_types:&lt;/h1&gt;
-&lt;h1 id=&#34;--3&#34;&gt;- &amp;ldquo;3&amp;rdquo;&lt;/h1&gt;
-&lt;h1 id=&#34;publishdate-2017-01-01t000000z&#34;&gt;publishDate: &amp;ldquo;2017-01-01T00:00:00Z&amp;rdquo;&lt;/h1&gt;
-&lt;h1 id=&#34;slides-example&#34;&gt;slides: example&lt;/h1&gt;
-&lt;h1 id=&#34;summary-lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-duis-posuere-tellus&#34;&gt;summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus&lt;/h1&gt;
-&lt;h1 id=&#34;ac-convallis-placerat-proin-tincidunt-magna-sed-ex-sollicitudin-condimentum&#34;&gt;ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.&lt;/h1&gt;
-&lt;h1 id=&#34;tags&#34;&gt;tags:&lt;/h1&gt;
-&lt;h1 id=&#34;--source-themes&#34;&gt;- Source Themes&lt;/h1&gt;
-&lt;h1 id=&#34;title-an-example-preprint--working-paper&#34;&gt;title: An example preprint / working paper&lt;/h1&gt;
-&lt;h1 id=&#34;url_code-&#34;&gt;url_code: &#39;&#39;&lt;/h1&gt;
-&lt;h1 id=&#34;url_dataset-&#34;&gt;url_dataset: &#39;&#39;&lt;/h1&gt;
-&lt;h1 id=&#34;url_pdf-&#34;&gt;url_pdf: &#39;&#39;&lt;/h1&gt;
-&lt;h1 id=&#34;url_poster-&#34;&gt;url_poster: &#39;&#39;&lt;/h1&gt;
-&lt;h1 id=&#34;url_project-&#34;&gt;url_project: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;url_slides-&#34;&gt;url_slides: &amp;quot;&amp;quot;&lt;/h1&gt;
-&lt;h1 id=&#34;url_source-&#34;&gt;url_source: &#39;&#39;&lt;/h1&gt;
-&lt;h1 id=&#34;url_video-&#34;&gt;url_video: &#39;&#39;&lt;/h1&gt;
-&lt;h1 id=&#34;---&#34;&gt;&amp;mdash;&lt;/h1&gt;
-&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
-&lt;h1 id=&#34;div-classalert-alert-note&#34;&gt;&lt;div class=&#34;alert alert-note&#34;&gt;&lt;/h1&gt;
-  &lt;div&gt;
-    &lt;h1 id=&#34;create-your-slides-in-markdown---click-the-slides-button-to-check-out-the-example&#34;&gt;Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.&lt;/h1&gt;
-&lt;h1 id=&#34;heading&#34;&gt;&lt;/h1&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;h1 id=&#34;heading-1&#34;&gt;&lt;/h1&gt;
-&lt;h1 id=&#34;supplementary-notes-can-be-added-here-including-code-math-and-imageshttpswowchemycomdocswriting-markdown-latex&#34;&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and #images&lt;/a&gt;.&lt;/h1&gt;
-</description>
     </item>
     
   </channel>

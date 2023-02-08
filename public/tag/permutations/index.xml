@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>permutations | </title>
+    <link>https://solon-karapanagiotis.com/tag/permutations/</link>
+      <atom:link href="https://solon-karapanagiotis.com/tag/permutations/index.xml" rel="self" type="application/rss+xml" />
+    <description>permutations</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Solon Karapanagiotis 2018-2023</copyright><lastBuildDate>Fri, 15 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://solon-karapanagiotis.com/media/icon.png</url>
+      <title>permutations</title>
+      <link>https://solon-karapanagiotis.com/tag/permutations/</link>
+    </image>
+    
+    <item>
+      <title># 134 Puzzle from the New Scientist</title>
+      <link>https://solon-karapanagiotis.com/post/new_scientist_puzzle_134/puzzle_134/</link>
+      <pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/new_scientist_puzzle_134/puzzle_134/</guid>
+      <description>
+
+
+&lt;p&gt;Another puzzle from the &lt;a href=&#34;https://www.newscientist.com/&#34;&gt;New Scientist&lt;/a&gt; - &lt;a href=&#34;https://www.newscientist.com/article/mg25133551-300-puzzle-134-can-you-work-out-which-keyboard-to-hack/&#34;&gt;#134: Can you work out which keyboard to hack?&lt;/a&gt;. It goes as follows:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;James Blond edges along the corridors of the supervillain’s base, and comes to two locked doors, each with a keypad that requires a four-digit code. He will need to get through one of the doors, but there is no time to guess a four-digit code – the number of possible combinations is staggering!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;But wait! Some of the buttons on the keypads are visibly worn down, while others look as if they have never been pressed.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;One door has a keypad with four worn buttons, the other has three. Blond only has time to try one door, and he will have to try all the possible combinations.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Which of the two keypads will give him fewer combinations to try – the one with four worn buttons, or the one with three?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Here we are interested in the order of the four numbers, that is all possible &lt;a href=&#34;https://en.wikipedia.org/wiki/Permutation&#34;&gt;permutations&lt;/a&gt; of four digits.&lt;/p&gt;
+&lt;p&gt;For the door with the four worn buttons (let’s call it Door 1) we can calculate all the permutations as follows:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Pick one of the four numbers (there are four choices in this step).&lt;/li&gt;
+&lt;li&gt;Pick one of the remaining three numbers (there are three choices).&lt;/li&gt;
+&lt;li&gt;Pick one of the remaining two numbers (two choices).&lt;/li&gt;
+&lt;li&gt;Stick the last number on the end.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;By multiplying these choices together to get our result: &lt;span class=&#34;math inline&#34;&gt;\(4 \times 3 \times 2 (\times 1) = 24\)&lt;/span&gt; possible permutations.&lt;/p&gt;
+&lt;p&gt;The actual formula behind the calculation is &lt;span class=&#34;math inline&#34;&gt;\(n!/(n-r)!\)&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; is the number of things to choose from,
+and we choose &lt;span class=&#34;math inline&#34;&gt;\(r\)&lt;/span&gt; of them, with no repetitions (we need to choose each number only once). For us, &lt;span class=&#34;math inline&#34;&gt;\(n= r= 4\)&lt;/span&gt; since we have &lt;span class=&#34;math inline&#34;&gt;\(n=4\)&lt;/span&gt; digits to choose from and we choose &lt;span class=&#34;math inline&#34;&gt;\(r=4\)&lt;/span&gt; which gives &lt;span class=&#34;math inline&#34;&gt;\(4!/(0!) = 4!/1 = 4 \times 3 \times 2 \times 1 = 24\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The factorial function (symbol: &lt;span class=&#34;math inline&#34;&gt;\(!\)&lt;/span&gt;) just means to multiply a series of descending natural numbers. Example: &lt;span class=&#34;math inline&#34;&gt;\(7! = 7 × 6 × 5 × 4 × 3 × 2 × 1 = 5,040\)&lt;/span&gt;. Note, it is generally agreed that &lt;span class=&#34;math inline&#34;&gt;\(0! = 1\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The reasoning for the door with three worn buttons (Door 2) is slightly more involved. First, I introduce the letters &lt;span class=&#34;math inline&#34;&gt;\(A, B\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(C\)&lt;/span&gt; to denote each of the three worn buttons on the keypad- it doesn’t matter which is which. We can arrange the three letters in &lt;span class=&#34;math inline&#34;&gt;\(3!\)&lt;/span&gt; ways. This follows the same reasoning as before. Now, let’s assume the following order&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\({\color{BrickRed}*}, A, *, B, *, C, {\color{BrickRed}*}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where the asterisks indicate positions where the letters can be repeated. For example, if &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt; is repeated then I simply replace the asterisks with &lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt;. We then get&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(A, A, B, C\)&lt;/span&gt; (I replaced the first asterisk)&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(A, A, B, C\)&lt;/span&gt; (I replaced the second asterisk)&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(A, B, A, C\)&lt;/span&gt; (I replaced the third asterisk)&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(A, B, C, A\)&lt;/span&gt; (I replaced the fourth asterisk)&lt;/p&gt;
+&lt;p&gt;Note the first two are actually the same. So, in effect, two asterisks (shown in red above) are superfluous. This reduces the positions the letters can be repeated to 2. And since we can repeat any of the 3 letters (&lt;span class=&#34;math inline&#34;&gt;\(A\)&lt;/span&gt; or &lt;span class=&#34;math inline&#34;&gt;\(B\)&lt;/span&gt; or &lt;span class=&#34;math inline&#34;&gt;\(C\)&lt;/span&gt;), the number of possible permutations is &lt;span class=&#34;math inline&#34;&gt;\(3! \times 2 \times 3 = 36\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Hence, James should go for Door 1 with the four worn digits as he will need at most 24 attempts compared to 36 attempts for Door 2.&lt;/p&gt;
+&lt;div id=&#34;update-151021&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Update 15/10/21&lt;/h2&gt;
+&lt;p&gt;The &lt;a href=&#34;https://www.newscientist.com/article/mg25133564-500-puzzle-135-how-do-you-hit-the-jackpot-on-this-machine/&#34;&gt;solution&lt;/a&gt; from the New Scientist.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

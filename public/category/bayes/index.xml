@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bayes | </title>
+    <link>https://solon-karapanagiotis.com/category/bayes/</link>
+      <atom:link href="https://solon-karapanagiotis.com/category/bayes/index.xml" rel="self" type="application/rss+xml" />
+    <description>Bayes</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Solon Karapanagiotis 2018-2023</copyright><lastBuildDate>Sat, 22 May 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://solon-karapanagiotis.com/media/icon.png</url>
+      <title>Bayes</title>
+      <link>https://solon-karapanagiotis.com/category/bayes/</link>
+    </image>
+    
+    <item>
+      <title>Outliers: Which prior are you using?</title>
+      <link>https://solon-karapanagiotis.com/post/outliers/outliers/</link>
+      <pubDate>Sat, 22 May 2021 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/outliers/outliers/</guid>
+      <description>
+
+
+&lt;p&gt;This post is concerned with a ubiquitous problem of outliers. They are infamous for degrading the performance of many models/algorithms. As a result, ongoing attempts try to accommodate them by deriving robust estimators. Unfortunately, these estimators have drawbacks such as being less efficient. In this post, I approach the problem from a Bayesian viewpoint. I illustrate how the issue of outliers connects with our prior beliefs about the data collection procedure. This leads me to show how a simple but flexible Bayesian model allows us to accommodate outliers without inheriting the drawbacks of other estimators.&lt;/p&gt;
+&lt;p&gt;Disclaimer: This post is heavily inspired by the work of &lt;span class=&#34;citation&#34;&gt;Jaynes (&lt;a href=&#34;#ref-jaynes2003probability&#34; role=&#34;doc-biblioref&#34;&gt;2003&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;div id=&#34;the-problem&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The problem&lt;/h2&gt;
+&lt;p&gt;Imagine we are interested in a quantity &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;, which is unknown. The subsequent, logical step is to try to quantify our uncertainty about &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; by collecting some data. That is, we are trying to measure &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;. But the data collection procedure (or apparatus) is always imperfect and so having &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; independent measurements of &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;, we have &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; different results ($x_1, …, x_n $). How are we going to proceed on estimating &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;, what is the “best” estimate to use?
+If the &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; data points are “close” together the problem of drawing conclusion about &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; is not very difficult. But if they are not nicely clustered: one value, &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt;, lies far away from the other &lt;span class=&#34;math inline&#34;&gt;\(n-1\)&lt;/span&gt; values? How are we going to deal with this outlier&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-dilemma&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The dilemma&lt;/h2&gt;
+&lt;p&gt;Two opposite views have been expressed:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;The outlier should not have been included in the data. The data have been contaminated and the outlier needs to be removed otherwise we may get erroneous conclusions.&lt;/li&gt;
+&lt;li&gt;The outlier may be the most important datapoint we have so it must be taken into account in the analysis. In other words, it may be desirable to describe the population including all observations. For only in that way do we describe what is actually happening &lt;span class=&#34;citation&#34;&gt;(Dixon &lt;a href=&#34;#ref-dixon1950analysis&#34; role=&#34;doc-biblioref&#34;&gt;1950&lt;/a&gt;)&lt;/span&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;These viewpoints reflect different prior information about the data collection procedure. The first view is reasonable if we believe &lt;em&gt;a priori&lt;/em&gt; the data collection procedure is unreliable. That is, any now and then and without warning we can get an erroneous measurement. The second view is reasonable if we have absolute confidence in the data collection procedure. Then the outlier is an important result and ignoring it may harm us.&lt;/p&gt;
+&lt;p&gt;Clearly these are extreme positions, and in real-life the researcher is in a intermediate position. If they knew the apparatus is unreliable they would have choose not to collect data in the first place or improve the apparatus. Of course, in some situations we are obliged to use whatever “apparatus” we have access to. So the question arises can we formalise an intermediate position?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;robustness&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Robustness&lt;/h2&gt;
+&lt;p&gt;Such an intermediate position is the idea of robustness. Researchers sometimes use various “robust” procedures, which protect against the possibility (or presence) of outliers. These techniques do not directly examine the outliers but accommodate them at no serious inconvenience &lt;span class=&#34;citation&#34;&gt;(Barnett and Lewis &lt;a href=&#34;#ref-barnett1974outliers&#34; role=&#34;doc-biblioref&#34;&gt;1974&lt;/a&gt;)&lt;/span&gt;. Certain estimators, especially the mean and least squares estimators, are particularly vulnerable to outliers, or have low breakdown values&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For this reason, researchers turn to robust or high breakdown methods to provide alternative estimators for these important aspects of the data. A common robust estimation method for univariate distributions involves the use of a trimmed mean, which is calculated by temporarily eliminating extreme observations at both ends of the sample (very high and low values) &lt;span class=&#34;citation&#34;&gt;(Anscombe &lt;a href=&#34;#ref-anscombe1960rejection&#34; role=&#34;doc-biblioref&#34;&gt;1960&lt;/a&gt;)&lt;/span&gt;. Alternatively, researchers may choose to compute a Windsorized mean, for which the highest and lowest observations are temporarily censored, and replaced with adjacent values from the remaining data.&lt;/p&gt;
+&lt;p&gt;The issue arises from the fact that robust qualities - however defined - must
+be bought at a price: poorer performance when the model is correct. This is usually reported by some trade-off between the conflicting requirements of robustness and accuracy.&lt;/p&gt;
+&lt;p&gt;As an example, lets look at the median which is often cited as a robust estimator. The downside of the median is that it is less efficient than the mean. This is because it does not take into account the precise value of each observation and hence does not use all information available in the data. The standard error of the median (&lt;span class=&#34;math inline&#34;&gt;\(\sigma_{median}\)&lt;/span&gt;) for large samples and normal distributions is:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \sigma_{median} \approx 1.25 \frac{\sigma}{\sqrt{N}} = 1.25 \sigma_{mean}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(\sigma\)&lt;/span&gt; is the population standard deviation and &lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt; the sample size.
+Thus, the standard error of the median is about &lt;span class=&#34;math inline&#34;&gt;\(25\%\)&lt;/span&gt; larger than that for the mean &lt;span class=&#34;citation&#34;&gt;(Maindonald and Braun &lt;a href=&#34;#ref-maindonald2006data&#34; role=&#34;doc-biblioref&#34;&gt;2006&lt;/a&gt;, Chapter 4)&lt;/span&gt;. Hence, the median is less efficient estimator when the model in correct, i.e the data come from normal distributions. Later, I will show that Bayesian analysis automatically delivers robustness whenever it is desirable without throwing away relevant information. But first I introduce how the apparatus generates data.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-model&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The model&lt;/h2&gt;
+&lt;p&gt;Following &lt;span class=&#34;citation&#34;&gt;Box and Tiao (&lt;a href=&#34;#ref-box1968bayesian&#34; role=&#34;doc-biblioref&#34;&gt;1968&lt;/a&gt;)&lt;/span&gt; I assume that the apparatus produces good and bad measurements. So we have a “good” sampling distribution&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[G(x|\theta)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;parametrized by &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;. The “bad” sampling distribution&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[B(x|\xi)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;possibly containing an uninteresting parameter &lt;span class=&#34;math inline&#34;&gt;\(\xi\)&lt;/span&gt;. Data from &lt;span class=&#34;math inline&#34;&gt;\(B(x|\xi)\)&lt;/span&gt; are useless or worse for estimating &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;, since their occurrence probability has nothing to do with &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;. Our sample consists of &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; observations&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[D = (x_1 \dots x_n)\]&lt;/span&gt;
+The trouble is we do not know which is which. However, we may be able to guess since a datapoint far away from the tails of &lt;span class=&#34;math inline&#34;&gt;\(G(x|\theta)\)&lt;/span&gt; can be suspected of being bad. Let’s define&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{equation}
+       q_i = 
+        \begin{cases}
+            1 &amp;amp; \text{if the ith datapoint is good} \\
+            0 &amp;amp; \text{if it is bad,}
+        \end{cases} 
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;with joint prior probabilities&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[p(q_1 \dots q_n)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;to the &lt;span class=&#34;math inline&#34;&gt;\(2^n\)&lt;/span&gt; sequences of good and bad.&lt;/p&gt;
+&lt;p&gt;Consider the most common case where our prior information about the good and bad observations is invariant on the particular trial at which they occur. That is, the probability of any sequence of &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; good/bad observations depends only on the numbers &lt;span class=&#34;math inline&#34;&gt;\(r\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(n-r\)&lt;/span&gt; of good and bad ones. Then, under de Finetti’s representation theorem &lt;span class=&#34;citation&#34;&gt;(De Finetti &lt;a href=&#34;#ref-de1972probability&#34; role=&#34;doc-biblioref&#34;&gt;1972&lt;/a&gt;)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:deFinetti&#34;&gt;\[\begin{equation}
+p(q_1 \dots q_n) = \int_{0}^{1} u^r (1-u)^{n-r} dg(u)
+\tag{1}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;The theorem above is equivalent to assuming that &lt;span class=&#34;math inline&#34;&gt;\(q_i\)&lt;/span&gt; are independent Bern(&lt;span class=&#34;math inline&#34;&gt;\(u\)&lt;/span&gt;) (Bernoulli) random variables with &lt;span class=&#34;math inline&#34;&gt;\(u\)&lt;/span&gt;, given a prior distribution &lt;span class=&#34;math inline&#34;&gt;\(g(u)\)&lt;/span&gt;. Consequently, our sampling distribution can be written as a probability mixture of the good and bad distributions&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:mixturedistr&#34;&gt;\[\begin{equation}
+p(x|\theta,\xi,u) = u G(x|\theta) + (1-u) B(x|\xi)
+\tag{2}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; can be thought of the parameter of interest while (&lt;span class=&#34;math inline&#34;&gt;\(\xi,u\)&lt;/span&gt;) are nuisance parameters.
+In the next section, I show how a simple, flexible Bayesian solution allows for robustness. Throughout I assume &lt;span class=&#34;math inline&#34;&gt;\(u\)&lt;/span&gt; is unknown, which is in line with real-life scenarios.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-solution&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The solution&lt;/h2&gt;
+&lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(p(\theta,\xi,u)\)&lt;/span&gt; be the joint prior density for the parameters. Under Bayes theorem their joint posterior density, given the data &lt;span class=&#34;math inline&#34;&gt;\(D\)&lt;/span&gt;, becomes&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[p(\theta,\xi,u|D) \propto L(\theta,\xi,u) p(\theta,\xi,u),\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;and from &lt;a href=&#34;#eq:mixturedistr&#34;&gt;(2)&lt;/a&gt;,&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:jointlikelihood&#34;&gt;\[\begin{equation}
+L(\theta,\xi,u) = \prod_{i=1}^{n} \Big[ u G(x|\theta) + (1-u) B(x|\xi) \Big]
+\tag{3}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;is the likelihood. The marginal posterior density for the parameter of interest &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; is&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:marginaltheta&#34;&gt;\[\begin{equation}
+p(\theta|D) = \int \int p(\theta,\xi,u|D) d\xi du.
+\tag{4}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Another formulation of &lt;a href=&#34;#eq:marginaltheta&#34;&gt;(4)&lt;/a&gt; is&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ p(\theta|D) = \frac{p(\theta) \bar{L}(\theta)} {\int p(\theta) \bar{L}(\theta) d\theta}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(p(\theta)\)&lt;/span&gt; is the marginal prior density for &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\bar{L}(\theta)\)&lt;/span&gt; is the quasi-likelihood defined as&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:quasilikelihood&#34;&gt;\[\begin{equation}
+\bar{L}(\theta) = \int \int L(\theta,\xi,u) h(\xi,u|\theta) d\xi du.
+\tag{5}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;which results from decomposing the prior joint density &lt;span class=&#34;math inline&#34;&gt;\(p(\theta,\xi,u)\)&lt;/span&gt; into&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[p(\theta,\xi,u) = h(\xi,u|\theta) p(\theta)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(h(\xi,u|\theta)\)&lt;/span&gt; is the joint prior for &lt;span class=&#34;math inline&#34;&gt;\((\xi,u)\)&lt;/span&gt; given &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;.
+Substituting &lt;a href=&#34;#eq:jointlikelihood&#34;&gt;(3)&lt;/a&gt; into &lt;a href=&#34;#eq:quasilikelihood&#34;&gt;(5)&lt;/a&gt;, we have&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:quasilikelihoodex&#34;&gt;\[\begin{equation}
+\begin{split}
+\bar{L}(\theta) = \int \int h(\xi,u|\theta) d\xi du \Big[ u^n L(\theta) + u^{n-1} (1-u) \sum_{j=1}^n B(x_j|\xi) L_j(\theta) \\
++ n^{n-2} (1-u)^2 \sum_{j&amp;lt; k} B(x_j|\xi) B(x_k|\xi) L_{jk}(\theta) + \dots \\
++ (1-u)^n B(x_1|\xi) \dots B(x_n|\xi) \Big]
+\end{split}
+\tag{6}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{equation}
+\begin{split}
+L(\theta) = \prod_{i = 1}^n G(x_i|\theta) \\
+L_j(\theta) = \prod_{i \neq j} G(x_i|\theta) \\
+L_{jk}(\theta) = \prod_{i \neq j,k} G(x_i|\theta) \dots
+\end{split}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;are a sequence of likelihood functions for the good distributions in which we use all the data, all except &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt;, all except &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(x_k\)&lt;/span&gt; etc. Note that the coefficient of &lt;span class=&#34;math inline&#34;&gt;\(L(\theta)\)&lt;/span&gt; in &lt;a href=&#34;#eq:quasilikelihoodex&#34;&gt;(6)&lt;/a&gt;,&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:simplification&#34;&gt;\[\begin{equation}
+\int \int h(\xi,u|\theta) u^n d\xi du = \int h(u|\theta)u^n du,   
+\tag{7}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;is the probability that all the data &lt;span class=&#34;math inline&#34;&gt;\(D\)&lt;/span&gt; are good conditional on &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;&lt;a href=&#34;#fn3&#34; class=&#34;footnote-ref&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;. This is in the form &lt;a href=&#34;#eq:deFinetti&#34;&gt;(1)&lt;/a&gt;, in which the function &lt;span class=&#34;math inline&#34;&gt;\(g(u)\)&lt;/span&gt; is the prior &lt;span class=&#34;math inline&#34;&gt;\(h(u|\theta)\)&lt;/span&gt;. Likewise, the coefficient of &lt;span class=&#34;math inline&#34;&gt;\(L_j(\theta)\)&lt;/span&gt; is&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \int \int h(\xi,u|\theta) u^{n-1} (1-u) B(x_j|\xi)  d\xi du =\\ 
+\int u^{n-1} (1-u) du \int B(x_j|\xi) h(\xi,u|\theta) d\xi.\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Following the same reasoning, this is the probability, given &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;, that the jth datapoint would be bad and would have the value &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt; and the other data would be good. Putting &lt;span class=&#34;math inline&#34;&gt;\(\bar{L}(\theta)\)&lt;/span&gt; into words&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{equation}
+\begin{array}{l@{}l}
+\bar{L}(\theta) &amp;amp;{} = \text{prob(all the data are good)} \times \text{(likelihood using all the data)} \\
+&amp;amp;{} + \sum_j \text{prob(only $x_j$ bad)} \times \text{(likelihood using all the data except $x_j$)} \\
+&amp;amp;{} + \dots  \\
+&amp;amp;{} + \text{prob(all the data are bad)}.
+\end{array}
+\label{quasiinwords}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;In short, &lt;span class=&#34;math inline&#34;&gt;\(\bar{L}(\theta)\)&lt;/span&gt; is a weighted average of likelihoods resulting from every possible assumption about each datapoint &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt;, weighted by the prior probabilities of those assumptions.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;an-example&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;An example&lt;/h2&gt;
+&lt;p&gt;Suppose we are interested in a location parameter, and have a sample of 10 observations. But one datapoint &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt; moves away from the cluster of the others. How will this datapoint affect our conclusions about &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;? The answer depends on the model we specify. If we assume the sampling distribution &lt;span class=&#34;math inline&#34;&gt;\(G(x|\theta)\)&lt;/span&gt; to be Gaussian i.e. &lt;span class=&#34;math inline&#34;&gt;\(x \sim N(\theta, \sigma)\)&lt;/span&gt;, and our prior for &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; wide, then the Bayesian estimate will remain equal to the sample average and our datapoint &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt; will pull the estimate far away from the average indicated by the nine other data values. However, this analysis assumes that we know in advance that &lt;span class=&#34;math inline&#34;&gt;\(u =1\)&lt;/span&gt;, all the data are good i.e. come from &lt;span class=&#34;math inline&#34;&gt;\(G\)&lt;/span&gt;. In such a case the study of datapoint &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt; may be of significance since it gives us information about &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;. The rejection of &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt; would then be fault. On the other hand, if we believe that &lt;span class=&#34;math inline&#34;&gt;\(x_j\)&lt;/span&gt; should be thrown out, then we don’t actually believe in our assumption that &lt;span class=&#34;math inline&#34;&gt;\(u = 1\)&lt;/span&gt; strongly enough to adhere to it in the presence of the this surprising datapoint. A model like &lt;a href=&#34;#eq:mixturedistr&#34;&gt;(2)&lt;/a&gt; would then be more realistic.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;connection-with-adversarial-training-in-machine-learning&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Connection with adversarial training in Machine Learning&lt;/h2&gt;
+&lt;p&gt;In fact, model &lt;a href=&#34;#eq:mixturedistr&#34;&gt;(2)&lt;/a&gt; is the cornerstone of adversarial training in Machine Learning (ML). In adversarial training, the basic idea is to simply create and then incorporate adversarial data into the training process. The researcher then evaluates how robust is the output of the model to such perturbations of the input data. The entire area of adversarial ML studies ways to create robust learning algorithms that withstand such perturbations. The area of adversarial ML arose after observing that standard learning methods degrade rapidly in the presence of perturbations &lt;span class=&#34;citation&#34;&gt;(Kurakin, Goodfellow, and Bengio &lt;a href=&#34;#ref-kurakin2016adversarial&#34; role=&#34;doc-biblioref&#34;&gt;2016&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The formal study of robust estimation was initiated by &lt;span class=&#34;citation&#34;&gt;(Huber &lt;a href=&#34;#ref-huber1964&#34; role=&#34;doc-biblioref&#34;&gt;1964&lt;/a&gt;, &lt;a href=&#34;#ref-huber1965&#34; role=&#34;doc-biblioref&#34;&gt;1965&lt;/a&gt;)&lt;/span&gt; who considered estimation procedures under the &lt;span class=&#34;math inline&#34;&gt;\(\epsilon\)&lt;/span&gt;-contamination model, where samples are obtained from a mixture model of the form:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{equation}
+ P_{\epsilon} = (1 - \epsilon) P + \epsilon Q,
+\label{Huber_contamination}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(P\)&lt;/span&gt; is the uncontaminated target distribution, &lt;span class=&#34;math inline&#34;&gt;\(Q\)&lt;/span&gt; is an arbitrary outlier distribution and &lt;span class=&#34;math inline&#34;&gt;\(\epsilon\)&lt;/span&gt; is the expected fraction of contamination. The distribution &lt;span class=&#34;math inline&#34;&gt;\(Q\)&lt;/span&gt; allows for arbitrary contamination, which may correspond to gross corruptions or more subtle deviations from the assumed model. This is exactly our model in &lt;a href=&#34;#eq:mixturedistr&#34;&gt;(2)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Summarising, the Bayesian solution can capture our prior knowledge about how the data are being generated. Allowing for a more flexible Bayesian model gives desirable qualities of robustness &lt;em&gt;automatically&lt;/em&gt;. As a result, we may be able to bypass the need to derive robust estimators which, as we saw, come with drawbacks. This fact could be used in adversarial ML applications.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-anscombe1960rejection&#34;&gt;
+&lt;p&gt;Anscombe, Frank J. 1960. “Rejection of Outliers.” &lt;em&gt;Technometrics&lt;/em&gt; 2 (2): 123–46.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-barnett1974outliers&#34;&gt;
+&lt;p&gt;Barnett, Vic, and Toby Lewis. 1974. &lt;em&gt;Outliers in Statistical Data&lt;/em&gt;. Wiley.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-box1968bayesian&#34;&gt;
+&lt;p&gt;Box, George EP, and George C Tiao. 1968. “A Bayesian Approach to Some Outlier Problems.” &lt;em&gt;Biometrika&lt;/em&gt; 55 (1): 119–29.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-de1972probability&#34;&gt;
+&lt;p&gt;De Finetti, Bruno. 1972. “Probability, Induction, and Statistics.”&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-dixon1950analysis&#34;&gt;
+&lt;p&gt;Dixon, Wilfred J. 1950. “Analysis of Extreme Values.” &lt;em&gt;The Annals of Mathematical Statistics&lt;/em&gt; 21 (4): 488–506.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-grubbs1969procedures&#34;&gt;
+&lt;p&gt;Grubbs, Frank E. 1969. “Procedures for Detecting Outlying Observations in Samples.” &lt;em&gt;Technometrics&lt;/em&gt; 11 (1): 1–21.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-huber1964&#34;&gt;
+&lt;p&gt;Huber, Peter J. 1964. “Robust Estimation of a Location Parameter.” &lt;em&gt;Ann. Math. Statist.&lt;/em&gt; 35 (1): 73–101. &lt;a href=&#34;https://doi.org/10.1214/aoms/1177703732&#34;&gt;https://doi.org/10.1214/aoms/1177703732&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-huber1965&#34;&gt;
+&lt;p&gt;———. 1965. “A Robust Version of the Probability Ratio Test.” &lt;em&gt;Ann. Math. Statist.&lt;/em&gt; 36 (6): 1753–8. &lt;a href=&#34;https://doi.org/10.1214/aoms/1177699803&#34;&gt;https://doi.org/10.1214/aoms/1177699803&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-jaynes2003probability&#34;&gt;
+&lt;p&gt;Jaynes, Edwin T. 2003. &lt;em&gt;Probability Theory: The Logic of Science&lt;/em&gt;. Cambridge University Press.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-kurakin2016adversarial&#34;&gt;
+&lt;p&gt;Kurakin, Alexey, Ian Goodfellow, and Samy Bengio. 2016. “Adversarial Machine Learning at Scale.” &lt;em&gt;arXiv Preprint arXiv:1611.01236&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-maindonald2006data&#34;&gt;
+&lt;p&gt;Maindonald, John, and John Braun. 2006. &lt;em&gt;Data Analysis and Graphics Using R: An Example-Based Approach&lt;/em&gt;. Vol. 10. Cambridge University Press.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-serfling2011asymptotic&#34;&gt;
+&lt;p&gt;Serfling, Robert. 2011. “Asymptotic Relative Efficiency in Estimation.” &lt;em&gt;International Encyclopedia of Statistical Science&lt;/em&gt; 23 (13): 68–72.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;I define an outlier as an observation which seems “to deviate markedly from the other members of the data sample in which it appears.” &lt;span class=&#34;citation&#34;&gt;(Grubbs &lt;a href=&#34;#ref-grubbs1969procedures&#34; role=&#34;doc-biblioref&#34;&gt;1969&lt;/a&gt;)&lt;/span&gt;?&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;The breakdown point of an estimator is the proportion of incorrect observations (e.g. arbitrarily large observations) an estimator can handle before giving an incorrect (e.g., arbitrarily large) result. See &lt;span class=&#34;citation&#34;&gt;Serfling (&lt;a href=&#34;#ref-serfling2011asymptotic&#34; role=&#34;doc-biblioref&#34;&gt;2011&lt;/a&gt;)&lt;/span&gt; for a formal definition.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;In &lt;a href=&#34;#eq:simplification&#34;&gt;(7)&lt;/a&gt; I assume that &lt;span class=&#34;math inline&#34;&gt;\(u\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\xi\)&lt;/span&gt; are independent. That is, &lt;span class=&#34;math inline&#34;&gt;\(h(\xi,u) = h(\xi) h(u)\)&lt;/span&gt;, which a reasonable assumption.&lt;a href=&#34;#fnref3&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

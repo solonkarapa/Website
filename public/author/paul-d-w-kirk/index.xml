@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Paul D W Kirk | </title>
+    <link>https://solon-karapanagiotis.com/author/paul-d-w-kirk/</link>
+      <atom:link href="https://solon-karapanagiotis.com/author/paul-d-w-kirk/index.xml" rel="self" type="application/rss+xml" />
+    <description>Paul D W Kirk</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Solon Karapanagiotis 2018-2023</copyright><lastBuildDate>Sat, 07 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://solon-karapanagiotis.com/media/icon.png</url>
+      <title>Paul D W Kirk</title>
+      <link>https://solon-karapanagiotis.com/author/paul-d-w-kirk/</link>
+    </image>
+    
+    <item>
+      <title>Tailored Bayes: a risk modeling framework under unequal misclassification costs</title>
+      <link>https://solon-karapanagiotis.com/publication/tailoredbayes/</link>
+      <pubDate>Sat, 07 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/tailoredbayes/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
