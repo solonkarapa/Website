@@ -1,0 +1,118 @@
+---
+title: "# 212 Puzzle from the New Scientist"
+author: Me
+date: '2023-02-08'
+slug: puzzle212
+categories:
+  - puzzle
+tags: [puzzle]
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2023-03-30T14:27:06Z'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: yes
+projects: []
+draft: TRUE
+---
+
+
+
+<p><a href="https://www.newscientist.com/article/mg25734291-300-puzzle-212-can-you-work-out-how-sams-mum-can-unmute-her-television/">Puzzle #212</a> from the New Scientist is:</p>
+<blockquote>
+<p>“Why isn’t the sound working?”, Mum muttered as she hit the mute key on the remote control.</p>
+</blockquote>
+<blockquote>
+<p>“You’ve probably got the wrong remote, Mum”, Sam said. “Remember, it’s the long, thin one for the television, the wide one for the set-top box and the little one for the speakers. Which one did you mute?”</p>
+</blockquote>
+<blockquote>
+<p>“I can’t remember”, said Mum, as she got her thinking cap on to try to fix things.</p>
+</blockquote>
+<blockquote>
+<p>To get sound, all three remotes have to be unmuted. Mum came up with the most efficient system for cycling through the possible combinations of muting and unmuting, and got to work.</p>
+</blockquote>
+<blockquote>
+<p>What is the maximum number of presses needed if she wanted to be sure of getting the sound back?</p>
+</blockquote>
+<div id="solution" class="section level2">
+<h2>Solution</h2>
+<p>Each remote can be in one of two states {mute or unmute}. There are three remotes, so in total there are <span class="math inline">\(2^3=8\)</span> possible states.</p>
+<p>An example of a state is {mute, mute, unmute}. The desired state is {unmute, unmute, unmute}.</p>
+<p>We’ll start by finding an efficient system for cycling through the possible combinations of states.</p>
+<p>The system goes as follows:</p>
+<ol style="list-style-type: decimal">
+<li>choose a remote and press the mute/unmute button.
+<ol style="list-style-type: lower-alpha">
+<li>If no sound, repeat step 1, but this time choosing a different remote.
+<ul>
+<li>The worst-case scenario requires 3 presses. We may need to cycle through 1, 2 or all 3 remotes.</li>
+</ul></li>
+</ol></li>
+<li>After testing all three remotes in step 1 and provided there is no sound we start over again but now choosing two remotes together and pressing the mute/unmute buttons.
+<ol style="list-style-type: lower-alpha">
+<li>If no sound, repeat step 2, but this time choosing the other remotes.
+<ul>
+<li>The worst-case scenario this requires 3 presses. That is we can choose, to press remote 1 and remote 2, remote 1 and remote 3, and, remote 1 and remote 3. In total 3 choices.</li>
+</ul></li>
+</ol></li>
+<li>For last step, we can press all three remotes simultaneously.
+<ul>
+<li>This requires 1 press.</li>
+</ul></li>
+</ol>
+<p>So the maximum number of presses is 7: 3 at step 1, 3 at step 2 and 1 at step 3. Let’s try to code this system to verify our answer.</p>
+</div>
+<div id="code" class="section level2">
+<h2>Code</h2>
+<pre class="r"><code># create a vector to store the status of each device (muted = 1, unmuted = 0)
+devices &lt;- c(1, 0, 1) # start from any state
+
+# create a function to check if all devices are unmuted
+check_sound &lt;- function(devices) {
+    sum(devices) == 3
+}</code></pre>
+<pre class="r"><code>counter &lt;- function(initial_state){
+   
+   if(length(initial_state) != 3){
+      stop(&quot;The function works for only 3 states at the moment.&quot;)
+   }
+   
+   devices &lt;- initial_state 
+
+   count &lt;- 0 # initialize a counter for the number of presses
+
+    # first check if all unmuted
+    if (check_sound(devices)) {
+       print(paste(&quot;Sound is on! Total number of button presses:&quot;, count))
+       }
+    
+    # check if changing all fixed the problem - this is step 3 above
+    devices[c(1, 2, 3)] &lt;- 1 - devices[c(1, 2, 3)]
+    count &lt;- count + 1 # add 1 count
+    
+    if (check_sound(devices)) {
+        print(paste(&quot;Sound is back! Total number of button presses:&quot;, count))
+       } else {
+          devices[c(1, 2, 3)] &lt;- 1 - devices[c(1, 2, 3)] # revert to initial state
+          }
+
+     # create indices to loop through
+      g &lt;- expand.grid(1:3, 1:3) %&gt;% mutate(Var3 = (Var1 == Var2)) %&gt;% arrange(desc(Var3))
+   
+    for (i in 1:nrow(g)) {
+       # checks  
+       indices &lt;- g[i,]
+       devices[c(indices$Var1, indices$Var2)] &lt;- 1 - devices[c(indices$Var1, indices$Var2)]
+    
+      if (check_sound(devices)) {
+         print(paste(&quot;Sound is back! Total number of button presses:&quot;, count))
+         } else {
+            count = count + 1
+            devices[c(indices$Var1, indices$Var2)] &lt;- 1 - devices[c(indices$Var1, indices$Var2)]
+            }
+      }
+}</code></pre>
+</div>
