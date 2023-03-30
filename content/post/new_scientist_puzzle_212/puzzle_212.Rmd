@@ -56,17 +56,19 @@ The system goes as follows:
 3) For last step, we can press all three remotes simultaneously. 
    - This requires 1 press.
 
-So the maximum number of presses is 7: 3 at step 1, 3 at step 2 and 1 at step 3. Let's try to code this system to verify our answer. 
+So the maximum number of presses is 7: 3 at step 1, 3 at step 2 and 1 at step 3. 
+Note, there is no requirement to follow steps 1 to 3 in this order. Any order works. In fact, the code below implements step 3 first. 
 
 ## Code 
+We represent the status of each device using binary values 0 and 1 where muted = 0, and unmuted = 1. So the state {mute, mute, unmute} is represented with c(0, 0, 1).
 
-
-```{r}
+```{r, warning=F, message=F}
 library(dplyr)
 library(combinat)
 library(purrr)
+library(ggplot2)
 
-# create a vector to store the status of each device (muted = 1, unmuted = 0)
+# create a vector to store the status of each device (muted = 0, unmuted = 1)
 devices <- c(1, 0, 1) # start from any state
 
 # create a function to check if all devices are unmuted
@@ -75,7 +77,11 @@ check_sound <- function(devices) {
 }
 ```
 
+The function `counter()` counts the maximum button presses needed to go from any initial state to c(1, 1, 1), which corresponds to the unmuted state. 
+
 ```{r}
+# Function to count the button presses for the remotes to achieve state {1, 1, 1} from any initial state. 
+# The function takes a vector of 3 binary values indicating whether each device is muted (0) or unmuted (1).
 
 counter <- function(initial_state){
    
@@ -122,7 +128,16 @@ counter <- function(initial_state){
 }
 ```
 
+As an example, if we start from state c(1, 1, 0), and based on the system described above, we need at most 3 presses to get the sound back on. 
+
 ```{r}
+counter(c(1, 1, 0))$count
+```
+
+The plot shows the maximun number of presses needed to get the sound back from each state. Since the code first checks step 3 (pressing all three remotes simultaneously) then if we start from c(0, 0, 0) we are 1 press away from unmuting the TV. 
+
+```{r}
+# all possible states
 states <- list(c(0, 0, 0), c(1, 1, 1), 
                c(1, 0, 0), c(0, 1, 0), c(0, 0, 1),
                c(1, 1, 0), c(1, 0, 1), c(0, 1, 1)) 
@@ -134,7 +149,5 @@ ggplot(res) +
    geom_text(aes(x = initial_state, y = count + 0.5, label = count)) +
    labs(x = "Initial State", y = "Number of presses") +
    theme_linedraw(12)
-
-
 ```
 
