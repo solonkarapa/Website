@@ -1,7 +1,7 @@
 ---
 title: "# 212 Puzzle from the New Scientist"
 author: Me
-date: '2023-02-08'
+date: '2023-03-30'
 slug: puzzle212
 categories:
   - puzzle
