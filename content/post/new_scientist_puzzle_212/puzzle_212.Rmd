@@ -9,7 +9,7 @@ tags: [puzzle]
 subtitle: ''
 summary: ''
 authors: []
-lastmod: '2023-03-30T14:27:06Z'
+lastmod: '2023-03-31T14:27:06Z'
 featured: no
 image:
   caption: ''
@@ -37,30 +37,30 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Solution
 
-Each remote can be in one of two states {mute or unmute}. There are three remotes, so in total there are $2^3=8$ possible states. 
+Each remote can be in one of two states {muted or unmuted}. There are three remotes, so in total there are $2^3=8$ possible states. An example of a state is {muted, muted, unmuted}. 
 
-An example of a state is {mute, mute, unmute}. The desired state is {unmute, unmute, unmute}. 
+The desired state is {unmute, unmute, unmute}. We’ll start by finding a system for cycling through the possible combinations of states. 
 
-We’ll start by finding an efficient system for cycling through the possible combinations of states. 
+Such a system goes as follows:
 
-The system goes as follows:
+1) choose a remote and press the mute/unmute key. 
+    a) If no sound, press the mute/unmute key again (essentially going back to the initial state). Then repeat step 1, but this time choosing a different remote. 
+        - The worst-case scenario requires 3 presses. We may need to cycle through 1, 2 or all 3 remotes to getting the sound back on.
 
-1) choose a remote and press the mute/unmute button. 
-    a) If no sound, repeat step 1, but this time choosing a different remote. 
-        - The worst-case scenario requires 3 presses. We may need to cycle through 1, 2 or all 3 remotes. 
-
-2) After testing all three remotes in step 1 and provided there is no sound we start over again but now choosing two remotes together and pressing the mute/unmute buttons. 
-    a) If no sound, repeat step 2, but this time choosing the other remotes.
+2) After testing all three remotes in step 1, and provided there is no sound, we start over again but now choosing two remotes together and pressing the mute/unmute keys.
+    a) If no sound, press the mute/unmute key again (reverting to the initial state) and repeat step 2, but this time choosing the other remotes.
         - The worst-case scenario this requires 3 presses. That is we can choose, to press remote 1 and remote 2, remote 1 and remote 3, and, remote 1 and remote 3. In total 3 choices. 
 
 3) For last step, we can press all three remotes simultaneously. 
-   - This requires 1 press.
+   - We count this as 1 press.
 
 So the maximum number of presses is 7: 3 at step 1, 3 at step 2 and 1 at step 3. 
-Note, there is no requirement to follow steps 1 to 3 in this order. Any order works. In fact, the code below implements step 3 first. 
+Note, there is no requirement to follow steps 1 to 3 in this order. Any order works. The trick is to revert the remote(s) to their initial state (which is of course unknown) after each trial.
 
 ## Code 
-We represent the status of each device using binary values 0 and 1 where muted = 0, and unmuted = 1. So the state {mute, mute, unmute} is represented with c(0, 0, 1).
+This R program shows the maximum presses needed to go from any initial state to the unmuted state.
+
+We represent the status of each device using binary values 0 and 1 where muted = 0, and unmuted = 1. So the state {muted, muted, unmuted} is represented with c(0, 0, 1).
 
 ```{r, warning=F, message=F}
 library(dplyr)
@@ -77,7 +77,7 @@ check_sound <- function(devices) {
 }
 ```
 
-The function `counter()` counts the maximum button presses needed to go from any initial state to c(1, 1, 1), which corresponds to the unmuted state. 
+The function `counter()` counts the button presses needed to go from any initial state to c(1, 1, 1), i.e. the unmuted state. 
 
 ```{r}
 # Function to count the button presses for the remotes to achieve state {1, 1, 1} from any initial state. 
@@ -97,44 +97,52 @@ counter <- function(initial_state){
     if (check_sound(devices)) {
        out <- count
        }
-    
-    # check if changing all fixed the problem - this is step 3 above
-    devices[c(1, 2, 3)] <- 1 - devices[c(1, 2, 3)]
-    count <- count + 1 # add 1 count
-    
-    if (check_sound(devices)) {
-        out <- count
-       } else {
-          devices[c(1, 2, 3)] <- 1 - devices[c(1, 2, 3)] # revert to initial state
-          }
-
-     # create indices to loop through
-      g <- expand.grid(1:3, 1:3) %>% mutate(Var3 = (Var1 == Var2)) %>% arrange(desc(Var3))
    
+   # create look out frame for indices to be changed
+   g <- expand.grid(1:3, 1:3) %>% 
+         mutate(Var3 = (Var1 == Var2), add = Var1+Var2) %>% 
+      group_by(add, Var3) %>% 
+      slice_sample() %>% 
+      arrange(desc(Var3))
+
+   # this is steps 1 and 2 above
     for (i in 1:nrow(g)) {
        # checks  
        indices <- g[i,]
-       devices[c(indices$Var1, indices$Var2)] <- 1 - devices[c(indices$Var1, indices$Var2)]
+       devices[c(indices$Var1, indices$Var2)] <- 1 - devices[c(indices$Var1, indices$Var2)] # change 1 or 2 remotes. 
     
-      if (check_sound(devices)) {
-          out <- count
-         } else {
-            count = count + 1
-            devices[c(indices$Var1, indices$Var2)] <- 1 - devices[c(indices$Var1, indices$Var2)]
-            }
+         if (check_sound(devices)) {
+             out <- count + 1
+            } else {
+               count = count + 1
+               devices[c(indices$Var1, indices$Var2)] <- 1 - devices[c(indices$Var1, indices$Var2)] # revert to initial state
+               }
     }
       
-      return(data.frame(initial_state = paste(initial_state, collapse = " "), count = out))
+   # check if changing all fixed the problem - this is step 3 above
+   devices[c(1, 2, 3)] <- 1 - devices[c(1, 2, 3)]
+   count <- count + 1 # add 1 count
+    
+    if (check_sound(devices)) {
+        out <- count
+    }
+
+    output <- data.frame(initial_state = paste(initial_state, collapse = " "), 
+                         count = out)
+    
+   return(output)
 }
 ```
 
-As an example, if we start from state c(1, 1, 0), and based on the system described above, we need at most 3 presses to get the sound back on. 
+As an example, if we start from state c(0, 0, 1), and based on the system described above, we need 4 presses[^1] to get the sound back on. 
 
 ```{r}
-counter(c(1, 1, 0))$count
+counter(c(0, 0, 1))$count
 ```
 
-The plot shows the maximun number of presses needed to get the sound back from each state. Since the code first checks step 3 (pressing all three remotes simultaneously) then if we start from c(0, 0, 0) we are 1 press away from unmuting the TV. 
+The plot shows the number of presses needed to get the sound back. Since the code last checks step 3 (pressing all three remotes simultaneously) then if we start from c(0, 0, 0) we are 7 press away from unmuting the TV, which is the worst-case scenario. 
+
+In fact, 7 is the maximum number of presses needed, independent of the order steps 1 through 3 are implemented. 
 
 ```{r}
 # all possible states
@@ -150,4 +158,7 @@ ggplot(res) +
    labs(x = "Initial State", y = "Number of presses") +
    theme_linedraw(12)
 ```
+
+[^1]: This value depends on how we choose remotes in step 2. The code chooses to change the status of remotes 1 and 2, followed by 1 and 3 and 2 and 3. Hence, when we start from state c(0, 0, 1), we first change one remote at a time (step 1) and then the first and second simultaneously (step 2). This adds up to 4 presses. 
+
 
