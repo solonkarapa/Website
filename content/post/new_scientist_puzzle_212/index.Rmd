@@ -12,15 +12,17 @@ authors: []
 lastmod: '2023-03-31T14:27:06Z'
 featured: no
 image:
-  caption: ''
+  caption: 'created by DALL·E'
   focal_point: ''
-  preview_only: yes
+  preview_only: no
 projects: []
 draft: TRUE
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+#knitr::include_graphics('/post/new_scientist_puzzle_212/trial2.png')
+#![created by DALL·E](/post/new_scientist_puzzle_212/DALL·E 2023-04-14_remote_Medium.jpeg)
 ```
 
 [Puzzle #212](https://www.newscientist.com/article/mg25734291-300-puzzle-212-can-you-work-out-how-sams-mum-can-unmute-her-television/) from the New Scientist is: 
@@ -34,6 +36,7 @@ knitr::opts_chunk$set(echo = TRUE)
 > To get sound, all three remotes have to be unmuted. Mum came up with the most efficient system for cycling through the possible combinations of muting and unmuting, and got to work.
 
 > What is the maximum number of presses needed if she wanted to be sure of getting the sound back?
+
 
 ## Solution
 
