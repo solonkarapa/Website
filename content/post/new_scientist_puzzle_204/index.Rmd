@@ -12,9 +12,9 @@ authors: []
 lastmod: '2023-02-08T14:27:06Z'
 featured: no
 image:
-  caption: ''
+  caption: 'created by DALL·E'
   focal_point: ''
-  preview_only: yes
+  preview_only: no
 projects: []
 ---
 
