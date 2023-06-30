@@ -1,0 +1,170 @@
+---
+title: "# 224 Puzzle from the New Scientist"
+author: Me
+date: '2023-07-10'
+slug: puzzle224
+categories:
+  - puzzle
+tags: [puzzle]
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2023-02-08T14:27:06Z'
+featured: no
+image:
+  caption: 'created by DALL·E'
+  focal_point: ''
+  preview_only: no
+projects: []
+draft: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+[Puzzle #224](https://www.newscientist.com/article/mg25834411-000-puzzle-224-can-you-find-the-ring-inside-the-russian-dolls/) from the New Scientist is:
+
+> I collect Russian dolls, the type where each doll can be opened to reveal a smaller one inside. I am particularly fond of my simple, single-coloured ones, which come in sets of five (and, unusually, have a hollow smallest doll). I have five lovely sets of them, each a different colour.
+
+> Alas, while I was out, my daughter Kira rearranged them so that each large doll now contains one each of the four other colours. She proudly tells me that no blue doll contains a doll that has a yellow doll anywhere within it. There is no doll that contains a pink doll with a red doll anywhere within it. And no yellow doll contains a green doll with a pink doll anywhere within it.
+
+> “By the way, have you seen my wedding ring?” I ask her.
+
+> “Ah, I put that inside the smallest blue doll” replies Kira.
+
+> Which coloured doll should l open first if I want to find the ring as quickly as possible?
+
+
+The figure shows all the possible arrangement of the five dolls. The index indicates the doll size: 5 for the smallest and 1 for the largest. The letter indicates the colour: R for red, Y for yellow and so on. 
+
+As an example, the top path - `P1 R2 G3 Y4 B5`- corresponds to the combination pink, red, green, yellow and blue (from the largest to the smallest doll). 
+
+`B5` occupies the left hand size since we know the smallest doll is blue. 
+
+With the a few lines of code we aim to re-create the figure. As with the figure we have 24 possible arrangements.
+
+```{r, message = F}
+library(gtools)
+library(stringi)
+library(stringr)
+library(rebus) 
+
+colour <- c("blue", "yellow", "pink", "red", "green") # all the different colours
+
+numb <- 1:5 # the size index (1 is the largest)
+
+opt <- paste0(rep(colour, each = 5), "_", numb) # combine colour and index
+
+perms <- permutations(n = 25, r = 5, v = opt, repeats.allowed = F) # all the combinations of 5 dolls
+
+##### adding restrictions
+# 1: select only the ones where blue is the smallest doll
+blue_smallest_doll <- which(perms[,5] == "blue_5") # select only the ones where blue is the smallest doll
+
+perms2 <- perms[blue_smallest_doll,]
+
+# 2: select only the combinations where each color appears once and indexes are sorted correctly 
+combs <- c()
+for(i in 1:nrow(perms2)){
+    perms3 <- stri_split_fixed(perms2[i,], "_", simplify = T) # split the vectors into two
+    dupl <- sum(stri_duplicated(perms3[,1])) # check for uniqueness
+    sorted <- is.unsorted(perms3[,2], strictly = T) # check for correct order 
+    
+    if(dupl == 0 & sorted == 0){
+        combs <- rbind(perms2[i,], combs)
+    }
+}
+
+combs 
+```
+
+
+Then, we need to take into account the additional restrictions:
+
+1. "no doll that contains a pink doll with a red doll anywhere within it", and
+2. "no yellow doll contains a green doll with a pink doll anywhere within it".
+
+The first one is easy. We need to discard all solutions where pink is followed by red. This gives us 12 remaining solutions. 
+
+```{r}
+# 3: apply first restrictions 
+pattern_pink_red <- ("pink" %R% zero_or_more(WRD) %R% "red") # no doll contains a pink with a red doll anywhere within it
+
+ind <- c()
+for(i in 1:nrow(combs)){
+    splitted <- stri_split_fixed(combs[i,], "_", simplify = T) # split the vectors into two
+    
+    ind[i] <- str_detect(paste(splitted[,1], collapse = ""), pattern_pink_red, 
+               negate = T) # find patterns
+    
+}
+
+combs_update <- combs[ind, ]
+combs_update
+
+```
+
+Now, we move on to the second restriction. Unfortunately, we 2nd restriction is a quite vague, leading to different interpretations and different final solutions. Here are a few examples.
+
+### 1st interpretation 
+A way to interpret the restriction is to remove all solution where a pink dolls is inside a green which is *at the same time* inside a yellow one. This results in 9 solutions. 
+
+```{r}
+##### interpretation 1 
+pattern_yellow_green_pink <- ("yellow" %R% zero_or_more(WRD) %R% "green" %R% zero_or_more(WRD) %R% "pink") # no yellow doll contains a green doll with a pink inside it. 
+
+
+ind <- c()
+for(i in 1:nrow(combs_update)){
+    splitted <- stri_split_fixed(combs_update[i,], "_", simplify = T) # split the vectors into two
+    
+    ind[i] <- str_detect(paste(splitted[,1], collapse = ""), pattern_yellow_green_pink, 
+                         negate = T) # find patterns
+    
+}
+
+combs_update[ind, ]
+
+```
+
+### 2nd interpretation 
+
+Another interpretation is to additionally remove solutions where pink is inside green, *independently* where yellow is. 
+
+```{r}
+# option 2 
+pattern_green_pink <- ("green" %R% zero_or_more(WRD) %R% "pink") # no green doll with a pink doll anywhere within it
+                              
+ind <- c()
+for(i in 1:nrow(combs_update)){
+    splitted <- stri_split_fixed(combs_update[i,], "_", simplify = T) # split the vectors into two
+    
+    ind[i] <- str_detect(paste(splitted[,1], collapse = ""), or(pattern_yellow_green_pink, pattern_green_pink), 
+                         negate = T) # find patterns
+    
+}
+
+combs_update[ind, ]
+```
+
+### 3rd interpretation
+
+```{r}
+# option 3
+pattern_yellow_green<- ("yellow" %R% zero_or_more(WRD) %R% "green")
+
+ind <- c()
+for(i in 1:nrow(combs_update)){
+    splitted <- stri_split_fixed(combs_update[i,], "_", simplify = T) # split the vectors into two
+    
+    ind[i] <- str_detect(paste(splitted[,1], collapse = ""), or(pattern_yellow_green_pink, pattern_green_pink, pattern_yellow_green), 
+                         negate = T) # find patterns
+    
+}
+
+combs_update[ind, ]
+```
+
+This gives a unique solution `R1 P2 G3 Y4 B5` - which does not seem to violate any of the restrictions. Unfortuntately though it is different from the solution given by the New Scientist, which is `Y1 R2 P3 G4 B5`. 
+
