@@ -62,7 +62,7 @@ opt <- paste0(rep(colour, each = 5), "_", numb) # combine colour and index
 
 perms <- permutations(n = 25, r = 5, v = opt, repeats.allowed = F) # all the combinations of 5 dolls
 
-##### adding restrictions
+##### add restrictions
 # 1: select only the ones where blue is the smallest doll
 blue_smallest_doll <- which(perms[,5] == "blue_5") # blue is the smallest doll
 
@@ -92,10 +92,12 @@ The first one is easy. We need to discard all solutions where pink is followed b
 
 ```{r}
 # 3: apply first restriction
-pattern_pink_red <- ("pink" %R% zero_or_more(WRD) %R% "red") # no doll contains a pink with a red doll anywhere within it
+# no doll contains a pink with a red doll anywhere within it
+pattern_pink_red <- ("pink" %R% zero_or_more(WRD) %R% "red") 
 
 ind <- c()
 for(i in 1:nrow(combs)){
+   
     splitted <- stri_split_fixed(combs[i,], "_", simplify = T) # split the vectors into two
     
     ind[i] <- str_detect(paste(splitted[,1], collapse = ""), pattern_pink_red, negate = T) # find patterns
@@ -108,14 +110,16 @@ combs_update
 Now, we move on to the second restriction. Unfortunately, the 2nd restriction is a quite vague, leading to different interpretations and different final solutions. Here are a few examples.
 
 ### 1st interpretation 
-A way to interpret the restriction is to remove all solutions where a pink doll is inside a green one which is *at the same time* inside a yellow one. This results in 9 solutions. 
+A way to interpret the restriction is to remove all solutions where a pink doll is inside a green one, which is *at the same time*, inside a yellow one. This results in 9 solutions. 
 
 ```{r}
 ##### 1st interpretation 
-pattern_yellow_green_pink <- ("yellow" %R% zero_or_more(WRD) %R% "green" %R% zero_or_more(WRD) %R% "pink") # no yellow doll contains a green doll with a pink inside it. 
+# no yellow doll contains a green doll with a pink inside it
+pattern_yellow_green_pink <- ("yellow" %R% zero_or_more(WRD) %R% "green" %R% zero_or_more(WRD) %R% "pink") 
 
 ind <- c()
 for(i in 1:nrow(combs_update)){
+   
     splitted <- stri_split_fixed(combs_update[i,], "_", simplify = T) # split the vectors into two
     
     ind[i] <- str_detect(paste(splitted[,1], collapse = ""), pattern_yellow_green_pink, negate = T) # find patterns
@@ -130,10 +134,12 @@ Another interpretation is to *additionally* remove solutions where pink is insid
 
 ```{r}
 ##### 2nd interpretation 
-pattern_green_pink <- ("green" %R% zero_or_more(WRD) %R% "pink") # no green doll with a pink doll anywhere within it
+# no green doll with a pink doll anywhere within it
+pattern_green_pink <- ("green" %R% zero_or_more(WRD) %R% "pink") 
                               
 ind <- c()
 for(i in 1:nrow(combs_update)){
+   
     splitted <- stri_split_fixed(combs_update[i,], "_", simplify = T) # split the vectors into two
     
     ind[i] <- str_detect(paste(splitted[,1], collapse = ""), or(pattern_yellow_green_pink, pattern_green_pink), 
@@ -153,9 +159,11 @@ pattern_yellow_green<- ("yellow" %R% zero_or_more(WRD) %R% "green")
 
 ind <- c()
 for(i in 1:nrow(combs_update)){
+   
     splitted <- stri_split_fixed(combs_update[i,], "_", simplify = T) # split the vectors into two
     
-    ind[i] <- str_detect(paste(splitted[,1], collapse = ""), or(pattern_yellow_green_pink, pattern_green_pink, pattern_yellow_green), 
+    ind[i] <- str_detect(paste(splitted[,1], collapse = ""), 
+                         or(pattern_yellow_green_pink, pattern_green_pink, pattern_yellow_green), 
                          negate = T) # find patterns
     
 }

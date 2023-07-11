@@ -56,7 +56,7 @@ opt &lt;- paste0(rep(colour, each = 5), &quot;_&quot;, numb) # combine colour an
 
 perms &lt;- permutations(n = 25, r = 5, v = opt, repeats.allowed = F) # all the combinations of 5 dolls
 
-##### adding restrictions
+##### add restrictions
 # 1: select only the ones where blue is the smallest doll
 blue_smallest_doll &lt;- which(perms[,5] == &quot;blue_5&quot;) # blue is the smallest doll
 
@@ -107,10 +107,12 @@ combs </code></pre>
 </ol>
 <p>The first one is easy. We need to discard all solutions where pink is followed by red. This gives us 12 remaining solutions.</p>
 <pre class="r"><code># 3: apply first restriction
-pattern_pink_red &lt;- (&quot;pink&quot; %R% zero_or_more(WRD) %R% &quot;red&quot;) # no doll contains a pink with a red doll anywhere within it
+# no doll contains a pink with a red doll anywhere within it
+pattern_pink_red &lt;- (&quot;pink&quot; %R% zero_or_more(WRD) %R% &quot;red&quot;) 
 
 ind &lt;- c()
 for(i in 1:nrow(combs)){
+   
     splitted &lt;- stri_split_fixed(combs[i,], &quot;_&quot;, simplify = T) # split the vectors into two
     
     ind[i] &lt;- str_detect(paste(splitted[,1], collapse = &quot;&quot;), pattern_pink_red, negate = T) # find patterns
@@ -134,12 +136,14 @@ combs_update</code></pre>
 <p>Now, we move on to the second restriction. Unfortunately, the 2nd restriction is a quite vague, leading to different interpretations and different final solutions. Here are a few examples.</p>
 <div id="st-interpretation" class="section level3">
 <h3>1st interpretation</h3>
-<p>A way to interpret the restriction is to remove all solutions where a pink doll is inside a green one which is <em>at the same time</em> inside a yellow one. This results in 9 solutions.</p>
+<p>A way to interpret the restriction is to remove all solutions where a pink doll is inside a green one, which is <em>at the same time</em>, inside a yellow one. This results in 9 solutions.</p>
 <pre class="r"><code>##### 1st interpretation 
-pattern_yellow_green_pink &lt;- (&quot;yellow&quot; %R% zero_or_more(WRD) %R% &quot;green&quot; %R% zero_or_more(WRD) %R% &quot;pink&quot;) # no yellow doll contains a green doll with a pink inside it. 
+# no yellow doll contains a green doll with a pink inside it
+pattern_yellow_green_pink &lt;- (&quot;yellow&quot; %R% zero_or_more(WRD) %R% &quot;green&quot; %R% zero_or_more(WRD) %R% &quot;pink&quot;) 
 
 ind &lt;- c()
 for(i in 1:nrow(combs_update)){
+   
     splitted &lt;- stri_split_fixed(combs_update[i,], &quot;_&quot;, simplify = T) # split the vectors into two
     
     ind[i] &lt;- str_detect(paste(splitted[,1], collapse = &quot;&quot;), pattern_yellow_green_pink, negate = T) # find patterns
@@ -162,10 +166,12 @@ combs_update[ind, ]</code></pre>
 <h3>2nd interpretation</h3>
 <p>Another interpretation is to <em>additionally</em> remove solutions where pink is inside green, <em>independently</em> of where yellow is. This results in 4 solutions.</p>
 <pre class="r"><code>##### 2nd interpretation 
-pattern_green_pink &lt;- (&quot;green&quot; %R% zero_or_more(WRD) %R% &quot;pink&quot;) # no green doll with a pink doll anywhere within it
+# no green doll with a pink doll anywhere within it
+pattern_green_pink &lt;- (&quot;green&quot; %R% zero_or_more(WRD) %R% &quot;pink&quot;) 
                               
 ind &lt;- c()
 for(i in 1:nrow(combs_update)){
+   
     splitted &lt;- stri_split_fixed(combs_update[i,], &quot;_&quot;, simplify = T) # split the vectors into two
     
     ind[i] &lt;- str_detect(paste(splitted[,1], collapse = &quot;&quot;), or(pattern_yellow_green_pink, pattern_green_pink), 
@@ -188,9 +194,11 @@ pattern_yellow_green&lt;- (&quot;yellow&quot; %R% zero_or_more(WRD) %R% &quot;gr
 
 ind &lt;- c()
 for(i in 1:nrow(combs_update)){
+   
     splitted &lt;- stri_split_fixed(combs_update[i,], &quot;_&quot;, simplify = T) # split the vectors into two
     
-    ind[i] &lt;- str_detect(paste(splitted[,1], collapse = &quot;&quot;), or(pattern_yellow_green_pink, pattern_green_pink, pattern_yellow_green), 
+    ind[i] &lt;- str_detect(paste(splitted[,1], collapse = &quot;&quot;), 
+                         or(pattern_yellow_green_pink, pattern_green_pink, pattern_yellow_green), 
                          negate = T) # find patterns
     
 }
