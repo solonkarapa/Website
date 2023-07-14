@@ -45,7 +45,7 @@ As an example, the top path - `P1 R2 G3 Y4 B5`- corresponds to the combination p
 
 Further, `B5` occupies the left hand size since we know the smallest doll is blue. 
 
-With the a few lines of code I recreate the figure. Each row of the output corresponds to a set of five dolls. For example, the first row corresponds to the combination yellow, red, pink, green and blue. In total, we have 24 possible arrangements - same as in the figure.
+With the a few lines of code I recreate the figure. Each row of the output corresponds to a set of five dolls. For example, the last row corresponds to the combination yellow, red, pink, green and blue. In total, we have 24 possible arrangements - same as in the figure.
 
 ```{r, message = F}
 # pkgs used in this post
@@ -53,6 +53,7 @@ library(gtools)
 library(stringi)
 library(stringr)
 library(rebus) 
+library(purrr)
 
 colour <- c("blue", "yellow", "pink", "red", "green") # all the different colours
 
@@ -62,6 +63,36 @@ opt <- paste0(rep(colour, each = 5), "_", numb) # combine colour and index
 
 perms <- permutations(n = 25, r = 5, v = opt, repeats.allowed = F) # all the combinations of 5 dolls
 
+# define function to use 
+my_fun <- function(x, data, pattern = NULL){
+   # x: the row index of `data`
+   # data: the input dataset
+   # pattern: the pattern to search for in each row of `data`
+   
+   if(is.null(pattern)){
+      perms3 <- stri_split_fixed(data[x,], "_", simplify = T) # split the vectors into two
+      dupl <- sum(stri_duplicated(perms3[,1])) # check for uniqueness
+      sorted <- is.unsorted(perms3[,2], strictly = T) # check for correct order
+   
+      if(dupl == 0 & sorted == 0){ # if no duplicated and correct order data is returned
+         out <- data[x,]
+         } else {
+            out <- c()
+            }
+      } else {
+         splitted <- stri_split_fixed(data[x,], "_", simplify = T) # split the vectors into two
+         ind <- str_detect(paste(splitted[,1], collapse = ""), pattern = pattern, negate = T) # find patterns
+      
+         if(ind == 1){ # if pattern is found it's returned
+            out <- data[x,]
+            }else{
+               out <- c()
+            }
+      }
+   
+   return(out)
+}
+
 ##### add restrictions
 # 1: select only the ones where blue is the smallest doll
 blue_smallest_doll <- which(perms[,5] == "blue_5") # blue is the smallest doll
@@ -69,18 +100,12 @@ blue_smallest_doll <- which(perms[,5] == "blue_5") # blue is the smallest doll
 perms2 <- perms[blue_smallest_doll,]
 
 # 2: select only the combinations where each colour appears once and indexes are sorted correctly 
-combs <- c()
-for(i in 1:nrow(perms2)){
-    perms3 <- stri_split_fixed(perms2[i,], "_", simplify = T) # split the vectors into two
-    dupl <- sum(stri_duplicated(perms3[,1])) # check for uniqueness
-    sorted <- is.unsorted(perms3[,2], strictly = T) # check for correct order 
-    
-    if(dupl == 0 & sorted == 0){
-        combs <- rbind(perms2[i,], combs)
-    }
-}
+combinations <- matrix( # simplify final result into a matrix 
+   unlist( # simplify output of map()
+      map(1:nrow(perms2), my_fun, data = perms2)), # apply my_fun to all rows of perms2
+   ncol = 5, byrow = TRUE) 
 
-combs 
+combinations 
 ```
 
 Then, we need to take into account the two additional restrictions:
@@ -89,22 +114,17 @@ Then, we need to take into account the two additional restrictions:
 2. "no yellow doll contains a green doll with a pink doll anywhere within it".
 
 The first one is easy. We need to discard all solutions where pink is followed by red. This gives us 12 remaining solutions. 
-
 ```{r}
 # 3: apply first restriction
-# no doll contains a pink with a red doll anywhere within it
+# specify pattern: "no doll contains a pink with a red doll anywhere within it"
 pattern_pink_red <- ("pink" %R% zero_or_more(WRD) %R% "red") 
 
-ind <- c()
-for(i in 1:nrow(combs)){
-   
-    splitted <- stri_split_fixed(combs[i,], "_", simplify = T) # split the vectors into two
-    
-    ind[i] <- str_detect(paste(splitted[,1], collapse = ""), pattern_pink_red, negate = T) # find patterns
-    }
+combinations_update <- matrix(
+   unlist(
+      map(1:nrow(combinations), my_fun, data = combinations, pattern = pattern_pink_red)), 
+   ncol = 5, byrow = TRUE)
 
-combs_update <- combs[ind, ]
-combs_update
+combinations_update
 ```
 
 Now, we move on to the second restriction. Unfortunately, the 2nd restriction is a quite vague, leading to different interpretations and different final solutions. Here are a few examples.
@@ -114,19 +134,16 @@ A way to interpret the restriction is to remove all solutions where a pink doll 
 
 ```{r}
 ##### 1st interpretation 
-# no yellow doll contains a green doll with a pink inside it
+# specify pattern: "no yellow doll contains a green doll with a pink inside it"
 pattern_yellow_green_pink <- ("yellow" %R% zero_or_more(WRD) %R% "green" %R% zero_or_more(WRD) %R% "pink") 
 
-ind <- c()
-for(i in 1:nrow(combs_update)){
-   
-    splitted <- stri_split_fixed(combs_update[i,], "_", simplify = T) # split the vectors into two
-    
-    ind[i] <- str_detect(paste(splitted[,1], collapse = ""), pattern_yellow_green_pink, negate = T) # find patterns
-    
-}
+combinations_update1 <- matrix(
+   unlist(
+      map(1:nrow(combinations_update), my_fun, data = combinations_update, 
+          pattern = pattern_yellow_green_pink)), 
+   ncol = 5, byrow = TRUE)
 
-combs_update[ind, ]
+combinations_update1
 ```
 
 ### 2nd interpretation 
@@ -134,20 +151,16 @@ Another interpretation is to *additionally* remove solutions where pink is insid
 
 ```{r}
 ##### 2nd interpretation 
-# no green doll with a pink doll anywhere within it
+# specify pattern: "no green doll with a pink doll anywhere within it"
 pattern_green_pink <- ("green" %R% zero_or_more(WRD) %R% "pink") 
                               
-ind <- c()
-for(i in 1:nrow(combs_update)){
-   
-    splitted <- stri_split_fixed(combs_update[i,], "_", simplify = T) # split the vectors into two
-    
-    ind[i] <- str_detect(paste(splitted[,1], collapse = ""), or(pattern_yellow_green_pink, pattern_green_pink), 
-                         negate = T) # find patterns
-    
-}
+combinations_update2 <- matrix(
+   unlist(
+      map(1:nrow(combinations_update), my_fun, data = combinations_update, 
+          pattern = or(pattern_yellow_green_pink, pattern_green_pink))), 
+   ncol = 5, byrow = TRUE)
 
-combs_update[ind, ]
+combinations_update2
 ```
 
 ### 3rd interpretation
@@ -157,18 +170,13 @@ Lastly, we can *further* remove solutions where green is inside yellow *independ
 #### 3rd interpretation
 pattern_yellow_green<- ("yellow" %R% zero_or_more(WRD) %R% "green")
 
-ind <- c()
-for(i in 1:nrow(combs_update)){
-   
-    splitted <- stri_split_fixed(combs_update[i,], "_", simplify = T) # split the vectors into two
-    
-    ind[i] <- str_detect(paste(splitted[,1], collapse = ""), 
-                         or(pattern_yellow_green_pink, pattern_green_pink, pattern_yellow_green), 
-                         negate = T) # find patterns
-    
-}
+combinations_update3 <- matrix(
+   unlist(
+      map(1:nrow(combinations_update), my_fun, data = combinations_update, 
+          pattern = or(pattern_yellow_green_pink, pattern_green_pink, pattern_yellow_green))), 
+   ncol = 5, byrow = TRUE)
 
-combs_update[ind, ]
+combinations_update3
 ```
 
 This gives a unique solution - `R1 P2 G3 Y4 B5` - which does not seem to violate any of the restrictions. Unfortunately, it is different from the solution given by the New Scientist, which is `Y1 R2 P3 G4 B5`!!! 

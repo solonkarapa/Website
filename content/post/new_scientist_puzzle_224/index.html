@@ -41,12 +41,13 @@ draft: TRUE
 <p>The figure shows all the possible arrangements of the five dolls. The letter indicates the colour: R for red, Y for yellow and so on. The index indicates the doll size: 5 for the smallest and 1 for the largest.</p>
 <p>As an example, the top path - <code>P1 R2 G3 Y4 B5</code>- corresponds to the combination pink, red, green, yellow and blue (from the largest to the smallest doll).</p>
 <p>Further, <code>B5</code> occupies the left hand size since we know the smallest doll is blue.</p>
-<p>With the a few lines of code I recreate the figure. Each row of the output corresponds to a set of five dolls. For example, the first row corresponds to the combination yellow, red, pink, green and blue. In total, we have 24 possible arrangements - same as in the figure.</p>
+<p>With the a few lines of code I recreate the figure. Each row of the output corresponds to a set of five dolls. For example, the last row corresponds to the combination yellow, red, pink, green and blue. In total, we have 24 possible arrangements - same as in the figure.</p>
 <pre class="r"><code># pkgs used in this post
 library(gtools)
 library(stringi)
 library(stringr)
 library(rebus) 
+library(purrr)
 
 colour &lt;- c(&quot;blue&quot;, &quot;yellow&quot;, &quot;pink&quot;, &quot;red&quot;, &quot;green&quot;) # all the different colours
 
@@ -56,6 +57,36 @@ opt &lt;- paste0(rep(colour, each = 5), &quot;_&quot;, numb) # combine colour an
 
 perms &lt;- permutations(n = 25, r = 5, v = opt, repeats.allowed = F) # all the combinations of 5 dolls
 
+# define function to use 
+my_fun &lt;- function(x, data, pattern = NULL){
+   # x: the row index of `data`
+   # data: the input dataset
+   # pattern: the pattern to search for in each row of `data`
+   
+   if(is.null(pattern)){
+      perms3 &lt;- stri_split_fixed(data[x,], &quot;_&quot;, simplify = T) # split the vectors into two
+      dupl &lt;- sum(stri_duplicated(perms3[,1])) # check for uniqueness
+      sorted &lt;- is.unsorted(perms3[,2], strictly = T) # check for correct order
+   
+      if(dupl == 0 &amp; sorted == 0){ # if no duplicated and correct order data is returned
+         out &lt;- data[x,]
+         } else {
+            out &lt;- c()
+            }
+      } else {
+         splitted &lt;- stri_split_fixed(data[x,], &quot;_&quot;, simplify = T) # split the vectors into two
+         ind &lt;- str_detect(paste(splitted[,1], collapse = &quot;&quot;), pattern = pattern, negate = T) # find patterns
+      
+         if(ind == 1){ # if pattern is found it&#39;s returned
+            out &lt;- data[x,]
+            }else{
+               out &lt;- c()
+            }
+      }
+   
+   return(out)
+}
+
 ##### add restrictions
 # 1: select only the ones where blue is the smallest doll
 blue_smallest_doll &lt;- which(perms[,5] == &quot;blue_5&quot;) # blue is the smallest doll
@@ -63,43 +94,37 @@ blue_smallest_doll &lt;- which(perms[,5] == &quot;blue_5&quot;) # blue is the sm
 perms2 &lt;- perms[blue_smallest_doll,]
 
 # 2: select only the combinations where each colour appears once and indexes are sorted correctly 
-combs &lt;- c()
-for(i in 1:nrow(perms2)){
-    perms3 &lt;- stri_split_fixed(perms2[i,], &quot;_&quot;, simplify = T) # split the vectors into two
-    dupl &lt;- sum(stri_duplicated(perms3[,1])) # check for uniqueness
-    sorted &lt;- is.unsorted(perms3[,2], strictly = T) # check for correct order 
-    
-    if(dupl == 0 &amp; sorted == 0){
-        combs &lt;- rbind(perms2[i,], combs)
-    }
-}
+combinations &lt;- matrix( # simplify final result into a matrix 
+   unlist( # simplify output of map()
+      map(1:nrow(perms2), my_fun, data = perms2)), # apply my_fun to all rows of perms2
+   ncol = 5, byrow = TRUE) 
 
-combs </code></pre>
+combinations </code></pre>
 <pre><code>##       [,1]       [,2]       [,3]       [,4]       [,5]    
-##  [1,] &quot;yellow_1&quot; &quot;red_2&quot;    &quot;pink_3&quot;   &quot;green_4&quot;  &quot;blue_5&quot;
-##  [2,] &quot;yellow_1&quot; &quot;red_2&quot;    &quot;green_3&quot;  &quot;pink_4&quot;   &quot;blue_5&quot;
-##  [3,] &quot;yellow_1&quot; &quot;pink_2&quot;   &quot;red_3&quot;    &quot;green_4&quot;  &quot;blue_5&quot;
-##  [4,] &quot;yellow_1&quot; &quot;pink_2&quot;   &quot;green_3&quot;  &quot;red_4&quot;    &quot;blue_5&quot;
-##  [5,] &quot;yellow_1&quot; &quot;green_2&quot;  &quot;red_3&quot;    &quot;pink_4&quot;   &quot;blue_5&quot;
-##  [6,] &quot;yellow_1&quot; &quot;green_2&quot;  &quot;pink_3&quot;   &quot;red_4&quot;    &quot;blue_5&quot;
-##  [7,] &quot;red_1&quot;    &quot;yellow_2&quot; &quot;pink_3&quot;   &quot;green_4&quot;  &quot;blue_5&quot;
-##  [8,] &quot;red_1&quot;    &quot;yellow_2&quot; &quot;green_3&quot;  &quot;pink_4&quot;   &quot;blue_5&quot;
-##  [9,] &quot;red_1&quot;    &quot;pink_2&quot;   &quot;yellow_3&quot; &quot;green_4&quot;  &quot;blue_5&quot;
-## [10,] &quot;red_1&quot;    &quot;pink_2&quot;   &quot;green_3&quot;  &quot;yellow_4&quot; &quot;blue_5&quot;
-## [11,] &quot;red_1&quot;    &quot;green_2&quot;  &quot;yellow_3&quot; &quot;pink_4&quot;   &quot;blue_5&quot;
-## [12,] &quot;red_1&quot;    &quot;green_2&quot;  &quot;pink_3&quot;   &quot;yellow_4&quot; &quot;blue_5&quot;
-## [13,] &quot;pink_1&quot;   &quot;yellow_2&quot; &quot;red_3&quot;    &quot;green_4&quot;  &quot;blue_5&quot;
-## [14,] &quot;pink_1&quot;   &quot;yellow_2&quot; &quot;green_3&quot;  &quot;red_4&quot;    &quot;blue_5&quot;
-## [15,] &quot;pink_1&quot;   &quot;red_2&quot;    &quot;yellow_3&quot; &quot;green_4&quot;  &quot;blue_5&quot;
-## [16,] &quot;pink_1&quot;   &quot;red_2&quot;    &quot;green_3&quot;  &quot;yellow_4&quot; &quot;blue_5&quot;
-## [17,] &quot;pink_1&quot;   &quot;green_2&quot;  &quot;yellow_3&quot; &quot;red_4&quot;    &quot;blue_5&quot;
-## [18,] &quot;pink_1&quot;   &quot;green_2&quot;  &quot;red_3&quot;    &quot;yellow_4&quot; &quot;blue_5&quot;
-## [19,] &quot;green_1&quot;  &quot;yellow_2&quot; &quot;red_3&quot;    &quot;pink_4&quot;   &quot;blue_5&quot;
-## [20,] &quot;green_1&quot;  &quot;yellow_2&quot; &quot;pink_3&quot;   &quot;red_4&quot;    &quot;blue_5&quot;
-## [21,] &quot;green_1&quot;  &quot;red_2&quot;    &quot;yellow_3&quot; &quot;pink_4&quot;   &quot;blue_5&quot;
-## [22,] &quot;green_1&quot;  &quot;red_2&quot;    &quot;pink_3&quot;   &quot;yellow_4&quot; &quot;blue_5&quot;
-## [23,] &quot;green_1&quot;  &quot;pink_2&quot;   &quot;yellow_3&quot; &quot;red_4&quot;    &quot;blue_5&quot;
-## [24,] &quot;green_1&quot;  &quot;pink_2&quot;   &quot;red_3&quot;    &quot;yellow_4&quot; &quot;blue_5&quot;</code></pre>
+##  [1,] &quot;green_1&quot;  &quot;pink_2&quot;   &quot;red_3&quot;    &quot;yellow_4&quot; &quot;blue_5&quot;
+##  [2,] &quot;green_1&quot;  &quot;pink_2&quot;   &quot;yellow_3&quot; &quot;red_4&quot;    &quot;blue_5&quot;
+##  [3,] &quot;green_1&quot;  &quot;red_2&quot;    &quot;pink_3&quot;   &quot;yellow_4&quot; &quot;blue_5&quot;
+##  [4,] &quot;green_1&quot;  &quot;red_2&quot;    &quot;yellow_3&quot; &quot;pink_4&quot;   &quot;blue_5&quot;
+##  [5,] &quot;green_1&quot;  &quot;yellow_2&quot; &quot;pink_3&quot;   &quot;red_4&quot;    &quot;blue_5&quot;
+##  [6,] &quot;green_1&quot;  &quot;yellow_2&quot; &quot;red_3&quot;    &quot;pink_4&quot;   &quot;blue_5&quot;
+##  [7,] &quot;pink_1&quot;   &quot;green_2&quot;  &quot;red_3&quot;    &quot;yellow_4&quot; &quot;blue_5&quot;
+##  [8,] &quot;pink_1&quot;   &quot;green_2&quot;  &quot;yellow_3&quot; &quot;red_4&quot;    &quot;blue_5&quot;
+##  [9,] &quot;pink_1&quot;   &quot;red_2&quot;    &quot;green_3&quot;  &quot;yellow_4&quot; &quot;blue_5&quot;
+## [10,] &quot;pink_1&quot;   &quot;red_2&quot;    &quot;yellow_3&quot; &quot;green_4&quot;  &quot;blue_5&quot;
+## [11,] &quot;pink_1&quot;   &quot;yellow_2&quot; &quot;green_3&quot;  &quot;red_4&quot;    &quot;blue_5&quot;
+## [12,] &quot;pink_1&quot;   &quot;yellow_2&quot; &quot;red_3&quot;    &quot;green_4&quot;  &quot;blue_5&quot;
+## [13,] &quot;red_1&quot;    &quot;green_2&quot;  &quot;pink_3&quot;   &quot;yellow_4&quot; &quot;blue_5&quot;
+## [14,] &quot;red_1&quot;    &quot;green_2&quot;  &quot;yellow_3&quot; &quot;pink_4&quot;   &quot;blue_5&quot;
+## [15,] &quot;red_1&quot;    &quot;pink_2&quot;   &quot;green_3&quot;  &quot;yellow_4&quot; &quot;blue_5&quot;
+## [16,] &quot;red_1&quot;    &quot;pink_2&quot;   &quot;yellow_3&quot; &quot;green_4&quot;  &quot;blue_5&quot;
+## [17,] &quot;red_1&quot;    &quot;yellow_2&quot; &quot;green_3&quot;  &quot;pink_4&quot;   &quot;blue_5&quot;
+## [18,] &quot;red_1&quot;    &quot;yellow_2&quot; &quot;pink_3&quot;   &quot;green_4&quot;  &quot;blue_5&quot;
+## [19,] &quot;yellow_1&quot; &quot;green_2&quot;  &quot;pink_3&quot;   &quot;red_4&quot;    &quot;blue_5&quot;
+## [20,] &quot;yellow_1&quot; &quot;green_2&quot;  &quot;red_3&quot;    &quot;pink_4&quot;   &quot;blue_5&quot;
+## [21,] &quot;yellow_1&quot; &quot;pink_2&quot;   &quot;green_3&quot;  &quot;red_4&quot;    &quot;blue_5&quot;
+## [22,] &quot;yellow_1&quot; &quot;pink_2&quot;   &quot;red_3&quot;    &quot;green_4&quot;  &quot;blue_5&quot;
+## [23,] &quot;yellow_1&quot; &quot;red_2&quot;    &quot;green_3&quot;  &quot;pink_4&quot;   &quot;blue_5&quot;
+## [24,] &quot;yellow_1&quot; &quot;red_2&quot;    &quot;pink_3&quot;   &quot;green_4&quot;  &quot;blue_5&quot;</code></pre>
 <p>Then, we need to take into account the two additional restrictions:</p>
 <ol style="list-style-type: decimal">
 <li>“no doll that contains a pink doll with a red doll anywhere within it”, and</li>
@@ -107,84 +132,73 @@ combs </code></pre>
 </ol>
 <p>The first one is easy. We need to discard all solutions where pink is followed by red. This gives us 12 remaining solutions.</p>
 <pre class="r"><code># 3: apply first restriction
-# no doll contains a pink with a red doll anywhere within it
+# specify pattern: &quot;no doll contains a pink with a red doll anywhere within it&quot;
 pattern_pink_red &lt;- (&quot;pink&quot; %R% zero_or_more(WRD) %R% &quot;red&quot;) 
 
-ind &lt;- c()
-for(i in 1:nrow(combs)){
-   
-    splitted &lt;- stri_split_fixed(combs[i,], &quot;_&quot;, simplify = T) # split the vectors into two
-    
-    ind[i] &lt;- str_detect(paste(splitted[,1], collapse = &quot;&quot;), pattern_pink_red, negate = T) # find patterns
-    }
+combinations_update &lt;- matrix(
+   unlist(
+      map(1:nrow(combinations), my_fun, data = combinations, pattern = pattern_pink_red)), 
+   ncol = 5, byrow = TRUE)
 
-combs_update &lt;- combs[ind, ]
-combs_update</code></pre>
+combinations_update</code></pre>
 <pre><code>##       [,1]       [,2]       [,3]       [,4]       [,5]    
-##  [1,] &quot;yellow_1&quot; &quot;red_2&quot;    &quot;pink_3&quot;   &quot;green_4&quot;  &quot;blue_5&quot;
-##  [2,] &quot;yellow_1&quot; &quot;red_2&quot;    &quot;green_3&quot;  &quot;pink_4&quot;   &quot;blue_5&quot;
-##  [3,] &quot;yellow_1&quot; &quot;green_2&quot;  &quot;red_3&quot;    &quot;pink_4&quot;   &quot;blue_5&quot;
-##  [4,] &quot;red_1&quot;    &quot;yellow_2&quot; &quot;pink_3&quot;   &quot;green_4&quot;  &quot;blue_5&quot;
-##  [5,] &quot;red_1&quot;    &quot;yellow_2&quot; &quot;green_3&quot;  &quot;pink_4&quot;   &quot;blue_5&quot;
-##  [6,] &quot;red_1&quot;    &quot;pink_2&quot;   &quot;yellow_3&quot; &quot;green_4&quot;  &quot;blue_5&quot;
-##  [7,] &quot;red_1&quot;    &quot;pink_2&quot;   &quot;green_3&quot;  &quot;yellow_4&quot; &quot;blue_5&quot;
-##  [8,] &quot;red_1&quot;    &quot;green_2&quot;  &quot;yellow_3&quot; &quot;pink_4&quot;   &quot;blue_5&quot;
-##  [9,] &quot;red_1&quot;    &quot;green_2&quot;  &quot;pink_3&quot;   &quot;yellow_4&quot; &quot;blue_5&quot;
-## [10,] &quot;green_1&quot;  &quot;yellow_2&quot; &quot;red_3&quot;    &quot;pink_4&quot;   &quot;blue_5&quot;
-## [11,] &quot;green_1&quot;  &quot;red_2&quot;    &quot;yellow_3&quot; &quot;pink_4&quot;   &quot;blue_5&quot;
-## [12,] &quot;green_1&quot;  &quot;red_2&quot;    &quot;pink_3&quot;   &quot;yellow_4&quot; &quot;blue_5&quot;</code></pre>
+##  [1,] &quot;green_1&quot;  &quot;red_2&quot;    &quot;pink_3&quot;   &quot;yellow_4&quot; &quot;blue_5&quot;
+##  [2,] &quot;green_1&quot;  &quot;red_2&quot;    &quot;yellow_3&quot; &quot;pink_4&quot;   &quot;blue_5&quot;
+##  [3,] &quot;green_1&quot;  &quot;yellow_2&quot; &quot;red_3&quot;    &quot;pink_4&quot;   &quot;blue_5&quot;
+##  [4,] &quot;red_1&quot;    &quot;green_2&quot;  &quot;pink_3&quot;   &quot;yellow_4&quot; &quot;blue_5&quot;
+##  [5,] &quot;red_1&quot;    &quot;green_2&quot;  &quot;yellow_3&quot; &quot;pink_4&quot;   &quot;blue_5&quot;
+##  [6,] &quot;red_1&quot;    &quot;pink_2&quot;   &quot;green_3&quot;  &quot;yellow_4&quot; &quot;blue_5&quot;
+##  [7,] &quot;red_1&quot;    &quot;pink_2&quot;   &quot;yellow_3&quot; &quot;green_4&quot;  &quot;blue_5&quot;
+##  [8,] &quot;red_1&quot;    &quot;yellow_2&quot; &quot;green_3&quot;  &quot;pink_4&quot;   &quot;blue_5&quot;
+##  [9,] &quot;red_1&quot;    &quot;yellow_2&quot; &quot;pink_3&quot;   &quot;green_4&quot;  &quot;blue_5&quot;
+## [10,] &quot;yellow_1&quot; &quot;green_2&quot;  &quot;red_3&quot;    &quot;pink_4&quot;   &quot;blue_5&quot;
+## [11,] &quot;yellow_1&quot; &quot;red_2&quot;    &quot;green_3&quot;  &quot;pink_4&quot;   &quot;blue_5&quot;
+## [12,] &quot;yellow_1&quot; &quot;red_2&quot;    &quot;pink_3&quot;   &quot;green_4&quot;  &quot;blue_5&quot;</code></pre>
 <p>Now, we move on to the second restriction. Unfortunately, the 2nd restriction is a quite vague, leading to different interpretations and different final solutions. Here are a few examples.</p>
 <div id="st-interpretation" class="section level3">
 <h3>1st interpretation</h3>
 <p>A way to interpret the restriction is to remove all solutions where a pink doll is inside a green one, which is <em>at the same time</em>, inside a yellow one. This results in 9 solutions.</p>
 <pre class="r"><code>##### 1st interpretation 
-# no yellow doll contains a green doll with a pink inside it
+# specify pattern: &quot;no yellow doll contains a green doll with a pink inside it&quot;
 pattern_yellow_green_pink &lt;- (&quot;yellow&quot; %R% zero_or_more(WRD) %R% &quot;green&quot; %R% zero_or_more(WRD) %R% &quot;pink&quot;) 
 
-ind &lt;- c()
-for(i in 1:nrow(combs_update)){
-   
-    splitted &lt;- stri_split_fixed(combs_update[i,], &quot;_&quot;, simplify = T) # split the vectors into two
-    
-    ind[i] &lt;- str_detect(paste(splitted[,1], collapse = &quot;&quot;), pattern_yellow_green_pink, negate = T) # find patterns
-    
-}
+combinations_update1 &lt;- matrix(
+   unlist(
+      map(1:nrow(combinations_update), my_fun, data = combinations_update, 
+          pattern = pattern_yellow_green_pink)), 
+   ncol = 5, byrow = TRUE)
 
-combs_update[ind, ]</code></pre>
+combinations_update1</code></pre>
 <pre><code>##       [,1]       [,2]       [,3]       [,4]       [,5]    
-##  [1,] &quot;yellow_1&quot; &quot;red_2&quot;    &quot;pink_3&quot;   &quot;green_4&quot;  &quot;blue_5&quot;
-##  [2,] &quot;red_1&quot;    &quot;yellow_2&quot; &quot;pink_3&quot;   &quot;green_4&quot;  &quot;blue_5&quot;
-##  [3,] &quot;red_1&quot;    &quot;pink_2&quot;   &quot;yellow_3&quot; &quot;green_4&quot;  &quot;blue_5&quot;
-##  [4,] &quot;red_1&quot;    &quot;pink_2&quot;   &quot;green_3&quot;  &quot;yellow_4&quot; &quot;blue_5&quot;
+##  [1,] &quot;green_1&quot;  &quot;red_2&quot;    &quot;pink_3&quot;   &quot;yellow_4&quot; &quot;blue_5&quot;
+##  [2,] &quot;green_1&quot;  &quot;red_2&quot;    &quot;yellow_3&quot; &quot;pink_4&quot;   &quot;blue_5&quot;
+##  [3,] &quot;green_1&quot;  &quot;yellow_2&quot; &quot;red_3&quot;    &quot;pink_4&quot;   &quot;blue_5&quot;
+##  [4,] &quot;red_1&quot;    &quot;green_2&quot;  &quot;pink_3&quot;   &quot;yellow_4&quot; &quot;blue_5&quot;
 ##  [5,] &quot;red_1&quot;    &quot;green_2&quot;  &quot;yellow_3&quot; &quot;pink_4&quot;   &quot;blue_5&quot;
-##  [6,] &quot;red_1&quot;    &quot;green_2&quot;  &quot;pink_3&quot;   &quot;yellow_4&quot; &quot;blue_5&quot;
-##  [7,] &quot;green_1&quot;  &quot;yellow_2&quot; &quot;red_3&quot;    &quot;pink_4&quot;   &quot;blue_5&quot;
-##  [8,] &quot;green_1&quot;  &quot;red_2&quot;    &quot;yellow_3&quot; &quot;pink_4&quot;   &quot;blue_5&quot;
-##  [9,] &quot;green_1&quot;  &quot;red_2&quot;    &quot;pink_3&quot;   &quot;yellow_4&quot; &quot;blue_5&quot;</code></pre>
+##  [6,] &quot;red_1&quot;    &quot;pink_2&quot;   &quot;green_3&quot;  &quot;yellow_4&quot; &quot;blue_5&quot;
+##  [7,] &quot;red_1&quot;    &quot;pink_2&quot;   &quot;yellow_3&quot; &quot;green_4&quot;  &quot;blue_5&quot;
+##  [8,] &quot;red_1&quot;    &quot;yellow_2&quot; &quot;pink_3&quot;   &quot;green_4&quot;  &quot;blue_5&quot;
+##  [9,] &quot;yellow_1&quot; &quot;red_2&quot;    &quot;pink_3&quot;   &quot;green_4&quot;  &quot;blue_5&quot;</code></pre>
 </div>
 <div id="nd-interpretation" class="section level3">
 <h3>2nd interpretation</h3>
 <p>Another interpretation is to <em>additionally</em> remove solutions where pink is inside green, <em>independently</em> of where yellow is. This results in 4 solutions.</p>
 <pre class="r"><code>##### 2nd interpretation 
-# no green doll with a pink doll anywhere within it
+# specify pattern: &quot;no green doll with a pink doll anywhere within it&quot;
 pattern_green_pink &lt;- (&quot;green&quot; %R% zero_or_more(WRD) %R% &quot;pink&quot;) 
                               
-ind &lt;- c()
-for(i in 1:nrow(combs_update)){
-   
-    splitted &lt;- stri_split_fixed(combs_update[i,], &quot;_&quot;, simplify = T) # split the vectors into two
-    
-    ind[i] &lt;- str_detect(paste(splitted[,1], collapse = &quot;&quot;), or(pattern_yellow_green_pink, pattern_green_pink), 
-                         negate = T) # find patterns
-    
-}
+combinations_update2 &lt;- matrix(
+   unlist(
+      map(1:nrow(combinations_update), my_fun, data = combinations_update, 
+          pattern = or(pattern_yellow_green_pink, pattern_green_pink))), 
+   ncol = 5, byrow = TRUE)
 
-combs_update[ind, ]</code></pre>
+combinations_update2</code></pre>
 <pre><code>##      [,1]       [,2]       [,3]       [,4]       [,5]    
-## [1,] &quot;yellow_1&quot; &quot;red_2&quot;    &quot;pink_3&quot;   &quot;green_4&quot;  &quot;blue_5&quot;
-## [2,] &quot;red_1&quot;    &quot;yellow_2&quot; &quot;pink_3&quot;   &quot;green_4&quot;  &quot;blue_5&quot;
-## [3,] &quot;red_1&quot;    &quot;pink_2&quot;   &quot;yellow_3&quot; &quot;green_4&quot;  &quot;blue_5&quot;
-## [4,] &quot;red_1&quot;    &quot;pink_2&quot;   &quot;green_3&quot;  &quot;yellow_4&quot; &quot;blue_5&quot;</code></pre>
+## [1,] &quot;red_1&quot;    &quot;pink_2&quot;   &quot;green_3&quot;  &quot;yellow_4&quot; &quot;blue_5&quot;
+## [2,] &quot;red_1&quot;    &quot;pink_2&quot;   &quot;yellow_3&quot; &quot;green_4&quot;  &quot;blue_5&quot;
+## [3,] &quot;red_1&quot;    &quot;yellow_2&quot; &quot;pink_3&quot;   &quot;green_4&quot;  &quot;blue_5&quot;
+## [4,] &quot;yellow_1&quot; &quot;red_2&quot;    &quot;pink_3&quot;   &quot;green_4&quot;  &quot;blue_5&quot;</code></pre>
 </div>
 <div id="rd-interpretation" class="section level3">
 <h3>3rd interpretation</h3>
@@ -192,18 +206,14 @@ combs_update[ind, ]</code></pre>
 <pre class="r"><code>#### 3rd interpretation
 pattern_yellow_green&lt;- (&quot;yellow&quot; %R% zero_or_more(WRD) %R% &quot;green&quot;)
 
-ind &lt;- c()
-for(i in 1:nrow(combs_update)){
-   
-    splitted &lt;- stri_split_fixed(combs_update[i,], &quot;_&quot;, simplify = T) # split the vectors into two
-    
-    ind[i] &lt;- str_detect(paste(splitted[,1], collapse = &quot;&quot;), 
-                         or(pattern_yellow_green_pink, pattern_green_pink, pattern_yellow_green), 
-                         negate = T) # find patterns
-    
-}
+combinations_update3 &lt;- matrix(
+   unlist(
+      map(1:nrow(combinations_update), my_fun, data = combinations_update, 
+          pattern = or(pattern_yellow_green_pink, pattern_green_pink, pattern_yellow_green))), 
+   ncol = 5, byrow = TRUE)
 
-combs_update[ind, ]</code></pre>
-<pre><code>## [1] &quot;red_1&quot;    &quot;pink_2&quot;   &quot;green_3&quot;  &quot;yellow_4&quot; &quot;blue_5&quot;</code></pre>
+combinations_update3</code></pre>
+<pre><code>##      [,1]    [,2]     [,3]      [,4]       [,5]    
+## [1,] &quot;red_1&quot; &quot;pink_2&quot; &quot;green_3&quot; &quot;yellow_4&quot; &quot;blue_5&quot;</code></pre>
 <p>This gives a unique solution - <code>R1 P2 G3 Y4 B5</code> - which does not seem to violate any of the restrictions. Unfortunately, it is different from the solution given by the New Scientist, which is <code>Y1 R2 P3 G4 B5</code>!!!</p>
 </div>
