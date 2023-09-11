@@ -16,7 +16,7 @@ image:
   focal_point: ''
   preview_only: no
 projects: []
-draft: TRUE
+draft: FALSE
 ---
 
 ```{r setup, include=FALSE}
@@ -39,6 +39,7 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::include_graphics("./Tree_fig.pdf")
 ```
 
+## Solution
 The figure shows all the possible arrangements of the five dolls. The letter indicates the colour: R for red, Y for yellow and so on. The index indicates the doll size: 5 for the smallest and 1 for the largest. 
 
 As an example, the top path - `P1 R2 G3 Y4 B5`- corresponds to the combination pink, red, green, yellow and blue (from the largest to the smallest doll). 
@@ -127,7 +128,7 @@ combinations_update <- matrix(
 combinations_update
 ```
 
-Now, we move on to the second restriction. Unfortunately, the 2nd restriction is a quite vague, leading to different interpretations and different final solutions. Here are a few examples.
+Now, we move on to the second restriction. Unfortunately, the 2nd restriction is a bit vague, leading to different interpretations and different final solutions. Here are a few examples.
 
 ### 1st interpretation 
 A way to interpret the restriction is to remove all solutions where a pink doll is inside a green one, which is *at the same time*, inside a yellow one. This results in 9 solutions. 

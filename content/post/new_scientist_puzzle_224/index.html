@@ -16,7 +16,7 @@ image:
   focal_point: ''
   preview_only: no
 projects: []
-draft: TRUE
+draft: FALSE
 ---
 
 
@@ -38,6 +38,8 @@ draft: TRUE
 <p>Which coloured doll should l open first if I want to find the ring as quickly as possible?</p>
 </blockquote>
 <embed src="./Tree_fig.pdf" width="800px" height="460px" style="display: block; margin: auto;" type="application/pdf" />
+<div id="solution" class="section level2">
+<h2>Solution</h2>
 <p>The figure shows all the possible arrangements of the five dolls. The letter indicates the colour: R for red, Y for yellow and so on. The index indicates the doll size: 5 for the smallest and 1 for the largest.</p>
 <p>As an example, the top path - <code>P1 R2 G3 Y4 B5</code>- corresponds to the combination pink, red, green, yellow and blue (from the largest to the smallest doll).</p>
 <p>Further, <code>B5</code> occupies the left hand size since we know the smallest doll is blue.</p>
@@ -154,7 +156,7 @@ combinations_update</code></pre>
 ## [10,] &quot;yellow_1&quot; &quot;green_2&quot;  &quot;red_3&quot;    &quot;pink_4&quot;   &quot;blue_5&quot;
 ## [11,] &quot;yellow_1&quot; &quot;red_2&quot;    &quot;green_3&quot;  &quot;pink_4&quot;   &quot;blue_5&quot;
 ## [12,] &quot;yellow_1&quot; &quot;red_2&quot;    &quot;pink_3&quot;   &quot;green_4&quot;  &quot;blue_5&quot;</code></pre>
-<p>Now, we move on to the second restriction. Unfortunately, the 2nd restriction is a quite vague, leading to different interpretations and different final solutions. Here are a few examples.</p>
+<p>Now, we move on to the second restriction. Unfortunately, the 2nd restriction is a bit vague, leading to different interpretations and different final solutions. Here are a few examples.</p>
 <div id="st-interpretation" class="section level3">
 <h3>1st interpretation</h3>
 <p>A way to interpret the restriction is to remove all solutions where a pink doll is inside a green one, which is <em>at the same time</em>, inside a yellow one. This results in 9 solutions.</p>
@@ -216,4 +218,5 @@ combinations_update3</code></pre>
 <pre><code>##      [,1]    [,2]     [,3]      [,4]       [,5]    
 ## [1,] &quot;red_1&quot; &quot;pink_2&quot; &quot;green_3&quot; &quot;yellow_4&quot; &quot;blue_5&quot;</code></pre>
 <p>This gives a unique solution - <code>R1 P2 G3 Y4 B5</code> - which does not seem to violate any of the restrictions. Unfortunately, it is different from the solution given by the New Scientist, which is <code>Y1 R2 P3 G4 B5</code>!!!</p>
+</div>
 </div>
