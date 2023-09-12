@@ -65,9 +65,9 @@ dev <- rnorm(160, sd = 10)
 banana_index %>% mutate(y = 0 + dev) %>%
    ggplot(., aes(x = log(Bananas.index..land_use_kg), y = y, label = entity, size = land_use_kg)) +
    geom_point() +
-   ggtitle("Land use by kg") +
+   ggtitle("Land use by weight") +
    #geom_jitter(position = postition_jitter(width = 0, height = 0.001)) +
-   labs(x = "ln(Banana Index)", size = "Land use", y = "") +
+   labs(x = "ln(Banana Index)", size = "Land use by kg", y = "") +
    geom_text_repel(size = 3.5) +
    geom_vline(xintercept = 0) +
    theme_classic() +
@@ -90,11 +90,11 @@ The results are similar if we calculate the index for nutritional values (calori
 set.seed(100)
 dev <- rnorm(160, sd = 10)
 banana_index %>% mutate(y = 0 + dev) %>%
-   ggplot(., aes(x = log(Bananas.index..land_use_1000kcal), y = y, label = entity, size = land_use_kg)) +
+   ggplot(., aes(x = log(Bananas.index..land_use_1000kcal), y = y, label = entity, size = land_use_1000kcal)) +
    geom_point() +
-   ggtitle("Land use by kcal") +
+   ggtitle("Land use by calorie count") +
    #geom_jitter(position = postition_jitter(width = 0, height = 0.001)) +
-   labs(x = "ln(Banana Index)", size = "Land use", y = "") +
+   labs(x = "ln(Banana Index)", size = "Land use per kcal", y = "") +
    geom_text_repel(size = 3.5) +
    geom_vline(xintercept = 0) +
    theme_classic() +
@@ -102,19 +102,84 @@ banana_index %>% mutate(y = 0 + dev) %>%
          axis.ticks.y = element_blank())
 ```
 
+In terms of protein content Sugar has a large index (8.72)! This means 1g of sugar protein requires 8.7 times as much land as 1g of banana protein. This is probably because sugar has extremely low values of protein content to begin with. 
+
 ```{r, echo=FALSE, warning=F}
 set.seed(100)
 dev <- rnorm(160, sd = 10)
 banana_index %>% mutate(y = 0 + dev) %>%
-   ggplot(., aes(x = log(Bananas.index..land_use_100g_protein), y = y, label = entity, size = land_use_kg)) +
+   ggplot(., aes(x = log(Bananas.index..land_use_100g_protein), y = y, label = entity, size = Land.use.per.100.grams.of.protein)) +
    geom_point() +
    ggtitle("Land use by protein content") +
    #geom_jitter(position = postition_jitter(width = 0, height = 0.001)) +
-   labs(x = "ln(Banana Index)", size = "Land use", y = "") +
+   labs(x = "ln(Banana Index)", size = "Land use by protein", y = "") +
    geom_text_repel(size = 3.5) +
    geom_vline(xintercept = 0) +
    theme_classic() +
    theme(axis.text.y = element_blank(), 
          axis.ticks.y = element_blank())
+
+banana_index %>% filter(entity == "Sugar")
+```
+
+```{r, echo=F}
+#set.seed(100)
+#dev <- rnorm(160, sd = 10)
+#banana_index %>% mutate(y = 0 + dev) %>%
+#   ggplot(., aes(x = Bananas.index..land_use_100g_protein, y = y, label = entity, size = Land.use.per.100.grams.of.protein)) +
+#   geom_point() +
+#   ggtitle("Land use by protein content") +
+#   #geom_jitter(position = postition_jitter(width = 0, height = 0.001)) +
+#   labs(x = "ln(Banana Index)", size = "Land use by 100g protein", y = "") +
+#   geom_text_repel(size = 3.5) +
+#   geom_vline(xintercept = 1) +
+#   theme_classic() +
+#   theme(axis.text.y = element_blank(), 
+#         axis.ticks.y = element_blank())
+
+```
+
+As when looking at [emissions](https://www.economist.com/graphic-detail/2023/04/11/a-different-way-to-measure-the-climate-impact-of-food), some foods out-emit bananas on one metric put them to shame on another. 
+
+
+```{r}
+banana_index %>% mutate(sd = sd(Bananas.index..land_use_kg:Bananas.index..land_use_100g_protein))
+
+library(tidyr)
+
+# The arguments to gather():
+# - data: Data object
+# - key: Name of new key column (made from names of data columns)
+# - value: Name of new value column
+# - ...: Names of source columns that contain values
+# - factor_key: Treat the new key column as a factor (instead of character vector)
+data_long <- gather(banana_index, index, measurement, Bananas.index..land_use_kg:Bananas.index..land_use_100g_protein, factor_key = TRUE) %>%
+   group_by(entity) %>%
+   mutate(min_index = min(measurement),
+          max_index = max(measurement),
+          diff = max_index - min_index) 
+
+banana_index%>% filter(str_detect(entity, "Beef")) 
+
+data_long %>% filter(str_detect(entity, "Beef")) %>% select(measurement, min_index, max_index, index)
+
+ggplot() + 
+   geom_point(data = data_long, aes(x = diff, y = entity)) +
+   geom_text_repel(data = data_long %>% distinct(entity, .keep_all = T) %>% filter(diff > 20), aes(x = diff, y = entity, label = entity), size = 3.5)
+   
+```
+
+```{r}
+data_long2 <- gather(banana_index, index, measurement, Bananas.index..kg.:Bananas.index..100g.protein., factor_key = TRUE) %>%
+   group_by(entity) %>%
+   mutate(min_index = min(measurement),
+          max_index = max(measurement),
+          diff = max_index - min_index) 
+
+data_long2 %>% filter(str_detect(entity, "Beef")) %>% select(measurement, min_index, max_index, index)
+
+ggplot() + 
+   geom_point(data = data_long2, aes(x = diff, y = entity)) +
+   geom_text_repel(data = data_long2 %>% distinct(entity, .keep_all = T) %>% filter(diff > 20), aes(x = diff, y = entity, label = entity), size = 3.5)
 ```
 
