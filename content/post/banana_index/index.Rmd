@@ -1,0 +1,41 @@
+---
+title: "The Banana Index Revisited"
+author: Me
+date: '2023-09-10'
+slug: banana_index
+categories:
+  - data analysis
+tags: [data analysis]
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2023-02-08T14:27:06Z'
+featured: no
+image:
+  caption: 'created by DALL·E'
+  focal_point: ''
+  preview_only: no
+projects: []
+draft: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Recently, the [Economist](https://www.economist.com/graphic-detail/2023/04/11/a-different-way-to-measure-the-climate-impact-of-food) proposed the banana index as a way to compare the relative environmental impact of the foods. 
+
+The banana index gives the greenhouse-gas emissions of foods by their equivalent in bananas. The banana was chosen as baseline due to its "middling climate impact and nutritional value". The idea of the index is that benchmarking emissions to a single food gives a sense of how different foods rank. 
+
+For example, producing one kilogram of beef burger results in as many emissions as 61kg of bananas (this is a banana index of 61). This measures emissions by weight (i.e. emissions per kg), but we do the same for nutritional value (calories and protein content). For example, producing 1 calorie of beef burger causes 25 times as much emissions as 1 calorie of banana. As for protein, the score is 4. We get similar results, for other beef-derived foods. The bottom line: "beef is bad for the environment no matter how you slice it" and how you measure it!
+
+The banana index relies on average emissions for a given food and "does not capture other environmental impacts, such as land use". Here, I revisit the data looking at land use in parallel to emissions. 
+
+## The calculation
+As mentioned, the index gives the emissions of foods by their equivalent in bananas. This is simply a ratio of emissions efficiency. For example, the production of 1 kg of a beef burger brings about 54 kilograms of CO2-equivalents. Bananas bring about 0.88 kilograms of CO2-equivalents. A burger's banana index, by weight, is therefore equal to 54/0.88, which is 61.
+
+Here, I use the same methodology to calculate the banana index for land use. This is the land use of foods by their equivalent in bananas - a ratio of *land use efficiency*. I use the [same data source](https://github.com/TheEconomist/banana-index-data/) as the original article. 
+
+## Banana index for land use
+
+

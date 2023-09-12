@@ -3,7 +3,7 @@ library(dplyr)
 library(ggplot2)
 library(ggrepel)
 
-bananaindex <- read.csv("~/Downloads/bananaindex.csv")
+bananaindex <- read.csv("~/Desktop/Website/content/post/banana_index/bananaindex.csv")
 
 
 
@@ -23,6 +23,21 @@ banana_index <- bananaindex %>% mutate(
 )
 
 colnames(banana_index)
+
+## plot emissions kg
+set.seed(100)
+dev <- rnorm(160, sd = 10)
+banana_index %>% mutate(y = 0 + dev) %>%
+   ggplot(., aes(x = log(Bananas.index..kg.), y = y, label = entity, size = emissions_kg)) +
+   geom_point() +
+   ggtitle("BANANA INDEX; Land use") +
+   #geom_jitter(position = postition_jitter(width = 0, height = 0.001)) +
+   geom_text_repel(size = 3.5) +
+   geom_vline(xintercept = 0)
+
+banana_index %>% filter(entity == "Beef burger")
+banana_index %>% filter(entity == "Beef mince")
+banana_index %>% filter(entity == "Strawberries")
 
 ## plot land use 
 banana_index %>% arrange(land_use_kg) %>% head()
