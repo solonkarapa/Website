@@ -30,7 +30,7 @@ dev <- rnorm(160, sd = 10)
 banana_index %>% mutate(y = 0 + dev) %>%
    ggplot(., aes(x = log(Bananas.index..kg.), y = y, label = entity, size = emissions_kg)) +
    geom_point() +
-   ggtitle("BANANA INDEX; Land use") +
+   #ggtitle("BANANA INDEX; Land use") +
    #geom_jitter(position = postition_jitter(width = 0, height = 0.001)) +
    geom_text_repel(size = 3.5) +
    geom_vline(xintercept = 0)
