@@ -28,19 +28,20 @@ library(dplyr)
 library(ggplot2)
 library(ggrepel)
 library(stringr)
+library(tidyr)
 
 bananaindex <- read.csv("~/Desktop/Website/content/post/banana_index/bananaindex.csv")
 ```
 
-Recently, the [Economist](https://www.economist.com/graphic-detail/2023/04/11/a-different-way-to-measure-the-climate-impact-of-food) proposed the banana index as a way to compare the relative environmental impact of the foods. 
+Recently, the [Economist](https://www.economist.com/graphic-detail/2023/04/11/a-different-way-to-measure-the-climate-impact-of-food) proposed the banana index as a way to compare the relative environmental impact of different foods. 
 
-The banana index gives the greenhouse-gas emissions of foods by their equivalent in bananas. The banana was chosen as baseline due to its "middling climate impact and nutritional value". The idea of the index is that benchmarking emissions to a single food gives a sense of how different foods rank. 
+The banana index gives the greenhouse-gas emissions of foods by their equivalent in bananas! The banana was chosen as baseline due to its "middling climate impact and nutritional value". The idea of the index is that benchmarking emissions to a single food gives a sense of how different foods rank. 
 
-For example, producing one kilogram of beef burger results in as many emissions as 61kg of bananas (this is a banana index of 61). This measures emissions by weight (i.e. emissions per kg), but we do the same for nutritional value (calories and protein content). For example, producing 1 calorie of beef burger causes 25 times as much emissions as 1 calorie of banana. As for protein, the score is 4. We get similar results, for other beef-derived foods. The bottom line: "beef is bad for the environment no matter how you slice it" and how you measure it!
+For example, producing one kilogram of beef burger results in as many emissions as 61kg of bananas (this is a banana index of 61). This measures emissions by weight (i.e. emissions per kg), but we can do the same for nutritional value (calories and protein content). For example, producing 1 calorie of beef burger causes 25 times as much emissions as 1 calorie of banana. As for protein, the score is 4. We get similar results, for other beef-derived foods. The bottom line: "beef is bad for the environment no matter how you slice it" and how you measure it!
 
-The banana index relies on average emissions for a given food and "does not capture other environmental impacts, such as land use". Here, I revisit the data looking at land use in parallel to emissions. 
+However, the banana index only relies on average emissions for a given food and "does not capture other environmental impacts, such as land use". Here, I revisit the data looking at land use in parallel to emissions. 
 
-## The calculation
+## The calculations
 As mentioned, the index gives the emissions of foods by their equivalent in bananas. This is simply a ratio of emissions efficiency. For example, the production of 1 kg of a beef burger brings about 54 kilograms of CO2-equivalents. Bananas bring about 0.88 kilograms of CO2-equivalents. A burger's banana index, by weight, is therefore equal to 54/0.88, which is 61.
 
 Here, I use the same methodology to calculate the banana index for land use. This is the land use of foods by their equivalent in bananas - a ratio of *land use efficiency*. I use the [same data source](https://github.com/TheEconomist/banana-index-data/) as the original article. 
@@ -75,7 +76,7 @@ banana_index %>% mutate(y = 0 + dev) %>%
          axis.ticks.y = element_blank())
 ```
 
-Beef is not bad only in terms of emissions (see above) but also in terms of land use (by weight), with an index between 51 and 161, depending on the slice: 
+Beef is not bad only in terms of emissions (as shown above) but also in terms of land use (by weight), with an index between 51 and 161, depending on the slice: 
 
 ```{r, echo=F}
 banana_index %>% filter(str_detect(entity, "Beef")) %>% 
@@ -118,8 +119,6 @@ banana_index %>% mutate(y = 0 + dev) %>%
    theme_classic() +
    theme(axis.text.y = element_blank(), 
          axis.ticks.y = element_blank())
-
-banana_index %>% filter(entity == "Sugar")
 ```
 
 ```{r, echo=F}
@@ -139,47 +138,75 @@ banana_index %>% filter(entity == "Sugar")
 
 ```
 
-As when looking at [emissions](https://www.economist.com/graphic-detail/2023/04/11/a-different-way-to-measure-the-climate-impact-of-food), some foods out-emit bananas on one metric put them to shame on another. 
+## Variability in the Banana Index 
 
+Looking at [emissions](https://www.economist.com/graphic-detail/2023/04/11/a-different-way-to-measure-the-climate-impact-of-food), some foods out-emit bananas on one metric put them to shame on another. To illustrate this, for each food I calculate range in its banana index between the three metrics - weight, calories and protein content. This allows to capture the variability in emissions between the three metrics. The vertical line corresponds to a range of 10. That is a difference of 10 between the minimum and maximum banana index. A substantial number of foods exceed this value, showcasing that how you calculate the index actually matters. 
 
-```{r}
-banana_index %>% mutate(sd = sd(Bananas.index..land_use_kg:Bananas.index..land_use_100g_protein))
-
-library(tidyr)
-
-# The arguments to gather():
-# - data: Data object
-# - key: Name of new key column (made from names of data columns)
-# - value: Name of new value column
-# - ...: Names of source columns that contain values
-# - factor_key: Treat the new key column as a factor (instead of character vector)
-data_long <- gather(banana_index, index, measurement, Bananas.index..land_use_kg:Bananas.index..land_use_100g_protein, factor_key = TRUE) %>%
-   group_by(entity) %>%
-   mutate(min_index = min(measurement),
-          max_index = max(measurement),
-          diff = max_index - min_index) 
-
-banana_index%>% filter(str_detect(entity, "Beef")) 
-
-data_long %>% filter(str_detect(entity, "Beef")) %>% select(measurement, min_index, max_index, index)
-
-ggplot() + 
-   geom_point(data = data_long, aes(x = diff, y = entity)) +
-   geom_text_repel(data = data_long %>% distinct(entity, .keep_all = T) %>% filter(diff > 20), aes(x = diff, y = entity, label = entity), size = 3.5)
-   
-```
-
-```{r}
+```{r, echo=FALSE, warning=F}
 data_long2 <- gather(banana_index, index, measurement, Bananas.index..kg.:Bananas.index..100g.protein., factor_key = TRUE) %>%
    group_by(entity) %>%
    mutate(min_index = min(measurement),
           max_index = max(measurement),
           diff = max_index - min_index) 
-
-data_long2 %>% filter(str_detect(entity, "Beef")) %>% select(measurement, min_index, max_index, index)
-
+th <- 10
 ggplot() + 
    geom_point(data = data_long2, aes(x = diff, y = entity)) +
-   geom_text_repel(data = data_long2 %>% distinct(entity, .keep_all = T) %>% filter(diff > 20), aes(x = diff, y = entity, label = entity), size = 3.5)
+   geom_text_repel(data = data_long2 %>% distinct(entity, .keep_all = T) %>% filter(diff > th), aes(x = diff, y = entity, label = entity), size = 3.5) +
+   geom_vline(xintercept = th, linetype = "dashed") +
+   ggtitle("Emissions") + 
+   coord_cartesian(xlim = c(0, 150)) +
+   labs(x = "Banana Index Range", y = "") +
+   theme_classic() +
+   theme(axis.text.y = element_blank(), 
+         axis.ticks.y = element_blank())
+```
+
+Again, beef is the most variable. For example, a beef steak has a banana index of 148.6 when emissions are measured by weight and only 8.3 when measured by protein content. 
+
+```{r, echo=F}
+banana_index %>% filter(str_detect(entity, "Beef steak")) %>%
+   rename(BI_emissions_kg = Bananas.index..kg.,
+          BI_emissions_calories = Bananas.index..1000.kcalories.,
+          BI_emissions_protein = Bananas.index..100g.protein.) %>% 
+   select(BI_emissions_kg:BI_emissions_protein)
+```
+
+Following the same approach for land use, we still find beef to be the most variable but most foods show decreased variability in their banana index. This indicates the banana index for land use is robust to the metric used. 
+
+```{r, echo=F}
+data_long3 <- gather(banana_index, index, measurement, Bananas.index..land_use_kg:Bananas.index..land_use_100g_protein, factor_key = TRUE) %>%
+   group_by(entity) %>%
+   mutate(min_index = min(measurement),
+          max_index = max(measurement),
+          diff = max_index - min_index) 
+
+ggplot() + 
+   geom_point(data = data_long3, aes(x = diff, y = entity)) +
+   geom_text_repel(data = data_long3 %>% distinct(entity, .keep_all = T) %>% filter(diff > th), aes(x = diff, y = entity, label = entity), size = 3.5) +
+   geom_vline(xintercept = th, linetype = "dashed") +
+   ggtitle("Land use") + 
+   coord_cartesian(xlim = c(0, 150)) +
+   labs(x = "Banana Index Range", y = "") +
+   theme_classic() +
+   theme(axis.text.y = element_blank(), 
+         axis.ticks.y = element_blank())
+```
+
+## Emissions vs Land use 
+
+```{r}
+banana_index %>% 
+   ggplot(., aes(x = Bananas.index..kg., y = Bananas.index..land_use_kg, label = entity)) +
+   geom_point() +
+   ggtitle("BI by weight") +
+   #geom_jitter(position = postition_jitter(width = 0, height = 0.001)) +
+   labs(x = "Banana Index Emissions", y = "Banana Index Land use") +
+   geom_text_repel(size = 3.5) +
+   geom_vline(xintercept = 1) +
+   theme_classic() +
+   theme(axis.text.y = element_blank(), 
+         axis.ticks.y = element_blank())
+
+
 ```
 
