@@ -22,7 +22,7 @@ draft: TRUE
 
 
 <p>Recently, the <a href="https://www.economist.com/graphic-detail/2023/04/11/a-different-way-to-measure-the-climate-impact-of-food">Economist</a> proposed the banana index as a way to compare the relative environmental impact of different foods.</p>
-<p>The banana index gives the greenhouse-gas emissions of foods by their equivalent in bananas! The banana was chosen as baseline due to its “middling climate impact and nutritional value”. The idea of the index is that benchmarking emissions to a single food gives a sense of how different foods rank.</p>
+<p>The banana index gives the greenhouse-gas emissions of foods by their equivalent in bananas! The banana was chosen as baseline due to its “middling climate impact and nutritional value”. Benchmarking emissions to a single food (the banana in this case) gives a sense of how different foods rank.</p>
 <p>For example, producing one kilogram of beef burger results in as many emissions as 61kg of bananas (this is a banana index of 61). This measures emissions by weight (i.e. emissions per kg), but we can do the same for nutritional value (calories and protein content). For example, producing 1 calorie of beef burger causes 25 times as much emissions as 1 calorie of banana. As for protein, the score is 4. We get similar results, for other beef-derived foods. The bottom line: “beef is bad for the environment no matter how you slice it” and how you measure it!</p>
 <p>However, the banana index only relies on average emissions for a given food and “does not capture other environmental impacts, such as land use”. Here, I revisit the data looking at land use in parallel to emissions.</p>
 <div id="the-calculations" class="section level2">
@@ -47,29 +47,15 @@ draft: TRUE
 </div>
 <div id="variability-in-the-banana-index" class="section level2">
 <h2>Variability in the Banana Index</h2>
-<p>Looking at <a href="https://www.economist.com/graphic-detail/2023/04/11/a-different-way-to-measure-the-climate-impact-of-food">emissions</a>, some foods out-emit bananas on one metric put them to shame on another. To illustrate this, for each food I calculate range in its banana index between the three metrics - weight, calories and protein content. This allows to capture the variability in emissions between the three metrics. The vertical line corresponds to a range of 10. That is a difference of 10 between the minimum and maximum banana index. A substantial number of foods exceed this value, showcasing that how you calculate the index actually matters.</p>
+<p>Looking at <a href="https://www.economist.com/graphic-detail/2023/04/11/a-different-way-to-measure-the-climate-impact-of-food">emissions</a>, some foods out-emit bananas on one metric put them to shame on another. To illustrate this, for each food I calculate the range in its banana index between the three metrics - weight, calories and protein content. This allows to capture the variability in emissions between the three metrics. The vertical line corresponds to a range of 10. That is a difference of 10 between the minimum and maximum banana index. A substantial number of foods exceed this value, showcasing that how you calculate the index actually matters.</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Again, beef is the most variable. For example, a beef steak has a banana index of 148.6 when emissions are measured by weight and only 8.3 when measured by protein content.</p>
 <pre><code>##   BI_emissions_kg BI_emissions_calories BI_emissions_protein
 ## 1        148.5633              77.75263             8.312805</code></pre>
-<p>Following the same approach for land use, we still find beef to be the most variable but most foods show decreased variability in their banana index. This indicates the banana index for land use is robust to the metric used.</p>
-<pre><code>## Warning: Removed 6 rows containing missing values (`geom_point()`).</code></pre>
+<p>Following the same approach for land use, we still find beef to be the most variable, but most foods show decreased variability in their banana index. This indicates the banana index for land use is robust to the metric used.</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <div id="emissions-vs-land-use" class="section level2">
 <h2>Emissions vs Land use</h2>
-<pre class="r"><code>banana_index %&gt;% 
-   ggplot(., aes(x = Bananas.index..kg., y = Bananas.index..land_use_kg, label = entity)) +
-   geom_point() +
-   ggtitle(&quot;BI by weight&quot;) +
-   #geom_jitter(position = postition_jitter(width = 0, height = 0.001)) +
-   labs(x = &quot;Banana Index Emissions&quot;, y = &quot;Banana Index Land use&quot;) +
-   geom_text_repel(size = 3.5) +
-   geom_vline(xintercept = 1) +
-   theme_classic() +
-   theme(axis.text.y = element_blank(), 
-         axis.ticks.y = element_blank())</code></pre>
-<pre><code>## Warning: ggrepel: 156 unlabeled data points (too many overlaps). Consider
-## increasing max.overlaps</code></pre>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
