@@ -163,7 +163,7 @@ ggplot() +
          axis.ticks.y = element_blank())
 ```
 
-Again, beef is the most variable. For example, a beef steak has a banana index of 148.6 when emissions are measured by weight and only 8.3 when measured by protein content. 
+Again, beef is the most variable. For example, a beef steak has a banana index of 148.6 when emissions are measured by weight but only 8.3 when measured by protein content. 
 
 ```{r, echo=F}
 banana_index %>% filter(str_detect(entity, "Beef steak")) %>%
