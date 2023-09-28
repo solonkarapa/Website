@@ -37,9 +37,11 @@ Recently, the [Economist](https://www.economist.com/graphic-detail/2023/04/11/a-
 
 The banana index gives the greenhouse-gas emissions of foods by their equivalent in bananas! The banana was chosen as baseline due to its "middling climate impact and nutritional value". Benchmarking emissions to a single food (the banana in this case) gives a sense of how different foods rank. 
 
-For example, producing one kilogram of beef burger results in as many emissions as 61kg of bananas (this is a banana index of 61). This measures emissions by weight (i.e. emissions per kg), but we can do the same for nutritional value (calories and protein content). For example, producing 1 calorie of beef burger causes 25 times as much emissions as 1 calorie of banana. As for protein, the score is 4. We get similar results, for other beef-derived foods. The bottom line: "beef is bad for the environment no matter how you slice it" and how you measure it!
+For example, producing one kilogram of beef burger results in as many emissions as 61kg of bananas (this is a banana index of 61). This measures emissions by weight (i.e. emissions per kg), but we can do the same for nutritional value (calories and protein content). For instance, producing 1 calorie of beef burger causes 25 times as much emissions as 1 calorie of banana (i.e. banana index of 25). As for protein, the score is 4. We get similar results, for other beef-derived foods. The bottom line: "beef is bad for the environment no matter how you slice it" and how you measure it!
 
-However, the banana index only relies on average emissions for a given food and "does not capture other environmental impacts, such as land use". Here, I revisit the data looking at land use in parallel to emissions. 
+However, the banana index only relies on emissions for a given food and "does not capture other environmental impacts, such as land use". Here, I revisit the data looking at land use in parallel to emissions. 
+
+> Why is this relevant? Imagine two foods with the same greenhouse-gas emissions, but different land use scores. Based solely on emissions we are indifferent between them. But, based on both emissions and land use we should be prefer the one with the lowest land use. 
 
 ## The calculations
 As mentioned, the index gives the emissions of foods by their equivalent in bananas. This is simply a ratio of emissions efficiency. For example, the production of 1 kg of a beef burger brings about 54 kilograms of CO2-equivalents. Bananas bring about 0.88 kilograms of CO2-equivalents. A burger's banana index, by weight, is therefore equal to 54/0.88, which is 61.
@@ -192,7 +194,7 @@ ggplot() +
          axis.ticks.y = element_blank())
 ```
 
-## Emissions vs Land use 
+## Emissions and Land use 
 
 ```{r, echo = F, warning=F, message=F}
 p1 <- banana_index %>% 
