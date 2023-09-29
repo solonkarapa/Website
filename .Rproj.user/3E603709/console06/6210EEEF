@@ -1,840 +1,0 @@
-]0;~/Box Sync/Box Sync/Website6[?1034hSolons-MacBook-Pro:Website6 solon$ [KSolons-MacBook-Pro:Website6 solon$ defaults write org.R-project.R force.LANG en_US.UTF-8
-]0;~/Box Sync/Box Sync/Website6Solons-MacBook-Pro:Website6 solon$ 
-git status
-On branch master
-Changes not staged for commit:
-  (use "git add/rm <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
-
-	[31mmodified:   .Rproj.user/3E603709/console06/6210EEEF[m
-	[31mmodified:   .Rproj.user/3E603709/console06/INDEX001[m
-	[31mmodified:   .Rproj.user/3E603709/pcs/files-pane.pper[m
-	[31mmodified:   .Rproj.user/3E603709/pcs/source-pane.pper[m
-	[31mmodified:   .Rproj.user/3E603709/pcs/workbench-pane.pper[m
-	[31mmodified:   .Rproj.user/3E603709/sources/prop/7892FE90[m
-	[31mdeleted:    .Rproj.user/3E603709/sources/s-286B4AA9/9C5FF83B[m
-	[31mdeleted:    .Rproj.user/3E603709/sources/s-286B4AA9/9C5FF83B-contents[m
-	[31mdeleted:    .Rproj.user/3E603709/sources/s-286B4AA9/C5777B11[m
-	[31mdeleted:    .Rproj.user/3E603709/sources/s-286B4AA9/C5777B11-contents[m
-	[31mdeleted:    .Rproj.user/3E603709/sources/s-286B4AA9/CCF650CC[m
-	[31mdeleted:    .Rproj.user/3E603709/sources/s-286B4AA9/CCF650CC-contents[m
-	[31mdeleted:    .Rproj.user/3E603709/sources/s-286B4AA9/lock_file[m
-
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-
-	[31m.gitignore[m
-
-no changes added to commit (use "git add" and/or "git commit -a")
-]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ git add .
-]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ git commnt  it -m "First commmn  it  "
-[master 04bec4b] First commit
- Committer: solon <solon@dhcp-10-248-195-241.eduroam.wireless.private.cam.ac.uk>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 15 files changed, 41 insertions(+), 699 deletions(-)
- rewrite .Rproj.user/3E603709/console06/INDEX001 (73%)
- delete mode 100644 .Rproj.user/3E603709/sources/s-286B4AA9/9C5FF83B
- delete mode 100644 .Rproj.user/3E603709/sources/s-286B4AA9/9C5FF83B-contents
- delete mode 100644 .Rproj.user/3E603709/sources/s-286B4AA9/C5777B11
- delete mode 100644 .Rproj.user/3E603709/sources/s-286B4AA9/C5777B11-contents
- delete mode 100644 .Rproj.user/3E603709/sources/s-286B4AA9/CCF650CC
- delete mode 100644 .Rproj.user/3E603709/sources/s-286B4AA9/CCF650CC-contents
- delete mode 100644 .Rproj.user/3E603709/sources/s-286B4AA9/lock_file
- create mode 100644 .gitignore
-]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ ls
-Website.Rproj	config.toml	data		layouts		static
-archetypes	content		index.Rmd	public		themes
-]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ git remote add origin https://github.com/solonkarapa/Website.git
-fatal: remote origin already exists.
-]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ git push -u origin master
-remote: Repository not found.
-fatal: repository 'https://github.com/solonkarapa/Website-.git/' not found
-]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ git init
-Reinitialized existing Git repository in /Users/solon/Box Sync/Box Sync/Website/.git/
-]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ git remote add origin https://github.com/solonkarapa/Website.git
-fatal: remote origin already exists.
-]0;~/Box Sync/Box Sync/Websitedhcp-10-248-195-241:Website solon$ git push -u origin master
-remote: Repository not found.
-fatal: repository 'https://github.com/solonkarapa/Website-.git/' not found
-git remote -v
-origin	https://github.com/solonkarapa/Website-.git (fetch)
-origin	https://github.com/solonkarapa/Website-.git (push)
-]0;~/Desktop/Websitedhcp-10-248-195-241:Website solon$ git remote rm origin
-]0;~/Desktop/Websitedhcp-10-248-195-241:Website solon$ git remote add origin https://github.com/solonkarapa/Website.git
-]0;~/Desktop/Websitedhcp-10-248-195-241:Website solon$ git push -u origin master
-Counting objects: 475, done.
-Delta compression using up to 4 threads.
-Compressing objects:   0% (1/397)   Compressing objects:   1% (4/397)   Compressing objects:   2% (8/397)   Compressing objects:   3% (12/397)   Compressing objects:   4% (16/397)   Compressing objects:   5% (20/397)   Compressing objects:   6% (24/397)   Compressing objects:   7% (28/397)   Compressing objects:   8% (32/397)   Compressing objects:   9% (36/397)   Compressing objects:  10% (40/397)   Compressing objects:  11% (44/397)   Compressing objects:  12% (48/397)   Compressing objects:  13% (52/397)   Compressing objects:  14% (56/397)   Compressing objects:  15% (60/397)   Compressing objects:  16% (64/397)   Compressing objects:  17% (68/397)   Compressing objects:  18% (72/397)   Compressing objects:  19% (76/397)   Compressing objects:  20% (80/397)   Compressing objects:  21% (84/397)   Compressing objects:  22% (88/397)   Compressing objects:  23% (92/397)   Compressing objects:  24% (96/397)   Compressing objects:  25% (100/397)   Compressing objects:  26% (104/397)   Compressing objects:  27% (108/397)   Compressing objects:  28% (112/397)   Compressing objects:  29% (116/397)   Compressing objects:  30% (120/397)   Compressing objects:  31% (124/397)   Compressing objects:  32% (128/397)   Compressing objects:  33% (132/397)   Compressing objects:  34% (135/397)   Compressing objects:  35% (139/397)   Compressing objects:  36% (143/397)   Compressing objects:  37% (147/397)   Compressing objects:  38% (151/397)   Compressing objects:  39% (155/397)   Compressing objects:  40% (159/397)   Compressing objects:  41% (163/397)   Compressing objects:  42% (167/397)   Compressing objects:  43% (171/397)   Compressing objects:  44% (175/397)   Compressing objects:  45% (179/397)   Compressing objects:  46% (183/397)   Compressing objects:  47% (187/397)   Compressing objects:  48% (191/397)   Compressing objects:  49% (195/397)   Compressing objects:  50% (199/397)   Compressing objects:  51% (203/397)   Compressing objects:  52% (207/397)   Compressing objects:  53% (211/397)   Compressing objects:  54% (215/397)   Compressing objects:  55% (219/397)   Compressing objects:  56% (223/397)   Compressing objects:  57% (227/397)   Compressing objects:  58% (231/397)   Compressing objects:  59% (235/397)   Compressing objects:  60% (239/397)   Compressing objects:  61% (243/397)   Compressing objects:  62% (247/397)   Compressing objects:  63% (251/397)   Compressing objects:  64% (255/397)   Compressing objects:  65% (259/397)   Compressing objects:  66% (263/397)   Compressing objects:  67% (266/397)   Compressing objects:  68% (270/397)   Compressing objects:  69% (274/397)   Compressing objects:  70% (278/397)   Compressing objects:  71% (282/397)   Compressing objects:  72% (286/397)   Compressing objects:  73% (290/397)   Compressing objects:  74% (294/397)   Compressing objects:  75% (298/397)   Compressing objects:  76% (302/397)   Compressing objects:  77% (306/397)   Compressing objects:  78% (310/397)   Compressing objects:  79% (314/397)   Compressing objects:  80% (318/397)   Compressing objects:  81% (322/397)   Compressing objects:  82% (326/397)   Compressing objects:  83% (330/397)   Compressing objects:  84% (334/397)   Compressing objects:  85% (338/397)   Compressing objects:  86% (342/397)   Compressing objects:  87% (346/397)   Compressing objects:  88% (350/397)   Compressing objects:  89% (354/397)   Compressing objects:  90% (358/397)   Compressing objects:  91% (362/397)   Compressing objects:  92% (366/397)   Compressing objects:  93% (370/397)   Compressing objects:  94% (374/397)   Compressing objects:  95% (378/397)   Compressing objects:  96% (382/397)   Compressing objects:  97% (386/397)   Compressing objects:  98% (390/397)   Compressing objects:  99% (394/397)   Compressing objects: 100% (397/397)   Compressing objects: 100% (397/397), done.
-Writing objects:   0% (1/475)   Writing objects:   1% (5/475)   Writing objects:   1% (6/475), 1.07 MiB | 339.00 KiB/s   Writing objects:   1% (6/475), 1.37 MiB | 366.00 KiB/s   Writing objects:   1% (6/475), 1.63 MiB | 309.00 KiB/s   Writing objects:   1% (6/475), 1.81 MiB | 314.00 KiB/s   Writing objects:   1% (6/475), 2.38 MiB | 352.00 KiB/s   Writing objects:   1% (6/475), 3.19 MiB | 409.00 KiB/s   Writing objects:   1% (6/475), 4.00 MiB | 510.00 KiB/s   Writing objects:   2% (10/475), 4.44 MiB | 593.00 KiB/s   Writing objects:   3% (15/475), 4.44 MiB | 593.00 KiB/s   Writing objects:   4% (19/475), 4.44 MiB | 593.00 KiB/s   Writing objects:   5% (24/475), 4.44 MiB | 593.00 KiB/s   Writing objects:   6% (29/475), 4.44 MiB | 593.00 KiB/s   Writing objects:   7% (34/475), 4.44 MiB | 593.00 KiB/s   Writing objects:   8% (38/475), 4.44 MiB | 593.00 KiB/s   Writing objects:   9% (43/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  10% (48/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  11% (53/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  12% (57/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  13% (62/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  14% (67/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  15% (72/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  16% (76/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  17% (81/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  18% (86/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  19% (91/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  20% (95/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  21% (100/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  22% (105/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  23% (110/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  24% (114/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  25% (119/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  27% (129/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  28% (133/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  29% (138/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  30% (144/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  31% (148/475), 4.44 MiB | 593.00 KiB/s   Writing objects:  31% (151/475), 4.95 MiB | 715.00 KiB/s   Writing objects:  31% (151/475), 6.01 MiB | 850.00 KiB/s   Writing objects:  32% (152/475), 6.01 MiB | 850.00 KiB/s   Writing objects:  32% (156/475), 6.63 MiB | 919.00 KiB/s   Writing objects:  33% (157/475), 6.63 MiB | 919.00 KiB/s   Writing objects:  34% (162/475), 6.63 MiB | 919.00 KiB/s   Writing objects:  34% (165/475), 7.43 MiB | 871.00 KiB/s   Writing objects:  34% (165/475), 9.30 MiB | 1.08 MiB/s   Writing objects:  34% (165/475), 10.68 MiB | 1.16 MiB/s   Writing objects:  34% (165/475), 12.24 MiB | 1.26 MiB/s   Writing objects:  34% (165/475), 13.99 MiB | 1.35 MiB/s   Writing objects:  34% (165/475), 15.93 MiB | 1.60 MiB/s   Writing objects:  34% (165/475), 17.99 MiB | 1.70 MiB/s   Writing objects:  34% (165/475), 20.30 MiB | 1.92 MiB/s   Writing objects:  34% (166/475), 22.77 MiB | 2.09 MiB/s   Writing objects:  35% (167/475), 22.77 MiB | 2.09 MiB/s   Writing objects:  36% (172/475), 24.09 MiB | 2.18 MiB/s   Writing objects:  36% (174/475), 25.50 MiB | 2.28 MiB/s   Writing objects:  37% (176/475), 25.50 MiB | 2.28 MiB/s   Writing objects:  37% (178/475), 28.27 MiB | 2.42 MiB/s   Writing objects:  38% (181/475), 28.27 MiB | 2.42 MiB/s   Writing objects:  39% (187/475), 28.27 MiB | 2.42 MiB/s   Writing objects:  40% (190/475), 28.27 MiB | 2.42 MiB/s   Writing objects:  40% (193/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  41% (195/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  42% (200/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  43% (205/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  44% (209/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  45% (214/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  46% (219/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  47% (224/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  48% (228/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  49% (233/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  50% (238/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  51% (243/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  52% (247/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  53% (252/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  54% (257/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  55% (262/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  56% (266/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  57% (271/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  58% (276/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  59% (281/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  60% (285/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  61% (290/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  62% (295/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  63% (300/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  64% (304/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  65% (310/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  66% (314/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  67% (319/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  68% (323/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  69% (329/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  70% (333/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  71% (338/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  72% (342/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  73% (349/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  74% (352/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  75% (357/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  76% (361/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  77% (366/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  78% (371/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  79% (376/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  80% (380/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  81% (385/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  82% (390/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  83% (395/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  84% (399/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  85% (404/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  86% (409/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  87% (414/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  88% (418/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  89% (423/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  90% (428/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  91% (433/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  92% (437/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  93% (442/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  94% (447/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  95% (452/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  96% (456/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  97% (461/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  98% (466/475), 29.77 MiB | 2.52 MiB/s   Writing objects:  99% (471/475), 29.77 MiB | 2.52 MiB/s   Writing objects: 100% (475/475), 29.77 MiB | 2.52 MiB/s   Writing objects: 100% (475/475), 30.68 MiB | 1.26 MiB/s, done.
-Total 475 (delta 115), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/115)   [Kremote: Resolving deltas:   4% (5/115)   [Kremote: Resolving deltas:   7% (9/115)   [Kremote: Resolving deltas:   8% (10/115)   [Kremote: Resolving deltas:  11% (13/115)   [Kremote: Resolving deltas:  12% (14/115)   [Kremote: Resolving deltas:  13% (16/115)   [Kremote: Resolving deltas:  15% (18/115)   [Kremote: Resolving deltas:  16% (19/115)   [Kremote: Resolving deltas:  18% (21/115)   [Kremote: Resolving deltas:  19% (22/115)   [Kremote: Resolving deltas:  20% (23/115)   [Kremote: Resolving deltas:  21% (25/115)   [Kremote: Resolving deltas:  22% (26/115)   [Kremote: Resolving deltas:  23% (27/115)   [Kremote: Resolving deltas:  24% (28/115)   [Kremote: Resolving deltas:  25% (29/115)   [Kremote: Resolving deltas:  26% (31/115)   [Kremote: Resolving deltas:  28% (33/115)   [Kremote: Resolving deltas:  30% (35/115)   [Kremote: Resolving deltas:  33% (38/115)   [Kremote: Resolving deltas:  55% (64/115)   [Kremote: Resolving deltas:  66% (77/115)   [Kremote: Resolving deltas:  69% (80/115)   [Kremote: Resolving deltas:  70% (81/115)   [Kremote: Resolving deltas:  71% (82/115)   [Kremote: Resolving deltas:  73% (85/115)   [Kremote: Resolving deltas:  76% (88/115)   [Kremote: Resolving deltas:  77% (89/115)   [Kremote: Resolving deltas:  78% (90/115)   [Kremote: Resolving deltas:  79% (91/115)   [Kremote: Resolving deltas:  80% (93/115)   [Kremote: Resolving deltas:  92% (106/115)   [Kremote: Resolving deltas:  94% (109/115)   [Kremote: Resolving deltas:  95% (110/115)   [Kremote: Resolving deltas:  97% (112/115)   [Kremote: Resolving deltas:  98% (113/115)   [Kremote: Resolving deltas:  99% (114/115)   [Kremote: Resolving deltas: 100% (115/115)   [Kremote: Resolving deltas: 100% (115/115), done.[K
-To https://github.com/solonkarapa/Website.git
- * [new branch]      master -> master
-Branch 'master' set up to track remote branch 'master' from 'origin'.
-gi  t status
-On branch master
-Your branch is up to date with 'origin/master'.
-
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
-
-	[31mmodified:   .Rproj.user/3E603709/console06/6210EEEF[m
-	[31mmodified:   .Rproj.user/3E603709/console06/INDEX001[m
-
-no changes added to commit (use "git add" and/or "git commit -a")
-]0;~/Desktop/Websitedhcp-10-248-196-16:Website solon$ git add .
-]0;~/Desktop/Websitedhcp-10-248-196-16:Website solon$ gi  git commit -m "fixinf   g bug in post"
-[master 9659b01] fixing bug in post
- Committer: solon <solon@dhcp-10-248-196-16.eduroam.wireless.private.cam.ac.uk>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 15 files changed, 3482 insertions(+), 3352 deletions(-)
- rewrite .Rproj.user/3E603709/console06/INDEX001 (61%)
- rewrite content/post/2018-04-10-importing-flat-files-into-r.html (95%)
- rewrite public/categories/data/index.html (94%)
- rewrite public/categories/r/index.html (94%)
- rewrite public/index.html (81%)
- rewrite public/index.xml (92%)
- create mode 100644 public/post/bla/index.html
- rewrite public/post/importing-flat-files-into-r/index.html (97%)
- rewrite public/post/index.html (91%)
- rewrite public/post/index.xml (99%)
-]0;~/Desktop/Websitedhcp-10-248-196-16:Website solon$ git o push
-Counting objects: 33, done.
-Delta compression using up to 4 threads.
-Compressing objects:   3% (1/29)   Compressing objects:   6% (2/29)   Compressing objects:  10% (3/29)   Compressing objects:  13% (4/29)   Compressing objects:  17% (5/29)   Compressing objects:  20% (6/29)   Compressing objects:  24% (7/29)   Compressing objects:  27% (8/29)   Compressing objects:  31% (9/29)   Compressing objects:  34% (10/29)   Compressing objects:  37% (11/29)   Compressing objects:  41% (12/29)   Compressing objects:  44% (13/29)   Compressing objects:  48% (14/29)   Compressing objects:  51% (15/29)   Compressing objects:  55% (16/29)   Compressing objects:  58% (17/29)   Compressing objects:  62% (18/29)   Compressing objects:  65% (19/29)   Compressing objects:  68% (20/29)   Compressing objects:  72% (21/29)   Compressing objects:  75% (22/29)   Compressing objects:  79% (23/29)   Compressing objects:  82% (24/29)   Compressing objects:  86% (25/29)   Compressing objects:  89% (26/29)   Compressing objects:  93% (27/29)   Compressing objects:  96% (28/29)   Compressing objects: 100% (29/29)   Compressing objects: 100% (29/29), done.
-Writing objects:   3% (1/33)   Writing objects:   6% (2/33)   Writing objects:   9% (3/33)   Writing objects:  12% (4/33)   Writing objects:  15% (5/33)   Writing objects:  18% (6/33)   Writing objects:  21% (7/33)   Writing objects:  24% (8/33)   Writing objects:  27% (9/33)   Writing objects:  30% (10/33)   Writing objects:  33% (11/33)   Writing objects:  36% (12/33)   Writing objects:  39% (13/33)   Writing objects:  42% (14/33)   Writing objects:  45% (15/33)   Writing objects:  48% (16/33)   Writing objects:  51% (17/33)   Writing objects:  57% (19/33)   Writing objects:  60% (20/33)   Writing objects:  63% (21/33)   Writing objects:  66% (22/33)   Writing objects:  72% (24/33)   Writing objects:  75% (25/33)   Writing objects:  78% (26/33)   Writing objects:  81% (27/33)   Writing objects:  84% (28/33)   Writing objects:  87% (29/33)   Writing objects:  90% (30/33)   Writing objects:  93% (31/33)   Writing objects:  96% (32/33)   Writing objects: 100% (33/33)   Writing objects: 100% (33/33), 16.16 KiB | 243.00 KiB/s, done.
-Total 33 (delta 20), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/20)   [Kremote: Resolving deltas:  10% (2/20)   [Kremote: Resolving deltas:  15% (3/20)   [Kremote: Resolving deltas:  20% (4/20)   [Kremote: Resolving deltas:  25% (5/20)   [Kremote: Resolving deltas:  30% (6/20)   [Kremote: Resolving deltas:  35% (7/20)   [Kremote: Resolving deltas:  40% (8/20)   [Kremote: Resolving deltas:  45% (9/20)   [Kremote: Resolving deltas:  50% (10/20)   [Kremote: Resolving deltas:  55% (11/20)   [Kremote: Resolving deltas:  60% (12/20)   [Kremote: Resolving deltas:  65% (13/20)   [Kremote: Resolving deltas:  70% (14/20)   [Kremote: Resolving deltas:  80% (16/20)   [Kremote: Resolving deltas:  85% (17/20)   [Kremote: Resolving deltas:  90% (18/20)   [Kremote: Resolving deltas:  95% (19/20)   [Kremote: Resolving deltas: 100% (20/20)   [Kremote: Resolving deltas: 100% (20/20), completed with 17 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   6679e71..9659b01  master -> master
-git add .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commint -m ""u"e"[1P"[1P"o"r"g"a"n"i"s"e" "p"o"s"t"s" "i"n" "f"i"[1P"o"l"d"e"r"s"
-git: 'commint' is not a git command. See 'git --help'.
-
-The most similar command is
-	commit
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commint -m "organise posts in folders"n[1P
-[master 10033cb] organise posts in folders
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 50 files changed, 2256 insertions(+), 249732 deletions(-)
- rewrite .Rproj.user/3E603709/console06/INDEX001 (74%)
- delete mode 100644 content/post/FINALDATASET.csv
- rename content/post/{ => importFlatFiles}/2018-04-10-importing-flat-files-into-r.Rmd (99%)
- rename content/post/{ => importFlatFiles}/2018-04-10-importing-flat-files-into-r.html (100%)
- rename content/post/{ => importFlatFiles}/happiness.csv (100%)
- rename content/post/{ => importFlatFiles}/happiness2.csv (100%)
- create mode 100644 content/post/reefs/.FINALDATASET.csv.icloud
- rename content/post/{ => reefs}/2018-03-26-plastic-waste-and-disease-on-coral-reefs.Rmd (100%)
- rename content/post/{ => reefs}/2018-03-26-plastic-waste-and-disease-on-coral-reefs.html (100%)
- rename content/post/{ => reefs}/TRANSECT_LENGTH_FINAL.csv (100%)
- rename content/post/{ => reefs}/bibliopost.bib (100%)
- create mode 100644 public/.science2.tif.icloud
- create mode 100644 public/img/.science2.jpg.tif.icloud
- create mode 100644 public/img/.science2.tif.icloud
- create mode 100644 public/img/headers/.science2.jpg.icloud
- delete mode 100644 public/img/headers/science2.jpg
- delete mode 100644 public/img/science2.jpg.tif
- delete mode 100644 public/img/science2.tif
- create mode 100644 public/post/.FINALDATASET.csv.icloud
- delete mode 100644 public/post/FINALDATASET.csv
- create mode 100644 public/post/importFlatFiles/happiness.csv
- create mode 100644 public/post/importFlatFiles/happiness2.csv
- create mode 100644 public/post/importFlatFiles/importing-flat-files-into-r/index.html
- create mode 100644 public/post/reefs/TRANSECT_LENGTH_FINAL.csv
- create mode 100644 public/post/reefs/bibliopost.bib
- create mode 100644 public/post/reefs/plastic-waste-and-disease-on-coral-reefs/index.html
- delete mode 100644 public/science2.tif
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git push
-Counting objects: 63, done.
-Delta compression using up to 4 threads.
-Compressing objects:   1% (1/58)   Compressing objects:   3% (2/58)   Compressing objects:   5% (3/58)   Compressing objects:   6% (4/58)   Compressing objects:   8% (5/58)   Compressing objects:  10% (6/58)   Compressing objects:  12% (7/58)   Compressing objects:  13% (8/58)   Compressing objects:  15% (9/58)   Compressing objects:  17% (10/58)   Compressing objects:  18% (11/58)   Compressing objects:  20% (12/58)   Compressing objects:  22% (13/58)   Compressing objects:  24% (14/58)   Compressing objects:  25% (15/58)   Compressing objects:  27% (16/58)   Compressing objects:  29% (17/58)   Compressing objects:  31% (18/58)   Compressing objects:  32% (19/58)   Compressing objects:  34% (20/58)   Compressing objects:  36% (21/58)   Compressing objects:  37% (22/58)   Compressing objects:  39% (23/58)   Compressing objects:  41% (24/58)   Compressing objects:  43% (25/58)   Compressing objects:  44% (26/58)   Compressing objects:  46% (27/58)   Compressing objects:  48% (28/58)   Compressing objects:  50% (29/58)   Compressing objects:  51% (30/58)   Compressing objects:  53% (31/58)   Compressing objects:  55% (32/58)   Compressing objects:  56% (33/58)   Compressing objects:  58% (34/58)   Compressing objects:  60% (35/58)   Compressing objects:  62% (36/58)   Compressing objects:  63% (37/58)   Compressing objects:  65% (38/58)   Compressing objects:  67% (39/58)   Compressing objects:  68% (40/58)   Compressing objects:  70% (41/58)   Compressing objects:  72% (42/58)   Compressing objects:  74% (43/58)   Compressing objects:  75% (44/58)   Compressing objects:  77% (45/58)   Compressing objects:  79% (46/58)   Compressing objects:  81% (47/58)   Compressing objects:  82% (48/58)   Compressing objects:  84% (49/58)   Compressing objects:  86% (50/58)   Compressing objects:  87% (51/58)   Compressing objects:  89% (52/58)   Compressing objects:  91% (53/58)   Compressing objects:  93% (54/58)   Compressing objects:  94% (55/58)   Compressing objects:  96% (56/58)   Compressing objects:  98% (57/58)   Compressing objects: 100% (58/58)   Compressing objects: 100% (58/58), done.
-Writing objects:   1% (1/63)   Writing objects:   3% (2/63)   Writing objects:   4% (3/63)   Writing objects:   6% (4/63)   Writing objects:   7% (5/63)   Writing objects:   9% (6/63)   Writing objects:  11% (7/63)   Writing objects:  12% (8/63)   Writing objects:  14% (9/63)   Writing objects:  15% (10/63)   Writing objects:  17% (11/63)   Writing objects:  19% (12/63)   Writing objects:  20% (13/63)   Writing objects:  22% (14/63)   Writing objects:  23% (15/63)   Writing objects:  25% (16/63)   Writing objects:  26% (17/63)   Writing objects:  28% (18/63)   Writing objects:  30% (19/63)   Writing objects:  31% (20/63)   Writing objects:  33% (21/63)   Writing objects:  34% (22/63)   Writing objects:  36% (23/63)   Writing objects:  38% (24/63)   Writing objects:  39% (25/63)   Writing objects:  41% (26/63)   Writing objects:  42% (27/63)   Writing objects:  44% (28/63)   Writing objects:  46% (29/63)   Writing objects:  47% (30/63)   Writing objects:  49% (31/63)   Writing objects:  50% (32/63)   Writing objects:  52% (33/63)   Writing objects:  53% (34/63)   Writing objects:  55% (35/63)   Writing objects:  57% (36/63)   Writing objects:  58% (37/63)   Writing objects:  60% (38/63)   Writing objects:  61% (39/63)   Writing objects:  63% (40/63)   Writing objects:  65% (41/63)   Writing objects:  66% (42/63)   Writing objects:  68% (43/63)   Writing objects:  69% (44/63)   Writing objects:  71% (45/63)   Writing objects:  73% (46/63)   Writing objects:  74% (47/63)   Writing objects:  76% (48/63)   Writing objects:  77% (49/63)   Writing objects:  79% (50/63)   Writing objects:  80% (51/63)   Writing objects:  82% (52/63)   Writing objects:  84% (53/63)   Writing objects:  85% (54/63)   Writing objects:  87% (55/63)   Writing objects:  88% (56/63)   Writing objects:  90% (57/63)   Writing objects:  92% (58/63)   Writing objects:  93% (59/63)   Writing objects:  95% (60/63)   Writing objects:  96% (61/63)   Writing objects:  98% (62/63)   Writing objects: 100% (63/63)   Writing objects: 100% (63/63), 26.50 KiB | 238.00 KiB/s, done.
-Total 63 (delta 35), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/35)   [Kremote: Resolving deltas:   2% (1/35)   [Kremote: Resolving deltas:   8% (3/35)   [Kremote: Resolving deltas:  11% (4/35)   [Kremote: Resolving deltas:  14% (5/35)   [Kremote: Resolving deltas:  17% (6/35)   [Kremote: Resolving deltas:  20% (7/35)   [Kremote: Resolving deltas:  22% (8/35)   [Kremote: Resolving deltas:  25% (9/35)   [Kremote: Resolving deltas:  28% (10/35)   [Kremote: Resolving deltas:  31% (11/35)   [Kremote: Resolving deltas:  34% (12/35)   [Kremote: Resolving deltas:  37% (13/35)   [Kremote: Resolving deltas:  40% (14/35)   [Kremote: Resolving deltas:  45% (16/35)   [Kremote: Resolving deltas:  48% (17/35)   [Kremote: Resolving deltas:  51% (18/35)   [Kremote: Resolving deltas:  57% (20/35)   [Kremote: Resolving deltas:  62% (22/35)   [Kremote: Resolving deltas:  68% (24/35)   [Kremote: Resolving deltas:  71% (25/35)   [Kremote: Resolving deltas:  74% (26/35)   [Kremote: Resolving deltas:  77% (27/35)   [Kremote: Resolving deltas:  80% (28/35)   [Kremote: Resolving deltas:  82% (29/35)   [Kremote: Resolving deltas:  85% (30/35)   [Kremote: Resolving deltas:  88% (31/35)   [Kremote: Resolving deltas:  91% (32/35)   [Kremote: Resolving deltas:  94% (33/35)   [Kremote: Resolving deltas:  97% (34/35)   [Kremote: Resolving deltas: 100% (35/35)   [Kremote: Resolving deltas: 100% (35/35), completed with 28 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   249ecd9..10033cb  master -> master
-git add .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commit -m ""t"y"p"i"n"g"[1P"[1P"[1P"e"s"e"t"t"i"n"g"
-[master 2e49568] typesetting
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 48 files changed, 131 insertions(+), 181 deletions(-)
- rewrite .Rproj.user/3E603709/console06/INDEX001 (75%)
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git push
-Counting objects: 96, done.
-Delta compression using up to 4 threads.
-Compressing objects:   1% (1/78)   Compressing objects:   2% (2/78)   Compressing objects:   3% (3/78)   Compressing objects:   5% (4/78)   Compressing objects:   6% (5/78)   Compressing objects:   7% (6/78)   Compressing objects:   8% (7/78)   Compressing objects:  10% (8/78)   Compressing objects:  11% (9/78)   Compressing objects:  12% (10/78)   Compressing objects:  14% (11/78)   Compressing objects:  15% (12/78)   Compressing objects:  16% (13/78)   Compressing objects:  17% (14/78)   Compressing objects:  19% (15/78)   Compressing objects:  20% (16/78)   Compressing objects:  21% (17/78)   Compressing objects:  23% (18/78)   Compressing objects:  24% (19/78)   Compressing objects:  25% (20/78)   Compressing objects:  26% (21/78)   Compressing objects:  28% (22/78)   Compressing objects:  29% (23/78)   Compressing objects:  30% (24/78)   Compressing objects:  32% (25/78)   Compressing objects:  33% (26/78)   Compressing objects:  34% (27/78)   Compressing objects:  35% (28/78)   Compressing objects:  37% (29/78)   Compressing objects:  38% (30/78)   Compressing objects:  39% (31/78)   Compressing objects:  41% (32/78)   Compressing objects:  42% (33/78)   Compressing objects:  43% (34/78)   Compressing objects:  44% (35/78)   Compressing objects:  46% (36/78)   Compressing objects:  47% (37/78)   Compressing objects:  48% (38/78)   Compressing objects:  50% (39/78)   Compressing objects:  51% (40/78)   Compressing objects:  52% (41/78)   Compressing objects:  53% (42/78)   Compressing objects:  55% (43/78)   Compressing objects:  56% (44/78)   Compressing objects:  57% (45/78)   Compressing objects:  58% (46/78)   Compressing objects:  60% (47/78)   Compressing objects:  61% (48/78)   Compressing objects:  62% (49/78)   Compressing objects:  64% (50/78)   Compressing objects:  65% (51/78)   Compressing objects:  66% (52/78)   Compressing objects:  67% (53/78)   Compressing objects:  69% (54/78)   Compressing objects:  70% (55/78)   Compressing objects:  71% (56/78)   Compressing objects:  73% (57/78)   Compressing objects:  74% (58/78)   Compressing objects:  75% (59/78)   Compressing objects:  76% (60/78)   Compressing objects:  78% (61/78)   Compressing objects:  79% (62/78)   Compressing objects:  80% (63/78)   Compressing objects:  82% (64/78)   Compressing objects:  83% (65/78)   Compressing objects:  84% (66/78)   Compressing objects:  85% (67/78)   Compressing objects:  87% (68/78)   Compressing objects:  88% (69/78)   Compressing objects:  89% (70/78)   Compressing objects:  91% (71/78)   Compressing objects:  92% (72/78)   Compressing objects:  93% (73/78)   Compressing objects:  94% (74/78)   Compressing objects:  96% (75/78)   Compressing objects:  97% (76/78)   Compressing objects:  98% (77/78)   Compressing objects: 100% (78/78)   Compressing objects: 100% (78/78), done.
-Writing objects:   1% (1/96)   Writing objects:   2% (2/96)   Writing objects:   3% (3/96)   Writing objects:   4% (4/96)   Writing objects:   5% (5/96)   Writing objects:   6% (6/96)   Writing objects:   7% (7/96)   Writing objects:   8% (8/96)   Writing objects:   9% (9/96)   Writing objects:  10% (10/96)   Writing objects:  11% (11/96)   Writing objects:  12% (12/96)   Writing objects:  13% (13/96)   Writing objects:  14% (14/96)   Writing objects:  15% (15/96)   Writing objects:  16% (16/96)   Writing objects:  17% (17/96)   Writing objects:  18% (18/96)   Writing objects:  19% (19/96)   Writing objects:  20% (20/96)   Writing objects:  21% (21/96)   Writing objects:  22% (22/96)   Writing objects:  23% (23/96)   Writing objects:  25% (24/96)   Writing objects:  26% (25/96)   Writing objects:  27% (26/96)   Writing objects:  28% (27/96)   Writing objects:  29% (28/96)   Writing objects:  30% (29/96)   Writing objects:  31% (30/96)   Writing objects:  32% (31/96)   Writing objects:  33% (32/96)   Writing objects:  34% (33/96)   Writing objects:  35% (34/96)   Writing objects:  36% (35/96)   Writing objects:  37% (36/96)   Writing objects:  38% (37/96)   Writing objects:  39% (38/96)   Writing objects:  40% (39/96)   Writing objects:  41% (40/96)   Writing objects:  42% (41/96)   Writing objects:  43% (42/96)   Writing objects:  44% (43/96)   Writing objects:  45% (44/96)   Writing objects:  46% (45/96)   Writing objects:  47% (46/96)   Writing objects:  48% (47/96)   Writing objects:  50% (48/96)   Writing objects:  51% (49/96)   Writing objects:  52% (50/96)   Writing objects:  53% (51/96)   Writing objects:  54% (52/96)   Writing objects:  55% (53/96)   Writing objects:  56% (54/96)   Writing objects:  57% (55/96)   Writing objects:  58% (56/96)   Writing objects:  59% (57/96)   Writing objects:  60% (58/96)   Writing objects:  61% (59/96)   Writing objects:  62% (60/96)   Writing objects:  63% (61/96)   Writing objects:  64% (62/96)   Writing objects:  65% (63/96)   Writing objects:  66% (64/96)   Writing objects:  67% (65/96)   Writing objects:  68% (66/96)   Writing objects:  69% (67/96)   Writing objects:  70% (68/96)   Writing objects:  71% (69/96)   Writing objects:  72% (70/96)   Writing objects:  73% (71/96)   Writing objects:  75% (72/96)   Writing objects:  76% (73/96)   Writing objects:  77% (74/96)   Writing objects:  78% (75/96)   Writing objects:  79% (76/96)   Writing objects:  80% (77/96)   Writing objects:  81% (78/96)   Writing objects:  82% (79/96)   Writing objects:  83% (80/96)   Writing objects:  84% (81/96)   Writing objects:  85% (82/96)   Writing objects:  86% (83/96)   Writing objects:  87% (84/96)   Writing objects:  88% (85/96)   Writing objects:  89% (86/96)   Writing objects:  90% (87/96)   Writing objects:  91% (88/96)   Writing objects:  92% (89/96)   Writing objects:  93% (90/96)   Writing objects:  94% (91/96)   Writing objects:  95% (92/96)   Writing objects:  96% (93/96)   Writing objects:  97% (94/96)   Writing objects:  98% (95/96)   Writing objects: 100% (96/96)   Writing objects: 100% (96/96), 10.84 KiB | 69.00 KiB/s, done.
-Total 96 (delta 56), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/56)   [Kremote: Resolving deltas:   1% (1/56)   [Kremote: Resolving deltas:   3% (2/56)   [Kremote: Resolving deltas:   5% (3/56)   [Kremote: Resolving deltas:   7% (4/56)   [Kremote: Resolving deltas:   8% (5/56)   [Kremote: Resolving deltas:  10% (6/56)   [Kremote: Resolving deltas:  12% (7/56)   [Kremote: Resolving deltas:  14% (8/56)   [Kremote: Resolving deltas:  16% (9/56)   [Kremote: Resolving deltas:  17% (10/56)   [Kremote: Resolving deltas:  19% (11/56)   [Kremote: Resolving deltas:  21% (12/56)   [Kremote: Resolving deltas:  23% (13/56)   [Kremote: Resolving deltas:  25% (14/56)   [Kremote: Resolving deltas:  26% (15/56)   [Kremote: Resolving deltas:  28% (16/56)   [Kremote: Resolving deltas:  30% (17/56)   [Kremote: Resolving deltas:  32% (18/56)   [Kremote: Resolving deltas:  33% (19/56)   [Kremote: Resolving deltas:  35% (20/56)   [Kremote: Resolving deltas:  37% (21/56)   [Kremote: Resolving deltas:  41% (23/56)   [Kremote: Resolving deltas:  44% (25/56)   [Kremote: Resolving deltas:  48% (27/56)   [Kremote: Resolving deltas:  51% (29/56)   [Kremote: Resolving deltas:  53% (30/56)   [Kremote: Resolving deltas:  55% (31/56)   [Kremote: Resolving deltas:  57% (32/56)   [Kremote: Resolving deltas:  58% (33/56)   [Kremote: Resolving deltas:  60% (34/56)   [Kremote: Resolving deltas:  62% (35/56)   [Kremote: Resolving deltas:  64% (36/56)   [Kremote: Resolving deltas:  67% (38/56)   [Kremote: Resolving deltas:  69% (39/56)   [Kremote: Resolving deltas:  71% (40/56)   [Kremote: Resolving deltas:  75% (42/56)   [Kremote: Resolving deltas:  76% (43/56)   [Kremote: Resolving deltas:  78% (44/56)   [Kremote: Resolving deltas:  80% (45/56)   [Kremote: Resolving deltas:  82% (46/56)   [Kremote: Resolving deltas:  83% (47/56)   [Kremote: Resolving deltas:  85% (48/56)   [Kremote: Resolving deltas:  89% (50/56)   [Kremote: Resolving deltas:  91% (51/56)   [Kremote: Resolving deltas:  92% (52/56)   [Kremote: Resolving deltas:  94% (53/56)   [Kremote: Resolving deltas:  96% (54/56)   [Kremote: Resolving deltas:  98% (55/56)   [Kremote: Resolving deltas: 100% (56/56)   [Kremote: Resolving deltas: 100% (56/56), completed with 49 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   10033cb..2e49568  master -> master
-[KSolons-MacBook-Pro:Website solon$ git add .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commit -m ""f"i"n"i"s"h" "s"t"a"t" "r"e"p"o"r"t"i"n"g" "b"l"o"g"[1P"[1P"[1P"[1P"p"o"s"t"
-[master 201bc37] finish stat reporting post
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 35 files changed, 126141 insertions(+), 231 deletions(-)
- rewrite .Rproj.user/3E603709/console06/INDEX001 (75%)
- rewrite .Rproj.user/3E603709/rmd-outputs (98%)
- create mode 100644 content/post/2018-04-25-on-statistical-reporting-in-biomedical-journals.Rmd
- create mode 100644 content/post/2018-04-25-on-statistical-reporting-in-biomedical-journals.html
- create mode 100644 content/post/biblio.bib
- create mode 100644 public/post/2018-04-25-on-statistical-reporting-in-biomedical-journals_files/figure-html/unnamed-chunk-1-1.png
- create mode 100644 public/post/biblio.bib
- create mode 100644 public/post/on-statistical-reporting-in-biomedical-journals/index.html
- create mode 100644 public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png
- create mode 100644 public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png
- create mode 100644 public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png
- create mode 100644 public/post/reefs/FINALDATASET.csv
- create mode 100644 static/post/2018-04-25-on-statistical-reporting-in-biomedical-journals_files/figure-html/unnamed-chunk-1-1.png
- create mode 100644 static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png
- create mode 100644 static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png
- create mode 100644 static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git push
-Counting objects: 57, done.
-Delta compression using up to 4 threads.
-Compressing objects:   2% (1/49)   Compressing objects:   4% (2/49)   Compressing objects:   6% (3/49)   Compressing objects:   8% (4/49)   Compressing objects:  10% (5/49)   Compressing objects:  12% (6/49)   Compressing objects:  14% (7/49)   Compressing objects:  16% (8/49)   Compressing objects:  18% (9/49)   Compressing objects:  20% (10/49)   Compressing objects:  22% (11/49)   Compressing objects:  24% (12/49)   Compressing objects:  26% (13/49)   Compressing objects:  28% (14/49)   Compressing objects:  30% (15/49)   Compressing objects:  32% (16/49)   Compressing objects:  34% (17/49)   Compressing objects:  36% (18/49)   Compressing objects:  38% (19/49)   Compressing objects:  40% (20/49)   Compressing objects:  42% (21/49)   Compressing objects:  44% (22/49)   Compressing objects:  46% (23/49)   Compressing objects:  48% (24/49)   Compressing objects:  51% (25/49)   Compressing objects:  53% (26/49)   Compressing objects:  55% (27/49)   Compressing objects:  57% (28/49)   Compressing objects:  59% (29/49)   Compressing objects:  61% (30/49)   Compressing objects:  63% (31/49)   Compressing objects:  65% (32/49)   Compressing objects:  67% (33/49)   Compressing objects:  69% (34/49)   Compressing objects:  71% (35/49)   Compressing objects:  73% (36/49)   Compressing objects:  75% (37/49)   Compressing objects:  77% (38/49)   Compressing objects:  79% (39/49)   Compressing objects:  81% (40/49)   Compressing objects:  83% (41/49)   Compressing objects:  85% (42/49)   Compressing objects:  87% (43/49)   Compressing objects:  89% (44/49)   Compressing objects:  91% (45/49)   Compressing objects:  93% (46/49)   Compressing objects:  95% (47/49)   Compressing objects:  97% (48/49)   Compressing objects: 100% (49/49)   Compressing objects: 100% (49/49), done.
-Writing objects:   1% (1/57)   Writing objects:   3% (2/57)   Writing objects:   5% (3/57)   Writing objects:   7% (4/57)   Writing objects:   8% (5/57)   Writing objects:  10% (6/57)   Writing objects:  12% (7/57)   Writing objects:  14% (8/57)   Writing objects:  15% (9/57)   Writing objects:  17% (10/57)   Writing objects:  19% (11/57)   Writing objects:  21% (12/57)   Writing objects:  22% (13/57)   Writing objects:  24% (14/57)   Writing objects:  26% (15/57)   Writing objects:  28% (16/57)   Writing objects:  29% (17/57)   Writing objects:  31% (18/57)   Writing objects:  33% (19/57)   Writing objects:  35% (20/57)   Writing objects:  36% (21/57)   Writing objects:  38% (22/57)   Writing objects:  40% (23/57)   Writing objects:  43% (25/57)   Writing objects:  45% (26/57)   Writing objects:  47% (27/57)   Writing objects:  49% (28/57)   Writing objects:  50% (29/57)   Writing objects:  52% (30/57)   Writing objects:  54% (31/57)   Writing objects:  56% (32/57)   Writing objects:  57% (33/57)   Writing objects:  59% (34/57)   Writing objects:  61% (35/57)   Writing objects:  63% (36/57)   Writing objects:  64% (37/57)   Writing objects:  66% (38/57)   Writing objects:  68% (39/57)   Writing objects:  70% (40/57)   Writing objects:  71% (41/57)   Writing objects:  73% (42/57)   Writing objects:  75% (43/57)   Writing objects:  77% (44/57)   Writing objects:  78% (45/57)   Writing objects:  80% (46/57)   Writing objects:  82% (47/57)   Writing objects:  84% (48/57)   Writing objects:  85% (49/57)   Writing objects:  87% (50/57)   Writing objects:  87% (50/57), 1.10 MiB | 615.00 KiB/s   Writing objects:  89% (51/57), 1.10 MiB | 615.00 KiB/s   Writing objects:  91% (52/57), 1.10 MiB | 615.00 KiB/s   Writing objects:  92% (53/57), 1.10 MiB | 615.00 KiB/s   Writing objects:  94% (54/57), 1.10 MiB | 615.00 KiB/s   Writing objects:  96% (55/57), 1.10 MiB | 615.00 KiB/s   Writing objects:  98% (56/57), 1.10 MiB | 615.00 KiB/s   Writing objects: 100% (57/57), 1.10 MiB | 615.00 KiB/s   Writing objects: 100% (57/57), 1.12 MiB | 622.00 KiB/s, done.
-Total 57 (delta 30), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/30)   [Kremote: Resolving deltas:   3% (1/30)   [Kremote: Resolving deltas:   6% (2/30)   [Kremote: Resolving deltas:  10% (3/30)   [Kremote: Resolving deltas:  13% (4/30)   [Kremote: Resolving deltas:  16% (5/30)   [Kremote: Resolving deltas:  20% (6/30)   [Kremote: Resolving deltas:  23% (7/30)   [Kremote: Resolving deltas:  26% (8/30)   [Kremote: Resolving deltas:  30% (9/30)   [Kremote: Resolving deltas:  33% (10/30)   [Kremote: Resolving deltas:  36% (11/30)   [Kremote: Resolving deltas:  40% (12/30)   [Kremote: Resolving deltas:  46% (14/30)   [Kremote: Resolving deltas:  50% (15/30)   [Kremote: Resolving deltas:  53% (16/30)   [Kremote: Resolving deltas:  60% (18/30)   [Kremote: Resolving deltas:  63% (19/30)   [Kremote: Resolving deltas:  66% (20/30)   [Kremote: Resolving deltas:  70% (21/30)   [Kremote: Resolving deltas:  73% (22/30)   [Kremote: Resolving deltas:  76% (23/30)   [Kremote: Resolving deltas:  80% (24/30)   [Kremote: Resolving deltas:  86% (26/30)   [Kremote: Resolving deltas:  90% (27/30)   [Kremote: Resolving deltas:  93% (28/30)   [Kremote: Resolving deltas:  96% (29/30)   [Kremote: Resolving deltas: 100% (30/30)   [Kremote: Resolving deltas: 100% (30/30), completed with 26 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   2e49568..201bc37  master -> master
-git add .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commit -m ""f"i"x" "b"u"g" "[1P"
-[master 341cdcd] fix bug
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 11 files changed, 125082 insertions(+), 63 deletions(-)
- rewrite .Rproj.user/3E603709/console06/INDEX001 (76%)
- delete mode 100644 content/post/reefs/.FINALDATASET.csv.icloud
- create mode 100644 content/post/reefs/FINALDATASET.csv
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git push
-Counting objects: 19, done.
-Delta compression using up to 4 threads.
-Compressing objects:   5% (1/18)   Compressing objects:  11% (2/18)   Compressing objects:  16% (3/18)   Compressing objects:  22% (4/18)   Compressing objects:  27% (5/18)   Compressing objects:  33% (6/18)   Compressing objects:  38% (7/18)   Compressing objects:  44% (8/18)   Compressing objects:  50% (9/18)   Compressing objects:  55% (10/18)   Compressing objects:  61% (11/18)   Compressing objects:  66% (12/18)   Compressing objects:  72% (13/18)   Compressing objects:  77% (14/18)   Compressing objects:  83% (15/18)   Compressing objects:  88% (16/18)   Compressing objects:  94% (17/18)   Compressing objects: 100% (18/18)   Compressing objects: 100% (18/18), done.
-Writing objects:   5% (1/19)   Writing objects:  10% (2/19)   Writing objects:  15% (3/19)   Writing objects:  21% (4/19)   Writing objects:  26% (5/19)   Writing objects:  31% (6/19)   Writing objects:  36% (7/19)   Writing objects:  42% (8/19)   Writing objects:  47% (9/19)   Writing objects:  52% (10/19)   Writing objects:  57% (11/19)   Writing objects:  63% (12/19)   Writing objects:  68% (13/19)   Writing objects:  73% (14/19)   Writing objects:  78% (15/19)   Writing objects:  84% (16/19)   Writing objects:  89% (17/19)   Writing objects:  94% (18/19)   Writing objects: 100% (19/19)   Writing objects: 100% (19/19), 243.78 KiB | 4.20 MiB/s, done.
-Total 19 (delta 12), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/12)   [Kremote: Resolving deltas:   8% (1/12)   [Kremote: Resolving deltas:  16% (2/12)   [Kremote: Resolving deltas:  25% (3/12)   [Kremote: Resolving deltas:  33% (4/12)   [Kremote: Resolving deltas:  41% (5/12)   [Kremote: Resolving deltas:  50% (6/12)   [Kremote: Resolving deltas:  58% (7/12)   [Kremote: Resolving deltas:  66% (8/12)   [Kremote: Resolving deltas:  75% (9/12)   [Kremote: Resolving deltas:  83% (10/12)   [Kremote: Resolving deltas:  91% (11/12)   [Kremote: Resolving deltas: 100% (12/12)   [Kremote: Resolving deltas: 100% (12/12), completed with 12 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   201bc37..341cdcd  master -> master
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git add .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commit -m "another attempt"
-[master 22ca4aa] another attempt
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 3 files changed, 189 insertions(+), 23 deletions(-)
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git psuh    push
-Counting objects: 11, done.
-Delta compression using up to 4 threads.
-Compressing objects:   9% (1/11)   Compressing objects:  18% (2/11)   Compressing objects:  27% (3/11)   Compressing objects:  36% (4/11)   Compressing objects:  45% (5/11)   Compressing objects:  54% (6/11)   Compressing objects:  63% (7/11)   Compressing objects:  72% (8/11)   Compressing objects:  81% (9/11)   Compressing objects:  90% (10/11)   Compressing objects: 100% (11/11)   Compressing objects: 100% (11/11), done.
-Writing objects:   9% (1/11)   Writing objects:  18% (2/11)   Writing objects:  27% (3/11)   Writing objects:  36% (4/11)   Writing objects:  45% (5/11)   Writing objects:  54% (6/11)   Writing objects:  63% (7/11)   Writing objects:  72% (8/11)   Writing objects:  81% (9/11)   Writing objects:  90% (10/11)   Writing objects: 100% (11/11)   Writing objects: 100% (11/11), 564.01 KiB | 6.34 MiB/s, done.
-Total 11 (delta 7), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/7)   [Kremote: Resolving deltas:  14% (1/7)   [Kremote: Resolving deltas:  28% (2/7)   [Kremote: Resolving deltas:  42% (3/7)   [Kremote: Resolving deltas:  57% (4/7)   [Kremote: Resolving deltas:  71% (5/7)   [Kremote: Resolving deltas:  85% (6/7)   [Kremote: Resolving deltas: 100% (7/7)   [Kremote: Resolving deltas: 100% (7/7), completed with 7 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   341cdcd..22ca4aa  master -> master
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ [KSolons-MacBook-Pro:Website solon$ git aff  dd .
-git ]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git   commit . -m "a ate tmep   empt to fix bug"
-[master df88d78] attempt to fix bug
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 51 files changed, 126981 insertions(+), 1140 deletions(-)
- rewrite content/post/2018-04-25-on-statistical-reporting-in-biomedical-journals.html (99%)
- rewrite content/post/importFlatFiles/2018-04-10-importing-flat-files-into-r.html (96%)
- rewrite content/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs.html (99%)
- delete mode 100644 public/.science2.tif.icloud
- create mode 100644 public/categories/guidelines/index.html
- create mode 100644 public/categories/guidelines/page/1/index.html
- create mode 100644 public/categories/reporting/index.html
- create mode 100644 public/categories/reporting/page/1/index.html
- delete mode 100644 public/img/.science2.jpg.icloud
- delete mode 100644 public/img/.science2.jpg.tif.icloud
- delete mode 100644 public/img/.science2.tif.icloud
- delete mode 100644 public/img/headers/.science2.jpg.icloud
- delete mode 100644 public/img/headers/.science2.tiff.icloud
- create mode 100644 public/img/headers/science2.jpg
- create mode 100644 public/img/headers/science2.tiff
- create mode 100644 public/img/science2.jpg
- create mode 100644 public/img/science2.jpg.tif
- create mode 100644 public/img/science2.tif
- delete mode 100644 public/post/.FINALDATASET.csv.icloud
- create mode 100644 public/post/2018-04-25-on-statistical-reporting-in-biomedical-journals_files/figure-html/figs-1.png
- create mode 100644 public/post/FINALDATASET.csv
- rewrite public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png (97%)
- rewrite public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png (97%)
- rewrite public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png (96%)
- create mode 100644 public/science2.tif
- create mode 100644 public/tags/guidelines/index.html
- create mode 100644 public/tags/guidelines/page/1/index.html
- create mode 100644 public/tags/reporting/index.html
- create mode 100644 public/tags/reporting/page/1/index.html
- create mode 100644 static/post/2018-04-25-on-statistical-reporting-in-biomedical-journals_files/figure-html/figs-1.png
- rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png (97%)
- rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png (97%)
- rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png (96%)
-git add .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commit -nm  m "typos"
-[master 4ee0225] typos
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 8 files changed, 12 insertions(+), 10 deletions(-)
- rewrite .Rproj.user/3E603709/console06/INDEX001 (64%)
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git psu  ush
-Counting objects: 17, done.
-Delta compression using up to 4 threads.
-Compressing objects:   6% (1/16)   Compressing objects:  12% (2/16)   Compressing objects:  18% (3/16)   Compressing objects:  25% (4/16)   Compressing objects:  31% (5/16)   Compressing objects:  37% (6/16)   Compressing objects:  43% (7/16)   Compressing objects:  50% (8/16)   Compressing objects:  56% (9/16)   Compressing objects:  62% (10/16)   Compressing objects:  68% (11/16)   Compressing objects:  75% (12/16)   Compressing objects:  81% (13/16)   Compressing objects:  87% (14/16)   Compressing objects:  93% (15/16)   Compressing objects: 100% (16/16)   Compressing objects: 100% (16/16), done.
-Writing objects:   5% (1/17)   Writing objects:  11% (2/17)   Writing objects:  17% (3/17)   Writing objects:  23% (4/17)   Writing objects:  29% (5/17)   Writing objects:  35% (6/17)   Writing objects:  41% (7/17)   Writing objects:  47% (8/17)   Writing objects:  52% (9/17)   Writing objects:  58% (10/17)   Writing objects:  64% (11/17)   Writing objects:  70% (12/17)   Writing objects:  76% (13/17)   Writing objects:  82% (14/17)   Writing objects:  88% (15/17)   Writing objects:  94% (16/17)   Writing objects: 100% (17/17)   Writing objects: 100% (17/17), 1.52 KiB | 311.00 KiB/s, done.
-Total 17 (delta 11), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/11)   [Kremote: Resolving deltas:   9% (1/11)   [Kremote: Resolving deltas:  18% (2/11)   [Kremote: Resolving deltas:  27% (3/11)   [Kremote: Resolving deltas:  36% (4/11)   [Kremote: Resolving deltas:  45% (5/11)   [Kremote: Resolving deltas:  54% (6/11)   [Kremote: Resolving deltas:  63% (7/11)   [Kremote: Resolving deltas:  72% (8/11)   [Kremote: Resolving deltas:  81% (9/11)   [Kremote: Resolving deltas:  90% (10/11)   [Kremote: Resolving deltas: 100% (11/11)   [Kremote: Resolving deltas: 100% (11/11), completed with 11 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   d126bf5..4ee0225  master -> master
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git add .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commit . -m "render R r mar    markdown"
-[master 49a21ce] render Rmarkdown
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 4 files changed, 220 insertions(+), 51 deletions(-)
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git pu ush
-Counting objects: 12, done.
-Delta compression using up to 4 threads.
-Compressing objects:   8% (1/12)   Compressing objects:  16% (2/12)   Compressing objects:  25% (3/12)   Compressing objects:  33% (4/12)   Compressing objects:  41% (5/12)   Compressing objects:  50% (6/12)   Compressing objects:  58% (7/12)   Compressing objects:  66% (8/12)   Compressing objects:  75% (9/12)   Compressing objects:  83% (10/12)   Compressing objects:  91% (11/12)   Compressing objects: 100% (12/12)   Compressing objects: 100% (12/12), done.
-Writing objects:   8% (1/12)   Writing objects:  16% (2/12)   Writing objects:  25% (3/12)   Writing objects:  33% (4/12)   Writing objects:  41% (5/12)   Writing objects:  50% (6/12)   Writing objects:  58% (7/12)   Writing objects:  66% (8/12)   Writing objects:  75% (9/12)   Writing objects:  83% (10/12)   Writing objects:  91% (11/12)   Writing objects: 100% (12/12)   Writing objects: 100% (12/12), 242.55 KiB | 6.22 MiB/s, done.
-Total 12 (delta 8), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/8)   [Kremote: Resolving deltas:  12% (1/8)   [Kremote: Resolving deltas:  25% (2/8)   [Kremote: Resolving deltas:  37% (3/8)   [Kremote: Resolving deltas:  50% (4/8)   [Kremote: Resolving deltas:  62% (5/8)   [Kremote: Resolving deltas:  75% (6/8)   [Kremote: Resolving deltas:  87% (7/8)   [Kremote: Resolving deltas: 100% (8/8)   [Kremote: Resolving deltas: 100% (8/8), completed with 8 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   4ee0225..49a21ce  master -> master
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git add .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commit -m "last attempt"
-[master f25bbc8] last attempt
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 12 files changed, 518 insertions(+), 638 deletions(-)
- rewrite content/post/importFlatFiles/2018-04-10-importing-flat-files-into-r.html (95%)
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git push
-Counting objects: 31, done.
-Delta compression using up to 4 threads.
-Compressing objects:   3% (1/30)   Compressing objects:   6% (2/30)   Compressing objects:  10% (3/30)   Compressing objects:  13% (4/30)   Compressing objects:  16% (5/30)   Compressing objects:  20% (6/30)   Compressing objects:  23% (7/30)   Compressing objects:  26% (8/30)   Compressing objects:  30% (9/30)   Compressing objects:  33% (10/30)   Compressing objects:  36% (11/30)   Compressing objects:  40% (12/30)   Compressing objects:  43% (13/30)   Compressing objects:  46% (14/30)   Compressing objects:  50% (15/30)   Compressing objects:  53% (16/30)   Compressing objects:  56% (17/30)   Compressing objects:  60% (18/30)   Compressing objects:  63% (19/30)   Compressing objects:  66% (20/30)   Compressing objects:  70% (21/30)   Compressing objects:  73% (22/30)   Compressing objects:  76% (23/30)   Compressing objects:  80% (24/30)   Compressing objects:  83% (25/30)   Compressing objects:  86% (26/30)   Compressing objects:  90% (27/30)   Compressing objects:  93% (28/30)   Compressing objects:  96% (29/30)   Compressing objects: 100% (30/30)   Compressing objects: 100% (30/30), done.
-Writing objects:   3% (1/31)   Writing objects:   6% (2/31)   Writing objects:   9% (3/31)   Writing objects:  12% (4/31)   Writing objects:  16% (5/31)   Writing objects:  19% (6/31)   Writing objects:  22% (7/31)   Writing objects:  25% (8/31)   Writing objects:  29% (9/31)   Writing objects:  35% (11/31)   Writing objects:  38% (12/31)   Writing objects:  41% (13/31)   Writing objects:  45% (14/31)   Writing objects:  48% (15/31)   Writing objects:  51% (16/31)   Writing objects:  54% (17/31)   Writing objects:  58% (18/31)   Writing objects:  61% (19/31)   Writing objects:  64% (20/31)   Writing objects:  67% (21/31)   Writing objects:  70% (22/31)   Writing objects:  74% (23/31)   Writing objects:  77% (24/31)   Writing objects:  80% (25/31)   Writing objects:  83% (26/31)   Writing objects:  87% (27/31)   Writing objects:  90% (28/31)   Writing objects:  93% (29/31)   Writing objects:  96% (30/31)   Writing objects: 100% (31/31)   Writing objects: 100% (31/31), 3.04 KiB | 1.52 MiB/s, done.
-Total 31 (delta 21), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/21)   [Kremote: Resolving deltas:   4% (1/21)   [Kremote: Resolving deltas:   9% (2/21)   [Kremote: Resolving deltas:  14% (3/21)   [Kremote: Resolving deltas:  19% (4/21)   [Kremote: Resolving deltas:  23% (5/21)   [Kremote: Resolving deltas:  28% (6/21)   [Kremote: Resolving deltas:  38% (8/21)   [Kremote: Resolving deltas:  42% (9/21)   [Kremote: Resolving deltas:  47% (10/21)   [Kremote: Resolving deltas:  57% (12/21)   [Kremote: Resolving deltas:  66% (14/21)   [Kremote: Resolving deltas:  71% (15/21)   [Kremote: Resolving deltas:  76% (16/21)   [Kremote: Resolving deltas:  80% (17/21)   [Kremote: Resolving deltas:  85% (18/21)   [Kremote: Resolving deltas:  90% (19/21)   [Kremote: Resolving deltas:  95% (20/21)   [Kremote: Resolving deltas: 100% (21/21)   [Kremote: Resolving deltas: 100% (21/21), completed with 18 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   49a21ce..f25bbc8  master -> master
-git add .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commit -m ""s"t"a"t" "r"e"p"o"r"t"i"n"g" "p"o"s"t" "f"i"n"i"s"h"e"s"[1P"d"
-[master 3d41e31] stat reporting post finished
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 48 files changed, 933 insertions(+), 374594 deletions(-)
- rewrite .Rproj.user/3E603709/console06/INDEX001 (64%)
- create mode 100644 content/post/reefs/.FINALDATASET.csv.icloud
- delete mode 100644 content/post/reefs/FINALDATASET.csv
- rename content/post/{ => stat_reporting}/2018-04-25-on-statistical-reporting-in-biomedical-journals.Rmd (80%)
- rename content/post/{ => stat_reporting}/2018-04-25-on-statistical-reporting-in-biomedical-journals.html (80%)
- rename content/post/{ => stat_reporting}/biblio.bib (100%)
- create mode 100644 public/.science2.tif.icloud
- create mode 100644 public/img/.science2.jpg.icloud
- create mode 100644 public/img/.science2.jpg.tif.icloud
- create mode 100644 public/img/.science2.tif.icloud
- create mode 100644 public/img/headers/.science2.jpg.icloud
- create mode 100644 public/img/headers/.science2.tiff.icloud
- delete mode 100644 public/img/headers/science2.jpg
- delete mode 100644 public/img/headers/science2.tiff
- delete mode 100644 public/img/science2.jpg
- delete mode 100644 public/img/science2.jpg.tif
- delete mode 100644 public/img/science2.tif
- create mode 100644 public/post/.FINALDATASET.csv.icloud
- delete mode 100644 public/post/FINALDATASET.csv
- create mode 100644 public/post/reefs/.FINALDATASET.csv.icloud
- delete mode 100644 public/post/reefs/FINALDATASET.csv
- create mode 100644 public/post/stat_reporting/2018-04-25-on-statistical-reporting-in-biomedical-journals_files/figure-html/figs-1.png
- create mode 100644 public/post/stat_reporting/biblio.bib
- create mode 100644 public/post/stat_reporting/on-statistical-reporting-in-biomedical-journals/index.html
- delete mode 100644 public/science2.tif
- create mode 100644 public/tags/stat-reporting/index.html
- create mode 100644 public/tags/stat-reporting/page/1/index.html
- create mode 100644 static/post/stat_reporting/2018-04-25-on-statistical-reporting-in-biomedical-journals_files/figure-html/figs-1.png
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git push
-Counting objects: 69, done.
-Delta compression using up to 4 threads.
-Compressing objects:   1% (1/60)   Compressing objects:   3% (2/60)   Compressing objects:   5% (3/60)   Compressing objects:   6% (4/60)   Compressing objects:   8% (5/60)   Compressing objects:  10% (6/60)   Compressing objects:  11% (7/60)   Compressing objects:  13% (8/60)   Compressing objects:  15% (9/60)   Compressing objects:  16% (10/60)   Compressing objects:  18% (11/60)   Compressing objects:  20% (12/60)   Compressing objects:  21% (13/60)   Compressing objects:  23% (14/60)   Compressing objects:  25% (15/60)   Compressing objects:  26% (16/60)   Compressing objects:  28% (17/60)   Compressing objects:  30% (18/60)   Compressing objects:  31% (19/60)   Compressing objects:  33% (20/60)   Compressing objects:  35% (21/60)   Compressing objects:  36% (22/60)   Compressing objects:  38% (23/60)   Compressing objects:  40% (24/60)   Compressing objects:  41% (25/60)   Compressing objects:  43% (26/60)   Compressing objects:  45% (27/60)   Compressing objects:  46% (28/60)   Compressing objects:  48% (29/60)   Compressing objects:  50% (30/60)   Compressing objects:  51% (31/60)   Compressing objects:  53% (32/60)   Compressing objects:  55% (33/60)   Compressing objects:  56% (34/60)   Compressing objects:  58% (35/60)   Compressing objects:  60% (36/60)   Compressing objects:  61% (37/60)   Compressing objects:  63% (38/60)   Compressing objects:  65% (39/60)   Compressing objects:  66% (40/60)   Compressing objects:  68% (41/60)   Compressing objects:  70% (42/60)   Compressing objects:  71% (43/60)   Compressing objects:  73% (44/60)   Compressing objects:  75% (45/60)   Compressing objects:  76% (46/60)   Compressing objects:  78% (47/60)   Compressing objects:  80% (48/60)   Compressing objects:  81% (49/60)   Compressing objects:  83% (50/60)   Compressing objects:  85% (51/60)   Compressing objects:  86% (52/60)   Compressing objects:  88% (53/60)   Compressing objects:  90% (54/60)   Compressing objects:  91% (55/60)   Compressing objects:  93% (56/60)   Compressing objects:  95% (57/60)   Compressing objects:  96% (58/60)   Compressing objects:  98% (59/60)   Compressing objects: 100% (60/60)   Compressing objects: 100% (60/60), done.
-Writing objects:   1% (1/69)   Writing objects:   2% (2/69)   Writing objects:   4% (3/69)   Writing objects:   5% (4/69)   Writing objects:   7% (5/69)   Writing objects:   8% (6/69)   Writing objects:  10% (7/69)   Writing objects:  11% (8/69)   Writing objects:  13% (9/69)   Writing objects:  14% (10/69)   Writing objects:  15% (11/69)   Writing objects:  17% (12/69)   Writing objects:  18% (13/69)   Writing objects:  20% (14/69)   Writing objects:  21% (15/69)   Writing objects:  23% (16/69)   Writing objects:  24% (17/69)   Writing objects:  26% (18/69)   Writing objects:  27% (19/69)   Writing objects:  28% (20/69)   Writing objects:  30% (21/69)   Writing objects:  31% (22/69)   Writing objects:  33% (23/69)   Writing objects:  34% (24/69)   Writing objects:  36% (25/69)   Writing objects:  37% (26/69)   Writing objects:  39% (27/69)   Writing objects:  42% (29/69)   Writing objects:  43% (30/69)   Writing objects:  44% (31/69)   Writing objects:  46% (32/69)   Writing objects:  47% (33/69)   Writing objects:  49% (34/69)   Writing objects:  50% (35/69)   Writing objects:  52% (36/69)   Writing objects:  53% (37/69)   Writing objects:  55% (38/69)   Writing objects:  56% (39/69)   Writing objects:  57% (40/69)   Writing objects:  59% (41/69)   Writing objects:  60% (42/69)   Writing objects:  62% (43/69)   Writing objects:  63% (44/69)   Writing objects:  65% (45/69)   Writing objects:  66% (46/69)   Writing objects:  68% (47/69)   Writing objects:  69% (48/69)   Writing objects:  71% (49/69)   Writing objects:  72% (50/69)   Writing objects:  73% (51/69)   Writing objects:  75% (52/69)   Writing objects:  76% (53/69)   Writing objects:  78% (54/69)   Writing objects:  79% (55/69)   Writing objects:  81% (56/69)   Writing objects:  82% (57/69)   Writing objects:  84% (58/69)   Writing objects:  85% (59/69)   Writing objects:  86% (60/69)   Writing objects:  88% (61/69)   Writing objects:  89% (62/69)   Writing objects:  91% (63/69)   Writing objects:  92% (64/69)   Writing objects:  94% (65/69)   Writing objects:  95% (66/69)   Writing objects:  97% (67/69)   Writing objects:  98% (68/69)   Writing objects: 100% (69/69)   Writing objects: 100% (69/69), 13.39 KiB | 64.00 KiB/s, done.
-Total 69 (delta 45), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/45)   [Kremote: Resolving deltas:   8% (4/45)   [Kremote: Resolving deltas:  13% (6/45)   [Kremote: Resolving deltas:  15% (7/45)   [Kremote: Resolving deltas:  17% (8/45)   [Kremote: Resolving deltas:  20% (9/45)   [Kremote: Resolving deltas:  22% (10/45)   [Kremote: Resolving deltas:  24% (11/45)   [Kremote: Resolving deltas:  26% (12/45)   [Kremote: Resolving deltas:  28% (13/45)   [Kremote: Resolving deltas:  31% (14/45)   [Kremote: Resolving deltas:  33% (15/45)   [Kremote: Resolving deltas:  35% (16/45)   [Kremote: Resolving deltas:  37% (17/45)   [Kremote: Resolving deltas:  42% (19/45)   [Kremote: Resolving deltas:  44% (20/45)   [Kremote: Resolving deltas:  46% (21/45)   [Kremote: Resolving deltas:  48% (22/45)   [Kremote: Resolving deltas:  51% (23/45)   [Kremote: Resolving deltas:  53% (24/45)   [Kremote: Resolving deltas:  57% (26/45)   [Kremote: Resolving deltas:  64% (29/45)   [Kremote: Resolving deltas:  66% (30/45)   [Kremote: Resolving deltas:  68% (31/45)   [Kremote: Resolving deltas:  71% (32/45)   [Kremote: Resolving deltas:  73% (33/45)   [Kremote: Resolving deltas:  77% (35/45)   [Kremote: Resolving deltas:  80% (36/45)   [Kremote: Resolving deltas:  82% (37/45)   [Kremote: Resolving deltas:  84% (38/45)   [Kremote: Resolving deltas:  86% (39/45)   [Kremote: Resolving deltas:  88% (40/45)   [Kremote: Resolving deltas:  91% (41/45)   [Kremote: Resolving deltas:  93% (42/45)   [Kremote: Resolving deltas:  95% (43/45)   [Kremote: Resolving deltas:  97% (44/45)   [Kremote: Resolving deltas: 100% (45/45)   [Kremote: Resolving deltas: 100% (45/45), completed with 34 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   f25bbc8..3d41e31  master -> master
-git add .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ f git commit -m "fix typos"
-[master 2126b9c] fix typos
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 31 files changed, 374618 insertions(+), 32 deletions(-)
- rewrite .Rproj.user/3E603709/console06/INDEX001 (64%)
- delete mode 100644 content/post/reefs/.FINALDATASET.csv.icloud
- create mode 100644 content/post/reefs/FINALDATASET.csv
- delete mode 100644 public/.science2.tif.icloud
- delete mode 100644 public/img/.science2.jpg.icloud
- delete mode 100644 public/img/.science2.jpg.tif.icloud
- delete mode 100644 public/img/.science2.tif.icloud
- delete mode 100644 public/img/headers/.science2.jpg.icloud
- delete mode 100644 public/img/headers/.science2.tiff.icloud
- create mode 100644 public/img/headers/science2.jpg
- create mode 100644 public/img/headers/science2.tiff
- create mode 100644 public/img/science2.jpg
- create mode 100644 public/img/science2.jpg.tif
- create mode 100644 public/img/science2.tif
- delete mode 100644 public/post/.FINALDATASET.csv.icloud
- create mode 100644 public/post/FINALDATASET.csv
- delete mode 100644 public/post/reefs/.FINALDATASET.csv.icloud
- create mode 100644 public/post/reefs/FINALDATASET.csv
- create mode 100644 public/science2.tif
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git psuh   ush
-Counting objects: 34, done.
-Delta compression using up to 4 threads.
-Compressing objects:   3% (1/31)   Compressing objects:   6% (2/31)   Compressing objects:   9% (3/31)   Compressing objects:  12% (4/31)   Compressing objects:  16% (5/31)   Compressing objects:  19% (6/31)   Compressing objects:  22% (7/31)   Compressing objects:  25% (8/31)   Compressing objects:  29% (9/31)   Compressing objects:  32% (10/31)   Compressing objects:  35% (11/31)   Compressing objects:  38% (12/31)   Compressing objects:  41% (13/31)   Compressing objects:  45% (14/31)   Compressing objects:  48% (15/31)   Compressing objects:  51% (16/31)   Compressing objects:  54% (17/31)   Compressing objects:  58% (18/31)   Compressing objects:  61% (19/31)   Compressing objects:  64% (20/31)   Compressing objects:  67% (21/31)   Compressing objects:  70% (22/31)   Compressing objects:  74% (23/31)   Compressing objects:  77% (24/31)   Compressing objects:  80% (25/31)   Compressing objects:  83% (26/31)   Compressing objects:  87% (27/31)   Compressing objects:  90% (28/31)   Compressing objects:  93% (29/31)   Compressing objects:  96% (30/31)   Compressing objects: 100% (31/31)   Compressing objects: 100% (31/31), done.
-Writing objects:   2% (1/34)   Writing objects:   5% (2/34)   Writing objects:   8% (3/34)   Writing objects:  11% (4/34)   Writing objects:  14% (5/34)   Writing objects:  17% (6/34)   Writing objects:  20% (7/34)   Writing objects:  23% (8/34)   Writing objects:  26% (9/34)   Writing objects:  29% (10/34)   Writing objects:  32% (11/34)   Writing objects:  35% (12/34)   Writing objects:  38% (13/34)   Writing objects:  41% (14/34)   Writing objects:  44% (15/34)   Writing objects:  47% (16/34)   Writing objects:  50% (17/34)   Writing objects:  52% (18/34)   Writing objects:  55% (19/34)   Writing objects:  58% (20/34)   Writing objects:  61% (21/34)   Writing objects:  64% (22/34)   Writing objects:  67% (23/34)   Writing objects:  70% (24/34)   Writing objects:  73% (25/34)   Writing objects:  76% (26/34)   Writing objects:  76% (26/34), 1.07 MiB | 799.00 KiB/s   Writing objects:  76% (26/34), 2.13 MiB | 704.00 KiB/s   Writing objects:  79% (27/34), 3.19 MiB | 908.00 KiB/s   Writing objects:  79% (27/34), 4.03 MiB | 388.00 KiB/s   Writing objects:  79% (27/34), 4.28 MiB | 374.00 KiB/s   Writing objects:  79% (27/34), 4.34 MiB | 336.00 KiB/s   Writing objects:  79% (27/34), 4.41 MiB | 325.00 KiB/s   Writing objects:  79% (27/34), 4.78 MiB | 320.00 KiB/s   Writing objects:  79% (27/34), 5.91 MiB | 341.00 KiB/s   Writing objects:  79% (27/34), 5.91 MiB | 162.00 KiB/s   Writing objects:  82% (28/34), 6.22 MiB | 129.00 KiB/s   Writing objects:  85% (29/34), 6.22 MiB | 129.00 KiB/s   Writing objects:  88% (30/34), 6.22 MiB | 129.00 KiB/s   Writing objects:  91% (31/34), 6.22 MiB | 129.00 KiB/s   Writing objects:  94% (32/34), 6.22 MiB | 129.00 KiB/s   Writing objects:  97% (33/34), 6.22 MiB | 129.00 KiB/s   Writing objects: 100% (34/34), 6.22 MiB | 129.00 KiB/s   Writing objects: 100% (34/34), 6.95 MiB | 255.00 KiB/s, done.
-Total 34 (delta 22), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/22)   [Kremote: Resolving deltas:   4% (1/22)   [Kremote: Resolving deltas:   9% (2/22)   [Kremote: Resolving deltas:  13% (3/22)   [Kremote: Resolving deltas:  18% (4/22)   [Kremote: Resolving deltas:  22% (5/22)   [Kremote: Resolving deltas:  27% (6/22)   [Kremote: Resolving deltas:  31% (7/22)   [Kremote: Resolving deltas:  36% (8/22)   [Kremote: Resolving deltas:  40% (9/22)   [Kremote: Resolving deltas:  45% (10/22)   [Kremote: Resolving deltas:  50% (11/22)   [Kremote: Resolving deltas:  59% (13/22)   [Kremote: Resolving deltas:  63% (14/22)   [Kremote: Resolving deltas:  68% (15/22)   [Kremote: Resolving deltas:  72% (16/22)   [Kremote: Resolving deltas:  77% (17/22)   [Kremote: Resolving deltas:  81% (18/22)   [Kremote: Resolving deltas:  86% (19/22)   [Kremote: Resolving deltas:  90% (20/22)   [Kremote: Resolving deltas:  95% (21/22)   [Kremote: Resolving deltas: 100% (22/22)   [Kremote: Resolving deltas: 100% (22/22), completed with 21 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   3d41e31..2126b9c  master -> master
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git add .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commut  it -m "render correctly"
-[master c2ff623] render correctly
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 12 files changed, 58 insertions(+), 14 deletions(-)
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git push
-Counting objects: 30, done.
-Delta compression using up to 4 threads.
-Compressing objects:   3% (1/29)   Compressing objects:   6% (2/29)   Compressing objects:  10% (3/29)   Compressing objects:  13% (4/29)   Compressing objects:  17% (5/29)   Compressing objects:  20% (6/29)   Compressing objects:  24% (7/29)   Compressing objects:  27% (8/29)   Compressing objects:  31% (9/29)   Compressing objects:  34% (10/29)   Compressing objects:  37% (11/29)   Compressing objects:  41% (12/29)   Compressing objects:  44% (13/29)   Compressing objects:  48% (14/29)   Compressing objects:  51% (15/29)   Compressing objects:  55% (16/29)   Compressing objects:  58% (17/29)   Compressing objects:  62% (18/29)   Compressing objects:  65% (19/29)   Compressing objects:  68% (20/29)   Compressing objects:  72% (21/29)   Compressing objects:  75% (22/29)   Compressing objects:  79% (23/29)   Compressing objects:  82% (24/29)   Compressing objects:  86% (25/29)   Compressing objects:  89% (26/29)   Compressing objects:  93% (27/29)   Compressing objects:  96% (28/29)   Compressing objects: 100% (29/29)   Compressing objects: 100% (29/29), done.
-Writing objects:   3% (1/30)   Writing objects:   6% (2/30)   Writing objects:  10% (3/30)   Writing objects:  13% (4/30)   Writing objects:  16% (5/30)   Writing objects:  20% (6/30)   Writing objects:  23% (7/30)   Writing objects:  26% (8/30)   Writing objects:  30% (9/30)   Writing objects:  33% (10/30)   Writing objects:  36% (11/30)   Writing objects:  40% (12/30)   Writing objects:  43% (13/30)   Writing objects:  46% (14/30)   Writing objects:  50% (15/30)   Writing objects:  53% (16/30)   Writing objects:  56% (17/30)   Writing objects:  60% (18/30)   Writing objects:  63% (19/30)   Writing objects:  66% (20/30)   Writing objects:  70% (21/30)   Writing objects:  73% (22/30)   Writing objects:  76% (23/30)   Writing objects:  80% (24/30)   Writing objects:  83% (25/30)   Writing objects:  86% (26/30)   Writing objects:  90% (27/30)   Writing objects:  93% (28/30)   Writing objects:  96% (29/30)   Writing objects: 100% (30/30)   Writing objects: 100% (30/30), 3.27 KiB | 81.00 KiB/s, done.
-Total 30 (delta 22), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/22)   [Kremote: Resolving deltas:   4% (1/22)   [Kremote: Resolving deltas:   9% (2/22)   [Kremote: Resolving deltas:  13% (3/22)   [Kremote: Resolving deltas:  18% (4/22)   [Kremote: Resolving deltas:  22% (5/22)   [Kremote: Resolving deltas:  27% (6/22)   [Kremote: Resolving deltas:  36% (8/22)   [Kremote: Resolving deltas:  40% (9/22)   [Kremote: Resolving deltas:  45% (10/22)   [Kremote: Resolving deltas:  50% (11/22)   [Kremote: Resolving deltas:  59% (13/22)   [Kremote: Resolving deltas:  68% (15/22)   [Kremote: Resolving deltas:  72% (16/22)   [Kremote: Resolving deltas:  77% (17/22)   [Kremote: Resolving deltas:  81% (18/22)   [Kremote: Resolving deltas:  86% (19/22)   [Kremote: Resolving deltas:  90% (20/22)   [Kremote: Resolving deltas:  95% (21/22)   [Kremote: Resolving deltas: 100% (22/22)   [Kremote: Resolving deltas: 100% (22/22), completed with 19 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   2126b9c..c2ff623  master -> master
-git aff  dd .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commit -m ""t"y"p"e"s"[1P"[1P"o"s"
-[master 4c604fa] typos
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
-g 22 files changed, 29 insertions(+), 374539 deletions(-)
- rewrite .Rproj.user/3E603709/console06/INDEX001 (65%)
- create mode 100644 content/post/reefs/.FINALDATASET.csv.icloud
- delete mode 100644 content/post/reefs/FINALDATASET.csv
- create mode 100644 public/.science2.tif.icloud
- create mode 100644 public/img/.science2.jpg.icloud
- create mode 100644 public/img/.science2.jpg.tif.icloud
- create mode 100644 public/img/.science2.tif.icloud
- create mode 100644 public/img/headers/.science2.jpg.icloud
- create mode 100644 public/img/headers/.science2.tiff.icloud
- delete mode 100644 public/img/headers/science2.jpg
- delete mode 100644 public/img/headers/science2.tiff
- delete mode 100644 public/img/science2.jpg
- delete mode 100644 public/img/science2.jpg.tif
- delete mode 100644 public/img/science2.tif
- create mode 100644 public/post/.FINALDATASET.csv.icloud
- delete mode 100644 public/post/FINALDATASET.csv
- create mode 100644 public/post/reefs/.FINALDATASET.csv.icloud
- delete mode 100644 public/post/reefs/FINALDATASET.csv
- delete mode 100644 public/science2.tif
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git push        git add .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commit -m "types  os2"
-[master 6da0dee] typos2
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 12 files changed, 49 insertions(+), 14 deletions(-)
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git psu  ush
-Counting objects: 54, done.
-Delta compression using up to 4 threads.
-Compressing objects:   1% (1/53)   Compressing objects:   3% (2/53)   Compressing objects:   5% (3/53)   Compressing objects:   7% (4/53)   Compressing objects:   9% (5/53)   Compressing objects:  11% (6/53)   Compressing objects:  13% (7/53)   Compressing objects:  15% (8/53)   Compressing objects:  16% (9/53)   Compressing objects:  18% (10/53)   Compressing objects:  20% (11/53)   Compressing objects:  22% (12/53)   Compressing objects:  24% (13/53)   Compressing objects:  26% (14/53)   Compressing objects:  28% (15/53)   Compressing objects:  30% (16/53)   Compressing objects:  32% (17/53)   Compressing objects:  33% (18/53)   Compressing objects:  35% (19/53)   Compressing objects:  37% (20/53)   Compressing objects:  39% (21/53)   Compressing objects:  41% (22/53)   Compressing objects:  43% (23/53)   Compressing objects:  45% (24/53)   Compressing objects:  47% (25/53)   Compressing objects:  49% (26/53)   Compressing objects:  50% (27/53)   Compressing objects:  52% (28/53)   Compressing objects:  54% (29/53)   Compressing objects:  56% (30/53)   Compressing objects:  58% (31/53)   Compressing objects:  60% (32/53)   Compressing objects:  62% (33/53)   Compressing objects:  64% (34/53)   Compressing objects:  66% (35/53)   Compressing objects:  67% (36/53)   Compressing objects:  69% (37/53)   Compressing objects:  71% (38/53)   Compressing objects:  73% (39/53)   Compressing objects:  75% (40/53)   Compressing objects:  77% (41/53)   Compressing objects:  79% (42/53)   Compressing objects:  81% (43/53)   Compressing objects:  83% (44/53)   Compressing objects:  84% (45/53)   Compressing objects:  86% (46/53)   Compressing objects:  88% (47/53)   Compressing objects:  90% (48/53)   Compressing objects:  92% (49/53)   Compressing objects:  94% (50/53)   Compressing objects:  96% (51/53)   Compressing objects:  98% (52/53)   Compressing objects: 100% (53/53)   Compressing objects: 100% (53/53), done.
-Writing objects:   1% (1/54)   Writing objects:   3% (2/54)   Writing objects:   5% (3/54)   Writing objects:   7% (4/54)   Writing objects:   9% (5/54)   Writing objects:  11% (6/54)   Writing objects:  12% (7/54)   Writing objects:  14% (8/54)   Writing objects:  16% (9/54)   Writing objects:  18% (10/54)   Writing objects:  20% (11/54)   Writing objects:  22% (12/54)   Writing objects:  24% (13/54)   Writing objects:  25% (14/54)   Writing objects:  27% (15/54)   Writing objects:  29% (16/54)   Writing objects:  31% (17/54)   Writing objects:  35% (19/54)   Writing objects:  37% (20/54)   Writing objects:  38% (21/54)   Writing objects:  40% (22/54)   Writing objects:  42% (23/54)   Writing objects:  44% (24/54)   Writing objects:  46% (25/54)   Writing objects:  48% (26/54)   Writing objects:  50% (27/54)   Writing objects:  51% (28/54)   Writing objects:  53% (29/54)   Writing objects:  55% (30/54)   Writing objects:  57% (31/54)   Writing objects:  59% (32/54)   Writing objects:  61% (33/54)   Writing objects:  62% (34/54)   Writing objects:  64% (35/54)   Writing objects:  66% (36/54)   Writing objects:  68% (37/54)   Writing objects:  70% (38/54)   Writing objects:  72% (39/54)   Writing objects:  74% (40/54)   Writing objects:  75% (41/54)   Writing objects:  77% (42/54)   Writing objects:  79% (43/54)   Writing objects:  81% (44/54)   Writing objects:  83% (45/54)   Writing objects:  85% (46/54)   Writing objects:  87% (47/54)   Writing objects:  88% (48/54)   Writing objects:  90% (49/54)   Writing objects:  92% (50/54)   Writing objects:  94% (51/54)   Writing objects:  96% (52/54)   Writing objects:  98% (53/54)   Writing objects: 100% (54/54)   Writing objects: 100% (54/54), 5.16 KiB | 26.00 KiB/s, done.
-Total 54 (delta 40), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/40)   [Kremote: Resolving deltas:  10% (4/40)   [Kremote: Resolving deltas:  15% (6/40)   [Kremote: Resolving deltas:  17% (7/40)   [Kremote: Resolving deltas:  22% (9/40)   [Kremote: Resolving deltas:  27% (11/40)   [Kremote: Resolving deltas:  30% (12/40)   [Kremote: Resolving deltas:  35% (14/40)   [Kremote: Resolving deltas:  40% (16/40)   [Kremote: Resolving deltas:  45% (18/40)   [Kremote: Resolving deltas:  47% (19/40)   [Kremote: Resolving deltas:  50% (20/40)   [Kremote: Resolving deltas:  52% (21/40)   [Kremote: Resolving deltas:  57% (23/40)   [Kremote: Resolving deltas:  60% (24/40)   [Kremote: Resolving deltas:  65% (26/40)   [Kremote: Resolving deltas:  70% (28/40)   [Kremote: Resolving deltas:  72% (29/40)   [Kremote: Resolving deltas:  75% (30/40)   [Kremote: Resolving deltas:  77% (31/40)   [Kremote: Resolving deltas:  80% (32/40)   [Kremote: Resolving deltas:  85% (34/40)   [Kremote: Resolving deltas:  87% (35/40)   [Kremote: Resolving deltas:  90% (36/40)   [Kremote: Resolving deltas:  92% (37/40)   [Kremote: Resolving deltas:  95% (38/40)   [Kremote: Resolving deltas:  97% (39/40)   [Kremote: Resolving deltas: 100% (40/40)   [Kremote: Resolving deltas: 100% (40/40), completed with 26 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   c2ff623..6da0dee  master -> master
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git add .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git coomit      mmit -m ""l"i"n"k" "[1P""[1@f[1@i[1@x[1@ 
-[master cda5710] fix link
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 4 files changed, 37 insertions(+), 12 deletions(-)
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git push
-Counting objects: 10, done.
-Delta compression using up to 4 threads.
-Compressing objects:  10% (1/10)   Compressing objects:  20% (2/10)   Compressing objects:  30% (3/10)   Compressing objects:  40% (4/10)   Compressing objects:  50% (5/10)   Compressing objects:  60% (6/10)   Compressing objects:  70% (7/10)   Compressing objects:  80% (8/10)   Compressing objects:  90% (9/10)   Compressing objects: 100% (10/10)   Compressing objects: 100% (10/10), done.
-Writing objects:  10% (1/10)   Writing objects:  20% (2/10)   Writing objects:  30% (3/10)   Writing objects:  40% (4/10)   Writing objects:  50% (5/10)   Writing objects:  60% (6/10)   Writing objects:  70% (7/10)   Writing objects:  80% (8/10)   Writing objects:  90% (9/10)   Writing objects: 100% (10/10)   Writing objects: 100% (10/10), 1.84 KiB | 471.00 KiB/s, done.
-Total 10 (delta 7), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/7)   [Kremote: Resolving deltas:  14% (1/7)   [Kremote: Resolving deltas:  28% (2/7)   [Kremote: Resolving deltas:  42% (3/7)   [Kremote: Resolving deltas:  57% (4/7)   [Kremote: Resolving deltas:  71% (5/7)   [Kremote: Resolving deltas:  85% (6/7)   [Kremote: Resolving deltas: 100% (7/7)   [Kremote: Resolving deltas: 100% (7/7), completed with 7 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   6da0dee..cda5710  master -> master
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git add .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commit -m "reefs post"
-[master e6bd613] reefs post
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 16 files changed, 249751 insertions(+), 38 deletions(-)
- delete mode 100644 content/post/reefs/.FINALDATASET.csv.icloud
- create mode 100644 content/post/reefs/FINALDATASET.csv
- delete mode 100644 public/post/reefs/.FINALDATASET.csv.icloud
- rewrite public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png (97%)
- rewrite public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png (97%)
- rewrite public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png (96%)
- create mode 100644 public/post/reefs/FINALDATASET.csv
- rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png (97%)
- rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png (97%)
- rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png (96%)
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git push
-Counting objects: 27, done.
-Delta compression using up to 4 threads.
-Compressing objects:   4% (1/25)   Compressing objects:   8% (2/25)   Compressing objects:  12% (3/25)   Compressing objects:  16% (4/25)   Compressing objects:  20% (5/25)   Compressing objects:  24% (6/25)   Compressing objects:  28% (7/25)   Compressing objects:  32% (8/25)   Compressing objects:  36% (9/25)   Compressing objects:  40% (10/25)   Compressing objects:  44% (11/25)   Compressing objects:  48% (12/25)   Compressing objects:  52% (13/25)   Compressing objects:  56% (14/25)   Compressing objects:  60% (15/25)   Compressing objects:  64% (16/25)   Compressing objects:  68% (17/25)   Compressing objects:  72% (18/25)   Compressing objects:  76% (19/25)   Compressing objects:  80% (20/25)   Compressing objects:  84% (21/25)   Compressing objects:  88% (22/25)   Compressing objects:  92% (23/25)   Compressing objects:  96% (24/25)   Compressing objects: 100% (25/25)   Compressing objects: 100% (25/25), done.
-Writing objects:   3% (1/27)   Writing objects:   7% (2/27)   Writing objects:  11% (3/27)   Writing objects:  14% (4/27)   Writing objects:  18% (5/27)   Writing objects:  22% (6/27)   Writing objects:  25% (7/27)   Writing objects:  29% (8/27)   Writing objects:  33% (9/27)   Writing objects:  37% (10/27)   Writing objects:  40% (11/27)   Writing objects:  44% (12/27)   Writing objects:  48% (13/27)   Writing objects:  51% (14/27)   Writing objects:  55% (15/27)   Writing objects:  59% (16/27)   Writing objects:  62% (17/27)   Writing objects:  66% (18/27)   Writing objects:  70% (19/27)   Writing objects:  74% (20/27)   Writing objects:  77% (21/27)   Writing objects:  81% (22/27)   Writing objects:  85% (23/27)   Writing objects:  88% (24/27)   Writing objects:  92% (25/27)   Writing objects:  96% (26/27)   Writing objects: 100% (27/27)   Writing objects: 100% (27/27), 781.94 KiB | 2.56 MiB/s, done.
-Total 27 (delta 16), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/16)   [Kremote: Resolving deltas:   6% (1/16)   [Kremote: Resolving deltas:  12% (2/16)   [Kremote: Resolving deltas:  18% (3/16)   [Kremote: Resolving deltas:  25% (4/16)   [Kremote: Resolving deltas:  31% (5/16)   [Kremote: Resolving deltas:  43% (7/16)   [Kremote: Resolving deltas:  50% (8/16)   [Kremote: Resolving deltas:  56% (9/16)   [Kremote: Resolving deltas:  62% (10/16)   [Kremote: Resolving deltas:  68% (11/16)   [Kremote: Resolving deltas:  75% (12/16)   [Kremote: Resolving deltas:  81% (13/16)   [Kremote: Resolving deltas:  87% (14/16)   [Kremote: Resolving deltas:  93% (15/16)   [Kremote: Resolving deltas: 100% (16/16)   [Kremote: Resolving deltas: 100% (16/16), completed with 15 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   cda5710..e6bd613  master -> master
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git add .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commit -m ""r"e"e"f"s" "p"o"s"t"
-[master aaadc8c] reefs post
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 29 files changed, 252 insertions(+), 215 deletions(-)
- rewrite public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png (98%)
- rewrite public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png (97%)
- rewrite public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png (96%)
- rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png (98%)
- rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png (97%)
- rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png (96%)
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ p git psuh   ush
-Counting objects: 60, done.
-Delta compression using up to 4 threads.
-Compressing objects:   1% (1/55)   Compressing objects:   3% (2/55)   Compressing objects:   5% (3/55)   Compressing objects:   7% (4/55)   Compressing objects:   9% (5/55)   Compressing objects:  10% (6/55)   Compressing objects:  12% (7/55)   Compressing objects:  14% (8/55)   Compressing objects:  16% (9/55)   Compressing objects:  18% (10/55)   Compressing objects:  20% (11/55)   Compressing objects:  21% (12/55)   Compressing objects:  23% (13/55)   Compressing objects:  25% (14/55)   Compressing objects:  27% (15/55)   Compressing objects:  29% (16/55)   Compressing objects:  30% (17/55)   Compressing objects:  32% (18/55)   Compressing objects:  34% (19/55)   Compressing objects:  36% (20/55)   Compressing objects:  38% (21/55)   Compressing objects:  40% (22/55)   Compressing objects:  41% (23/55)   Compressing objects:  43% (24/55)   Compressing objects:  45% (25/55)   Compressing objects:  47% (26/55)   Compressing objects:  49% (27/55)   Compressing objects:  50% (28/55)   Compressing objects:  52% (29/55)   Compressing objects:  54% (30/55)   Compressing objects:  56% (31/55)   Compressing objects:  58% (32/55)   Compressing objects:  60% (33/55)   Compressing objects:  61% (34/55)   Compressing objects:  63% (35/55)   Compressing objects:  65% (36/55)   Compressing objects:  67% (37/55)   Compressing objects:  69% (38/55)   Compressing objects:  70% (39/55)   Compressing objects:  72% (40/55)   Compressing objects:  74% (41/55)   Compressing objects:  76% (42/55)   Compressing objects:  78% (43/55)   Compressing objects:  80% (44/55)   Compressing objects:  81% (45/55)   Compressing objects:  83% (46/55)   Compressing objects:  85% (47/55)   Compressing objects:  87% (48/55)   Compressing objects:  89% (49/55)   Compressing objects:  90% (50/55)   Compressing objects:  92% (51/55)   Compressing objects:  94% (52/55)   Compressing objects:  96% (53/55)   Compressing objects:  98% (54/55)   Compressing objects: 100% (55/55)   Compressing objects: 100% (55/55), done.
-Writing objects:   1% (1/60)   Writing objects:   3% (2/60)   Writing objects:   5% (3/60)   Writing objects:   6% (4/60)   Writing objects:   8% (5/60)   Writing objects:  10% (6/60)   Writing objects:  11% (7/60)   Writing objects:  13% (8/60)   Writing objects:  15% (9/60)   Writing objects:  16% (10/60)   Writing objects:  18% (11/60)   Writing objects:  20% (12/60)   Writing objects:  21% (13/60)   Writing objects:  23% (14/60)   Writing objects:  25% (15/60)   Writing objects:  26% (16/60)   Writing objects:  28% (17/60)   Writing objects:  30% (18/60)   Writing objects:  31% (19/60)   Writing objects:  33% (20/60)   Writing objects:  35% (21/60)   Writing objects:  36% (22/60)   Writing objects:  38% (23/60)   Writing objects:  40% (24/60)   Writing objects:  41% (25/60)   Writing objects:  43% (26/60)   Writing objects:  45% (27/60)   Writing objects:  46% (28/60)   Writing objects:  48% (29/60)   Writing objects:  50% (30/60)   Writing objects:  51% (31/60)   Writing objects:  53% (32/60)   Writing objects:  55% (33/60)   Writing objects:  56% (34/60)   Writing objects:  58% (35/60)   Writing objects:  60% (36/60)   Writing objects:  61% (37/60)   Writing objects:  63% (38/60)   Writing objects:  65% (39/60)   Writing objects:  66% (40/60)   Writing objects:  68% (41/60)   Writing objects:  70% (42/60)   Writing objects:  71% (43/60)   Writing objects:  73% (44/60)   Writing objects:  75% (45/60)   Writing objects:  76% (46/60)   Writing objects:  78% (47/60)   Writing objects:  80% (48/60)   Writing objects:  81% (49/60)   Writing objects:  83% (50/60)   Writing objects:  85% (51/60)   Writing objects:  86% (52/60)   Writing objects:  88% (53/60)   Writing objects:  90% (54/60)   Writing objects:  91% (55/60)   Writing objects:  93% (56/60)   Writing objects:  95% (57/60)   Writing objects:  96% (58/60)   Writing objects:  98% (59/60)   Writing objects: 100% (60/60)   Writing objects: 100% (60/60), 317.32 KiB | 519.00 KiB/s, done.
-Total 60 (delta 38), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/38)   [Kremote: Resolving deltas:   2% (1/38)   [Kremote: Resolving deltas:   5% (2/38)   [Kremote: Resolving deltas:   7% (3/38)   [Kremote: Resolving deltas:  10% (4/38)   [Kremote: Resolving deltas:  13% (5/38)   [Kremote: Resolving deltas:  15% (6/38)   [Kremote: Resolving deltas:  18% (7/38)   [Kremote: Resolving deltas:  21% (8/38)   [Kremote: Resolving deltas:  23% (9/38)   [Kremote: Resolving deltas:  26% (10/38)   [Kremote: Resolving deltas:  28% (11/38)   [Kremote: Resolving deltas:  34% (13/38)   [Kremote: Resolving deltas:  36% (14/38)   [Kremote: Resolving deltas:  39% (15/38)   [Kremote: Resolving deltas:  42% (16/38)   [Kremote: Resolving deltas:  44% (17/38)   [Kremote: Resolving deltas:  47% (18/38)   [Kremote: Resolving deltas:  55% (21/38)   [Kremote: Resolving deltas:  60% (23/38)   [Kremote: Resolving deltas:  65% (25/38)   [Kremote: Resolving deltas:  68% (26/38)   [Kremote: Resolving deltas:  71% (27/38)   [Kremote: Resolving deltas:  73% (28/38)   [Kremote: Resolving deltas:  76% (29/38)   [Kremote: Resolving deltas:  78% (30/38)   [Kremote: Resolving deltas:  81% (31/38)   [Kremote: Resolving deltas:  84% (32/38)   [Kremote: Resolving deltas:  86% (33/38)   [Kremote: Resolving deltas:  89% (34/38)   [Kremote: Resolving deltas:  92% (35/38)   [Kremote: Resolving deltas:  94% (36/38)   [Kremote: Resolving deltas:  97% (37/38)   [Kremote: Resolving deltas: 100% (38/38)   [Kremote: Resolving deltas: 100% (38/38), completed with 33 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   e6bd613..aaadc8c  master -> master
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git gtig    add .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commit -m "typos reef post"
-[master 2119450] typos reef post
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 19 files changed, 53 insertions(+), 24 deletions(-)
- rewrite public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png (97%)
- rewrite public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png (97%)
- rewrite public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png (97%)
- rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png (97%)
- rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png (97%)
- rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png (97%)
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git push
-Counting objects: 39, done.
-Delta compression using up to 4 threads.
-Compressing objects:   2% (1/37)   Compressing objects:   5% (2/37)   Compressing objects:   8% (3/37)   Compressing objects:  10% (4/37)   Compressing objects:  13% (5/37)   Compressing objects:  16% (6/37)   Compressing objects:  18% (7/37)   Compressing objects:  21% (8/37)   Compressing objects:  24% (9/37)   Compressing objects:  27% (10/37)   Compressing objects:  29% (11/37)   Compressing objects:  32% (12/37)   Compressing objects:  35% (13/37)   Compressing objects:  37% (14/37)   Compressing objects:  40% (15/37)   Compressing objects:  43% (16/37)   Compressing objects:  45% (17/37)   Compressing objects:  48% (18/37)   Compressing objects:  51% (19/37)   Compressing objects:  54% (20/37)   Compressing objects:  56% (21/37)   Compressing objects:  59% (22/37)   Compressing objects:  62% (23/37)   Compressing objects:  64% (24/37)   Compressing objects:  67% (25/37)   Compressing objects:  70% (26/37)   Compressing objects:  72% (27/37)   Compressing objects:  75% (28/37)   Compressing objects:  78% (29/37)   Compressing objects:  81% (30/37)   Compressing objects:  83% (31/37)   Compressing objects:  86% (32/37)   Compressing objects:  89% (33/37)   Compressing objects:  91% (34/37)   Compressing objects:  94% (35/37)   Compressing objects:  97% (36/37)   Compressing objects: 100% (37/37)   Compressing objects: 100% (37/37), done.
-Writing objects:   2% (1/39)   Writing objects:   5% (2/39)   Writing objects:   7% (3/39)   Writing objects:  10% (4/39)   Writing objects:  12% (5/39)   Writing objects:  15% (6/39)   Writing objects:  17% (7/39)   Writing objects:  20% (8/39)   Writing objects:  23% (9/39)   Writing objects:  25% (10/39)   Writing objects:  28% (11/39)   Writing objects:  30% (12/39)   Writing objects:  33% (13/39)   Writing objects:  35% (14/39)   Writing objects:  38% (15/39)   Writing objects:  41% (16/39)   Writing objects:  43% (17/39)   Writing objects:  46% (18/39)   Writing objects:  48% (19/39)   Writing objects:  51% (20/39)   Writing objects:  53% (21/39)   Writing objects:  56% (22/39)   Writing objects:  58% (23/39)   Writing objects:  61% (24/39)   Writing objects:  64% (25/39)   Writing objects:  66% (26/39)   Writing objects:  69% (27/39)   Writing objects:  71% (28/39)   Writing objects:  74% (29/39)   Writing objects:  76% (30/39)   Writing objects:  79% (31/39)   Writing objects:  82% (32/39)   Writing objects:  84% (33/39)   Writing objects:  87% (34/39)   Writing objects:  89% (35/39)   Writing objects:  92% (36/39)   Writing objects:  94% (37/39)   Writing objects:  97% (38/39)   Writing objects: 100% (39/39)   Writing objects: 100% (39/39), 316.52 KiB | 1.38 MiB/s, done.
-Total 39 (delta 25), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/25)   [Kremote: Resolving deltas:   4% (1/25)   [Kremote: Resolving deltas:   8% (2/25)   [Kremote: Resolving deltas:  12% (3/25)   [Kremote: Resolving deltas:  16% (4/25)   [Kremote: Resolving deltas:  20% (5/25)   [Kremote: Resolving deltas:  24% (6/25)   [Kremote: Resolving deltas:  28% (7/25)   [Kremote: Resolving deltas:  32% (8/25)   [Kremote: Resolving deltas:  36% (9/25)   [Kremote: Resolving deltas:  40% (10/25)   [Kremote: Resolving deltas:  44% (11/25)   [Kremote: Resolving deltas:  52% (13/25)   [Kremote: Resolving deltas:  56% (14/25)   [Kremote: Resolving deltas:  60% (15/25)   [Kremote: Resolving deltas:  64% (16/25)   [Kremote: Resolving deltas:  68% (17/25)   [Kremote: Resolving deltas:  72% (18/25)   [Kremote: Resolving deltas:  76% (19/25)   [Kremote: Resolving deltas:  80% (20/25)   [Kremote: Resolving deltas:  84% (21/25)   [Kremote: Resolving deltas:  88% (22/25)   [Kremote: Resolving deltas:  92% (23/25)   [Kremote: Resolving deltas:  96% (24/25)   [Kremote: Resolving deltas: 100% (25/25)   [Kremote: Resolving deltas: 100% (25/25), completed with 24 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   aaadc8c..2119450  master -> master
-git add .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commit -m "grammar fi  fix"
-[master e185e6a] grammar fix
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 5 files changed, 38 insertions(+), 7 deletions(-)
- rewrite .Rproj.user/3E603709/console06/INDEX001 (65%)
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git pui sh
-Counting objects: 14, done.
-Delta compression using up to 4 threads.
-Compressing objects:   7% (1/13)   Compressing objects:  15% (2/13)   Compressing objects:  23% (3/13)   Compressing objects:  30% (4/13)   Compressing objects:  38% (5/13)   Compressing objects:  46% (6/13)   Compressing objects:  53% (7/13)   Compressing objects:  61% (8/13)   Compressing objects:  69% (9/13)   Compressing objects:  76% (10/13)   Compressing objects:  84% (11/13)   Compressing objects:  92% (12/13)   Compressing objects: 100% (13/13)   Compressing objects: 100% (13/13), done.
-Writing objects:   7% (1/14)   Writing objects:  14% (2/14)   Writing objects:  21% (3/14)   Writing objects:  28% (4/14)   Writing objects:  35% (5/14)   Writing objects:  42% (6/14)   Writing objects:  50% (7/14)   Writing objects:  57% (8/14)   Writing objects:  64% (9/14)   Writing objects:  71% (10/14)   Writing objects:  78% (11/14)   Writing objects:  85% (12/14)   Writing objects:  92% (13/14)   Writing objects: 100% (14/14)   Writing objects: 100% (14/14), 2.04 KiB | 1.02 MiB/s, done.
-Total 14 (delta 9), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/9)   [Kremote: Resolving deltas:  11% (1/9)   [Kremote: Resolving deltas:  22% (2/9)   [Kremote: Resolving deltas:  33% (3/9)   [Kremote: Resolving deltas:  44% (4/9)   [Kremote: Resolving deltas:  55% (5/9)   [Kremote: Resolving deltas:  66% (6/9)   [Kremote: Resolving deltas:  77% (7/9)   [Kremote: Resolving deltas:  88% (8/9)   [Kremote: Resolving deltas: 100% (9/9)   [Kremote: Resolving deltas: 100% (9/9), completed with 9 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   2119450..e185e6a  master -> master
-git add .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commit -m "gt rama mar d fixed 2"[1P[1@s [1@ [1P
-[master 5290df0] grammar fixes 2
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 14 files changed, 78 insertions(+), 44 deletions(-)
- rewrite .Rproj.user/3E603709/console06/INDEX001 (65%)
- rewrite public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png (97%)
- rewrite public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png (97%)
- rewrite public/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png (96%)
- rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/plot-1.png (97%)
- rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-3-1.png (97%)
- rewrite static/post/reefs/2018-03-26-plastic-waste-and-disease-on-coral-reefs_files/figure-html/unnamed-chunk-4-1.png (96%)
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git psuh   ush
-Counting objects: 28, done.
-Delta compression using up to 4 threads.
-Compressing objects:   3% (1/26)   Compressing objects:   7% (2/26)   Compressing objects:  11% (3/26)   Compressing objects:  15% (4/26)   Compressing objects:  19% (5/26)   Compressing objects:  23% (6/26)   Compressing objects:  26% (7/26)   Compressing objects:  30% (8/26)   Compressing objects:  34% (9/26)   Compressing objects:  38% (10/26)   Compressing objects:  42% (11/26)   Compressing objects:  46% (12/26)   Compressing objects:  50% (13/26)   Compressing objects:  53% (14/26)   Compressing objects:  57% (15/26)   Compressing objects:  61% (16/26)   Compressing objects:  65% (17/26)   Compressing objects:  69% (18/26)   Compressing objects:  73% (19/26)   Compressing objects:  76% (20/26)   Compressing objects:  80% (21/26)   Compressing objects:  84% (22/26)   Compressing objects:  88% (23/26)   Compressing objects:  92% (24/26)   Compressing objects:  96% (25/26)   Compressing objects: 100% (26/26)   Compressing objects: 100% (26/26), done.
-Writing objects:   3% (1/28)   Writing objects:   7% (2/28)   Writing objects:  10% (3/28)   Writing objects:  14% (4/28)   Writing objects:  17% (5/28)   Writing objects:  21% (6/28)   Writing objects:  25% (7/28)   Writing objects:  28% (8/28)   Writing objects:  32% (9/28)   Writing objects:  35% (10/28)   Writing objects:  39% (11/28)   Writing objects:  42% (12/28)   Writing objects:  46% (13/28)   Writing objects:  50% (14/28)   Writing objects:  53% (15/28)   Writing objects:  57% (16/28)   Writing objects:  60% (17/28)   Writing objects:  64% (18/28)   Writing objects:  67% (19/28)   Writing objects:  71% (20/28)   Writing objects:  75% (21/28)   Writing objects:  78% (22/28)   Writing objects:  82% (23/28)   Writing objects:  85% (24/28)   Writing objects:  89% (25/28)   Writing objects:  92% (26/28)   Writing objects:  96% (27/28)   Writing objects: 100% (28/28)   Writing objects: 100% (28/28), 319.31 KiB | 6.26 MiB/s, done.
-Total 28 (delta 18), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/18)   [Kremote: Resolving deltas:   5% (1/18)   [Kremote: Resolving deltas:  11% (2/18)   [Kremote: Resolving deltas:  16% (3/18)   [Kremote: Resolving deltas:  22% (4/18)   [Kremote: Resolving deltas:  27% (5/18)   [Kremote: Resolving deltas:  33% (6/18)   [Kremote: Resolving deltas:  38% (7/18)   [Kremote: Resolving deltas:  44% (8/18)   [Kremote: Resolving deltas:  50% (9/18)   [Kremote: Resolving deltas:  55% (10/18)   [Kremote: Resolving deltas:  61% (11/18)   [Kremote: Resolving deltas:  66% (12/18)   [Kremote: Resolving deltas:  72% (13/18)   [Kremote: Resolving deltas:  77% (14/18)   [Kremote: Resolving deltas:  83% (15/18)   [Kremote: Resolving deltas:  88% (16/18)   [Kremote: Resolving deltas:  94% (17/18)   [Kremote: Resolving deltas: 100% (18/18)   [Kremote: Resolving deltas: 100% (18/18), completed with 18 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   e185e6a..5290df0  master -> master
-[KSolons-MacBook-Pro:Website solon$ git aff  dd .
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git commnt it t[1P [1P [1P [1P m i t   - m   " "   p"  u"  z"  z"  l"  e"   "  f"  i"  r"  t"   "  [1P"  [1P"  s"  t"   "  c"  o"  m"  m"  i"  t"  
-[master 14533dd] puzzle first commit
- Committer: solon <solon@Solons-MacBook-Pro.local>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 32 files changed, 3277 insertions(+), 249918 deletions(-)
- rewrite .Rproj.user/3E603709/console06/INDEX001 (66%)
- create mode 100644 content/post/hardest_puzzle/biblio_puzzle.bib
- create mode 100644 content/post/hardest_puzzle/hardest-logic-puzzle.Rmd
- create mode 100644 content/post/hardest_puzzle/hardest-logic-puzzle.html
- create mode 100644 content/post/reefs/.FINALDATASET.csv.icloud
- delete mode 100644 content/post/reefs/FINALDATASET.csv
- create mode 100644 public/categories/probability/index.html
- create mode 100644 public/categories/probability/page/1/index.html
- create mode 100644 public/post/hardest_puzzle/biblio.bib
- create mode 100644 public/post/hardest_puzzle/biblio_puzzle.bib
- create mode 100644 public/post/hardest_puzzle/the-hardest-logic-puzzle/index.html
- create mode 100644 public/post/reefs/.FINALDATASET.csv.icloud
- delete mode 100644 public/post/reefs/FINALDATASET.csv
- rewrite public/post/stat_reporting/2018-04-25-on-statistical-reporting-in-biomedical-journals_files/figure-html/figs-1.png (97%)
- create mode 100644 public/post/the-hardest-logic-puzzle/index.html
- create mode 100644 public/tags/page/2/index.html
- create mode 100644 public/tags/probability/index.html
- create mode 100644 public/tags/probability/page/1/index.html
- rewrite static/post/stat_reporting/2018-04-25-on-statistical-reporting-in-biomedical-journals_files/figure-html/figs-1.png (97%)
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ git push
-Counting objects: 60, done.
-Delta compression using up to 4 threads.
-Compressing objects:   2% (1/49)   Compressing objects:   4% (2/49)   Compressing objects:   6% (3/49)   Compressing objects:   8% (4/49)   Compressing objects:  10% (5/49)   Compressing objects:  12% (6/49)   Compressing objects:  14% (7/49)   Compressing objects:  16% (8/49)   Compressing objects:  18% (9/49)   Compressing objects:  20% (10/49)   Compressing objects:  22% (11/49)   Compressing objects:  24% (12/49)   Compressing objects:  26% (13/49)   Compressing objects:  28% (14/49)   Compressing objects:  30% (15/49)   Compressing objects:  32% (16/49)   Compressing objects:  34% (17/49)   Compressing objects:  36% (18/49)   Compressing objects:  38% (19/49)   Compressing objects:  40% (20/49)   Compressing objects:  42% (21/49)   Compressing objects:  44% (22/49)   Compressing objects:  46% (23/49)   Compressing objects:  48% (24/49)   Compressing objects:  51% (25/49)   Compressing objects:  53% (26/49)   Compressing objects:  55% (27/49)   Compressing objects:  57% (28/49)   Compressing objects:  59% (29/49)   Compressing objects:  61% (30/49)   Compressing objects:  63% (31/49)   Compressing objects:  65% (32/49)   Compressing objects:  67% (33/49)   Compressing objects:  69% (34/49)   Compressing objects:  71% (35/49)   Compressing objects:  73% (36/49)   Compressing objects:  75% (37/49)   Compressing objects:  77% (38/49)   Compressing objects:  79% (39/49)   Compressing objects:  81% (40/49)   Compressing objects:  83% (41/49)   Compressing objects:  85% (42/49)   Compressing objects:  87% (43/49)   Compressing objects:  89% (44/49)   Compressing objects:  91% (45/49)   Compressing objects:  93% (46/49)   Compressing objects:  95% (47/49)   Compressing objects:  97% (48/49)   Compressing objects: 100% (49/49)   Compressing objects: 100% (49/49), done.
-Writing objects:   1% (1/60)   Writing objects:   3% (2/60)   Writing objects:   5% (3/60)   Writing objects:   6% (4/60)   Writing objects:   8% (5/60)   Writing objects:  10% (6/60)   Writing objects:  11% (7/60)   Writing objects:  13% (8/60)   Writing objects:  15% (9/60)   Writing objects:  16% (10/60)   Writing objects:  18% (11/60)   Writing objects:  20% (12/60)   Writing objects:  21% (13/60)   Writing objects:  23% (14/60)   Writing objects:  25% (15/60)   Writing objects:  26% (16/60)   Writing objects:  28% (17/60)   Writing objects:  30% (18/60)   Writing objects:  31% (19/60)   Writing objects:  33% (20/60)   Writing objects:  36% (22/60)   Writing objects:  38% (23/60)   Writing objects:  40% (24/60)   Writing objects:  41% (25/60)   Writing objects:  43% (26/60)   Writing objects:  45% (27/60)   Writing objects:  46% (28/60)   Writing objects:  48% (29/60)   Writing objects:  50% (30/60)   Writing objects:  51% (31/60)   Writing objects:  53% (32/60)   Writing objects:  55% (33/60)   Writing objects:  56% (34/60)   Writing objects:  58% (35/60)   Writing objects:  60% (36/60)   Writing objects:  61% (37/60)   Writing objects:  63% (38/60)   Writing objects:  65% (39/60)   Writing objects:  66% (40/60)   Writing objects:  68% (41/60)   Writing objects:  70% (42/60)   Writing objects:  71% (43/60)   Writing objects:  73% (44/60)   Writing objects:  75% (45/60)   Writing objects:  76% (46/60)   Writing objects:  78% (47/60)   Writing objects:  80% (48/60)   Writing objects:  81% (49/60)   Writing objects:  83% (50/60)   Writing objects:  85% (51/60)   Writing objects:  86% (52/60)   Writing objects:  88% (53/60)   Writing objects:  90% (54/60)   Writing objects:  91% (55/60)   Writing objects:  93% (56/60)   Writing objects:  95% (57/60)   Writing objects:  96% (58/60)   Writing objects:  98% (59/60)   Writing objects: 100% (60/60)   Writing objects: 100% (60/60), 341.01 KiB | 3.67 MiB/s, done.
-Total 60 (delta 34), reused 0 (delta 0)
-remote: Resolving deltas:   0% (0/34)   [Kremote: Resolving deltas:   5% (2/34)   [Kremote: Resolving deltas:   8% (3/34)   [Kremote: Resolving deltas:  11% (4/34)   [Kremote: Resolving deltas:  14% (5/34)   [Kremote: Resolving deltas:  17% (6/34)   [Kremote: Resolving deltas:  20% (7/34)   [Kremote: Resolving deltas:  23% (8/34)   [Kremote: Resolving deltas:  26% (9/34)   [Kremote: Resolving deltas:  29% (10/34)   [Kremote: Resolving deltas:  32% (11/34)   [Kremote: Resolving deltas:  35% (12/34)   [Kremote: Resolving deltas:  38% (13/34)   [Kremote: Resolving deltas:  41% (14/34)   [Kremote: Resolving deltas:  44% (15/34)   [Kremote: Resolving deltas:  47% (16/34)   [Kremote: Resolving deltas:  50% (17/34)   [Kremote: Resolving deltas:  52% (18/34)   [Kremote: Resolving deltas:  55% (19/34)   [Kremote: Resolving deltas:  58% (20/34)   [Kremote: Resolving deltas:  61% (21/34)   [Kremote: Resolving deltas:  64% (22/34)   [Kremote: Resolving deltas:  70% (24/34)   [Kremote: Resolving deltas:  73% (25/34)   [Kremote: Resolving deltas:  76% (26/34)   [Kremote: Resolving deltas:  82% (28/34)   [Kremote: Resolving deltas:  85% (29/34)   [Kremote: Resolving deltas:  88% (30/34)   [Kremote: Resolving deltas:  94% (32/34)   [Kremote: Resolving deltas:  97% (33/34)   [Kremote: Resolving deltas: 100% (34/34)   [Kremote: Resolving deltas: 100% (34/34), completed with 27 local objects.[K
-To https://github.com/solonkarapa/Website.git
-   5290df0..14533dd  master -> master
-]0;~/Desktop/WebsiteSolons-MacBook-Pro:Website solon$ 
