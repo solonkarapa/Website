@@ -52,19 +52,19 @@ draft: TRUE
 </div>
 <div id="variability-in-the-banana-index" class="section level2">
 <h2>Variability in the Banana Index</h2>
-<p>Looking at <a href="https://www.economist.com/graphic-detail/2023/04/11/a-different-way-to-measure-the-climate-impact-of-food">emissions</a>, some foods out-emit bananas on one metric put them to shame on another. To illustrate this, for each food I calculate the range in its banana index between the three metrics - weight, calories and protein content. This allows to capture the variability in emissions between the three metrics. The vertical line corresponds to a range of 10. That is a difference of 10 between the minimum and maximum banana index. A substantial number of foods exceed this value, showcasing that how you calculate the index actually matters.</p>
+<p>Looking at <a href="https://www.economist.com/graphic-detail/2023/04/11/a-different-way-to-measure-the-climate-impact-of-food">emissions</a>, some foods out-emit bananas on one metric put them to shame on another. To illustrate this, for each food I calculate the range in its banana index between the three metrics - weight, calories and protein content. This allows to capture the variability in emissions between the three metrics. The vertical dashed line corresponds to a range of 10. That is a difference of 10 between the minimum and maximum banana index. A substantial number of foods exceed this value, showcasing that how we calculate the index actually matters.</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p>Again, beef is the most variable. For example, a beef steak has a banana index of 148.6 when emissions are measured by weight but only 8.3 when measured by protein content.</p>
+<p>Again, beef is the most variable. For example, a beef steak has a banana index of 148.6 when emissions are measured by weight, but only 8.3 when measured by protein content.</p>
 <pre><code>##   BI_emissions_kg BI_emissions_calories BI_emissions_protein
 ## 1        148.5633              77.75263             8.312805</code></pre>
-<p>Following the same approach for land use, we still find beef to be the most variable, but most foods show decreased variability in their banana index. This indicates the land required to produce these foods, by weight or nutritional content, does not change a lot.</p>
+<p>Following the same approach for land use, we still find beef to be the most variable, but most foods show decreased variability in their banana index. This indicates the land required to produce these foods, by weight or nutritional content, does not change a lot. This is interesting, since in contrary to emissions (as we just saw) how we calculate the index for land use does seems to matter that much.</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <div id="emissions-and-land-use" class="section level2">
 <h2>Emissions and Land use</h2>
-<p>Lastly, I look at the relationship between emissions and land use. The banana index for land use is plotted against the index for emissions. This is done by weight (top-left), calories (top-right) and protein content (bottom). Foods falling into the diagonal dashed line have the same banana index for both emissions and land use. The blue lines corresponds to the “average” relationship across all the foods.</p>
+<p>Lastly, I look at the relationship between emissions and land use. The banana index for land use (y axis) is plotted against the index for emissions (x axis). This is done by weight (top-left), calories (top-right) and protein content (bottom). Foods falling into the diagonal dashed line have the same banana index for both emissions and land use. The blue lines corresponds to the “average” relationship across all the foods.</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<p>In terms of weight most foods have higher index for emissions than land use (top-left). That is, to produce 1 kg of salmon out-emits bananas by a factor of 12, but requires only 1.8 times more land. On the other hand, there are foods that out-emit bananas but require less land, or the other way around. For example, producing one kg of raspberries results in as many emissions as 9.6 kg of bananas, but requires only 0.6 the space. On the other hand, almond butter and almonds emit less than bananas (per kg produced), but require about 3 times the land. In fact, these two are the only examples of such relationship.</p>
+<p>In terms of weight (top-left) most foods have higher index for emissions than land use. On example is salmon. To produce 1 kg of salmon out-emits bananas by a factor of 12, but requires only 1.8 times more land. On the other hand, there are foods that out-emit bananas but require less land, or the other way around. For example, producing one kg of raspberries results in as many emissions as 9.6 kg of bananas, but requires only 0.6 the space. On the other hand, almond butter and almonds emit less than bananas (per kg produced), but require about 3 times the land. In fact, these two are the only examples of such relationship.</p>
 <pre><code>##   entity BI_emissions_kg BI_land_use_kg
 ## 1 Salmon        11.92258       1.798589</code></pre>
 <pre><code>##        entity BI_emissions_kg BI_land_use_kg
@@ -72,4 +72,9 @@ draft: TRUE
 <pre><code>##          entity BI_emissions_kg BI_land_use_kg
 ## 1 Almond butter       0.4431345       2.910438
 ## 2       Almonds       0.6897214       3.117983</code></pre>
+<p>Similar trends are valid when looking at calories (top-right). Instead, in terms of protein content we see a few outliers. Most notably, sugar, coconut milk, and grapes. All of them result in high emissions per 100g of protein, but do not have proportionaly large space requirements.</p>
+<pre><code>##         entity BI_emissions_protein BI_land_use_protein
+## 1 Coconut milk             33.32015           1.4345743
+## 2       Grapes             15.12852           0.9482029
+## 3        Sugar             20.68580           8.7152656</code></pre>
 </div>
