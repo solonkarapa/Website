@@ -50,7 +50,7 @@ As mentioned, the index gives the emissions of foods by their equivalent in bana
 
 Here, I use the same methodology to calculate the banana index for land use. This is the land use of foods by their equivalent in bananas - a ratio of *land use efficiency*. I use the [same data source](https://github.com/TheEconomist/banana-index-data/) as the original article. 
 
-## Banana index for land use
+## A banana index for land use
 
 The index for 160 foods is plotted below. To improve visualisation is it on the natural logarithmic scale. This mean that 0 (vertical line) corresponds to a banana index of 1, the land needed to produce one kilo of bananas.
 
@@ -142,7 +142,7 @@ banana_index %>% mutate(y = 0 + dev) %>%
 
 ```
 
-## Variability in the Banana Index 
+## Variability in the banana index 
 
 Looking at [emissions](https://www.economist.com/graphic-detail/2023/04/11/a-different-way-to-measure-the-climate-impact-of-food), some foods out-emit bananas on one metric put them to shame on another. To illustrate this, for each food I calculate the range in its banana index between the three metrics - weight, calories and protein content. This allows to capture the variability in emissions between the three metrics. The vertical dashed line corresponds to a range of 10. That is a difference of 10 between the minimum and maximum banana index. A substantial number of foods exceed this value, showcasing that how we calculate the index actually matters. 
 
@@ -198,9 +198,9 @@ ggplot() +
          axis.ticks.y = element_blank())
 ```
 
-## Emissions and Land use 
+## Emissions and land use 
 
-Lastly, I look at the relationship between emissions and land use. The banana index for land use (y axis) is plotted against the index for emissions (x axis). This is done by weight (top-left), calories (top-right) and protein content (bottom). Foods falling into the diagonal dashed line have the same banana index for both emissions and land use. The blue lines corresponds to the "average" relationship across all the foods. 
+Lastly, I look at the relationship between emissions and land use. The banana index for land use (y axis) is plotted against the index for emissions (x axis). This is done by weight (top-left), calories (top-right) and protein content (bottom). Foods falling into the diagonal dashed line have the same banana index for both emissions and land use. The blue lines correspond to the "average" relationship across all the foods. 
 
 ```{r, echo = F, warning=F, message=F}
 p1 <- banana_index %>% 
@@ -248,7 +248,7 @@ ggarrange(p1, p2, p3,
 
 ```
 
-In terms of weight (top-left) most foods have higher index for emissions than land use. On example is salmon. To produce 1 kg of salmon out-emits bananas by a factor of 12, but requires only 1.8 times more land. On the other hand, there are foods that out-emit bananas but require less land, or the other way around. For example, producing one kg of raspberries results in as many emissions as 9.6 kg of bananas, but requires only 0.6 the space. On the other hand, almond butter and almonds emit less than bananas (per kg produced), but require about 3 times the land. In fact, these two are the only examples of such relationship. 
+In terms of weight (top-left) most foods have higher index for emissions than land use. One example is salmon: producing 1 kg of salmon out-emits bananas by a factor of 12, but requires only 1.8 times more land. On the other hand, there are foods that out-emit bananas but require less land, or the other way around. For example, producing one kg of raspberries results in as many emissions as 9.6 kg of bananas, but requires only 0.6 the space. On the other hand, almond butter and almonds emit less than bananas (per kg produced), but require about 3 times the land. In fact, these two are the only examples of such relationship. 
 
 ```{r, echo=F}
 banana_index %>% select(entity, Bananas.index..kg., Bananas.index..land_use_kg) %>%
@@ -282,4 +282,8 @@ banana_index %>% select(entity,  Bananas.index..100g.protein., Bananas.index..la
 ```
 
 
+## Impications
 
+1. emissions are important 
+2. land use is also important (alongside emissions) - give an example 
+3. how you measure emissions matter, less for land use 
