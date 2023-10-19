@@ -282,8 +282,13 @@ banana_index %>% select(entity,  Bananas.index..100g.protein., Bananas.index..la
 ```
 
 
-## Impications
+> The plots allows to find the worst food in terms of emissions *and* land use. These occupy the top-left corner on the plots. Beef is by far the worst food for the climate! 
 
-1. emissions are important 
-2. land use is also important (alongside emissions) - give an example 
-3. how you measure emissions matter, less for land use 
+> This implies that if we shifted to a plant-based diet not only we would considerably reduce emissions but also reduce global land use. In fanct, it has been [estimated](https://ourworldindata.org/land-use-diets) this shift would reduce the global agricultural land use from 4 to 1 billion hectares. 
+
+
+## Conclusions
+We've seen substantial variability in the environmental impact of different foods. 
+Mainstream calculations rank foods based on their greenhouse-gas emissions.  
+But, land use is also important. In fact, the expansion of land for agriculture is the leading driver of deforestation and biodiversity loss. Both matter! 
+
