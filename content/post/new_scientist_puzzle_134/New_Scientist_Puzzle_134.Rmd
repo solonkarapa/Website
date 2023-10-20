@@ -1,0 +1,67 @@
+---
+title: "# 134 Puzzle from the New Scientist"
+author: ''
+date: '2021-10-15'
+slug: puzzle_134
+categories: [puzzle, permutations]
+tags: [puzzle, permutations]
+output: bookdown::html_document2
+header:
+  caption: ''
+  image: ''
+  preview: yes
+link-citations: yes
+draft: FALSE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Another puzzle from the [New Scientist](https://www.newscientist.com/) - [#134: Can you work out which keyboard to hack?](https://www.newscientist.com/article/mg25133551-300-puzzle-134-can-you-work-out-which-keyboard-to-hack/). It goes as follows:
+
+> James Blond edges along the corridors of the supervillain’s base, and comes to two locked doors, each with a keypad that requires a four-digit code. He will need to get through one of the doors, but there is no time to guess a four-digit code – the number of possible combinations is staggering!
+
+> But wait! Some of the buttons on the keypads are visibly worn down, while others look as if they have never been pressed.
+
+> One door has a keypad with four worn buttons, the other has three. Blond only has time to try one door, and he will have to try all the possible combinations.
+
+> Which of the two keypads will give him fewer combinations to try – the one with four worn buttons, or the one with three?
+
+Here we are interested in the order of the four numbers, that is all possible [permutations](https://en.wikipedia.org/wiki/Permutation) of four digits. 
+
+For the door with the four worn buttons (let's call it Door 1) we can calculate all the permutations as follows:
+
+1. Pick one of the four numbers (there are four choices in this step).
+2. Pick one of the remaining three numbers (there are three choices).
+3. Pick one of the remaining two numbers (two choices). 
+4. Stick the last number on the end.
+
+By multiplying these choices together to get our result: $4 \times 3 \times 2 (\times 1) = 24$ possible permutations. 
+
+The actual formula behind the calculation is $n!/(n-r)!$, where $n$ is the number of things to choose from,
+and we choose $r$ of them, with no repetitions (we need to choose each number only once). For us, $n= r= 4$ since we have $n=4$ digits to choose from and we choose $r=4$ which gives $4!/(0!) = 4!/1 = 4 \times 3 \times 2 \times 1 = 24$.
+
+The factorial function (symbol: $!$) just means to multiply a series of descending natural numbers. Example: $7! = 7 × 6 × 5 × 4 × 3 × 2 × 1 = 5,040$. Note, it is generally agreed that $0! = 1$.
+
+The reasoning for the door with three worn buttons (Door 2) is slightly more involved. First, I introduce the letters $A, B$ and $C$ to denote each of the three worn buttons on the keypad- it doesn't matter which is which. We can arrange the three letters in $3!$ ways. This follows the same reasoning as before. Now, let's assume the following order 
+
+${\color{BrickRed}*}, A, *, B, *,  C, {\color{BrickRed}*}$
+
+where the asterisks indicate positions where the letters can be repeated. For example, if $A$ is repeated then I simply replace the asterisks with $A$. We then get 
+
+$A, A, B,  C$ (I replaced the first asterisk)
+
+$A, A, B,  C$ (I replaced the second asterisk)
+
+$A, B, A,  C$ (I replaced the third asterisk)
+
+$A, B,  C, A$ (I replaced the fourth asterisk)
+
+
+Note the first two are actually the same. So, in effect, two asterisks (shown in red above) are superfluous. This reduces the positions the letters can be repeated to 2. And since we can repeat any of the 3 letters ($A$ or $B$ or $C$), the number of possible permutations is $3! \times 2 \times 3 = 36$.
+
+Hence, James should go for Door 1 with the four worn digits as he will need at most 24 attempts compared to 36 attempts for Door 2. 
+
+## Update 15/10/21
+The [solution](https://www.newscientist.com/article/mg25133564-500-puzzle-135-how-do-you-hit-the-jackpot-on-this-machine/) from the New Scientist.

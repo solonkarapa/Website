@@ -1,0 +1,1450 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.1 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Solon Karapanagiotis">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="This post is concerned with a ubiquitous problem of outliers. They are infamous for degrading the performance of many models/algorithms. As a result, ongoing attempts try to accommodate them by deriving robust estimators.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://solon-karapanagiotis.com/post/outliers/outliers/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#EF525B">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700%7CFauna+One&display=swap">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.31999a6925929b294baf09712a189e8a.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-143318883-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-143318883-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_huc18e723f091434b03acc4e46114b282d_11627_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_huc18e723f091434b03acc4e46114b282d_11627_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://solon-karapanagiotis.com/post/outliers/outliers/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@SolonSTATS">
+  <meta property="twitter:creator" content="@SolonSTATS">
+  
+  <meta property="og:site_name" content="">
+  <meta property="og:url" content="https://solon-karapanagiotis.com/post/outliers/outliers/">
+  <meta property="og:title" content="Outliers: Which prior are you using? | ">
+  <meta property="og:description" content="This post is concerned with a ubiquitous problem of outliers. They are infamous for degrading the performance of many models/algorithms. As a result, ongoing attempts try to accommodate them by deriving robust estimators."><meta property="og:image" content="https://solon-karapanagiotis.com/media/icon.png">
+  <meta property="twitter:image" content="https://solon-karapanagiotis.com/media/icon.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2021-05-22T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2021-05-22T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://solon-karapanagiotis.com/post/outliers/outliers/"
+  },
+  "headline": "Outliers: Which prior are you using?",
+  
+  "datePublished": "2021-05-22T00:00:00Z",
+  "dateModified": "2021-05-22T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Solon Karapanagiotis"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://solon-karapanagiotis.com/images/icon_huc18e723f091434b03acc4e46114b282d_11627_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "This post is concerned with a ubiquitous problem of outliers. They are infamous for degrading the performance of many models/algorithms. As a result, ongoing attempts try to accommodate them by deriving robust estimators."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Outliers: Which prior are you using? | </title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.1df0392aab543464b23a85146803aaf2.js"></script>
+
+  
+
+<aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
+        
+      </div>
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#teaching"><span>Teaching</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Outliers: Which prior are you using?</h1>
+
+  
+  <p class="page-subtitle">The problem of outliers from a Bayesian viewpoint</p>
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 22, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    11 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/bayes/">Bayes</a>, <a href="/category/outliers/">outliers</a>, <a href="/category/ml/">ML</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+
+
+<p>This post is concerned with a ubiquitous problem of outliers. They are infamous for degrading the performance of many models/algorithms. As a result, ongoing attempts try to accommodate them by deriving robust estimators. Unfortunately, these estimators have drawbacks such as being less efficient. In this post, I approach the problem from a Bayesian viewpoint. I illustrate how the issue of outliers connects with our prior beliefs about the data collection procedure. This leads me to show how a simple but flexible Bayesian model allows us to accommodate outliers without inheriting the drawbacks of other estimators.</p>
+<p>Disclaimer: This post is heavily inspired by the work of <span class="citation">Jaynes (<a href="#ref-jaynes2003probability" role="doc-biblioref">2003</a>)</span>.</p>
+<div id="the-problem" class="section level2">
+<h2>The problem</h2>
+<p>Imagine we are interested in a quantity <span class="math inline">\(\theta\)</span>, which is unknown. The subsequent, logical step is to try to quantify our uncertainty about <span class="math inline">\(\theta\)</span> by collecting some data. That is, we are trying to measure <span class="math inline">\(\theta\)</span>. But the data collection procedure (or apparatus) is always imperfect and so having <span class="math inline">\(n\)</span> independent measurements of <span class="math inline">\(\theta\)</span>, we have <span class="math inline">\(n\)</span> different results ($x_1, …, x_n $). How are we going to proceed on estimating <span class="math inline">\(\theta\)</span>, what is the “best” estimate to use?
+If the <span class="math inline">\(n\)</span> data points are “close” together the problem of drawing conclusion about <span class="math inline">\(\theta\)</span> is not very difficult. But if they are not nicely clustered: one value, <span class="math inline">\(x_j\)</span>, lies far away from the other <span class="math inline">\(n-1\)</span> values? How are we going to deal with this outlier<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>?</p>
+</div>
+<div id="the-dilemma" class="section level2">
+<h2>The dilemma</h2>
+<p>Two opposite views have been expressed:</p>
+<ol style="list-style-type: decimal">
+<li>The outlier should not have been included in the data. The data have been contaminated and the outlier needs to be removed otherwise we may get erroneous conclusions.</li>
+<li>The outlier may be the most important datapoint we have so it must be taken into account in the analysis. In other words, it may be desirable to describe the population including all observations. For only in that way do we describe what is actually happening <span class="citation">(Dixon <a href="#ref-dixon1950analysis" role="doc-biblioref">1950</a>)</span>.</li>
+</ol>
+<p>These viewpoints reflect different prior information about the data collection procedure. The first view is reasonable if we believe <em>a priori</em> the data collection procedure is unreliable. That is, any now and then and without warning we can get an erroneous measurement. The second view is reasonable if we have absolute confidence in the data collection procedure. Then the outlier is an important result and ignoring it may harm us.</p>
+<p>Clearly these are extreme positions, and in real-life the researcher is in a intermediate position. If they knew the apparatus is unreliable they would have choose not to collect data in the first place or improve the apparatus. Of course, in some situations we are obliged to use whatever “apparatus” we have access to. So the question arises can we formalise an intermediate position?</p>
+</div>
+<div id="robustness" class="section level2">
+<h2>Robustness</h2>
+<p>Such an intermediate position is the idea of robustness. Researchers sometimes use various “robust” procedures, which protect against the possibility (or presence) of outliers. These techniques do not directly examine the outliers but accommodate them at no serious inconvenience <span class="citation">(Barnett and Lewis <a href="#ref-barnett1974outliers" role="doc-biblioref">1974</a>)</span>. Certain estimators, especially the mean and least squares estimators, are particularly vulnerable to outliers, or have low breakdown values<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
+<p>For this reason, researchers turn to robust or high breakdown methods to provide alternative estimators for these important aspects of the data. A common robust estimation method for univariate distributions involves the use of a trimmed mean, which is calculated by temporarily eliminating extreme observations at both ends of the sample (very high and low values) <span class="citation">(Anscombe <a href="#ref-anscombe1960rejection" role="doc-biblioref">1960</a>)</span>. Alternatively, researchers may choose to compute a Windsorized mean, for which the highest and lowest observations are temporarily censored, and replaced with adjacent values from the remaining data.</p>
+<p>The issue arises from the fact that robust qualities - however defined - must
+be bought at a price: poorer performance when the model is correct. This is usually reported by some trade-off between the conflicting requirements of robustness and accuracy.</p>
+<p>As an example, lets look at the median which is often cited as a robust estimator. The downside of the median is that it is less efficient than the mean. This is because it does not take into account the precise value of each observation and hence does not use all information available in the data. The standard error of the median (<span class="math inline">\(\sigma_{median}\)</span>) for large samples and normal distributions is:</p>
+<p><span class="math display">\[ \sigma_{median} \approx 1.25 \frac{\sigma}{\sqrt{N}} = 1.25 \sigma_{mean}\]</span></p>
+<p>where <span class="math inline">\(\sigma\)</span> is the population standard deviation and <span class="math inline">\(N\)</span> the sample size.
+Thus, the standard error of the median is about <span class="math inline">\(25\%\)</span> larger than that for the mean <span class="citation">(Maindonald and Braun <a href="#ref-maindonald2006data" role="doc-biblioref">2006</a>, Chapter 4)</span>. Hence, the median is less efficient estimator when the model in correct, i.e the data come from normal distributions. Later, I will show that Bayesian analysis automatically delivers robustness whenever it is desirable without throwing away relevant information. But first I introduce how the apparatus generates data.</p>
+</div>
+<div id="the-model" class="section level2">
+<h2>The model</h2>
+<p>Following <span class="citation">Box and Tiao (<a href="#ref-box1968bayesian" role="doc-biblioref">1968</a>)</span> I assume that the apparatus produces good and bad measurements. So we have a “good” sampling distribution</p>
+<p><span class="math display">\[G(x|\theta)\]</span></p>
+<p>parametrized by <span class="math inline">\(\theta\)</span>. The “bad” sampling distribution</p>
+<p><span class="math display">\[B(x|\xi)\]</span></p>
+<p>possibly containing an uninteresting parameter <span class="math inline">\(\xi\)</span>. Data from <span class="math inline">\(B(x|\xi)\)</span> are useless or worse for estimating <span class="math inline">\(\theta\)</span>, since their occurrence probability has nothing to do with <span class="math inline">\(\theta\)</span>. Our sample consists of <span class="math inline">\(n\)</span> observations</p>
+<p><span class="math display">\[D = (x_1 \dots x_n)\]</span>
+The trouble is we do not know which is which. However, we may be able to guess since a datapoint far away from the tails of <span class="math inline">\(G(x|\theta)\)</span> can be suspected of being bad. Let’s define</p>
+<p><span class="math display">\[\begin{equation}
+       q_i = 
+        \begin{cases}
+            1 &amp; \text{if the ith datapoint is good} \\
+            0 &amp; \text{if it is bad,}
+        \end{cases} 
+\end{equation}\]</span></p>
+<p>with joint prior probabilities</p>
+<p><span class="math display">\[p(q_1 \dots q_n)\]</span></p>
+<p>to the <span class="math inline">\(2^n\)</span> sequences of good and bad.</p>
+<p>Consider the most common case where our prior information about the good and bad observations is invariant on the particular trial at which they occur. That is, the probability of any sequence of <span class="math inline">\(n\)</span> good/bad observations depends only on the numbers <span class="math inline">\(r\)</span>, <span class="math inline">\(n-r\)</span> of good and bad ones. Then, under de Finetti’s representation theorem <span class="citation">(De Finetti <a href="#ref-de1972probability" role="doc-biblioref">1972</a>)</span></p>
+<p><span class="math display" id="eq:deFinetti">\[\begin{equation}
+p(q_1 \dots q_n) = \int_{0}^{1} u^r (1-u)^{n-r} dg(u)
+\tag{1}
+\end{equation}\]</span></p>
+<p>The theorem above is equivalent to assuming that <span class="math inline">\(q_i\)</span> are independent Bern(<span class="math inline">\(u\)</span>) (Bernoulli) random variables with <span class="math inline">\(u\)</span>, given a prior distribution <span class="math inline">\(g(u)\)</span>. Consequently, our sampling distribution can be written as a probability mixture of the good and bad distributions</p>
+<p><span class="math display" id="eq:mixturedistr">\[\begin{equation}
+p(x|\theta,\xi,u) = u G(x|\theta) + (1-u) B(x|\xi)
+\tag{2}
+\end{equation}\]</span></p>
+<p><span class="math inline">\(\theta\)</span> can be thought of the parameter of interest while (<span class="math inline">\(\xi,u\)</span>) are nuisance parameters.
+In the next section, I show how a simple, flexible Bayesian solution allows for robustness. Throughout I assume <span class="math inline">\(u\)</span> is unknown, which is in line with real-life scenarios.</p>
+</div>
+<div id="the-solution" class="section level2">
+<h2>The solution</h2>
+<p>Let <span class="math inline">\(p(\theta,\xi,u)\)</span> be the joint prior density for the parameters. Under Bayes theorem their joint posterior density, given the data <span class="math inline">\(D\)</span>, becomes</p>
+<p><span class="math display">\[p(\theta,\xi,u|D) \propto L(\theta,\xi,u) p(\theta,\xi,u),\]</span></p>
+<p>and from <a href="#eq:mixturedistr">(2)</a>,</p>
+<p><span class="math display" id="eq:jointlikelihood">\[\begin{equation}
+L(\theta,\xi,u) = \prod_{i=1}^{n} \Big[ u G(x|\theta) + (1-u) B(x|\xi) \Big]
+\tag{3}
+\end{equation}\]</span></p>
+<p>is the likelihood. The marginal posterior density for the parameter of interest <span class="math inline">\(\theta\)</span> is</p>
+<p><span class="math display" id="eq:marginaltheta">\[\begin{equation}
+p(\theta|D) = \int \int p(\theta,\xi,u|D) d\xi du.
+\tag{4}
+\end{equation}\]</span></p>
+<p>Another formulation of <a href="#eq:marginaltheta">(4)</a> is</p>
+<p><span class="math display">\[ p(\theta|D) = \frac{p(\theta) \bar{L}(\theta)} {\int p(\theta) \bar{L}(\theta) d\theta}\]</span></p>
+<p>where <span class="math inline">\(p(\theta)\)</span> is the marginal prior density for <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\bar{L}(\theta)\)</span> is the quasi-likelihood defined as</p>
+<p><span class="math display" id="eq:quasilikelihood">\[\begin{equation}
+\bar{L}(\theta) = \int \int L(\theta,\xi,u) h(\xi,u|\theta) d\xi du.
+\tag{5}
+\end{equation}\]</span></p>
+<p>which results from decomposing the prior joint density <span class="math inline">\(p(\theta,\xi,u)\)</span> into</p>
+<p><span class="math display">\[p(\theta,\xi,u) = h(\xi,u|\theta) p(\theta)\]</span></p>
+<p>where <span class="math inline">\(h(\xi,u|\theta)\)</span> is the joint prior for <span class="math inline">\((\xi,u)\)</span> given <span class="math inline">\(\theta\)</span>.
+Substituting <a href="#eq:jointlikelihood">(3)</a> into <a href="#eq:quasilikelihood">(5)</a>, we have</p>
+<p><span class="math display" id="eq:quasilikelihoodex">\[\begin{equation}
+\begin{split}
+\bar{L}(\theta) = \int \int h(\xi,u|\theta) d\xi du \Big[ u^n L(\theta) + u^{n-1} (1-u) \sum_{j=1}^n B(x_j|\xi) L_j(\theta) \\
++ n^{n-2} (1-u)^2 \sum_{j&lt; k} B(x_j|\xi) B(x_k|\xi) L_{jk}(\theta) + \dots \\
++ (1-u)^n B(x_1|\xi) \dots B(x_n|\xi) \Big]
+\end{split}
+\tag{6}
+\end{equation}\]</span></p>
+<p>where</p>
+<p><span class="math display">\[\begin{equation}
+\begin{split}
+L(\theta) = \prod_{i = 1}^n G(x_i|\theta) \\
+L_j(\theta) = \prod_{i \neq j} G(x_i|\theta) \\
+L_{jk}(\theta) = \prod_{i \neq j,k} G(x_i|\theta) \dots
+\end{split}
+\end{equation}\]</span></p>
+<p>are a sequence of likelihood functions for the good distributions in which we use all the data, all except <span class="math inline">\(x_j\)</span>, all except <span class="math inline">\(x_j\)</span> and <span class="math inline">\(x_k\)</span> etc. Note that the coefficient of <span class="math inline">\(L(\theta)\)</span> in <a href="#eq:quasilikelihoodex">(6)</a>,</p>
+<p><span class="math display" id="eq:simplification">\[\begin{equation}
+\int \int h(\xi,u|\theta) u^n d\xi du = \int h(u|\theta)u^n du,   
+\tag{7}
+\end{equation}\]</span></p>
+<p>is the probability that all the data <span class="math inline">\(D\)</span> are good conditional on <span class="math inline">\(\theta\)</span><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>. This is in the form <a href="#eq:deFinetti">(1)</a>, in which the function <span class="math inline">\(g(u)\)</span> is the prior <span class="math inline">\(h(u|\theta)\)</span>. Likewise, the coefficient of <span class="math inline">\(L_j(\theta)\)</span> is</p>
+<p><span class="math display">\[ \int \int h(\xi,u|\theta) u^{n-1} (1-u) B(x_j|\xi)  d\xi du =\\ 
+\int u^{n-1} (1-u) du \int B(x_j|\xi) h(\xi,u|\theta) d\xi.\]</span></p>
+<p>Following the same reasoning, this is the probability, given <span class="math inline">\(\theta\)</span>, that the jth datapoint would be bad and would have the value <span class="math inline">\(x_j\)</span> and the other data would be good. Putting <span class="math inline">\(\bar{L}(\theta)\)</span> into words</p>
+<p><span class="math display">\[\begin{equation}
+\begin{array}{l@{}l}
+\bar{L}(\theta) &amp;{} = \text{prob(all the data are good)} \times \text{(likelihood using all the data)} \\
+&amp;{} + \sum_j \text{prob(only $x_j$ bad)} \times \text{(likelihood using all the data except $x_j$)} \\
+&amp;{} + \dots  \\
+&amp;{} + \text{prob(all the data are bad)}.
+\end{array}
+\label{quasiinwords}
+\end{equation}\]</span></p>
+<p>In short, <span class="math inline">\(\bar{L}(\theta)\)</span> is a weighted average of likelihoods resulting from every possible assumption about each datapoint <span class="math inline">\(x_j\)</span>, weighted by the prior probabilities of those assumptions.</p>
+</div>
+<div id="an-example" class="section level2">
+<h2>An example</h2>
+<p>Suppose we are interested in a location parameter, and have a sample of 10 observations. But one datapoint <span class="math inline">\(x_j\)</span> moves away from the cluster of the others. How will this datapoint affect our conclusions about <span class="math inline">\(\theta\)</span>? The answer depends on the model we specify. If we assume the sampling distribution <span class="math inline">\(G(x|\theta)\)</span> to be Gaussian i.e. <span class="math inline">\(x \sim N(\theta, \sigma)\)</span>, and our prior for <span class="math inline">\(\theta\)</span> wide, then the Bayesian estimate will remain equal to the sample average and our datapoint <span class="math inline">\(x_j\)</span> will pull the estimate far away from the average indicated by the nine other data values. However, this analysis assumes that we know in advance that <span class="math inline">\(u =1\)</span>, all the data are good i.e. come from <span class="math inline">\(G\)</span>. In such a case the study of datapoint <span class="math inline">\(x_j\)</span> may be of significance since it gives us information about <span class="math inline">\(\theta\)</span>. The rejection of <span class="math inline">\(x_j\)</span> would then be fault. On the other hand, if we believe that <span class="math inline">\(x_j\)</span> should be thrown out, then we don’t actually believe in our assumption that <span class="math inline">\(u = 1\)</span> strongly enough to adhere to it in the presence of the this surprising datapoint. A model like <a href="#eq:mixturedistr">(2)</a> would then be more realistic.</p>
+</div>
+<div id="connection-with-adversarial-training-in-machine-learning" class="section level2">
+<h2>Connection with adversarial training in Machine Learning</h2>
+<p>In fact, model <a href="#eq:mixturedistr">(2)</a> is the cornerstone of adversarial training in Machine Learning (ML). In adversarial training, the basic idea is to simply create and then incorporate adversarial data into the training process. The researcher then evaluates how robust is the output of the model to such perturbations of the input data. The entire area of adversarial ML studies ways to create robust learning algorithms that withstand such perturbations. The area of adversarial ML arose after observing that standard learning methods degrade rapidly in the presence of perturbations <span class="citation">(Kurakin, Goodfellow, and Bengio <a href="#ref-kurakin2016adversarial" role="doc-biblioref">2016</a>)</span>.</p>
+<p>The formal study of robust estimation was initiated by <span class="citation">(Huber <a href="#ref-huber1964" role="doc-biblioref">1964</a>, <a href="#ref-huber1965" role="doc-biblioref">1965</a>)</span> who considered estimation procedures under the <span class="math inline">\(\epsilon\)</span>-contamination model, where samples are obtained from a mixture model of the form:</p>
+<p><span class="math display">\[\begin{equation}
+ P_{\epsilon} = (1 - \epsilon) P + \epsilon Q,
+\label{Huber_contamination}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(P\)</span> is the uncontaminated target distribution, <span class="math inline">\(Q\)</span> is an arbitrary outlier distribution and <span class="math inline">\(\epsilon\)</span> is the expected fraction of contamination. The distribution <span class="math inline">\(Q\)</span> allows for arbitrary contamination, which may correspond to gross corruptions or more subtle deviations from the assumed model. This is exactly our model in <a href="#eq:mixturedistr">(2)</a>.</p>
+<p>Summarising, the Bayesian solution can capture our prior knowledge about how the data are being generated. Allowing for a more flexible Bayesian model gives desirable qualities of robustness <em>automatically</em>. As a result, we may be able to bypass the need to derive robust estimators which, as we saw, come with drawbacks. This fact could be used in adversarial ML applications.</p>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-anscombe1960rejection">
+<p>Anscombe, Frank J. 1960. “Rejection of Outliers.” <em>Technometrics</em> 2 (2): 123–46.</p>
+</div>
+<div id="ref-barnett1974outliers">
+<p>Barnett, Vic, and Toby Lewis. 1974. <em>Outliers in Statistical Data</em>. Wiley.</p>
+</div>
+<div id="ref-box1968bayesian">
+<p>Box, George EP, and George C Tiao. 1968. “A Bayesian Approach to Some Outlier Problems.” <em>Biometrika</em> 55 (1): 119–29.</p>
+</div>
+<div id="ref-de1972probability">
+<p>De Finetti, Bruno. 1972. “Probability, Induction, and Statistics.”</p>
+</div>
+<div id="ref-dixon1950analysis">
+<p>Dixon, Wilfred J. 1950. “Analysis of Extreme Values.” <em>The Annals of Mathematical Statistics</em> 21 (4): 488–506.</p>
+</div>
+<div id="ref-grubbs1969procedures">
+<p>Grubbs, Frank E. 1969. “Procedures for Detecting Outlying Observations in Samples.” <em>Technometrics</em> 11 (1): 1–21.</p>
+</div>
+<div id="ref-huber1964">
+<p>Huber, Peter J. 1964. “Robust Estimation of a Location Parameter.” <em>Ann. Math. Statist.</em> 35 (1): 73–101. <a href="https://doi.org/10.1214/aoms/1177703732">https://doi.org/10.1214/aoms/1177703732</a>.</p>
+</div>
+<div id="ref-huber1965">
+<p>———. 1965. “A Robust Version of the Probability Ratio Test.” <em>Ann. Math. Statist.</em> 36 (6): 1753–8. <a href="https://doi.org/10.1214/aoms/1177699803">https://doi.org/10.1214/aoms/1177699803</a>.</p>
+</div>
+<div id="ref-jaynes2003probability">
+<p>Jaynes, Edwin T. 2003. <em>Probability Theory: The Logic of Science</em>. Cambridge University Press.</p>
+</div>
+<div id="ref-kurakin2016adversarial">
+<p>Kurakin, Alexey, Ian Goodfellow, and Samy Bengio. 2016. “Adversarial Machine Learning at Scale.” <em>arXiv Preprint arXiv:1611.01236</em>.</p>
+</div>
+<div id="ref-maindonald2006data">
+<p>Maindonald, John, and John Braun. 2006. <em>Data Analysis and Graphics Using R: An Example-Based Approach</em>. Vol. 10. Cambridge University Press.</p>
+</div>
+<div id="ref-serfling2011asymptotic">
+<p>Serfling, Robert. 2011. “Asymptotic Relative Efficiency in Estimation.” <em>International Encyclopedia of Statistical Science</em> 23 (13): 68–72.</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>I define an outlier as an observation which seems “to deviate markedly from the other members of the data sample in which it appears.” <span class="citation">(Grubbs <a href="#ref-grubbs1969procedures" role="doc-biblioref">1969</a>)</span>?<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>The breakdown point of an estimator is the proportion of incorrect observations (e.g. arbitrarily large observations) an estimator can handle before giving an incorrect (e.g., arbitrarily large) result. See <span class="citation">Serfling (<a href="#ref-serfling2011asymptotic" role="doc-biblioref">2011</a>)</span> for a formal definition.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>In <a href="#eq:simplification">(7)</a> I assume that <span class="math inline">\(u\)</span> and <span class="math inline">\(\xi\)</span> are independent. That is, <span class="math inline">\(h(\xi,u) = h(\xi) h(u)\)</span>, which a reasonable assumption.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/bayes/">Bayes</a>
+  
+  <a class="badge badge-light" href="/tag/outliers/">outliers</a>
+  
+  <a class="badge badge-light" href="/tag/ml/">ML</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://solon-karapanagiotis.com/post/outliers/outliers/&amp;text=Outliers:%20Which%20prior%20are%20you%20using?" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Outliers:%20Which%20prior%20are%20you%20using?&amp;body=https://solon-karapanagiotis.com/post/outliers/outliers/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://solon-karapanagiotis.com/post/outliers/outliers/&amp;title=Outliers:%20Which%20prior%20are%20you%20using?" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://solon-karapanagiotis.com/"><img class="avatar mr-3 avatar-circle" src="/author/solon-karapanagiotis/avatar_hu91952b704368f9faa82e4f9322747064_1766173_270x270_fill_q75_lanczos_center.jpg" alt="Solon Karapanagiotis"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://solon-karapanagiotis.com/">Solon Karapanagiotis</a></h5>
+      <h6 class="card-subtitle">Research Associate <br> MRC Biostatistics Unit</h6>
+      
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/SolonSTATS" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/solonkarapa?tab=repositories" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/solonkarapanagiotis/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://publons.com/author/1232574/solon-karapanagiotis#profile" target="_blank" rel="noopener">
+        <i class="ai ai-publons"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://orcid.org/0000-0003-4460-2073" target="_blank" rel="noopener">
+        <i class="fab fa-orcid"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/table_vs_graph/ml/">Table vs graph</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © Solon Karapanagiotis 2018-2023
+  </p>
+
+  
+  
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+    
+  
+  
+    
+  
+
+  
+
+  
+  <p class="powered-by copyright-license-text">
+    This website is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank">CC BY NC ND 4.0</a>
+  </p>
+  
+
+  <p class="powered-by footer-license-icons">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank" aria-label="Creative Commons">
+      <i class="fab fa-creative-commons fa-2x" aria-hidden="true"></i>
+      <i class="fab fa-creative-commons-by fa-2x" aria-hidden="true"></i>
+      
+        <i class="fab fa-creative-commons-nc fa-2x" aria-hidden="true"></i>
+      
+      
+        <i class="fab fa-creative-commons-nd fa-2x" aria-hidden="true"></i>
+      
+    </a>
+  </p>
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+    Published with
+    <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/latex.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'event' : "Events",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/js/wowchemy.min.572b7caf7fe601716a0f74d67d754c21.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

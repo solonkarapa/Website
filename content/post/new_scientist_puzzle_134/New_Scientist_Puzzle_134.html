@@ -1,0 +1,56 @@
+---
+title: "# 134 Puzzle from the New Scientist"
+author: ''
+date: '2021-10-15'
+slug: puzzle_134
+categories: [puzzle, permutations]
+tags: [puzzle, permutations]
+output: bookdown::html_document2
+header:
+  caption: ''
+  image: ''
+  preview: yes
+link-citations: yes
+draft: FALSE
+---
+
+
+
+<p>Another puzzle from the <a href="https://www.newscientist.com/">New Scientist</a> - <a href="https://www.newscientist.com/article/mg25133551-300-puzzle-134-can-you-work-out-which-keyboard-to-hack/">#134: Can you work out which keyboard to hack?</a>. It goes as follows:</p>
+<blockquote>
+<p>James Blond edges along the corridors of the supervillain’s base, and comes to two locked doors, each with a keypad that requires a four-digit code. He will need to get through one of the doors, but there is no time to guess a four-digit code – the number of possible combinations is staggering!</p>
+</blockquote>
+<blockquote>
+<p>But wait! Some of the buttons on the keypads are visibly worn down, while others look as if they have never been pressed.</p>
+</blockquote>
+<blockquote>
+<p>One door has a keypad with four worn buttons, the other has three. Blond only has time to try one door, and he will have to try all the possible combinations.</p>
+</blockquote>
+<blockquote>
+<p>Which of the two keypads will give him fewer combinations to try – the one with four worn buttons, or the one with three?</p>
+</blockquote>
+<p>Here we are interested in the order of the four numbers, that is all possible <a href="https://en.wikipedia.org/wiki/Permutation">permutations</a> of four digits.</p>
+<p>For the door with the four worn buttons (let’s call it Door 1) we can calculate all the permutations as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Pick one of the four numbers (there are four choices in this step).</li>
+<li>Pick one of the remaining three numbers (there are three choices).</li>
+<li>Pick one of the remaining two numbers (two choices).</li>
+<li>Stick the last number on the end.</li>
+</ol>
+<p>By multiplying these choices together to get our result: <span class="math inline">\(4 \times 3 \times 2 (\times 1) = 24\)</span> possible permutations.</p>
+<p>The actual formula behind the calculation is <span class="math inline">\(n!/(n-r)!\)</span>, where <span class="math inline">\(n\)</span> is the number of things to choose from,
+and we choose <span class="math inline">\(r\)</span> of them, with no repetitions (we need to choose each number only once). For us, <span class="math inline">\(n= r= 4\)</span> since we have <span class="math inline">\(n=4\)</span> digits to choose from and we choose <span class="math inline">\(r=4\)</span> which gives <span class="math inline">\(4!/(0!) = 4!/1 = 4 \times 3 \times 2 \times 1 = 24\)</span>.</p>
+<p>The factorial function (symbol: <span class="math inline">\(!\)</span>) just means to multiply a series of descending natural numbers. Example: <span class="math inline">\(7! = 7 × 6 × 5 × 4 × 3 × 2 × 1 = 5,040\)</span>. Note, it is generally agreed that <span class="math inline">\(0! = 1\)</span>.</p>
+<p>The reasoning for the door with three worn buttons (Door 2) is slightly more involved. First, I introduce the letters <span class="math inline">\(A, B\)</span> and <span class="math inline">\(C\)</span> to denote each of the three worn buttons on the keypad- it doesn’t matter which is which. We can arrange the three letters in <span class="math inline">\(3!\)</span> ways. This follows the same reasoning as before. Now, let’s assume the following order</p>
+<p><span class="math inline">\({\color{BrickRed}*}, A, *, B, *, C, {\color{BrickRed}*}\)</span></p>
+<p>where the asterisks indicate positions where the letters can be repeated. For example, if <span class="math inline">\(A\)</span> is repeated then I simply replace the asterisks with <span class="math inline">\(A\)</span>. We then get</p>
+<p><span class="math inline">\(A, A, B, C\)</span> (I replaced the first asterisk)</p>
+<p><span class="math inline">\(A, A, B, C\)</span> (I replaced the second asterisk)</p>
+<p><span class="math inline">\(A, B, A, C\)</span> (I replaced the third asterisk)</p>
+<p><span class="math inline">\(A, B, C, A\)</span> (I replaced the fourth asterisk)</p>
+<p>Note the first two are actually the same. So, in effect, two asterisks (shown in red above) are superfluous. This reduces the positions the letters can be repeated to 2. And since we can repeat any of the 3 letters (<span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span> or <span class="math inline">\(C\)</span>), the number of possible permutations is <span class="math inline">\(3! \times 2 \times 3 = 36\)</span>.</p>
+<p>Hence, James should go for Door 1 with the four worn digits as he will need at most 24 attempts compared to 36 attempts for Door 2.</p>
+<div id="update-151021" class="section level2">
+<h2>Update 15/10/21</h2>
+<p>The <a href="https://www.newscientist.com/article/mg25133564-500-puzzle-135-how-do-you-hit-the-jackpot-on-this-machine/">solution</a> from the New Scientist.</p>
+</div>

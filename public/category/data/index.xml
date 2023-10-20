@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>data | </title>
+    <link>https://solon-karapanagiotis.com/category/data/</link>
+      <atom:link href="https://solon-karapanagiotis.com/category/data/index.xml" rel="self" type="application/rss+xml" />
+    <description>data</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Solon Karapanagiotis 2018-2023</copyright><lastBuildDate>Tue, 10 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://solon-karapanagiotis.com/media/icon.png</url>
+      <title>data</title>
+      <link>https://solon-karapanagiotis.com/category/data/</link>
+    </image>
+    
+    <item>
+      <title>Importing Flat Files Into R</title>
+      <link>https://solon-karapanagiotis.com/post/importflatfiles/importing-flat-files-into-r/</link>
+      <pubDate>Tue, 10 Apr 2018 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/importflatfiles/importing-flat-files-into-r/</guid>
+      <description>
+
+
+&lt;p&gt;There are many tutorials for importing data into R focusing on a specific function/package. This one focuses on 3 different packages. You will learn how to import all common formats of flat file data with base R functions and the dedicated &lt;code&gt;readr&lt;/code&gt; and &lt;code&gt;data.table&lt;/code&gt; packages. I first present these three packages and finish with a comparison table between them.&lt;/p&gt;
+&lt;div id=&#34;task&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Task&lt;/h2&gt;
+&lt;p&gt;Import a flat file into R: create an R object that contains the data from a flat file.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;what-is-a-flat-file&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;What is a flat file?&lt;/h2&gt;
+&lt;p&gt;A flat file can be a plain text file that contains table data. A form of flat file is one in which table data is gathered in lines with the value from each table cell separated by a comma and each row represented with a new line. This type of flat file is also known as a comma-separated values (CSV) file. An alternative is a tab-delimited file where each field value is separated from the next using tabs.&lt;/p&gt;
+&lt;p&gt;The following sections describe various options for importing flat files. The ultimate goal is to convey, “translate”, them into an R &lt;strong&gt;data.frame&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;what-are-we-going-to-import&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;What are we going to import?&lt;/h2&gt;
+&lt;p&gt;For illustration purposes we use the &lt;a href=&#34;http://perso.telecom-paristech.fr/~eagan/class/as2013/inf229/labs/datasets&#34;&gt;Happiness&lt;/a&gt; dataset. It is based on the European quality of life survey with questions related to income, life satisfaction or perceived quality of society. The file is quite small but enough to sharpen your importing skills. It provides the average rating for the question “How happy would you say you are these days?”. Rating 1 (low) to 10 (high) by country and gender.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;##    Country Gender Mean   N.
+## 1       AT   Male  7.3  471
+## 2          Female  7.3  570
+## 3            Both  7.3 1041
+## 4       BE   Male  7.8  468
+## 5          Female  7.8  542
+## 6            Both  7.8 1010
+## 7       BG   Male  5.8  416
+## 8          Female  5.8  555
+## 9            Both  5.8  971
+## 10      CY   Male  7.8  433&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;lets-get-going-the-utils&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Let’s get going… the &lt;code&gt;utils&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;We start with the &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/&#34;&gt;&lt;code&gt;utils&lt;/code&gt;&lt;/a&gt; package. This package is loaded by default when you start your R session. This means that you can access its functions without further due. Here, we are interested in three of them:
+&lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.table()&lt;/code&gt;&lt;/a&gt;, &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.csv()&lt;/code&gt;&lt;/a&gt;, and &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.delim()&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;div id=&#34;reading-data-with-read.table&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Reading data with &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.table()&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Reads a file in table format and creates an R &lt;strong&gt;data.frame&lt;/strong&gt; from it, with cases corresponding to rows and variables to columns. Let’s see how it works for our dataset.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;happiness &amp;lt;- read.table(&amp;quot;happiness.csv&amp;quot;)
+head(happiness)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##                       V1
+## 1 Country,Gender,Mean,N=
+## 2        AT,Male,7.3,471
+## 3        ,Female,7.3,570
+## 4         ,Both,7.3,1041
+## 5        BE,Male,7.8,468
+## 6        ,Female,7.8,542&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Not what we wanted?! This data frame contains 108 rows and 1 column instead of 105 rows and 4 columns. That’s because additional arguments need to be specified in order to tell R what it has to deal with.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;happiness &amp;lt;- read.table(file = &amp;quot;happiness.csv&amp;quot;,     # path to flat file 
+                        header = TRUE,              # first row lists variables&amp;#39; names
+                        sep = &amp;quot;,&amp;quot;,                  # field separator is a comma
+                        stringsAsFactors = FALSE)   # not import strings as categorical variables&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let’s take a look now&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(happiness)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Country Gender Mean   N.
+## 1      AT   Male  7.3  471
+## 2         Female  7.3  570
+## 3           Both  7.3 1041
+## 4      BE   Male  7.8  468
+## 5         Female  7.8  542
+## 6           Both  7.8 1010&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(happiness)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;#39;data.frame&amp;#39;:    105 obs. of  4 variables:
+##  $ Country: chr  &amp;quot;AT&amp;quot; &amp;quot;&amp;quot; &amp;quot;&amp;quot; &amp;quot;BE&amp;quot; ...
+##  $ Gender : chr  &amp;quot;Male&amp;quot; &amp;quot;Female&amp;quot; &amp;quot;Both&amp;quot; &amp;quot;Male&amp;quot; ...
+##  $ Mean   : num  7.3 7.3 7.3 7.8 7.8 7.8 5.8 5.8 5.8 7.8 ...
+##  $ N.     : int  471 570 1041 468 542 1010 416 555 971 433 ...&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;By specifying &lt;code&gt;header = TRUE&lt;/code&gt; R sees the that the first line contains the names of the variables. With &lt;code&gt;stringsAsFactors = FALSE&lt;/code&gt; we specify that we wanted &lt;code&gt;Country&lt;/code&gt; and &lt;code&gt;Gender&lt;/code&gt; to be character variables. The &lt;code&gt;sep = &#34;,&#34;&lt;/code&gt; identifies the field separator to be a comma. There are many more arguments you can specify and each one can take many values!
+For further details, consult the &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;R documentation&lt;/a&gt; or type &lt;code&gt;help(read.table)&lt;/code&gt; on the console.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: In order to use &lt;code&gt;read.table()&lt;/code&gt;, in same manner, you need to give the full path name of the target file if it’s not in your working directory. You can use the &lt;a href=&#34;http://rfunction.com/archives/1001&#34;&gt;R Function of the Day&lt;/a&gt;, namely &lt;code&gt;setwd(&#34;&amp;lt;location of your dataset&amp;gt;&#34;)&lt;/code&gt;, to change your working directory. The same is valid for any other function we are going to encounter in this tutorial. Alternatively, you can specify the location of the flat file inside &lt;code&gt;read.table()&lt;/code&gt;. Keep in mind that the specification of the file is platform dependent (Windows, Unix/Linux and OSX).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;read.table(file = &amp;quot;&amp;lt;location of your dataset&amp;gt;&amp;quot;, ...) &lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Another option is to use &lt;a href=&#34;http://www.rdocumentation.org/packages/base/functions/file.path&#34;&gt;&lt;code&gt;file.path()&lt;/code&gt;&lt;/a&gt;. It constructs the path to a file from components in a platform-independent way.
+For example,&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;path &amp;lt;- file.path(&amp;quot;~&amp;quot;, &amp;quot;datasets&amp;quot;, &amp;quot;happiness.csv&amp;quot;)     
+
+happiness &amp;lt;- read.table(file = path,    
+                        header = TRUE,             
+                        sep = &amp;quot;,&amp;quot;,                  
+                        stringsAsFactors = FALSE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Comment&lt;/strong&gt;
+The &lt;code&gt;stringsAsFactors&lt;/code&gt; argument is true by default which means that character variables are imported into R as factors, the data type to store categorical variables.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;happiness_2 &amp;lt;- read.table(file = &amp;quot;happiness.csv&amp;quot;,    
+                        header = TRUE,             
+                        sep = &amp;quot;,&amp;quot;,                  
+                        stringsAsFactors = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;At first sight you do not notice anything different and you shouldn’t! But for R it’s a big deal! For character variables each element is a string of one or more characters. On the other hand, factor variables are stored, internally, as numeric variables together with their levels. This has major impact in computations that R maybe has to carry out later.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(happiness_2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;#39;data.frame&amp;#39;:    105 obs. of  4 variables:
+##  $ Country: Factor w/ 36 levels &amp;quot;&amp;quot;,&amp;quot;AT&amp;quot;,&amp;quot;BE&amp;quot;,&amp;quot;BG&amp;quot;,..: 2 1 1 3 1 1 4 1 1 6 ...
+##  $ Gender : Factor w/ 3 levels &amp;quot;Both&amp;quot;,&amp;quot;Female&amp;quot;,..: 3 2 1 3 2 1 3 2 1 3 ...
+##  $ Mean   : num  7.3 7.3 7.3 7.8 7.8 7.8 5.8 5.8 5.8 7.8 ...
+##  $ N.     : int  471 570 1041 468 542 1010 416 555 971 433 ...&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;reading-data-with-read.csv&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Reading data with &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.csv()&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;It is a wrapper around &lt;code&gt;read.table()&lt;/code&gt;. This means that &lt;code&gt;read.csv()&lt;/code&gt; calls &lt;code&gt;read.table()&lt;/code&gt; behind the scenes but with different default arguments. More specifically, the defaults are &lt;code&gt;header = TRUE&lt;/code&gt; and &lt;code&gt;sep = &#34;,&#34;&lt;/code&gt;. These match with the standardized CSV format, where &lt;code&gt;,&lt;/code&gt; is used as a separator and usually the first line contains the names of the columns. Therefore, it saves you time since you need to specify less arguments.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;read.csv(file = &amp;quot;happiness.csv&amp;quot;,   
+                        stringsAsFactors = FALSE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which is equivalent to&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;read.table(file = &amp;quot;happiness.csv&amp;quot;,    
+                        header = TRUE,             
+                        sep = &amp;quot;,&amp;quot;,                  
+                        stringsAsFactors = FALSE)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;reading-data-with-read.delim&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Reading data with &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.delim()&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;It is also a wrapper of &lt;code&gt;read.table()&lt;/code&gt;. Now the default arguments match with tab-delimited files. More specifically, the defaults are &lt;code&gt;header = TRUE&lt;/code&gt; and &lt;code&gt;sep = &#34;\t&#34;&lt;/code&gt;, since &lt;code&gt;\t&lt;/code&gt; is the field separator in tab-delimited files.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;read.delim(file = &amp;quot;happiness.txt&amp;quot;,    
+                        stringsAsFactors = FALSE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which is equivalent to&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;read.table(file = &amp;quot;happiness.txt&amp;quot;,    
+                        header = TRUE,             
+                        sep = &amp;quot;\t&amp;quot;,                  
+                        stringsAsFactors = FALSE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Both these functions make our lives easier since less arguments need to be specified.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; Locale differences.
+The standard field delimiters for CSV files are commas. On US versions, the comma is set as default for the “List Separator”, which is okay for CSV files. But on European versions this character is reserved as the Decimal Symbol and the “List Separator” is set by default to the semicolon.
+Why you should care?&lt;/p&gt;
+&lt;p&gt;Suppose you try to import the European CSV version &lt;code&gt;happiness_eu.csv&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(happiness_eu)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Country.Gender.Mean.N.
+## 1        AT,Male,7.3,471
+## 2        ,Female,7.3,570
+## 3         ,Both,7.3,1041
+## 4        BE,Male,7.8,468
+## 5        ,Female,7.8,542
+## 6         ,Both,7.8,1010&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;R performs the operation but clearly not the one we wanted. It’s a data frame with 105 rows but a single variable! To deal with such problems you can use the &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.csv2()&lt;/code&gt;&lt;/a&gt; function. The defaults are &lt;code&gt;sep = &#34;;&#34;&lt;/code&gt; and &lt;code&gt;dec = &#34;,&#34;&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;happiness_eu &amp;lt;- read.csv2(file = &amp;quot;happiness_eu.csv&amp;quot;,  
+                        stringsAsFactors = FALSE)
+head(happiness_eu)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   Country Gender Mean   N.
+## 1      AT   Male  7.3  471
+## 2         Female  7.3  570
+## 3           Both  7.3 1041
+## 4      BE   Male  7.8  468
+## 5         Female  7.8  542
+## 6           Both  7.8 1010&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Similarly, there is &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.delim2()&lt;/code&gt;&lt;/a&gt;. The logic is the same.&lt;/p&gt;
+&lt;p&gt;To summarize, the &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.table()&lt;/code&gt;&lt;/a&gt; is to read delimited data files. Some variants are: &lt;code&gt;read.csv()&lt;/code&gt; and &lt;code&gt;read.delim()&lt;/code&gt;, which have different default values and are tailored for CSV and tab-delimited files, respectively.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;In &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.csv()&lt;/code&gt;&lt;/a&gt; default values are: &lt;code&gt;header = T&lt;/code&gt;, &lt;code&gt;sep = ???,???&lt;/code&gt;, &lt;code&gt;dec = ???.???&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;In &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.csv2()&lt;/code&gt;&lt;/a&gt; default values are: &lt;code&gt;header = T&lt;/code&gt;, &lt;code&gt;sep = ???;???&lt;/code&gt;, &lt;code&gt;dec = ???,???&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;In &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.delim()&lt;/code&gt;&lt;/a&gt; default values are: &lt;code&gt;header = T&lt;/code&gt;, &lt;code&gt;sep = ???\t???&lt;/code&gt;, &lt;code&gt;dec = ???.???&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;In &lt;a href=&#34;http://www.rdocumentation.org/packages/utils/functions/read.table&#34;&gt;&lt;code&gt;read.delim2()&lt;/code&gt;&lt;/a&gt; default values are: &lt;code&gt;header = T&lt;/code&gt;, &lt;code&gt;sep = ???\t???&lt;/code&gt;, &lt;code&gt;dec = ???,???&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;##&lt;a href=&#34;https://cran.r-project.org/web/packages/readr/readr.pdf&#34;&gt;&lt;code&gt;readr&lt;/code&gt;&lt;/a&gt; … an alternative to import flat files&lt;/p&gt;
+&lt;p&gt;An alternative to the &lt;code&gt;utils&lt;/code&gt; package is the &lt;a href=&#34;https://cran.r-project.org/web/packages/readr/readr.pdf&#34;&gt;&lt;code&gt;readr&lt;/code&gt;&lt;/a&gt;. Compared
+the &lt;code&gt;read.table&lt;/code&gt; family of functions, it is faster, easier to use and with a consistent naming scheme. We start by installing and loading it.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;install.packages(&amp;quot;readr&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(readr)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let’s import our dataset. In &lt;code&gt;readr&lt;/code&gt; you can use &lt;a href=&#34;https://cran.r-project.org/web/packages/readr/readr.pdf&#34;&gt;&lt;code&gt;read_delim()&lt;/code&gt;&lt;/a&gt; for flat files. It can be considered the correspondent to &lt;code&gt;read.table()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;happiness_readr &amp;lt;- read_delim(&amp;quot;happiness.csv&amp;quot;,        # path to flat file 
+                              delim = &amp;quot;,&amp;quot;)            # character that separates fields in the file&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   Country = col_character(),
+##   Gender = col_character(),
+##   Mean = col_double(),
+##   `N=` = col_double()
+## )&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(happiness_readr)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## tibble [105 × 4] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ Country: chr [1:105] &amp;quot;AT&amp;quot; NA NA &amp;quot;BE&amp;quot; ...
+##  $ Gender : chr [1:105] &amp;quot;Male&amp;quot; &amp;quot;Female&amp;quot; &amp;quot;Both&amp;quot; &amp;quot;Male&amp;quot; ...
+##  $ Mean   : num [1:105] 7.3 7.3 7.3 7.8 7.8 7.8 5.8 5.8 5.8 7.8 ...
+##  $ N=     : num [1:105] 471 570 1041 468 542 ...
+##  - attr(*, &amp;quot;spec&amp;quot;)=
+##   .. cols(
+##   ..   Country = col_character(),
+##   ..   Gender = col_character(),
+##   ..   Mean = col_double(),
+##   ..   `N=` = col_double()
+##   .. )&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(happiness_readr)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 4
+##   Country Gender  Mean  `N=`
+##   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+## 1 AT      Male     7.3   471
+## 2 &amp;lt;NA&amp;gt;    Female   7.3   570
+## 3 &amp;lt;NA&amp;gt;    Both     7.3  1041
+## 4 BE      Male     7.8   468
+## 5 &amp;lt;NA&amp;gt;    Female   7.8   542
+## 6 &amp;lt;NA&amp;gt;    Both     7.8  1010&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Notice, that the output is the same as when using the &lt;code&gt;read.table()&lt;/code&gt;, previously. But we did not have to specify &lt;code&gt;header=TRUE&lt;/code&gt; because by default &lt;code&gt;read_delim()&lt;/code&gt; expects the first row to contain the column names. This is done through the &lt;code&gt;col_names&lt;/code&gt; argument, set equal to true by default. Also, strings are never automatically converted to factors. Hence, &lt;code&gt;stringsAsFactors = FALSE&lt;/code&gt; is not necessary. To control the types of the columns &lt;code&gt;readr&lt;/code&gt; uses the &lt;code&gt;col_types&lt;/code&gt; argument. Let’s see how these two work.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;col_names&lt;/code&gt; is true by default meaning that it will use the the first row of data as column names. If your file does not have column names you can set &lt;code&gt;col_names = FALSE&lt;/code&gt; and columns will be numbered sequentially.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(read_delim(&amp;quot;happiness2.csv&amp;quot;, delim = &amp;quot;,&amp;quot;,
+                              col_names = FALSE))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   X1 = col_character(),
+##   X2 = col_character(),
+##   X3 = col_double(),
+##   X4 = col_character()
+## )&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 4
+##   X1    X2        X3 X4   
+##   &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;
+## 1 &amp;#39;AT   Male     7.3 471&amp;#39; 
+## 2 &amp;#39;     Female   7.3 570&amp;#39; 
+## 3 &amp;#39;     Both     7.3 1041&amp;#39;
+## 4 &amp;#39;BE   Male     7.8 468&amp;#39; 
+## 5 &amp;#39;     Female   7.8 542&amp;#39; 
+## 6 &amp;#39;     Both     7.8 1010&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; Instead of assigning the output of &lt;code&gt;read_delim()&lt;/code&gt; to a variable I directly use the &lt;code&gt;head()&lt;/code&gt; function to print the first 6 lines of the data frame. It is equivalent to&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;happiness_delim &amp;lt;- read_delim(&amp;quot;happiness2.csv&amp;quot;, delim = &amp;quot;,&amp;quot;,
+                              col_names = FALSE)
+head(happiness_delim)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can also manually set the column names.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(read_delim(&amp;quot;happiness2.csv&amp;quot;, delim = &amp;quot;,&amp;quot;,
+                              col_names = c(&amp;quot;Country&amp;quot;, &amp;quot;Gender&amp;quot;, &amp;quot;Mean&amp;quot;, &amp;quot;N&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   Country = col_character(),
+##   Gender = col_character(),
+##   Mean = col_double(),
+##   N = col_character()
+## )&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 4
+##   Country Gender  Mean N    
+##   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;
+## 1 &amp;#39;AT     Male     7.3 471&amp;#39; 
+## 2 &amp;#39;       Female   7.3 570&amp;#39; 
+## 3 &amp;#39;       Both     7.3 1041&amp;#39;
+## 4 &amp;#39;BE     Male     7.8 468&amp;#39; 
+## 5 &amp;#39;       Female   7.8 542&amp;#39; 
+## 6 &amp;#39;       Both     7.8 1010&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As mentioned, there is &lt;code&gt;col_types&lt;/code&gt; to control the column classes. If you leave the default value &lt;code&gt;readr&lt;/code&gt; heuristically inspects the first 100 rows to guess the type of each column.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sapply(happiness_readr, class)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     Country      Gender        Mean          N= 
+## &amp;quot;character&amp;quot; &amp;quot;character&amp;quot;   &amp;quot;numeric&amp;quot;   &amp;quot;numeric&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you want to override the default column types you can also specify them manually. An option would be&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;happiness_readr2 &amp;lt;- read_delim(&amp;quot;happiness.csv&amp;quot;, delim = &amp;quot;,&amp;quot;, 
+                               col_types = &amp;quot;ccni&amp;quot;)
+sapply(happiness_readr2, class)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     Country      Gender        Mean          N= 
+## &amp;quot;character&amp;quot; &amp;quot;character&amp;quot;   &amp;quot;numeric&amp;quot;   &amp;quot;integer&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Where&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;c&lt;/code&gt; = character&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;d&lt;/code&gt; = double&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;i&lt;/code&gt; = integer&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;l&lt;/code&gt; = logical&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;_&lt;/code&gt; = skip&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Let see how &lt;code&gt;skip&lt;/code&gt; works&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(read_delim(&amp;quot;happiness.csv&amp;quot;, delim = &amp;quot;,&amp;quot;, 
+                               col_types = &amp;quot;ccn_&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 3
+##   Country Gender  Mean
+##   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;  &amp;lt;dbl&amp;gt;
+## 1 AT      Male     7.3
+## 2 &amp;lt;NA&amp;gt;    Female   7.3
+## 3 &amp;lt;NA&amp;gt;    Both     7.3
+## 4 BE      Male     7.8
+## 5 &amp;lt;NA&amp;gt;    Female   7.8
+## 6 &amp;lt;NA&amp;gt;    Both     7.8&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Notice the fourth column has been skipped.&lt;/p&gt;
+&lt;p&gt;Yet another way of setting the types of the imported columns is using collectors. Collector functions can be passed in a &lt;a href=&#34;http://www.rdocumentation.org/packages/base/functions/list&#34;&gt;&lt;code&gt;list()&lt;/code&gt;&lt;/a&gt; to the &lt;code&gt;col_types&lt;/code&gt; argument of &lt;code&gt;read_&lt;/code&gt; functions to tell them how to interpret values in a column.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;car &amp;lt;- col_character()
+fac &amp;lt;- col_factor(levels = c(&amp;quot;Male&amp;quot;, &amp;quot;Female&amp;quot;, &amp;quot;Both&amp;quot;))
+num &amp;lt;- col_number()
+int &amp;lt;- col_integer()
+
+str(read_delim(&amp;quot;happiness.csv&amp;quot;, delim = &amp;quot;,&amp;quot; , 
+                           col_types = list(car, fac, num, int)))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## tibble [105 × 4] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ Country: chr [1:105] &amp;quot;AT&amp;quot; NA NA &amp;quot;BE&amp;quot; ...
+##  $ Gender : Factor w/ 3 levels &amp;quot;Male&amp;quot;,&amp;quot;Female&amp;quot;,..: 1 2 3 1 2 3 1 2 3 1 ...
+##  $ Mean   : num [1:105] 7.3 7.3 7.3 7.8 7.8 7.8 5.8 5.8 5.8 7.8 ...
+##  $ N=     : int [1:105] 471 570 1041 468 542 1010 416 555 971 433 ...
+##  - attr(*, &amp;quot;spec&amp;quot;)=
+##   .. cols(
+##   ..   Country = col_character(),
+##   ..   Gender = col_factor(levels = c(&amp;quot;Male&amp;quot;, &amp;quot;Female&amp;quot;, &amp;quot;Both&amp;quot;), ordered = FALSE, include_na = FALSE),
+##   ..   Mean = col_number(),
+##   ..   `N=` = col_integer()
+##   .. )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For a complete list of collector functions, you can take a look at the &lt;a href=&#34;https://cran.r-project.org/web/packages/readr/readr.pdf&#34;&gt;&lt;code&gt;collector&lt;/code&gt;&lt;/a&gt; documentation.&lt;/p&gt;
+&lt;p&gt;If you are working on large datasets you may prefer handling the data in smaller parts. In &lt;code&gt;readr&lt;/code&gt; you can achieve this with the combination of &lt;code&gt;skip&lt;/code&gt; and &lt;code&gt;n_max&lt;/code&gt; arguments.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(read_delim(&amp;quot;happiness.csv&amp;quot;, delim = &amp;quot;,&amp;quot;,
+                skip=2, n_max= 4))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Missing column names filled in: &amp;#39;X1&amp;#39; [1]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   X1 = col_character(),
+##   Female = col_character(),
+##   `7.3` = col_double(),
+##   `570` = col_double()
+## )&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 4 x 4
+##   X1    Female `7.3` `570`
+##   &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+## 1 &amp;lt;NA&amp;gt;  Both     7.3  1041
+## 2 BE    Male     7.8   468
+## 3 &amp;lt;NA&amp;gt;  Female   7.8   542
+## 4 &amp;lt;NA&amp;gt;  Both     7.8  1010&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We skipped two rows and then read four lines. There is something wrong though! Since the &lt;code&gt;col_names&lt;/code&gt; is true by default the first line is used for the column names. Therefore, we need to manually specify the column names.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(read_delim(&amp;quot;happiness2.csv&amp;quot;, delim = &amp;quot;,&amp;quot;,
+                              col_names = c(&amp;quot;Country&amp;quot;,&amp;quot;Gender&amp;quot;, &amp;quot;Mean&amp;quot;, &amp;quot;N&amp;quot;), 
+                              skip=2, n_max= 4))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   Country = col_character(),
+##   Gender = col_character(),
+##   Mean = col_double(),
+##   N = col_character()
+## )&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 4 x 4
+##   Country Gender  Mean N    
+##   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;
+## 1 &amp;#39;       Both     7.3 1041&amp;#39;
+## 2 &amp;#39;BE     Male     7.8 468&amp;#39; 
+## 3 &amp;#39;       Female   7.8 542&amp;#39; 
+## 4 &amp;#39;       Both     7.8 1010&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Like the &lt;code&gt;utils&lt;/code&gt; package &lt;code&gt;readr&lt;/code&gt; provides alternatives to &lt;code&gt;read_delim()&lt;/code&gt;. The &lt;a href=&#34;https://cran.r-project.org/web/packages/readr/readr.pdf&#34;&gt;&lt;code&gt;read_csv()&lt;/code&gt;&lt;/a&gt; and &lt;a href=&#34;https://cran.r-project.org/web/packages/readr/readr.pdf&#34;&gt;&lt;code&gt;read_tsv()&lt;/code&gt;&lt;/a&gt; are used for CSV files and tab-delimited files, respectively. The functions of both packages are presented below. Notice the &lt;code&gt;_&lt;/code&gt; is used in &lt;code&gt;readr&lt;/code&gt; instead of the &lt;code&gt;.&lt;/code&gt;.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;utils&lt;/th&gt;
+&lt;th&gt;readr&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;code&gt;read.table()&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;read_delim()&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;code&gt;read.csv()&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;read_csv()&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;code&gt;read.delim()&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;read.tsv&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;data.table-yet-another-alternative-to-read-data-into-r&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;a href=&#34;http://www.rdocumentation.org/packages/data.table&#34;&gt;&lt;code&gt;data.table&lt;/code&gt;&lt;/a&gt; … yet another alternative to read data into R&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;data.table&lt;/code&gt; package is designed mainly for fast data manipulation. It also features a powerful function to import your data into R, the &lt;a href=&#34;http://www.rdocumentation.org/packages/data.table/functions/fread&#34;&gt;&lt;code&gt;fread()&lt;/code&gt;&lt;/a&gt;. Once more you need to install and load the package.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;install.packages(&amp;quot;data.table&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(data.table)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let’s see how it works with two versions of our dataset.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(fread(&amp;quot;happiness.csv&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    Country Gender Mean   N=
+## 1:      AT   Male  7.3  471
+## 2:         Female  7.3  570
+## 3:           Both  7.3 1041
+## 4:      BE   Male  7.8  468
+## 5:         Female  7.8  542
+## 6:           Both  7.8 1010&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(fread(&amp;quot;happiness2.csv&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     V1     V2  V3    V4
+## 1: &amp;#39;AT   Male 7.3  471&amp;#39;
+## 2:   &amp;#39; Female 7.3  570&amp;#39;
+## 3:   &amp;#39;   Both 7.3 1041&amp;#39;
+## 4: &amp;#39;BE   Male 7.8  468&amp;#39;
+## 5:   &amp;#39; Female 7.8  542&amp;#39;
+## 6:   &amp;#39;   Both 7.8 1010&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Remember that the first row of &lt;code&gt;happiness2.csv&lt;/code&gt; does not contain the column names. That’s not a problem for &lt;code&gt;fread()&lt;/code&gt; as it automatically assignees names to the columns. As in this case, often simply specifying the path to the file is enough to successfully import your flat file using &lt;code&gt;fread&lt;/code&gt;. Moreover, it can infer the column types and separators.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(fread(&amp;quot;happiness.csv&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Classes &amp;#39;data.table&amp;#39; and &amp;#39;data.frame&amp;#39;:   105 obs. of  4 variables:
+##  $ Country: chr  &amp;quot;AT&amp;quot; &amp;quot;&amp;quot; &amp;quot;&amp;quot; &amp;quot;BE&amp;quot; ...
+##  $ Gender : chr  &amp;quot;Male&amp;quot; &amp;quot;Female&amp;quot; &amp;quot;Both&amp;quot; &amp;quot;Male&amp;quot; ...
+##  $ Mean   : num  7.3 7.3 7.3 7.8 7.8 7.8 5.8 5.8 5.8 7.8 ...
+##  $ N=     : int  471 570 1041 468 542 1010 416 555 971 433 ...
+##  - attr(*, &amp;quot;.internal.selfref&amp;quot;)=&amp;lt;externalptr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Two more useful arguments of &lt;code&gt;fread()&lt;/code&gt; are &lt;code&gt;drop&lt;/code&gt; and &lt;code&gt;select&lt;/code&gt;. They enable you to drop or select variables of interest in your flat file. Suppose I want to select the 2nd and 3rd column.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(fread(&amp;quot;happiness.csv&amp;quot;, select = c(2,3)))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    Gender Mean
+## 1:   Male  7.3
+## 2: Female  7.3
+## 3:   Both  7.3
+## 4:   Male  7.8
+## 5: Female  7.8
+## 6:   Both  7.8&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Alternatively,&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(fread(&amp;quot;happiness.csv&amp;quot;, select = c(&amp;quot;Gender&amp;quot;,&amp;quot;Mean&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    Gender Mean
+## 1:   Male  7.3
+## 2: Female  7.3
+## 3:   Both  7.3
+## 4:   Male  7.8
+## 5: Female  7.8
+## 6:   Both  7.8&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(fread(&amp;quot;happiness.csv&amp;quot;, drop = c(1,4)))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    Gender Mean
+## 1:   Male  7.3
+## 2: Female  7.3
+## 3:   Both  7.3
+## 4:   Male  7.8
+## 5: Female  7.8
+## 6:   Both  7.8&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which is equivalent to&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(fread(&amp;quot;happiness.csv&amp;quot;, drop = c(&amp;quot;Country&amp;quot;,&amp;quot;N=&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In short, &lt;code&gt;fread()&lt;/code&gt; saves you work by automatically guessing the delimiter, whether or not the file has a header, how many lines to skip by default, providing an easy way to select variables and more. Nevertheless, if you wish to specify them, you can do it, along with other arguments. Check the &lt;a href=&#34;http://www.rdocumentation.org/packages/data.table/functions/fread&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Comment&lt;/strong&gt;
+You might have noticed by now that the &lt;code&gt;fread()&lt;/code&gt; function produces data frames that look slightly different when you print them out. That’s because another class is assigned to the resulting data frames, namely &lt;code&gt;data.table&lt;/code&gt; and &lt;code&gt;data.frame&lt;/code&gt;. &lt;code&gt;read_delim()&lt;/code&gt; creates an object with three classes: &lt;code&gt;tbl_df&lt;/code&gt;, &lt;code&gt;tbl&lt;/code&gt; and &lt;code&gt;data.frame&lt;/code&gt;. The printout of such data.table objects is different. Well, it allows for a different treatment of the printouts, for example.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;when-to-use-read.table-read_delim-or-fread&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;When to use &lt;code&gt;read.table()&lt;/code&gt;, &lt;code&gt;read_delim()&lt;/code&gt; or &lt;code&gt;fread()&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;In a nutshell, the main differences between these functions are : the &lt;code&gt;read_&lt;/code&gt; functions from the &lt;code&gt;readr&lt;/code&gt; package have more consistent naming scheme for the parameters (e.g. &lt;code&gt;col_names&lt;/code&gt; and &lt;code&gt;col_types&lt;/code&gt;) than &lt;code&gt;read.&lt;/code&gt; and all functions work exactly the same way regardless of the current locale (to override the US-centric defaults, use &lt;code&gt;locale()&lt;/code&gt;). It is also faster! But &lt;code&gt;fread()&lt;/code&gt; is even faster! And it saves you work by automatically guessing parameters. This &lt;a href=&#34;https://cran.r-project.org/web/packages/readr/README.html&#34;&gt;README&lt;/a&gt; goes in more detail.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Speed&lt;/th&gt;
+&lt;th&gt;Auto-detection&lt;/th&gt;
+&lt;th&gt;Locale&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;code&gt;read.table()&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;fast&lt;/td&gt;
+&lt;td&gt;NO&lt;/td&gt;
+&lt;td&gt;YES&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;code&gt;read_delim()&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;faster&lt;/td&gt;
+&lt;td&gt;NO&lt;/td&gt;
+&lt;td&gt;NO&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;code&gt;fread()&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;fastest&lt;/td&gt;
+&lt;td&gt;YES&lt;/td&gt;
+&lt;td&gt;NO&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;With some loss of generality a few suggestions are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;for large files (many MB-GB) &lt;code&gt;fread()&lt;/code&gt; will be the fastest (with a few &lt;a href=&#34;http://stackoverflow.com/questions/32263566/comparing-speed-of-fread-vs-read-table-for-reading-the-first-1m-rows-out-of-100&#34;&gt;exceptions&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;the consistency and independence of the actual locale makes &lt;code&gt;readr&lt;/code&gt; a good candidate for everyday use&lt;/li&gt;
+&lt;li&gt;if you are new to all these using &lt;code&gt;read.table()&lt;/code&gt; will allow you to develop intuition on how R works.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,1382 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 5.0.0-beta.1 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Solon Karapanagiotis">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="It is usually taught in statistics classes that Binomial probabilities can be approximated by Poisson probabilities, which are generally easier to calculate. This approximation is valid “when \(n\) is large and \(np\) is small,” and rules of thumb are sometimes given.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://solon-karapanagiotis.com/post/approx_binomial/approximating-binomial-with-poisson/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#EF525B">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700%7CFauna+One&display=swap">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.31999a6925929b294baf09712a189e8a.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-143318883-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-143318883-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_huc18e723f091434b03acc4e46114b282d_11627_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_huc18e723f091434b03acc4e46114b282d_11627_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://solon-karapanagiotis.com/post/approx_binomial/approximating-binomial-with-poisson/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@SolonSTATS">
+  <meta property="twitter:creator" content="@SolonSTATS">
+  
+  <meta property="og:site_name" content="">
+  <meta property="og:url" content="https://solon-karapanagiotis.com/post/approx_binomial/approximating-binomial-with-poisson/">
+  <meta property="og:title" content="Approximating Binomial with Poisson | ">
+  <meta property="og:description" content="It is usually taught in statistics classes that Binomial probabilities can be approximated by Poisson probabilities, which are generally easier to calculate. This approximation is valid “when \(n\) is large and \(np\) is small,” and rules of thumb are sometimes given."><meta property="og:image" content="https://solon-karapanagiotis.com/media/icon.png">
+  <meta property="twitter:image" content="https://solon-karapanagiotis.com/media/icon.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-02-05T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2019-02-05T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://solon-karapanagiotis.com/post/approx_binomial/approximating-binomial-with-poisson/"
+  },
+  "headline": "Approximating Binomial with Poisson",
+  
+  "datePublished": "2019-02-05T00:00:00Z",
+  "dateModified": "2019-02-05T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Solon Karapanagiotis"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://solon-karapanagiotis.com/images/icon_huc18e723f091434b03acc4e46114b282d_11627_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "It is usually taught in statistics classes that Binomial probabilities can be approximated by Poisson probabilities, which are generally easier to calculate. This approximation is valid “when \\(n\\) is large and \\(np\\) is small,” and rules of thumb are sometimes given."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Approximating Binomial with Poisson | </title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  ">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.1df0392aab543464b23a85146803aaf2.js"></script>
+
+  
+
+<aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
+        
+      </div>
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#teaching"><span>Teaching</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Approximating Binomial with Poisson</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Feb 5, 2019
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/probability/">probability</a>, <a href="/category/r/">R</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+
+
+<p>It is usually taught in statistics classes that Binomial probabilities can be approximated by Poisson probabilities, which are generally easier to calculate. This approximation is valid “when <span class="math inline">\(n\)</span> is large and <span class="math inline">\(np\)</span> is small,” and rules of thumb are sometimes given.</p>
+<p>In this post I’ll walk through a simple proof showing that the Poisson distribution is really just the Binomial with <span class="math inline">\(n\)</span> (the number of trials) approaching infinity and <span class="math inline">\(p\)</span> (the probability of success in each trail) approaching zero. I’ll then provide some numerical examples to investigate how good is the approximation.</p>
+<div id="proof" class="section level2">
+<h2>Proof</h2>
+<p>The Binomial distribution describes the probability that there will be <span class="math inline">\(x\)</span> successes in a sample
+of size <span class="math inline">\(n\)</span>, chosen with replacement from a population where the probability of success is <span class="math inline">\(p\)</span>.</p>
+<p>Let <span class="math inline">\(X \sim Binomial(n, p)\)</span>, that is</p>
+<p><span class="math display" id="eq:binom">\[\begin{equation}
+\tag{1}
+   P(X = x) = {n\choose x} p^x (1-p)^{n-x},
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(x= 0, 1, \dots, n\)</span>. Define the number</p>
+<p><span class="math display">\[\lambda = np\]</span></p>
+<p>This is the rate of success. That’s the number of trials <span class="math inline">\(n\)</span>—however many there are—times the chance of success <span class="math inline">\(p\)</span> for each of those trials. If we repeat the experiment every day, we will be getting <span class="math inline">\(\lambda\)</span> successes per day on average.</p>
+<p>Solving for <span class="math inline">\(p\)</span>, we get:</p>
+<p><span class="math display">\[ p = \frac{\lambda}{n}\]</span>
+We then substitute this into <a href="#eq:binom">(1)</a>, and take the limit as <span class="math inline">\(n\)</span> goes to infinity</p>
+<p><span class="math display">\[ \lim_{n \to \infty}P(X = x) =  \lim_{n \to \infty} \frac{n!}{x!(n-x)!} \bigg( \frac{\lambda}{n} \bigg)^x \bigg( 1-\frac{\lambda}{n} \bigg)^{n-x}\]</span></p>
+<p>I then collect the constants (terms that don’t depend on <span class="math inline">\(n\)</span>) in front and split the last term into two</p>
+<p><span class="math display" id="eq:limit">\[\begin{equation}
+   \tag{2}
+   \frac{\lambda^x}{x!}  \lim_{n \to \infty} \color{blue}{\frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x} \color{red}{ \bigg( 1-\frac{\lambda}{n} \bigg)^n } \color{green}{\bigg( 1-\frac{\lambda}{n} \bigg)^{-x}}
+\end{equation}\]</span></p>
+<p>Now let’s take the limit of this right-hand side one term at a time.</p>
+<ol style="list-style-type: decimal">
+<li>We start with the blue term</li>
+</ol>
+<p><span class="math display">\[\color{blue}{ \lim_{n \to \infty} \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x }\]</span>
+The numerator and denominator can be expanded as follows</p>
+<p><span class="math display">\[\color{blue}{ \lim_{n \to \infty} \frac{(n)(n-1)(n-2)\dots(n-x)(n-x-1)\dots (1)}{(n-x)(n-x-1)(n-x-2)\dots (1)}\bigg( \frac{1}{n} \bigg)^x }\]</span></p>
+<p>The <span class="math inline">\((n-x)(n-x-1)\dots(1)\)</span> terms cancel from both the numerator and denominator, leaving the following</p>
+<p><span class="math display">\[\color{blue}{ \lim_{n \to \infty} \frac{(n)(n-1)(n-2)(n-x+1)}{n^x} }\]</span>
+This can be rewrited as</p>
+<p><span class="math display">\[\color{blue}{  \lim_{n \to \infty} \frac{n}{n} \frac{(n-1)}{n} \frac{(n-2)}{n} \frac{(n-x+1)}{n} }\]</span>
+This is because there were <span class="math inline">\(x\)</span> terms in both the numerator and denominator. Clearly, every one of these <span class="math inline">\(x\)</span> terms approaches 1 as <span class="math inline">\(n\)</span> approaches infinity. So we know this just simplifies to one. So we’re done with the first step.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Now we focus on the red term of <a href="#eq:limit">(2)</a></li>
+</ol>
+<p><span class="math display">\[\color{red}{ \lim_{n \to \infty} \bigg( 1-\frac{\lambda}{n} \bigg)^n }\]</span></p>
+<p>Recall the <a href="https://en.wikipedia.org/wiki/E_(mathematical_constant)">definition</a> of <span class="math inline">\(e= 2.7182\dots\)</span> is</p>
+<p><span class="math display">\[ \lim_{a \to \infty} \bigg(1 + \frac{1}{a}\bigg)^a\]</span>
+Our goal here is to find a way to manipulate our expression to look more like the definition of <span class="math inline">\(e\)</span>, which we know the limit of. Let’s define a number <span class="math inline">\(a\)</span> as</p>
+<p><span class="math display">\[ a = -\frac{n}{\lambda}\]</span></p>
+<p>Substituting it into our expression we get</p>
+<p><span class="math display">\[ \color{red}{ \lim_{n \to \infty} \bigg( 1-\frac{\lambda}{n} \bigg)^n = \lim_{n \to \infty} \bigg( 1+\frac{1}{a} \bigg)^{-a\lambda} = e^{-\lambda} }\]</span>
+So we’ve finished with the middle term.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>The third term of <a href="#eq:limit">(2)</a> is</li>
+</ol>
+<p><span class="math display">\[\color{green}{ \lim_{n \to \infty}  \bigg( 1-\frac{\lambda}{n} \bigg)^{-x} }\]</span>
+As <span class="math inline">\(n\)</span> approaches infinity, this term becomes <span class="math inline">\(1^{-x}\)</span> which is equal to one. And that takes care of our last term.</p>
+<p>Putting these together we can re-write <a href="#eq:limit">(2)</a> as</p>
+<p><span class="math display">\[ \frac{\lambda^x}{x!}  \lim_{n \to \infty} \color{blue}{ \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x} \color{red}{ \bigg( 1-\frac{\lambda}{n} \bigg)^n} \color{green}{ \bigg( 1-\frac{\lambda}{n} \bigg)^{-x} } = \frac{\lambda^x}{x!} \color{red}{ e^{-\lambda} }\]</span>
+which is the probability mass function of a Poisson random variable <span class="math inline">\(Y\)</span>, i.e</p>
+<p><span class="math display">\[P(Y = y)  = \frac{\lambda^y}{y!} e^{-\lambda}\]</span></p>
+<p>where <span class="math inline">\(y = 0, 1, \dots\)</span>. So we have shown that the Poisson distribution is a special case of the Binomial, in which the number of trials grows to infinity and the chance of success in any trial approaches zero. And that completes the proof.</p>
+<p><span class="citation">Casella and Berger (<a href="#ref-casella2002statistical" role="doc-biblioref">2002</a>)</span> provide a much shorter proof based on moment generating functions.</p>
+<p>A natural question is how good is this approximation? It turns out it is quite good even for moderate <span class="math inline">\(p\)</span> and <span class="math inline">\(n\)</span> as we’ll see with a few numerical examples.</p>
+</div>
+<div id="code" class="section level2">
+<h2>Code</h2>
+<p>A <a href="https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc331.htm">rule of thumb</a> says for the approximation to be good:</p>
+<blockquote>
+<p>“The sample size <span class="math inline">\(n\)</span> should be equal to or larger than 20 and the probability of a single success, <span class="math inline">\(p\)</span>, should be smaller than or equal to 0.05. If <span class="math inline">\(n\)</span> &gt; 100, the approximation is excellent if <span class="math inline">\(np\)</span> is also &lt; 10.”</p>
+</blockquote>
+<p>Let’s try a few scenarios. I have slightly modified the code from <a href="https://www.math.utah.edu/~treiberg/M3074PoisApproxEg.pdf">here</a>.</p>
+<pre class="r"><code># plots the pmfs of Binomial and Poisson
+pl &lt;- function(n, p, a, b) {
+   
+   clr &lt;- rainbow(15)[ceiling(c(10.68978, 14.24863))]
+   lambda &lt;- n * p
+   mx &lt;- max(dbinom(a:b, n, p))
+      
+   plot(
+      c(a:b, a:b),
+      c(dbinom(a:b, n, p), dpois(a:b, lambda)),
+      type = &quot;n&quot;,
+      main = paste(&quot;Poisson Approx. to Binomial, n=&quot;, n, &quot;, p=&quot;, p, &quot;, lambda=&quot;, lambda),
+      ylab = &quot;Probability&quot;,
+      xlab = &quot;x&quot;)
+   points((a:b) - .15,
+          dbinom(a:b, n, p),
+          type = &quot;h&quot;,
+          col = clr[1],
+          lwd = 10)
+   points((a:b) + .15,
+          dpois(a:b, lambda),
+          type = &quot;h&quot;,
+          col = clr[2],
+          lwd = 10)
+   legend(b - 3.5, mx, legend = c(&quot;Binomial(x,n,p)&quot;, &quot;Poisson(x,lambda)&quot;), fill = clr, bg = &quot;white&quot;)
+}</code></pre>
+<p>I start with the recommendation: <span class="math inline">\(n\)</span> = 20, <span class="math inline">\(p\)</span> = 0.05. This gives <span class="math inline">\(\lambda= 1\)</span>. Already the approximation seems reasonable.</p>
+<pre class="r"><code>pl(20, 0.05, 0, 10)</code></pre>
+<p><img src="/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>For <span class="math inline">\(n\)</span> = 10, <span class="math inline">\(p\)</span> = 0.3 it doesn’t seem to work very well.</p>
+<pre class="r"><code>pl(10, 0.3, 0, 10)</code></pre>
+<p><img src="/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>But if we increase <span class="math inline">\(n\)</span> and decrease <span class="math inline">\(p\)</span> in order to come home with the same <span class="math inline">\(\lambda\)</span> value things improve.</p>
+<pre class="r"><code>pl(100, 0.03, 0, 10)</code></pre>
+<p><img src="/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+Lastly, for 1000 trials the distributions are indistinguishable.</p>
+<pre class="r"><code>pl(1000, 0.003, 0, 10)</code></pre>
+<p><img src="/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-casella2002statistical">
+<p>Casella, George, and Roger L Berger. 2002. <em>Statistical Inference</em>. Vol. 2. Duxbury Pacific Grove, CA.</p>
+</div>
+</div>
+</div>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/probability/">probability</a>
+  
+  <a class="badge badge-light" href="/tag/r/">R</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://solon-karapanagiotis.com/post/approx_binomial/approximating-binomial-with-poisson/&amp;text=Approximating%20Binomial%20with%20Poisson" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Approximating%20Binomial%20with%20Poisson&amp;body=https://solon-karapanagiotis.com/post/approx_binomial/approximating-binomial-with-poisson/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://solon-karapanagiotis.com/post/approx_binomial/approximating-binomial-with-poisson/&amp;title=Approximating%20Binomial%20with%20Poisson" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://solon-karapanagiotis.com/"><img class="avatar mr-3 avatar-circle" src="/author/solon-karapanagiotis/avatar_hu91952b704368f9faa82e4f9322747064_1766173_270x270_fill_q75_lanczos_center.jpg" alt="Solon Karapanagiotis"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://solon-karapanagiotis.com/">Solon Karapanagiotis</a></h5>
+      <h6 class="card-subtitle">Research Associate <br> MRC Biostatistics Unit</h6>
+      
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/SolonSTATS" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/solonkarapa?tab=repositories" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/solonkarapanagiotis/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://publons.com/author/1232574/solon-karapanagiotis#profile" target="_blank" rel="noopener">
+        <i class="ai ai-publons"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://orcid.org/0000-0003-4460-2073" target="_blank" rel="noopener">
+        <i class="fab fa-orcid"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/qwerty/probability/">QWERTY-nomics, how did QWERTY came to be?</a></li>
+      
+      <li><a href="/post/new_scientist_puzzle_131/puzzle_131/"># 131 Puzzle from the New Scientist</a></li>
+      
+      <li><a href="/post/new_scientist_puzzle/puzzle_115/">Puzzle from the New Scientist</a></li>
+      
+      <li><a href="/post/auc_post/model-evaluation-auc/">Naive classification beats deep-learning</a></li>
+      
+      <li><a href="/post/hardest_puzzle/the-hardest-logic-puzzle/">Another solution to the &#39;The Hardest Logic Puzzle Ever&#39; using probability</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © Solon Karapanagiotis 2018-2023
+  </p>
+
+  
+  
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+    
+  
+  
+    
+  
+
+  
+
+  
+  <p class="powered-by copyright-license-text">
+    This website is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank">CC BY NC ND 4.0</a>
+  </p>
+  
+
+  <p class="powered-by footer-license-icons">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank" aria-label="Creative Commons">
+      <i class="fab fa-creative-commons fa-2x" aria-hidden="true"></i>
+      <i class="fab fa-creative-commons-by fa-2x" aria-hidden="true"></i>
+      
+        <i class="fab fa-creative-commons-nc fa-2x" aria-hidden="true"></i>
+      
+      
+        <i class="fab fa-creative-commons-nd fa-2x" aria-hidden="true"></i>
+      
+    </a>
+  </p>
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+    Published with
+    <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/latex.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'event' : "Events",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/js/wowchemy.min.572b7caf7fe601716a0f74d67d754c21.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

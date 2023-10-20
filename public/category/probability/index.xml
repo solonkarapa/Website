@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>probability | </title>
+    <link>https://solon-karapanagiotis.com/category/probability/</link>
+      <atom:link href="https://solon-karapanagiotis.com/category/probability/index.xml" rel="self" type="application/rss+xml" />
+    <description>probability</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Solon Karapanagiotis 2018-2023</copyright><lastBuildDate>Fri, 07 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://solon-karapanagiotis.com/media/icon.png</url>
+      <title>probability</title>
+      <link>https://solon-karapanagiotis.com/category/probability/</link>
+    </image>
+    
+    <item>
+      <title>QWERTY-nomics, how did QWERTY came to be?</title>
+      <link>https://solon-karapanagiotis.com/post/qwerty/probability/</link>
+      <pubDate>Fri, 07 Oct 2022 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/qwerty/probability/</guid>
+      <description>
+
+
+&lt;p&gt;QWERTY has become the dominant keyboard standard, used by billions of people every day. The basic QWERTY form was developed in 1873 and was based around four rows with eleven characters in each row.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/QWERTY&#34;&gt;QWERTY&lt;/a&gt; takes its name from the first six letter of the second line (see &lt;a href=&#34;http://www.gettyimages.com/detail/1268712200&#34;&gt;image&lt;/a&gt;).&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There has been a lot of debate on the nature of QWERTY, whether the specific keyboard design was by choice or chance?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;A common view is the letters QWERTY were assembled (on purpose) in one row so the salesman could impress the customers by quickly typing “typewriter” which was the name of the brand producing the hardware - “the Sholes and Glidden Type Writer”. Effectively a sales trick!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Using the six letters in QWERTY we can type the word “typewriter”.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;Kay (&lt;a href=&#34;#ref-kay2013rerun&#34; role=&#34;doc-biblioref&#34;&gt;2013&lt;/a&gt;)&lt;/span&gt; labels this view as Myth 1.&lt;/p&gt;
+&lt;p&gt;They used probability theory to investigate whether this feature of the keyboard exists “by intent or accident”. To do this, they calculated the probability the seven letters that make up “typewriter” falling on one line. This probability is 0.0002, so small, which indicates it was a design choice.&lt;/p&gt;
+&lt;p&gt;Crucially, this calculation is based on the assumption that the designer had chosen in advance to place 10 letters at the top row of the keyboard&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here, I’m looking how this probability changes for other values of letters at the top row.&lt;/p&gt;
+&lt;div id=&#34;the-calculation-in-kay2013rerun&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;The calculation in &lt;span class=&#34;citation&#34;&gt;Kay (&lt;a href=&#34;#ref-kay2013rerun&#34; role=&#34;doc-biblioref&#34;&gt;2013&lt;/a&gt;)&lt;/span&gt;&lt;/h1&gt;
+&lt;p&gt;First, I briefly go through the calculations presented in &lt;span class=&#34;citation&#34;&gt;Kay (&lt;a href=&#34;#ref-kay2013rerun&#34; role=&#34;doc-biblioref&#34;&gt;2013&lt;/a&gt;)&lt;/span&gt;. The problem is parallel to sampling without replacement from an (imaginary) urn. The designer has chosen &lt;span class=&#34;math inline&#34;&gt;\(K=10\)&lt;/span&gt; letters to be assigned at the top row of the keyboard and the rest &lt;span class=&#34;math inline&#34;&gt;\(R=26-10=16\)&lt;/span&gt; to the other rows (there are &lt;span class=&#34;math inline&#34;&gt;\(N=26\)&lt;/span&gt; letters in the alphabet).&lt;/p&gt;
+&lt;p&gt;We are interested in the probability the &lt;span class=&#34;math inline&#34;&gt;\(k=7\)&lt;/span&gt; letters needed to form the word “typewriter” finish at the top row. This probability is described by a &lt;em&gt;hypergeometric&lt;/em&gt; distribution.&lt;/p&gt;
+&lt;p&gt;The hypergeometric distribution describes the probability of &lt;span class=&#34;math inline&#34;&gt;\(k=7\)&lt;/span&gt; “successes” in &lt;span class=&#34;math inline&#34;&gt;\(n=7\)&lt;/span&gt; draws, without replacement, from a finite population of size &lt;span class=&#34;math inline&#34;&gt;\(N = 26\)&lt;/span&gt; letters that contains exactly &lt;span class=&#34;math inline&#34;&gt;\(K = 10\)&lt;/span&gt; objects with that feature, wherein each draw is either a success or a failure. Using the usual urn-style language of “green” and “red” marbles we have:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(K = 10\)&lt;/span&gt; green marbles (i.e. 10 letters to be assigned at the top row)&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(N = 26\)&lt;/span&gt; (i.e. the letters of the alphabet)&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(R = 16\)&lt;/span&gt; red marbles (i.e. the rest of the letters to be assigned to the other rows)&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(k = 7\)&lt;/span&gt; letters that form the word “typerwriter”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We then draw &lt;span class=&#34;math inline&#34;&gt;\(n = 7\)&lt;/span&gt; marbles without replacement. What is the probability that exactly &lt;span class=&#34;math inline&#34;&gt;\(k=7\)&lt;/span&gt; are green? This is given by&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[P(X=k) = \frac{ {K\choose{k}} {{N-k}\choose{n-k}}}{N\choose n}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;For &lt;span class=&#34;math inline&#34;&gt;\(k=7, n=7, N=26, K= 10\)&lt;/span&gt;, this probability is 0.00018 which is quite small. Hence, it indicates this was a design choice rather than by chance.&lt;/p&gt;
+&lt;p&gt;But this calculation is based on the assumption: the designer decided the number of letters for the top row to be 10 (&lt;span class=&#34;math inline&#34;&gt;\(K=10\)&lt;/span&gt;).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;an-updated-calculation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;An updated calculation&lt;/h1&gt;
+&lt;p&gt;Another approach is to change the number of letters in the top row and see how this probability changes.&lt;/p&gt;
+&lt;p&gt;Now we are interested in the probability of drawing “&lt;span class=&#34;math inline&#34;&gt;\(k=7\)&lt;/span&gt; green marbles in &lt;span class=&#34;math inline&#34;&gt;\(n=7\)&lt;/span&gt; draws for different choices of &lt;span class=&#34;math inline&#34;&gt;\(K\)&lt;/span&gt;”. The plot shows the probability of &lt;span class=&#34;math inline&#34;&gt;\(k=7\)&lt;/span&gt; for different values of &lt;span class=&#34;math inline&#34;&gt;\(K\)&lt;/span&gt;. We start with &lt;span class=&#34;math inline&#34;&gt;\(K = 6\)&lt;/span&gt; which gives probability = 0, as there is no way to draw 7 green marbles when there are only 6 of them! The red dot corresponds to &lt;span class=&#34;math inline&#34;&gt;\(K=10\)&lt;/span&gt; which has been used in the paper by Kay. For &lt;span class=&#34;math inline&#34;&gt;\(K=19\)&lt;/span&gt; which corresponds to the quite extreme scenario of having 19 letters at the top row, the probability the 7 “typerwriter” letters are found there becomes 8%. Still small but appreciable.&lt;/p&gt;
+&lt;p&gt;The calculations above are based on sampling the letters in “typewriter” at any order. We can also calculate the probability of drawing “Exactly &lt;span class=&#34;math inline&#34;&gt;\(k=7\)&lt;/span&gt; green marbles in &lt;span class=&#34;math inline&#34;&gt;\(n=7\)&lt;/span&gt; draws, in the specific QWERTY order”. This corresponds to the horizontal dashed line in the plot.&lt;/p&gt;
+&lt;p&gt;Overall, adding more letters at the top row increases the probability substantially. For example, the probability increases by 9900% (!) when going from &lt;span class=&#34;math inline&#34;&gt;\(K=10\)&lt;/span&gt; to &lt;span class=&#34;math inline&#34;&gt;\(16\)&lt;/span&gt; letters. Nevertheless, in absolute terms even for &lt;span class=&#34;math inline&#34;&gt;\(K =19\)&lt;/span&gt; it is so small that we can conclude it is unlikely that these letters would appear together by chance.&lt;/p&gt;
+&lt;p&gt;For a more historical perspective and other myths on QWERTY - read &lt;a href=&#34;https://www.newscientist.com/article/2200664-the-truth-about-the-qwerty-keyboard/&#34;&gt;this article&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(purrr)
+N &amp;lt;- 26
+K &amp;lt;- seq(6, N - 7, by = 1)
+prbs &amp;lt;- map_dbl(K, ~ dhyper(x = 7, m = .x, n = N - .x, k = 7))
+df &amp;lt;- data.frame(K, prbs)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)
+library(dplyr)
+
+# prb of exact &amp;quot;qwerty&amp;quot; word sampled
+pr_exact &amp;lt;- (1/26)*(1/25)*(1/24)*(1/23)*(1/22)**(1/21)*(1/20)*(1/19)
+
+ggplot(df) +
+    geom_point(aes(x = K, y = prbs)) +
+    labs(y = &amp;quot;Probability&amp;quot;, x = &amp;quot;K&amp;quot;) +
+    geom_point(data = df %&amp;gt;% filter(K == &amp;quot;10&amp;quot;), aes(x = K, y = prbs), col = &amp;#39;red&amp;#39;) +
+    geom_hline(yintercept = pr_exact, linetype = &amp;quot;dashed&amp;quot;) +
+    scale_x_continuous(breaks = K, labels = K) +
+    theme_bw()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/qwerty/qwerty_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level1 unnumbered&#34;&gt;
+&lt;h1&gt;References&lt;/h1&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references csl-bib-body hanging-indent&#34;&gt;
+&lt;div id=&#34;ref-kay2013rerun&#34; class=&#34;csl-entry&#34;&gt;
+Kay, Neil M. 2013. &lt;span&gt;“Rerun the Tape of History and QWERTY Always Wins.”&lt;/span&gt; &lt;em&gt;Research Policy&lt;/em&gt; 42 (6-7): 1175–85.
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes footnotes-end-of-document&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;In fact, later versions changed this arrangement to 10 (top), 9 (middle), 7 (bottom), a more balanced ordering - this the modern QWERTY.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title># 131 Puzzle from the New Scientist</title>
+      <link>https://solon-karapanagiotis.com/post/new_scientist_puzzle_131/puzzle_131/</link>
+      <pubDate>Tue, 21 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/new_scientist_puzzle_131/puzzle_131/</guid>
+      <description>
+
+
+&lt;p&gt;Solution to &lt;a href=&#34;https://www.newscientist.com/article/mg25133522-800-puzzle-131-what-is-the-probability-of-winning-this-game-of-chance/#ixzz775sxHixz&#34;&gt;#131 “The Paradise Club”&lt;/a&gt; puzzle from the &lt;a href=&#34;https://www.newscientist.com/&#34;&gt;New Scientist&lt;/a&gt;. This week (No 3352 - 18 September 2021) the New Scientist posted the following puzzle:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Down at The Paradise Club, Gus and Bart take it in turns to roll a pair of dice. The first person to score his favourite score for two dice wins, which means being treated to a drink by the other (the loser). They each favour a different prime number as a score with two dice and it so happens that their chances of getting their favourite score is the same for each.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What is that probability? If Gus goes first what are his chances of being bought a drink?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The maximum score (i.e. sum) when rolling two dice is 12. The prime numbers from 2 (the minimum score) to 12 are&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[2, 3, 5, 7, 11\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Each score can be the result of the following dice combinations&lt;/p&gt;
+&lt;p&gt;2: {1, 1}&lt;/p&gt;
+&lt;p&gt;3: {2, 1}&lt;/p&gt;
+&lt;p&gt;5: {2, 3}, {4, 1}&lt;/p&gt;
+&lt;p&gt;7: {4, 3}, {5, 2}, {6, 1}&lt;/p&gt;
+&lt;p&gt;11: {6, 5}&lt;/p&gt;
+&lt;p&gt;For example, a score of 2 can only be achieved if both dice are {1, 1} (1 combination in total). A score of 3 can be achieved either with {2, 1} or {1, 2} (2 combinations in total). A score of 5 can be achieved with {2, 3} or {4, 1} or {3, 2} or {1, 4} (4 combinations in total).&lt;/p&gt;
+&lt;p&gt;The table below shows the total number of combinations for each score&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;center&#34;&gt;Score&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Total Combinations&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;11&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The puzzle states that the chances of getting their favourite score is the same for Gus and Bart. Since each combination is equiprobable&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; the only scores that result in the same chances are 3 and 11.&lt;/p&gt;
+&lt;p&gt;Now we need to find that probability. We can calculate it as&lt;/p&gt;
+&lt;p&gt;Probability = Number of favourable combinations/total number of combinations&lt;/p&gt;
+&lt;p&gt;We already know the number of favourable combinations (i.e. the number of combinations that will give the win) - it is 2. There are 2 ways to get a score of 3 or 11 (see table). The total number of combinations is 36. There are 36 possible outcomes when we roll two dice (6 from the first and 6 from the second die).&lt;/p&gt;
+&lt;p&gt;Hence, the probability of getting their favourite score is &lt;span class=&#34;math inline&#34;&gt;\(2/36 \text{ or } 1/18\)&lt;/span&gt; and it is the same for both.&lt;/p&gt;
+&lt;p&gt;Then, we are asked: “If Gus goes first what are his chances of being bought a drink?”
+That is, what are his chances of winning? Gus wins if he rolls his favourite score or both Bart and Gus fail - in which case they continue the game. Let W denote the event that Gus wins. The probability of W is&lt;/p&gt;
+&lt;p&gt;P(W) = P(Gus rolls his favourite score ) + P(both fail)&lt;/p&gt;
+&lt;p&gt;This is usually called the addition rule&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;. We already know the first term, the probability of rolling his favourite score is &lt;span class=&#34;math inline&#34;&gt;\(1/18\)&lt;/span&gt;. The second term can be decomposed as&lt;/p&gt;
+&lt;p&gt;P(both fail) = P(Bart fails and Gus fails) =&lt;/p&gt;
+&lt;p&gt;P(Bart fails given that Gus fails) P(Gus fails)&lt;/p&gt;
+&lt;p&gt;P(Bart fails given that Gus fails) (1 - P(W))&lt;/p&gt;
+&lt;p&gt;To go from the first to the second line I used the multiplication rule&lt;a href=&#34;#fn3&#34; class=&#34;footnote-ref&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;. Also, P(Gus fails) = 1 - P(Gus wins) = 1 - P(W). The first term in the last line (P(Bart fails given that Gus fails)) is equal to the probability that Bart fails, which is 1-P(Bart rolls his favourite score) = 1 - 1/18 = 17/18. So rewriting our previous equation we have&lt;/p&gt;
+&lt;p&gt;P(W) = P(Gus rolls his favourite score) + P(both fail)&lt;/p&gt;
+&lt;p&gt;P(W) = P(Gus rolls his favourite score) + P(Bart fails given that Gus fails) (1 - P(W))&lt;/p&gt;
+&lt;p&gt;P(W) = 1/18 + 17/18(1 - P(W))&lt;/p&gt;
+&lt;p&gt;P(W) = 18/35&lt;/p&gt;
+&lt;p&gt;The probability of Gus winning, if he goes first, is 18/35.&lt;/p&gt;
+&lt;div id=&#34;update-270921&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Update 27/09/21&lt;/h2&gt;
+&lt;p&gt;The &lt;a href=&#34;https://www.newscientist.com/article/mg25133530-900-puzzle-132-can-you-work-out-on-which-day-a-quiz-will-be-given/&#34;&gt;solution&lt;/a&gt; from the New Scientist.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;I have assumed that each die is fair, that is the occurrence of each number is equally likely.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;The addition rule states that for two events A and B, the probability that either one or both events occur is P(A or B) = P(A) + P(B) - P(A and B). The last term, P(A and B), is the probability that both events occur. In our case, it is zero because we cannot have a score of 3 and 11 at the same time, they cannot occur together when rolling a pair of dice.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;The multiplication rule states that the probability that both events occur is P(A and B) = P(A) P(B given A) or P(B) P(A given B). P(A given B) means the probability that event A occurs given event B has occurred.&lt;a href=&#34;#fnref3&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Puzzle from the New Scientist</title>
+      <link>https://solon-karapanagiotis.com/post/new_scientist_puzzle/puzzle_115/</link>
+      <pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/new_scientist_puzzle/puzzle_115/</guid>
+      <description>
+
+
+&lt;p&gt;Attempt to solve &lt;a href=&#34;https://www.newscientist.com/article/mg25033361-300-puzzle-115-can-you-work-out-where-roman-the-robot-will-end-up/&#34;&gt;#115 “A random robot”&lt;/a&gt; puzzle from the &lt;a href=&#34;https://www.newscientist.com/&#34;&gt;New Scientist&lt;/a&gt;. This week (No 3336 - 29 May 2021) the New Scientist published the following puzzle:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Roman the test robot is being given one final roam before being consigned to the scrapheap where he can rust in peace.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;He has been programmed to make four equal length steps. For his first move, he can travel one step east, west, north or south. Each of his subsequent three steps must be at right angles to the previous move. The direction of each move is selected by a random number generator, with all four possibilities being equally probable.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What is the chance that Roman will finish where he started?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I decided to solve the puzzle by first plotting how (and whether) Roman can finish where he started (see graph below). To do this, I divided the space based on the 4 cardinal directions he can take in one step.
+These are the coloured quadrants in the plot; his Start/Finish position is also given. For example, Roman will be travelling along the purple top-right quadrant if he starts by going either north or east.&lt;/p&gt;
+&lt;p&gt;Next, within each quadrant he can travel clockwise or anti-clockwise. This is depicted with the black and grey arrows, respectively. For instance, if he goes north at the first step (purple quadrant) and then by travelling clockwise (black arrow), at right angles, he will finish where he started. Similarly, if he goes east at the first step (purple quadrant) and then by travelling anti-clockwise (grey arrow) he will again finish where he started. In effect, the purple quadrant corresponds to the path:&lt;/p&gt;
+&lt;p&gt;north -&amp;gt; east -&amp;gt; south -&amp;gt; west&lt;/p&gt;
+&lt;p&gt;or&lt;/p&gt;
+&lt;p&gt;east -&amp;gt; north -&amp;gt; west -&amp;gt; south&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/new_scientist_puzzle/New_Scientist_Puzzle_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Using the same reasoning, within each quadrant Roman can travel clockwise or anti-clockwise. This gives us 8 different paths (4 quadrants times 2 directions in each one) in total for Roman to start and finish at the same position.&lt;/p&gt;
+&lt;p&gt;Now we need to calculate the probability of each of those paths. I’ll use the
+path:&lt;/p&gt;
+&lt;p&gt;north -&amp;gt; east -&amp;gt; south -&amp;gt; west&lt;/p&gt;
+&lt;p&gt;for illustration. For his first move, he can choose any of the four cardinal directions with equal probability. So, the probability he chooses north is 1/4 (i.e. P(north)=1/4). After that, for each subsequent step he can only travel at right angels to the previous move. This limits his choices to two at each subsequent step. In addition, either choice is equally probable (as given by the problem). In this example, after going north, he can only go east or west with equal probability, so P(east) = 1/2. The same is valid of the next two steps. Hence, P(south) = 1/2 and P(west) = 1/2. To find the probability of the entire path we simply need to multiply the individual probabilities of the path. This is, P(path) = P(north) * P(east) * P(south) * P(west) = 1/32.&lt;/p&gt;
+&lt;p&gt;Finally, we have 8 different paths so the total probability that Roman will finish where he started is 8*(1/32)=1/4.&lt;/p&gt;
+&lt;div id=&#34;update-040621&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Update 04/06/21&lt;/h2&gt;
+&lt;p&gt;Indeed, the answer is 1/4, &lt;a href=&#34;https://www.newscientist.com/article/mg25033370-700-puzzle-116-can-you-figure-out-all-the-scores-for-the-1991-season/&#34;&gt;see here&lt;/a&gt; for the New Scientist’s solution.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Approximating Binomial with Poisson</title>
+      <link>https://solon-karapanagiotis.com/post/approx_binomial/approximating-binomial-with-poisson/</link>
+      <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/approx_binomial/approximating-binomial-with-poisson/</guid>
+      <description>
+
+
+&lt;p&gt;It is usually taught in statistics classes that Binomial probabilities can be approximated by Poisson probabilities, which are generally easier to calculate. This approximation is valid “when &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; is large and &lt;span class=&#34;math inline&#34;&gt;\(np\)&lt;/span&gt; is small,” and rules of thumb are sometimes given.&lt;/p&gt;
+&lt;p&gt;In this post I’ll walk through a simple proof showing that the Poisson distribution is really just the Binomial with &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; (the number of trials) approaching infinity and &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; (the probability of success in each trail) approaching zero. I’ll then provide some numerical examples to investigate how good is the approximation.&lt;/p&gt;
+&lt;div id=&#34;proof&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Proof&lt;/h2&gt;
+&lt;p&gt;The Binomial distribution describes the probability that there will be &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; successes in a sample
+of size &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;, chosen with replacement from a population where the probability of success is &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(X \sim Binomial(n, p)\)&lt;/span&gt;, that is&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:binom&#34;&gt;\[\begin{equation}
+\tag{1}
+   P(X = x) = {n\choose x} p^x (1-p)^{n-x},
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(x= 0, 1, \dots, n\)&lt;/span&gt;. Define the number&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\lambda = np\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;This is the rate of success. That’s the number of trials &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;—however many there are—times the chance of success &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; for each of those trials. If we repeat the experiment every day, we will be getting &lt;span class=&#34;math inline&#34;&gt;\(\lambda\)&lt;/span&gt; successes per day on average.&lt;/p&gt;
+&lt;p&gt;Solving for &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;, we get:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ p = \frac{\lambda}{n}\]&lt;/span&gt;
+We then substitute this into &lt;a href=&#34;#eq:binom&#34;&gt;(1)&lt;/a&gt;, and take the limit as &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; goes to infinity&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \lim_{n \to \infty}P(X = x) =  \lim_{n \to \infty} \frac{n!}{x!(n-x)!} \bigg( \frac{\lambda}{n} \bigg)^x \bigg( 1-\frac{\lambda}{n} \bigg)^{n-x}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;I then collect the constants (terms that don’t depend on &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;) in front and split the last term into two&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:limit&#34;&gt;\[\begin{equation}
+   \tag{2}
+   \frac{\lambda^x}{x!}  \lim_{n \to \infty} \color{blue}{\frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x} \color{red}{ \bigg( 1-\frac{\lambda}{n} \bigg)^n } \color{green}{\bigg( 1-\frac{\lambda}{n} \bigg)^{-x}}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Now let’s take the limit of this right-hand side one term at a time.&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;We start with the blue term&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{blue}{ \lim_{n \to \infty} \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x }\]&lt;/span&gt;
+The numerator and denominator can be expanded as follows&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{blue}{ \lim_{n \to \infty} \frac{(n)(n-1)(n-2)\dots(n-x)(n-x-1)\dots (1)}{(n-x)(n-x-1)(n-x-2)\dots (1)}\bigg( \frac{1}{n} \bigg)^x }\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;The &lt;span class=&#34;math inline&#34;&gt;\((n-x)(n-x-1)\dots(1)\)&lt;/span&gt; terms cancel from both the numerator and denominator, leaving the following&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{blue}{ \lim_{n \to \infty} \frac{(n)(n-1)(n-2)(n-x+1)}{n^x} }\]&lt;/span&gt;
+This can be rewrited as&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{blue}{  \lim_{n \to \infty} \frac{n}{n} \frac{(n-1)}{n} \frac{(n-2)}{n} \frac{(n-x+1)}{n} }\]&lt;/span&gt;
+This is because there were &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; terms in both the numerator and denominator. Clearly, every one of these &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; terms approaches 1 as &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; approaches infinity. So we know this just simplifies to one. So we’re done with the first step.&lt;/p&gt;
+&lt;ol start=&#34;2&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Now we focus on the red term of &lt;a href=&#34;#eq:limit&#34;&gt;(2)&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{red}{ \lim_{n \to \infty} \bigg( 1-\frac{\lambda}{n} \bigg)^n }\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Recall the &lt;a href=&#34;https://en.wikipedia.org/wiki/E_(mathematical_constant)&#34;&gt;definition&lt;/a&gt; of &lt;span class=&#34;math inline&#34;&gt;\(e= 2.7182\dots\)&lt;/span&gt; is&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \lim_{a \to \infty} \bigg(1 + \frac{1}{a}\bigg)^a\]&lt;/span&gt;
+Our goal here is to find a way to manipulate our expression to look more like the definition of &lt;span class=&#34;math inline&#34;&gt;\(e\)&lt;/span&gt;, which we know the limit of. Let’s define a number &lt;span class=&#34;math inline&#34;&gt;\(a\)&lt;/span&gt; as&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ a = -\frac{n}{\lambda}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Substituting it into our expression we get&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \color{red}{ \lim_{n \to \infty} \bigg( 1-\frac{\lambda}{n} \bigg)^n = \lim_{n \to \infty} \bigg( 1+\frac{1}{a} \bigg)^{-a\lambda} = e^{-\lambda} }\]&lt;/span&gt;
+So we’ve finished with the middle term.&lt;/p&gt;
+&lt;ol start=&#34;3&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;The third term of &lt;a href=&#34;#eq:limit&#34;&gt;(2)&lt;/a&gt; is&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\color{green}{ \lim_{n \to \infty}  \bigg( 1-\frac{\lambda}{n} \bigg)^{-x} }\]&lt;/span&gt;
+As &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; approaches infinity, this term becomes &lt;span class=&#34;math inline&#34;&gt;\(1^{-x}\)&lt;/span&gt; which is equal to one. And that takes care of our last term.&lt;/p&gt;
+&lt;p&gt;Putting these together we can re-write &lt;a href=&#34;#eq:limit&#34;&gt;(2)&lt;/a&gt; as&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \frac{\lambda^x}{x!}  \lim_{n \to \infty} \color{blue}{ \frac{n!}{(n-x)!} \bigg( \frac{1}{n} \bigg)^x} \color{red}{ \bigg( 1-\frac{\lambda}{n} \bigg)^n} \color{green}{ \bigg( 1-\frac{\lambda}{n} \bigg)^{-x} } = \frac{\lambda^x}{x!} \color{red}{ e^{-\lambda} }\]&lt;/span&gt;
+which is the probability mass function of a Poisson random variable &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt;, i.e&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[P(Y = y)  = \frac{\lambda^y}{y!} e^{-\lambda}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(y = 0, 1, \dots\)&lt;/span&gt;. So we have shown that the Poisson distribution is a special case of the Binomial, in which the number of trials grows to infinity and the chance of success in any trial approaches zero. And that completes the proof.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;Casella and Berger (&lt;a href=&#34;#ref-casella2002statistical&#34; role=&#34;doc-biblioref&#34;&gt;2002&lt;/a&gt;)&lt;/span&gt; provide a much shorter proof based on moment generating functions.&lt;/p&gt;
+&lt;p&gt;A natural question is how good is this approximation? It turns out it is quite good even for moderate &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; as we’ll see with a few numerical examples.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;code&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Code&lt;/h2&gt;
+&lt;p&gt;A &lt;a href=&#34;https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc331.htm&#34;&gt;rule of thumb&lt;/a&gt; says for the approximation to be good:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“The sample size &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; should be equal to or larger than 20 and the probability of a single success, &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;, should be smaller than or equal to 0.05. If &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; &amp;gt; 100, the approximation is excellent if &lt;span class=&#34;math inline&#34;&gt;\(np\)&lt;/span&gt; is also &amp;lt; 10.”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Let’s try a few scenarios. I have slightly modified the code from &lt;a href=&#34;https://www.math.utah.edu/~treiberg/M3074PoisApproxEg.pdf&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plots the pmfs of Binomial and Poisson
+pl &amp;lt;- function(n, p, a, b) {
+   
+   clr &amp;lt;- rainbow(15)[ceiling(c(10.68978, 14.24863))]
+   lambda &amp;lt;- n * p
+   mx &amp;lt;- max(dbinom(a:b, n, p))
+      
+   plot(
+      c(a:b, a:b),
+      c(dbinom(a:b, n, p), dpois(a:b, lambda)),
+      type = &amp;quot;n&amp;quot;,
+      main = paste(&amp;quot;Poisson Approx. to Binomial, n=&amp;quot;, n, &amp;quot;, p=&amp;quot;, p, &amp;quot;, lambda=&amp;quot;, lambda),
+      ylab = &amp;quot;Probability&amp;quot;,
+      xlab = &amp;quot;x&amp;quot;)
+   points((a:b) - .15,
+          dbinom(a:b, n, p),
+          type = &amp;quot;h&amp;quot;,
+          col = clr[1],
+          lwd = 10)
+   points((a:b) + .15,
+          dpois(a:b, lambda),
+          type = &amp;quot;h&amp;quot;,
+          col = clr[2],
+          lwd = 10)
+   legend(b - 3.5, mx, legend = c(&amp;quot;Binomial(x,n,p)&amp;quot;, &amp;quot;Poisson(x,lambda)&amp;quot;), fill = clr, bg = &amp;quot;white&amp;quot;)
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I start with the recommendation: &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; = 20, &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; = 0.05. This gives &lt;span class=&#34;math inline&#34;&gt;\(\lambda= 1\)&lt;/span&gt;. Already the approximation seems reasonable.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pl(20, 0.05, 0, 10)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;For &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; = 10, &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; = 0.3 it doesn’t seem to work very well.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pl(10, 0.3, 0, 10)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;But if we increase &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; and decrease &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; in order to come home with the same &lt;span class=&#34;math inline&#34;&gt;\(\lambda\)&lt;/span&gt; value things improve.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pl(100, 0.03, 0, 10)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;
+Lastly, for 1000 trials the distributions are indistinguishable.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pl(1000, 0.003, 0, 10)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://solon-karapanagiotis.com/post/approx_binomial/approximating-binomial-with-poisson_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-casella2002statistical&#34;&gt;
+&lt;p&gt;Casella, George, and Roger L Berger. 2002. &lt;em&gt;Statistical Inference&lt;/em&gt;. Vol. 2. Duxbury Pacific Grove, CA.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Another solution to the &#39;The Hardest Logic Puzzle Ever&#39; using probability</title>
+      <link>https://solon-karapanagiotis.com/post/hardest_puzzle/the-hardest-logic-puzzle/</link>
+      <pubDate>Fri, 03 Aug 2018 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/post/hardest_puzzle/the-hardest-logic-puzzle/</guid>
+      <description>
+
+
+&lt;p&gt;I present a solution to a modification of the “hardest logic puzzle ever” using probability theory.&lt;/p&gt;
+&lt;div id=&#34;background&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Background&lt;/h2&gt;
+&lt;p&gt;“The hardest logic puzzle” was originally presented by &lt;span class=&#34;citation&#34;&gt;Boolos (&lt;a href=&#34;#ref-boolos1996hardest&#34; role=&#34;doc-biblioref&#34;&gt;1996&lt;/a&gt;)&lt;/span&gt; and since then it has been amended several times in order to make it harder &lt;span class=&#34;citation&#34;&gt;(see Rabern and Rabern &lt;a href=&#34;#ref-rabern2008simple&#34; role=&#34;doc-biblioref&#34;&gt;2008&lt;/a&gt;; Novozhilov &lt;a href=&#34;#ref-novozhilov2012hardest&#34; role=&#34;doc-biblioref&#34;&gt;2012&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The puzzle: &lt;em&gt;Three gods A, B, and C are called, in some order, True, False, and Random. True always speaks truly, False always speaks falsely, but whether Random speaks truly or falsely is a completely random matter. Your task is to determine the identities of A, B, and C by asking three yes-no questions; &lt;strong&gt;each question must be put to exactly one god&lt;/strong&gt;. The gods understand English, but will answer all questions in their own language, in which the words for “yes” and “no” are “da” and “ja,” in some order. You do not know which word means which. &lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;Boolos (&lt;a href=&#34;#ref-boolos1996hardest&#34; role=&#34;doc-biblioref&#34;&gt;1996&lt;/a&gt;)&lt;/span&gt; then provides the following guidelines:&lt;br /&gt;
+1. It could be that some god gets asked more than one question (and hence that some god is not asked any question at all).&lt;br /&gt;
+2. What the second question is, and to which god it is put, may depend on the answer to the first question. (And of course similarly for the third question.)&lt;br /&gt;
+3. Whether Random speaks truly or not should be thought of as depending on the flip of a coin hidden in his brain: if the coin comes down heads, he speaks truly; if tails, falsely.&lt;br /&gt;
+4. Random will answer da or ja when asked any yes-no question.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;Rabern and Rabern (&lt;a href=&#34;#ref-rabern2008simple&#34; role=&#34;doc-biblioref&#34;&gt;2008&lt;/a&gt;)&lt;/span&gt; proposed to modify the third point above with the following:
+“Whether Random answers ‘da’ or ‘ja’ should be thought of as depending on the flip of a coin hidden in his
+brain: if the coin comes down heads, he answers ‘yes’; if tails, ‘no’.”&lt;/p&gt;
+&lt;p&gt;Boolos’ article includes multiple ways of solving the problem. &lt;span class=&#34;citation&#34;&gt;Rabern and Rabern (&lt;a href=&#34;#ref-rabern2008simple&#34; role=&#34;doc-biblioref&#34;&gt;2008&lt;/a&gt;)&lt;/span&gt; give a simpler solution. The main ideas for the solutions can be found &lt;a href=&#34;https://www.technologyreview.com/s/428189/the-hardest-logic-puzzle-ever-made-even-harder/&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;http://nautil.us/issue/30/identity/how-to-solve-the-hardest-logic-puzzle-ever&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;my-solution&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;My solution&lt;/h2&gt;
+&lt;p&gt;My solution is based on the long-run frequency interpretation of probability. It involves two steps. At the first step we will identify the Random god and in step 2 we distinguish between the True and False gods.&lt;/p&gt;
+&lt;p&gt;Step 1&lt;/p&gt;
+&lt;p&gt;Imagine the following scenario: you keep asking the same question to each god. The question is different for each god. Under the interpretation of probability as long-run frequency both True and False will always give the same answer. For example, if A is the True god he will always answer “da” or “ja” and similarly the False god will always answer the opposite. The crucial point is that Random will change between “da” and “ja” because his answers are random, “they depend on the flip of a coin hidden in his brain”. Suppose you ask your question to Random ten times, and assuming the coin in his head is fair (i.e., P(heads) = P(tails) = 0.5) then the probability that all his answers are same ( “da” or “ja” ) is &lt;span class=&#34;math inline&#34;&gt;\(0.5^{10}\)&lt;/span&gt;, that is highly unlikely. In fact, you do not need to pre-specify how many times you ask the question, since the moment a given god switches from “da” to “ja” or vice-versa you know he is Random. Having identified Random we proceed to distinguish between True and False. An example question to each one is “are you True”?&lt;/p&gt;
+&lt;p&gt;Step 2&lt;/p&gt;
+&lt;p&gt;For simplicity let’s assume C is Random. Now, we only need to identify one more god. Let’s use god A for illustration. All possibilities regarding god A and the word “da” are given below:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;A is True and “da” means “yes”,&lt;/li&gt;
+&lt;li&gt;A is True and “da” means “no”,&lt;/li&gt;
+&lt;li&gt;A is False and “da” means “yes”,&lt;/li&gt;
+&lt;li&gt;A is False and “da” means “no”,&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Then ask A the following question:&lt;/p&gt;
+&lt;p&gt;Q1: Is C Random?&lt;/p&gt;
+&lt;p&gt;And B:&lt;/p&gt;
+&lt;p&gt;Q2: Is A True?&lt;/p&gt;
+&lt;p&gt;For each scenario above we end up with the following pattern:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If scenario (1) the answers are “da” and “ja” for Q1 and Q2 respectively.&lt;/li&gt;
+&lt;li&gt;If scenario (2) the answers are “ja” and “da”.&lt;/li&gt;
+&lt;li&gt;If scenario (3) the answers are “ja” and “da”.&lt;/li&gt;
+&lt;li&gt;If scenario (4) the answers are “da” and “da”.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Looking more carefully at the answers we distinguish 3 distinct patterns for the answers:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;P1: “da”and “ja”,&lt;/li&gt;
+&lt;li&gt;P2: “ja” and “da” and&lt;/li&gt;
+&lt;li&gt;P3: “da” and “da”.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Furthermore, P1 and P3 are unique, they appear only once. That means if the gods answer Q1 and Q2 using P1 or P3 we have identified them and the game is over! For example, if they answer with P3 then scenario (4) was correct: A is False and “da” means “no” and consequently B is True and “ja” means “yes”. If they answer using P2 then we need a further question because both scenarios (2) and (3) may be right. We can ask A: (repeat the 1st question)&lt;/p&gt;
+&lt;p&gt;Q3: Are you True?&lt;/p&gt;
+&lt;p&gt;Now, if scenario (2) the answer is “ja” and if scenario (3) the answer is “da”.&lt;/p&gt;
+&lt;p&gt;Using this approach we have also identified the meanings of “da” and “ja”.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;comments&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Comments&lt;/h2&gt;
+&lt;p&gt;The modification I used was allowing each question to be put to more than one god. In step 1 the question “Are you True?” was put to all gods and was repeated in step 2 as Q3. So technically I have solved the puzzle using only three questions in total, but allowing myself to repeat the same questions to more than one god.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;Boolos (&lt;a href=&#34;#ref-boolos1996hardest&#34; role=&#34;doc-biblioref&#34;&gt;1996&lt;/a&gt;)&lt;/span&gt; provided his solution in the same article in which he introduced the puzzle.
+He states that the “first move is to find a god that you can be certain is not Random, and hence is either True or False”. My approach does the reverse; first identifies the Random god and then the True and False gods.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-boolos1996hardest&#34;&gt;
+&lt;p&gt;Boolos, George. 1996. “The Hardest Logic Puzzle Ever.” &lt;em&gt;The Harvard Review of Philosophy&lt;/em&gt; 6 (1): 62–65.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-novozhilov2012hardest&#34;&gt;
+&lt;p&gt;Novozhilov, Nikolay. 2012. “The Hardest Logic Puzzle Ever Becomes Even Tougher.” &lt;em&gt;arXiv Preprint arXiv:1206.1926&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-rabern2008simple&#34;&gt;
+&lt;p&gt;Rabern, Brian, and Landon Rabern. 2008. “A Simple Solution to the Hardest Logic Puzzle Ever.” &lt;em&gt;Analysis&lt;/em&gt; 68 (2): 105–12.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

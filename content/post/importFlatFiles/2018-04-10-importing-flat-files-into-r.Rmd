@@ -1,0 +1,367 @@
+---
+title: Importing Flat Files Into R
+author: ''
+date: '2018-04-10'
+slug: importing-flat-files-into-r
+categories:
+  - R
+  - data
+tags: [import, data,  R]
+header:
+  caption: ''
+  image: ''
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+There are many tutorials for importing data into R focusing on a specific function/package. This one focuses on 3 different packages. You will learn how to import all common formats of flat file data with base R functions and the dedicated `readr` and `data.table` packages. I first present these three packages and finish with a comparison table between them. 
+
+## Task
+Import a flat file into R: create an R object that contains the data from a flat file.
+
+## What is a flat file? 
+A flat file can be a plain text file that contains table data. A form of flat file is one in which table data is gathered in lines with the value from each table cell separated by a comma and each row represented with a new line. This type of flat file is also known as a comma-separated values (CSV) file. An alternative is a tab-delimited file where each field value is separated from the next using tabs. 
+
+The following sections describe various options for importing flat files. The ultimate goal is to convey, "translate", them into an R **data.frame**. 
+
+## What are we going to import?
+For illustration purposes we use the [Happiness](http://perso.telecom-paristech.fr/~eagan/class/as2013/inf229/labs/datasets) dataset. It is based on the European quality of life survey with questions related to income, life satisfaction or perceived quality of society. The file is quite small but enough to sharpen your importing skills. It provides the average rating for the question "How happy would you say you are these days?". Rating 1 (low) to 10 (high) by country and gender.
+
+```{r,echo=F}
+happiness <- read.table(file = "happiness.csv",     # path to flat file 
+                        header = TRUE,              # first row lists variable names
+                        sep = ",",                  # field separator is a comma
+                        stringsAsFactors = FALSE)
+head(happiness, 10)
+```
+
+
+## Let's get going... the `utils`
+We start with the [`utils`](http://www.rdocumentation.org/packages/utils/) package. This package is loaded by default when you start your R session. This means that you can access its functions without further due. Here, we are interested in three of them: 
+[`read.table()`](http://www.rdocumentation.org/packages/utils/functions/read.table), [`read.csv()`](http://www.rdocumentation.org/packages/utils/functions/read.table), and [`read.delim()`](http://www.rdocumentation.org/packages/utils/functions/read.table). 
+
+### Reading data with [`read.table()`](http://www.rdocumentation.org/packages/utils/functions/read.table)
+Reads a file in table format and creates an R **data.frame** from it, with cases corresponding to rows and variables to columns. Let's see how it works for our dataset.
+
+```{r}
+happiness <- read.table("happiness.csv")
+head(happiness)
+```
+
+Not what we wanted?! This data frame contains 108 rows and 1 column instead of 105 rows and 4 columns. That's because additional arguments need to be specified in order to tell R what it has to deal with.
+
+```{r}
+happiness <- read.table(file = "happiness.csv",     # path to flat file 
+                        header = TRUE,              # first row lists variables' names
+                        sep = ",",                  # field separator is a comma
+                        stringsAsFactors = FALSE)   # not import strings as categorical variables
+```
+
+Let's take a look now
+```{r}
+head(happiness)
+str(happiness)
+```
+
+By specifying `header = TRUE` R sees the that the first line contains the names of the variables. With `stringsAsFactors = FALSE` we specify that we wanted `Country` and `Gender` to be character variables. The `sep = ","` identifies the field separator to be a comma. There are many more arguments you can specify and each one can take many values! 
+For further details, consult the [R documentation](http://www.rdocumentation.org/packages/utils/functions/read.table) or type `help(read.table)` on the console.
+
+> Note: In order to use `read.table()`, in same manner, you need to give the full path name of the target file if it's not in your working directory. You can use the [R Function of the Day](http://rfunction.com/archives/1001), namely `setwd("<location of your dataset>")`, to change your working directory. The same is valid for any other function we are going to encounter in this tutorial. Alternatively, you can specify the location of the flat file inside `read.table()`. Keep in mind that the specification of the file is platform dependent (Windows, Unix/Linux and OSX).
+
+```{r,eval=F}
+read.table(file = "<location of your dataset>", ...) 
+```
+
+> Another option is to use [`file.path()`](http://www.rdocumentation.org/packages/base/functions/file.path). It constructs the path to a file from components in a platform-independent way.
+For example, 
+
+```{r,eval=FALSE}
+path <- file.path("~", "datasets", "happiness.csv")     
+
+happiness <- read.table(file = path,    
+                        header = TRUE,             
+                        sep = ",",                  
+                        stringsAsFactors = FALSE)
+```
+
+**Comment**
+The `stringsAsFactors` argument is true by default which means that character variables are imported into R as factors, the data type to store categorical variables. 
+
+```{r}
+happiness_2 <- read.table(file = "happiness.csv",    
+                        header = TRUE,             
+                        sep = ",",                  
+                        stringsAsFactors = TRUE)
+```
+
+At first sight you do not notice anything different and you shouldn't! But for R it's a big deal! For character variables each element is a string of one or more characters. On the other hand, factor variables are stored, internally, as numeric variables together with their levels. This has major impact in computations that R maybe has to carry out later. 
+
+```{r}
+str(happiness_2)
+```
+
+### Reading data with [`read.csv()`](http://www.rdocumentation.org/packages/utils/functions/read.table)
+It is a wrapper around `read.table()`. This means that `read.csv()` calls `read.table()` behind the scenes but with different default arguments. More specifically, the defaults are `header = TRUE` and `sep = ","`. These match with the standardized CSV format, where `,` is used as a separator and usually the first line contains the names of the columns. Therefore, it saves you time since you need to specify less arguments.  
+
+```{r,eval=F}
+read.csv(file = "happiness.csv",   
+                        stringsAsFactors = FALSE)
+```
+
+which is equivalent to 
+
+```{r,eval=F}
+read.table(file = "happiness.csv",    
+                        header = TRUE,             
+                        sep = ",",                  
+                        stringsAsFactors = FALSE)
+```
+
+### Reading data with [`read.delim()`](http://www.rdocumentation.org/packages/utils/functions/read.table)
+It is also a wrapper of `read.table()`. Now the default arguments match with tab-delimited files. More specifically, the defaults are `header = TRUE` and `sep = "\t"`, since `\t` is the field separator in tab-delimited files. 
+
+```{r,eval=F}
+read.delim(file = "happiness.txt",    
+                        stringsAsFactors = FALSE)
+```
+
+which is equivalent to 
+
+```{r,eval=F}
+read.table(file = "happiness.txt",    
+                        header = TRUE,             
+                        sep = "\t",                  
+                        stringsAsFactors = FALSE)
+```
+
+Both these functions make our lives easier since less arguments need to be specified. 
+
+**Note** Locale differences. 
+The standard field delimiters for CSV files are commas. On US versions, the comma is set as default for the "List Separator", which is okay for CSV files. But on European versions this character is reserved as the Decimal Symbol and the "List Separator" is set by default to the semicolon. 
+Why you should care?
+
+Suppose you try to import the European CSV version `happiness_eu.csv`. 
+```{r,echo=F}
+happiness_eu <- read.csv(file = "happiness.csv",  
+                        sep = ";",
+                        dec=",",
+                        stringsAsFactors = FALSE)
+```
+
+```{r}
+head(happiness_eu)
+```
+
+R performs the operation but clearly not the one we wanted. It's a data frame with 105 rows but a single variable! To deal with such problems you can use the [`read.csv2()`](http://www.rdocumentation.org/packages/utils/functions/read.table) function. The defaults are `sep = ";"` and `dec = ","`.
+
+```{r,eval=F}
+happiness_eu <- read.csv2(file = "happiness_eu.csv",  
+                        stringsAsFactors = FALSE)
+head(happiness_eu)
+```
+
+```{r,echo=F}
+head(read.csv(file = "happiness.csv",    
+                        stringsAsFactors = FALSE))
+```
+
+Similarly, there is [`read.delim2()`](http://www.rdocumentation.org/packages/utils/functions/read.table). The logic is the same. 
+
+To summarize, the [`read.table()`](http://www.rdocumentation.org/packages/utils/functions/read.table) is to read delimited data files.  Some variants are: `read.csv()` and `read.delim()`, which have different default values and are tailored for CSV and tab-delimited files, respectively.
+
+- In [`read.csv()`](http://www.rdocumentation.org/packages/utils/functions/read.table) default values are: `header = T`, `sep = ???,???`, `dec = ???.???`
+- In [`read.csv2()`](http://www.rdocumentation.org/packages/utils/functions/read.table) default values are: `header = T`, `sep = ???;???`, `dec = ???,???`
+- In [`read.delim()`](http://www.rdocumentation.org/packages/utils/functions/read.table) default values are: `header = T`, `sep = ???\t???`, `dec = ???.???`
+- In [`read.delim2()`](http://www.rdocumentation.org/packages/utils/functions/read.table) default values are: `header = T`, `sep = ???\t???`, `dec = ???,???`
+
+##[`readr`](https://cran.r-project.org/web/packages/readr/readr.pdf) ... an alternative to import flat files
+
+An alternative to the `utils` package is the [`readr`](https://cran.r-project.org/web/packages/readr/readr.pdf). Compared
+the `read.table` family of functions, it is faster, easier to use and with a consistent naming scheme. We start by installing and loading it. 
+
+```{r,eval=F}
+install.packages("readr")
+```
+
+```{r}
+library(readr)
+```
+
+Let's import our dataset. In `readr` you can use [`read_delim()`](https://cran.r-project.org/web/packages/readr/readr.pdf) for flat files. It can be considered the correspondent to `read.table()`. 
+
+```{r}
+happiness_readr <- read_delim("happiness.csv",        # path to flat file 
+                              delim = ",")            # character that separates fields in the file
+```
+
+```{r}
+str(happiness_readr)
+```
+
+
+```{r}
+head(happiness_readr)
+```
+
+Notice, that the output is the same as when using the `read.table()`, previously. But we did not have to specify `header=TRUE` because by default `read_delim()` expects the first row to contain the column names. This is done through the `col_names` argument, set equal to true by default. Also, strings are never automatically converted to factors. Hence, `stringsAsFactors = FALSE` is not necessary. To control the types of the columns `readr` uses the `col_types` argument. Let's see how these two work. 
+
+`col_names` is true by default meaning that it will use the the first row of data as column names. If your file does not have column names you can set `col_names = FALSE` and columns will be numbered sequentially. 
+
+```{r}
+head(read_delim("happiness2.csv", delim = ",",
+                              col_names = FALSE))
+```
+
+> **Note** Instead of assigning the output of `read_delim()` to a variable I directly use the `head()` function to print the first 6 lines of the data frame. It is equivalent to 
+```{r, eval=F}
+happiness_delim <- read_delim("happiness2.csv", delim = ",",
+                              col_names = FALSE)
+head(happiness_delim)
+```
+
+You can also manually set the column names. 
+
+```{r}
+head(read_delim("happiness2.csv", delim = ",",
+                              col_names = c("Country", "Gender", "Mean", "N")))
+```
+
+As mentioned, there is `col_types` to control the column classes. If you leave the default value `readr` heuristically inspects the first 100 rows to guess the type of each column. 
+
+```{r}
+sapply(happiness_readr, class)
+```
+
+ If you want to override the default column types you can also specify them manually. An option would be 
+
+```{r}
+happiness_readr2 <- read_delim("happiness.csv", delim = ",", 
+                               col_types = "ccni")
+sapply(happiness_readr2, class)
+```
+
+Where 
+
+- `c` = character 
+- `d` = double 
+- `i` = integer
+- `l` = logical
+- `_` = skip 
+
+Let see how `skip` works 
+
+```{r}
+head(read_delim("happiness.csv", delim = ",", 
+                               col_types = "ccn_"))
+```
+
+Notice the fourth column has been skipped. 
+
+Yet another way of setting the types of the imported columns is using collectors. Collector functions can be passed in a [`list()`](http://www.rdocumentation.org/packages/base/functions/list) to the `col_types` argument of `read_` functions to tell them how to interpret values in a column. 
+
+```{r}
+car <- col_character()
+fac <- col_factor(levels = c("Male", "Female", "Both"))
+num <- col_number()
+int <- col_integer()
+
+str(read_delim("happiness.csv", delim = "," , 
+                           col_types = list(car, fac, num, int)))
+```
+
+For a complete list of collector functions, you can take a look at the [`collector`](https://cran.r-project.org/web/packages/readr/readr.pdf) documentation. 
+
+If you are working on large datasets you may prefer handling the data in smaller parts. In `readr` you can achieve this with the combination of `skip` and `n_max` arguments. 
+
+```{r}
+head(read_delim("happiness.csv", delim = ",",
+                skip=2, n_max= 4))
+```
+
+We skipped two rows and then read four lines. There is something wrong though! Since the `col_names` is true by default the first line is used for the column names. Therefore, we need to manually specify the column names.
+
+```{r}
+head(read_delim("happiness2.csv", delim = ",",
+                              col_names = c("Country","Gender", "Mean", "N"), 
+                              skip=2, n_max= 4))
+```
+
+Like the `utils` package `readr` provides alternatives to `read_delim()`. The [`read_csv()`](https://cran.r-project.org/web/packages/readr/readr.pdf) and [`read_tsv()`](https://cran.r-project.org/web/packages/readr/readr.pdf) are used for CSV files and tab-delimited files, respectively. The functions of both packages are presented below. Notice the `_` is used in `readr` instead of the `.`.  
+
+
+  utils | readr   
+-----|-----
+  `read.table()` |  `read_delim()` 
+  `read.csv()` | `read_csv()`  
+  `read.delim()` |  `read.tsv` 
+
+## [`data.table`](http://www.rdocumentation.org/packages/data.table) ... yet another alternative to read data into R
+The `data.table` package is designed mainly for fast data manipulation. It also features a powerful function to import your data into R, the [`fread()`](http://www.rdocumentation.org/packages/data.table/functions/fread). Once more you need to install and load the package.
+
+```{r,eval=F}
+install.packages("data.table")
+```
+
+```{r}
+library(data.table)
+```
+
+Let's see how it works with two versions of our dataset.  
+
+```{r}
+head(fread("happiness.csv"))
+head(fread("happiness2.csv"))
+```
+
+Remember that the first row of `happiness2.csv` does not contain the column names. That's not a problem for `fread()` as it automatically assignees names to the columns. As in this case, often simply specifying the path to the file is enough to successfully import your flat file using `fread`. Moreover, it can infer the column types and separators. 
+
+```{r}
+str(fread("happiness.csv"))
+```
+
+Two more useful arguments of `fread()` are `drop` and `select`. They enable you to drop or select variables of interest in your flat file. Suppose I want to select the 2nd and 3rd column. 
+
+```{r}
+head(fread("happiness.csv", select = c(2,3)))
+```
+
+Alternatively, 
+
+```{r}
+head(fread("happiness.csv", select = c("Gender","Mean")))
+```
+
+or 
+
+```{r}
+head(fread("happiness.csv", drop = c(1,4)))
+```
+
+which is equivalent to 
+
+```{r,eval=F}
+head(fread("happiness.csv", drop = c("Country","N=")))
+```
+
+In short, `fread()` saves you work by automatically guessing the delimiter, whether or not the file has a header, how many lines to skip by default, providing an easy way to select variables and more. Nevertheless, if you wish to specify them, you can do it, along with other arguments. Check the [documentation](http://www.rdocumentation.org/packages/data.table/functions/fread).  
+
+
+**Comment**
+You might have noticed by now that the `fread()` function produces data frames that look slightly different when you print them out. That's because another class is assigned to the resulting data frames, namely `data.table` and `data.frame`. `read_delim()` creates an object with three classes: `tbl_df`, `tbl` and `data.frame`. The printout of such data.table objects is different. Well, it allows for a different treatment of the printouts, for example.
+
+## When to use `read.table()`, `read_delim()` or `fread()`
+In a nutshell, the main differences between these functions are : the `read_` functions from the `readr` package have more consistent naming scheme for the parameters (e.g. `col_names` and `col_types`) than `read.` and all functions work exactly the same way regardless of the current locale (to override the US-centric defaults, use `locale()`). It is also faster! But `fread()` is even faster! And it saves you work by automatically guessing parameters. This [README](https://cran.r-project.org/web/packages/readr/README.html) goes in more detail.
+
+  || Speed | Auto-detection |  Locale 
+-----|----- | -----| -----
+  `read.table()` | fast  |  NO| YES
+  `read_delim()` | faster  | NO | NO
+  `fread()` |  fastest |  YES | NO
+
+With some loss of generality a few suggestions are: 
+
+- for large files (many MB-GB) `fread()` will be the fastest (with a few [exceptions](http://stackoverflow.com/questions/32263566/comparing-speed-of-fread-vs-read-table-for-reading-the-first-1m-rows-out-of-100))
+- the consistency and independence of the actual locale makes `readr` a good candidate for everyday use
+- if you are new to all these using `read.table()` will allow you to develop intuition on how R works.

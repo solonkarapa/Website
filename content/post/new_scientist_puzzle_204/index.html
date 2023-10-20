@@ -1,0 +1,114 @@
+---
+title: "# 204 Puzzle from the New Scientist"
+author: Me
+date: '2023-02-08'
+slug: puzzle204
+categories:
+  - puzzle
+tags: [puzzle]
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2023-02-08T14:27:06Z'
+featured: no
+image:
+  caption: 'created by DALL·E'
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+
+
+<p>This week’s <a href="https://www.newscientist.com/article/mg25734214-000-puzzle-204-can-you-work-out-what-number-my-son-thought-of/">puzzle</a> goes as follows:</p>
+<blockquote>
+<p>My son’s book of mathematical magic tricks includes this one:</p>
+</blockquote>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>Think of a whole number from 1 to 50.</li>
+<li>Add 9 and double the result.</li>
+<li>Multiply by 6 and add 12.</li>
+<li>Subtract 60.</li>
+<li>Divide by 12 and subtract 4.</li>
+<li>Subtract your original number.</li>
+<li>And the answer is (drumroll…) 1!</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>Unfortunately, when he is reading, my son sometimes repeats a line and sometimes he skips one. That happened with this trick. He did one of the lines twice and then missed the final instruction to subtract this original number. Yet, by an increadible fluke, he still managed to end up on the number 1.</p>
+</blockquote>
+<p>Let’s start by introducing some notation for each step:</p>
+<ol style="list-style-type: decimal">
+<li>Think of a whole number from 1 to 50 - we call this number <span class="math inline">\(x\)</span></li>
+<li>Add 9 and double the result - we call the result of this step, <span class="math inline">\(q\)</span>. That is, <span class="math inline">\(q=((x + 9)*2)\)</span></li>
+<li>Multiply by 6 and add 12 - we call this <span class="math inline">\(r\)</span>. That is, <span class="math inline">\(r = (q*6)+12\)</span></li>
+<li>Subtract 60 - we call this <span class="math inline">\(s\)</span>. Then, <span class="math inline">\(s=r-60\)</span></li>
+<li>Divide by 12 and subtract 4 - we call this <span class="math inline">\(t\)</span>. Then, <span class="math inline">\(t=\frac{s}{12} - 4\)</span></li>
+<li>Subtract your original number - we call this <span class="math inline">\(u\)</span>. That is, <span class="math inline">\(u=t-x\)</span>. And, we know, <span class="math inline">\(u=1\)</span> (from step 7).</li>
+</ol>
+<p>The puzzle states that the son “missed the final instruction to subtract this original number.” If he had subtracted the original number (after repeating one of the previous steps) he would have gotten a negative number (or zero). So, we know, after repeating a step that <span class="math inline">\(t’ \leq 0\)</span>, where <span class="math inline">\(t’\)</span> is the result to step 5, after repeating one of the previous steps.</p>
+<p>Now, looking at steps 2 through 5, the only ones that can give us a negative number are steps 4 and 5. Steps 2 and 3 involve the addition and multiplication of positive numbers. They cannot give us a negative result.</p>
+<p>We are then left with steps 4 and 5 as potential candidates to have been repeated twice. In fact, whatever the result is after steps 2 and 3 we know that either:</p>
+<ul>
+<li><p>[repeat step 4 twice and add step 5] = 1 (I call this proposition A) or</p></li>
+<li><p>[step 4 and repeat step 5 twice] = 1 (I call this proposition B).</p></li>
+</ul>
+<p>We can check each of these propositions:</p>
+<ul>
+<li><p>Proposition A is: <span class="math inline">\(\frac{(r-60)-60}{12} - 4 = 1\)</span>. I have simply repeated step 4 twice and then added step 5. Solving for <span class="math inline">\(r\)</span> gives us <span class="math inline">\(r = 180\)</span>. We can then backtrack, solving for <span class="math inline">\(q\)</span> from steps 2 and 3 to get <span class="math inline">\(x =5\)</span>. So <span class="math inline">\(x = 5\)</span> is a potential solution.</p></li>
+<li><p>Proposition B is: <span class="math inline">\(\frac{(s/12 - 4)}{12} - 4 = 1\)</span> gives us <span class="math inline">\(s=768\)</span>. From steps 2-4 this implies that <span class="math inline">\(x=59\)</span>, which is outside the range given in step 1. So this is not a valid solution.</p></li>
+</ul>
+<p>Summarizing, the only way to get a result equal to 1 at step 6, after repeating one step twice and then missing the final instruction to subtract the original number, is to choose <span class="math inline">\(x=5\)</span> at step 1.</p>
+<div id="brute-force-solution" class="section level2">
+<h2>Brute force solution</h2>
+<p>Another way to get the solution is to code steps 2 through 6, repeating each step twice and checking the result for all numbers from 1 to 50. This is what the <code>magic_trick()</code> function does.</p>
+<pre class="r"><code># helper functions - each one calculates one of the steps 2-5
+f2 &lt;- function(x) (x + 9) * 2 # calculates step 2
+f3 &lt;- function(x) (x * 6) + 12 # calculates step 3
+f4 &lt;- function(x) x - 60 # calculates step 4
+f5 &lt;- function(x) (x / 12) - 4 # calculates step 5
+
+magic_trick &lt;- function(x, rep = 0){
+   # x: a whole number from 1 to 50
+   # rep: the step 2-5 to be repeated twice. If rep = 0 or 1. - no repetition 
+   
+    if(rep == 2){
+       f &lt;- f5(f4(f3(f2(f2(x)))))
+       } else if(rep == 3){
+          f &lt;- f5(f4(f3(f3(f2(x)))))
+          } else if(rep == 4){
+             f &lt;- f5(f4(f4(f3(f2(x))))) 
+             } else if(rep == 5) {
+                f &lt;- f5(f5(f4(f3(f2(x)))))
+                } else {
+                   f &lt;- f5(f4(f3(f2(x)))) - x
+                   }    
+    return(f)
+}</code></pre>
+<p>The code below calculates the final solution to the puzzle for each original number (<code>x_values</code>) and for each step repeated twice or not repeated at all (<code>repeated</code>).</p>
+<p>The first (top left) panel corresponds to the solution for the original set-up - no step is repeated. For all <span class="math inline">\(x\)</span> the result is always one. The second and third panels correspond to repeating steps 2 and 3, respectively. The results confirm our intuition from before - all solutions are positive and well above one. The last panel shows the results when repeating step 5. All of them are negative for the range 1 to 50. Finally, the fourth panel gives the solution to the puzzle. There is only one value of <span class="math inline">\(x\)</span>, namely <span class="math inline">\(x = 5\)</span>, that gives one as the final result.</p>
+<pre class="r"><code>library(purrr)
+library(dplyr)
+library(ggplot2)
+
+x_values &lt;- seq(1, 50, by = 1) # step 1: whole number from 1 to 50.
+repeated &lt;- c(0, 2, 3, 4, 5) # step to repeat. 0 corresponds to the original puzzle 
+
+vals &lt;- expand.grid(x_values, repeated)
+
+res &lt;- map2_dbl(vals$Var1, vals$Var2, magic_trick)
+
+df &lt;- data.frame(x = rep(x_values, 5), repeated = rep(repeated, each = 50), res = res) %&gt;%
+   mutate(repeated = paste0(&quot;step &quot;, repeated, &quot; repeated&quot;)) 
+
+ggplot(df) +
+   geom_point(aes(x = x, y = res)) +
+   facet_wrap(. ~ repeated, scales = &quot;free&quot;) +
+   geom_hline(yintercept = 1, linetype = &quot;dashed&quot;, linewidth = 1.7, col = &quot;#009E73&quot;) +
+   labs(y = &quot;Result at step 7&quot;) +
+   theme_linedraw(12) +
+   theme(strip.background = element_rect(fill = &quot;white&quot;)) +
+   theme(strip.text.x = element_text(color = &quot;black&quot;))</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>

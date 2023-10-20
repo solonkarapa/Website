@@ -1,0 +1,184 @@
+---
+title: "# 224 Puzzle from the New Scientist"
+author: Me
+date: '2023-07-10'
+slug: puzzle224
+categories:
+  - puzzle
+tags: [puzzle]
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2023-02-08T14:27:06Z'
+featured: no
+image:
+  caption: 'created by DALL·E'
+  focal_point: ''
+  preview_only: no
+projects: []
+draft: FALSE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+[Puzzle #224](https://www.newscientist.com/article/mg25834411-000-puzzle-224-can-you-find-the-ring-inside-the-russian-dolls/) from the New Scientist is:
+
+> I collect Russian dolls, the type where each doll can be opened to reveal a smaller one inside. I am particularly fond of my simple, single-coloured ones, which come in sets of five (and, unusually, have a hollow smallest doll). I have five lovely sets of them, each a different colour.
+
+> Alas, while I was out, my daughter Kira rearranged them so that each large doll now contains one each of the four other colours. She proudly tells me that no blue doll contains a doll that has a yellow doll anywhere within it. There is no doll that contains a pink doll with a red doll anywhere within it. And no yellow doll contains a green doll with a pink doll anywhere within it.
+
+> “By the way, have you seen my wedding ring?” I ask her.
+
+> “Ah, I put that inside the smallest blue doll” replies Kira.
+
+> Which coloured doll should l open first if I want to find the ring as quickly as possible?
+
+```{r, fig.align="center", out.height='460px', out.width='800px', echo=FALSE}
+knitr::include_graphics("./Tree_fig.pdf")
+```
+
+## Solution
+The figure shows all the possible arrangements of the five dolls. The letter indicates the colour: R for red, Y for yellow and so on. The index indicates the doll size: 5 for the smallest and 1 for the largest. 
+
+As an example, the top path - `P1 R2 G3 Y4 B5`- corresponds to the combination pink, red, green, yellow and blue (from the largest to the smallest doll). 
+
+Further, `B5` occupies the left hand size since we know the smallest doll is blue. 
+
+With the a few lines of code I recreate the figure. Each row of the output corresponds to a set of five dolls. For example, the last row corresponds to the combination yellow, red, pink, green and blue. In total, we have 24 possible arrangements - same as in the figure.
+
+```{r, message = F}
+# pkgs used in this post
+library(gtools)
+library(stringi)
+library(stringr)
+library(rebus) 
+library(purrr)
+
+colour <- c("blue", "yellow", "pink", "red", "green") # all the different colours
+
+numb <- 1:5 # the size index (1 is the largest)
+
+opt <- paste0(rep(colour, each = 5), "_", numb) # combine colour and index
+
+perms <- permutations(n = 25, r = 5, v = opt, repeats.allowed = F) # all the combinations of 5 dolls
+
+# define function to use 
+my_fun <- function(x, data, pattern = NULL){
+   # x: the row index of `data`
+   # data: the input dataset
+   # pattern: the pattern to search for in each row of `data`
+   
+   if(is.null(pattern)){
+      perms3 <- stri_split_fixed(data[x,], "_", simplify = T) # split the vectors into two
+      dupl <- sum(stri_duplicated(perms3[,1])) # check for uniqueness
+      sorted <- is.unsorted(perms3[,2], strictly = T) # check for correct order
+   
+      if(dupl == 0 & sorted == 0){ # if no duplicated and correct order data is returned
+         out <- data[x,]
+         } else {
+            out <- c()
+            }
+      } else {
+         splitted <- stri_split_fixed(data[x,], "_", simplify = T) # split the vectors into two
+         ind <- str_detect(paste(splitted[,1], collapse = ""), pattern = pattern, negate = T) # find patterns
+      
+         if(ind == 1){ # if pattern is found it's returned
+            out <- data[x,]
+            }else{
+               out <- c()
+            }
+      }
+   
+   return(out)
+}
+
+##### add restrictions
+# 1: select only the ones where blue is the smallest doll
+blue_smallest_doll <- which(perms[,5] == "blue_5") # blue is the smallest doll
+
+perms2 <- perms[blue_smallest_doll,]
+
+# 2: select only the combinations where each colour appears once and indexes are sorted correctly 
+combinations <- matrix( # simplify final result into a matrix 
+   unlist( # simplify output of map()
+      map(1:nrow(perms2), my_fun, data = perms2)), # apply my_fun to all rows of perms2
+   ncol = 5, byrow = TRUE) 
+
+combinations 
+```
+
+Then, we need to take into account the two additional restrictions:
+
+1. "no doll that contains a pink doll with a red doll anywhere within it", and
+2. "no yellow doll contains a green doll with a pink doll anywhere within it".
+
+The first one is easy. We need to discard all solutions where pink is followed by red. This gives us 12 remaining solutions. 
+```{r}
+# 3: apply first restriction
+# specify pattern: "no doll contains a pink with a red doll anywhere within it"
+pattern_pink_red <- ("pink" %R% zero_or_more(WRD) %R% "red") 
+
+combinations_update <- matrix(
+   unlist(
+      map(1:nrow(combinations), my_fun, data = combinations, pattern = pattern_pink_red)), 
+   ncol = 5, byrow = TRUE)
+
+combinations_update
+```
+
+Now, we move on to the second restriction. Unfortunately, the 2nd restriction is a bit vague, leading to different interpretations and different final solutions. Here are a few examples.
+
+### 1st interpretation 
+A way to interpret the restriction is to remove all solutions where a pink doll is inside a green one, which is *at the same time*, inside a yellow one. This results in 9 solutions. 
+
+```{r}
+##### 1st interpretation 
+# specify pattern: "no yellow doll contains a green doll with a pink inside it"
+pattern_yellow_green_pink <- ("yellow" %R% zero_or_more(WRD) %R% "green" %R% zero_or_more(WRD) %R% "pink") 
+
+combinations_update1 <- matrix(
+   unlist(
+      map(1:nrow(combinations_update), my_fun, data = combinations_update, 
+          pattern = pattern_yellow_green_pink)), 
+   ncol = 5, byrow = TRUE)
+
+combinations_update1
+```
+
+### 2nd interpretation 
+Another interpretation is to *additionally* remove solutions where pink is inside green, *independently* of where yellow is. This results in 4 solutions. 
+
+```{r}
+##### 2nd interpretation 
+# specify pattern: "no green doll with a pink doll anywhere within it"
+pattern_green_pink <- ("green" %R% zero_or_more(WRD) %R% "pink") 
+                              
+combinations_update2 <- matrix(
+   unlist(
+      map(1:nrow(combinations_update), my_fun, data = combinations_update, 
+          pattern = or(pattern_yellow_green_pink, pattern_green_pink))), 
+   ncol = 5, byrow = TRUE)
+
+combinations_update2
+```
+
+### 3rd interpretation
+Lastly, we can *further* remove solutions where green is inside yellow *independently* of where pink is. 
+
+```{r}
+#### 3rd interpretation
+pattern_yellow_green<- ("yellow" %R% zero_or_more(WRD) %R% "green")
+
+combinations_update3 <- matrix(
+   unlist(
+      map(1:nrow(combinations_update), my_fun, data = combinations_update, 
+          pattern = or(pattern_yellow_green_pink, pattern_green_pink, pattern_yellow_green))), 
+   ncol = 5, byrow = TRUE)
+
+combinations_update3
+```
+
+This gives a unique solution - `R1 P2 G3 Y4 B5` - which does not seem to violate any of the restrictions. Unfortunately, it is different from the solution given by the New Scientist, which is `Y1 R2 P3 G4 B5`!!! 
+

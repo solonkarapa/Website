@@ -1,0 +1,292 @@
+---
+title: "The Banana Index Revisited"
+author: Me
+date: '2023-09-10'
+slug: banana_index
+categories:
+  - data analysis
+  - data vis
+  - data
+tags: [data analysis, data vis, data]
+subtitle: ''
+summary: 'The banana index measures greenhouse-gas emissions of foods relative to the banana. But it overlooks other crucial environmental factors like land use, prompting a reevaluation of its findings to include this essential dimension.'
+authors: []
+lastmod: '2023-02-08T14:27:06Z'
+featured: no
+image:
+  caption: 'created by DALL·E'
+  focal_point: ''
+  preview_only: no
+projects: []
+draft: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=F, warning=F, message=F}
+library(dplyr)
+library(ggplot2)
+library(ggrepel)
+library(stringr)
+library(tidyr)
+
+bananaindex <- read.csv("~/Desktop/Website/content/post/banana_index/bananaindex.csv")
+```
+
+Recently, the [Economist](https://www.economist.com/graphic-detail/2023/04/11/a-different-way-to-measure-the-climate-impact-of-food) proposed the banana index as a way to compare the relative environmental impact of different foods. 
+
+The banana index gives the greenhouse-gas emissions of foods by their equivalent in bananas! The banana was chosen as baseline due to its "middling climate impact and nutritional value". Benchmarking emissions to a single food (the banana in this case) gives a sense of how different foods rank. 
+
+For example, producing one kilogram of beef burger results in as many emissions as 61kg of bananas (this is a banana index of 61). This measures emissions by weight (i.e. emissions per kg), but we can do the same for nutritional value (calories and protein content). For instance, producing 1 calorie of beef burger causes 25 times as much emissions as 1 calorie of banana (i.e. banana index of 25). As for protein, the score is 4. We get similar results, for other beef-derived foods. The bottom line: "beef is bad for the environment no matter how you slice it", and how you measure it!
+
+However, the banana index only relies on emissions for a given food and "does not capture other environmental impacts, such as land use". Here, I revisit the data looking at land use in parallel to emissions. 
+
+> Why is this relevant? Imagine two foods with the same greenhouse-gas emissions, but different land use scores. Based solely on emissions we should be indifferent between them. But, based on both emissions and land use we should be prefer the one with the lowest land use. 
+
+## The calculations
+As mentioned, the index gives the emissions of foods by their equivalent in bananas. This is simply a ratio of *emissions efficiency*. For example, the production of 1 kg of a beef burger brings about 54 kilograms of CO2-equivalents. Bananas bring about 0.88 kilograms of CO2-equivalents. A burger's banana index, by weight, is therefore equal to 54/0.88, which is 61.
+
+Here, I use the same methodology to calculate the banana index for land use. This is the land use of foods by their equivalent in bananas - a ratio of *land use efficiency*. I use the [same data source](https://github.com/TheEconomist/banana-index-data/) as the original article. 
+
+## A banana index for land use
+
+The index for 160 foods is plotted below. To improve visualisation is it on the natural logarithmic scale. This mean that 0 (vertical line) corresponds to a banana index of 1, the land needed to produce one kilo of bananas.
+
+```{r, echo=F}
+banana_index <- bananaindex %>% mutate(
+   Bananas.index..100g_fat = emissions_100g_fat/20.46922,
+   Bananas.index..land_use_kg = land_use_kg/2.639824,
+   Bananas.index..land_use_1000kcal = land_use_1000kcal/2.717877,
+   Bananas.index..land_use_100g_protein = Land.use.per.100.grams.of.protein/22.82123,
+   Banana.index..land_use_100g_fat = Land.use.per.100.grams.of.fat/64.90734
+)
+```
+
+```{r, echo=FALSE, warning=F}
+set.seed(100)
+dev <- rnorm(160, sd = 10)
+banana_index %>% mutate(y = 0 + dev) %>%
+   ggplot(., aes(x = log(Bananas.index..land_use_kg), y = y, label = entity, size = land_use_kg)) +
+   geom_point() +
+   ggtitle("Land use by weight") +
+   #geom_jitter(position = postition_jitter(width = 0, height = 0.001)) +
+   labs(x = "ln(Banana Index)", size = "Land use by kg", y = "") +
+   geom_text_repel(size = 3.5) +
+   geom_vline(xintercept = 0) +
+   theme_classic() +
+   theme(axis.text.y = element_blank(), 
+         axis.ticks.y = element_blank())
+```
+
+Beef is not bad only in terms of emissions (as shown above) but also in terms of land use (by weight), with an index between 51 and 161, depending on the slice: 
+
+```{r, echo=F}
+banana_index %>% filter(str_detect(entity, "Beef")) %>% 
+   select(entity,  Bananas.index..land_use_kg) %>%
+   rename(BI_land_use_kg = Bananas.index..land_use_kg) %>%
+   arrange(desc(BI_land_use_kg))
+```
+
+The results are similar if we calculate the index for nutritional values (calories and protein content):
+
+```{r, echo=FALSE, warning=F}
+set.seed(100)
+dev <- rnorm(160, sd = 10)
+banana_index %>% mutate(y = 0 + dev) %>%
+   ggplot(., aes(x = log(Bananas.index..land_use_1000kcal), y = y, label = entity, size = land_use_1000kcal)) +
+   geom_point() +
+   ggtitle("Land use by calorie count") +
+   #geom_jitter(position = postition_jitter(width = 0, height = 0.001)) +
+   labs(x = "ln(Banana Index)", size = "Land use per kcal", y = "") +
+   geom_text_repel(size = 3.5) +
+   geom_vline(xintercept = 0) +
+   theme_classic() +
+   theme(axis.text.y = element_blank(), 
+         axis.ticks.y = element_blank())
+```
+
+In terms of protein content Sugar has a large index (8.72)! This means 1g of sugar protein requires 8.7 times as much land as 1g of banana protein. This is probably because sugar has extremely low values of protein content to begin with. 
+
+```{r, echo=FALSE, warning=F}
+set.seed(100)
+dev <- rnorm(160, sd = 10)
+banana_index %>% mutate(y = 0 + dev) %>%
+   ggplot(., aes(x = log(Bananas.index..land_use_100g_protein), y = y, label = entity, size = Land.use.per.100.grams.of.protein)) +
+   geom_point() +
+   ggtitle("Land use by protein content") +
+   #geom_jitter(position = postition_jitter(width = 0, height = 0.001)) +
+   labs(x = "ln(Banana Index)", size = "Land use by protein", y = "") +
+   geom_text_repel(size = 3.5) +
+   geom_vline(xintercept = 0) +
+   theme_classic() +
+   theme(axis.text.y = element_blank(), 
+         axis.ticks.y = element_blank())
+```
+
+```{r, echo=F}
+#set.seed(100)
+#dev <- rnorm(160, sd = 10)
+#banana_index %>% mutate(y = 0 + dev) %>%
+#   ggplot(., aes(x = Bananas.index..land_use_100g_protein, y = y, label = entity, size = Land.use.per.100.grams.of.protein)) +
+#   geom_point() +
+#   ggtitle("Land use by protein content") +
+#   #geom_jitter(position = postition_jitter(width = 0, height = 0.001)) +
+#   labs(x = "ln(Banana Index)", size = "Land use by 100g protein", y = "") +
+#   geom_text_repel(size = 3.5) +
+#   geom_vline(xintercept = 1) +
+#   theme_classic() +
+#   theme(axis.text.y = element_blank(), 
+#         axis.ticks.y = element_blank())
+
+```
+
+## Variability in the banana index 
+
+Looking at [emissions](https://www.economist.com/graphic-detail/2023/04/11/a-different-way-to-measure-the-climate-impact-of-food), some foods out-emit bananas on one metric put them to shame on another. To illustrate this, for each food I calculate the range in its banana index between the three metrics - weight, calories and protein content. This allows to capture the variability in emissions between the three metrics. The vertical dashed line corresponds to a range of 10. That is a difference of 10 between the minimum and maximum banana index. A substantial number of foods exceed this value, showcasing that how we calculate the index actually matters. 
+
+```{r, echo=FALSE, warning=F}
+data_long2 <- gather(banana_index, index, measurement, Bananas.index..kg.:Bananas.index..100g.protein., factor_key = TRUE) %>%
+   group_by(entity) %>%
+   mutate(min_index = min(measurement),
+          max_index = max(measurement),
+          diff = max_index - min_index) 
+th <- 10
+ggplot() + 
+   geom_point(data = data_long2, aes(x = diff, y = entity)) +
+   geom_text_repel(data = data_long2 %>% distinct(entity, .keep_all = T) %>% filter(diff > th), aes(x = diff, y = entity, label = entity), size = 3.5) +
+   geom_vline(xintercept = th, linetype = "dashed") +
+   ggtitle("Emissions") + 
+   coord_cartesian(xlim = c(0, 150)) +
+   labs(x = "Banana Index Range", y = "") +
+   theme_classic() +
+   scale_x_continuous(breaks = c(seq(0, 150, 50), th)) +
+   theme(axis.text.y = element_blank(), 
+         axis.ticks.y = element_blank())
+```
+
+Again, beef is the most variable. For example, a beef steak has a banana index of 148.6 when emissions are measured by weight, but only 8.3 when measured by protein content. 
+
+```{r, echo=F}
+banana_index %>% filter(str_detect(entity, "Beef steak")) %>%
+   rename(BI_emissions_kg = Bananas.index..kg.,
+          BI_emissions_calories = Bananas.index..1000.kcalories.,
+          BI_emissions_protein = Bananas.index..100g.protein.) %>% 
+   select(BI_emissions_kg:BI_emissions_protein)
+```
+
+Following the same approach for land use, we still find beef to be the most variable, but most foods show decreased variability in their banana index. This indicates the land required to produce these foods, by weight or nutritional content, does not change a lot. This is interesting, since in contrary to emissions (as we just saw) how we calculate the index for land use does seems to matter that much. 
+
+```{r, echo=F, warning=F}
+data_long3 <- gather(banana_index, index, measurement, Bananas.index..land_use_kg:Bananas.index..land_use_100g_protein, factor_key = TRUE) %>%
+   group_by(entity) %>%
+   mutate(min_index = min(measurement),
+          max_index = max(measurement),
+          diff = max_index - min_index) 
+
+ggplot() + 
+   geom_point(data = data_long3, aes(x = diff, y = entity)) +
+   geom_text_repel(data = data_long3 %>% distinct(entity, .keep_all = T) %>% filter(diff > th), aes(x = diff, y = entity, label = entity), size = 3.5) +
+   geom_vline(xintercept = th, linetype = "dashed") +
+   ggtitle("Land use") + 
+   coord_cartesian(xlim = c(0, 150)) +
+   scale_x_continuous(breaks = c(seq(0, 150, 50), th)) +
+   labs(x = "Banana Index Range", y = "") +
+   theme_classic() +
+   theme(axis.text.y = element_blank(), 
+         axis.ticks.y = element_blank())
+```
+
+## Emissions and land use 
+
+Lastly, I look at the relationship between emissions and land use. The banana index for land use (y axis) is plotted against the index for emissions (x axis). This is done by weight (top-left), calories (top-right) and protein content (bottom). Foods falling into the diagonal dashed line have the same banana index for both emissions and land use. The blue lines correspond to the "average" relationship across all the foods. 
+
+```{r, echo = F, warning=F, message=F}
+p1 <- banana_index %>% 
+   ggplot(., aes(x = Bananas.index..kg., y = Bananas.index..land_use_kg, label = entity)) +
+   geom_point() +
+   geom_smooth(se = F) +
+   ggtitle("Weight") +
+   #geom_jitter(position = postition_jitter(width = 0, height = 0.001)) +
+   labs(x = "BI Emissions", y = "BI Land use") +
+   geom_text_repel(size = 3.5) +
+   geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
+   geom_vline(xintercept = 1, linetype = "dotted") +
+   geom_hline(yintercept = 1, linetype = "dotted") +
+   theme_classic()
+
+p2 <- banana_index %>% 
+   ggplot(., aes(x =  Bananas.index..1000.kcalories., y = Bananas.index..land_use_1000kcal, label = entity)) +
+   geom_point() +
+   geom_smooth(se = F) +
+   ggtitle("Calories") +
+   #geom_jitter(position = postition_jitter(width = 0, height = 0.001)) +
+   labs(x = "BI Emissions", y = "BI Land use") +
+   geom_text_repel(size = 3.5) +
+   geom_vline(xintercept = 1, linetype = "dotted") +
+   geom_hline(yintercept = 1, linetype = "dotted") +
+   geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
+   theme_classic()
+
+p3 <- banana_index %>% 
+   ggplot(., aes(x =  Bananas.index..100g.protein., y = Bananas.index..land_use_100g_protein, label = entity)) +
+   geom_point() +
+   geom_smooth(se = F) +
+   ggtitle("Protein") +
+   #geom_jitter(position = postition_jitter(width = 0, height = 0.001)) +
+   labs(x = "BI Emissions", y = "BI Land use") +
+   geom_text_repel(data = banana_index %>% filter(Bananas.index..100g.protein. > 4), size = 3.5) +
+   geom_vline(xintercept = 1, linetype = "dotted") +
+   geom_hline(yintercept = 1, linetype = "dotted") +
+   geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
+   theme_classic() 
+
+library(ggpubr)
+ggarrange(p1, p2, p3,
+          ncol = 2, nrow = 2)
+
+```
+
+In terms of weight (top-left) most foods have higher index for emissions than land use. One example is salmon: producing 1 kg of salmon out-emits bananas by a factor of 12, but requires only 1.8 times more land. On the other hand, there are foods that out-emit bananas but require less land, or the other way around. For example, producing one kg of raspberries results in as many emissions as 9.6 kg of bananas, but requires only 0.6 the space. On the other hand, almond butter and almonds emit less than bananas (per kg produced), but require about 3 times the land. In fact, these two are the only examples of such relationship. 
+
+```{r, echo=F}
+banana_index %>% select(entity, Bananas.index..kg., Bananas.index..land_use_kg) %>%
+   rename(BI_emissions_kg = Bananas.index..kg.,
+          BI_land_use_kg = Bananas.index..land_use_kg) %>%
+   filter(entity == "Salmon")
+```
+
+```{r, echo=F}
+banana_index %>% select(entity, Bananas.index..kg., Bananas.index..land_use_kg) %>%
+   rename(BI_emissions_kg = Bananas.index..kg.,
+          BI_land_use_kg = Bananas.index..land_use_kg) %>%
+   filter(str_detect(entity, "Ras")) 
+```
+
+```{r, echo=F}
+banana_index %>% select(entity, Bananas.index..kg., Bananas.index..land_use_kg) %>%
+   rename(BI_emissions_kg = Bananas.index..kg.,
+          BI_land_use_kg = Bananas.index..land_use_kg) %>%
+   filter(BI_emissions_kg <= 1 & BI_land_use_kg >= 1)
+```
+
+Similar trends are valid when looking at calories (top-right). Instead, in terms of protein content we see a few outliers. Most notably, sugar, coconut milk, and grapes. All of them result in high emissions per 100g of protein, but do not have proportionaly large space requirements. 
+
+```{r, echo=F}
+banana_index %>% select(entity,  Bananas.index..100g.protein., Bananas.index..land_use_100g_protein) %>%
+   rename(BI_emissions_protein =  Bananas.index..100g.protein.,
+          BI_land_use_protein = Bananas.index..land_use_100g_protein) %>%
+   filter(BI_emissions_protein > 10)
+   #filter(entity == "Coconut milk" |  entity == "Sugar") 
+```
+
+
+> The plots above allow to find the worst food in terms of emissions *and* land use. These occupy the top-right corner on the plots. Beef is by far the worst food for the climate! 
+
+> This implies that if we shifted to a plant-based diet not only we would considerably reduce emissions but also reduce global land use. In fact, it has been [estimated](https://ourworldindata.org/land-use-diets) this shift would reduce the global agricultural land use from 4 to 1 billion hectares. 
+
+
+## Conclusions
+We've seen substantial variability in the environmental impact of different foods. 
+Common assessments typically rank foods by their emissions of greenhouse gases. Nevertheless, the utilization of land is equally crucial. In fact, the expansion of agricultural land is the leading driver of deforestation and biodiversity loss. Both matter! 

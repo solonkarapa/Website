@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2 | </title>
+    <link>https://solon-karapanagiotis.com/publication-type/2/</link>
+      <atom:link href="https://solon-karapanagiotis.com/publication-type/2/index.xml" rel="self" type="application/rss+xml" />
+    <description>2</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Solon Karapanagiotis 2018-2023</copyright><lastBuildDate>Tue, 13 Dec 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://solon-karapanagiotis.com/media/icon.png</url>
+      <title>2</title>
+      <link>https://solon-karapanagiotis.com/publication-type/2/</link>
+    </image>
+    
+    <item>
+      <title>Regional Histopathology and Prostate MRI Positivity: A Secondary Analysis of the PROMIS Trial</title>
+      <link>https://solon-karapanagiotis.com/publication/mri_prostate2/</link>
+      <pubDate>Tue, 13 Dec 2022 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/mri_prostate2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tailored Bayes: a risk modeling framework under unequal misclassification costs</title>
+      <link>https://solon-karapanagiotis.com/publication/tailoredbayes/</link>
+      <pubDate>Sat, 07 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/tailoredbayes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>False Positive Multiparametric Magnetic Resonance Imaging Phenotypes in the Biopsy-naïve Prostate: Are They Distinct from Significant Cancer-associated Lesions? Lessons from PROMIS</title>
+      <link>https://solon-karapanagiotis.com/publication/mri_prostate/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/mri_prostate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Development and External Validation of Prediction Models for 10-Year Survival of Invasive Breast Cancer. Comparison with PREDICT and CancerMath</title>
+      <link>https://solon-karapanagiotis.com/publication/clinicalcancerresearch/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/clinicalcancerresearch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ventilatory limitation and dynamic hyperinflation during exercise testing in Cystic Fibrosis</title>
+      <link>https://solon-karapanagiotis.com/publication/ventilatorylimitation/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/ventilatorylimitation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Isocapnic hyperpnea with a portable device in Cystic Fibrosis: an agreement study between two different set-up modalities</title>
+      <link>https://solon-karapanagiotis.com/publication/isocapnichyperpnea/</link>
+      <pubDate>Thu, 01 Oct 2015 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/isocapnichyperpnea/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Wiihabilitation</title>
+      <link>https://solon-karapanagiotis.com/publication/wiihabilitation/</link>
+      <pubDate>Fri, 01 Jun 2012 00:00:00 +0000</pubDate>
+      <guid>https://solon-karapanagiotis.com/publication/wiihabilitation/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

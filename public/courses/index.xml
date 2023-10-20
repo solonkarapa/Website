@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Courses | </title>
+    <link>https://solon-karapanagiotis.com/courses/</link>
+      <atom:link href="https://solon-karapanagiotis.com/courses/index.xml" rel="self" type="application/rss+xml" />
+    <description>Courses</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© Solon Karapanagiotis 2018-2023</copyright>
+    <image>
+      <url>https://solon-karapanagiotis.com/media/icon.png</url>
+      <title>Courses</title>
+      <link>https://solon-karapanagiotis.com/courses/</link>
+    </image>
+    
+  </channel>
+</rss>

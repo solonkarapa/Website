@@ -1,0 +1,92 @@
+---
+title: "Another solution to the 'The Hardest Logic Puzzle Ever' using probability"
+author: ''
+date: '2018-08-03'
+slug: the-hardest-logic-puzzle
+categories: [probability]
+tags: [probability]
+output: 
+  bookdown::html_document2: 
+    fig_caption: yes
+header:
+  caption: ''
+  image: ''
+bibliography: biblio_puzzle.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I present a solution to a modification of the "hardest logic puzzle ever" using probability theory. 
+
+## Background 
+"The hardest logic puzzle" was originally presented by @boolos1996hardest and since then it has been amended several times in order to make it harder [see @rabern2008simple; @novozhilov2012hardest]. 
+
+The puzzle: *Three gods A, B, and C are called, in some order, True, False, and Random. True always speaks truly, False always speaks falsely, but whether Random speaks truly or falsely is a completely random matter. Your task is to determine the identities of A, B, and C by asking three yes-no questions; __each question must be put to exactly one god__. The gods understand English, but will answer all questions in their own language, in which the words for “yes” and “no” are “da” and “ja,” in some order. You do not know which word means which. * 
+
+@boolos1996hardest then provides the following guidelines:   
+   1.   It could be that some god gets asked more than one question (and hence that some god is not asked any question at all).   
+   2.  What the second question is, and to which god it is put, may depend on the answer to the first question. (And of course similarly for the third question.)  
+   3.  Whether Random speaks truly or not should be thought of as depending on the flip of a coin hidden in his brain: if the coin comes down heads, he speaks truly; if tails, falsely.  
+   4.  Random will answer da or ja when asked any yes-no question.   
+
+@rabern2008simple proposed to modify the third point above with the following:
+"Whether Random answers ‘da’ or ‘ja’ should be thought of as depending on the flip of a coin hidden in his
+brain: if the coin comes down heads, he answers ‘yes’; if tails, ‘no’."
+
+Boolos' article includes multiple ways of solving the problem. @rabern2008simple give  a simpler solution. The main ideas for the solutions can be found [here](https://www.technologyreview.com/s/428189/the-hardest-logic-puzzle-ever-made-even-harder/) and [here](http://nautil.us/issue/30/identity/how-to-solve-the-hardest-logic-puzzle-ever).
+
+## My solution
+My solution is based on the long-run frequency interpretation of probability. It involves two steps. At the first step we will identify the Random god and in step 2 we distinguish between the True and False gods. 
+
+Step 1
+
+Imagine the following scenario: you keep asking the same question to each god. The question is different for each god. Under the interpretation of probability as long-run frequency both True and False will always give the same answer. For example, if A is the True god he will always answer “da” or “ja” and similarly the False god will always answer the opposite. The crucial point is that Random will change between “da” and “ja” because his answers are random, "they depend on the flip of a coin hidden in his brain". Suppose you ask your question to Random ten times, and assuming the coin in his head is fair (i.e., P(heads) = P(tails) = 0.5) then the probability that all his answers are same ( “da” or “ja” ) is $0.5^{10}$, that is highly unlikely. In fact, you do not need to pre-specify how many times you ask the question, since the moment a given god switches from “da” to “ja” or vice-versa you know he is Random. Having identified Random we proceed to distinguish between True and False. An example question to each one is “are you True”? 
+
+
+Step 2
+
+For simplicity let’s assume C is Random. Now, we only need to identify one more god. Let’s use god A for illustration. All possibilities regarding god A and the word “da” are given below:  
+
+(1) A is True and “da” means “yes”, 
+(2) A is True and “da” means “no”, 
+(3) A is False and “da” means “yes”, 
+(4) A is False and “da” means “no”, 
+
+Then ask A the following question:
+
+Q1: Is C Random? 
+
+And B: 
+
+Q2: Is A True? 
+
+For each scenario above we end up with the following pattern: 
+
+   + If scenario (1) the answers are “da” and “ja” for Q1 and Q2 respectively. 
+   + If scenario (2) the answers are “ja” and “da”. 
+   + If scenario (3) the answers are “ja” and “da”. 
+   + If scenario (4) the answers are “da” and “da”. 
+
+Looking more carefully at the answers we distinguish 3 distinct patterns for the answers: 
+
+   + P1: “da”and “ja”, 
+   + P2: “ja” and “da” and 
+   + P3: “da” and “da”. 
+
+Furthermore, P1 and P3 are unique, they appear only once. That means if the gods answer Q1 and Q2 using P1 or P3 we have identified them and the game is over! For example, if they answer with P3 then scenario (4) was correct: A is False and “da” means “no” and consequently B is True and “ja” means “yes”. If they answer using P2 then we need a further question because both scenarios (2) and (3) may be right. We can ask A: (repeat the 1st question)
+
+Q3: Are you True?
+
+Now,  if scenario (2) the answer is “ja”  and if scenario (3) the answer is “da”. 
+
+Using this approach we have also identified the meanings of “da” and “ja”.
+
+## Comments
+The modification I used was allowing each question to be put to more than one god. In step 1 the question "Are you True?" was put to all gods and was repeated in step 2 as Q3. So technically I have solved the puzzle using only three questions in total, but allowing myself to repeat the same questions to more than one god. 
+
+@boolos1996hardest provided his solution in the same article in which he introduced the puzzle. 
+He states that the "first move is to find a god that you can be certain is not Random, and hence is either True or False". My approach does the reverse; first identifies the Random god and then the True and False gods.
+
+## References 
