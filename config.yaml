@@ -24,6 +24,15 @@ permalinks:
   event: /talk/:slug/
   publication_types: /publication-type/:slug/
   tags: /tag/:slug/
+frontmatter:
+  lastmod: 
+   - lastmod
+   - :git
+   - modified
+   - date
+   - publishdate
+   - pubdate
+   - published
 outputs:
   home:
     - HTML
