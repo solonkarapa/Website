@@ -23,6 +23,11 @@ draft: FALSE
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+custom_date <- function() {
+    today <- Sys.Date()
+    return(format(today, format = "%d-%m-%Y"))
+}
 ```
 
 ```{r, echo=F, warning=F, message=F}
@@ -300,3 +305,9 @@ banana_index %>% select(entity,  Bananas.index..100g.protein., Bananas.index..la
 ## Conclusions
 We've seen substantial variability in the environmental impact of different foods. 
 Common assessments typically rank foods by their emissions of greenhouse gases. Nevertheless, the utilization of land is equally crucial. In fact, the expansion of agricultural land is the leading driver of deforestation and biodiversity loss. Both matter! 
+
+
+*First published : `r custom_date()`*
+
+
+
