@@ -1,7 +1,7 @@
 ---
 title: "The Banana Index Revisited"
 author: Me
-date: '2023-10-27'
+date: '`r format(Sys.Date(), "%d. %b %Y")`'
 slug: banana_index
 categories:
   - data analysis
@@ -306,8 +306,6 @@ banana_index %>% select(entity,  Bananas.index..100g.protein., Bananas.index..la
 We've seen substantial variability in the environmental impact of different foods. 
 Common assessments typically rank foods by their emissions of greenhouse gases. Nevertheless, the utilization of land is equally crucial. In fact, the expansion of agricultural land is the leading driver of deforestation and biodiversity loss. Both matter! 
 
-
-*First published : `r custom_date()`*
 
 
 

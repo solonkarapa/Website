@@ -26,10 +26,10 @@ permalinks:
   tags: /tag/:slug/
 frontmatter:
   lastmod: 
+   - date
    - lastmod
    - :git
    - modified
-   - date
    - publishdate
    - pubdate
    - published
