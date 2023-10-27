@@ -35,6 +35,9 @@ font_size = "S"
 
 enableGitInfo = false
 
+lastmod = ["lastmod", ":git", "date", "publishDate"]
+
+
 # Website type
 #   Improve how search engines understand your site.
 #   For personal sites, choose "Person".

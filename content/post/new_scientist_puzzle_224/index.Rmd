@@ -23,7 +23,7 @@ draft: FALSE
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-[Puzzle #224](https://www.newscientist.com/article/mg25834411-000-puzzle-224-can-you-find-the-ring-inside-the-russian-dolls/) from the New Scientist is:
+[Puzzle #224](https://www.newscientist.com/article/mg25834411-000-puzzle-224-can-you-find-the-ring-inside-the-russian-dolls/) from the New Scientist is: 
 
 > I collect Russian dolls, the type where each doll can be opened to reveal a smaller one inside. I am particularly fond of my simple, single-coloured ones, which come in sets of five (and, unusually, have a hollow smallest doll). I have five lovely sets of them, each a different colour.
 
