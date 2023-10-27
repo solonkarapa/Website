@@ -33,6 +33,8 @@ font_size = "S"
 ## Basic Info
 ############################
 
+enableGitInfo = false
+
 # Website type
 #   Improve how search engines understand your site.
 #   For personal sites, choose "Person".
