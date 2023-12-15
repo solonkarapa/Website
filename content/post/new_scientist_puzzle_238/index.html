@@ -174,3 +174,5 @@ res &lt;- final_path(start_pos = c(1, 1), num_moves = 9)</code></pre>
 <p>Of course, the results will be different each time the code is run. So I re-run the code for 20 times and keep only the distinct solutions. We end up with 5 distinct solutions. The figure shows the sequence of moves (labels 1-10) and the visited squares (purple) for each of the 5 distinct solutions.</p>
 <p>Note, for some solutions we visit the same square twice. For example, in the 2nd solution the square {4,4} is visited in moves 3 and 5.</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>So my answer to the puzzle is apparently: “No”, we can’t retrace the knight’s path. She could have taken any of the 5 solutions.</p>
+<p>The published solution corresponds to solution 5 above. I’m guessing they don’t want to visit the same square more than once, that’s why the disregard all the others.</p>

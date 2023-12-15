@@ -330,9 +330,9 @@ ggplot(df_res, aes(x = Var1, y = Var2)) +
    easy_remove_axes("both", what = c("line", "ticks"))
 ```
 
+So my answer to the puzzle is apparently: "No", we can't retrace the knight's path. She could have taken any of the 5 solutions. 
 
-
-
+The published solution corresponds to solution 5 above. I'm guessing they don't want to visit the same square more than once, that's why the disregard all the others. 
 
 
 
