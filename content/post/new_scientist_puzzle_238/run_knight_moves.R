@@ -15,7 +15,7 @@ for(i in 1:m){
 
 str(df)
 
-setwd("~/Desktop/Website/content/post/new_scientist_puzzle_238/")
+#setwd("~/Desktop/Website/content/post/new_scientist_puzzle_238/")
 #save(df, file = "results.RData")
 
 

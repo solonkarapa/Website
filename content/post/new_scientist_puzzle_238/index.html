@@ -21,9 +21,9 @@ draft: TRUE
 
 
 
-<p><a href="https://www.newscientist.com/article/mg25734214-000-puzzle-204-can-you-work-out-what-number-my-son-thought-of/">Puzzle 238</a> is:</p>
+<p><a href="https://www.newscientist.com/article/mg25934551-100-puzzle-238-can-you-retrace-the-chess-knights-path/">Puzzle 238</a> “Can you retrace the chess knight’s path?” is:</p>
 <blockquote>
-<p>I’ve heard that whatever square I start from, and no matter what path I take, I can always make at least 10 moves without landing on a square I’ve already been on”, said the white knight.</p>
+<p>“I’ve heard that whatever square I start from, and no matter what path I take, I can always make at least 10 moves without landing on a square I’ve already been on”, said the white knight.</p>
 </blockquote>
 <blockquote>
 <p>The black knight tested it out. After jumping onto a particular black square somewhere in the top left-hand quarter of the chess board, she made three hops, but there were now no squares she could move to that she hadn’t already visited. “That wasn’t 10!”, she said.</p>
@@ -36,7 +36,10 @@ draft: TRUE
 </blockquote>
 <p>We start from a black square at the top left-hand quarter (highlighted area). There are only 8 black squares we can choose from (I use grey, instead of black).</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>Since after 3 hops, there were now no squares she could move to that she hadn’t already visited the ending square needs to be at the edge of the board. This gives us 3 options as ending squares and 4 as starting ones. Out of which only {2, 3} and {3, 2} satisfy our requirements (highlighted). From the other 2 ({3, 4} and {4, 3}) it’s impossible to arrive at the edge of the board after 3 steps and move to a square she hadn’t visited before.</p>
+<p>Since after 3 hops, there were now no squares she could move to that she hadn’t already visited the ending square needs to be at the edge of the board. This gives us 3 options as ending squares and 4 as starting ones. Out of which only {2, 3} and {3, 2} satisfy our requirements (highlighted below). From the other 2 ({3, 4} and {4, 3}) it’s impossible to arrive at the edge of the board after 3 steps and move to a square she hadn’t visited before.</p>
+<blockquote>
+<p>My notation {2, 3} corresponds to {x, y} axes, respectively,</p>
+</blockquote>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <blockquote>
 <p>The starting square is {2, 3} or {3,2}.</p>
@@ -50,7 +53,124 @@ draft: TRUE
 <blockquote>
 <p>The ending square is {8,1} and need to pass from {6,2} and {7,3}.</p>
 </blockquote>
-<p>So far, we know we start at either {2,3} or {3,2}, we make 3 steps ending in {1,1}, we retrace our steps, and then make another 6 steps that bring us to {8,1}, passing through {6,2} and {7,3}.</p>
+<p>So far, we know we start at either {2,3} or {3,2}, we make 3 moves ending in {1,1}, we retrace our steps, and then make another 6 moves that bring us to {8,1}, passing through {6,2} and {7,3}. We now need to find the intermediate moves.</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>To find the solution I coded the moves of a knight based on the specifications of the problem. The code needs as input a starting position and the number of moves. It runs for a few seconds until it finds a solution. I then re-run for 20 times as each time we can end up with different results.</p>
-<p>It ended up with distinct 4 solutions.</p>
+<p>To find the solution I coded the moves of a knight based on the specifications of the problem (<code>knight_moves()</code> and <code>final_path()</code>). The code needs as input a starting position and the number of moves.</p>
+<pre class="r"><code># function to simulate knight moves
+knight_moves &lt;- function(start_pos, num_moves) {
+   # start_pos: the starting position
+   # num_moves: the number of moves 
+   
+   # possible moves for the knight
+   moves &lt;- matrix(c(2, 1, -2, -1, 2, -1, -2, 1, 1, 2, -1, -2, 1, -2, -1, 2),
+                   ncol = 2, byrow = TRUE)
+   
+   # function to check if the position is valid on an 8x8 chessboard
+   is_valid_pos &lt;- function(coord) {
+      x &lt;- coord[1]
+      y &lt;- coord[2]
+      return(x &gt;= 1 &amp;&amp; x &lt;= 8 &amp;&amp; y &gt;= 1 &amp;&amp; y &lt;= 8)
+    }
+    
+    # starting position
+    path &lt;- list(start_pos)
+    
+    # simulating knight moves
+    for (i in 1:num_moves) {
+        curr_pos &lt;- path[[i]]
+        
+        # generating all possible next moves
+        next_moves_x &lt;- curr_pos[1] + moves[,1]
+        next_moves_y &lt;- curr_pos[2] + moves[,2]
+        
+        next_moves &lt;- matrix(c(next_moves_x, next_moves_y),
+                             ncol = 2, byrow = F)
+        
+        # filtering valid moves
+        next_moves &lt;- next_moves[apply(next_moves, 1, is_valid_pos), ]
+        
+        # randomly selecting the next move
+        next_move &lt;- next_moves[sample(nrow(next_moves), 1), ]
+        path &lt;- append(path, list(next_move))
+    }
+    
+    return(path)
+}
+
+# Function to implement the additional restrictions
+final_path &lt;- function(start_pos, num_moves){
+   # start_pos: the starting position
+   # num_moves: the number of moves 
+   
+   # simulate a knight&#39;s path 
+   any_path &lt;- knight_moves(start_pos, num_moves)
+    
+   path_matrix &lt;- matrix(unlist(any_path), ncol = 2, byrow = T)
+    
+    ### add additional restrictions 
+    
+    # visit at least one square in every column 
+    every_col &lt;- seq(1, 8, by = 1)
+    res1 &lt;- every_col %in% path_matrix[, 1]
+    
+    # make exactly one hop into the lower half of the board
+    lower_half &lt;- 4
+    res2 &lt;- path_matrix[, 2] &gt; lower_half
+
+    # last square must be {8,1}
+    res3 &lt;- path_matrix[10, ] == c(8, 1)
+    
+    # need to be at {2, 3} (or {3, 2}) after 1st move and {3, 2} (or {2, 3}) at 3rd move
+    res4 &lt;- (path_matrix[2, ] == c(3, 2) &amp; path_matrix[4, ] == c(2, 3)) |
+       (path_matrix[4, ] == c(3, 2) &amp; path_matrix[2, ] == c(2, 3))
+    
+    # need to be at {6, 2} (or {7, 3}) at 7th move and {7, 3} (or {6, 2}) at 8th move
+    res5 &lt;- (path_matrix[9, ] == c(6, 2) &amp; path_matrix[7, ] == c(7, 3)) |
+       (path_matrix[7, ] == c(6, 2) &amp; path_matrix[9, ] == c(7, 3))
+    
+    
+    while(sum(res1) != 8 | sum(res2) != 1 | sum(res3) != 2 | sum(res4) != 2 | sum(res5) != 2) {
+     
+        any_path &lt;- knight_moves(start_pos, num_moves)
+        
+        path_matrix &lt;- matrix(unlist(any_path), ncol = 2, byrow = T)
+        
+        # visit at least one square in every column 
+        res1 &lt;- every_col %in% path_matrix[, 1]
+        
+        # make exactly one hop into the lower half of the board
+        res2 &lt;- path_matrix[, 2] &gt; lower_half
+       
+        # last square must be {8,1}
+        res3 &lt;- path_matrix[10, ] == c(8, 1)
+        
+        # need to be at {2, 3} (or {3, 2}) after 1st move and {3, 2} (or {2, 3}) at 3rd move
+        res4 &lt;- (path_matrix[2, ] == c(3, 2) &amp; path_matrix[4, ] == c(2, 3)) |
+           (path_matrix[4, ] == c(3, 2) &amp; path_matrix[2, ] == c(2, 3))
+        
+        # need to be at {6, 2} (or {7, 3}) at 7th move and {7, 3} (or {6, 2}) at 8th move
+        res5 &lt;- (path_matrix[9, ] == c(6, 2) &amp; path_matrix[7, ] == c(7, 3)) |
+           (path_matrix[7, ] == c(6, 2) &amp; path_matrix[9, ] == c(7, 3))
+        
+    }
+    
+    return(any_path)
+    
+}</code></pre>
+<p>For example, starting {1,1} and after 9 moves we cover the following path:</p>
+<pre class="r"><code># it runs for a few seconds/minutes until it finds a solution
+set.seed(3)
+res &lt;- final_path(start_pos = c(1, 1), num_moves = 9)</code></pre>
+<pre><code>## Move # 1 :  1 1 
+## Move # 2 :  2 3 
+## Move # 3 :  4 4 
+## Move # 4 :  3 2 
+## Move # 5 :  5 3 
+## Move # 6 :  6 5 
+## Move # 7 :  7 3 
+## Move # 8 :  8 1 
+## Move # 9 :  6 2 
+## Move # 10 :  8 1</code></pre>
+<p>Of course, the results will be different each time the code is run. So I re-run the code for 20 times and keep only the distinct solutions. We end up with 5 distinct solutions. The figure shows the sequence of moves (labels 1-10) and the visited squares (purple) for each of the 5 distinct solutions.</p>
+<p>Note, for some solutions we visit the same square twice. For example, in the 2nd solution the square {4,4} is visited in moves 3 and 5.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
