@@ -1,0 +1,175 @@
+---
+title: "# Puzzle 238 from the New Scientist"
+author: Me
+date: '`r format(Sys.Date(), "%d. %b %Y")`'
+slug: puzzle238
+categories:
+  - puzzle
+tags: [puzzle]
+subtitle: ''
+summary: 'add summary'
+authors: []
+lastmod: '2023-12-15T14:27:06Z'
+featured: no
+image:
+  caption: 'created by DALL·E'
+  focal_point: ''
+  preview_only: no
+projects: []
+draft: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=F, warning=F, message=F}
+library(reshape2)
+library(ggplot2)
+library(ggeasy)
+library(dplyr)
+```
+
+[Puzzle 238](https://www.newscientist.com/article/mg25734214-000-puzzle-204-can-you-work-out-what-number-my-son-thought-of/) is:
+
+> I’ve heard that whatever square I start from, and no matter what path I take, I can always make at least 10 moves without landing on a square I’ve already been on”, said the white knight.
+
+> The black knight tested it out. After jumping onto a particular black square somewhere in the top left-hand quarter of the chess board, she made three hops, but there were now no squares she could move to that she hadn’t already visited. “That wasn’t 10!”, she said.
+
+> “Maybe you were unlucky”, said the white knight. The black knight set off from where she had finished before. Her first three hops retraced her earlier moves, then she made another six hops, visiting at least one square in every column and making exactly one hop into the lower half of the board. After these nine moves, she was stuck once more. “Still one short. So much for your theory!”, she said.
+
+> Can you retrace her path?
+
+
+```{r, echo = F, warning=F}
+
+mx <- matrix(rep(c(T, F), 65), nrow = 7, ncol = 7, byrow = T)
+mx <- cbind(mx, mx[,6])
+mx <- rbind(mx, mx[6,])
+
+df <- melt(mx) #%>% mutate(Var1 = as.factor(Var1), Var2 = as.factor(Var2))
+
+df1 <- df %>% mutate(#value = 
+                     #   ifelse(Var1 %in% c(1, 2, 3, 4) & Var2 %in% c(1, 2, 3, 4)
+                     #          , value + 1, value),
+                     chosen_start = ifelse(Var1 %in% c(1, 2, 3, 4) & Var2 %in% c(1, 2, 3, 4), 
+                                     "yes", "no"),
+                     starting = ifelse((Var1 == 2 & Var2 == 3) | (Var1 == 3 & Var2 == 2), 
+                                       "yes", "no"),
+                     start_start = ifelse(Var1 == 1 & Var2 == 1, 
+                                     "yes", "no"),
+                     ending = ifelse(Var1 == 8 & Var2 == 1, 
+                                     "yes", "no"),
+                     chosen_end = ifelse(Var1 %in% c(5, 6, 7, 8) & Var2 %in% c(1, 2, 3, 4), 
+                                           "yes", "no"),
+                     pass_though = ifelse((Var1 == 6 & Var2 == 2) | (Var1 == 7 & Var2 == 3), 
+                                       "yes", "no"))
+```
+
+We start from a black square at the top left-hand quarter (highlighted area). There are only 8 black squares we can choose from (I use grey, instead of black).  
+
+```{r, echo = F}
+ggplot() + 
+   geom_tile(data = df, aes(x = Var1, y = Var2, fill = value)) +
+   scale_y_reverse(breaks = seq(8, 1, by = -1)) +
+   scale_x_continuous(breaks = seq(1, 8, by = 1)) + 
+   scale_fill_manual(values = c("#999999", "#E69F00")) +
+   geom_tile(data = df1 %>% filter(chosen_start == "yes"), 
+             aes(x = Var1, y = Var2, fill = value), linewidth = 1, colour = "black") +
+   labs(x = "", y = "") +
+   theme_minimal() +
+   theme(legend.position = "none") +
+   easy_remove_axes("both", what = c("line", "ticks"))
+```
+
+Since after 3 hops, there were now no squares she could move to that she hadn't already visited the ending square needs to be at the edge of the board. This gives us 3 options as ending squares and 4 as starting ones. Out of which only {2, 3} and {3, 2} satisfy our requirements (highlighted). From the other 2 ({3, 4} and {4, 3}) it's impossible to arrive at the edge of the board after 3 steps and move to a square she hadn't visited before.
+
+```{r, echo=F}
+ggplot() + 
+   geom_tile(data = df, aes(x = Var1, y = Var2, fill = value)) +
+   scale_y_reverse(breaks = seq(8, 1, by = -1)) +
+   scale_x_continuous(breaks = seq(1, 8, by = 1)) + 
+   scale_fill_manual(values = c("#999999", "#E69F00")) +
+   geom_tile(data = df1 %>% filter(starting == "yes"), 
+             aes(x = Var1, y = Var2, fill = value), linetype = "dashed", 
+             linewidth = 1, colour = "blue") +
+   labs(x = "", y = "") +
+   theme_minimal() +
+   theme(legend.position = "none") +
+   easy_remove_axes("both", what = c("line", "ticks"))
+```
+
+> The starting square is {2, 3} or {3,2}.
+
+Further, we already know the final square (after the 3 hops). It is {1,1}. All the remaining squares have more than 3 or more degrees of freedom, that is 3 or more possible steps which makes it impossible to have covered them during our first 3 steps. 
+
+Then, we know we need to visit "at least one square in every column." This means we need to end on the right-had side of the board. Further, we need to make "exactly one hop into the lower half of the board." This means we will be ending up on the top right-hand quarter (highlighted area). 
+
+We further know the ending square, which is {8,1} (highlighted). This is because there need to be no squares we can move that we hadn't visited before. The same reasoning as before applies. The chessboard is symmetric after all! 
+
+```{r, echo=F}
+ggplot() + 
+   geom_tile(data = df, aes(x = Var1, y = Var2, fill = value)) +
+   scale_y_reverse(breaks = seq(8, 1, by = -1)) +
+   scale_x_continuous(breaks = seq(1, 8, by = 1)) + 
+   scale_fill_manual(values = c("#999999", "#E69F00")) +
+   geom_tile(data = df1 %>% filter(chosen_end == "yes"), 
+             aes(x = Var1, y = Var2, fill = value), linewidth = 1, colour = "black") +
+   geom_tile(data = df1 %>% filter(ending == "yes"), 
+             aes(x = Var1, y = Var2, fill = value), linewidth = 1, colour = "blue") +
+   labs(x = "", y = "") +
+   theme_minimal() +
+   theme(legend.position = "none") +
+   easy_remove_axes("both", what = c("line", "ticks"))
+```
+
+We also know we need to pass from {6,2} and {7,3} since only from those 2 we can arrive at {8,1} and have no square we haven't moved before.
+
+```{r, echo=F}
+ggplot() + 
+   geom_tile(data = df, aes(x = Var1, y = Var2, fill = value)) +
+   scale_y_reverse(breaks = seq(8, 1, by = -1)) +
+   scale_x_continuous(breaks = seq(1, 8, by = 1)) + 
+   scale_fill_manual(values = c("#999999", "#E69F00")) +
+   #geom_tile(data = df1 %>% filter(chosen_end == "yes"), 
+   #          aes(x = Var1, y = Var2, fill = value), linewidth = 1, colour = "black") +
+   geom_tile(data = df1 %>% filter(pass_though == "yes"), 
+             aes(x = Var1, y = Var2, fill = value), linewidth = 1, colour = "blue") +
+   labs(x = "", y = "") +
+   theme_minimal() +
+   theme(legend.position = "none") +
+   easy_remove_axes("both", what = c("line", "ticks"))
+```
+
+
+> The ending square is {8,1} and need to pass from {6,2} and {7,3}. 
+
+So far, we know we start at either {2,3} or {3,2}, we make 3 steps ending in {1,1}, we retrace our steps, and then make another 6 steps that bring us to {8,1}, passing through {6,2} and {7,3}.
+
+```{r, echo=F}
+ggplot() + 
+   geom_tile(data = df, aes(x = Var1, y = Var2, fill = value)) +
+   scale_y_reverse(breaks = seq(8, 1, by = -1)) +
+   scale_x_continuous(breaks = seq(1, 8, by = 1)) + 
+   scale_fill_manual(values = c("#999999", "#E69F00")) +
+   geom_tile(data = df1 %>% filter(starting == "yes"), 
+             aes(x = Var1, y = Var2, fill = value), linetype = "dashed", 
+             linewidth = 1, colour = "blue") +
+   geom_tile(data = df1 %>% filter(start_start == "yes"), 
+             aes(x = Var1, y = Var2, fill = value), linewidth = 1, colour = "blue") +
+   geom_tile(data = df1 %>% filter(pass_though == "yes"), 
+             aes(x = Var1, y = Var2, fill = value), linewidth = 1, colour = "blue") +
+   geom_tile(data = df1 %>% filter(ending == "yes"), 
+             aes(x = Var1, y = Var2, fill = value), linewidth = 1, colour = "blue") + 
+   labs(x = "", y = "") +
+   theme_minimal() +
+   theme(legend.position = "none") +
+   easy_remove_axes("both", what = c("line", "ticks"))
+```
+
+To find the solution I coded the moves of a knight based on the specifications of the problem. The code needs as input a starting position and the number of moves. It runs for a few seconds until it finds a solution. I then re-run for 20 times as each time we can end up with different results. 
+
+It ended up with distinct 4 solutions. 
+
+
+
