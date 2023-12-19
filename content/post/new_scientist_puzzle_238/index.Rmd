@@ -7,7 +7,7 @@ categories:
   - puzzle
 tags: [puzzle]
 subtitle: ''
-summary: 'add summary'
+summary: 'Solution to #238 "Can you retrace the chess knight’s path?" puzzle.'
 authors: []
 lastmod: '2023-12-15T14:27:06Z'
 featured: no
@@ -31,7 +31,7 @@ library(dplyr)
 library(ggrepel)
 ```
 
-[Puzzle 238](https://www.newscientist.com/article/mg25934551-100-puzzle-238-can-you-retrace-the-chess-knights-path/) "Can you retrace the chess knight’s path?" is:
+[Puzzle 238](https://www.newscientist.com/article/mg25934551-100-puzzle-238-can-you-retrace-the-chess-knights-path/), "Can you retrace the chess knight’s path?" is:
 
 > "I’ve heard that whatever square I start from, and no matter what path I take, I can always make at least 10 moves without landing on a square I’ve already been on”, said the white knight.
 
@@ -66,6 +66,7 @@ df1 <- df %>% mutate(#value =
                                        "yes", "no"))
 ```
 
+## Solution
 We start from a black square at the top left-hand quarter (highlighted area). There are only 8 black squares we can choose from (I use grey, instead of black).  
 
 ```{r, echo = F}
@@ -103,7 +104,7 @@ ggplot() +
 
 > The starting square is {2, 3} or {3,2}.
 
-Further, we already know the final square (after the 3 hops). It is {1,1}. All the remaining squares have more than 3 or more degrees of freedom, that is 3 or more possible steps which makes it impossible to have covered them during our first 3 steps. 
+Further, we already know the final square (after the 3 hops). It is {1,1}. The 2 remaining squares have 3 or more degrees of freedom, that is 3 or more possible steps which makes it impossible to have covered them during our first 3 steps. 
 
 Then, we know we need to visit "at least one square in every column." This means we need to end on the right-had side of the board. Further, we need to make "exactly one hop into the lower half of the board." This means we will be ending up on the top right-hand quarter (highlighted area). 
 
@@ -172,7 +173,7 @@ ggplot() +
 To find the solution I coded the moves of a knight based on the specifications of the problem (`knight_moves()` and `final_path()`). The code needs as input a starting position and the number of moves. 
 
 ```{r}
-# function to simulate knight moves
+# Function to simulate knight moves
 knight_moves <- function(start_pos, num_moves) {
    # start_pos: the starting position
    # num_moves: the number of moves 
@@ -295,7 +296,7 @@ for (i in 1:length(res)) {
 ```
 
 
-Of course, the results will be different each time the code is run. So I re-run the code for 20 times and keep only the distinct solutions. We end up with 5 distinct solutions. The figure shows the sequence of moves (labels 1-10) and the visited squares (purple) for each of the 5 distinct solutions. 
+Of course, the results will be different each time the code is run. So I re-run the code 20 times and keep only the distinct solutions. We end up with 5 distinct solutions. The figure shows the sequence of moves (labels 1-10) and the visited squares (in purple) for each of the 5 solutions. 
 
 Note, for some solutions we visit the same square twice. For example, in the 2nd solution the square {4,4} is visited in moves 3 and 5. 
 
@@ -330,9 +331,9 @@ ggplot(df_res, aes(x = Var1, y = Var2)) +
    easy_remove_axes("both", what = c("line", "ticks"))
 ```
 
-So my answer to the puzzle is apparently: "No", we can't retrace the knight's path. She could have taken any of the 5 solutions. 
+So my answer to the puzzle is apparently: "No", we can't retrace the knight's path. She could have taken any of the 5 paths.  
 
-The published solution corresponds to solution 5 above. I'm guessing they don't want to visit the same square more than once, that's why the disregard all the others. 
+The published solution corresponds to solution 5 above. I'm guessing they don't want to visit the same square more than once, that's why they disregard all the others. 
 
 
 

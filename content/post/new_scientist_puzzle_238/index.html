@@ -1,13 +1,13 @@
 ---
 title: "# Puzzle 238 from the New Scientist"
 author: Me
-date: '15. Dec 2023'
+date: '19. Dec 2023'
 slug: puzzle238
 categories:
   - puzzle
 tags: [puzzle]
 subtitle: ''
-summary: 'add summary'
+summary: 'Solution to #238 "Can you retrace the chess knight’s path?" puzzle.'
 authors: []
 lastmod: '2023-12-15T14:27:06Z'
 featured: no
@@ -21,7 +21,7 @@ draft: TRUE
 
 
 
-<p><a href="https://www.newscientist.com/article/mg25934551-100-puzzle-238-can-you-retrace-the-chess-knights-path/">Puzzle 238</a> “Can you retrace the chess knight’s path?” is:</p>
+<p><a href="https://www.newscientist.com/article/mg25934551-100-puzzle-238-can-you-retrace-the-chess-knights-path/">Puzzle 238</a>, “Can you retrace the chess knight’s path?” is:</p>
 <blockquote>
 <p>“I’ve heard that whatever square I start from, and no matter what path I take, I can always make at least 10 moves without landing on a square I’ve already been on”, said the white knight.</p>
 </blockquote>
@@ -34,6 +34,8 @@ draft: TRUE
 <blockquote>
 <p>Can you retrace her path?</p>
 </blockquote>
+<div id="solution" class="section level2">
+<h2>Solution</h2>
 <p>We start from a black square at the top left-hand quarter (highlighted area). There are only 8 black squares we can choose from (I use grey, instead of black).</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Since after 3 hops, there were now no squares she could move to that she hadn’t already visited the ending square needs to be at the edge of the board. This gives us 3 options as ending squares and 4 as starting ones. Out of which only {2, 3} and {3, 2} satisfy our requirements (highlighted below). From the other 2 ({3, 4} and {4, 3}) it’s impossible to arrive at the edge of the board after 3 steps and move to a square she hadn’t visited before.</p>
@@ -44,7 +46,7 @@ draft: TRUE
 <blockquote>
 <p>The starting square is {2, 3} or {3,2}.</p>
 </blockquote>
-<p>Further, we already know the final square (after the 3 hops). It is {1,1}. All the remaining squares have more than 3 or more degrees of freedom, that is 3 or more possible steps which makes it impossible to have covered them during our first 3 steps.</p>
+<p>Further, we already know the final square (after the 3 hops). It is {1,1}. The 2 remaining squares have 3 or more degrees of freedom, that is 3 or more possible steps which makes it impossible to have covered them during our first 3 steps.</p>
 <p>Then, we know we need to visit “at least one square in every column.” This means we need to end on the right-had side of the board. Further, we need to make “exactly one hop into the lower half of the board.” This means we will be ending up on the top right-hand quarter (highlighted area).</p>
 <p>We further know the ending square, which is {8,1} (highlighted). This is because there need to be no squares we can move that we hadn’t visited before. The same reasoning as before applies. The chessboard is symmetric after all!</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
@@ -56,7 +58,7 @@ draft: TRUE
 <p>So far, we know we start at either {2,3} or {3,2}, we make 3 moves ending in {1,1}, we retrace our steps, and then make another 6 moves that bring us to {8,1}, passing through {6,2} and {7,3}. We now need to find the intermediate moves.</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>To find the solution I coded the moves of a knight based on the specifications of the problem (<code>knight_moves()</code> and <code>final_path()</code>). The code needs as input a starting position and the number of moves.</p>
-<pre class="r"><code># function to simulate knight moves
+<pre class="r"><code># Function to simulate knight moves
 knight_moves &lt;- function(start_pos, num_moves) {
    # start_pos: the starting position
    # num_moves: the number of moves 
@@ -171,8 +173,9 @@ res &lt;- final_path(start_pos = c(1, 1), num_moves = 9)</code></pre>
 ## Move # 8 :  8 1 
 ## Move # 9 :  6 2 
 ## Move # 10 :  8 1</code></pre>
-<p>Of course, the results will be different each time the code is run. So I re-run the code for 20 times and keep only the distinct solutions. We end up with 5 distinct solutions. The figure shows the sequence of moves (labels 1-10) and the visited squares (purple) for each of the 5 distinct solutions.</p>
+<p>Of course, the results will be different each time the code is run. So I re-run the code 20 times and keep only the distinct solutions. We end up with 5 distinct solutions. The figure shows the sequence of moves (labels 1-10) and the visited squares (in purple) for each of the 5 solutions.</p>
 <p>Note, for some solutions we visit the same square twice. For example, in the 2nd solution the square {4,4} is visited in moves 3 and 5.</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<p>So my answer to the puzzle is apparently: “No”, we can’t retrace the knight’s path. She could have taken any of the 5 solutions.</p>
-<p>The published solution corresponds to solution 5 above. I’m guessing they don’t want to visit the same square more than once, that’s why the disregard all the others.</p>
+<p>So my answer to the puzzle is apparently: “No”, we can’t retrace the knight’s path. She could have taken any of the 5 paths.</p>
+<p>The published solution corresponds to solution 5 above. I’m guessing they don’t want to visit the same square more than once, that’s why they disregard all the others.</p>
+</div>

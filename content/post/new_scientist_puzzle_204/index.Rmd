@@ -7,7 +7,7 @@ categories:
   - puzzle
 tags: [puzzle]
 subtitle: ''
-summary: ''
+summary: 'Solution to #204 "Can you work out what number my son thought of?" puzzle.'
 authors: []
 lastmod: '2023-02-08T14:27:06Z'
 featured: no
