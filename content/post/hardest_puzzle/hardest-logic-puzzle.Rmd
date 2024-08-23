@@ -18,7 +18,7 @@ bibliography: biblio_puzzle.bib
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-I present a solution to a modification of the "hardest logic puzzle ever" using probability theory. ()
+I present a solution to a modification of the "hardest logic puzzle ever" using probability theory. 
 
 ## Background 
 "The hardest logic puzzle" was originally presented by @boolos1996hardest and since then it has been amended several times in order to make it harder [see @rabern2008simple; @novozhilov2012hardest]. 
