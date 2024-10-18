@@ -16,7 +16,7 @@ image:
   preview_only: no
 projects: []
 bibliography: biblio_medaka.bib  
-draft: TRUE
+draft: FALSE
 ---
 
 ```{r setup, include=FALSE}
