@@ -1,0 +1,130 @@
+---
+title: "Flying fish"
+author: Me
+date: '`r format(Sys.Date(), "%d. %b %Y")`'
+slug: medaka
+categories: [data analysis]
+tags: [data analysis]
+subtitle: ''
+summary: "Charles Darwin's 165-year-old theory about how fish end up in isolated ponds has finally been proven! Researchers have demonstrated that waterbirds can indeed transport aquatic life between water bodies. Additionaly, here I show, the duration of air exposure doesn't affect the eggs' hatching probability. "
+authors: []
+lastmod: '2024-10-20T14:27:06Z'
+featured: no
+image:
+  caption: 'created by DALL·E'
+  focal_point: ''
+  preview_only: no
+projects: []
+bibliography: biblio_medaka.bib  
+draft: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=F, warning=F, message=F}
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+library(ggsurvfit)
+library(survival)
+library(gtsummary)
+```
+
+The mystery of how fish appear in isolated water bodies has long puzzled scientists, including Charles Darwin. In his seminal work "On the Origin of Species" (1859), Darwin hypothesized that aquatic larvae might adhere to waterbirds' feet, facilitating their transport. However, this idea remained largely theoretical for over a century.
+
+To test Darwin's hypothesis, @yao2024passive devised an experiment using two ponds placed one meter apart. They populated one pond with 36 artificial aquatic plants while leaving the other bare. Both ponds were stocked with baitfish to attract avian visitors. After six months, the researchers observed that some plants had indeed migrated between ponds. Crucially, they captured photographic evidence of a heron taking flight with plant material attached to its foot, providing visual confirmation of Darwin's long-standing theory. This experiment not only validates Darwin's intuition but also offers a concrete mechanism for the dispersal of aquatic life to isolated water bodies.
+
+The next step was to investigate the survival of fish eggs during aerial transport. To do this, the team conducted experiments using [medaka](https://en.wikipedia.org/wiki/Japanese_rice_fish), small fish that inhabit shallow waters and deposit their eggs on aquatic vegetation. After the medaka laid eggs on plant strips, the scientists removed these egg-laden plants from the water. They exposed the eggs to air for varying durations, ranging from immediate submersion to a full 24-hour period out of water. Following the air exposure, the researchers returned the plants with attached eggs to the water.
+
+They found that medaka eggs can successfully hatch after spending up to 18 hours out of water when attached to plant leaves (Figure below - reproduced using the [authors' code](https://github.com/yaoakifumi/Medaka-embryo-desication-tolerance/blob/main/code.md)).
+
+```{r, echo=F}
+dehydration <- read.csv("~/Desktop/Website/content/post/medaka/data/dehydration_final.csv")
+```
+
+```{r, echo=F, warning=F}
+# manual curation
+dehydration_final <- dehydration %>%
+    mutate(time = "12:00pm",
+           experiment_day = as_datetime(experiment_day, tz = "GMT"),
+           hatch_complete_day = as_datetime(hatch_complete_day, tz = "GMT"),
+           experiment_day_time = ymd_hm(paste(experiment_day, time), tz = "GMT"),
+           hatch_complete_day_time = ymd_hm(paste(hatch_complete_day, time), tz = "GMT"),
+           hatch_complete_day2 = as_datetime(
+               ifelse(is.na(hatch_complete_day_time), 
+                   experiment_day_time + hours(period), 
+                   hatch_complete_day_time), tz = "GMT"),
+           time_diff = difftime(hatch_complete_day2, experiment_day_time, units = "days"),
+           status = ifelse(hatch == 0, 0, 1)) %>%
+    mutate(hatch_complete_day2 = as_datetime(
+       ifelse(hatch_complete_day == "2024-12-11" & period == 0,
+               update(hatch_complete_day2, year = 2023), 
+               hatch_complete_day2), tz = "GMT"),
+        hatch_complete_day2 = as_datetime(
+           ifelse(hatch_complete_day == "2024-12-16" & period == 6,
+                   update(hatch_complete_day2, month = 1), 
+                   hatch_complete_day2), tz = "GMT"),
+        hatch_complete_day2 = as_datetime(
+            ifelse((hatch_complete_day == "2024-12-16" | hatch_complete_day == "2024-12-27") & period == 12,
+                   update(hatch_complete_day2, month = 1), 
+                   hatch_complete_day2), tz = "GMT"), 
+        time_diff = difftime(hatch_complete_day2, experiment_day_time, units = "days"))
+```
+
+```{r, echo=FALSE, warning=F, message=F}
+dehydration_final %>%
+  ggplot(aes(period, (hatch / 4))) +
+  geom_smooth(method = "glm", method.args = list(family="binomial"(link="probit")), 
+              se = FALSE, linewidth = 1.5, color = "darkcyan") +
+  geom_jitter(width = 0.3, height = 0, alpha = 0.7) +
+  xlab("Dehydration period (hour)") + 
+  ylab("Hatching rate (%)") + 
+  scale_x_continuous(breaks = seq(0, 24, 6), limits = c(-0.3, 24.3)) + 
+  scale_y_continuous(breaks = seq(0, 1, 0.25), limits = c(0, 1.15)) +
+  theme_classic() +
+  theme(axis.ticks = element_line(colour = "black"),
+        axis.text = element_text(colour = "black"))
+```
+
+## Time to hatching
+
+A compelling follow-up question arises: Does the duration of dehydration affect the time it takes for the eggs to hatch?
+
+After some data cleaning, I plot the hatching probability over days for eggs exposed to dehydration periods ranging from 0 to 18 hours. (All eggs die for longer exposures). The analysis revealed no significant difference in hatching probability across the various dehydration periods (p = 0.9).
+
+```{r}
+dehydration_hours <- c(0, 6, 12, 15, 18)
+dehydration_final %>% 
+   filter(period %in% dehydration_hours) %>%
+   survfit2(Surv(time_diff, status) ~ period, data = .) %>%
+    ggsurvfit(size = 1) +
+    labs(
+       x = "Days",
+       y = "Hatching probability",
+       col = "Dehydrarion Period (hour)"
+    ) + 
+   scale_color_brewer(palette = "Dark2") +
+   theme_classic()
+```
+
+```{r}
+dehydration_final %>% 
+   filter(period %in% dehydration_hours) %>%
+    survdiff(Surv(time_diff, status) ~ period, data = .)
+```
+Furthermore, the median number of days until hatching remained remarkably consistent across all dehydration periods. This suggests that, within the tested range, the duration of air exposure does not significantly impact the eggs' developmental timeline once they are returned to water.
+
+```{r}
+dehydration_final %>% 
+   filter(period %in%dehydration_hours) %>% 
+   survfit(Surv(time_diff, status) ~ period, data = .) %>% 
+    tbl_survfit(
+        probs = 0.5, statistic = " { estimate }")
+```
+
+These findings indicate that medaka eggs possess a robust ability to withstand temporary dehydration without altering their developmental trajectory, further supporting their potential for successful dispersal via aerial transport.
+
+
+## References
