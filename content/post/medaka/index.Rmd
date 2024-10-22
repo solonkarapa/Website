@@ -6,7 +6,7 @@ slug: medaka
 categories: [data analysis]
 tags: [data analysis]
 subtitle: ''
-summary: "Charles Darwin's 165-year-old theory about how fish end up in isolated ponds has finally been proven! Researchers have demonstrated that waterbirds can indeed transport aquatic life between water bodies. Additionaly, here I show, the duration of air exposure doesn't affect the eggs' hatching probability. "
+summary: "Charles Darwin's 165-year-old theory about how fish end up in isolated ponds has finally been proven! Researchers have demonstrated that waterbirds can indeed transport aquatic life between water bodies - effectively fish can withstand air exposure. Further to this, here I show, the duration of air exposure doesn't affect the eggs' hatching timeline. "
 authors: []
 lastmod: '2024-10-20T14:27:06Z'
 featured: no
@@ -16,7 +16,7 @@ image:
   preview_only: no
 projects: []
 bibliography: biblio_medaka.bib  
-draft: TRUE
+draft: FALSE
 ---
 
 ```{r setup, include=FALSE}
