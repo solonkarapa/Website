@@ -1,0 +1,77 @@
+---
+title: "Klingons on the starboard bow?"
+author: Me
+date: '16. Dec 2024'
+slug: significance
+categories: [puzzle]
+tags: [puzzle]
+subtitle: ''
+summary: ""
+authors: []
+lastmod: '2024-12-16T14:27:06Z'
+featured: no
+image:
+  caption: 'created by DALL·E'
+  focal_point: ''
+  preview_only: no
+projects: []
+draft: TRUE
+---
+
+
+
+<p>The puzzle <a href="https://academic.oup.com/jrssig/article/21/4/4/7730926">Klingons on the starboard bow?</a> is</p>
+<blockquote>
+<p>“Captain, there is an alien ship approaching on the starboard bow,” said Chekhov.</p>
+</blockquote>
+<blockquote>
+<p>“What kind of vessel is it?” enquired James T. Kirk, commander of the Starship Enterprise.</p>
+</blockquote>
+<blockquote>
+<p>“A Klingon vessel, captain, I think,” said the ensign.</p>
+</blockquote>
+<blockquote>
+<p>“Analysis, Mr Spock,” said the commander to his first officer.</p>
+</blockquote>
+<blockquote>
+<p>“It could well be a Klingon vessel, captain, 90 per cent of ships in this sector are Klingon.”</p>
+</blockquote>
+<blockquote>
+<p>“And the other 10 per cent are Romulan vessels?”</p>
+</blockquote>
+<blockquote>
+<p>“Precisely, captain.”</p>
+</blockquote>
+<blockquote>
+<p>“Well, Spock, as you know, we are at war with the Klingons and have recently signed a peace treaty with the Romulans. I am wary of firing a photon torpedo after the debacle of the M5 computer.* Starfleet are insisting that we be 95 per cent confident a ship is of Klingon origin before we fire on it. How good is ensign Chekhov at identifying Klingon vessels?”</p>
+</blockquote>
+<blockquote>
+<p>“His records show that the probability he says it’s a Klingon ship when it is a Klingon ship is 98 per cent and …”</p>
+</blockquote>
+<blockquote>
+<p>“That’s all the evidence we need,” interrupted the captain. “Fire the photon torpedoes.”</p>
+</blockquote>
+<blockquote>
+<p>Has Captain Kirk made the right decision or should Spock step in and voice his concern?</p>
+</blockquote>
+<div id="solution" class="section level2">
+<h2>Solution</h2>
+<p>To determine if Captain Kirk made the right decision, we need to calculate the probability that the ship is indeed Klingon, given Chekhov’s identification.</p>
+<p>Let’s denote this probability, <span class="math inline">\(\text{P(K given C)}\)</span>: the probability that the ship is Klingon (K) given Chekhov says it is Klingon (C).</p>
+<p>From the dialogue we know:</p>
+<ul>
+<li><span class="math inline">\(\text{P(K)=0.9}\)</span>: 90% of ships in this sector are Klingon.</li>
+<li><span class="math inline">\(\text{P(R)=0.1}\)</span>: 10% of ships in this sector are Romulan.</li>
+<li><span class="math inline">\(\text{P(C given K)=0.98}\)</span>: If the ship is Klingon, Chekhov correctly identifies it as Klingon 98% of the time.</li>
+</ul>
+<p>We apply <a href="https://www.investopedia.com/terms/b/bayes-theorem.asp">Bayes’ theorem</a>:</p>
+<p><span class="math display">\[\text{P(K given C)} = \frac{\text{P(C given K)⋅P(K)}}{\text{P(C given R)⋅P(R) +
+P(C given K)⋅P(K)}}\]</span></p>
+<p>There is an extra unknown on the right-hand side, <span class="math inline">\(\text{P(C given R)}\)</span>. This is the probability Chekhov misidentifies a Romulan ship as Klingon.</p>
+<p>Without this information, we cannot calculate the exact probability. However, we can determine the maximum value of <span class="math inline">\(\text{P(C given R)}\)</span> that would still meet Starfleet’s 95% confidence requirement.</p>
+<p>That is, we want <span class="math inline">\(\text{P(K given C) &gt; 0.95}\)</span>.</p>
+<p>Solving the inequality we end up with <span class="math inline">\(\text{P(C given R) &lt; 0.46}\)</span>.</p>
+<p>This means that if Chekhov misidentifies Romulan ships as Klingon less than 46% of the time, the confidence level would be above 95%, meeting Starfleet’s requirement.</p>
+<p>Given Chekhov’s high accuracy with Klingon ships (98%), it’s unlikely his error rate for Romulan ships would be as high as 46%. In fact, this is worse than a random guess! Therefore, it’s probable that the actual confidence level is above 95%.</p>
+<p>Captain Kirk is right to fire the torpedoes because he knows that Chekhov would be able to recognise Romulan ships at least 46% of the time!</p>
+</div>
