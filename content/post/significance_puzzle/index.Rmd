@@ -6,9 +6,9 @@ slug: significance
 categories: [puzzle]
 tags: [puzzle]
 subtitle: ''
-summary: ""
+summary: "Puzzle solution"
 authors: []
-lastmod: '2024-12-16T14:27:06Z'
+lastmod: '2025-01-17T14:27:06Z'
 featured: no
 image:
   caption: 'created by DALL·E'
@@ -47,7 +47,7 @@ The puzzle [Klingons on the starboard bow?](https://academic.oup.com/jrssig/arti
 > Has Captain Kirk made the right decision or should Spock step in and voice his concern?
 
 ## Solution
-To determine if Captain Kirk made the right decision, we need to calculate the probability that the ship is indeed Klingon, given Chekhov's identification. 
+To determine if Captain Kirk made the right decision we need to calculate the probability that the ship is indeed Klingon, given Chekhov's identification. 
 
 Let’s denote this probability, $\text{P(K given C)}$: the probability that the ship is Klingon (K) given Chekhov says it is Klingon (C).
 
@@ -59,10 +59,11 @@ From the dialogue we know:
 
 We apply [Bayes’ theorem](https://www.investopedia.com/terms/b/bayes-theorem.asp): 
 
-$$\text{P(K given C)} = \frac{\text{P(C given K)⋅P(K)}}{\text{P(C given R)⋅P(R) + 
-P(C given K)⋅P(K)}}$$
+$$\text{P(K given C)} = \frac{\text{P(C given K)⋅P(K)}}{\text{P(C given R)⋅P(R) + P(C given K)⋅P(K)}}$$
 
-There is an extra unknown on the right-hand side, $\text{P(C given R)}$. This is the probability Chekhov misidentifies a Romulan ship as Klingon. 
+Bayes’ theorem gives the probability of an event (here $\text{P(K given C))}$ based on new information that is related to that event. In our case, we know that 10\% of ships in this sector are Klingon ($\text{P(K)}$) and we want to know how this is changed/updated based on Chekhov’s performance in identifying Klingon ships, $\text{P(C given K)}$.  
+
+The only unknown is on the right-hand side, $\text{P(C given R)}$. This is the probability Chekhov misidentifies a Romulan ship as Klingon. 
 
 Without this information, we cannot calculate the exact probability. However, we can determine the maximum value of $\text{P(C given R)}$ that would still meet Starfleet's 95% confidence requirement.
 
