@@ -15,7 +15,7 @@ image:
   focal_point: ''
   preview_only: no
 projects: []
-draft: TRUE
+draft: FALSE
 ---
 
 ```{r setup, include=FALSE}
@@ -47,9 +47,9 @@ The puzzle [Klingons on the starboard bow?](https://academic.oup.com/jrssig/arti
 > Has Captain Kirk made the right decision or should Spock step in and voice his concern?
 
 ## Solution
-To determine if Captain Kirk made the right decision we need to calculate the probability that the ship is indeed Klingon, given Chekhov's identification. 
+To determine if Captain Kirk made the right decision we need to calculate the probability that the ship is indeed Klingon, given Chekhov's identification capabilities. 
 
-Let’s denote this probability, $\text{P(K given C)}$: the probability that the ship is Klingon (K) given Chekhov says it is Klingon (C).
+Let’s denote this probability, $\text{P(K given C)}$: the probability that the ship is Klingon ($\text{K}$) given Chekhov says it is Klingon ($\text{C}$).
 
 From the dialogue we know:
 
