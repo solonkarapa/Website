@@ -28,7 +28,7 @@ title: People
    - Zhijie Yao, MPhil Health Data Science
    - Yawei Peng, MPhil Health Data Science 
 - 2023
-   - Martin Muniategui, Summer intern
+   - Martín de Muniategui Climente, Summer intern
    - Normandie Hincks, MPhil Computational Biology 
 - 2022
    - Shen Sia, MPhil Health Data Science
