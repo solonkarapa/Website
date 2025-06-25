@@ -1,0 +1,117 @@
+---
+title: "Missed Opportunity? Rethinking Quality of Life Analysis in the SONIA Trial"
+author: Me
+date: '`r format(Sys.Date(), "%d. %b %Y")`'
+slug: sonia_trial
+categories:
+  - reporting
+tags: [reporting]
+subtitle: ''
+summary: 'To add summary'
+authors: []
+lastmod: '2025-12-20T14:27:06Z'
+featured: no
+image:
+  caption: 'created by DALL·E'
+  focal_point: ''
+  preview_only: no
+projects: []
+draft: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=F}
+library(ggplot2)
+```
+
+The [SONIA trial](https://www.nature.com/articles/s41586-024-08035-2) made headlines by challenging a major assumption in breast cancer care: that powerful drugs like CDK4/6 inhibitors must be used right away in advanced HR+/HER2– breast cancer. The study found **no significant difference in survival** between using these drugs early or later. It even showed that later use led to fewer side effects and lower costs.
+
+But there’s one area where the results are … less satisfying.
+
+The authors reported **no difference in health-related quality of life (HRQOL)** between the early and delayed treatment groups, based on the widely used FACT-B questionnaire. At first glance, this seems reassuring—patients felt just as good either way.
+
+But let’s look a little closer.
+
+## The HRQOL Analysis Was Likely Too Simple
+
+The authors used a main effects model to compare the FACT-B scores over time. This approach makes two key assumptions:
+
+1. The only difference between the groups is a constant shift—i.e., one group is consistently better or worse than the other across time.
+    - In their model, the coefficient for the "CDK4/6i-second" group was −0.91, implying a minor, consistent shift.
+2. FACT-B scores change linearly over time.
+
+Both assumptions are strong—and likely inadequate.
+
+```{r}
+intercept <- 37.950
+arm_second_group <- -0.91
+time_coef <- -0.008
+FACTB_baseline <- 0.676
+
+time <- seq(0, 640, by = 10)
+first_group <- intercept + (time_coef * time) + FACTB_baseline
+second_group <- first_group + arm_second_group
+
+original_df <- data.frame(y = c(first_group, second_group),
+                          group = c(rep("CDK4/6 first", length(time)), rep("CDK4/6 second", length(time))),
+                          time = time)
+```
+
+```{r}
+ggplot(original_df) +
+   geom_line(aes(y = y, x = time, colour = group))
+```
+
+## A Better Way to Ask the Question
+
+Instead of asking, “Were average quality of life scores different across time?”, why not ask a more patient-centered question:
+
+### **Hypothesis 1**
+
+*Patients who start CDK4/6 inhibitors earlier (first-line group) experience a **faster decline** in quality of life compared to those who start them later.*
+
+Why might this be true? Because the first-line group had more severe side effects—more than 1,000 additional grade 3+ events than the second-line group. It’s logical to expect this would show up in how patients feel over time.
+
+Testing this hypothesis means including an interaction between time and treatment group. This would allow the slopes of the two groups’ HRQOL trajectories to differ.
+
+Visually, this would look like one group’s curve dropping faster than the other.
+
+```{r}
+interaction_coeff <- -0.005
+arm_second_group <- -0.9
+main <- intercept + (time_coef * time) + FACTB_baseline
+first_group_int <- main + (interaction_coeff*time)
+second_group_int <- main + arm_second_group
+
+
+hyp1_df <- data.frame(y = c(first_group_int, second_group_int),
+                          group = c(rep("CDK4/6 first", length(time)), 
+                                    rep("CDK4/6 second", length(time))),
+                          time = time)
+
+ggplot(hyp1_df) +
+   geom_line(aes(y = y, x = time, colour = group))
+
+```
+
+### **Hypothesis 2**
+
+*Even if the average scores at the end are the same, the **shapes of the trajectories** might differ—non-linear patterns, dips, or recoveries.*
+
+Here, we’re relaxing the idea that quality of life changes in a neat, straight line. Real life (and real cancer treatment) is rarely linear. Patients often experience early/late toxicity, and plateaus. A model assuming straight-line change might completely miss that.
+
+Pictorially, this might show two wavy lines crossing or diverging—even if they end at the same place.
+
+```{r}
+
+```
+
+## Why This Matters
+
+These more flexible, hypothesis-driven approaches might **better capture what patients actually experience**.
+
+The SONIA trial is important, but its quality of life analysis could have gone further. With the right modeling, we might learn even more about **how and when treatment side effects truly impact patients’ lives**.
+
