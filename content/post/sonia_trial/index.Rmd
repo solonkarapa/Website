@@ -7,7 +7,7 @@ categories:
   - reporting
 tags: [reporting]
 subtitle: ''
-summary: 'To add summary'
+summary: 'The SONIA trial made headlines by challenging a major assumption in breast cancer care: that drugs like CDK4/6 inhibitors must be used right away in advanced HR+/HER2– breast cancer. The study found no significant difference in survival between using these drugs early or later. It even showed that later use led to fewer side effects and lower costs. But not everything was so straightforward.'
 authors: []
 lastmod: '2025-12-20T14:27:06Z'
 featured: no
@@ -23,29 +23,83 @@ draft: TRUE
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r, echo=F}
+```{r, echo=F, message = F}
 library(ggplot2)
+
+colors <- c("blue", "red")
 ```
 
-The [SONIA trial](https://www.nature.com/articles/s41586-024-08035-2) made headlines by challenging a major assumption in breast cancer care: that powerful drugs like CDK4/6 inhibitors must be used right away in advanced HR+/HER2– breast cancer. The study found **no significant difference in survival** between using these drugs early or later. It even showed that later use led to fewer side effects and lower costs.
+The [SONIA trial](https://www.nature.com/articles/s41586-024-08035-2) shook up conventional thinking about advanced breast cancer treatment. For years, the standard approach was to start CDK4/6 inhibitors—powerful but costly and often toxic drugs—right away in HR+/HER2– metastatic breast cancer. SONIA tested that assumption.
+
+In a large randomized trial, patients were assigned to either receive a CDK4/6 inhibitor up front (early group) or only after first-line hormonal therapy failed (delayed group). The results? *No difference in overall survival*. Delaying treatment didn't worsen outcomes—and actually came with fewer side effects and lower costs.
 
 But there’s one area where the results are … less satisfying.
 
-The authors reported **no difference in health-related quality of life (HRQOL)** between the early and delayed treatment groups, based on the widely used FACT-B questionnaire. At first glance, this seems reassuring—patients felt just as good either way.
+The authors reported *no difference in health-related quality of life (HRQOL)* between the early and delayed treatment groups, based on the widely used FACT-B questionnaire. At first glance, this seems reassuring—patients felt just as good/bad either way.
 
-But let’s look a little closer.
+But a closer look raises questions about what was being measured—and whether the tools used fully captured the patient experience.
+
+```{r, echo=F, warning=F}
+nodes <- data.frame(
+   label = c(
+      "Randomization\nN=1050",
+      "CDK4/6-first group:\nAI + CDK4/6i", "CDK4/6-second group:\nAI only",
+      "2nd-line:\nFulvestrant", "2nd-line:\nFulvestrant + CDK4/6i"
+   ),
+   x = c(0, -3, 3, -3, 3),
+   y = c(6, 4, 4, 2, 2),
+   group = c("main", "A", "B", "A", "B")
+)
+
+# Define arrows
+edges <- data.frame(
+   x = c(0, 0, -3, 3),
+   xend = c(-3, 3, -3, 3),
+   y = c(5.4, 5.4, 3.3, 3.3),
+   yend = c(4.8, 4.8, 2.7, 2.7),
+   group = c("A", "B", "A", "B")
+)
+
+# Plot
+ggplot() +
+   # Arrows
+   geom_segment(data = edges, 
+                aes(x = x, y = y, xend = xend, yend = yend, color = group),
+                arrow = arrow(length = unit(0.2, "inches")),
+                size = 1.2) +
+   
+   # Boxes
+   geom_rect(data = nodes,
+             aes(xmin = x - 1.4, xmax = x + 1.4, ymin = y - 0.5, ymax = y + 0.5, fill = group),
+             color = "black", alpha = 0.15) +
+   
+   # Labels
+   geom_text(data = nodes,
+             aes(x = x, y = y, label = label),
+             size = 4, lineheight = 1.1) +
+   
+   # Color and theme
+   scale_color_manual(values = c("A" = "blue", "B" = "red")) +
+   scale_fill_manual(values = c("A" = "blue", "B" = "red", "main" = "#ffffff")) +
+   theme_void() +
+   theme(legend.position = "none") +
+   coord_fixed() +
+   labs(title = "SONIA Trial Design") +
+   theme(plot.title = element_text(hjust = 0.5))
+
+```
 
 ## The HRQOL Analysis Was Likely Too Simple
 
 The authors used a main effects model to compare the FACT-B scores over time. This approach makes two key assumptions:
 
-1. The only difference between the groups is a constant shift—i.e., one group is consistently better or worse than the other across time.
-    - In their model, the coefficient for the "CDK4/6i-second" group was −0.91, implying a minor, consistent shift.
+1. The only difference between the treatment groups is a constant shift—i.e., one group is consistently better or worse than the other across time.
+    - In their model, the coefficient for the "CDK4/6-second" group was −0.91, implying a minor, consistent shift.
 2. FACT-B scores change linearly over time.
 
 Both assumptions are strong—and likely inadequate.
 
-```{r}
+```{r, echo = F}
 intercept <- 37.950
 arm_second_group <- -0.91
 time_coef <- -0.008
@@ -56,30 +110,36 @@ first_group <- intercept + (time_coef * time) + FACTB_baseline
 second_group <- first_group + arm_second_group
 
 original_df <- data.frame(y = c(first_group, second_group),
-                          group = c(rep("CDK4/6 first", length(time)), rep("CDK4/6 second", length(time))),
+                          group = c(rep("CDK4/6-first", length(time)), rep("CDK4/6-second", length(time))),
                           time = time)
 ```
 
-```{r}
+```{r, echo = F}
 ggplot(original_df) +
-   geom_line(aes(y = y, x = time, colour = group))
+   geom_line(aes(y = y, x = time, colour = group), linewidth = 1) +
+   labs(y = "FACT-B score", x = "Time", col = "Treatment Group") + 
+   scale_color_manual(values= colors) +
+   theme_classic() +
+   theme(axis.text.x = element_blank(),
+         axis.text.y = element_blank(),
+         axis.ticks = element_blank())
 ```
 
 ## A Better Way to Ask the Question
 
-Instead of asking, “Were average quality of life scores different across time?”, why not ask a more patient-centered question:
+Instead of asking, “Were average quality of life scores different across time?”, why not ask a more patient-centered question?
 
 ### **Hypothesis 1**
 
 *Patients who start CDK4/6 inhibitors earlier (first-line group) experience a **faster decline** in quality of life compared to those who start them later.*
 
-Why might this be true? Because the first-line group had more severe side effects—more than 1,000 additional grade 3+ events than the second-line group. It’s logical to expect this would show up in how patients feel over time.
+Why might this be true? Because the first-line group had more severe side effects—more than 1,000 additional grade 3+ events than the second-line group. It’s logical to expect this would show up in their quality of life assessments.
 
 Testing this hypothesis means including an interaction between time and treatment group. This would allow the slopes of the two groups’ HRQOL trajectories to differ.
 
-Visually, this would look like one group’s curve dropping faster than the other.
+Visually, this would look like one group’s line dropping faster than the other.
 
-```{r}
+```{r, echo = F}
 interaction_coeff <- -0.005
 arm_second_group <- -0.9
 main <- intercept + (time_coef * time) + FACTB_baseline
@@ -93,25 +153,49 @@ hyp1_df <- data.frame(y = c(first_group_int, second_group_int),
                           time = time)
 
 ggplot(hyp1_df) +
-   geom_line(aes(y = y, x = time, colour = group))
-
+   geom_line(aes(y = y, x = time, colour = group), linewidth = 1) +
+   labs(y = "FACT-B score", x = "Time", col = "Treatment Group") + 
+   scale_color_manual(values= colors) +
+   theme_classic() +
+   theme(axis.text.x = element_blank(),
+         axis.text.y = element_blank(),
+         axis.ticks = element_blank())
 ```
 
 ### **Hypothesis 2**
 
-*Even if the average scores at the end are the same, the **shapes of the trajectories** might differ—non-linear patterns, dips, or recoveries.*
+*Even if the average scores at the end are the same, the shapes of the trajectories might differ—non-linear patterns.*
 
 Here, we’re relaxing the idea that quality of life changes in a neat, straight line. Real life (and real cancer treatment) is rarely linear. Patients often experience early/late toxicity, and plateaus. A model assuming straight-line change might completely miss that.
 
-Pictorially, this might show two wavy lines crossing or diverging—even if they end at the same place.
+Pictorially, this might show two lines crossing or diverging—even if they end at the same place.
 
-```{r}
+```{r, echo = F}
+# Create a sequence of x values
+x <- seq(0, 10, length.out = 200)
 
+# Define two curves with different starting points, converging to the same end point
+curve1 <- data.frame(x = x, y = exp(-0.3 * x) * 3)
+curve2 <- data.frame(x = x, y = exp(-0.5 * x) * 5)
+
+# Combine into one data frame for ggplot
+curve1$curve <- "CDK4/6 second"
+curve2$curve <- "CDK4/6 first"
+df <- rbind(curve1, curve2)
+
+# Plot the curves
+ggplot(df, aes(x = x, y = y, color = curve)) +
+   geom_line(linewidth = 1) +
+   labs(y = "FACT-B score", x = "Time", col = "Treatment Group") + 
+   scale_color_manual(values = colors) +
+   theme_classic() +
+   theme(axis.text.x = element_blank(),
+                 axis.text.y = element_blank(),
+                 axis.ticks = element_blank())
 ```
 
 ## Why This Matters
 
-These more flexible, hypothesis-driven approaches might **better capture what patients actually experience**.
+The SONIA trial is important, but its quality of life analysis could have gone further. With the right modeling, we might learn even more about how and when treatment side effects truly impact patients’ lives.
 
-The SONIA trial is important, but its quality of life analysis could have gone further. With the right modeling, we might learn even more about **how and when treatment side effects truly impact patients’ lives**.
-
+A more flexible, hypothesis-driven approach might have better captured what patients actually experienced.
