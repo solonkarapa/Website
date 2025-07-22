@@ -9,14 +9,14 @@ tags: [reporting]
 subtitle: ''
 summary: 'The SONIA trial made headlines by challenging a major assumption in breast cancer care: that drugs like CDK4/6 inhibitors must be used right away in advanced HR+/HER2– breast cancer. The study found no significant difference in survival between using these drugs early or later. It even showed that later use led to fewer side effects and lower costs. But not everything was so straightforward.'
 authors: []
-lastmod: '2025-12-20T14:27:06Z'
+lastmod: '2025-07-22T14:27:06Z'
 featured: no
 image:
   caption: 'created by DALL·E'
   focal_point: ''
   preview_only: no
 projects: []
-draft: TRUE
+draft: FALSE
 ---
 
 ```{r setup, include=FALSE}
@@ -91,7 +91,7 @@ ggplot() +
 
 ## The HRQOL Analysis Was Likely Too Simple
 
-The authors used a main effects model to compare the FACT-B scores over time. This approach makes two key assumptions:
+The authors used a main effects model to compare the FACT-B scores over time (see plot below). This approach makes two key assumptions:
 
 1. The only difference between the treatment groups is a constant shift—i.e., one group is consistently better or worse than the other across time.
     - In their model, the coefficient for the "CDK4/6-second" group was −0.91, implying a minor, consistent shift.
@@ -127,7 +127,7 @@ ggplot(original_df) +
 
 ## A Better Way to Ask the Question
 
-Instead of asking, “Were average quality of life scores different across time?”, why not ask a more patient-centered question?
+Instead of asking, “Were average quality of life scores different across time?”, why not ask more patient-centered questions?
 
 ### **Hypothesis 1**
 
@@ -164,9 +164,9 @@ ggplot(hyp1_df) +
 
 ### **Hypothesis 2**
 
-*Even if the average scores at the end are the same, the shapes of the trajectories might differ—non-linear patterns.*
+*The trajectories of the two groups may take different shapes—potentially non-linear—even if the final FACT-B scores are the same.*
 
-Here, we’re relaxing the idea that quality of life changes in a neat, straight line. Real life (and real cancer treatment) is rarely linear. Patients often experience early/late toxicity, and plateaus. A model assuming straight-line change might completely miss that.
+Here, I'm relaxing the idea that quality of life changes in a neat, straight line. Real life (and real cancer treatment) is rarely linear. Patients often experience early/late toxicity, and plateaus. A model assuming straight-line change might completely miss that.
 
 Pictorially, this might show two lines crossing or diverging—even if they end at the same place.
 
