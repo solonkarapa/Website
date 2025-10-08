@@ -31,7 +31,7 @@ title: Teaching
 - Dissertation Supervisor (2022-2023) at the [MPhil in Computational Biology](https://www.maths.cam.ac.uk/postgrad/mphil/prospective/compbio).
 <br><br>
 
-- Teaching Assistant and Dissertation Supervisor (2021-2024) at the [MPhil in Population Health Sciences](https://www.phs.masters.cam.ac.uk/), University of Cambridge.
+- Teaching Assistant and Dissertation Supervisor (2021-2025) at the [MPhil in Population Health Sciences](https://www.phs.masters.cam.ac.uk/), University of Cambridge.
 <br><br>
 
 - [Supervisor](https://www.maths.cam.ac.uk/undergrad/supervisions) 
