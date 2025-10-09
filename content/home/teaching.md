@@ -28,14 +28,14 @@ title: Teaching
 - Lecturer, [MPhil in Computational Biology](https://www.maths.cam.ac.uk/postgrad/mphil/prospective/compbio) - University of Cambridge (2022-2024)
 <br><br>
 
-- Thesis Supervisor, [MPhil in Computational Biology](https://www.maths.cam.ac.uk/postgrad/mphil/prospective/compbio), University of Cambridge (2022-2023)
+- Thesis Supervisor, [MPhil in Computational Biology](https://www.maths.cam.ac.uk/postgrad/mphil/prospective/compbio) - University of Cambridge (2022-2023)
 <br><br>
 
-- Teaching Assistant and Thesis Supervisor, [MPhil in Population Health Sciences](https://www.phs.masters.cam.ac.uk/), University of Cambridge (2021-2025)
+- Teaching Assistant and Thesis Supervisor, [MPhil in Population Health Sciences](https://www.phs.masters.cam.ac.uk/) - University of Cambridge (2021-2025)
 <br><br>
 
 - Supervisor, 
-[Statistics IB](https://www.dpmms.cam.ac.uk/study/IB/Statistics/), University of Cambridge (2019) 
+[Statistics IB](https://www.dpmms.cam.ac.uk/study/IB/Statistics/) - University of Cambridge (2019) 
 <br><br>
 
 - This is the [handbook](/teaching/BrilliantClub_Handbook.pdf) for the course I taught as a [Brilliant Club](https://thebrilliantclub.org/) tutor (2019) 
