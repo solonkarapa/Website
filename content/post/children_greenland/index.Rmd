@@ -75,7 +75,9 @@ When we think about survival in harsh climates, images of hunters, warriors, and
 
 # Toys as Training: Comparing Norse and Inuit Childhoods in Greenland
 
-The Norse Greenlanders and the Inuit developed very different ways of interacting with their environment, shaped by their unique social structures and ecological relationships. These differences are reflected even in the toys children played with.
+The Inuit entered Greenland from Canada from AD 1000. The Norse, on the other hand, reached Greenland from Iceland around the same time.
+
+The Norse and the Inuit developed very different ways of interacting with their environment, shaped by their unique social structures and ecological relationships. These differences are reflected even in the toys children played with.
 
 During the period when the Norse and Inuit coexisted in Greenland (roughly AD 1000–1400), their approaches to childhood play diverged in meaningful ways. Inuit society emphasized toys that prepared children for life in the Arctic. Miniature hunting tools and social play objects were common, likely serving as practice for essential survival skills. In contrast, Norse children’s toys were more closely tied to agriculture, reflecting the early introduction of farm work in their daily lives.
 
@@ -148,11 +150,12 @@ material_prop <- df %>%
     group_by(Culture, Dates) %>%
     # Sum number of YES for each material and total items
     summarise(
-        total_items = n(),  # total rows (or use sum(No.) if you want actual number of items)
+        #total_items = n(), #n(), #n(),  # total rows (or use sum(No.) if you want actual number of items)
         across(all_of(material_cols), sum, .names = "sum_{col}"),
         .groups = "drop") %>%
     # Calculate proportion for each material
-    mutate(across(starts_with("sum_"), ~ . / total_items, .names = "prop_{col}")) %>%
+   mutate(total_items_calc = rowSums(across(starts_with("sum_")))) %>%
+   mutate(across(starts_with("sum_"), ~ . / total_items_calc, .names = "prop_{col}")) %>%
     select(Culture, Dates, starts_with("prop_")) %>%
     tidyr::pivot_longer(
         cols = starts_with("prop_sum_"),     # columns with proportions
@@ -163,7 +166,8 @@ material_prop <- df %>%
     mutate(Material = str_to_sentence(gsub("prop_sum_Material_", "", Material)),
            Material = ifelse(Material == "Plant", "Wood", Material))
     
-material_prop %>% filter(Dates == "1000-1200" | Dates == "1200-1400") %>% 
+material_prop %>% 
+   filter(Dates == "1000-1200" | Dates == "1200-1400") %>% 
     ggplot(., aes(x = Dates, y = Proportion*100, group = Material, col = Material)) +
     facet_wrap(Culture ~ .) +
     geom_point() +
@@ -181,6 +185,7 @@ df %>% filter(Material_bone == "YES") %>% filter(Culture == "Inuit") %>%
    reframe(unique(Material_description)) 
 ```
 
+
 # Shifting Play: Inuit Toys and Cultural Change Over 800 Years
 
 For the Inuit, the dataset spans a period of approximately 800 years, allowing us to examine changes over an extended timeframe.
@@ -191,7 +196,7 @@ The most pronounced shifts appear to occur between 1600 and 1800—a period corr
 
 ```{r, echo=F}
 df_types %>% filter(Culture == "Inuit") %>% 
-    ggplot(., aes(x = Dates, y = proportion, col = Type, group = Type)) +
+    ggplot(., aes(x = Dates, y = proportion*100, col = Type, group = Type)) +
     geom_point() +
     geom_line() +
     #geom_text_repel(aes(label = Type)) +
@@ -208,6 +213,14 @@ df_types %>% filter(Culture == "Inuit") %>%
     theme_hc(12) +
     theme(legend.position = "none")
 
+# 10 most prevalent items in a period
+item_label <- df_items %>% filter(Culture == "Inuit") %>% 
+   #filter(Dates == "1400-1600") %>%
+   filter(Dates == ">1800") %>%
+   arrange(desc(proportion)) %>%
+   top_n(10) %>%
+   mutate(Dates = "1000-1200")
+
 df_items %>% filter(Culture == "Inuit") %>% 
     #filter(proportion > 0.05) %>%
     ggplot(., aes(x = Dates, y = proportion*100, col = Type, group = Item_name)) +
@@ -216,15 +229,166 @@ df_items %>% filter(Culture == "Inuit") %>%
     #geom_text_repel(aes(label = Item_name)) +
     facet_wrap(.~ Culture) +
     labs(x = "Time", y = "Proportion, %") + 
-    geom_text_repel(data = df_items %>% 
-                        filter(Culture == "Inuit") %>%
-                        filter(Dates == "1000-1200"), 
+    geom_text_repel(data = item_label, 
                     aes(label = Item_name)) +
     facet_wrap(.~ Culture) +
     #theme_minimal() +
     scale_color_brewer(palette = "Dark2") +
     theme_hc(12) +
     theme(legend.position = "none")
+
 ```
+
+```{r}
+avg_dimensions <- df %>%
+    group_by(Culture, Dates, Item_name) %>%
+    summarise(
+        mean_length = mean(MaxLength_mm, na.rm = TRUE),
+        mean_width = mean(MaxWidth_mm, na.rm = TRUE),
+        mean_thickness = mean(MaxThickness_mm, na.rm = TRUE),
+        mean_height = mean(MaxHeight_mm, na.rm = TRUE),
+        n_items = n()
+    ) %>%
+    ungroup()
+
+avg_dimensions_long <- avg_dimensions %>%
+    tidyr::pivot_longer(
+        cols = starts_with("mean_"),     # the dimension columns
+        names_to = "Dimension",          # new column for the variable names
+        values_to = "Value"            # new column for the values
+    ) %>%
+    mutate(
+        Dimension = gsub("mean_", "", Dimension),  # clean up names (optional)
+        Dimension = tools::toTitleCase(Dimension)  # make them look nice: "Length", "Width", etc.
+    )
+
+avg_dimensions_long %>% group_by(Culture, Dates, Item_name) %>% 
+    reframe(sds = sd(Value, na.rm = TRUE)) %>%
+   filter(Culture == "Inuit") %>%
+    ggplot(., aes(x = Dates, y = sds, col = Item_name, group = Item_name)) +
+    geom_point() +
+    geom_line() +
+    #geom_text_repel(aes(label = Type)) +
+    facet_grid(Culture ~ ., scales = "free") +
+    theme_minimal() +
+    theme(legend.position = "none")
+
+avg_dimensions_long %>% filter(Culture == "Inuit") %>% 
+    #filter(Item_name == "Figure") %>%
+    ggplot(., aes(x = Dates, y = Value, col = Item_name, group = Item_name)) +
+    geom_point() +
+    geom_line() +
+    #geom_text_repel(aes(label = Type)) +
+    facet_grid(Culture ~ Dimension, scales = "free") +
+    theme_minimal() +
+    theme(legend.position = "none")
+```
+```{r}
+avg_dimensions <- df %>%
+    group_by(Culture, Dates, Type) %>%
+    summarise(
+        mean_length = mean(MaxLength_mm, na.rm = TRUE),
+        mean_width = mean(MaxWidth_mm, na.rm = TRUE),
+        mean_thickness = mean(MaxThickness_mm, na.rm = TRUE),
+        mean_height = mean(MaxHeight_mm, na.rm = TRUE),
+        n_items = n()
+    ) %>%
+    ungroup()
+
+avg_dimensions_long <- avg_dimensions %>%
+    tidyr::pivot_longer(
+        cols = starts_with("mean_"),     # the dimension columns
+        names_to = "Dimension",          # new column for the variable names
+        values_to = "Value"            # new column for the values
+    ) %>%
+    mutate(
+        Dimension = gsub("mean_", "", Dimension),  # clean up names (optional)
+        Dimension = tools::toTitleCase(Dimension)  # make them look nice: "Length", "Width", etc.
+    )
+avg_dimensions_long %>% filter(Culture == "Inuit") %>% 
+    #filter(Item_name == "Figure") %>%
+    ggplot(., aes(x = Dates, y = Value, col = Type, group = Type)) +
+    geom_point() +
+    geom_line() +
+    #geom_text_repel(aes(label = Type)) +
+    facet_grid(Culture ~ Dimension, scales = "free") +
+    theme_minimal() 
+
+```
+```{r}
+material_prop %>% 
+   filter(Culture == "Inuit") %>% 
+   #filter(Dates == "1000-1200" | Dates == "1200-1400") %>% 
+    ggplot(., aes(x = Dates, y = Proportion*100, group = Material, col = Material)) +
+    #facet_wrap(Culture ~ .) +
+    geom_point() +
+    geom_line() +
+    geom_text_repel(data = material_prop %>% filter(Dates == "1000-1200"), 
+                    aes(label = Material)) +
+    labs(x = "Time", y = "Proportion, %") + 
+    theme_hc(12) +
+    scale_color_paletteer_d("PrettyCols::Bold") +
+    theme(legend.position = "none")
+```
+```{r}
+material_prop <- df %>%
+    # Convert "YES"/"NO" to 1/0 for counting
+    mutate(across(all_of(material_cols), ~ ifelse(. == "YES", 1, 0))) %>%
+    # Group by Culture and Dates
+    group_by(Culture, Dates, Type) %>%
+    # Sum number of YES for each material and total items
+    summarise(
+        #total_items = sum(No., na.rm = T),  # total rows (or use sum(No.) if you want actual number of items)
+        across(all_of(material_cols), sum, .names = "sum_{col}"),
+        .groups = "drop") %>%
+    # Calculate proportion for each material
+   mutate(total_items_calc = rowSums(across(starts_with("sum_")))) %>%
+    mutate(across(starts_with("sum_"), ~ . / total_items_calc, .names = "prop_{col}")) %>%
+    select(Culture, Dates, Type, starts_with("prop_")) %>%
+    tidyr::pivot_longer(
+        cols = starts_with("prop_sum_"),     # columns with proportions
+        names_to = "Material",               # new column for material type
+        values_to = "Proportion"             # new column for proportion value
+    ) %>%
+    # Optional: clean up the Material names
+    mutate(Material = str_to_sentence(gsub("prop_sum_Material_", "", Material)),
+           Material = ifelse(Material == "Plant", "Wood", Material))
+
+material_prop %>% 
+   filter(Culture == "Inuit") %>% 
+   #filter(Dates == "1000-1200" | Dates == "1200-1400") %>% 
+    ggplot(., aes(x = Dates, y = Proportion*100, group = Material, col = Material)) +
+    geom_point() +
+    geom_line() +
+    geom_text_repel(data = material_prop %>% filter(Dates == "1000-1200"), 
+                    aes(label = Material)) +
+   facet_wrap(Type ~ ., scales = "free") +
+    labs(x = "Time", y = "Proportion, %") + 
+    theme_hc(12) +
+    scale_color_paletteer_d("PrettyCols::Bold") +
+    theme(legend.position = "none")
+
+```
+
+
+
+```{r}
+df_items %>% filter(Culture == "Inuit") %>% 
+    filter(Type == "Weapon") %>%
+    ggplot(., aes(x = Dates, y = proportion*100, col = Type, group = Item_name)) +
+    geom_point() +
+    geom_line() +
+    #geom_text_repel(aes(label = Item_name)) +
+    facet_wrap(.~ Culture) +
+    labs(x = "Time", y = "Proportion, %") + 
+    geom_text_repel( aes(label = Item_name)) +
+    facet_wrap(.~ Culture) +
+    #theme_minimal() +
+    scale_color_brewer(palette = "Dark2") +
+    theme_hc(12) +
+    theme(legend.position = "none")
+```
+
+
 
 ## References 

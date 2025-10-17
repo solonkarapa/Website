@@ -28,7 +28,8 @@ bibliography: biblio_children.bib
 <p>When we think about survival in harsh climates, images of hunters, warriors, and explorers often come to mind. But in Greenland during the Little Ice Age (14th century AD), survival wasn’t just about adults—it involved children too. Recent research reveals that the toys and play objects of Inuit and Norse children weren’t just for fun; they were tools of adaptation, creativity, and resilience <span class="citation">(<a href="#ref-meyer2025playing">Meyer and Riede 2025</a>)</span>. By examining the variety, materials, and complexity of these objects, archaeologists are uncovering how play shaped the skills and innovative thinking necessary to thrive in one of the world’s most challenging environments. In this post, we’ll explore how something as simple as a child’s toy can tell profound stories about culture and survival.</p>
 <div id="toys-as-training-comparing-norse-and-inuit-childhoods-in-greenland" class="section level1">
 <h1>Toys as Training: Comparing Norse and Inuit Childhoods in Greenland</h1>
-<p>The Norse Greenlanders and the Inuit developed very different ways of interacting with their environment, shaped by their unique social structures and ecological relationships. These differences are reflected even in the toys children played with.</p>
+<p>The Inuit entered Greenland from Canada from AD 1000. The Norse, on the other hand, reached Greenland from Iceland around the same time.</p>
+<p>The Norse and the Inuit developed very different ways of interacting with their environment, shaped by their unique social structures and ecological relationships. These differences are reflected even in the toys children played with.</p>
 <p>During the period when the Norse and Inuit coexisted in Greenland (roughly AD 1000–1400), their approaches to childhood play diverged in meaningful ways. Inuit society emphasized toys that prepared children for life in the Arctic. Miniature hunting tools and social play objects were common, likely serving as practice for essential survival skills. In contrast, Norse children’s toys were more closely tied to agriculture, reflecting the early introduction of farm work in their daily lives.</p>
 <p>Among the Inuit, little change in these categories is observable over time. For the Norse, the variation is more pronounced, although this pattern may simply reflect the limited sample size. These differences highlight how childhood play can offer a window into broader cultural strategies for survival and adaptation.</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" />
@@ -45,9 +46,171 @@ Another indication of diversity comes from the materials used. Usually only one 
 <p>The proportion of social play items (such as dolls) declines up to the 1600–1800 period, after which it increases sharply. In contrast, the proportion of weapon-related items rises until the 1600–1800s and then begins to decline. Tool-related artifacts show a steadier, more gradual increase across the sequence.</p>
 <p>The most pronounced shifts appear to occur between 1600 and 1800—a period corresponding to renewed contact between the Inuit and Europeans.</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<pre><code>## Warning: ggrepel: 9 unlabeled data points (too many overlaps). Consider
+<pre><code>## Selecting by proportion</code></pre>
+<pre><code>## Warning: ggrepel: 7 unlabeled data points (too many overlaps). Consider
 ## increasing max.overlaps</code></pre>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+<pre class="r"><code>avg_dimensions &lt;- df %&gt;%
+    group_by(Culture, Dates, Item_name) %&gt;%
+    summarise(
+        mean_length = mean(MaxLength_mm, na.rm = TRUE),
+        mean_width = mean(MaxWidth_mm, na.rm = TRUE),
+        mean_thickness = mean(MaxThickness_mm, na.rm = TRUE),
+        mean_height = mean(MaxHeight_mm, na.rm = TRUE),
+        n_items = n()
+    ) %&gt;%
+    ungroup()</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;Culture&#39;, &#39;Dates&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<pre class="r"><code>avg_dimensions_long &lt;- avg_dimensions %&gt;%
+    tidyr::pivot_longer(
+        cols = starts_with(&quot;mean_&quot;),     # the dimension columns
+        names_to = &quot;Dimension&quot;,          # new column for the variable names
+        values_to = &quot;Value&quot;            # new column for the values
+    ) %&gt;%
+    mutate(
+        Dimension = gsub(&quot;mean_&quot;, &quot;&quot;, Dimension),  # clean up names (optional)
+        Dimension = tools::toTitleCase(Dimension)  # make them look nice: &quot;Length&quot;, &quot;Width&quot;, etc.
+    )
+
+avg_dimensions_long %&gt;% group_by(Culture, Dates, Item_name) %&gt;% 
+    reframe(sds = sd(Value, na.rm = TRUE)) %&gt;%
+   filter(Culture == &quot;Inuit&quot;) %&gt;%
+    ggplot(., aes(x = Dates, y = sds, col = Item_name, group = Item_name)) +
+    geom_point() +
+    geom_line() +
+    #geom_text_repel(aes(label = Type)) +
+    facet_grid(Culture ~ ., scales = &quot;free&quot;) +
+    theme_minimal() +
+    theme(legend.position = &quot;none&quot;)</code></pre>
+<pre><code>## Warning: Removed 149 rows containing missing values or values outside the scale range
+## (`geom_point()`).</code></pre>
+<pre><code>## Warning: Removed 140 rows containing missing values or values outside the scale range
+## (`geom_line()`).</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>avg_dimensions_long %&gt;% filter(Culture == &quot;Inuit&quot;) %&gt;% 
+    #filter(Item_name == &quot;Figure&quot;) %&gt;%
+    ggplot(., aes(x = Dates, y = Value, col = Item_name, group = Item_name)) +
+    geom_point() +
+    geom_line() +
+    #geom_text_repel(aes(label = Type)) +
+    facet_grid(Culture ~ Dimension, scales = &quot;free&quot;) +
+    theme_minimal() +
+    theme(legend.position = &quot;none&quot;)</code></pre>
+<pre><code>## Warning: Removed 583 rows containing missing values or values outside the scale range
+## (`geom_point()`).</code></pre>
+<pre><code>## Warning: Removed 375 rows containing missing values or values outside the scale range
+## (`geom_line()`).</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<pre class="r"><code>avg_dimensions &lt;- df %&gt;%
+    group_by(Culture, Dates, Type) %&gt;%
+    summarise(
+        mean_length = mean(MaxLength_mm, na.rm = TRUE),
+        mean_width = mean(MaxWidth_mm, na.rm = TRUE),
+        mean_thickness = mean(MaxThickness_mm, na.rm = TRUE),
+        mean_height = mean(MaxHeight_mm, na.rm = TRUE),
+        n_items = n()
+    ) %&gt;%
+    ungroup()</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;Culture&#39;, &#39;Dates&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<pre class="r"><code>avg_dimensions_long &lt;- avg_dimensions %&gt;%
+    tidyr::pivot_longer(
+        cols = starts_with(&quot;mean_&quot;),     # the dimension columns
+        names_to = &quot;Dimension&quot;,          # new column for the variable names
+        values_to = &quot;Value&quot;            # new column for the values
+    ) %&gt;%
+    mutate(
+        Dimension = gsub(&quot;mean_&quot;, &quot;&quot;, Dimension),  # clean up names (optional)
+        Dimension = tools::toTitleCase(Dimension)  # make them look nice: &quot;Length&quot;, &quot;Width&quot;, etc.
+    )
+avg_dimensions_long %&gt;% filter(Culture == &quot;Inuit&quot;) %&gt;% 
+    #filter(Item_name == &quot;Figure&quot;) %&gt;%
+    ggplot(., aes(x = Dates, y = Value, col = Type, group = Type)) +
+    geom_point() +
+    geom_line() +
+    #geom_text_repel(aes(label = Type)) +
+    facet_grid(Culture ~ Dimension, scales = &quot;free&quot;) +
+    theme_minimal() </code></pre>
+<pre><code>## Warning: Removed 12 rows containing missing values or values outside the scale range
+## (`geom_point()`).</code></pre>
+<pre><code>## Warning: Removed 3 rows containing missing values or values outside the scale range
+## (`geom_line()`).</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code>material_prop %&gt;% 
+   filter(Culture == &quot;Inuit&quot;) %&gt;% 
+   #filter(Dates == &quot;1000-1200&quot; | Dates == &quot;1200-1400&quot;) %&gt;% 
+    ggplot(., aes(x = Dates, y = Proportion*100, group = Material, col = Material)) +
+    #facet_wrap(Culture ~ .) +
+    geom_point() +
+    geom_line() +
+    geom_text_repel(data = material_prop %&gt;% filter(Dates == &quot;1000-1200&quot;), 
+                    aes(label = Material)) +
+    labs(x = &quot;Time&quot;, y = &quot;Proportion, %&quot;) + 
+    theme_hc(12) +
+    scale_color_paletteer_d(&quot;PrettyCols::Bold&quot;) +
+    theme(legend.position = &quot;none&quot;)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre class="r"><code>material_prop &lt;- df %&gt;%
+    # Convert &quot;YES&quot;/&quot;NO&quot; to 1/0 for counting
+    mutate(across(all_of(material_cols), ~ ifelse(. == &quot;YES&quot;, 1, 0))) %&gt;%
+    # Group by Culture and Dates
+    group_by(Culture, Dates, Type) %&gt;%
+    # Sum number of YES for each material and total items
+    summarise(
+        #total_items = sum(No., na.rm = T),  # total rows (or use sum(No.) if you want actual number of items)
+        across(all_of(material_cols), sum, .names = &quot;sum_{col}&quot;),
+        .groups = &quot;drop&quot;) %&gt;%
+    # Calculate proportion for each material
+   mutate(total_items_calc = rowSums(across(starts_with(&quot;sum_&quot;)))) %&gt;%
+    mutate(across(starts_with(&quot;sum_&quot;), ~ . / total_items_calc, .names = &quot;prop_{col}&quot;)) %&gt;%
+    select(Culture, Dates, Type, starts_with(&quot;prop_&quot;)) %&gt;%
+    tidyr::pivot_longer(
+        cols = starts_with(&quot;prop_sum_&quot;),     # columns with proportions
+        names_to = &quot;Material&quot;,               # new column for material type
+        values_to = &quot;Proportion&quot;             # new column for proportion value
+    ) %&gt;%
+    # Optional: clean up the Material names
+    mutate(Material = str_to_sentence(gsub(&quot;prop_sum_Material_&quot;, &quot;&quot;, Material)),
+           Material = ifelse(Material == &quot;Plant&quot;, &quot;Wood&quot;, Material))
+
+material_prop %&gt;% 
+   filter(Culture == &quot;Inuit&quot;) %&gt;% 
+   #filter(Dates == &quot;1000-1200&quot; | Dates == &quot;1200-1400&quot;) %&gt;% 
+    ggplot(., aes(x = Dates, y = Proportion*100, group = Material, col = Material)) +
+    geom_point() +
+    geom_line() +
+    geom_text_repel(data = material_prop %&gt;% filter(Dates == &quot;1000-1200&quot;), 
+                    aes(label = Material)) +
+   facet_wrap(Type ~ ., scales = &quot;free&quot;) +
+    labs(x = &quot;Time&quot;, y = &quot;Proportion, %&quot;) + 
+    theme_hc(12) +
+    scale_color_paletteer_d(&quot;PrettyCols::Bold&quot;) +
+    theme(legend.position = &quot;none&quot;)</code></pre>
+<pre><code>## Warning: ggrepel: 6 unlabeled data points (too many overlaps). Consider
+## increasing max.overlaps</code></pre>
+<pre><code>## Warning: ggrepel: 7 unlabeled data points (too many overlaps). Consider
+## increasing max.overlaps</code></pre>
+<pre><code>## Warning: ggrepel: 6 unlabeled data points (too many overlaps). Consider increasing max.overlaps
+## ggrepel: 6 unlabeled data points (too many overlaps). Consider increasing max.overlaps</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<pre class="r"><code>df_items %&gt;% filter(Culture == &quot;Inuit&quot;) %&gt;% 
+    filter(Type == &quot;Weapon&quot;) %&gt;%
+    ggplot(., aes(x = Dates, y = proportion*100, col = Type, group = Item_name)) +
+    geom_point() +
+    geom_line() +
+    #geom_text_repel(aes(label = Item_name)) +
+    facet_wrap(.~ Culture) +
+    labs(x = &quot;Time&quot;, y = &quot;Proportion, %&quot;) + 
+    geom_text_repel( aes(label = Item_name)) +
+    facet_wrap(.~ Culture) +
+    #theme_minimal() +
+    scale_color_brewer(palette = &quot;Dark2&quot;) +
+    theme_hc(12) +
+    theme(legend.position = &quot;none&quot;)</code></pre>
+<pre><code>## Warning: ggrepel: 30 unlabeled data points (too many overlaps). Consider
+## increasing max.overlaps</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
