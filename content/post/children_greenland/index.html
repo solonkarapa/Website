@@ -1,7 +1,7 @@
 ---
 title: "Children Greenland"
 author: Me
-date: '17. Oct 2025'
+date: '20. Oct 2025'
 slug: Children_Greenland
 categories:
   - data analysis
@@ -25,7 +25,8 @@ bibliography: biblio_children.bib
 
 
 
-<p>When we think about survival in harsh climates, images of hunters, warriors, and explorers often come to mind. But in Greenland during the Little Ice Age (14th century AD), survival wasn’t just about adults—it involved children too. Recent research reveals that the toys and play objects of Inuit and Norse children weren’t just for fun; they were tools of adaptation, creativity, and resilience <span class="citation">(<a href="#ref-meyer2025playing">Meyer and Riede 2025</a>)</span>. By examining the variety, materials, and complexity of these objects, archaeologists are uncovering how play shaped the skills and innovative thinking necessary to thrive in one of the world’s most challenging environments. In this post, we’ll explore how something as simple as a child’s toy can tell profound stories about culture and survival.</p>
+<p>When we think about survival in harsh climates, images of hunters, warriors, and explorers often come to mind. But in Greenland during the Little Ice Age (14th century AD), survival wasn’t just about adults—it involved children too. Recent research reveals that the toys and play objects of Inuit and Norse children weren’t just for fun; they were tools of adaptation, creativity, and resilience <span class="citation">(<a href="#ref-meyer2025playing">Meyer and Riede 2025</a>)</span>. By examining the variety, materials, and complexity of these objects, archaeologists are uncovering how play shaped the skills and innovative thinking necessary to thrive in one of the world’s most challenging environments. In this post, I’m exploring how something as simple as a child’s toy can tell profound stories about culture and survival.</p>
+<p>Data from <span class="citation">Meyer and Riede (<a href="#ref-meyer2025playing">2025</a>)</span>.</p>
 <div id="toys-as-training-comparing-norse-and-inuit-childhoods-in-greenland" class="section level1">
 <h1>Toys as Training: Comparing Norse and Inuit Childhoods in Greenland</h1>
 <p>The Inuit entered Greenland from Canada from AD 1000. The Norse, on the other hand, reached Greenland from Iceland around the same time.</p>
@@ -37,7 +38,8 @@ Looking at the individual items, dolls and figures (figurines) made up the large
 <p>It is interesting to notice the diversity of items within each category for the Inuits compared to the Norse. This diversity is commonly seen as an indication of innovation <span class="citation">(<a href="#ref-kuhn2020evolution">Kuhn 2020</a>)</span>.</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 Another indication of diversity comes from the materials used. Usually only one material is used per item with only 6 items using combinations of two materials (bone and metal or wood and metal), all made by Inuit.</p>
-<p>For both cultures, the most prevalent material was wood. Followed by bone for the Inuit and stone for the Norse. The bone mainly originated from sea animals such as seals and whales <span class="citation">(e.g. <a href="#ref-seersholm2016dna">Seersholm et al. 2016</a>)</span>.</p>
+<p>For both cultures, the most prevalent material was wood. Followed by bone for the Inuit and stone for the Norse. The bones mainly originated from sea animals such as seals and whales <span class="citation">(e.g. <a href="#ref-seersholm2016dna">Seersholm et al. 2016</a>)</span>.</p>
+<p>So what?</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="shifting-play-inuit-toys-and-cultural-change-over-800-years" class="section level1">
@@ -45,155 +47,15 @@ Another indication of diversity comes from the materials used. Usually only one 
 <p>For the Inuit, the dataset spans a period of approximately 800 years, allowing us to examine changes over an extended timeframe.</p>
 <p>The proportion of social play items (such as dolls) declines up to the 1600–1800 period, after which it increases sharply. In contrast, the proportion of weapon-related items rises until the 1600–1800s and then begins to decline. Tool-related artifacts show a steadier, more gradual increase across the sequence.</p>
 <p>The most pronounced shifts appear to occur between 1600 and 1800—a period corresponding to renewed contact between the Inuit and Europeans.</p>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<pre><code>## Selecting by proportion</code></pre>
-<pre><code>## Warning: ggrepel: 7 unlabeled data points (too many overlaps). Consider
-## increasing max.overlaps</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
-<pre class="r"><code>avg_dimensions &lt;- df %&gt;%
-    group_by(Culture, Dates, Item_name) %&gt;%
-    summarise(
-        mean_length = mean(MaxLength_mm, na.rm = TRUE),
-        mean_width = mean(MaxWidth_mm, na.rm = TRUE),
-        mean_thickness = mean(MaxThickness_mm, na.rm = TRUE),
-        mean_height = mean(MaxHeight_mm, na.rm = TRUE),
-        n_items = n()
-    ) %&gt;%
-    ungroup()</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;Culture&#39;, &#39;Dates&#39;. You can override using
-## the `.groups` argument.</code></pre>
-<pre class="r"><code>avg_dimensions_long &lt;- avg_dimensions %&gt;%
-    tidyr::pivot_longer(
-        cols = starts_with(&quot;mean_&quot;),     # the dimension columns
-        names_to = &quot;Dimension&quot;,          # new column for the variable names
-        values_to = &quot;Value&quot;            # new column for the values
-    ) %&gt;%
-    mutate(
-        Dimension = gsub(&quot;mean_&quot;, &quot;&quot;, Dimension),  # clean up names (optional)
-        Dimension = tools::toTitleCase(Dimension)  # make them look nice: &quot;Length&quot;, &quot;Width&quot;, etc.
-    )
-
-avg_dimensions_long %&gt;% group_by(Culture, Dates, Item_name) %&gt;% 
-    reframe(sds = sd(Value, na.rm = TRUE)) %&gt;%
-   filter(Culture == &quot;Inuit&quot;) %&gt;%
-    ggplot(., aes(x = Dates, y = sds, col = Item_name, group = Item_name)) +
-    geom_point() +
-    geom_line() +
-    #geom_text_repel(aes(label = Type)) +
-    facet_grid(Culture ~ ., scales = &quot;free&quot;) +
-    theme_minimal() +
-    theme(legend.position = &quot;none&quot;)</code></pre>
-<pre><code>## Warning: Removed 149 rows containing missing values or values outside the scale range
-## (`geom_point()`).</code></pre>
-<pre><code>## Warning: Removed 140 rows containing missing values or values outside the scale range
-## (`geom_line()`).</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" /><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-2.png" width="672" />
+Among the recorded toy dimensions, the average toy length shows the most pronounced changes over time. This pattern may reflect shifts in design and function, variations in material availability, or a combination of both. Notably, between AD 1400 and 1600 there is a marked decline in the proportion of wooden toys, accompanied by an increase in bone objects. However, when material use is examined by toy type, this reduction in wooden items appears to be driven primarily by tools and weapons.</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<pre class="r"><code>avg_dimensions_long %&gt;% filter(Culture == &quot;Inuit&quot;) %&gt;% 
-    #filter(Item_name == &quot;Figure&quot;) %&gt;%
-    ggplot(., aes(x = Dates, y = Value, col = Item_name, group = Item_name)) +
-    geom_point() +
-    geom_line() +
-    #geom_text_repel(aes(label = Type)) +
-    facet_grid(Culture ~ Dimension, scales = &quot;free&quot;) +
-    theme_minimal() +
-    theme(legend.position = &quot;none&quot;)</code></pre>
-<pre><code>## Warning: Removed 583 rows containing missing values or values outside the scale range
-## (`geom_point()`).</code></pre>
-<pre><code>## Warning: Removed 375 rows containing missing values or values outside the scale range
-## (`geom_line()`).</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
-<pre class="r"><code>avg_dimensions &lt;- df %&gt;%
-    group_by(Culture, Dates, Type) %&gt;%
-    summarise(
-        mean_length = mean(MaxLength_mm, na.rm = TRUE),
-        mean_width = mean(MaxWidth_mm, na.rm = TRUE),
-        mean_thickness = mean(MaxThickness_mm, na.rm = TRUE),
-        mean_height = mean(MaxHeight_mm, na.rm = TRUE),
-        n_items = n()
-    ) %&gt;%
-    ungroup()</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;Culture&#39;, &#39;Dates&#39;. You can override using
-## the `.groups` argument.</code></pre>
-<pre class="r"><code>avg_dimensions_long &lt;- avg_dimensions %&gt;%
-    tidyr::pivot_longer(
-        cols = starts_with(&quot;mean_&quot;),     # the dimension columns
-        names_to = &quot;Dimension&quot;,          # new column for the variable names
-        values_to = &quot;Value&quot;            # new column for the values
-    ) %&gt;%
-    mutate(
-        Dimension = gsub(&quot;mean_&quot;, &quot;&quot;, Dimension),  # clean up names (optional)
-        Dimension = tools::toTitleCase(Dimension)  # make them look nice: &quot;Length&quot;, &quot;Width&quot;, etc.
-    )
-avg_dimensions_long %&gt;% filter(Culture == &quot;Inuit&quot;) %&gt;% 
-    #filter(Item_name == &quot;Figure&quot;) %&gt;%
-    ggplot(., aes(x = Dates, y = Value, col = Type, group = Type)) +
-    geom_point() +
-    geom_line() +
-    #geom_text_repel(aes(label = Type)) +
-    facet_grid(Culture ~ Dimension, scales = &quot;free&quot;) +
-    theme_minimal() </code></pre>
-<pre><code>## Warning: Removed 12 rows containing missing values or values outside the scale range
-## (`geom_point()`).</code></pre>
-<pre><code>## Warning: Removed 3 rows containing missing values or values outside the scale range
-## (`geom_line()`).</code></pre>
+<pre><code>## Warning: ggrepel: 2 unlabeled data points (too many overlaps). Consider
+## increasing max.overlaps</code></pre>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<pre class="r"><code>material_prop %&gt;% 
-   filter(Culture == &quot;Inuit&quot;) %&gt;% 
-   #filter(Dates == &quot;1000-1200&quot; | Dates == &quot;1200-1400&quot;) %&gt;% 
-    ggplot(., aes(x = Dates, y = Proportion*100, group = Material, col = Material)) +
-    #facet_wrap(Culture ~ .) +
-    geom_point() +
-    geom_line() +
-    geom_text_repel(data = material_prop %&gt;% filter(Dates == &quot;1000-1200&quot;), 
-                    aes(label = Material)) +
-    labs(x = &quot;Time&quot;, y = &quot;Proportion, %&quot;) + 
-    theme_hc(12) +
-    scale_color_paletteer_d(&quot;PrettyCols::Bold&quot;) +
-    theme(legend.position = &quot;none&quot;)</code></pre>
+<p>Each toy category exhibits distinct material preferences. Skill-based play objects were often made of bone, social play items (such as dolls) and transport toys (boats, kayaks) were predominantly crafted from wood, while tools were mainly produced from stone—especially after AD 1200. These patterns suggest that variations in toy dimensions and materials are more likely linked to changes in design or function rather than to material scarcity.</p>
+<p>Weapons present an interesting case: their frequency increases in AD 1600-1800, their forms become more diverse, and the dominant material shifts from bone to wood. This trend has been hypothesized to reflect broader changes in hunting implements that emerged in response to the increasingly harsh environmental conditions of the time (cite paper).</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<pre class="r"><code>material_prop &lt;- df %&gt;%
-    # Convert &quot;YES&quot;/&quot;NO&quot; to 1/0 for counting
-    mutate(across(all_of(material_cols), ~ ifelse(. == &quot;YES&quot;, 1, 0))) %&gt;%
-    # Group by Culture and Dates
-    group_by(Culture, Dates, Type) %&gt;%
-    # Sum number of YES for each material and total items
-    summarise(
-        #total_items = sum(No., na.rm = T),  # total rows (or use sum(No.) if you want actual number of items)
-        across(all_of(material_cols), sum, .names = &quot;sum_{col}&quot;),
-        .groups = &quot;drop&quot;) %&gt;%
-    # Calculate proportion for each material
-   mutate(total_items_calc = rowSums(across(starts_with(&quot;sum_&quot;)))) %&gt;%
-    mutate(across(starts_with(&quot;sum_&quot;), ~ . / total_items_calc, .names = &quot;prop_{col}&quot;)) %&gt;%
-    select(Culture, Dates, Type, starts_with(&quot;prop_&quot;)) %&gt;%
-    tidyr::pivot_longer(
-        cols = starts_with(&quot;prop_sum_&quot;),     # columns with proportions
-        names_to = &quot;Material&quot;,               # new column for material type
-        values_to = &quot;Proportion&quot;             # new column for proportion value
-    ) %&gt;%
-    # Optional: clean up the Material names
-    mutate(Material = str_to_sentence(gsub(&quot;prop_sum_Material_&quot;, &quot;&quot;, Material)),
-           Material = ifelse(Material == &quot;Plant&quot;, &quot;Wood&quot;, Material))
-
-material_prop %&gt;% 
-   filter(Culture == &quot;Inuit&quot;) %&gt;% 
-   #filter(Dates == &quot;1000-1200&quot; | Dates == &quot;1200-1400&quot;) %&gt;% 
-    ggplot(., aes(x = Dates, y = Proportion*100, group = Material, col = Material)) +
-    geom_point() +
-    geom_line() +
-    geom_text_repel(data = material_prop %&gt;% filter(Dates == &quot;1000-1200&quot;), 
-                    aes(label = Material)) +
-   facet_wrap(Type ~ ., scales = &quot;free&quot;) +
-    labs(x = &quot;Time&quot;, y = &quot;Proportion, %&quot;) + 
-    theme_hc(12) +
-    scale_color_paletteer_d(&quot;PrettyCols::Bold&quot;) +
-    theme(legend.position = &quot;none&quot;)</code></pre>
-<pre><code>## Warning: ggrepel: 6 unlabeled data points (too many overlaps). Consider
-## increasing max.overlaps</code></pre>
-<pre><code>## Warning: ggrepel: 7 unlabeled data points (too many overlaps). Consider
-## increasing max.overlaps</code></pre>
-<pre><code>## Warning: ggrepel: 6 unlabeled data points (too many overlaps). Consider increasing max.overlaps
-## ggrepel: 6 unlabeled data points (too many overlaps). Consider increasing max.overlaps</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <pre class="r"><code>df_items %&gt;% filter(Culture == &quot;Inuit&quot;) %&gt;% 
     filter(Type == &quot;Weapon&quot;) %&gt;%
     ggplot(., aes(x = Dates, y = proportion*100, col = Type, group = Item_name)) +
@@ -210,7 +72,7 @@ material_prop %&gt;%
     theme(legend.position = &quot;none&quot;)</code></pre>
 <pre><code>## Warning: ggrepel: 30 unlabeled data points (too many overlaps). Consider
 ## increasing max.overlaps</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">

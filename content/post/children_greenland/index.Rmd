@@ -71,7 +71,9 @@ df <- rbind(Inuit_sel, Norse_sel) %>%
         )
 ```
 
-When we think about survival in harsh climates, images of hunters, warriors, and explorers often come to mind. But in Greenland during the Little Ice Age (14th century AD), survival wasn’t just about adults—it involved children too. Recent research reveals that the toys and play objects of Inuit and Norse children weren’t just for fun; they were tools of adaptation, creativity, and resilience [@meyer2025playing]. By examining the variety, materials, and complexity of these objects, archaeologists are uncovering how play shaped the skills and innovative thinking necessary to thrive in one of the world’s most challenging environments. In this post, we’ll explore how something as simple as a child’s toy can tell profound stories about culture and survival. 
+When we think about survival in harsh climates, images of hunters, warriors, and explorers often come to mind. But in Greenland during the Little Ice Age (14th century AD), survival wasn’t just about adults—it involved children too. Recent research reveals that the toys and play objects of Inuit and Norse children weren’t just for fun; they were tools of adaptation, creativity, and resilience [@meyer2025playing]. By examining the variety, materials, and complexity of these objects, archaeologists are uncovering how play shaped the skills and innovative thinking necessary to thrive in one of the world’s most challenging environments. In this post, I'm exploring how something as simple as a child’s toy can tell profound stories about culture and survival. 
+
+Data from @meyer2025playing. 
 
 # Toys as Training: Comparing Norse and Inuit Childhoods in Greenland
 
@@ -137,7 +139,9 @@ df_items %>% filter(Dates == "1000-1200" | Dates == "1200-1400")  %>%
 ```
 Another indication of diversity comes from the materials used. Usually only one material is used per item with only 6 items using combinations of two materials (bone and metal or wood and metal), all made by Inuit. 
 
-For both cultures, the most prevalent material was wood. Followed by bone for the Inuit and stone for the Norse. The bone mainly originated from sea animals such as seals and whales [e.g. @seersholm2016dna]. 
+For both cultures, the most prevalent material was wood. Followed by bone for the Inuit and stone for the Norse. The bones mainly originated from sea animals such as seals and whales [e.g. @seersholm2016dna]. 
+
+So what?
 
 ```{r, echo=F}
 material_cols <- c("Material_metal", "Material_plant", "Material_stone", "Material_bone",
@@ -185,7 +189,6 @@ df %>% filter(Material_bone == "YES") %>% filter(Culture == "Inuit") %>%
    reframe(unique(Material_description)) 
 ```
 
-
 # Shifting Play: Inuit Toys and Cultural Change Over 800 Years
 
 For the Inuit, the dataset spans a period of approximately 800 years, allowing us to examine changes over an extended timeframe.
@@ -194,24 +197,22 @@ The proportion of social play items (such as dolls) declines up to the 1600–18
 
 The most pronounced shifts appear to occur between 1600 and 1800—a period corresponding to renewed contact between the Inuit and Europeans.
 
-```{r, echo=F}
-df_types %>% filter(Culture == "Inuit") %>% 
-    ggplot(., aes(x = Dates, y = proportion*100, col = Type, group = Type)) +
-    geom_point() +
-    geom_line() +
-    #geom_text_repel(aes(label = Type)) +
-    facet_wrap(.~ Culture) +
-    theme_minimal() +
-    facet_wrap(.~ Culture) +
-    labs(x = "Time", y = "Proportion, %") + 
-    geom_text_repel(data = df_types %>% filter(Culture == "Inuit") %>% 
-                        filter(Dates == "1000-1200"), 
+```{r, echo=F, warning = F, message=F}
+df_types %>% 
+   filter(Culture == "Inuit") %>% 
+   ggplot(., aes(x = Dates, y = proportion*100, col = Type, group = Type)) +
+   geom_point() +
+   geom_line() +
+   #geom_text_repel(aes(label = Type)) +
+   labs(x = "Time", y = "Proportion, %") + 
+   geom_text_repel(data = df_types %>% 
+                      filter(Culture == "Inuit") %>% 
+                      filter(Dates == "1000-1200"), 
                     aes(label = Type)) +
-    facet_wrap(.~ Culture) +
-    #theme_minimal() +
-    scale_color_brewer(palette = "Dark2") +
-    theme_hc(12) +
-    theme(legend.position = "none")
+   facet_wrap(.~ Culture) +
+   scale_color_brewer(palette = "Dark2") +
+   theme_hc(12) +
+   theme(legend.position = "none")
 
 # 10 most prevalent items in a period
 item_label <- df_items %>% filter(Culture == "Inuit") %>% 
@@ -221,8 +222,8 @@ item_label <- df_items %>% filter(Culture == "Inuit") %>%
    top_n(10) %>%
    mutate(Dates = "1000-1200")
 
-df_items %>% filter(Culture == "Inuit") %>% 
-    #filter(proportion > 0.05) %>%
+df_items %>% 
+   filter(Culture == "Inuit") %>% 
     ggplot(., aes(x = Dates, y = proportion*100, col = Type, group = Item_name)) +
     geom_point() +
     geom_line() +
@@ -236,54 +237,10 @@ df_items %>% filter(Culture == "Inuit") %>%
     scale_color_brewer(palette = "Dark2") +
     theme_hc(12) +
     theme(legend.position = "none")
-
 ```
+Among the recorded toy dimensions, the average toy length shows the most pronounced changes over time. This pattern may reflect shifts in design and function, variations in material availability, or a combination of both. Notably, between AD 1400 and 1600 there is a marked decline in the proportion of wooden toys, accompanied by an increase in bone objects. However, when material use is examined by toy type, this reduction in wooden items appears to be driven primarily by tools and weapons.
 
-```{r}
-avg_dimensions <- df %>%
-    group_by(Culture, Dates, Item_name) %>%
-    summarise(
-        mean_length = mean(MaxLength_mm, na.rm = TRUE),
-        mean_width = mean(MaxWidth_mm, na.rm = TRUE),
-        mean_thickness = mean(MaxThickness_mm, na.rm = TRUE),
-        mean_height = mean(MaxHeight_mm, na.rm = TRUE),
-        n_items = n()
-    ) %>%
-    ungroup()
-
-avg_dimensions_long <- avg_dimensions %>%
-    tidyr::pivot_longer(
-        cols = starts_with("mean_"),     # the dimension columns
-        names_to = "Dimension",          # new column for the variable names
-        values_to = "Value"            # new column for the values
-    ) %>%
-    mutate(
-        Dimension = gsub("mean_", "", Dimension),  # clean up names (optional)
-        Dimension = tools::toTitleCase(Dimension)  # make them look nice: "Length", "Width", etc.
-    )
-
-avg_dimensions_long %>% group_by(Culture, Dates, Item_name) %>% 
-    reframe(sds = sd(Value, na.rm = TRUE)) %>%
-   filter(Culture == "Inuit") %>%
-    ggplot(., aes(x = Dates, y = sds, col = Item_name, group = Item_name)) +
-    geom_point() +
-    geom_line() +
-    #geom_text_repel(aes(label = Type)) +
-    facet_grid(Culture ~ ., scales = "free") +
-    theme_minimal() +
-    theme(legend.position = "none")
-
-avg_dimensions_long %>% filter(Culture == "Inuit") %>% 
-    #filter(Item_name == "Figure") %>%
-    ggplot(., aes(x = Dates, y = Value, col = Item_name, group = Item_name)) +
-    geom_point() +
-    geom_line() +
-    #geom_text_repel(aes(label = Type)) +
-    facet_grid(Culture ~ Dimension, scales = "free") +
-    theme_minimal() +
-    theme(legend.position = "none")
-```
-```{r}
+```{r, echo=F, warning=F, message = F}
 avg_dimensions <- df %>%
     group_by(Culture, Dates, Type) %>%
     summarise(
@@ -305,17 +262,19 @@ avg_dimensions_long <- avg_dimensions %>%
         Dimension = gsub("mean_", "", Dimension),  # clean up names (optional)
         Dimension = tools::toTitleCase(Dimension)  # make them look nice: "Length", "Width", etc.
     )
-avg_dimensions_long %>% filter(Culture == "Inuit") %>% 
-    #filter(Item_name == "Figure") %>%
-    ggplot(., aes(x = Dates, y = Value, col = Type, group = Type)) +
-    geom_point() +
-    geom_line() +
-    #geom_text_repel(aes(label = Type)) +
-    facet_grid(Culture ~ Dimension, scales = "free") +
-    theme_minimal() 
-
+avg_dimensions_long %>% 
+   filter(Culture == "Inuit") %>% 
+   ggplot(., aes(x = Dates, y = Value, col = Type, group = Type)) +
+   geom_point() +
+   geom_line() +
+   labs(y = "Average Millimeters", x = "Time", col = "") +
+   #geom_text_repel(aes(label = Type)) +
+   facet_grid(. ~ Dimension, scales = "free") +
+   scale_color_brewer(palette = "Dark2") +
+   theme_hc(12) +
+   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
 ```
-```{r}
+```{r, echo=F}
 material_prop %>% 
    filter(Culture == "Inuit") %>% 
    #filter(Dates == "1000-1200" | Dates == "1200-1400") %>% 
@@ -323,14 +282,21 @@ material_prop %>%
     #facet_wrap(Culture ~ .) +
     geom_point() +
     geom_line() +
-    geom_text_repel(data = material_prop %>% filter(Dates == "1000-1200"), 
-                    aes(label = Material)) +
+    geom_text_repel(data = material_prop %>% 
+                       filter(Dates == "1000-1200") %>%
+                       distinct(Dates, Material, .keep_all = T), 
+                    aes(label = Material), max.overlaps = 1) +
     labs(x = "Time", y = "Proportion, %") + 
     theme_hc(12) +
     scale_color_paletteer_d("PrettyCols::Bold") +
     theme(legend.position = "none")
 ```
-```{r}
+
+Each toy category exhibits distinct material preferences. Skill-based play objects were often made of bone, social play items (such as dolls) and transport toys (boats, kayaks) were predominantly crafted from wood, while tools were mainly produced from stone—especially after AD 1200. These patterns suggest that variations in toy dimensions and materials are more likely linked to changes in design or function rather than to material scarcity.
+
+Weapons present an interesting case: their frequency increases in AD 1600-1800, their forms become more diverse, and the dominant material shifts from bone to wood. This trend has been hypothesized to reflect broader changes in hunting implements that emerged in response to the increasingly harsh environmental conditions of the time (cite paper).
+
+```{r, echo=F, warning = F, message = F}
 material_prop <- df %>%
     # Convert "YES"/"NO" to 1/0 for counting
     mutate(across(all_of(material_cols), ~ ifelse(. == "YES", 1, 0))) %>%
@@ -356,21 +322,20 @@ material_prop <- df %>%
 
 material_prop %>% 
    filter(Culture == "Inuit") %>% 
-   #filter(Dates == "1000-1200" | Dates == "1200-1400") %>% 
-    ggplot(., aes(x = Dates, y = Proportion*100, group = Material, col = Material)) +
-    geom_point() +
-    geom_line() +
-    geom_text_repel(data = material_prop %>% filter(Dates == "1000-1200"), 
+   ggplot(., aes(x = Dates, y = Proportion*100, group = Material, col = Material)) +
+   geom_point() +
+   geom_line() +
+   geom_text_repel(data = material_prop %>% 
+                      filter(Dates == "1000-1200") %>%
+                      distinct(Dates, Material, .keep_all = T), 
                     aes(label = Material)) +
    facet_wrap(Type ~ ., scales = "free") +
-    labs(x = "Time", y = "Proportion, %") + 
-    theme_hc(12) +
-    scale_color_paletteer_d("PrettyCols::Bold") +
-    theme(legend.position = "none")
-
+   labs(x = "Time", y = "Proportion, %") + 
+   theme_hc(12) +
+   scale_color_paletteer_d("PrettyCols::Bold") +
+   theme(legend.position = "none") +
+   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
 ```
-
-
 
 ```{r}
 df_items %>% filter(Culture == "Inuit") %>% 
@@ -389,6 +354,6 @@ df_items %>% filter(Culture == "Inuit") %>%
     theme(legend.position = "none")
 ```
 
-
-
 ## References 
+
+
