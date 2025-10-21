@@ -294,9 +294,9 @@ material_prop %>%
     theme(legend.position = "none")
 ```
 
-Each toy category exhibits distinct material preferences. Skill-based play objects were often made of bone, social play items (such as dolls) and transport toys (boats, kayaks) were predominantly crafted from wood, while tools were mainly produced from stone—especially after AD 1200. These patterns suggest that variations in toy dimensions and materials are more likely linked to changes in design or function rather than to material scarcity.
+Interestingly, each toy category exhibits distinct material preferences (Figure \@ref(fig:fig8)). Skill-based play objects were often made of bone, social play items (such as dolls) and transport toys (boats, kayaks) were predominantly crafted from wood, while tools were mainly produced from stone—especially after AD 1200. These patterns suggest that variations in toy dimensions and materials are more likely linked to changes in design or function rather than to material scarcity.
 
-Weapons present an interesting case: their frequency increases in AD 1600-1800 (Figure \@ref(fig:fig4)), their forms become more diverse, and the dominant material shifts from bone to wood (Figure \@ref(fig:fig8)). This trend has been hypothesized to reflect broader changes in hunting implements that emerged in response to the increasingly harsh environmental conditions of the time (cite paper).
+Weapons present an interesting case: their frequency increases in AD 1600-1800 (Figure \@ref(fig:fig4)), they become more diverse (Figure \@ref(fig:fig9)), and the dominant material shifts from bone to wood (Figure \@ref(fig:fig8)). This trend has been hypothesized to reflect broader changes in hunting implements that emerged in response to the increasingly harsh environmental conditions of the time (cite paper).
 
 ```{r fig8, echo=F, warning = F, message = F, fig.cap = "Proportion of material per toy category for Inuit."}
 material_prop <- df %>%
@@ -339,22 +339,25 @@ material_prop %>%
    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
 ```
 
-```{r}
-df_items %>% filter(Culture == "Inuit") %>% 
-    filter(Type == "Weapon") %>%
-    ggplot(., aes(x = Dates, y = proportion*100, col = Type, group = Item_name)) +
-    geom_point() +
-    geom_line() +
+```{r, fig9, echo=F, fig.cap="Number of distinct weapon toys over time."}
+df_distinct_weapons <- df_items %>% 
+   filter(Culture == "Inuit") %>% 
+   filter(Type == "Weapon") %>%
+   group_by(Dates, Type, Culture) %>%
+   reframe(N_distinct = length(unique(Item_name)))
+   
+df_distinct_weapons %>% 
+   ggplot(., aes(x = Dates, y = N_distinct, 
+                 fill = Type, group = Type)) +
+   geom_bar(stat = "identity") +
     #geom_text_repel(aes(label = Item_name)) +
-    facet_wrap(.~ Culture) +
-    labs(x = "Time", y = "Proportion, %") + 
-    geom_text_repel( aes(label = Item_name)) +
-    facet_wrap(.~ Culture) +
-    #theme_minimal() +
-    scale_color_brewer(palette = "Dark2") +
-    theme_hc(12) +
-    theme(legend.position = "none")
+   labs(x = "Time", y = "Number of Distinct Weapon Toys") + 
+   facet_wrap(.~ Culture) +
+   scale_fill_brewer(palette = "Dark2") +
+   theme_hc(12) +
+   theme(legend.position = "none")
 ```
+
 
 ## References 
 

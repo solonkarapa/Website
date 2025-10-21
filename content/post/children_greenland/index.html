@@ -86,31 +86,20 @@ Figure 6: Toy dimensions for Inuit.
 Figure 7: Proportion of material for Inuit.
 </p>
 </div>
-<p>Each toy category exhibits distinct material preferences. Skill-based play objects were often made of bone, social play items (such as dolls) and transport toys (boats, kayaks) were predominantly crafted from wood, while tools were mainly produced from stone—especially after AD 1200. These patterns suggest that variations in toy dimensions and materials are more likely linked to changes in design or function rather than to material scarcity.</p>
-<p>Weapons present an interesting case: their frequency increases in AD 1600-1800 (Figure <a href="#fig:fig4">4</a>), their forms become more diverse, and the dominant material shifts from bone to wood (Figure <a href="#fig:fig8">8</a>). This trend has been hypothesized to reflect broader changes in hunting implements that emerged in response to the increasingly harsh environmental conditions of the time (cite paper).</p>
+<p>Interestingly, each toy category exhibits distinct material preferences (Figure <a href="#fig:fig8">8</a>). Skill-based play objects were often made of bone, social play items (such as dolls) and transport toys (boats, kayaks) were predominantly crafted from wood, while tools were mainly produced from stone—especially after AD 1200. These patterns suggest that variations in toy dimensions and materials are more likely linked to changes in design or function rather than to material scarcity.</p>
+<p>Weapons present an interesting case: their frequency increases in AD 1600-1800 (Figure <a href="#fig:fig4">4</a>), they become more diverse (Figure <a href="#fig:fig9">9</a>), and the dominant material shifts from bone to wood (Figure <a href="#fig:fig8">8</a>). This trend has been hypothesized to reflect broader changes in hunting implements that emerged in response to the increasingly harsh environmental conditions of the time (cite paper).</p>
 <div class="figure"><span style="display:block;" id="fig:fig8"></span>
 <img src="{{< blogdown/postref >}}index_files/figure-html/fig8-1.png" alt="Proportion of material per toy category for Inuit." width="672" />
 <p class="caption">
 Figure 8: Proportion of material per toy category for Inuit.
 </p>
 </div>
-<pre class="r"><code>df_items %&gt;% filter(Culture == &quot;Inuit&quot;) %&gt;% 
-    filter(Type == &quot;Weapon&quot;) %&gt;%
-    ggplot(., aes(x = Dates, y = proportion*100, col = Type, group = Item_name)) +
-    geom_point() +
-    geom_line() +
-    #geom_text_repel(aes(label = Item_name)) +
-    facet_wrap(.~ Culture) +
-    labs(x = &quot;Time&quot;, y = &quot;Proportion, %&quot;) + 
-    geom_text_repel( aes(label = Item_name)) +
-    facet_wrap(.~ Culture) +
-    #theme_minimal() +
-    scale_color_brewer(palette = &quot;Dark2&quot;) +
-    theme_hc(12) +
-    theme(legend.position = &quot;none&quot;)</code></pre>
-<pre><code>## Warning: ggrepel: 30 unlabeled data points (too many overlaps). Consider
-## increasing max.overlaps</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="figure"><span style="display:block;" id="fig:fig9"></span>
+<img src="{{< blogdown/postref >}}index_files/figure-html/fig9-1.png" alt="Number of distinct weapon toys over time." width="672" />
+<p class="caption">
+Figure 9: Number of distinct weapon toys over time.
+</p>
+</div>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
