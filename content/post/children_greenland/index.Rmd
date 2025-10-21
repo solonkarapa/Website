@@ -70,13 +70,72 @@ df <- rbind(Inuit_sel, Norse_sel) %>%
         )
 ```
 
-When we think about survival in harsh climates, images of hunters, warriors, and explorers often come to mind. But in Greenland during the Little Ice Age (14th century AD), survival wasn’t just about adults—it involved children too. Recent research reveals that the toys and play objects of Inuit and Norse children weren’t just for fun; they were tools of adaptation, creativity, and resilience [@meyer2025playing]. By examining the variety, materials, and complexity of these objects, archaeologists are uncovering how play shaped the skills and innovative thinking necessary to thrive in one of the world’s most challenging environments. In this post, I'm exploring how something as simple as a child’s toy can tell profound stories about culture and survival. 
+When we think about survival in harsh climates, images of hunters, warriors, and explorers often come to mind. But in Greenland during the Little Ice Age (14th century AD), survival wasn’t just about adults—it involved children too. 
+
+Recent research reveals that the toys of Inuit and Norse children weren’t just for fun; they were tools of adaptation, creativity, and resilience [@meyer2025playing]. By examining the variety, materials, and complexity of these objects, archaeologists are uncovering how play shaped the skills and innovative thinking necessary to thrive in one of the world’s most challenging environments. 
+
+In this post, I'm exploring how something as simple as a child’s toy can tell profound stories about culture and survival. 
 
 Data from @meyer2025playing. 
 
 # Toys as Training: Comparing Norse and Inuit Childhoods in Greenland
 
 The Inuit entered Greenland from Canada from AD 1000. The Norse, on the other hand, reached Greenland from Iceland around the same time.
+
+(ad reproduction plot)
+
+```{r, echo=F, warning=F}
+timeline_df <- tibble::tribble(
+  ~group,             ~start, ~end,  ~category, ~label,
+  "Classic Thule",     1000, 2000,  "Inuit",    "Classic Thule",
+  "Ruin Island",       1200, 1400,  "Inuit",    "Ruin Island",
+  "Inugsuk (W/SW)",    1200, 1900,  "Inuit",    "Inugsuk",
+  "NE variant",        1400, 1900,  "Inuit",    "NE variant",
+  "Angmagssalik",      1500, 1750,  "Inuit",    "Angmagssalik",
+  "Norse – Eastern",    985, 1450,  "Norse",    "Eastern Settlement",
+  "Norse – Western",    985, 1350,  "Norse",    "Western Settlement"
+)
+
+# Assign colors by cultural group
+cols <- c("Norse" = "#66C2A5", "Inuit" = "#56B4E9")
+
+# Compute label positions
+timeline_df <- timeline_df %>%
+  mutate(mid = (start + end)/2,
+         x_label = ifelse(category == "Norse", 0.35, -0.35),
+         hjust = seq(1:7))
+
+vertical_adjust <- 0.3
+
+# ---- Build plot ----
+ggplot(timeline_df) +
+   geom_segment(aes(x = start, xend = end, y = hjust, yend = hjust, color = category), linewidth = 2, lineend = "butt") +
+   geom_text(aes(x = start + 100, y = hjust + vertical_adjust, label = label),
+                   nudge_y = 0) + 
+   #geom_vline(xintercept = 1300, linetype = "dashed", color = "grey60", linewidth = 0.5) +
+   #geom_vline(xintercept = 1721, linetype = "dashed", color = "grey60", linewidth = 0.5) +
+  annotate("text", y = 0, x = 1300 - 20, label = "Little Ice Age commences",
+           hjust = 0, vjust = 0, color = "grey20") +
+  annotate("text", y = 0, x = 1721 - 20, label = "European colonisation",
+           hjust = 0, vjust = 0, color = "grey20") +
+   geom_segment(aes(x = 1300, xend = 1300, y = 0.5, yend = 8),
+             color = "grey50", linewidth = 0.6) +
+   geom_segment(aes(x = 1721, xend = 1721, y = 0.5, yend = 8),
+             color = "grey50", linewidth = 0.6) +
+   labs(x = "Year AD", y = "", col = "") +
+   scale_color_manual(values = cols) +
+   theme_void(12) +
+   theme(
+    axis.title.y = element_blank(),   # remove y-axis title
+    axis.text.y  = element_blank(),   # remove y-axis labels
+    axis.ticks.y = element_blank(),   # remove tick marks
+    axis.line.y  = element_blank()    # remove axis line
+  )
+ 
+```
+
+
+
 
 The Norse and the Inuit developed very different ways of interacting with their environment, shaped by their unique social structures and ecological relationships. These differences are reflected even in the toys children played with.
 
