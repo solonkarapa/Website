@@ -1,7 +1,7 @@
 ---
 title: "Children Greenland"
 author: Me
-date: '20. Oct 2025'
+date: '21. Oct 2025'
 slug: Children_Greenland
 categories:
   - data analysis
@@ -17,8 +17,7 @@ image:
   preview_only: no
 projects: []
 output: 
-  bookdown::html_document2:
-    number_sections: true
+  bookdown::html_document2
 draft: TRUE
 bibliography: biblio_children.bib
 ---
@@ -52,10 +51,17 @@ Among the recorded toy dimensions, the average toy length shows the most pronoun
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <pre><code>## Warning: ggrepel: 2 unlabeled data points (too many overlaps). Consider
 ## increasing max.overlaps</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="figure"><span style="display:block;" id="fig:fig-example"></span>
+<img src="{{< blogdown/postref >}}index_files/figure-html/fig-example-1.png" alt="caption" width="672" />
+<p class="caption">
+Figure 1: caption
+</p>
+</div>
+<p>bkla</p>
+<p><a href="#fig:fig-example">1</a></p>
 <p>Each toy category exhibits distinct material preferences. Skill-based play objects were often made of bone, social play items (such as dolls) and transport toys (boats, kayaks) were predominantly crafted from wood, while tools were mainly produced from stone—especially after AD 1200. These patterns suggest that variations in toy dimensions and materials are more likely linked to changes in design or function rather than to material scarcity.</p>
 <p>Weapons present an interesting case: their frequency increases in AD 1600-1800, their forms become more diverse, and the dominant material shifts from bone to wood. This trend has been hypothesized to reflect broader changes in hunting implements that emerged in response to the increasingly harsh environmental conditions of the time (cite paper).</p>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <pre class="r"><code>df_items %&gt;% filter(Culture == &quot;Inuit&quot;) %&gt;% 
     filter(Type == &quot;Weapon&quot;) %&gt;%
     ggplot(., aes(x = Dates, y = proportion*100, col = Type, group = Item_name)) +
@@ -72,7 +78,7 @@ Among the recorded toy dimensions, the average toy length shows the most pronoun
     theme(legend.position = &quot;none&quot;)</code></pre>
 <pre><code>## Warning: ggrepel: 30 unlabeled data points (too many overlaps). Consider
 ## increasing max.overlaps</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">

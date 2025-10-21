@@ -17,8 +17,7 @@ image:
   preview_only: no
 projects: []
 output: 
-  bookdown::html_document2:
-    number_sections: true
+  bookdown::html_document2
 draft: TRUE
 bibliography: biblio_children.bib
 ---
@@ -274,7 +273,7 @@ avg_dimensions_long %>%
    theme_hc(12) +
    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
 ```
-```{r, echo=F}
+```{r fig-example, fig.cap="caption", echo=F}
 material_prop %>% 
    filter(Culture == "Inuit") %>% 
    #filter(Dates == "1000-1200" | Dates == "1200-1400") %>% 
@@ -291,6 +290,9 @@ material_prop %>%
     scale_color_paletteer_d("PrettyCols::Bold") +
     theme(legend.position = "none")
 ```
+bkla
+
+\@ref(fig:fig-example)
 
 Each toy category exhibits distinct material preferences. Skill-based play objects were often made of bone, social play items (such as dolls) and transport toys (boats, kayaks) were predominantly crafted from wood, while tools were mainly produced from stone—especially after AD 1200. These patterns suggest that variations in toy dimensions and materials are more likely linked to changes in design or function rather than to material scarcity.
 
