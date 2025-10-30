@@ -84,14 +84,14 @@ The Inuit entered Greenland from Canada from AD 1000. The Norse, on the other ha
 
 (ad reproduction plot)
 
-```{r, echo=F, warning=F}
+```{r, echo=F, warning=F, fig.cap = "Approximate timelines for the Inuit and the Norse in Greenland based on Fig 1 by Meyer and Riede (2025)."}
 timeline_df <- tibble::tribble(
   ~group,             ~start, ~end,  ~category, ~label,
-  "Classic Thule",     1000, 2000,  "Inuit",    "Classic Thule",
-  "Ruin Island",       1200, 1400,  "Inuit",    "Ruin Island",
-  "Inugsuk (W/SW)",    1200, 1900,  "Inuit",    "Inugsuk",
-  "NE variant",        1400, 1900,  "Inuit",    "NE variant",
-  "Angmagssalik",      1500, 1750,  "Inuit",    "Angmagssalik",
+  "Classic Thule",     1000, 1800,  "Inuit",    "Classic Thule",
+  "Ruin Island",       1300, 1450,  "Inuit",    "Ruin Island",
+  "Inugsuk (W/SW)",    1300, 1950,  "Inuit",    "Inugsuk",
+  "NE variant",        1400, 1940,  "Inuit",    "NE variant",
+  "Angmagssalik",      1500, 1900,  "Inuit",    "Angmagssalik",
   "Norse – Eastern",    985, 1450,  "Norse",    "Eastern Settlement",
   "Norse – Western",    985, 1350,  "Norse",    "Western Settlement"
 )
@@ -109,28 +109,27 @@ vertical_adjust <- 0.3
 
 # ---- Build plot ----
 ggplot(timeline_df) +
-   geom_segment(aes(x = start, xend = end, y = hjust, yend = hjust, color = category), linewidth = 2, lineend = "butt") +
-   geom_text(aes(x = start + 100, y = hjust + vertical_adjust, label = label),
-                   nudge_y = 0) + 
-   #geom_vline(xintercept = 1300, linetype = "dashed", color = "grey60", linewidth = 0.5) +
-   #geom_vline(xintercept = 1721, linetype = "dashed", color = "grey60", linewidth = 0.5) +
-  annotate("text", y = 0, x = 1300 - 20, label = "Little Ice Age commences",
+   annotate("text", y = 0, x = 1300 - 30, label = "Little Ice Age commences",
            hjust = 0, vjust = 0, color = "grey20") +
-  annotate("text", y = 0, x = 1721 - 20, label = "European colonisation",
+   annotate("text", y = 0, x = 1721 - 40, label = "European colonisation",
            hjust = 0, vjust = 0, color = "grey20") +
    geom_segment(aes(x = 1300, xend = 1300, y = 0.5, yend = 8),
-             color = "grey50", linewidth = 0.6) +
+             color = "grey50", linewidth = 0.6, alpha = 0.8) +
    geom_segment(aes(x = 1721, xend = 1721, y = 0.5, yend = 8),
-             color = "grey50", linewidth = 0.6) +
-   labs(x = "Year AD", y = "", col = "") +
+             color = "grey50", linewidth = 0.6, alpha = 0.8) +
+   geom_segment(aes(x = start, xend = end, y = hjust, yend = hjust, color = category),
+                linewidth = 2, lineend = "butt") +
+   geom_text(aes(x = start + 95, y = hjust + vertical_adjust, label = label),
+                   nudge_y = 0) + 
    scale_color_manual(values = cols) +
    theme_void(12) +
    theme(
-    axis.title.y = element_blank(),   # remove y-axis title
-    axis.text.y  = element_blank(),   # remove y-axis labels
-    axis.ticks.y = element_blank(),   # remove tick marks
-    axis.line.y  = element_blank()    # remove axis line
-  )
+    #axis.line.x = element_line(),
+    #axis.ticks.x = element_line(),
+    axis.text.x = element_text(),
+    axis.title.x = element_text()
+  ) +
+  labs(x = "Year AD", y = "", col = "")
  
 ```
 
