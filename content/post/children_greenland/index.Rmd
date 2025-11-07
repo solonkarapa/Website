@@ -1,15 +1,17 @@
 ---
-title: "Children Greenland"
+title: "Playing to Survive: How Inuit and Norse Toys Shaped Childhood in Greenland’s Harsh Climate"
 author: Me
 date: '`r format(Sys.Date(), "%d. %b %Y")`'
 slug: Children_Greenland
 categories:
-  - data analysis
-tags: [data analysis]
+   - data analysis
+   - data vis
+   - data
+tags: [data analysis, data vis, data]
 subtitle: ''
-summary: ''
+summary: 'Survival in Greenland during the Little Ice Age involved more than adults—children played a role too. Inuit and Norse toys reflected their societies’ interaction with the environment, showing how play fostered learning, innovation, and cultural adaptation.'
 authors: []
-lastmod: '2025-07-22T14:27:06Z'
+lastmod: '2025-11-22T14:27:06Z'
 featured: no
 image:
   caption: 'created by DALL·E'
@@ -34,6 +36,8 @@ library(dplyr)
 library(ggthemes)
 library(stringr)
 library(paletteer)
+
+font_size <- 11
 ```
 
 ```{r, echo=F}
@@ -72,7 +76,7 @@ df <- rbind(Inuit_sel, Norse_sel) %>%
 
 When we think about survival in harsh climates, images of hunters, warriors, and explorers often come to mind. But in Greenland during the Little Ice Age (14th century AD), survival wasn’t just about adults—it involved children too. 
 
-Recent research reveals that the toys of Inuit and Norse children weren’t just for fun; they were tools of adaptation, creativity, and resilience [@meyer2025playing]. By examining the variety, materials, and complexity of these objects, archaeologists are uncovering how play shaped the skills and innovative thinking necessary to thrive in one of the world’s most challenging environments. 
+Recent research reveals that the toys of Inuit and Norse children in Greenland weren’t just for fun; they were tools of adaptation, creativity, and resilience [@meyer2025playing]. By examining the variety, materials, and complexity of these objects, archaeologists are uncovering how play shaped the skills and innovative thinking necessary to thrive in one of the world’s most challenging environments. 
 
 In this post, I'm exploring how something as simple as a child’s toy can tell profound stories about culture and survival. 
 
@@ -82,7 +86,7 @@ Data from @meyer2025playing.
 
 The Inuit entered Greenland from Canada from AD 1000. The Norse, on the other hand, reached Greenland from Iceland around the same time (Figure \@ref(fig:fig0)).
 
-```{r fig0, echo=F, warning=F, fig.cap = "Approximate timelines for the Inuit and the Norse in Greenland based on Fig 1 by Meyer and Riede (2025)."}
+```{r fig0, echo=F, warning=F, fig.cap = "Approximate timelines for the Inuit and the Norse in Greenland based on Fig 1 by Meyer and Riede (2025). Names correspond to different cultures and settlements."}
 timeline_df <- tibble::tribble(
   ~group,             ~start, ~end,  ~category, ~label,
   "Classic Thule",     1000, 1800,  "Inuit",    "Classic Thule",
@@ -120,10 +124,11 @@ ggplot(timeline_df) +
    geom_text(aes(x = start + 95, y = hjust + vertical_adjust, label = label),
                    nudge_y = 0) + 
    scale_color_manual(values = cols) +
-   theme_void(12) +
+   theme_void(font_size) +
    theme(
     #axis.line.x = element_line(),
     #axis.ticks.x = element_line(),
+    #axis.ticks.length = unit(3, "pt"),
     axis.text.x = element_text(),
     axis.title.x = element_text()
   ) +
@@ -136,11 +141,11 @@ ggplot(timeline_df) +
 
 The Norse and the Inuit developed very different ways of interacting with their environment, shaped by their unique social structures and ecological relationships. These differences are reflected even in the toys children played with.
 
-During the period when the Norse and Inuit coexisted in Greenland (roughly AD 1000–1400), their approaches to childhood play diverged in meaningful ways (Figure \@ref(fig:fig1)). Inuit society emphasized toys that prepared children for life in the Arctic. Miniature hunting tools and social play objects were common, likely serving as practice for essential survival skills. In contrast, Norse children’s toys were more closely tied to agriculture, reflecting the early introduction of farm work in their daily lives.
+During the period when the Norse and Inuit coexisted in Greenland (roughly AD 1000–1400), their approaches to childhood play diverged in meaningful ways (Figure \@ref(fig:fig1)). Inuit society emphasized toys that prepared children for life in the Arctic. Miniature weapons (in the form of hunting tools) and social play objects were common, likely serving as practice for essential survival skills. In contrast, Norse children’s toys were more closely tied to agriculture, reflecting the early introduction of farm work in their daily lives.
 
 Among the Inuit, little change in these categories is observable over time. For the Norse, the variation is more pronounced, although this pattern may simply reflect the limited sample size. 
 
-These differences highlight how childhood play can offer a window into broader cultural strategies for survival and adaptation.
+However, these differences highlight how childhood play can offer a window into broader cultural strategies for survival and adaptation.
 
 ```{r fig1, echo=F, fig.cap = "Proportions of toy categories over time."}
 df_types <- df %>% 
@@ -163,12 +168,12 @@ df_types %>% filter(Dates == "1000-1200" | Dates == "1200-1400") %>%
     labs(x = "Time", y = "Proportion, %") +
     facet_wrap(.~ Culture) +
     scale_color_brewer(palette = "Dark2") +
-    theme_hc(12) +
+    theme_hc(font_size) +
     theme(legend.position = "none")
 ```
 Looking at the individual items, dolls and figures (figurines) made up the largest percentage of the Inuit and Norse toys, respectively (Figure \@ref(fig:fig2)).
 
-It is interesting to notice the diversity of items within each category for the Inuits compared to the Norse. This diversity is commonly seen as an indication of innovation [@kuhn2020evolution]. 
+It is interesting to notice the higher diversity of items within each category for the Inuits compared to the Norse. This diversity is commonly seen as an indication of innovation [@kuhn2020evolution]. 
 
 ```{r fig2, echo=F, warning=F, fig.cap = "Proportions of toy items over time."}
 df_items <- df %>% 
@@ -192,13 +197,11 @@ df_items %>% filter(Dates == "1000-1200" | Dates == "1200-1400")  %>%
     facet_wrap(.~ Culture) +
     #theme_minimal() +
     scale_color_brewer(palette = "Dark2") +
-    theme_hc(12) 
+    theme_hc(font_size) 
 ```
 Another indication of diversity comes from the materials used. Usually only one material is used per item with only 6 items using combinations of two materials (bone and metal or wood and metal), all made by Inuit. 
 
-For both cultures, the most prevalent material was wood (Figure \@ref(fig:fig3)). Followed by bone for the Inuit and stone for the Norse. The bones mainly originated from sea animals such as seals and whales [e.g. @seersholm2016dna]. 
-
-So what?
+For both cultures, the most prevalent material was wood (Figure \@ref(fig:fig3)). Followed by bone for the Inuit and stone for the Norse. The bones mainly originated from sea animals such as seals and whales [e.g. @seersholm2016dna]. The variety of materials used, although generally limited to a single material per object, reflects the different environmental resources and cultural priorities of the Inuit and the Norse. This suggests that each culture adapted its toy-making practices to the resources most readily available within its environment.
 
 ```{r fig3, echo=F, fig.cap = "Proportions of toy materials over time."}
 material_cols <- c("Material_metal", "Material_plant", "Material_stone", "Material_bone",
@@ -236,7 +239,7 @@ material_prop %>%
     geom_text_repel(data = material_prop %>% filter(Dates == "1000-1200"), 
                     aes(label = Material)) +
     labs(x = "Time", y = "Proportion, %") + 
-    theme_hc(12) +
+    theme_hc(font_size) +
     scale_color_paletteer_d("PrettyCols::Bold") +
     theme(legend.position = "none")
 ```
@@ -246,11 +249,13 @@ df %>% filter(Material_bone == "YES") %>% filter(Culture == "Inuit") %>%
    reframe(unique(Material_description)) 
 ```
 
+Ultimately, these contrasts in toy forms and materials reveal how childhood play can serve as a reflection of each culture’s broader strategies for learning, adaptation, and survival in the Greenlandic environment.
+
 # Shifting Play: Inuit Toys and Cultural Change Over 800 Years
 
 For the Inuit, the dataset spans a period of approximately 800 years, allowing us to examine changes over an extended timeframe.
 
-The proportion of social play items (such as dolls) declines up to the 1600–1800 period, after which it increases sharply (Figures \@ref(fig:fig4) and \@ref(fig:fig5)). In contrast, the proportion of weapon-related items rises until the 1600–1800s and then begins to decline. Tool-related artifacts show a steadier, more gradual increase across the sequence.
+The proportion of social play items (such as dolls) declines up to the 1600–1800 period, after which it increases sharply (Figures \@ref(fig:fig4) and \@ref(fig:fig5)). In contrast, the proportion of weapon-related items rises until the 1600–1800s and then begins to decline. Tool-related toys show a steadier, more gradual increase across the sequence.
 
 The most pronounced shifts appear to occur between 1600 and 1800—a period corresponding to renewed contact between the Inuit and Europeans.
 
@@ -268,7 +273,7 @@ df_types %>%
                     aes(label = Type)) +
    facet_wrap(.~ Culture) +
    scale_color_brewer(palette = "Dark2") +
-   theme_hc(12) +
+   theme_hc(font_size) +
    theme(legend.position = "none")
 
 # 10 most prevalent items in a period
@@ -294,7 +299,7 @@ df_items %>%
     facet_wrap(.~ Culture) +
     #theme_minimal() +
     scale_color_brewer(palette = "Dark2") +
-    theme_hc(12) +
+    theme_hc(font_size) +
     theme(legend.position = "none")
 ```
 
@@ -331,7 +336,7 @@ avg_dimensions_long %>%
    #geom_text_repel(aes(label = Type)) +
    facet_grid(. ~ Dimension, scales = "free") +
    scale_color_brewer(palette = "Dark2") +
-   theme_hc(12) +
+   theme_hc(font_size) +
    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
 ```
 ```{r fig7, fig.cap = "Proportion of material for Inuit.", echo=F, warning=F}
@@ -347,14 +352,14 @@ material_prop %>%
                        distinct(Dates, Material, .keep_all = T), 
                     aes(label = Material), max.overlaps = 1) +
     labs(x = "Time", y = "Proportion, %") + 
-    theme_hc(12) +
+    theme_hc(font_size) +
     scale_color_paletteer_d("PrettyCols::Bold") +
     theme(legend.position = "none")
 ```
 
 Interestingly, each toy category exhibits distinct material preferences (Figure \@ref(fig:fig8)). Skill-based play objects were often made of bone, social play items (such as dolls) and transport toys (boats, kayaks) were predominantly crafted from wood, while tools were mainly produced from stone—especially after AD 1200. These patterns suggest that variations in toy dimensions and materials are more likely linked to changes in design or function rather than to material scarcity.
 
-Weapons present an interesting case: their frequency increases in AD 1600-1800 (Figure \@ref(fig:fig4)), they become more diverse (Figure \@ref(fig:fig9)), and the dominant material shifts from bone to wood (Figure \@ref(fig:fig8)). This trend has been hypothesized to reflect broader changes in hunting implements that emerged in response to the increasingly harsh environmental conditions of the time (cite paper).
+Weapons present an interesting case: their frequency increases in AD 1600-1800 (Figure \@ref(fig:fig4)), they become more diverse (Figure \@ref(fig:fig9)), and the dominant material shifts from bone to wood (Figure \@ref(fig:fig8)). This trend has been hypothesized to reflect broader changes in hunting technology that emerged in response to to a harsher environment. Through playful experimentation with different weapon forms, children gained familiarity with a wider range of techniques and possibilities. This, its been suggested, would have equipped them to more effectively adapt their tools to environmental conditions later in life [@meyer2025playing].
 
 ```{r fig8, echo=F, warning = F, message = F, fig.cap = "Proportion of material per toy category for Inuit."}
 material_prop <- df %>%
@@ -391,7 +396,7 @@ material_prop %>%
                     aes(label = Material)) +
    facet_wrap(Type ~ ., scales = "free") +
    labs(x = "Time", y = "Proportion, %") + 
-   theme_hc(12) +
+   theme_hc(font_size) +
    scale_color_paletteer_d("PrettyCols::Bold") +
    theme(legend.position = "none") +
    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
@@ -412,9 +417,13 @@ df_distinct_weapons %>%
    labs(x = "Time", y = "Number of Distinct Weapon Toys") + 
    facet_wrap(.~ Culture) +
    scale_fill_brewer(palette = "Dark2") +
-   theme_hc(12) +
+   theme_hc(font_size) +
    theme(legend.position = "none")
 ```
+# Conclusions
+Taken together, the toys of Inuit and Norse children in Greenland show that play was not merely entertainment—it was a crucial part of cultural learning. Inuit children’s toys reinforced the skills needed for hunting, travel, and cooperation in the Arctic, while Norse children’s toys reflected a lifestyle centred on farming and animal husbandry. Over time, Inuit toys also reveal subtle shifts in design, material, and emphasis that correspond to broader ecological and social changes, particularly during periods of increased environmental challenge and renewed contact with Europeans.
+
+By looking closely at these small objects, we gain valuable insight into how children learned to navigate their world and how societies passed down knowledge across generations. Childhood play, in this sense, becomes a window into cultural resilience, innovation, and adaptation to changing climatic and environmental conditions. 
 
 
 ## References 
