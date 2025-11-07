@@ -80,11 +80,9 @@ Data from @meyer2025playing.
 
 # Toys as Training: Comparing Norse and Inuit Childhoods in Greenland
 
-The Inuit entered Greenland from Canada from AD 1000. The Norse, on the other hand, reached Greenland from Iceland around the same time.
+The Inuit entered Greenland from Canada from AD 1000. The Norse, on the other hand, reached Greenland from Iceland around the same time (Figure \@ref(fig:fig0)).
 
-(ad reproduction plot)
-
-```{r, echo=F, warning=F, fig.cap = "Approximate timelines for the Inuit and the Norse in Greenland based on Fig 1 by Meyer and Riede (2025)."}
+```{r fig0, echo=F, warning=F, fig.cap = "Approximate timelines for the Inuit and the Norse in Greenland based on Fig 1 by Meyer and Riede (2025)."}
 timeline_df <- tibble::tribble(
   ~group,             ~start, ~end,  ~category, ~label,
   "Classic Thule",     1000, 1800,  "Inuit",    "Classic Thule",
@@ -140,7 +138,9 @@ The Norse and the Inuit developed very different ways of interacting with their 
 
 During the period when the Norse and Inuit coexisted in Greenland (roughly AD 1000–1400), their approaches to childhood play diverged in meaningful ways (Figure \@ref(fig:fig1)). Inuit society emphasized toys that prepared children for life in the Arctic. Miniature hunting tools and social play objects were common, likely serving as practice for essential survival skills. In contrast, Norse children’s toys were more closely tied to agriculture, reflecting the early introduction of farm work in their daily lives.
 
-Among the Inuit, little change in these categories is observable over time. For the Norse, the variation is more pronounced, although this pattern may simply reflect the limited sample size. These differences highlight how childhood play can offer a window into broader cultural strategies for survival and adaptation.
+Among the Inuit, little change in these categories is observable over time. For the Norse, the variation is more pronounced, although this pattern may simply reflect the limited sample size. 
+
+These differences highlight how childhood play can offer a window into broader cultural strategies for survival and adaptation.
 
 ```{r fig1, echo=F, fig.cap = "Proportions of toy categories over time."}
 df_types <- df %>% 
@@ -298,7 +298,7 @@ df_items %>%
     theme(legend.position = "none")
 ```
 
-Among the recorded toy dimensions, the average toy length shows the most pronounced changes over time (Figure \@ref(fig:fig6)). This pattern may reflect shifts in design and function, variations in material availability, or a combination of both. Notably, between AD 1400 and 1600 there is a marked decline in the proportion of wooden toys, accompanied by an increase in bone objects (Figure \@ref(fig:fig7)). However, when material use is examined by toy type, this reduction in wooden items appears to be driven primarily by tools and weapons (Figure \@ref(fig:fig8)).
+In addition to shifts in toy categories, their dimensions also changed over time. Of these measurements, average toy length exhibited the most notable temporal variation (Figure \@ref(fig:fig6)). This pattern may reflect shifts in design and function, variations in material availability, or a combination of both. Notably, between AD 1400 and 1600 there is a marked decline in the proportion of wooden toys, accompanied by an increase in bone objects (Figure \@ref(fig:fig7)). However, when material use is examined by toy category, this reduction in wooden items appears to be driven primarily by tools and weapons (Figure \@ref(fig:fig8)).
 
 ```{r fig6, echo=F, warning=F, message = F, fig.cap = "Toy dimensions for Inuit."}
 avg_dimensions <- df %>%
