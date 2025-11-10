@@ -141,7 +141,7 @@ ggplot(timeline_df) +
 
 The Norse and the Inuit developed very different ways of interacting with their environment, shaped by their unique social structures and ecological relationships. These differences are reflected even in the toys children played with.
 
-During the period when the Norse and Inuit coexisted in Greenland (roughly AD 1000–1400), their approaches to childhood play diverged in meaningful ways (Figure \@ref(fig:fig1)). Inuit society emphasized toys that prepared children for life in the Arctic. Miniature weapons (in the form of hunting tools) and social play objects were common, likely serving as practice for essential survival skills. In contrast, Norse children’s toys were more closely tied to agriculture, reflecting the early introduction of farm work in their daily lives.
+During the period when the Norse and Inuit coexisted in Greenland (roughly AD 1000–1400), their approaches to childhood play diverged in meaningful ways (Figure \@ref(fig:fig1)). Inuit society emphasized toys that prepared children for life in the Arctic. Miniature weapons, in the form of hunting tools, and social play objects were common, likely serving as practice for essential survival skills. In contrast, Norse children’s toys were more closely tied to agriculture, reflecting the early introduction of farm work in their daily lives.
 
 Among the Inuit, little change in these categories is observable over time. For the Norse, the variation is more pronounced, although this pattern may simply reflect the limited sample size. 
 
@@ -191,7 +191,7 @@ df_items %>% filter(Dates == "1000-1200" | Dates == "1200-1400")  %>%
     ggplot(., aes(x = Dates, y = proportion*100, col = Type, group = Item_name)) +
     geom_point() +
     geom_line() +
-    labs(x = "Time", y = "Proportion, %") + 
+    labs(x = "Time", y = "Proportion, %", col = "Category") + 
     geom_text_repel(data = df_items %>% filter(Dates == "1000-1200"), 
                     aes(label = Item_name)) +
     facet_wrap(.~ Culture) +
@@ -202,6 +202,8 @@ df_items %>% filter(Dates == "1000-1200" | Dates == "1200-1400")  %>%
 Another indication of diversity comes from the materials used. Usually only one material is used per item with only 6 items using combinations of two materials (bone and metal or wood and metal), all made by Inuit. 
 
 For both cultures, the most prevalent material was wood (Figure \@ref(fig:fig3)). Followed by bone for the Inuit and stone for the Norse. The bones mainly originated from sea animals such as seals and whales [e.g. @seersholm2016dna]. The variety of materials used, although generally limited to a single material per object, reflects the different environmental resources and cultural priorities of the Inuit and the Norse. This suggests that each culture adapted its toy-making practices to the resources most readily available within its environment.
+
+Ultimately, these contrasts in toy forms and materials reveal how childhood play can serve as a reflection of each culture’s broader strategies for learning, adaptation, and survival in the Greenlandic environment.
 
 ```{r fig3, echo=F, fig.cap = "Proportions of toy materials over time."}
 material_cols <- c("Material_metal", "Material_plant", "Material_stone", "Material_bone",
@@ -249,7 +251,6 @@ df %>% filter(Material_bone == "YES") %>% filter(Culture == "Inuit") %>%
    reframe(unique(Material_description)) 
 ```
 
-Ultimately, these contrasts in toy forms and materials reveal how childhood play can serve as a reflection of each culture’s broader strategies for learning, adaptation, and survival in the Greenlandic environment.
 
 # Shifting Play: Inuit Toys and Cultural Change Over 800 Years
 
@@ -303,7 +304,7 @@ df_items %>%
     theme(legend.position = "none")
 ```
 
-In addition to shifts in toy categories, their dimensions also changed over time. Of these measurements, average toy length exhibited the most notable temporal variation (Figure \@ref(fig:fig6)). This pattern may reflect shifts in design and function, variations in material availability, or a combination of both. Notably, between AD 1400 and 1600 there is a marked decline in the proportion of wooden toys, accompanied by an increase in bone objects (Figure \@ref(fig:fig7)). However, when material use is examined by toy category, this reduction in wooden items appears to be driven primarily by tools and weapons (Figure \@ref(fig:fig8)).
+In addition to shifts in toy categories, their dimensions also changed over time. Of these measurements, the average toy length exhibited the most notable temporal variation (Figure \@ref(fig:fig6)). This pattern may reflect shifts in design and function, variations in material availability, or a combination of both. Notably, between AD 1400 and 1600 there is a marked decline in the proportion of wooden toys, accompanied by an increase in bone objects (Figure \@ref(fig:fig7)). However, when material use is examined by toy category, this reduction in wooden items appears to be driven primarily by tools and weapons (Figure \@ref(fig:fig8)).
 
 ```{r fig6, echo=F, warning=F, message = F, fig.cap = "Toy dimensions for Inuit."}
 avg_dimensions <- df %>%
@@ -359,7 +360,7 @@ material_prop %>%
 
 Interestingly, each toy category exhibits distinct material preferences (Figure \@ref(fig:fig8)). Skill-based play objects were often made of bone, social play items (such as dolls) and transport toys (boats, kayaks) were predominantly crafted from wood, while tools were mainly produced from stone—especially after AD 1200. These patterns suggest that variations in toy dimensions and materials are more likely linked to changes in design or function rather than to material scarcity.
 
-Weapons present an interesting case: their frequency increases in AD 1600-1800 (Figure \@ref(fig:fig4)), they become more diverse (Figure \@ref(fig:fig9)), and the dominant material shifts from bone to wood (Figure \@ref(fig:fig8)). This trend has been hypothesized to reflect broader changes in hunting technology that emerged in response to to a harsher environment. Through playful experimentation with different weapon forms, children gained familiarity with a wider range of techniques and possibilities. This, its been suggested, would have equipped them to more effectively adapt their tools to environmental conditions later in life [@meyer2025playing].
+Weapons present an interesting case: their frequency increases in AD 1600-1800 (Figure \@ref(fig:fig4)), they become more diverse (Figure \@ref(fig:fig9)), and the dominant material shifts from bone to wood (Figure \@ref(fig:fig8)). This trend has been hypothesized to reflect broader changes in hunting technology that emerged in response to a harsher environment. Through playful experimentation with different weapon forms, children gained familiarity with a wider range of techniques and possibilities. This, its been suggested, would have equipped them to more effectively adapt their tools to environmental conditions later in life [@meyer2025playing].
 
 ```{r fig8, echo=F, warning = F, message = F, fig.cap = "Proportion of material per toy category for Inuit."}
 material_prop <- df %>%
