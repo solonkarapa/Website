@@ -31,7 +31,7 @@ title: Teaching
 - Thesis Supervisor, [MPhil in Computational Biology](https://www.maths.cam.ac.uk/postgrad/mphil/prospective/compbio) - University of Cambridge (2022-2023)
 <br><br>
 
-- Teaching Assistant and Thesis Supervisor, [MPhil in Population Health Sciences](https://www.phs.masters.cam.ac.uk/) - University of Cambridge (2021-2025)
+- Thesis Supervisor, [MPhil in Population Health Sciences](https://www.phs.masters.cam.ac.uk/) - University of Cambridge (2021-2025)
 <br><br>
 
 - Supervisor, 
