@@ -11,7 +11,7 @@ tags: [data analysis, data vis, data]
 subtitle: ''
 summary: 'Survival in Greenland during the Little Ice Age involved more than adults—children played a role too. Inuit and Norse toys reflected their societies’ interaction with the environment, showing how play fostered learning, innovation, and cultural adaptation.'
 authors: []
-lastmod: '2025-11-22T14:27:06Z'
+lastmod: '2025-12-09T14:27:06Z'
 featured: no
 image:
   caption: 'created by DALL·E'
@@ -20,7 +20,7 @@ image:
 projects: []
 output: 
   bookdown::html_document2
-draft: TRUE
+draft: FALSE
 bibliography: biblio_children.bib
 ---
 
