@@ -23,7 +23,8 @@ title: People
 #   Leave `date_end` empty if it's your current employer.
 #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
 ---
-- 2025  
+- 2025
+   - Wayne Huang, Laidlaw Scholar
    - Jack Garland, Summer intern
    - Zhequan Zhou, MPhil Health Data Science
 - 2024 

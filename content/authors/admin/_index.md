@@ -18,13 +18,13 @@ highlight_name: false
 
 interests:
 - Data Science 
+- Machine Learning
 - Bayesian Methods
 - Biomedical Research
 - Statistical Computing
 - Statistical Modelling 
 - Longitudinal Data Analysis
 - Statistical Learning  
-- Machine Learning
 - Medical Decision Making
 - Predictive Modelling and Model Validation
 - Translational Genomics
