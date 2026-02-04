@@ -19,6 +19,7 @@ highlight_name: false
 interests:
 - Data Science 
 - Machine Learning
+- Computational Genomics
 - Bayesian Methods
 - Biomedical Research
 - Statistical Computing
