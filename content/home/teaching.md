@@ -25,6 +25,9 @@ title: Teaching
 
 ---
 
+- Lecturer, [MPhil in Population Health Sciences](https://www.phs.masters.cam.ac.uk/) - University of Cambridge (2026)
+<br><br>
+
 - Lecturer, [MPhil in Computational Biology](https://www.maths.cam.ac.uk/postgrad/mphil/prospective/compbio) - University of Cambridge (2022-2024)
 <br><br>
 
