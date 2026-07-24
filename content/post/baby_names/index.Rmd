@@ -1,0 +1,361 @@
+---
+title: "Baby names"
+author: Me
+date: '`r format(Sys.Date(), "%d. %b %Y")`'
+slug: puzzle238
+categories:
+  - puzzle
+tags: [puzzle]
+subtitle: ''
+summary: "what children are named changed beyond recognition, while what they're named for barely moved."
+authors: []
+lastmod: '2026-12-20T14:27:06Z'
+featured: no
+image:
+  caption: 'created by DALL·E'
+  focal_point: ''
+  preview_only: no
+projects: []
+draft: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=F, message=F}
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(scales)
+```
+
+```{r, echo=F}
+# import data
+path_data <- "/Users/solon/Desktop/Website/content/post/baby_names/data/"
+uk_names_with_popularity_and_connotations <- read.csv(paste0(path_data, "uk_names_with_popularity_and_connotations.csv")) %>%
+    mutate(country = "uk")
+us_names_with_popularity_and_connotations <- read.csv(paste0(path_data, "us_names_with_popularity_and_connotations.txt")) %>%
+    mutate(country = "us")
+
+data <- rbind(uk_names_with_popularity_and_connotations, us_names_with_popularity_and_connotations)
+```
+
+Picture a class of thirty girls. How many of them share a first name with someone else in the room?
+
+In 2023, almost one, on average. In 1880, ten.
+
+That's the whole story of this post. Everything that follows is an attempt to measure it properly.
+
+```{r, echo=F}
+# ---- 1. annual name shares, US girls, two snapshot years -------------------
+shares <- data %>%
+    filter(country == "us", sex == "F", year %in% c(1880, 2023)) %>%
+    group_by(year) %>%
+    mutate(share = n / sum(n)) %>%
+    ungroup()
+
+# ---- 2. expected number of children sharing a name, class of 30 -----------
+expected <- shares %>%
+    group_by(year) %>%
+    summarise(e = 30 * (1 - (1 - sum(share^2))^29), .groups = "drop") %>%
+    mutate(label = paste0("~", round(e), " of 30 share a name"),
+           col = 2.5, row = -5.4)
+
+# ---- 3. draw a classroom -------------------------------------------------
+draw_class <- function(seed) {
+    set.seed(seed)
+    shares %>%
+        group_by(year) %>%
+        group_modify(~ tibble(
+            child = 1:30,
+            name  = sample(.x$lowercase_name, 30, replace = TRUE, prob = .x$share)
+        )) %>%
+        group_by(year, name) %>%
+        mutate(shared = n() > 1) %>%
+        ungroup()
+}
+
+# find a seed whose draw matches the expected counts (~10 and ~1)
+seed_ok <- detect(1:500, function(s) {
+    d <- draw_class(s) %>% count(year, wt = shared)
+    d$n[d$year == 1880] %in% 9:11 && d$n[d$year == 2023] %in% 1:2
+})
+
+classroom <- draw_class(seed_ok) %>%
+    mutate(row = (child - 1) %/% 6,
+           col = (child - 1) %%  6,
+           label = str_to_title(name))
+
+# ---- 4. plot -------------------------------------------------------------
+ggplot(classroom, aes(col, -row)) +
+    geom_point(aes(colour = shared), size = 12) +
+    geom_text(aes(label = label), size = 2.0, colour = "white", fontface = "bold") +
+    geom_text(data = expected, aes(col, row, label = label),
+              inherit.aes = FALSE, size = 3.4, colour = "grey30",
+              fontface = "bold") +
+    facet_wrap(~ year) +
+    scale_colour_manual(values = c(`TRUE` = "#C1666B", `FALSE` = "grey85"),
+                        guide = "none") +
+    coord_equal(clip = "off", ylim = c(-5.9, 0.6)) +
+    labs(title = "Thirty girls in a classroom",
+         subtitle = "Coloured if she shares her name with someone else in the room") +
+    theme_void(base_size = 11) +
+    theme(strip.text  = element_text(face = "bold", size = 12, margin = margin(b = 8)),
+          plot.title  = element_text(face = "bold", size = 15, hjust = 0, margin = margin(b = 8)),
+          plot.subtitle = element_text(colour = "grey35", hjust = 0,
+                                       margin = margin(b = 10)),
+          plot.margin = margin(12, 12, 12, 12),
+          panel.spacing = unit(4, "lines"))
+```
+
+I use data published by *[The Economist](https://www.economist.com/interactive/culture/2025/03/20/what-is-in-a-name)* where they analysed the first names of almost 400m people born in America and Britain in the past 143 years. 
+
+The figure below shows every name that has ever topped the American charts, traced across its whole life — the year it arrived, the height it reached, the long decline after. Boys in blue, girls in red, each labelled at its own peak. 
+
+Two things are visible at once: names come and go in waves, and every wave breaks lower than the one before it. John and Mary held around one baby in twelve; Liam and Olivia hold about one in a hundred.
+
+```{r, echo = F}
+us <- data %>% filter(country == "us")
+
+# annual share of the cohort
+shares <- us %>%
+    group_by(sex, year) %>%
+    mutate(cohort = sum(n)) %>%
+    group_by(sex, year, lowercase_name) %>%
+    summarise(share = sum(n) / first(cohort), .groups = "drop")
+
+# every name that was ever #1
+champions <- shares %>%
+    group_by(sex, year) %>%
+    slice_max(share, n = 1, with_ties = FALSE) %>%
+    ungroup() %>%
+    distinct(sex, lowercase_name)
+
+waves <- shares %>%
+    semi_join(champions, by = c("sex", "lowercase_name"))
+
+# one label per name, at its own peak
+peaks <- waves %>%
+    group_by(sex, lowercase_name) %>%
+    slice_max(share, n = 1, with_ties = FALSE) %>%
+    ungroup() %>%
+    mutate(label = str_to_title(lowercase_name))
+
+ggplot(waves, aes(year, share, group = lowercase_name, colour = sex)) +
+    geom_line(linewidth = 0.6, alpha = 0.85) +
+    ggrepel::geom_text_repel(data = peaks, aes(label = label),
+                             size = 3, seed = 1, min.segment.length = 0.3,
+                             segment.size = 0.2, segment.colour = "grey70",
+                             box.padding = 0.35, max.overlaps = 40) +
+    scale_y_continuous(labels = scales::percent, expand = expansion(c(0, 0.05))) +
+    scale_colour_manual(values = c(F = "#C1666B", M = "#4281A4"), guide = "none") +
+    labs(x = NULL, y = "Share of babies given this name",
+         title = "Every name that was ever America's most popular",
+         subtitle = "Each wave is smaller than the last") +
+    theme_minimal(base_size = 11) +
+    theme(panel.grid.minor = element_blank(),
+          plot.subtitle = element_text(colour = "grey35"))
+
+```
+
+## The dominant pattern is de-concentration
+
+To verify whether this pattern is more widespread than the most popular name I took the top ten most popular ones of each decade. They are shown as a band: the solid line is the decade's number one, the shaded region stretches down to the tenth. Labels mark each name's reign — Mary held the top spot for seven consecutive decades, John and Michael for four each. Two things happen at once. The band falls, so the leading names command steadily less of each cohort. And it narrows, so the gap between first and tenth place shrinks over time. There is no longer a name that stands out from the pack.
+
+In the 1880s the top American girl's name (Mary) took ~6–7% of all female births on its own, and the whole top-ten band sat between roughly 2% and 8%. By the 2010s the entire top ten has collapsed into a thin ribbon near 1%. The band also *narrows* as it falls — early on there's a big gap between #1 and #10, now they're nearly indistinguishable: no name is meaningfully "the" name anymore.
+
+The UK series is barely there. ONS data starts in 1996, so the UK contributes two or three decade points against the US's fourteen.
+
+```{r, echo=F}
+denom <- data %>%
+    distinct(country, sex, year, per_year) %>%
+    mutate(decade = floor(year / 10) * 10) %>%
+    group_by(country, sex, decade) %>%
+    summarise(cohort = sum(per_year), n_years = n_distinct(year), .groups = "drop") %>%
+    filter(n_years == 10)
+
+top10 <- data %>%
+    mutate(decade = floor(year / 10) * 10) %>%
+    group_by(country, sex, decade, lowercase_name) %>%
+    summarise(births = sum(n), .groups = "drop") %>%
+    inner_join(denom, by = c("country", "sex", "decade")) %>%
+    mutate(prop = births / cohort) %>%
+    group_by(country, sex, decade) %>%
+    slice_max(prop, n = 10, with_ties = FALSE) %>%
+    mutate(rank = row_number()) %>%
+    ungroup()
+
+band <- top10 %>%
+    group_by(country, sex, decade) %>%
+    summarise(lo = min(prop), hi = max(prop), .groups = "drop")
+
+# one label per reign, placed at its midpoint
+leaders <- top10 %>%
+    filter(rank == 1) %>%
+    arrange(country, sex, decade) %>%
+    group_by(country, sex) %>%
+    mutate(spell = cumsum(lowercase_name != lag(lowercase_name, default = ""))) %>%
+    group_by(country, sex, spell, lowercase_name) %>%
+    summarise(decade = mean(decade), prop = mean(prop), .groups = "drop") %>%
+    mutate(label = str_to_title(lowercase_name))
+
+ggplot(band, aes(decade)) +
+    geom_ribbon(aes(ymin = lo, ymax = hi, fill = country), alpha = 0.2) +
+    geom_line(data = filter(top10, rank == 1),
+              aes(y = prop, colour = country), linewidth = 0.7) +
+    ggrepel::geom_text_repel(data = leaders, aes(y = prop, label = label),
+                             size = 3, direction = "y", min.segment.length = 0.2,
+                             segment.size = 0.2, seed = 1) +
+    facet_grid(country ~ sex, scales = "free_x", space = "free_x") +
+    scale_y_log10(labels = scales::percent) +
+    scale_colour_brewer(palette = "Set1", guide = "none") +
+    scale_fill_brewer(palette = "Set1", guide = "none") +
+    labs(x = NULL, y = "Share of births in decade",
+         title = "The most popular names are far less popular than they used to be",
+         subtitle = "Line: the decade's top name. Band: spread across the top ten.") +
+    theme_minimal(base_size = 11) +
+    theme(panel.grid.minor = element_blank(),
+          strip.text = element_text(face = "bold"),
+          panel.spacing = unit(2, "lines"))
+```
+
+## How Many Names Is That, Really?
+
+That's what happened at the top. The question is what happened underneath it — and for that, the ten most popular names aren't enough to go on.
+
+The simplest thing to do would be to count how many different names appear each year. But that mostly tells us how many babies were born — bigger cohorts throw up more one-offs, and the total climbs without anything really changing about how people choose.
+
+So instead of counting names, we can count *effective names* (see Methodology). If every name in use were equally popular, how many would you need to produce the variety we actually see?
+
+By this measure, 1880 comes out at about 190. That's a year in which one name in fourteen girls was Mary — so it's not that Victorian parents knew only 190 names, it's that the ones they used were clustered tightly enough to *behave* like 190 evenly-shared names.
+
+What the plot shows: Three things
+
+The rise is enormous — American girls go from about 190 effective names in 1880 to roughly 2,200 today, an eleven-fold increase, with boys following the same path a step behind.
+
+There's a rise to about 1900, then a genuine plateau from roughly 1900 to 1955 — girls hover around 300–340, boys around 180–245, with no net gain across five decades including two world wars. The takeoff starts around 1960 and steepens continuously after.
+
+And the sexes have swapped roles. Girls' names were always more varied, and the gap widened until about 1980 — but boys have been catching up fast ever since, and the two panels seem to be converging.
+
+```{r, echo=F}
+## diversity for each year - “How concentrated are names in a few popular choices?”
+hill_data <- data %>%
+    group_by(year, country, sex) %>%
+    group_modify(~ .x %>%
+                     count(lowercase_name, wt = n, name = "births") %>%
+                     mutate(p = births / sum(births)) %>%
+                     summarise(
+                         q0 = n(),
+                         q1 = exp(-sum(p * log(p))),
+                         q2 = 1 / sum(p^2),
+                         .groups = "drop"
+                     )) %>%
+    ungroup()
+
+hill_long <- hill_data %>%
+    pivot_longer(q0:q2, names_to = "order", values_to = "effective") %>%
+    mutate(order = recode(order,
+                          q0 = "Richness (q=0)",
+                          q1 = "Shannon (q=1)",
+                          q2 = "Simpson (q=2)"))
+
+# endpoint labels instead of a legend
+ends <- hill_long %>%
+    filter(order == "Shannon (q=1)") %>%
+    group_by(country, sex) %>%
+    slice_max(year, n = 1) %>%
+    ungroup()
+
+ggplot(filter(hill_long, order == "Shannon (q=1)"),
+       aes(year, effective, colour = country)) +
+    geom_line(data = filter(hill_long, order == "Simpson (q=2)"),
+              aes(group = interaction(country, sex)),
+              linewidth = 0.5, alpha = 0.35, linetype = "22") +
+    geom_line(linewidth = 0.8) +
+    ggrepel::geom_text_repel(data = ends, aes(label = toupper(country)),
+                             hjust = 0, nudge_x = 4, direction = "y",
+                             size = 3.2, segment.size = 0.2, seed = 1) +
+    facet_wrap(~ sex, labeller = as_labeller(c(F = "Girls", M = "Boys"))) +
+    scale_y_log10(breaks = c(10, 30, 100, 300, 1000, 3000),
+                  labels = scales::comma) +
+    scale_x_continuous(expand = expansion(mult = c(0.02, 0.12))) +
+    scale_colour_manual(values = c(uk = "#C1666B", us = "#4281A4"),
+                        guide = "none") +
+    labs(x = NULL, y = "Effective number of names",
+         title = "Naming has diversified for a century",
+         subtitle = paste("Solid: Shannon effective names (Hill q=1).",
+                          "Dashed: Simpson (q=2), which discounts rare names.")) +
+    theme_minimal(base_size = 11) +
+    theme(panel.grid.minor = element_blank(),
+          strip.text = element_text(face = "bold", hjust = 0),
+          plot.subtitle = element_text(colour = "grey35", size = 9),
+          panel.spacing = unit(2, "lines"))
+```
+## A Change in Values, or Just in Vocabulary?
+
+So naming fragmented — but fragmented away from what, and toward what? The effective-names curve is blind to this: it counts how many names were in play and treats them all as interchangeable tokens. Mary and Nevaeh are just two entries in a distribution. Yet the interesting question isn't how many names parents had to choose from, it's whether the *reasons* for choosing changed. Was the explosion in variety a change in values, or just a change in vocabulary? For that we need to know something about the names themselves.
+
+To do this we can look at the connotations. 
+
+What the plot shows: 
+
+**Tradition collapses, and it's the only category that does:** US boys sit at 75–78% from 1880 straight through to 1940 — flat for sixty years — then fall away: 73% (1940), 55% (1960), 44% (1980), 38% today. Girls run the same shape at half the level: 38% through 1940, then 26% (1960), 18% (1980). The steepest decades are the 1950s and 1970s.
+
+**Boys are named for strength, girls for beauty, and that has not changed:** Strength runs 70–78% for boys and 35–42% for girls across the entire period. Beauty is 51–61% for girls and 2–4% for boys. Both are essentially flat lines for 144 years.
+
+**Love has an arc.** Girls rise from 31% in 1920 to a peak of 60.5% in **1969**, then fall to 25% today. Boys trace a muted version of the same curve. That peak year is either a lovely coincidence or not one.
+
+**Religious goes the wrong way.** Boys dip to 21% in 1920, then *rise* to a 36% peak in 1983 and sit at 26% now — up over the period when everything else was fragmenting. Girls decline steadily, 12% to 7%.
+
+**The main prediction holds, with the right lead-lag.** The Hill curve is flat 1900–1955 and takes off around 1960. Tradition is flat 1880–1940 and starts falling around 1945. The canon loosens *first*, diversity rises *after*, with roughly a fifteen-year lag. That ordering matters — it's the difference between two correlated trends and a mechanism. The claim you can now make is specific: naming diversified because parents stopped drawing from an inherited stock, and you can date the loosening to the immediate postwar years.
+
+**But the religious half of the prediction fails, and that's useful.** If the story were simple secularisation, religious would track tradition down. It rises instead. So "tradition" here isn't measuring piety — it's measuring *inheritance*, the practice of reusing a canonical name. Biblical names stayed popular; naming your son after his grandfather did not. That's a sharper and more defensible claim than the one I'd guessed at.
+
+```{r, echo=F}
+connotations <- c("intelligence","beauty","strength","wealth",
+                  "love","joy","religious","tradition")
+
+#connotations <- top10$connotation
+
+conn_time <- data %>%
+   group_by(country, sex, year) %>%
+   mutate(cohort = sum(n)) %>%
+   ungroup() %>%
+   pivot_longer(all_of(connotations), names_to = "connotation", values_to = "flag") %>%
+   filter(flag) %>%
+   group_by(country, sex, year, connotation) %>%
+   summarise(share = sum(n) / first(cohort), .groups = "drop")
+
+conn_plot <- conn_time %>%
+    mutate(connotation = fct_reorder(connotation, share, .fun = max, .desc = TRUE),
+           sex = recode(sex, F = "Girls", M = "Boys"))
+
+ggplot(conn_plot, aes(year, share, colour = sex, linetype = country)) +
+    geom_vline(xintercept = 1960, colour = "grey80", linewidth = 0.3) +
+    geom_line(linewidth = 0.7) +
+    facet_wrap(~ connotation, scales = "free_y", ncol = 4) +
+    scale_y_continuous(labels = scales::percent, limits = c(0, NA)) +
+    scale_colour_manual(values = c(Girls = "#C1666B", Boys = "#4281A4")) +
+    scale_linetype_manual(values = c(us = "solid", uk = "22")) +
+    labs(x = NULL, y = "Share of births", colour = NULL, linetype = NULL,
+         title = "What parents named children for, 1880–2023",
+         subtitle = "Share of each birth cohort given a name carrying this association.") +
+    theme_minimal(base_size = 11) +
+    theme(panel.grid.minor = element_blank(),
+          strip.text = element_text(face = "bold", hjust = 0),
+          legend.position = "top")
+```
+
+What children are named changed beyond recognition, while what they're named for barely moved. Boys' names became twelve times more varied without becoming any less about strength. The diversity explosion was a change in vocabulary, not in values.
+
+
+### Methodology 
+
+Name diversity was summarised using Hill numbers, the effective-species framework of [Jost, L. (2006)](https://nsojournals.onlinelibrary.wiley.com/doi/10.1111/j.2006.0030-1299.14714.x. The Hill number of order q gives the number of equally frequent names that would produce the observed diversity, with q controlling the weight placed on rare versus common names: q=0 counts distinct names irrespective of frequency, q=1 (the exponential of Shannon entropy) weights names in proportion to their frequency, and q=2 (the inverse Simpson index) weights them by the square of their frequency and is dominated by the most common names.
+
+I report q=1 as the primary measure and q=2 alongside it as a sensitivity analysis. Registry data are subject to frequency-based suppression — names falling below a minimum annual count are withheld — and these thresholds differ between the US and UK sources. The number of rare names observed therefore depends on both the suppression rule and the size of the birth cohort, neither of which is a property of naming behaviour. Since q increases the weight given to common names, agreement between q=1 and q=2 provides evidence that a result is not an artifact of differential coverage in the tail. Across all series the ratio of q=1 to q=2 remained between 2.6 and 3.9 with no systematic trend over time and no divergence between countries, indicating that both the century-scale increase in diversity and the US–UK difference are driven by the common part of the name distribution.
+
+The q=2 diagnostic passes. The q1/q2 ratio sits between about 2.6 and 3.9 across every series, country, and era, with no systematic drift and no US/UK divergence (2023: US girls 3.36 vs UK 3.02; US boys 2.95 vs UK 3.12). That's the reassurance you wanted — the trends and the country gap are not artifacts of the rare tail or of differing suppression thresholds. Notably the US/UK gap survives under q=2 as well, so it's a real difference in common-name concentration, not just the US having a bigger cohort with more one-off names.
+
+
