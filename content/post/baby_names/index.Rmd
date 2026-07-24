@@ -32,7 +32,8 @@ library(scales)
 
 ```{r, echo=F}
 # import data
-path_data <- "/Users/solon/Desktop/Website/content/post/baby_names/data/"
+#path_data <- "/Users/solon/Desktop/Website/content/post/baby_names/data/"
+path_data <- "/Users/solon/Desktop/baby_names/"
 uk_names_with_popularity_and_connotations <- read.csv(paste0(path_data, "uk_names_with_popularity_and_connotations.csv")) %>%
     mutate(country = "uk")
 us_names_with_popularity_and_connotations <- read.csv(paste0(path_data, "us_names_with_popularity_and_connotations.txt")) %>%
