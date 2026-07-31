@@ -4,10 +4,11 @@ author: Me
 date: '`r format(Sys.Date(), "%d. %b %Y")`'
 slug: puzzle238
 categories:
-  - puzzle
-tags: [puzzle]
+  - data analysis
+  - data vis
+tags: [data analysis, data vis]
 subtitle: ''
-summary: "what children are named changed beyond recognition, while what they're named for barely moved."
+summary: "Naming went from a shared inheritance to an act of distinction — but what we name children for barely moved in 144 years. What the numbers reveal about tradition, individuality, and the names we've quietly abandoned."
 authors: []
 lastmod: '2026-12-20T14:27:06Z'
 featured: no
@@ -42,13 +43,15 @@ us_names_with_popularity_and_connotations <- read.csv(paste0(path_data, "us_name
 data <- rbind(uk_names_with_popularity_and_connotations, us_names_with_popularity_and_connotations)
 ```
 
-Picture a class of thirty girls. How many of them share a first name with someone else in the room?
+Picture a class of thirty girls. How many share a first name with someone else in the room?
 
-In 2023, almost one, on average. In 1880, ten.
+In 1880, about ten of them. In 2023, roughly one.
 
-That's the whole story of this post. Everything that follows is an attempt to measure it properly.
+That collapse — from a third of the room to almost no one — is one of the cleaner social signals. A single birth certificate records a private choice; a century of them stacked together records something larger. Somewhere between 1880 and now, naming stopped being an act of belonging — to a family, a saint, a generation — and became an act of distinction.
 
-```{r, echo=F}
+That shift is the story of this post. Everything after this is an attempt to measure it properly — and to see whether the easy explanation survives contact with the data.
+
+```{r fig0, echo=F, fig.cap = "Two classrooms, 143 years apart. Thirty girls per room, names drawn at random from that year's US births; red marks a girl who shares her name with a classmate. Around ten overlap in 1880, roughly one in 2023. See Methodology for details."}
 # ---- 1. annual name shares, US girls, two snapshot years -------------------
 shares <- data %>%
     filter(country == "us", sex == "F", year %in% c(1880, 2023)) %>%
@@ -57,6 +60,10 @@ shares <- data %>%
     ungroup()
 
 # ---- 2. expected number of children sharing a name, class of 30 -----------
+#Treat each of a focal child's 29 roommates as an independent Bernoulli trial with collision probability S.
+#(1 - S)^29 ≈ probability the focal child is unique in the room. This is an approximation. 
+#1 - (1 - S)^29 ≈ probability she shares with at least one other. 
+#30 * (...) scales to the expected count of non-unique children.
 expected <- shares %>%
     group_by(year) %>%
     summarise(e = 30 * (1 - (1 - sum(share^2))^29), .groups = "drop") %>%
@@ -64,6 +71,7 @@ expected <- shares %>%
            col = 2.5, row = -5.4)
 
 # ---- 3. draw a classroom -------------------------------------------------
+# or each year it samples 30 names with replacement from that year's distribution 
 draw_class <- function(seed) {
     set.seed(seed)
     shares %>%
@@ -112,11 +120,11 @@ ggplot(classroom, aes(col, -row)) +
 
 I use data published by *[The Economist](https://www.economist.com/interactive/culture/2025/03/20/what-is-in-a-name)* where they analysed the first names of almost 400m people born in America and Britain in the past 143 years. 
 
-The figure below shows every name that has ever topped the American charts, traced across its whole life — the year it arrived, the height it reached, the long decline after. Boys in blue, girls in red, each labelled at its own peak. 
+Figure \@ref(fig:fig1) shows every name that has ever topped the American charts, traced across its whole life — the year it arrived, the height it reached, the long decline after. Boys in blue, girls in red, each labelled at its own peak. 
 
-Two things are visible at once: names come and go in waves, and every wave breaks lower than the one before it. John and Mary held around one baby in twelve; Liam and Olivia hold about one in a hundred.
+Two things are visible at once: *names come and go in waves*, and *every wave breaks lower than the one before it*. John and Mary held around one baby in twelve; Liam and Olivia hold about one in a hundred.
 
-```{r, echo = F}
+```{r fig1, echo = F, fig.cap = "Most popular names in the US."}
 us <- data %>% filter(country == "us")
 
 # annual share of the cohort
@@ -160,15 +168,15 @@ ggplot(waves, aes(year, share, group = lowercase_name, colour = sex)) +
 
 ```
 
-## The dominant pattern is de-concentration
+# The dominant pattern is de-concentration
 
-To verify whether this pattern is more widespread than the most popular name I took the top ten most popular ones of each decade. They are shown as a band: the solid line is the decade's number one, the shaded region stretches down to the tenth. Labels mark each name's reign — Mary held the top spot for seven consecutive decades, John and Michael for four each. Two things happen at once. The band falls, so the leading names command steadily less of each cohort. And it narrows, so the gap between first and tenth place shrinks over time. There is no longer a name that stands out from the pack.
+To verify whether this pattern is more widespread than the most popular name I took the top ten most popular ones of each decade. Figure \@ref(fig:fig2) shows them as a band: the solid line is the decade's number one, the shaded region stretches down to the tenth. Labels mark each name's reign — Mary held the top spot for seven consecutive decades, John and Michael for four each. Two things happen at once. *The band falls*, so the leading names command steadily less of each cohort. And *it narrows*, so the gap between first and tenth place shrinks over time. There is no longer a name that stands out from the pack.
 
-In the 1880s the top American girl's name (Mary) took ~6–7% of all female births on its own, and the whole top-ten band sat between roughly 2% and 8%. By the 2010s the entire top ten has collapsed into a thin ribbon near 1%. The band also *narrows* as it falls — early on there's a big gap between #1 and #10, now they're nearly indistinguishable: no name is meaningfully "the" name anymore.
+For instance, in the 1880s the top American girl's name (Mary) took ~6–7% of all female births on its own, and the whole top-ten band sat between roughly 2% and 7%. By the 2010s the entire top ten has collapsed into a thin ribbon near 1%. The band also narrows as it falls — early on there's a big gap between #1 and #10, now they're nearly indistinguishable: no name is meaningfully "the" name anymore.
 
 The UK series is barely there. ONS data starts in 1996, so the UK contributes two or three decade points against the US's fourteen.
 
-```{r, echo=F}
+```{r fig2, echo=F, fig.cap = "Top 10 most popular names in the US and UK, by gender."}
 denom <- data %>%
     distinct(country, sex, year, per_year) %>%
     mutate(decade = floor(year / 10) * 10) %>%
@@ -221,7 +229,7 @@ ggplot(band, aes(decade)) +
           panel.spacing = unit(2, "lines"))
 ```
 
-## How Many Names Is That, Really?
+# How Many Names Is That, Really?
 
 That's what happened at the top. The question is what happened underneath it — and for that, the ten most popular names aren't enough to go on.
 
@@ -231,15 +239,15 @@ So instead of counting names, we can count *effective names* (see Methodology). 
 
 By this measure, 1880 comes out at about 190. That's a year in which one name in fourteen girls was Mary — so it's not that Victorian parents knew only 190 names, it's that the ones they used were clustered tightly enough to *behave* like 190 evenly-shared names.
 
-What the plot shows: Three things
+Figure \@ref(fig:fig3) shows three things:
 
-The rise is enormous — American girls go from about 190 effective names in 1880 to roughly 2,200 today, an eleven-fold increase, with boys following the same path a step behind.
+**The rise is enormous:** American girls go from about 190 effective names in 1880 to roughly 2,200 today, an eleven-fold increase, with boys following the same path.
 
-There's a rise to about 1900, then a genuine plateau from roughly 1900 to 1955 — girls hover around 300–340, boys around 180–245, with no net gain across five decades including two world wars. The takeoff starts around 1960 and steepens continuously after.
+**The 1960 inflection:** There's a rise to about 1900, then a genuine plateau from roughly 1900 to 1955 — girls hover around 300–340, boys around 180–245, with no net gain across five decades including two world wars. The takeoff starts around 1960 and steepens continuously after.
 
-And the sexes have swapped roles. Girls' names were always more varied, and the gap widened until about 1980 — but boys have been catching up fast ever since, and the two panels seem to be converging.
+**And the sexes have swapped roles**: Girls' names were always more varied, and the gap widened until about 1980 — but boys have been catching up fast ever since, and the two panels seem to be converging.
 
-```{r, echo=F}
+```{r fig3, echo=F, fig.cap = "How concentrated are names in a few popular choices? The higher the lower the concentration."}
 ## diversity for each year - “How concentrated are names in a few popular choices?”
 hill_data <- data %>%
     group_by(year, country, sex) %>%
@@ -293,11 +301,11 @@ ggplot(filter(hill_long, order == "Shannon (q=1)"),
           plot.subtitle = element_text(colour = "grey35", size = 9),
           panel.spacing = unit(2, "lines"))
 ```
-## A Change in Values, or Just in Vocabulary?
+# A Change in Values, or Just in Vocabulary?
 
 So naming fragmented — but fragmented away from what, and toward what? The effective-names curve is blind to this: it counts how many names were in play and treats them all as interchangeable tokens. Mary and Nevaeh are just two entries in a distribution. Yet the interesting question isn't how many names parents had to choose from, it's whether the *reasons* for choosing changed. Was the explosion in variety a change in values, or just a change in vocabulary? For that we need to know something about the names themselves.
 
-To do this we can look at the connotations. 
+To do this we can look at their connotations. 
 
 What the plot shows: 
 
@@ -309,13 +317,12 @@ What the plot shows:
 
 **Religious goes the wrong way.** Boys dip to 21% in 1920, then *rise* to a 36% peak in 1983 and sit at 26% now — up over the period when everything else was fragmenting. Girls decline steadily, 12% to 7%.
 
-**The main prediction holds, with the right lead-lag.** The Hill curve is flat 1900–1955 and takes off around 1960. Tradition is flat 1880–1940 and starts falling around 1945. The canon loosens *first*, diversity rises *after*, with roughly a fifteen-year lag. That ordering matters — it's the difference between two correlated trends and a mechanism. The claim you can now make is specific: naming diversified because parents stopped drawing from an inherited stock, and you can date the loosening to the immediate postwar years.
+**The main prediction holds, with the right lead-lag.** The Hill curve is flat 1900–1955 (see Figure \@ref(fig:fig3)) and takes off around 1960. Tradition is flat 1880–1940 and starts falling around 1945. The canon loosens *first*, diversity rises *after*, with roughly a fifteen-year lag. That ordering matters — it's the difference between two correlated trends and a mechanism. Naming diversified because parents stopped drawing from an inherited stock, and we can date this loosening to the immediate postwar years.
 
-**But the religious half of the prediction fails, and that's useful.** If the story were simple secularisation, religious would track tradition down. It rises instead. So "tradition" here isn't measuring piety — it's measuring *inheritance*, the practice of reusing a canonical name. Biblical names stayed popular; naming your son after his grandfather did not. That's a sharper and more defensible claim than the one I'd guessed at.
+**But the religious half of the prediction fails.** If the story were simple secularisation, religious would track tradition down. It rises instead. So "tradition" here isn't measuring piety — it's measuring *inheritance*, the practice of reusing a canonical name. Biblical names stayed popular; naming your son after his grandfather did not. 
 
-```{r, echo=F}
-connotations <- c("intelligence","beauty","strength","wealth",
-                  "love","joy","religious","tradition")
+```{r fig4, echo=F, fig.cap = "Name connotations."}
+connotations <- c("intelligence","beauty","strength","wealth", "love","joy","religious","tradition")
 
 #connotations <- top10$connotation
 
@@ -348,15 +355,22 @@ ggplot(conn_plot, aes(year, share, colour = sex, linetype = country)) +
           legend.position = "top")
 ```
 
-What children are named changed beyond recognition, while what they're named for barely moved. Boys' names became twelve times more varied without becoming any less about strength. The diversity explosion was a change in vocabulary, not in values.
+
+# Conclusions
+
+Return to the two classrooms. The 1880 room — ten girls answering to the same handful of names — wasn't the product of a smaller imagination. Parents then could have chosen freely and didn't; they reached, overwhelmingly, for the same inherited stock: the grandmother's name, the saint's name, the name three houses down. The 2023 room, almost every desk a different name, is what happened when that reflex faded.
+
+But the post set out to test whether the easy explanation — a society turning individualist, parents chasing uniqueness — survives the data. It half survives. The reaching for distinction is real: it's written into every curve, the falling top-ten band, the eleven-fold rise in effective names, the takeoff after 1960. Yet the connotations refuse to move with it. Boys are still named for strength, girls still for beauty, in almost exactly the proportions of 1880. What parents wanted a name to say held constant for 144 years; only the vocabulary they said it in widened.
+
+So the shift wasn't from one set of values to another. It was the loosening of a single practice — inheritance, the reuse of a canonical name — and the timing gives it away: the canon begins thinning around 1945, and diversity climbs about fifteen years later. Names became twelve times more varied without becoming any less about the same old things. What children are named changed beyond recognition; what they're named for barely moved at all.
 
 
 ### Methodology 
 
-Name diversity was summarised using Hill numbers, the effective-species framework of [Jost, L. (2006)](https://nsojournals.onlinelibrary.wiley.com/doi/10.1111/j.2006.0030-1299.14714.x. The Hill number of order q gives the number of equally frequent names that would produce the observed diversity, with q controlling the weight placed on rare versus common names: q=0 counts distinct names irrespective of frequency, q=1 (the exponential of Shannon entropy) weights names in proportion to their frequency, and q=2 (the inverse Simpson index) weights them by the square of their frequency and is dominated by the most common names.
+Figure \@ref(fig:fig0): The classroom visualisation contrasts the concentration of US female names in 1880 and 2023. For each year I converted birth counts to an empirical name distribution, $p_i = n_i / \sum n$, so that $p_i$ gives the probability that a randomly selected girl carries name $i$. From this distribution I computed Simpson's concentration index, $S = \sum p_i^2$, the probability that two independently drawn girls share a name, and approximated the expected number of children in a room of thirty who share a name with at least one classmate as $30 (1 − (1 − S)^{29})$, treating each of a child's twenty-nine roommates as an independent event of probability $S$. This expression slightly understates the exact expectation under a skewed distribution, but at the observed values of S (≈0.014 in 1880, ≈0.001 in 2023) the discrepancy is negligible. To render the result concretely, I simulated a classroom by drawing thirty names with replacement from each year's distribution and flagging every name that occurred more than once; because a single draw may be unrepresentative, I scanned random seeds and retained the first whose realised count of name-sharers fell close to the analytic expectation (nine to eleven in 1880, one to two in 2023), thereby displaying a typical rather than a fortuitous classroom. The thirty children were then arranged on a six-by-five grid and coloured according to whether their name was shared, with panels faceted by year.
+
+Figure \@ref(fig:fig3): Name diversity was summarised using Hill numbers, the effective-species framework of [Jost, L. (2006)](https://nsojournals.onlinelibrary.wiley.com/doi/10.1111/j.2006.0030-1299.14714.x). The Hill number of order q gives the number of equally frequent names that would produce the observed diversity, with q controlling the weight placed on rare versus common names: q=0 counts distinct names irrespective of frequency, q=1 (the exponential of Shannon entropy) weights names in proportion to their frequency, and q=2 (the inverse Simpson index) weights them by the square of their frequency and is dominated by the most common names.
 
 I report q=1 as the primary measure and q=2 alongside it as a sensitivity analysis. Registry data are subject to frequency-based suppression — names falling below a minimum annual count are withheld — and these thresholds differ between the US and UK sources. The number of rare names observed therefore depends on both the suppression rule and the size of the birth cohort, neither of which is a property of naming behaviour. Since q increases the weight given to common names, agreement between q=1 and q=2 provides evidence that a result is not an artifact of differential coverage in the tail. Across all series the ratio of q=1 to q=2 remained between 2.6 and 3.9 with no systematic trend over time and no divergence between countries, indicating that both the century-scale increase in diversity and the US–UK difference are driven by the common part of the name distribution.
-
-The q=2 diagnostic passes. The q1/q2 ratio sits between about 2.6 and 3.9 across every series, country, and era, with no systematic drift and no US/UK divergence (2023: US girls 3.36 vs UK 3.02; US boys 2.95 vs UK 3.12). That's the reassurance you wanted — the trends and the country gap are not artifacts of the rare tail or of differing suppression thresholds. Notably the US/UK gap survives under q=2 as well, so it's a real difference in common-name concentration, not just the US having a bigger cohort with more one-off names.
 
 
