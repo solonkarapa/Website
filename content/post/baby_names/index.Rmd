@@ -2,7 +2,7 @@
 title: "The Great Unnaming"
 author: Me
 date: '`r format(Sys.Date(), "%d. %b %Y")`'
-slug: puzzle238
+slug: the_great_unnaming
 categories:
   - data analysis
   - data vis
