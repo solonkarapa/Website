@@ -1,5 +1,5 @@
 ---
-title: "Baby names"
+title: "The Great Unnaming"
 author: Me
 date: '`r format(Sys.Date(), "%d. %b %Y")`'
 slug: puzzle238
@@ -8,12 +8,12 @@ categories:
   - data vis
 tags: [data analysis, data vis]
 subtitle: ''
-summary: "Naming went from a shared inheritance to an act of distinction — but what we name children for barely moved in 144 years. What the numbers reveal about tradition, individuality, and the names we've quietly abandoned."
+summary: "Naming went from a shared inheritance to an act of distinction — but what we name children for, barely moved in 144 years. What the numbers reveal about tradition, individuality, and the names we've quietly abandoned."
 authors: []
-lastmod: '2026-12-20T14:27:06Z'
+lastmod: '2026-08-06T14:27:06Z'
 featured: no
 image:
-  caption: 'created by DALL·E'
+  caption: ''
   focal_point: ''
   preview_only: no
 projects: []
@@ -49,7 +49,7 @@ In 1880, about ten of them. In 2023, roughly one.
 
 That collapse — from a third of the room to almost no one — is one of the cleaner social signals. A single birth certificate records a private choice; a century of them stacked together records something larger. Somewhere between 1880 and now, naming stopped being an act of belonging — to a family, a saint, a generation — and became an act of distinction.
 
-That shift is the story of this post. Everything after this is an attempt to measure it properly — and to see whether the easy explanation survives contact with the data.
+That shift is the story of this post. Everything after this is an attempt to quantify it — and to see whether the easy explanation survives contact with the data.
 
 ```{r fig0, echo=F, fig.cap = "Two classrooms, 143 years apart. Thirty girls per room, names drawn at random from that year's US births; red marks a girl who shares her name with a classmate. Around ten overlap in 1880, roughly one in 2023. See Methodology for details."}
 # ---- 1. annual name shares, US girls, two snapshot years -------------------
@@ -362,7 +362,9 @@ Return to the two classrooms. The 1880 room — ten girls answering to the same 
 
 But the post set out to test whether the easy explanation — a society turning individualist, parents chasing uniqueness — survives the data. It half survives. The reaching for distinction is real: it's written into every curve, the falling top-ten band, the eleven-fold rise in effective names, the takeoff after 1960. Yet the connotations refuse to move with it. Boys are still named for strength, girls still for beauty, in almost exactly the proportions of 1880. What parents wanted a name to say held constant for 144 years; only the vocabulary they said it in widened.
 
-So the shift wasn't from one set of values to another. It was the loosening of a single practice — inheritance, the reuse of a canonical name — and the timing gives it away: the canon begins thinning around 1945, and diversity climbs about fifteen years later. Names became twelve times more varied without becoming any less about the same old things. What children are named changed beyond recognition; what they're named for barely moved at all.
+So the shift wasn't from one set of values to another. It was the loosening of a single practice — inheritance, the reuse of a canonical name — and the timing gives it away: the canon begins thinning around 1945, and diversity climbs about fifteen years later. Names became twelve times more varied without becoming any less about the same old things. 
+
+What children are named changed beyond recognition; what they're named for barely moved at all.
 
 
 ### Methodology 

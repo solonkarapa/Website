@@ -1,19 +1,19 @@
 ---
-title: "Baby names"
+title: "The Great Unnaming"
 author: Me
-date: '31. Jul 2026'
+date: '06. Aug 2026'
 slug: puzzle238
 categories:
   - data analysis
   - data vis
 tags: [data analysis, data vis]
 subtitle: ''
-summary: "Naming went from a shared inheritance to an act of distinction — but what we name children for barely moved in 144 years. What the numbers reveal about tradition, individuality, and the names we've quietly abandoned."
+summary: "Naming went from a shared inheritance to an act of distinction — but what we name children for, barely moved in 144 years. What the numbers reveal about tradition, individuality, and the names we've quietly abandoned."
 authors: []
-lastmod: '2026-12-20T14:27:06Z'
+lastmod: '2026-08-06T14:27:06Z'
 featured: no
 image:
-  caption: 'created by DALL·E'
+  caption: ''
   focal_point: ''
   preview_only: no
 projects: []
@@ -25,7 +25,7 @@ draft: TRUE
 <p>Picture a class of thirty girls. How many share a first name with someone else in the room?</p>
 <p>In 1880, about ten of them. In 2023, roughly one.</p>
 <p>That collapse — from a third of the room to almost no one — is one of the cleaner social signals. A single birth certificate records a private choice; a century of them stacked together records something larger. Somewhere between 1880 and now, naming stopped being an act of belonging — to a family, a saint, a generation — and became an act of distinction.</p>
-<p>That shift is the story of this post. Everything after this is an attempt to measure it properly — and to see whether the easy explanation survives contact with the data.</p>
+<p>That shift is the story of this post. Everything after this is an attempt to quantify it — and to see whether the easy explanation survives contact with the data.</p>
 <div class="figure"><span style="display:block;" id="fig:fig0"></span>
 <img src="{{< blogdown/postref >}}index_files/figure-html/fig0-1.png" alt="Two classrooms, 143 years apart. Thirty girls per room, names drawn at random from that year's US births; red marks a girl who shares her name with a classmate. Around ten overlap in 1880, roughly one in 2023. See Methodology for details." width="672" />
 <p class="caption">
@@ -92,7 +92,8 @@ Figure 5: Name connotations.
 <h1>Conclusions</h1>
 <p>Return to the two classrooms. The 1880 room — ten girls answering to the same handful of names — wasn’t the product of a smaller imagination. Parents then could have chosen freely and didn’t; they reached, overwhelmingly, for the same inherited stock: the grandmother’s name, the saint’s name, the name three houses down. The 2023 room, almost every desk a different name, is what happened when that reflex faded.</p>
 <p>But the post set out to test whether the easy explanation — a society turning individualist, parents chasing uniqueness — survives the data. It half survives. The reaching for distinction is real: it’s written into every curve, the falling top-ten band, the eleven-fold rise in effective names, the takeoff after 1960. Yet the connotations refuse to move with it. Boys are still named for strength, girls still for beauty, in almost exactly the proportions of 1880. What parents wanted a name to say held constant for 144 years; only the vocabulary they said it in widened.</p>
-<p>So the shift wasn’t from one set of values to another. It was the loosening of a single practice — inheritance, the reuse of a canonical name — and the timing gives it away: the canon begins thinning around 1945, and diversity climbs about fifteen years later. Names became twelve times more varied without becoming any less about the same old things. What children are named changed beyond recognition; what they’re named for barely moved at all.</p>
+<p>So the shift wasn’t from one set of values to another. It was the loosening of a single practice — inheritance, the reuse of a canonical name — and the timing gives it away: the canon begins thinning around 1945, and diversity climbs about fifteen years later. Names became twelve times more varied without becoming any less about the same old things.</p>
+<p>What children are named changed beyond recognition; what they’re named for barely moved at all.</p>
 <div id="methodology" class="section level3">
 <h3>Methodology</h3>
 <p>Figure <a href="#fig:fig0">1</a>: The classroom visualisation contrasts the concentration of US female names in 1880 and 2023. For each year I converted birth counts to an empirical name distribution, <span class="math inline">\(p_i = n_i / \sum n\)</span>, so that <span class="math inline">\(p_i\)</span> gives the probability that a randomly selected girl carries name <span class="math inline">\(i\)</span>. From this distribution I computed Simpson’s concentration index, <span class="math inline">\(S = \sum p_i^2\)</span>, the probability that two independently drawn girls share a name, and approximated the expected number of children in a room of thirty who share a name with at least one classmate as <span class="math inline">\(30 (1 − (1 − S)^{29})\)</span>, treating each of a child’s twenty-nine roommates as an independent event of probability <span class="math inline">\(S\)</span>. This expression slightly understates the exact expectation under a skewed distribution, but at the observed values of S (≈0.014 in 1880, ≈0.001 in 2023) the discrepancy is negligible. To render the result concretely, I simulated a classroom by drawing thirty names with replacement from each year’s distribution and flagging every name that occurred more than once; because a single draw may be unrepresentative, I scanned random seeds and retained the first whose realised count of name-sharers fell close to the analytic expectation (nine to eleven in 1880, one to two in 2023), thereby displaying a typical rather than a fortuitous classroom. The thirty children were then arranged on a six-by-five grid and coloured according to whether their name was shared, with panels faceted by year.</p>
