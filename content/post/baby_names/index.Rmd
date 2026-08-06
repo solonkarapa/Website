@@ -33,14 +33,12 @@ library(scales)
 
 ```{r, echo=F}
 # import data
-#path_data <- "/Users/solon/Desktop/Website/content/post/baby_names/data/"
-path_data <- "/Users/solon/Desktop/baby_names/"
-uk_names_with_popularity_and_connotations <- read.csv(paste0(path_data, "uk_names_with_popularity_and_connotations.csv")) %>%
-    mutate(country = "uk")
-us_names_with_popularity_and_connotations <- read.csv(paste0(path_data, "us_names_with_popularity_and_connotations.txt")) %>%
-    mutate(country = "us")
+path_data <- "~/Desktop/Website/content/post/baby_names/"
+load(paste0(path_data, "data_processed_analysed.Rdata"))
+```
 
-data <- rbind(uk_names_with_popularity_and_connotations, us_names_with_popularity_and_connotations)
+```{r, echo=F}
+# code analysis in baby_names_prep.R
 ```
 
 Picture a class of thirty girls. How many share a first name with someone else in the room?
@@ -52,51 +50,7 @@ That collapse — from a third of the room to almost no one — is one of the cl
 That shift is the story of this post. Everything after this is an attempt to quantify it — and to see whether the easy explanation survives contact with the data.
 
 ```{r fig0, echo=F, fig.cap = "Two classrooms, 143 years apart. Thirty girls per room, names drawn at random from that year's US births; red marks a girl who shares her name with a classmate. Around ten overlap in 1880, roughly one in 2023. See Methodology for details."}
-# ---- 1. annual name shares, US girls, two snapshot years -------------------
-shares <- data %>%
-    filter(country == "us", sex == "F", year %in% c(1880, 2023)) %>%
-    group_by(year) %>%
-    mutate(share = n / sum(n)) %>%
-    ungroup()
-
-# ---- 2. expected number of children sharing a name, class of 30 -----------
-#Treat each of a focal child's 29 roommates as an independent Bernoulli trial with collision probability S.
-#(1 - S)^29 ≈ probability the focal child is unique in the room. This is an approximation. 
-#1 - (1 - S)^29 ≈ probability she shares with at least one other. 
-#30 * (...) scales to the expected count of non-unique children.
-expected <- shares %>%
-    group_by(year) %>%
-    summarise(e = 30 * (1 - (1 - sum(share^2))^29), .groups = "drop") %>%
-    mutate(label = paste0("~", round(e), " of 30 share a name"),
-           col = 2.5, row = -5.4)
-
-# ---- 3. draw a classroom -------------------------------------------------
-# or each year it samples 30 names with replacement from that year's distribution 
-draw_class <- function(seed) {
-    set.seed(seed)
-    shares %>%
-        group_by(year) %>%
-        group_modify(~ tibble(
-            child = 1:30,
-            name  = sample(.x$lowercase_name, 30, replace = TRUE, prob = .x$share)
-        )) %>%
-        group_by(year, name) %>%
-        mutate(shared = n() > 1) %>%
-        ungroup()
-}
-
-# find a seed whose draw matches the expected counts (~10 and ~1)
-seed_ok <- detect(1:500, function(s) {
-    d <- draw_class(s) %>% count(year, wt = shared)
-    d$n[d$year == 1880] %in% 9:11 && d$n[d$year == 2023] %in% 1:2
-})
-
-classroom <- draw_class(seed_ok) %>%
-    mutate(row = (child - 1) %/% 6,
-           col = (child - 1) %%  6,
-           label = str_to_title(name))
-
-# ---- 4. plot -------------------------------------------------------------
+# ---- plot -------------------------------------------------------------
 ggplot(classroom, aes(col, -row)) +
     geom_point(aes(colour = shared), size = 12) +
     geom_text(aes(label = label), size = 2.0, colour = "white", fontface = "bold") +
@@ -125,32 +79,6 @@ Figure \@ref(fig:fig1) shows every name that has ever topped the American charts
 Two things are visible at once: *names come and go in waves*, and *every wave breaks lower than the one before it*. John and Mary held around one baby in twelve; Liam and Olivia hold about one in a hundred.
 
 ```{r fig1, echo = F, fig.cap = "Most popular names in the US."}
-us <- data %>% filter(country == "us")
-
-# annual share of the cohort
-shares <- us %>%
-    group_by(sex, year) %>%
-    mutate(cohort = sum(n)) %>%
-    group_by(sex, year, lowercase_name) %>%
-    summarise(share = sum(n) / first(cohort), .groups = "drop")
-
-# every name that was ever #1
-champions <- shares %>%
-    group_by(sex, year) %>%
-    slice_max(share, n = 1, with_ties = FALSE) %>%
-    ungroup() %>%
-    distinct(sex, lowercase_name)
-
-waves <- shares %>%
-    semi_join(champions, by = c("sex", "lowercase_name"))
-
-# one label per name, at its own peak
-peaks <- waves %>%
-    group_by(sex, lowercase_name) %>%
-    slice_max(share, n = 1, with_ties = FALSE) %>%
-    ungroup() %>%
-    mutate(label = str_to_title(lowercase_name))
-
 ggplot(waves, aes(year, share, group = lowercase_name, colour = sex)) +
     geom_line(linewidth = 0.6, alpha = 0.85) +
     ggrepel::geom_text_repel(data = peaks, aes(label = label),
@@ -177,38 +105,6 @@ For instance, in the 1880s the top American girl's name (Mary) took ~6–7% of a
 The UK series is barely there. ONS data starts in 1996, so the UK contributes two or three decade points against the US's fourteen.
 
 ```{r fig2, echo=F, fig.cap = "Top 10 most popular names in the US and UK, by gender."}
-denom <- data %>%
-    distinct(country, sex, year, per_year) %>%
-    mutate(decade = floor(year / 10) * 10) %>%
-    group_by(country, sex, decade) %>%
-    summarise(cohort = sum(per_year), n_years = n_distinct(year), .groups = "drop") %>%
-    filter(n_years == 10)
-
-top10 <- data %>%
-    mutate(decade = floor(year / 10) * 10) %>%
-    group_by(country, sex, decade, lowercase_name) %>%
-    summarise(births = sum(n), .groups = "drop") %>%
-    inner_join(denom, by = c("country", "sex", "decade")) %>%
-    mutate(prop = births / cohort) %>%
-    group_by(country, sex, decade) %>%
-    slice_max(prop, n = 10, with_ties = FALSE) %>%
-    mutate(rank = row_number()) %>%
-    ungroup()
-
-band <- top10 %>%
-    group_by(country, sex, decade) %>%
-    summarise(lo = min(prop), hi = max(prop), .groups = "drop")
-
-# one label per reign, placed at its midpoint
-leaders <- top10 %>%
-    filter(rank == 1) %>%
-    arrange(country, sex, decade) %>%
-    group_by(country, sex) %>%
-    mutate(spell = cumsum(lowercase_name != lag(lowercase_name, default = ""))) %>%
-    group_by(country, sex, spell, lowercase_name) %>%
-    summarise(decade = mean(decade), prop = mean(prop), .groups = "drop") %>%
-    mutate(label = str_to_title(lowercase_name))
-
 ggplot(band, aes(decade)) +
     geom_ribbon(aes(ymin = lo, ymax = hi, fill = country), alpha = 0.2) +
     geom_line(data = filter(top10, rank == 1),
@@ -248,33 +144,6 @@ Figure \@ref(fig:fig3) shows three things:
 **And the sexes have swapped roles**: Girls' names were always more varied, and the gap widened until about 1980 — but boys have been catching up fast ever since, and the two panels seem to be converging.
 
 ```{r fig3, echo=F, fig.cap = "How concentrated are names in a few popular choices? The higher the lower the concentration."}
-## diversity for each year - “How concentrated are names in a few popular choices?”
-hill_data <- data %>%
-    group_by(year, country, sex) %>%
-    group_modify(~ .x %>%
-                     count(lowercase_name, wt = n, name = "births") %>%
-                     mutate(p = births / sum(births)) %>%
-                     summarise(
-                         q0 = n(),
-                         q1 = exp(-sum(p * log(p))),
-                         q2 = 1 / sum(p^2),
-                         .groups = "drop"
-                     )) %>%
-    ungroup()
-
-hill_long <- hill_data %>%
-    pivot_longer(q0:q2, names_to = "order", values_to = "effective") %>%
-    mutate(order = recode(order,
-                          q0 = "Richness (q=0)",
-                          q1 = "Shannon (q=1)",
-                          q2 = "Simpson (q=2)"))
-
-# endpoint labels instead of a legend
-ends <- hill_long %>%
-    filter(order == "Shannon (q=1)") %>%
-    group_by(country, sex) %>%
-    slice_max(year, n = 1) %>%
-    ungroup()
 
 ggplot(filter(hill_long, order == "Shannon (q=1)"),
        aes(year, effective, colour = country)) +
@@ -289,7 +158,7 @@ ggplot(filter(hill_long, order == "Shannon (q=1)"),
     scale_y_log10(breaks = c(10, 30, 100, 300, 1000, 3000),
                   labels = scales::comma) +
     scale_x_continuous(expand = expansion(mult = c(0.02, 0.12))) +
-    scale_colour_manual(values = c(uk = "#C1666B", us = "#4281A4"),
+    scale_colour_manual(values = c(UK = "#C1666B", US = "#4281A4"),
                         guide = "none") +
     labs(x = NULL, y = "Effective number of names",
          title = "Naming has diversified for a century",
@@ -301,6 +170,7 @@ ggplot(filter(hill_long, order == "Shannon (q=1)"),
           plot.subtitle = element_text(colour = "grey35", size = 9),
           panel.spacing = unit(2, "lines"))
 ```
+
 # A Change in Values, or Just in Vocabulary?
 
 So naming fragmented — but fragmented away from what, and toward what? The effective-names curve is blind to this: it counts how many names were in play and treats them all as interchangeable tokens. Mary and Nevaeh are just two entries in a distribution. Yet the interesting question isn't how many names parents had to choose from, it's whether the *reasons* for choosing changed. Was the explosion in variety a change in values, or just a change in vocabulary? For that we need to know something about the names themselves.
@@ -322,30 +192,13 @@ What the plot shows:
 **But the religious half of the prediction fails.** If the story were simple secularisation, religious would track tradition down. It rises instead. So "tradition" here isn't measuring piety — it's measuring *inheritance*, the practice of reusing a canonical name. Biblical names stayed popular; naming your son after his grandfather did not. 
 
 ```{r fig4, echo=F, fig.cap = "Name connotations."}
-connotations <- c("intelligence","beauty","strength","wealth", "love","joy","religious","tradition")
-
-#connotations <- top10$connotation
-
-conn_time <- data %>%
-   group_by(country, sex, year) %>%
-   mutate(cohort = sum(n)) %>%
-   ungroup() %>%
-   pivot_longer(all_of(connotations), names_to = "connotation", values_to = "flag") %>%
-   filter(flag) %>%
-   group_by(country, sex, year, connotation) %>%
-   summarise(share = sum(n) / first(cohort), .groups = "drop")
-
-conn_plot <- conn_time %>%
-    mutate(connotation = fct_reorder(connotation, share, .fun = max, .desc = TRUE),
-           sex = recode(sex, F = "Girls", M = "Boys"))
-
 ggplot(conn_plot, aes(year, share, colour = sex, linetype = country)) +
     geom_vline(xintercept = 1960, colour = "grey80", linewidth = 0.3) +
     geom_line(linewidth = 0.7) +
     facet_wrap(~ connotation, scales = "free_y", ncol = 4) +
     scale_y_continuous(labels = scales::percent, limits = c(0, NA)) +
     scale_colour_manual(values = c(Girls = "#C1666B", Boys = "#4281A4")) +
-    scale_linetype_manual(values = c(us = "solid", uk = "22")) +
+    scale_linetype_manual(values = c(US = "solid", UK = "22")) +
     labs(x = NULL, y = "Share of births", colour = NULL, linetype = NULL,
          title = "What parents named children for, 1880–2023",
          subtitle = "Share of each birth cohort given a name carrying this association.") +
