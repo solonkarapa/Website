@@ -45,7 +45,7 @@ data <- rbind(uk_names_with_popularity_and_connotations, us_names_with_popularit
 
 Picture a class of thirty girls. How many share a first name with someone else in the room?
 
-In 1880, about ten of them. In 2023, roughly one.
+In 1880, about *ten of them*. In 2023, *roughly one*.
 
 That collapse — from a third of the room to almost no one — is one of the cleaner social signals. A single birth certificate records a private choice; a century of them stacked together records something larger. Somewhere between 1880 and now, naming stopped being an act of belonging — to a family, a saint, a generation — and became an act of distinction.
 
